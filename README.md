@@ -8,6 +8,12 @@ It is not competitive yet. The current repo contains three small experimental co
 - order-1 adaptive block Huffman
 - naive LZ77 with literal and back-reference tokens
 
+Codec names in the CLI:
+
+- `huffman`: original block-model Huffman codec, faster and the default
+- `huffman-o1`: order-1 Huffman codec, usually slower
+- `lz77`: naive LZ77 codec
+
 Their purpose is to give you a clean, testable loop for:
 
 - compress
@@ -74,6 +80,14 @@ Run a round-trip test on the sample file:
 make roundtrip
 ```
 
+Select a codec explicitly:
+
+```sh
+make roundtrip CODEC=huffman
+make roundtrip CODEC=huffman-o1
+make roundtrip CODEC=lz77
+```
+
 Run a round-trip with an explicit codec:
 
 ```sh
@@ -90,7 +104,7 @@ cargo run --release -- decompress build/sample.lz77 build/sample.restored
 cmp data/sample.txt build/sample.restored
 ```
 
-If `--codec` is omitted, `compress` defaults to the original block-model Huffman codec. `decompress` auto-detects the archive format from the file header.
+If `--codec` is omitted, `compress` defaults to `huffman`. `decompress` auto-detects the archive format from the file header, so you do not need to specify the codec when restoring.
 
 Run the unit tests:
 
