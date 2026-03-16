@@ -15,8 +15,8 @@ help:
 	@echo "make fmt                      Format the code"
 	@echo "make enwik9                   Download and verify enwik9 if needed"
 	@echo "make verify-enwik9            Verify the local enwik9 checksum"
-	@echo "make roundtrip INPUT=path CODEC=huffman|lz77   Compress + decompress + verify"
-	@echo "make bench INPUT=path CODEC=huffman|lz77       Print size stats for a corpus"
+	@echo "make roundtrip INPUT=path CODEC=huffman|huffman-o1|lz77   Compress + decompress + verify"
+	@echo "make bench INPUT=path CODEC=huffman|huffman-o1|lz77       Print size stats for a corpus"
 	@echo "make clean                    Remove build artifacts"
 
 build:

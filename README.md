@@ -2,9 +2,10 @@
 
 This repo is a workspace for experimenting toward a future Hutter Prize submission in Rust.
 
-It is not competitive yet. The current repo contains two small experimental codecs:
+It is not competitive yet. The current repo contains three small experimental codecs:
 
 - adaptive block Huffman
+- order-1 adaptive block Huffman
 - naive LZ77 with literal and back-reference tokens
 
 Their purpose is to give you a clean, testable loop for:
@@ -54,7 +55,8 @@ Rust is not the common language in public Hutter Prize winners, but it is still 
 - `src/main.rs`: top-level entrypoint
 - `src/cli.rs`: command-line parsing and usage text
 - `src/codec.rs`: codec selection and archive-format dispatch
-- `src/adaptive_huffman.rs`: adaptive block-Huffman codec
+- `src/block_huffman.rs`: original adaptive block-Huffman codec
+- `src/adaptive_huffman.rs`: slower order-1 adaptive block-Huffman codec
 - `src/lz77.rs`: simple LZ77 codec
 - `data/sample.txt`: tiny sample corpus for smoke tests
 
@@ -79,12 +81,16 @@ cargo run --release -- compress --codec huffman data/sample.txt build/sample.huf
 cargo run --release -- decompress build/sample.huf build/sample.restored
 cmp data/sample.txt build/sample.restored
 
+cargo run --release -- compress --codec huffman-o1 data/sample.txt build/sample-o1.huf
+cargo run --release -- decompress build/sample-o1.huf build/sample.restored
+cmp data/sample.txt build/sample.restored
+
 cargo run --release -- compress --codec lz77 data/sample.txt build/sample.lz77
 cargo run --release -- decompress build/sample.lz77 build/sample.restored
 cmp data/sample.txt build/sample.restored
 ```
 
-If `--codec` is omitted, `compress` defaults to Huffman. `decompress` auto-detects the archive format from the file header.
+If `--codec` is omitted, `compress` defaults to the original block-model Huffman codec. `decompress` auto-detects the archive format from the file header.
 
 Run the unit tests:
 
@@ -103,6 +109,7 @@ Run on a larger input:
 ```sh
 make roundtrip INPUT=data/enwik9
 make bench INPUT=data/enwik9
+make roundtrip INPUT=data/enwik9 CODEC=huffman-o1 ARCHIVE=build/enwik9.ahf1 RESTORED=build/enwik9.ahf1.restored
 make roundtrip INPUT=data/enwik9 CODEC=lz77 ARCHIVE=build/enwik9.lz77 RESTORED=build/enwik9.lz77.restored
 ```
 
