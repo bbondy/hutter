@@ -11,6 +11,7 @@ pub enum Codec {
     PpmO3,
     PpmO4,
     PpmO5,
+    PpmO6,
 }
 
 impl Codec {
@@ -24,6 +25,7 @@ impl Codec {
             "ppm" | "ppm-o3" | "ppm3" => Ok(Self::PpmO3),
             "ppm-o4" | "ppm4" => Ok(Self::PpmO4),
             "ppm-o5" | "ppm5" => Ok(Self::PpmO5),
+            "ppm-o6" | "ppm6" => Ok(Self::PpmO6),
             _ => Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
                 format!("unknown codec: {value}"),
@@ -41,6 +43,7 @@ impl Codec {
             Self::PpmO3 => ppm::compress_order3(input, output),
             Self::PpmO4 => ppm::compress_order4(input, output),
             Self::PpmO5 => ppm::compress_order5(input, output),
+            Self::PpmO6 => ppm::compress_order6(input, output),
         }
     }
 }
@@ -69,6 +72,8 @@ pub fn decompress_auto<W: Write>(input: &[u8], output: W) -> io::Result<()> {
         ppm::decompress_order4(input, output)
     } else if &input[..4] == ppm::magic_order5() {
         ppm::decompress_order5(input, output)
+    } else if &input[..4] == ppm::magic_order6() {
+        ppm::decompress_order6(input, output)
     } else if input[..4] == *b"PPM0" {
         ppm::decompress_legacy_order3(input, output)
     } else {

@@ -6,9 +6,10 @@ const MAGIC_ORDER2: &[u8; 4] = b"PPM2";
 const MAGIC_ORDER3: &[u8; 4] = b"PPM3";
 const MAGIC_ORDER4: &[u8; 4] = b"PPM4";
 const MAGIC_ORDER5: &[u8; 4] = b"PPM5";
+const MAGIC_ORDER6: &[u8; 4] = b"PPM6";
 const MAGIC_LEGACY: &[u8; 4] = b"PPM0";
 const SYMBOLS: usize = 256;
-const MAX_ORDER: usize = 5;
+const MAX_ORDER: usize = 6;
 const MAX_CONTEXT_TOTAL: u32 = 1 << 15;
 const STATE_BITS: u32 = 32;
 const MAX_RANGE: u64 = (1u64 << STATE_BITS) - 1;
@@ -36,6 +37,10 @@ pub fn magic_order5() -> &'static [u8; 4] {
     MAGIC_ORDER5
 }
 
+pub fn magic_order6() -> &'static [u8; 4] {
+    MAGIC_ORDER6
+}
+
 pub fn compress_order1<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
     compress_with_order(input, output, MAGIC_ORDER1, 1)
 }
@@ -54,6 +59,10 @@ pub fn compress_order4<R: Read, W: Write>(input: R, output: W) -> io::Result<()>
 
 pub fn compress_order5<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
     compress_with_order(input, output, MAGIC_ORDER5, 5)
+}
+
+pub fn compress_order6<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    compress_with_order(input, output, MAGIC_ORDER6, 6)
 }
 
 fn compress_with_order<R: Read, W: Write>(
@@ -100,6 +109,10 @@ pub fn decompress_order4<R: Read, W: Write>(input: R, output: W) -> io::Result<(
 
 pub fn decompress_order5<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
     decompress_with_order(input, output, MAGIC_ORDER5, 5)
+}
+
+pub fn decompress_order6<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    decompress_with_order(input, output, MAGIC_ORDER6, 6)
 }
 
 pub fn decompress_legacy_order3<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
@@ -580,8 +593,8 @@ fn read_u64<R: Read>(input: &mut R) -> io::Result<u64> {
 mod tests {
     use super::{
         compress_order1, compress_order2, compress_order3, compress_order4, compress_order5,
-        decompress_order1, decompress_order2, decompress_order3, decompress_order4,
-        decompress_order5,
+        compress_order6, decompress_order1, decompress_order2, decompress_order3,
+        decompress_order4, decompress_order5, decompress_order6,
     };
 
     #[test]
@@ -592,6 +605,7 @@ mod tests {
         roundtrip_order3(input);
         roundtrip_order4(input);
         roundtrip_order5(input);
+        roundtrip_order6(input);
     }
 
     #[test]
@@ -602,6 +616,28 @@ mod tests {
         roundtrip_order3(&input);
         roundtrip_order4(&input);
         roundtrip_order5(&input);
+        roundtrip_order6(&input);
+    }
+
+    #[test]
+    fn order6_uses_longer_context_than_order5() {
+        let mut input = Vec::new();
+        for _ in 0..512 {
+            input.extend_from_slice(b"0abcdeX1abcdeY");
+        }
+
+        let mut compressed5 = Vec::new();
+        compress_order5(&input[..], &mut compressed5).unwrap();
+
+        let mut compressed6 = Vec::new();
+        compress_order6(&input[..], &mut compressed6).unwrap();
+
+        assert!(
+            compressed6.len() < compressed5.len(),
+            "expected order-6 archive ({}) to be smaller than order-5 ({})",
+            compressed6.len(),
+            compressed5.len()
+        );
     }
 
     fn roundtrip_order1(input: &[u8]) {
@@ -646,6 +682,15 @@ mod tests {
 
         let mut restored = Vec::new();
         decompress_order5(&compressed[..], &mut restored).unwrap();
+        assert_eq!(restored, input);
+    }
+
+    fn roundtrip_order6(input: &[u8]) {
+        let mut compressed = Vec::new();
+        compress_order6(input, &mut compressed).unwrap();
+
+        let mut restored = Vec::new();
+        decompress_order6(&compressed[..], &mut restored).unwrap();
         assert_eq!(restored, input);
     }
 }
