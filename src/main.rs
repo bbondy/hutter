@@ -3,6 +3,7 @@ mod block_huffman;
 mod cli;
 mod codec;
 mod lz77;
+mod ppm;
 
 use crate::cli::Command;
 use crate::codec::decompress_auto;

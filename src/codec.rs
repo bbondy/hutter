@@ -1,4 +1,4 @@
-use crate::{adaptive_huffman, block_huffman, lz77};
+use crate::{adaptive_huffman, block_huffman, lz77, ppm};
 use std::io::{self, Read, Write};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -6,6 +6,7 @@ pub enum Codec {
     BlockHuffman,
     AdaptiveHuffman,
     Lz77,
+    Ppm,
 }
 
 impl Codec {
@@ -14,6 +15,7 @@ impl Codec {
             "block-huffman" | "huffman" => Ok(Self::BlockHuffman),
             "adaptive-huffman" | "context-huffman" | "huffman-o1" => Ok(Self::AdaptiveHuffman),
             "lz77" => Ok(Self::Lz77),
+            "ppm" => Ok(Self::Ppm),
             _ => Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
                 format!("unknown codec: {value}"),
@@ -26,6 +28,7 @@ impl Codec {
             Self::BlockHuffman => block_huffman::compress(input, output),
             Self::AdaptiveHuffman => adaptive_huffman::compress(input, output),
             Self::Lz77 => lz77::compress(input, output),
+            Self::Ppm => ppm::compress(input, output),
         }
     }
 }
@@ -44,6 +47,8 @@ pub fn decompress_auto<W: Write>(input: &[u8], output: W) -> io::Result<()> {
         adaptive_huffman::decompress(input, output)
     } else if &input[..4] == lz77::magic() {
         lz77::decompress(input, output)
+    } else if &input[..4] == ppm::magic() {
+        ppm::decompress(input, output)
     } else {
         Err(io::Error::new(
             io::ErrorKind::InvalidData,
