@@ -1,8 +1,9 @@
-use crate::{adaptive_huffman, lz77};
+use crate::{adaptive_huffman, block_huffman, lz77};
 use std::io::{self, Read, Write};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Codec {
+    BlockHuffman,
     AdaptiveHuffman,
     Lz77,
 }
@@ -10,7 +11,8 @@ pub enum Codec {
 impl Codec {
     pub fn parse(value: &str) -> io::Result<Self> {
         match value {
-            "adaptive-huffman" | "huffman" => Ok(Self::AdaptiveHuffman),
+            "block-huffman" | "huffman" => Ok(Self::BlockHuffman),
+            "adaptive-huffman" | "context-huffman" | "huffman-o1" => Ok(Self::AdaptiveHuffman),
             "lz77" => Ok(Self::Lz77),
             _ => Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
@@ -21,6 +23,7 @@ impl Codec {
 
     pub fn compress<R: Read, W: Write>(self, input: R, output: W) -> io::Result<()> {
         match self {
+            Self::BlockHuffman => block_huffman::compress(input, output),
             Self::AdaptiveHuffman => adaptive_huffman::compress(input, output),
             Self::Lz77 => lz77::compress(input, output),
         }
@@ -35,7 +38,9 @@ pub fn decompress_auto<W: Write>(input: &[u8], output: W) -> io::Result<()> {
         ));
     }
 
-    if &input[..4] == adaptive_huffman::magic() {
+    if &input[..4] == block_huffman::magic() {
+        block_huffman::decompress(input, output)
+    } else if &input[..4] == adaptive_huffman::magic() {
         adaptive_huffman::decompress(input, output)
     } else if &input[..4] == lz77::magic() {
         lz77::decompress(input, output)

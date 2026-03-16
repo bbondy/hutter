@@ -39,7 +39,7 @@ pub fn parse_args<'a>(args: &'a [String]) -> io::Result<Command<'a>> {
 
 pub fn print_usage(program: &str) {
     eprintln!("usage:");
-    eprintln!("  {program} compress [--codec huffman|lz77] <input> <archive>");
+    eprintln!("  {program} compress [--codec huffman|huffman-o1|lz77] <input> <archive>");
     eprintln!("  {program} decompress <archive> <output>");
     eprintln!("  {program} stats <input> <archive>");
 }
@@ -47,7 +47,7 @@ pub fn print_usage(program: &str) {
 fn parse_compress_args<'a>(args: &'a [String]) -> io::Result<Command<'a>> {
     match args.len() {
         4 => Ok(Command::Compress {
-            codec: Codec::AdaptiveHuffman,
+            codec: Codec::BlockHuffman,
             input_path: &args[2],
             output_path: &args[3],
         }),

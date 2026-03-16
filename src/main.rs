@@ -1,4 +1,5 @@
 mod adaptive_huffman;
+mod block_huffman;
 mod cli;
 mod codec;
 mod lz77;
