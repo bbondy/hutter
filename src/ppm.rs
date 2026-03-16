@@ -1,8 +1,12 @@
 use std::collections::HashMap;
 use std::io::{self, Read, Write};
 
-const MAGIC: &[u8; 4] = b"PPM0";
+const MAGIC_ORDER1: &[u8; 4] = b"PPM1";
+const MAGIC_ORDER2: &[u8; 4] = b"PPM2";
+const MAGIC_ORDER3: &[u8; 4] = b"PPM3";
+const MAGIC_LEGACY: &[u8; 4] = b"PPM0";
 const SYMBOLS: usize = 256;
+const MAX_ORDER: usize = 3;
 const MAX_CONTEXT_TOTAL: u32 = 1 << 15;
 const STATE_BITS: u32 = 32;
 const MAX_RANGE: u64 = (1u64 << STATE_BITS) - 1;
@@ -10,29 +14,49 @@ const HALF: u64 = 1u64 << (STATE_BITS - 1);
 const QUARTER: u64 = HALF >> 1;
 const THREE_QUARTERS: u64 = HALF + QUARTER;
 
-pub fn magic() -> &'static [u8; 4] {
-    MAGIC
+pub fn magic_order1() -> &'static [u8; 4] {
+    MAGIC_ORDER1
 }
 
-pub fn compress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<()> {
+pub fn magic_order2() -> &'static [u8; 4] {
+    MAGIC_ORDER2
+}
+
+pub fn magic_order3() -> &'static [u8; 4] {
+    MAGIC_ORDER3
+}
+
+pub fn compress_order1<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    compress_with_order(input, output, MAGIC_ORDER1, 1)
+}
+
+pub fn compress_order2<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    compress_with_order(input, output, MAGIC_ORDER2, 2)
+}
+
+pub fn compress_order3<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    compress_with_order(input, output, MAGIC_ORDER3, 3)
+}
+
+fn compress_with_order<R: Read, W: Write>(
+    mut input: R,
+    mut output: W,
+    magic: &[u8; 4],
+    max_order: usize,
+) -> io::Result<()> {
     let mut data = Vec::new();
     input.read_to_end(&mut data)?;
 
-    output.write_all(MAGIC)?;
+    output.write_all(magic)?;
     output.write_all(&(data.len() as u64).to_le_bytes())?;
 
     let mut model = Model::new();
     let mut encoder = ArithmeticEncoder::new();
 
     for (index, &symbol) in data.iter().enumerate() {
-        let history = data[..index]
-            .iter()
-            .rev()
-            .copied()
-            .take(2)
-            .collect::<Vec<_>>();
-        model.encode_symbol(symbol, &history, &mut encoder)?;
-        model.observe(symbol, &history);
+        let history = build_history(&data[..index], max_order);
+        model.encode_symbol(symbol, &history, max_order, &mut encoder)?;
+        model.observe(symbol, &history, max_order);
     }
 
     let payload = encoder.finish()?;
@@ -40,10 +64,31 @@ pub fn compress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<()
     Ok(())
 }
 
-pub fn decompress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<()> {
+pub fn decompress_order1<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    decompress_with_order(input, output, MAGIC_ORDER1, 1)
+}
+
+pub fn decompress_order2<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    decompress_with_order(input, output, MAGIC_ORDER2, 2)
+}
+
+pub fn decompress_order3<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    decompress_with_order(input, output, MAGIC_ORDER3, 3)
+}
+
+pub fn decompress_legacy_order3<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    decompress_with_order(input, output, MAGIC_LEGACY, 3)
+}
+
+fn decompress_with_order<R: Read, W: Write>(
+    mut input: R,
+    mut output: W,
+    expected_magic: &[u8; 4],
+    max_order: usize,
+) -> io::Result<()> {
     let mut magic = [0u8; 4];
     input.read_exact(&mut magic)?;
-    if &magic != MAGIC {
+    if &magic != expected_magic {
         return Err(io::Error::new(
             io::ErrorKind::InvalidData,
             "invalid archive magic",
@@ -59,10 +104,10 @@ pub fn decompress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<
     let mut restored = Vec::with_capacity(original_size);
 
     while restored.len() < original_size {
-        let history = restored.iter().rev().copied().take(2).collect::<Vec<_>>();
-        let symbol = model.decode_symbol(&history, &mut decoder)?;
+        let history = build_history(&restored, max_order);
+        let symbol = model.decode_symbol(&history, max_order, &mut decoder)?;
         restored.push(symbol);
-        model.observe(symbol, &history);
+        model.observe(symbol, &history, max_order);
     }
 
     output.write_all(&restored)?;
@@ -73,6 +118,7 @@ struct Model {
     order0: Context,
     order1: HashMap<u8, Context>,
     order2: HashMap<u16, Context>,
+    order3: HashMap<u32, Context>,
 }
 
 impl Model {
@@ -81,6 +127,7 @@ impl Model {
             order0: Context::new(),
             order1: HashMap::new(),
             order2: HashMap::new(),
+            order3: HashMap::new(),
         }
     }
 
@@ -88,21 +135,11 @@ impl Model {
         &self,
         symbol: u8,
         history: &[u8],
+        max_order: usize,
         encoder: &mut ArithmeticEncoder,
     ) -> io::Result<()> {
-        if history.len() >= 2 {
-            let key = order2_key(history);
-            if let Some(context) = self.order2.get(&key) {
-                if context.contains(symbol) {
-                    return context.encode_symbol(symbol, encoder);
-                }
-                context.encode_escape(encoder)?;
-            }
-        }
-
-        if !history.is_empty() {
-            let key = history[0];
-            if let Some(context) = self.order1.get(&key) {
+        for order in (1..=history.len().min(max_order)).rev() {
+            if let Some(context) = self.context_for_order(order, history) {
                 if context.contains(symbol) {
                     return context.encode_symbol(symbol, encoder);
                 }
@@ -120,19 +157,14 @@ impl Model {
         Ok(())
     }
 
-    fn decode_symbol(&self, history: &[u8], decoder: &mut ArithmeticDecoder<'_>) -> io::Result<u8> {
-        if history.len() >= 2 {
-            let key = order2_key(history);
-            if let Some(context) = self.order2.get(&key) {
-                if let Some(symbol) = context.decode_symbol(decoder)? {
-                    return Ok(symbol);
-                }
-            }
-        }
-
-        if !history.is_empty() {
-            let key = history[0];
-            if let Some(context) = self.order1.get(&key) {
+    fn decode_symbol(
+        &self,
+        history: &[u8],
+        max_order: usize,
+        decoder: &mut ArithmeticDecoder<'_>,
+    ) -> io::Result<u8> {
+        for order in (1..=history.len().min(max_order)).rev() {
+            if let Some(context) = self.context_for_order(order, history) {
                 if let Some(symbol) = context.decode_symbol(decoder)? {
                     return Ok(symbol);
                 }
@@ -148,51 +180,87 @@ impl Model {
         Ok(value as u8)
     }
 
-    fn observe(&mut self, symbol: u8, history: &[u8]) {
+    fn observe(&mut self, symbol: u8, history: &[u8], max_order: usize) {
         self.order0.observe(symbol);
 
-        if !history.is_empty() {
-            self.order1
-                .entry(history[0])
-                .or_insert_with(Context::new)
-                .observe(symbol);
-        }
-
-        if history.len() >= 2 {
-            self.order2
-                .entry(order2_key(history))
-                .or_insert_with(Context::new)
-                .observe(symbol);
+        for order in 1..=history.len().min(max_order) {
+            match order {
+                1 => self
+                    .order1
+                    .entry(history[0])
+                    .or_insert_with(Context::new)
+                    .observe(symbol),
+                2 => self
+                    .order2
+                    .entry(order2_key(history))
+                    .or_insert_with(Context::new)
+                    .observe(symbol),
+                3 => self
+                    .order3
+                    .entry(order3_key(history))
+                    .or_insert_with(Context::new)
+                    .observe(symbol),
+                _ => unreachable!("unsupported ppm order"),
+            }
         }
     }
+
+    fn context_for_order(&self, order: usize, history: &[u8]) -> Option<&Context> {
+        match order {
+            1 => self.order1.get(&history[0]),
+            2 => self.order2.get(&order2_key(history)),
+            3 => self.order3.get(&order3_key(history)),
+            _ => None,
+        }
+    }
+}
+
+fn build_history(data: &[u8], max_order: usize) -> Vec<u8> {
+    data.iter()
+        .rev()
+        .copied()
+        .take(max_order.min(MAX_ORDER))
+        .collect()
 }
 
 fn order2_key(history: &[u8]) -> u16 {
     ((history[1] as u16) << 8) | history[0] as u16
 }
 
+fn order3_key(history: &[u8]) -> u32 {
+    ((history[2] as u32) << 16) | ((history[1] as u32) << 8) | history[0] as u32
+}
+
 struct Context {
-    counts: Box<[u16; SYMBOLS]>,
+    counts: Vec<SymbolCount>,
     total: u32,
-    distinct: u16,
+}
+
+#[derive(Clone, Copy)]
+struct SymbolCount {
+    symbol: u8,
+    count: u16,
 }
 
 impl Context {
     fn new() -> Self {
         Self {
-            counts: Box::new([0; SYMBOLS]),
+            counts: Vec::new(),
             total: 0,
-            distinct: 0,
         }
     }
 
     fn contains(&self, symbol: u8) -> bool {
-        self.counts[symbol as usize] != 0
+        self.find(symbol).is_some()
     }
 
     fn encode_symbol(&self, symbol: u8, encoder: &mut ArithmeticEncoder) -> io::Result<()> {
         let cum = self.cumulative(symbol);
-        let freq = self.counts[symbol as usize] as u32;
+        let freq = u32::from(
+            self.find(symbol)
+                .map(|index| self.counts[index].count)
+                .unwrap_or(0),
+        );
         encoder.encode(cum, freq, self.total_with_escape())
     }
 
@@ -215,12 +283,19 @@ impl Context {
     }
 
     fn observe(&mut self, symbol: u8) {
-        let slot = &mut self.counts[symbol as usize];
-        if *slot == 0 {
-            self.distinct = self.distinct.saturating_add(1);
+        match self.find(symbol) {
+            Some(index) => {
+                let slot = &mut self.counts[index].count;
+                *slot = slot.saturating_add(1);
+            }
+            None => {
+                let index = self
+                    .counts
+                    .binary_search_by_key(&symbol, |entry| entry.symbol)
+                    .unwrap_or_else(|index| index);
+                self.counts.insert(index, SymbolCount { symbol, count: 1 });
+            }
         }
-
-        *slot = slot.saturating_add(1);
         self.total = self.total.saturating_add(1);
 
         if self.total >= MAX_CONTEXT_TOTAL {
@@ -229,22 +304,19 @@ impl Context {
     }
 
     fn cumulative(&self, symbol: u8) -> u32 {
-        self.counts[..symbol as usize]
+        self.counts
             .iter()
-            .map(|&value| u32::from(value))
+            .take_while(|entry| entry.symbol < symbol)
+            .map(|entry| u32::from(entry.count))
             .sum()
     }
 
     fn lookup(&self, target: u32) -> io::Result<(u8, u32, u32)> {
         let mut cum = 0u32;
-        for (symbol, &freq) in self.counts.iter().enumerate() {
-            let freq = u32::from(freq);
-            if freq == 0 {
-                continue;
-            }
-
+        for entry in &self.counts {
+            let freq = u32::from(entry.count);
             if target < cum + freq {
-                return Ok((symbol as u8, cum, freq));
+                return Ok((entry.symbol, cum, freq));
             }
             cum += freq;
         }
@@ -256,7 +328,7 @@ impl Context {
     }
 
     fn escape_freq(&self) -> u32 {
-        u32::from(self.distinct.max(1))
+        (self.counts.len() as u32).max(1)
     }
 
     fn total_with_escape(&self) -> u32 {
@@ -265,17 +337,17 @@ impl Context {
 
     fn rescale(&mut self) {
         self.total = 0;
-        self.distinct = 0;
 
-        for count in self.counts.iter_mut() {
-            if *count == 0 {
-                continue;
-            }
-
-            *count = (*count).div_ceil(2).max(1);
-            self.total += u32::from(*count);
-            self.distinct += 1;
+        for entry in &mut self.counts {
+            entry.count = entry.count.div_ceil(2).max(1);
+            self.total += u32::from(entry.count);
         }
+    }
+
+    fn find(&self, symbol: u8) -> Option<usize> {
+        self.counts
+            .binary_search_by_key(&symbol, |entry| entry.symbol)
+            .ok()
     }
 }
 
@@ -497,27 +569,51 @@ fn read_u64<R: Read>(input: &mut R) -> io::Result<u64> {
 
 #[cfg(test)]
 mod tests {
-    use super::{compress, decompress};
+    use super::{
+        compress_order1, compress_order2, compress_order3, decompress_order1, decompress_order2,
+        decompress_order3,
+    };
 
     #[test]
-    fn roundtrip_repeated_text() {
+    fn roundtrip_repeated_text_all_orders() {
         let input = b"banana bandana banana bandana banana bandana";
-        let mut compressed = Vec::new();
-        compress(&input[..], &mut compressed).unwrap();
-
-        let mut restored = Vec::new();
-        decompress(&compressed[..], &mut restored).unwrap();
-        assert_eq!(restored, input);
+        roundtrip_order1(input);
+        roundtrip_order2(input);
+        roundtrip_order3(input);
     }
 
     #[test]
-    fn roundtrip_binary() {
+    fn roundtrip_binary_all_orders() {
         let input: Vec<u8> = (0..=255).cycle().take(4096).collect();
+        roundtrip_order1(&input);
+        roundtrip_order2(&input);
+        roundtrip_order3(&input);
+    }
+
+    fn roundtrip_order1(input: &[u8]) {
         let mut compressed = Vec::new();
-        compress(&input[..], &mut compressed).unwrap();
+        compress_order1(input, &mut compressed).unwrap();
 
         let mut restored = Vec::new();
-        decompress(&compressed[..], &mut restored).unwrap();
+        decompress_order1(&compressed[..], &mut restored).unwrap();
+        assert_eq!(restored, input);
+    }
+
+    fn roundtrip_order2(input: &[u8]) {
+        let mut compressed = Vec::new();
+        compress_order2(input, &mut compressed).unwrap();
+
+        let mut restored = Vec::new();
+        decompress_order2(&compressed[..], &mut restored).unwrap();
+        assert_eq!(restored, input);
+    }
+
+    fn roundtrip_order3(input: &[u8]) {
+        let mut compressed = Vec::new();
+        compress_order3(input, &mut compressed).unwrap();
+
+        let mut restored = Vec::new();
+        decompress_order3(&compressed[..], &mut restored).unwrap();
         assert_eq!(restored, input);
     }
 }

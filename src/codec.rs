@@ -6,7 +6,9 @@ pub enum Codec {
     BlockHuffman,
     AdaptiveHuffman,
     Lz77,
-    Ppm,
+    PpmO1,
+    PpmO2,
+    PpmO3,
 }
 
 impl Codec {
@@ -15,7 +17,9 @@ impl Codec {
             "block-huffman" | "huffman" => Ok(Self::BlockHuffman),
             "adaptive-huffman" | "context-huffman" | "huffman-o1" => Ok(Self::AdaptiveHuffman),
             "lz77" => Ok(Self::Lz77),
-            "ppm" => Ok(Self::Ppm),
+            "ppm-o1" | "ppm1" => Ok(Self::PpmO1),
+            "ppm-o2" | "ppm2" => Ok(Self::PpmO2),
+            "ppm" | "ppm-o3" | "ppm3" => Ok(Self::PpmO3),
             _ => Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
                 format!("unknown codec: {value}"),
@@ -28,7 +32,9 @@ impl Codec {
             Self::BlockHuffman => block_huffman::compress(input, output),
             Self::AdaptiveHuffman => adaptive_huffman::compress(input, output),
             Self::Lz77 => lz77::compress(input, output),
-            Self::Ppm => ppm::compress(input, output),
+            Self::PpmO1 => ppm::compress_order1(input, output),
+            Self::PpmO2 => ppm::compress_order2(input, output),
+            Self::PpmO3 => ppm::compress_order3(input, output),
         }
     }
 }
@@ -47,8 +53,14 @@ pub fn decompress_auto<W: Write>(input: &[u8], output: W) -> io::Result<()> {
         adaptive_huffman::decompress(input, output)
     } else if &input[..4] == lz77::magic() {
         lz77::decompress(input, output)
-    } else if &input[..4] == ppm::magic() {
-        ppm::decompress(input, output)
+    } else if &input[..4] == ppm::magic_order1() {
+        ppm::decompress_order1(input, output)
+    } else if &input[..4] == ppm::magic_order2() {
+        ppm::decompress_order2(input, output)
+    } else if &input[..4] == ppm::magic_order3() {
+        ppm::decompress_order3(input, output)
+    } else if input[..4] == *b"PPM0" {
+        ppm::decompress_legacy_order3(input, output)
     } else {
         Err(io::Error::new(
             io::ErrorKind::InvalidData,

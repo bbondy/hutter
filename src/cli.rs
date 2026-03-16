@@ -39,7 +39,9 @@ pub fn parse_args<'a>(args: &'a [String]) -> io::Result<Command<'a>> {
 
 pub fn print_usage(program: &str) {
     eprintln!("usage:");
-    eprintln!("  {program} compress [--codec huffman|huffman-o1|lz77|ppm] <input> <archive>");
+    eprintln!(
+        "  {program} compress [--codec huffman|huffman-o1|lz77|ppm-o1|ppm-o2|ppm-o3] <input> <archive>"
+    );
     eprintln!("  {program} decompress <archive> <output>");
     eprintln!("  {program} stats <input> <archive>");
 }
