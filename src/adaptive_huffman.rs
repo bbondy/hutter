@@ -7,6 +7,10 @@ const DEFAULT_BLOCK_SIZE: usize = 64 * 1024;
 const SYMBOLS: usize = 256;
 const MAX_FREQUENCY_SUM: u64 = 1 << 20;
 
+pub fn magic() -> &'static [u8; 4] {
+    MAGIC
+}
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 struct Code {
     bits: u64,

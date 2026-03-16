@@ -1,5 +1,10 @@
 mod adaptive_huffman;
+mod cli;
+mod codec;
+mod lz77;
 
+use crate::cli::Command;
+use crate::codec::decompress_auto;
 use std::env;
 use std::fs;
 use std::io;
@@ -15,41 +20,36 @@ fn main() {
 
 fn run() -> io::Result<()> {
     let args: Vec<String> = env::args().collect();
-    if args.len() < 2 {
-        print_usage(&args[0]);
-        process::exit(2);
-    }
-
-    match args[1].as_str() {
-        "compress" => {
-            if args.len() != 4 {
-                print_usage(&args[0]);
-                process::exit(2);
-            }
-            let input = fs::File::open(&args[2])?;
-            let output = fs::File::create(&args[3])?;
-            adaptive_huffman::compress(input, output)
-        }
-        "decompress" => {
-            if args.len() != 4 {
-                print_usage(&args[0]);
-                process::exit(2);
-            }
-            let input = fs::File::open(&args[2])?;
-            let output = fs::File::create(&args[3])?;
-            adaptive_huffman::decompress(input, output)
-        }
-        "stats" => {
-            if args.len() != 4 {
-                print_usage(&args[0]);
-                process::exit(2);
-            }
-            print_stats(&args[2], &args[3])
-        }
-        _ => {
-            print_usage(&args[0]);
+    let command = match cli::parse_args(&args) {
+        Ok(command) => command,
+        Err(_) => {
+            cli::print_usage(&args[0]);
             process::exit(2);
         }
+    };
+
+    match command {
+        Command::Compress {
+            codec,
+            input_path,
+            output_path,
+        } => {
+            let input = fs::File::open(input_path)?;
+            let output = fs::File::create(output_path)?;
+            codec.compress(input, output)
+        }
+        Command::Decompress {
+            input_path,
+            output_path,
+        } => {
+            let input = fs::read(input_path)?;
+            let output = fs::File::create(output_path)?;
+            decompress_auto(&input, output)
+        }
+        Command::Stats {
+            input_path,
+            archive_path,
+        } => print_stats(input_path, archive_path),
     }
 }
 
@@ -77,11 +77,4 @@ fn print_stats(input_path: &str, archive_path: &str) -> io::Result<()> {
 fn current_exe_size() -> io::Result<u64> {
     let exe = env::current_exe()?;
     Ok(fs::metadata(Path::new(&exe))?.len())
-}
-
-fn print_usage(program: &str) {
-    eprintln!("usage:");
-    eprintln!("  {program} compress <input> <archive>");
-    eprintln!("  {program} decompress <archive> <output>");
-    eprintln!("  {program} stats <input> <archive>");
 }
