@@ -4,9 +4,11 @@ use std::io::{self, Read, Write};
 const MAGIC_ORDER1: &[u8; 4] = b"PPM1";
 const MAGIC_ORDER2: &[u8; 4] = b"PPM2";
 const MAGIC_ORDER3: &[u8; 4] = b"PPM3";
+const MAGIC_ORDER4: &[u8; 4] = b"PPM4";
+const MAGIC_ORDER5: &[u8; 4] = b"PPM5";
 const MAGIC_LEGACY: &[u8; 4] = b"PPM0";
 const SYMBOLS: usize = 256;
-const MAX_ORDER: usize = 3;
+const MAX_ORDER: usize = 5;
 const MAX_CONTEXT_TOTAL: u32 = 1 << 15;
 const STATE_BITS: u32 = 32;
 const MAX_RANGE: u64 = (1u64 << STATE_BITS) - 1;
@@ -26,6 +28,14 @@ pub fn magic_order3() -> &'static [u8; 4] {
     MAGIC_ORDER3
 }
 
+pub fn magic_order4() -> &'static [u8; 4] {
+    MAGIC_ORDER4
+}
+
+pub fn magic_order5() -> &'static [u8; 4] {
+    MAGIC_ORDER5
+}
+
 pub fn compress_order1<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
     compress_with_order(input, output, MAGIC_ORDER1, 1)
 }
@@ -36,6 +46,14 @@ pub fn compress_order2<R: Read, W: Write>(input: R, output: W) -> io::Result<()>
 
 pub fn compress_order3<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
     compress_with_order(input, output, MAGIC_ORDER3, 3)
+}
+
+pub fn compress_order4<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    compress_with_order(input, output, MAGIC_ORDER4, 4)
+}
+
+pub fn compress_order5<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    compress_with_order(input, output, MAGIC_ORDER5, 5)
 }
 
 fn compress_with_order<R: Read, W: Write>(
@@ -74,6 +92,14 @@ pub fn decompress_order2<R: Read, W: Write>(input: R, output: W) -> io::Result<(
 
 pub fn decompress_order3<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
     decompress_with_order(input, output, MAGIC_ORDER3, 3)
+}
+
+pub fn decompress_order4<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    decompress_with_order(input, output, MAGIC_ORDER4, 4)
+}
+
+pub fn decompress_order5<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    decompress_with_order(input, output, MAGIC_ORDER5, 5)
 }
 
 pub fn decompress_legacy_order3<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
@@ -116,18 +142,14 @@ fn decompress_with_order<R: Read, W: Write>(
 
 struct Model {
     order0: Context,
-    order1: HashMap<u8, Context>,
-    order2: HashMap<u16, Context>,
-    order3: HashMap<u32, Context>,
+    contexts: Vec<HashMap<u64, Context>>,
 }
 
 impl Model {
     fn new() -> Self {
         Self {
             order0: Context::new(),
-            order1: HashMap::new(),
-            order2: HashMap::new(),
-            order3: HashMap::new(),
+            contexts: (0..MAX_ORDER).map(|_| HashMap::new()).collect(),
         }
     }
 
@@ -184,34 +206,17 @@ impl Model {
         self.order0.observe(symbol);
 
         for order in 1..=history.len().min(max_order) {
-            match order {
-                1 => self
-                    .order1
-                    .entry(history[0])
-                    .or_insert_with(Context::new)
-                    .observe(symbol),
-                2 => self
-                    .order2
-                    .entry(order2_key(history))
-                    .or_insert_with(Context::new)
-                    .observe(symbol),
-                3 => self
-                    .order3
-                    .entry(order3_key(history))
-                    .or_insert_with(Context::new)
-                    .observe(symbol),
-                _ => unreachable!("unsupported ppm order"),
-            }
+            self.contexts[order - 1]
+                .entry(order_key(history, order))
+                .or_insert_with(Context::new)
+                .observe(symbol);
         }
     }
 
     fn context_for_order(&self, order: usize, history: &[u8]) -> Option<&Context> {
-        match order {
-            1 => self.order1.get(&history[0]),
-            2 => self.order2.get(&order2_key(history)),
-            3 => self.order3.get(&order3_key(history)),
-            _ => None,
-        }
+        self.contexts
+            .get(order - 1)
+            .and_then(|contexts| contexts.get(&order_key(history, order)))
     }
 }
 
@@ -223,12 +228,16 @@ fn build_history(data: &[u8], max_order: usize) -> Vec<u8> {
         .collect()
 }
 
-fn order2_key(history: &[u8]) -> u16 {
-    ((history[1] as u16) << 8) | history[0] as u16
-}
+fn order_key(history: &[u8], order: usize) -> u64 {
+    debug_assert!(order > 0);
+    debug_assert!(order <= history.len());
+    debug_assert!(order <= 8);
 
-fn order3_key(history: &[u8]) -> u32 {
-    ((history[2] as u32) << 16) | ((history[1] as u32) << 8) | history[0] as u32
+    let mut key = 0u64;
+    for (shift, &byte) in history.iter().take(order).enumerate() {
+        key |= u64::from(byte) << (shift * 8);
+    }
+    key
 }
 
 struct Context {
@@ -570,8 +579,9 @@ fn read_u64<R: Read>(input: &mut R) -> io::Result<u64> {
 #[cfg(test)]
 mod tests {
     use super::{
-        compress_order1, compress_order2, compress_order3, decompress_order1, decompress_order2,
-        decompress_order3,
+        compress_order1, compress_order2, compress_order3, compress_order4, compress_order5,
+        decompress_order1, decompress_order2, decompress_order3, decompress_order4,
+        decompress_order5,
     };
 
     #[test]
@@ -580,6 +590,8 @@ mod tests {
         roundtrip_order1(input);
         roundtrip_order2(input);
         roundtrip_order3(input);
+        roundtrip_order4(input);
+        roundtrip_order5(input);
     }
 
     #[test]
@@ -588,6 +600,8 @@ mod tests {
         roundtrip_order1(&input);
         roundtrip_order2(&input);
         roundtrip_order3(&input);
+        roundtrip_order4(&input);
+        roundtrip_order5(&input);
     }
 
     fn roundtrip_order1(input: &[u8]) {
@@ -614,6 +628,24 @@ mod tests {
 
         let mut restored = Vec::new();
         decompress_order3(&compressed[..], &mut restored).unwrap();
+        assert_eq!(restored, input);
+    }
+
+    fn roundtrip_order4(input: &[u8]) {
+        let mut compressed = Vec::new();
+        compress_order4(input, &mut compressed).unwrap();
+
+        let mut restored = Vec::new();
+        decompress_order4(&compressed[..], &mut restored).unwrap();
+        assert_eq!(restored, input);
+    }
+
+    fn roundtrip_order5(input: &[u8]) {
+        let mut compressed = Vec::new();
+        compress_order5(input, &mut compressed).unwrap();
+
+        let mut restored = Vec::new();
+        decompress_order5(&compressed[..], &mut restored).unwrap();
         assert_eq!(restored, input);
     }
 }
