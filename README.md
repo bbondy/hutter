@@ -2,7 +2,12 @@
 
 This repo is a workspace for experimenting toward a future Hutter Prize submission in Rust.
 
-It is not competitive yet. The baseline compressor here is a simple adaptive block-Huffman coder whose only purpose is to give you a clean, testable loop for:
+It is not competitive yet. The current repo contains two small experimental codecs:
+
+- adaptive block Huffman
+- naive LZ77 with literal and back-reference tokens
+
+Their purpose is to give you a clean, testable loop for:
 
 - compress
 - decompress
@@ -46,8 +51,11 @@ Rust is not the common language in public Hutter Prize winners, but it is still 
 
 ## Workspace layout
 
-- `src/main.rs`: CLI
-- `src/adaptive_huffman.rs`: baseline adaptive block-Huffman codec
+- `src/main.rs`: top-level entrypoint
+- `src/cli.rs`: command-line parsing and usage text
+- `src/codec.rs`: codec selection and archive-format dispatch
+- `src/adaptive_huffman.rs`: adaptive block-Huffman codec
+- `src/lz77.rs`: simple LZ77 codec
 - `data/sample.txt`: tiny sample corpus for smoke tests
 
 ## Commands
@@ -63,6 +71,20 @@ Run a round-trip test on the sample file:
 ```sh
 make roundtrip
 ```
+
+Run a round-trip with an explicit codec:
+
+```sh
+cargo run --release -- compress --codec huffman data/sample.txt build/sample.huf
+cargo run --release -- decompress build/sample.huf build/sample.restored
+cmp data/sample.txt build/sample.restored
+
+cargo run --release -- compress --codec lz77 data/sample.txt build/sample.lz77
+cargo run --release -- decompress build/sample.lz77 build/sample.restored
+cmp data/sample.txt build/sample.restored
+```
+
+If `--codec` is omitted, `compress` defaults to Huffman. `decompress` auto-detects the archive format from the file header.
 
 Run the unit tests:
 
@@ -81,6 +103,7 @@ Run on a larger input:
 ```sh
 make roundtrip INPUT=data/enwik9
 make bench INPUT=data/enwik9
+make roundtrip INPUT=data/enwik9 CODEC=lz77 ARCHIVE=build/enwik9.lz77 RESTORED=build/enwik9.lz77.restored
 ```
 
 ## Sources

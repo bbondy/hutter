@@ -1,6 +1,7 @@
 INPUT ?= data/sample.txt
 ARCHIVE ?= build/$(notdir $(INPUT)).ahf
 RESTORED ?= build/$(notdir $(INPUT)).restored
+CODEC ?= huffman
 ENWIK9_URL ?= http://mattmahoney.net/dc/enwik9.zip
 ENWIK9_ZIP ?= data/enwik9.zip
 ENWIK9 ?= data/enwik9
@@ -14,8 +15,8 @@ help:
 	@echo "make fmt                      Format the code"
 	@echo "make enwik9                   Download and verify enwik9 if needed"
 	@echo "make verify-enwik9            Verify the local enwik9 checksum"
-	@echo "make roundtrip INPUT=path     Compress + decompress + verify"
-	@echo "make bench INPUT=path         Print size stats for a corpus"
+	@echo "make roundtrip INPUT=path CODEC=huffman|lz77   Compress + decompress + verify"
+	@echo "make bench INPUT=path CODEC=huffman|lz77       Print size stats for a corpus"
 	@echo "make clean                    Remove build artifacts"
 
 build:
@@ -29,14 +30,14 @@ fmt:
 
 roundtrip: build
 	mkdir -p build
-	target/release/hutter-starter compress $(INPUT) $(ARCHIVE)
+	target/release/hutter-starter compress --codec $(CODEC) $(INPUT) $(ARCHIVE)
 	target/release/hutter-starter decompress $(ARCHIVE) $(RESTORED)
 	cmp $(INPUT) $(RESTORED)
 	@echo "roundtrip ok: $(INPUT) -> $(ARCHIVE) -> $(RESTORED)"
 
 bench: build
 	mkdir -p build
-	target/release/hutter-starter compress $(INPUT) $(ARCHIVE)
+	target/release/hutter-starter compress --codec $(CODEC) $(INPUT) $(ARCHIVE)
 	target/release/hutter-starter stats $(INPUT) $(ARCHIVE)
 
 enwik9: $(ENWIK9)
