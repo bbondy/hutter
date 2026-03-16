@@ -64,6 +64,12 @@ Run a round-trip test on the sample file:
 make roundtrip
 ```
 
+Run the unit tests:
+
+```sh
+cargo test
+```
+
 Download the official `enwik9` corpus into `data/` if needed and verify it:
 
 ```sh
