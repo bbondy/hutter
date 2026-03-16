@@ -30,18 +30,16 @@ pub fn compress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<()
 
     let mut model = Model::new();
     let mut offset = 0usize;
+    let mut prev_byte = 0u8;
 
     while offset < data.len() {
         let end = (offset + DEFAULT_BLOCK_SIZE).min(data.len());
         let block = &data[offset..end];
-        let codes = build_codes(&model.freqs)?;
-        let encoded = encode_block(block, &codes)?;
+        let encoded = encode_block(block, &mut model, &mut prev_byte)?;
 
         output.write_all(&(block.len() as u32).to_le_bytes())?;
         output.write_all(&(encoded.len() as u32).to_le_bytes())?;
         output.write_all(&encoded)?;
-
-        model.observe(block);
         offset = end;
     }
 
@@ -69,6 +67,7 @@ pub fn decompress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<
 
     let mut model = Model::new();
     let mut restored = 0usize;
+    let mut prev_byte = 0u8;
 
     while restored < original_size {
         let block_len = read_u32(&mut input)? as usize;
@@ -83,10 +82,8 @@ pub fn decompress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<
         let mut payload = vec![0u8; payload_len];
         input.read_exact(&mut payload)?;
 
-        let tree = build_tree(&model.freqs)?;
-        let block = decode_block(&payload, block_len, &tree)?;
+        let block = decode_block(&payload, block_len, &mut model, &mut prev_byte)?;
         output.write_all(&block)?;
-        model.observe(&block);
         restored += block_len;
     }
 
@@ -94,49 +91,95 @@ pub fn decompress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<
 }
 
 struct Model {
-    freqs: [u32; SYMBOLS],
+    freqs: Vec<[u32; SYMBOLS]>,
+    codes: Vec<[Code; SYMBOLS]>,
+    trees: Vec<Option<DecodeTree>>,
+    dirty: Vec<bool>,
 }
 
 impl Model {
     fn new() -> Self {
         Self {
-            freqs: [1; SYMBOLS],
+            freqs: vec![[1; SYMBOLS]; SYMBOLS],
+            codes: vec![[Code { bits: 0, len: 0 }; SYMBOLS]; SYMBOLS],
+            trees: std::iter::repeat_with(|| None).take(SYMBOLS).collect(),
+            dirty: vec![true; SYMBOLS],
         }
     }
 
-    fn observe(&mut self, block: &[u8]) {
-        for &byte in block {
-            self.freqs[byte as usize] = self.freqs[byte as usize].saturating_add(1);
-        }
+    fn observe(&mut self, prev_byte: u8, byte: u8) {
+        let context = prev_byte as usize;
+        let freqs = &mut self.freqs[context];
+        freqs[byte as usize] = freqs[byte as usize].saturating_add(1);
 
-        let sum: u64 = self.freqs.iter().map(|&v| u64::from(v)).sum();
+        let sum: u64 = freqs.iter().map(|&v| u64::from(v)).sum();
         if sum > MAX_FREQUENCY_SUM {
-            for freq in &mut self.freqs {
+            for freq in freqs {
                 *freq = (*freq).div_ceil(2).max(1);
             }
         }
+
+        self.dirty[context] = true;
+    }
+
+    fn codes_for(&mut self, prev_byte: u8) -> io::Result<&[Code; SYMBOLS]> {
+        let context = prev_byte as usize;
+        self.refresh_context(context)?;
+        Ok(&self.codes[context])
+    }
+
+    fn tree_for(&mut self, prev_byte: u8) -> io::Result<&DecodeTree> {
+        let context = prev_byte as usize;
+        self.refresh_context(context)?;
+        self.trees[context]
+            .as_ref()
+            .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "missing decode tree"))
+    }
+
+    fn refresh_context(&mut self, context: usize) -> io::Result<()> {
+        if !self.dirty[context] {
+            return Ok(());
+        }
+
+        let tree = build_tree(&self.freqs[context])?;
+        let mut codes = [Code { bits: 0, len: 0 }; SYMBOLS];
+        assign_codes(&tree.nodes, tree.root, 0, 0, &mut codes)?;
+        self.codes[context] = codes;
+        self.trees[context] = Some(tree);
+        self.dirty[context] = false;
+        Ok(())
     }
 }
 
-fn encode_block(block: &[u8], codes: &[Code; SYMBOLS]) -> io::Result<Vec<u8>> {
+fn encode_block(block: &[u8], model: &mut Model, prev_byte: &mut u8) -> io::Result<Vec<u8>> {
     let mut writer = BitWriter::default();
     for &byte in block {
-        let code = codes[byte as usize];
+        let code = model.codes_for(*prev_byte)?[byte as usize];
         writer.write_bits(code.bits, code.len)?;
+        model.observe(*prev_byte, byte);
+        *prev_byte = byte;
     }
     Ok(writer.finish())
 }
 
-fn decode_block(payload: &[u8], output_len: usize, tree: &DecodeTree) -> io::Result<Vec<u8>> {
+fn decode_block(
+    payload: &[u8],
+    output_len: usize,
+    model: &mut Model,
+    prev_byte: &mut u8,
+) -> io::Result<Vec<u8>> {
     let mut reader = BitReader::new(payload);
     let mut output = Vec::with_capacity(output_len);
 
     while output.len() < output_len {
+        let tree = model.tree_for(*prev_byte)?;
         let mut node_idx = tree.root;
         loop {
             let node = &tree.nodes[node_idx];
             if let Some(symbol) = node.symbol {
                 output.push(symbol);
+                model.observe(*prev_byte, symbol);
+                *prev_byte = symbol;
                 break;
             }
 
@@ -159,13 +202,6 @@ fn decode_block(payload: &[u8], output_len: usize, tree: &DecodeTree) -> io::Res
     }
 
     Ok(output)
-}
-
-fn build_codes(freqs: &[u32; SYMBOLS]) -> io::Result<[Code; SYMBOLS]> {
-    let tree = build_tree(freqs)?;
-    let mut codes = [Code { bits: 0, len: 0 }; SYMBOLS];
-    assign_codes(&tree.nodes, tree.root, 0, 0, &mut codes)?;
-    Ok(codes)
 }
 
 fn assign_codes(
