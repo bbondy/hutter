@@ -1,0 +1,2 @@
+Wikipedia compression experiments need a correctness loop before they need good ratios.
+This sample file exists so the Rust starter can be built, exercised, and verified quickly.
