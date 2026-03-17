@@ -1,4 +1,4 @@
-use crate::{adaptive_huffman, block_huffman, lz77, ppm};
+use crate::{adaptive_huffman, block_huffman, lz77, ppm, wikimix};
 use std::io::{self, Read, Write};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -12,6 +12,7 @@ pub enum Codec {
     PpmO4,
     PpmO5,
     PpmO6,
+    WikiMix5,
 }
 
 impl Codec {
@@ -26,6 +27,7 @@ impl Codec {
             "ppm-o4" | "ppm4" => Ok(Self::PpmO4),
             "ppm-o5" | "ppm5" => Ok(Self::PpmO5),
             "ppm-o6" | "ppm6" => Ok(Self::PpmO6),
+            "wikimix5" | "wikimix" | "wmx5" => Ok(Self::WikiMix5),
             _ => Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
                 format!("unknown codec: {value}"),
@@ -44,6 +46,7 @@ impl Codec {
             Self::PpmO4 => ppm::compress_order4(input, output),
             Self::PpmO5 => ppm::compress_order5(input, output),
             Self::PpmO6 => ppm::compress_order6(input, output),
+            Self::WikiMix5 => wikimix::compress(input, output),
         }
     }
 }
@@ -74,6 +77,8 @@ pub fn decompress_auto<W: Write>(input: &[u8], output: W) -> io::Result<()> {
         ppm::decompress_order5(input, output)
     } else if &input[..4] == ppm::magic_order6() {
         ppm::decompress_order6(input, output)
+    } else if &input[..4] == wikimix::magic() {
+        wikimix::decompress(input, output)
     } else if input[..4] == *b"PPM0" {
         ppm::decompress_legacy_order3(input, output)
     } else {

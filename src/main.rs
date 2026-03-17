@@ -4,6 +4,7 @@ mod cli;
 mod codec;
 mod lz77;
 mod ppm;
+mod wikimix;
 
 use crate::cli::Command;
 use crate::codec::decompress_auto;
