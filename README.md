@@ -9,6 +9,11 @@ It is not competitive yet. The current repo contains three small experimental co
 - naive LZ77 with literal and back-reference tokens
 - simple order-2 PPM with arithmetic coding
 
+There is also an additive `WikiMix-5` design skeleton for a future mixed-model codec:
+
+- `src/wikimix.rs`
+- `docs/wikimix5.md`
+
 Codec names in the CLI:
 
 - `huffman`: original block-model Huffman codec, faster and the default
@@ -92,6 +97,7 @@ make roundtrip CODEC=huffman
 make roundtrip CODEC=huffman-o1
 make roundtrip CODEC=lz77
 make roundtrip CODEC=ppm
+make roundtrip CODEC=wikimix5
 ```
 
 Run a round-trip with an explicit codec:
@@ -111,6 +117,10 @@ cmp data/sample.txt build/sample.restored
 
 cargo run --release -- compress --codec ppm data/sample.txt build/sample.ppm
 cargo run --release -- decompress build/sample.ppm build/sample.restored
+cmp data/sample.txt build/sample.restored
+
+cargo run --release -- compress --codec wikimix5 data/sample.txt build/sample.wmx5
+cargo run --release -- decompress build/sample.wmx5 build/sample.restored
 cmp data/sample.txt build/sample.restored
 ```
 
@@ -140,20 +150,24 @@ make bench INPUT=data/enwik8
 make bench INPUT=data/enwik8 CODEC=huffman
 make bench INPUT=data/enwik8 CODEC=huffman-o1
 make bench INPUT=data/enwik8 CODEC=ppm
+make bench INPUT=data/enwik8 CODEC=wikimix5
 make roundtrip INPUT=data/enwik8 CODEC=huffman ARCHIVE=build/enwik8.ahf1 RESTORED=build/enwik8.ahf1.restored
 make roundtrip INPUT=data/enwik8 CODEC=huffman-o1 ARCHIVE=build/enwik8.ahf1 RESTORED=build/enwik8.ahf1.restored
 make roundtrip INPUT=data/enwik8 CODEC=lz77 ARCHIVE=build/enwik8.lz77 RESTORED=build/enwik8.lz77.restored
 make roundtrip INPUT=data/enwik8 CODEC=ppm ARCHIVE=build/enwik8.ppm RESTORED=build/enwik8.ppm.restored
+make roundtrip INPUT=data/enwik8 CODEC=wikimix5 ARCHIVE=build/enwik8.wmx5 RESTORED=build/enwik8.wmx5.restored
 
 make roundtrip INPUT=data/enwik9
 make bench INPUT=data/enwik9
 make bench INPUT=data/enwik9 CODEC=huffman
 make bench INPUT=data/enwik9 CODEC=huffman-o1
 make bench INPUT=data/enwik9 CODEC=ppm
+make bench INPUT=data/enwik9 CODEC=wikimix5
 make roundtrip INPUT=data/enwik9 CODEC=huffman ARCHIVE=build/enwik9.ahf1 RESTORED=build/enwik9.ahf1.restored
 make roundtrip INPUT=data/enwik9 CODEC=huffman-o1 ARCHIVE=build/enwik9.ahf1 RESTORED=build/enwik9.ahf1.restored
 make roundtrip INPUT=data/enwik9 CODEC=lz77 ARCHIVE=build/enwik9.lz77 RESTORED=build/enwik9.lz77.restored
 make roundtrip INPUT=data/enwik9 CODEC=ppm ARCHIVE=build/enwik9.ppm RESTORED=build/enwik9.ppm.restored
+make roundtrip INPUT=data/enwik9 CODEC=wikimix5 ARCHIVE=build/enwik9.wmx5 RESTORED=build/enwik9.wmx5.restored
 ```
 
 ## Sources
