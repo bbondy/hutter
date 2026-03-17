@@ -20,6 +20,7 @@ Codec names in the CLI:
 - `huffman-o1`: order-1 Huffman codec, usually slower
 - `lz77`: naive LZ77 codec
 - `ppm`: order-2 PPM-style arithmetic coder
+- `ppm-mix`: mixed-order PPM candidates with adaptive per-order weights
 
 Their purpose is to give you a clean, testable loop for:
 
@@ -97,6 +98,7 @@ make roundtrip CODEC=huffman
 make roundtrip CODEC=huffman-o1
 make roundtrip CODEC=lz77
 make roundtrip CODEC=ppm
+make roundtrip CODEC=ppm-mix
 make roundtrip CODEC=wikimix5
 ```
 
@@ -117,6 +119,10 @@ cmp data/sample.txt build/sample.restored
 
 cargo run --release -- compress --codec ppm data/sample.txt build/sample.ppm
 cargo run --release -- decompress build/sample.ppm build/sample.restored
+cmp data/sample.txt build/sample.restored
+
+cargo run --release -- compress --codec ppm-mix data/sample.txt build/sample.pmix
+cargo run --release -- decompress build/sample.pmix build/sample.restored
 cmp data/sample.txt build/sample.restored
 
 cargo run --release -- compress --codec wikimix5 data/sample.txt build/sample.wmx5
@@ -150,11 +156,13 @@ make bench INPUT=data/enwik8
 make bench INPUT=data/enwik8 CODEC=huffman
 make bench INPUT=data/enwik8 CODEC=huffman-o1
 make bench INPUT=data/enwik8 CODEC=ppm
+make bench INPUT=data/enwik8 CODEC=ppm-mix
 make bench INPUT=data/enwik8 CODEC=wikimix5
 make roundtrip INPUT=data/enwik8 CODEC=huffman ARCHIVE=build/enwik8.ahf1 RESTORED=build/enwik8.ahf1.restored
 make roundtrip INPUT=data/enwik8 CODEC=huffman-o1 ARCHIVE=build/enwik8.ahf1 RESTORED=build/enwik8.ahf1.restored
 make roundtrip INPUT=data/enwik8 CODEC=lz77 ARCHIVE=build/enwik8.lz77 RESTORED=build/enwik8.lz77.restored
 make roundtrip INPUT=data/enwik8 CODEC=ppm ARCHIVE=build/enwik8.ppm RESTORED=build/enwik8.ppm.restored
+make roundtrip INPUT=data/enwik8 CODEC=ppm-mix ARCHIVE=build/enwik8.pmix RESTORED=build/enwik8.pmix.restored
 make roundtrip INPUT=data/enwik8 CODEC=wikimix5 ARCHIVE=build/enwik8.wmx5 RESTORED=build/enwik8.wmx5.restored
 
 make roundtrip INPUT=data/enwik9
@@ -162,11 +170,13 @@ make bench INPUT=data/enwik9
 make bench INPUT=data/enwik9 CODEC=huffman
 make bench INPUT=data/enwik9 CODEC=huffman-o1
 make bench INPUT=data/enwik9 CODEC=ppm
+make bench INPUT=data/enwik9 CODEC=ppm-mix
 make bench INPUT=data/enwik9 CODEC=wikimix5
 make roundtrip INPUT=data/enwik9 CODEC=huffman ARCHIVE=build/enwik9.ahf1 RESTORED=build/enwik9.ahf1.restored
 make roundtrip INPUT=data/enwik9 CODEC=huffman-o1 ARCHIVE=build/enwik9.ahf1 RESTORED=build/enwik9.ahf1.restored
 make roundtrip INPUT=data/enwik9 CODEC=lz77 ARCHIVE=build/enwik9.lz77 RESTORED=build/enwik9.lz77.restored
 make roundtrip INPUT=data/enwik9 CODEC=ppm ARCHIVE=build/enwik9.ppm RESTORED=build/enwik9.ppm.restored
+make roundtrip INPUT=data/enwik9 CODEC=ppm-mix ARCHIVE=build/enwik9.pmix RESTORED=build/enwik9.pmix.restored
 make roundtrip INPUT=data/enwik9 CODEC=wikimix5 ARCHIVE=build/enwik9.wmx5 RESTORED=build/enwik9.wmx5.restored
 ```
 

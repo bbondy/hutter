@@ -7,10 +7,15 @@ const MAGIC_ORDER3: &[u8; 4] = b"PPM3";
 const MAGIC_ORDER4: &[u8; 4] = b"PPM4";
 const MAGIC_ORDER5: &[u8; 4] = b"PPM5";
 const MAGIC_ORDER6: &[u8; 4] = b"PPM6";
+const MAGIC_MIX: &[u8; 4] = b"PMIX";
 const MAGIC_LEGACY: &[u8; 4] = b"PPM0";
 const SYMBOLS: usize = 256;
 const MAX_ORDER: usize = 6;
 const MAX_CONTEXT_TOTAL: u32 = 1 << 15;
+const MIX_BASE_WEIGHTS: [u32; MAX_ORDER + 1] = [3, 5, 7, 10, 14, 19, 25];
+const MIX_INITIAL_WEIGHT: u32 = 16;
+const MIX_LEARNING_RATE: u32 = 3;
+const MIX_ESCAPE_FREQ: u32 = 32;
 const STATE_BITS: u32 = 32;
 const MAX_RANGE: u64 = (1u64 << STATE_BITS) - 1;
 const HALF: u64 = 1u64 << (STATE_BITS - 1);
@@ -41,6 +46,10 @@ pub fn magic_order6() -> &'static [u8; 4] {
     MAGIC_ORDER6
 }
 
+pub fn magic_mix() -> &'static [u8; 4] {
+    MAGIC_MIX
+}
+
 pub fn compress_order1<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
     compress_with_order(input, output, MAGIC_ORDER1, 1)
 }
@@ -63,6 +72,10 @@ pub fn compress_order5<R: Read, W: Write>(input: R, output: W) -> io::Result<()>
 
 pub fn compress_order6<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
     compress_with_order(input, output, MAGIC_ORDER6, 6)
+}
+
+pub fn compress_mix<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    compress_with_mixer(input, output, MAGIC_MIX, MAX_ORDER)
 }
 
 fn compress_with_order<R: Read, W: Write>(
@@ -91,6 +104,31 @@ fn compress_with_order<R: Read, W: Write>(
     Ok(())
 }
 
+fn compress_with_mixer<R: Read, W: Write>(
+    mut input: R,
+    mut output: W,
+    magic: &[u8; 4],
+    max_order: usize,
+) -> io::Result<()> {
+    let mut data = Vec::new();
+    input.read_to_end(&mut data)?;
+
+    output.write_all(magic)?;
+    output.write_all(&(data.len() as u64).to_le_bytes())?;
+
+    let mut model = MixedModel::new(max_order);
+    let mut encoder = ArithmeticEncoder::new();
+
+    for (index, &symbol) in data.iter().enumerate() {
+        let history = build_history(&data[..index], max_order);
+        model.encode_symbol(symbol, &history, &mut encoder)?;
+        model.observe(symbol, &history);
+    }
+
+    output.write_all(&encoder.finish()?)?;
+    Ok(())
+}
+
 pub fn decompress_order1<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
     decompress_with_order(input, output, MAGIC_ORDER1, 1)
 }
@@ -113,6 +151,10 @@ pub fn decompress_order5<R: Read, W: Write>(input: R, output: W) -> io::Result<(
 
 pub fn decompress_order6<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
     decompress_with_order(input, output, MAGIC_ORDER6, 6)
+}
+
+pub fn decompress_mix<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    decompress_with_mixer(input, output, MAGIC_MIX, MAX_ORDER)
 }
 
 pub fn decompress_legacy_order3<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
@@ -147,6 +189,40 @@ fn decompress_with_order<R: Read, W: Write>(
         let symbol = model.decode_symbol(&history, max_order, &mut decoder)?;
         restored.push(symbol);
         model.observe(symbol, &history, max_order);
+    }
+
+    output.write_all(&restored)?;
+    Ok(())
+}
+
+fn decompress_with_mixer<R: Read, W: Write>(
+    mut input: R,
+    mut output: W,
+    expected_magic: &[u8; 4],
+    max_order: usize,
+) -> io::Result<()> {
+    let mut magic = [0u8; 4];
+    input.read_exact(&mut magic)?;
+    if &magic != expected_magic {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "invalid archive magic",
+        ));
+    }
+
+    let original_size = read_u64(&mut input)? as usize;
+    let mut payload = Vec::new();
+    input.read_to_end(&mut payload)?;
+
+    let mut model = MixedModel::new(max_order);
+    let mut decoder = ArithmeticDecoder::new(&payload)?;
+    let mut restored = Vec::with_capacity(original_size);
+
+    while restored.len() < original_size {
+        let history = build_history(&restored, max_order);
+        let symbol = model.decode_symbol(&history, &mut decoder)?;
+        restored.push(symbol);
+        model.observe(symbol, &history);
     }
 
     output.write_all(&restored)?;
@@ -230,6 +306,136 @@ impl Model {
         self.contexts
             .get(order - 1)
             .and_then(|contexts| contexts.get(&order_key(history, order)))
+    }
+}
+
+struct MixedModel {
+    order0: Context,
+    contexts: Vec<HashMap<u64, Context>>,
+    mixer: OrderMixer,
+    max_order: usize,
+}
+
+impl MixedModel {
+    fn new(max_order: usize) -> Self {
+        Self {
+            order0: Context::new(),
+            contexts: (0..max_order).map(|_| HashMap::new()).collect(),
+            mixer: OrderMixer::new(max_order),
+            max_order,
+        }
+    }
+
+    fn encode_symbol(
+        &self,
+        symbol: u8,
+        history: &[u8],
+        encoder: &mut ArithmeticEncoder,
+    ) -> io::Result<()> {
+        let candidates = self.mixed_candidates(history);
+        encode_mixed_symbol(symbol, &candidates, encoder)
+    }
+
+    fn decode_symbol(&self, history: &[u8], decoder: &mut ArithmeticDecoder<'_>) -> io::Result<u8> {
+        let candidates = self.mixed_candidates(history);
+        decode_mixed_symbol(&candidates, decoder)
+    }
+
+    fn observe(&mut self, symbol: u8, history: &[u8]) {
+        self.mixer.observe(symbol, &self.predictions(history));
+        self.order0.observe(symbol);
+
+        for order in 1..=history.len().min(self.max_order) {
+            self.contexts[order - 1]
+                .entry(order_key(history, order))
+                .or_insert_with(Context::new)
+                .observe(symbol);
+        }
+    }
+
+    fn mixed_candidates(&self, history: &[u8]) -> Vec<WeightedSymbol> {
+        self.mixer.combine(&self.predictions(history))
+    }
+
+    fn predictions(&self, history: &[u8]) -> Vec<OrderPrediction> {
+        let mut predictions = Vec::with_capacity(self.max_order + 1);
+        predictions.push(OrderPrediction {
+            order: 0,
+            best_symbol: self.order0.best_symbol(),
+            symbols: self.order0.top_symbols(4),
+        });
+
+        for order in 1..=history.len().min(self.max_order) {
+            let context = self.contexts[order - 1].get(&order_key(history, order));
+            predictions.push(OrderPrediction {
+                order,
+                best_symbol: context.and_then(Context::best_symbol),
+                symbols: context
+                    .map(|context| context.top_symbols(4))
+                    .unwrap_or_default(),
+            });
+        }
+
+        predictions
+    }
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+struct WeightedSymbol {
+    symbol: u8,
+    weight: u32,
+}
+
+#[derive(Clone, Debug)]
+struct OrderPrediction {
+    order: usize,
+    best_symbol: Option<u8>,
+    symbols: Vec<(u8, u32)>,
+}
+
+struct OrderMixer {
+    adaptive_weights: Vec<u32>,
+}
+
+impl OrderMixer {
+    fn new(max_order: usize) -> Self {
+        Self {
+            adaptive_weights: vec![MIX_INITIAL_WEIGHT; max_order + 1],
+        }
+    }
+
+    fn combine(&self, predictions: &[OrderPrediction]) -> Vec<WeightedSymbol> {
+        let mut combined = Vec::new();
+
+        for prediction in predictions {
+            let order_weight = self.weight_for(prediction.order);
+            for &(symbol, count) in &prediction.symbols {
+                add_weight(&mut combined, symbol, count.saturating_mul(order_weight));
+            }
+        }
+
+        combined.sort_by(|left, right| {
+            right
+                .weight
+                .cmp(&left.weight)
+                .then_with(|| left.symbol.cmp(&right.symbol))
+        });
+        combined.truncate(16);
+        combined.sort_by_key(|candidate| candidate.symbol);
+        combined
+    }
+
+    fn observe(&mut self, symbol: u8, predictions: &[OrderPrediction]) {
+        for prediction in predictions {
+            if prediction.best_symbol == Some(symbol) {
+                let weight = &mut self.adaptive_weights[prediction.order];
+                *weight = weight.saturating_add(MIX_LEARNING_RATE);
+            }
+        }
+    }
+
+    fn weight_for(&self, order: usize) -> u32 {
+        MIX_BASE_WEIGHTS[order].saturating_mul(self.adaptive_weights[order])
     }
 }
 
@@ -371,6 +577,84 @@ impl Context {
             .binary_search_by_key(&symbol, |entry| entry.symbol)
             .ok()
     }
+
+    fn top_symbols(&self, limit: usize) -> Vec<(u8, u32)> {
+        let mut top: Vec<(u8, u32)> = self
+            .counts
+            .iter()
+            .map(|entry| (entry.symbol, u32::from(entry.count)))
+            .collect();
+        top.sort_by(|left, right| right.1.cmp(&left.1).then_with(|| left.0.cmp(&right.0)));
+        top.truncate(limit);
+        top
+    }
+
+    fn best_symbol(&self) -> Option<u8> {
+        self.top_symbols(1).first().map(|(symbol, _)| *symbol)
+    }
+}
+
+fn encode_mixed_symbol(
+    symbol: u8,
+    candidates: &[WeightedSymbol],
+    encoder: &mut ArithmeticEncoder,
+) -> io::Result<()> {
+    let total = mixed_total(candidates);
+    let mut cum = 0u32;
+
+    for candidate in candidates {
+        if candidate.symbol == symbol {
+            return encoder.encode(cum, candidate.weight, total);
+        }
+        cum = cum.saturating_add(candidate.weight);
+    }
+
+    encoder.encode(cum, MIX_ESCAPE_FREQ, total)?;
+    encoder.encode(symbol as u32, 1, SYMBOLS as u32)
+}
+
+fn decode_mixed_symbol(
+    candidates: &[WeightedSymbol],
+    decoder: &mut ArithmeticDecoder<'_>,
+) -> io::Result<u8> {
+    let total = mixed_total(candidates);
+    let target = decoder.target(total)?;
+    let mut cum = 0u32;
+
+    for candidate in candidates {
+        if target < cum + candidate.weight {
+            decoder.consume(cum, candidate.weight, total)?;
+            return Ok(candidate.symbol);
+        }
+        cum = cum.saturating_add(candidate.weight);
+    }
+
+    decoder.consume(cum, MIX_ESCAPE_FREQ, total)?;
+    let value = decoder.target(SYMBOLS as u32)?;
+    decoder.consume(value, 1, SYMBOLS as u32)?;
+    Ok(value as u8)
+}
+
+fn mixed_total(candidates: &[WeightedSymbol]) -> u32 {
+    candidates.iter().fold(MIX_ESCAPE_FREQ, |total, candidate| {
+        total.saturating_add(candidate.weight)
+    })
+}
+
+fn add_weight(target: &mut Vec<WeightedSymbol>, symbol: u8, weight: u32) {
+    if weight == 0 {
+        return;
+    }
+
+    if let Some(candidate) = target
+        .iter_mut()
+        .find(|candidate| candidate.symbol == symbol)
+    {
+        candidate.weight = candidate.weight.saturating_add(weight);
+        return;
+    }
+
+    target.push(WeightedSymbol { symbol, weight });
 }
 
 struct ArithmeticEncoder {
@@ -592,14 +876,16 @@ fn read_u64<R: Read>(input: &mut R) -> io::Result<u64> {
 #[cfg(test)]
 mod tests {
     use super::{
-        compress_order1, compress_order2, compress_order3, compress_order4, compress_order5,
-        compress_order6, decompress_order1, decompress_order2, decompress_order3,
-        decompress_order4, decompress_order5, decompress_order6,
+        MixedModel, OrderPrediction, compress_mix, compress_order1, compress_order2,
+        compress_order3, compress_order4, compress_order5, compress_order6, decompress_mix,
+        decompress_order1, decompress_order2, decompress_order3, decompress_order4,
+        decompress_order5, decompress_order6,
     };
 
     #[test]
     fn roundtrip_repeated_text_all_orders() {
         let input = b"banana bandana banana bandana banana bandana";
+        roundtrip_mix(input);
         roundtrip_order1(input);
         roundtrip_order2(input);
         roundtrip_order3(input);
@@ -611,6 +897,7 @@ mod tests {
     #[test]
     fn roundtrip_binary_all_orders() {
         let input: Vec<u8> = (0..=255).cycle().take(4096).collect();
+        roundtrip_mix(&input);
         roundtrip_order1(&input);
         roundtrip_order2(&input);
         roundtrip_order3(&input);
@@ -638,6 +925,27 @@ mod tests {
             compressed6.len(),
             compressed5.len()
         );
+    }
+
+    #[test]
+    fn mixed_model_rewards_orders_that_vote_correctly() {
+        let mut model = MixedModel::new(3);
+        let history = b"ban";
+
+        for &symbol in b"banana banana banana banana" {
+            model.observe(symbol, history);
+        }
+
+        let before = model.mixer.weight_for(0);
+        let predictions = vec![OrderPrediction {
+            order: 0,
+            best_symbol: Some(b'a'),
+            symbols: vec![(b'a', 3)],
+        }];
+        model.mixer.observe(b'a', &predictions);
+        let after = model.mixer.weight_for(0);
+
+        assert!(after > before);
     }
 
     fn roundtrip_order1(input: &[u8]) {
@@ -691,6 +999,15 @@ mod tests {
 
         let mut restored = Vec::new();
         decompress_order6(&compressed[..], &mut restored).unwrap();
+        assert_eq!(restored, input);
+    }
+
+    fn roundtrip_mix(input: &[u8]) {
+        let mut compressed = Vec::new();
+        compress_mix(input, &mut compressed).unwrap();
+
+        let mut restored = Vec::new();
+        decompress_mix(&compressed[..], &mut restored).unwrap();
         assert_eq!(restored, input);
     }
 }
