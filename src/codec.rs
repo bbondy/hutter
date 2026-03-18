@@ -22,13 +22,13 @@ impl Codec {
             "block-huffman" | "huffman" => Ok(Self::BlockHuffman),
             "adaptive-huffman" | "context-huffman" | "huffman-o1" => Ok(Self::AdaptiveHuffman),
             "lz77" => Ok(Self::Lz77),
-            "ppm-o1" | "ppm1" => Ok(Self::PpmO1),
-            "ppm-o2" | "ppm2" => Ok(Self::PpmO2),
-            "ppm" | "ppm-o3" | "ppm3" => Ok(Self::PpmO3),
-            "ppm-o4" | "ppm4" => Ok(Self::PpmO4),
-            "ppm-o5" | "ppm5" => Ok(Self::PpmO5),
-            "ppm-o6" | "ppm6" => Ok(Self::PpmO6),
-            "ppm-mix" | "ppmmix" | "pmix" => Ok(Self::PpmMix),
+            "ppm-bit-o1" | "ppm-o1" | "ppm1" => Ok(Self::PpmO1),
+            "ppm-bit-o2" | "ppm-o2" | "ppm2" => Ok(Self::PpmO2),
+            "ppm-bit" | "ppm-bit-o3" | "ppm" | "ppm-o3" | "ppm3" => Ok(Self::PpmO3),
+            "ppm-bit-o4" | "ppm-o4" | "ppm4" => Ok(Self::PpmO4),
+            "ppm-bit-o5" | "ppm-o5" | "ppm5" => Ok(Self::PpmO5),
+            "ppm-bit-o6" | "ppm-o6" | "ppm6" => Ok(Self::PpmO6),
+            "ppm-bit-mix" | "ppm-mix" | "ppmmix" | "pmix" => Ok(Self::PpmMix),
             "wikimix5" | "wikimix" | "wmx5" => Ok(Self::WikiMix5),
             _ => Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
@@ -84,8 +84,6 @@ pub fn decompress_auto<W: Write>(input: &[u8], output: W) -> io::Result<()> {
         ppm::decompress_mix(input, output)
     } else if &input[..4] == wikimix::magic() {
         wikimix::decompress(input, output)
-    } else if input[..4] == *b"PPM0" {
-        ppm::decompress_legacy_order3(input, output)
     } else {
         Err(io::Error::new(
             io::ErrorKind::InvalidData,

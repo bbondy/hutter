@@ -7,7 +7,7 @@ It is not competitive yet. The current repo contains three small experimental co
 - adaptive block Huffman
 - order-1 adaptive block Huffman
 - naive LZ77 with literal and back-reference tokens
-- simple order-2 PPM with arithmetic coding
+- bit-level PPM with arithmetic coding
 
 There is also an additive `WikiMix-5` design skeleton for a future mixed-model codec:
 
@@ -19,8 +19,8 @@ Codec names in the CLI:
 - `huffman`: original block-model Huffman codec, faster and the default
 - `huffman-o1`: order-1 Huffman codec, usually slower
 - `lz77`: naive LZ77 codec
-- `ppm`: order-2 PPM-style arithmetic coder
-- `ppm-mix`: mixed-order PPM candidates with adaptive per-order weights
+- `ppm-bit`: order-3 bit-level PPM-style arithmetic coder
+- `ppm-bit-mix`: mixed-order bit-level PPM candidates with adaptive per-order weights
 
 Their purpose is to give you a clean, testable loop for:
 
@@ -72,7 +72,7 @@ Rust is not the common language in public Hutter Prize winners, but it is still 
 - `src/block_huffman.rs`: original adaptive block-Huffman codec
 - `src/adaptive_huffman.rs`: slower order-1 adaptive block-Huffman codec
 - `src/lz77.rs`: simple LZ77 codec
-- `src/ppm.rs`: order-2 PPM-style arithmetic codec
+- `src/ppm.rs`: bit-level PPM-style arithmetic codec
 - `data/sample.txt`: tiny sample corpus for smoke tests
 - `data/enwik8`: optional 100 MB Hutter corpus for faster iteration
 - `data/enwik9`: optional 1 GB Hutter Prize corpus for full-scale benchmarking
@@ -97,8 +97,8 @@ Select a codec explicitly:
 make roundtrip CODEC=huffman
 make roundtrip CODEC=huffman-o1
 make roundtrip CODEC=lz77
-make roundtrip CODEC=ppm
-make roundtrip CODEC=ppm-mix
+make roundtrip CODEC=ppm-bit
+make roundtrip CODEC=ppm-bit-mix
 make roundtrip CODEC=wikimix5
 ```
 
@@ -117,11 +117,11 @@ cargo run --release -- compress --codec lz77 data/sample.txt build/sample.lz77
 cargo run --release -- decompress build/sample.lz77 build/sample.restored
 cmp data/sample.txt build/sample.restored
 
-cargo run --release -- compress --codec ppm data/sample.txt build/sample.ppm
+cargo run --release -- compress --codec ppm-bit data/sample.txt build/sample.ppm
 cargo run --release -- decompress build/sample.ppm build/sample.restored
 cmp data/sample.txt build/sample.restored
 
-cargo run --release -- compress --codec ppm-mix data/sample.txt build/sample.pmix
+cargo run --release -- compress --codec ppm-bit-mix data/sample.txt build/sample.pmix
 cargo run --release -- decompress build/sample.pmix build/sample.restored
 cmp data/sample.txt build/sample.restored
 
@@ -155,28 +155,28 @@ make roundtrip INPUT=data/enwik8
 make bench INPUT=data/enwik8
 make bench INPUT=data/enwik8 CODEC=huffman
 make bench INPUT=data/enwik8 CODEC=huffman-o1
-make bench INPUT=data/enwik8 CODEC=ppm
-make bench INPUT=data/enwik8 CODEC=ppm-mix
+make bench INPUT=data/enwik8 CODEC=ppm-bit
+make bench INPUT=data/enwik8 CODEC=ppm-bit-mix
 make bench INPUT=data/enwik8 CODEC=wikimix5
 make roundtrip INPUT=data/enwik8 CODEC=huffman ARCHIVE=build/enwik8.ahf1 RESTORED=build/enwik8.ahf1.restored
 make roundtrip INPUT=data/enwik8 CODEC=huffman-o1 ARCHIVE=build/enwik8.ahf1 RESTORED=build/enwik8.ahf1.restored
 make roundtrip INPUT=data/enwik8 CODEC=lz77 ARCHIVE=build/enwik8.lz77 RESTORED=build/enwik8.lz77.restored
-make roundtrip INPUT=data/enwik8 CODEC=ppm ARCHIVE=build/enwik8.ppm RESTORED=build/enwik8.ppm.restored
-make roundtrip INPUT=data/enwik8 CODEC=ppm-mix ARCHIVE=build/enwik8.pmix RESTORED=build/enwik8.pmix.restored
+make roundtrip INPUT=data/enwik8 CODEC=ppm-bit ARCHIVE=build/enwik8.ppm RESTORED=build/enwik8.ppm.restored
+make roundtrip INPUT=data/enwik8 CODEC=ppm-bit-mix ARCHIVE=build/enwik8.pmix RESTORED=build/enwik8.pmix.restored
 make roundtrip INPUT=data/enwik8 CODEC=wikimix5 ARCHIVE=build/enwik8.wmx5 RESTORED=build/enwik8.wmx5.restored
 
 make roundtrip INPUT=data/enwik9
 make bench INPUT=data/enwik9
 make bench INPUT=data/enwik9 CODEC=huffman
 make bench INPUT=data/enwik9 CODEC=huffman-o1
-make bench INPUT=data/enwik9 CODEC=ppm
-make bench INPUT=data/enwik9 CODEC=ppm-mix
+make bench INPUT=data/enwik9 CODEC=ppm-bit
+make bench INPUT=data/enwik9 CODEC=ppm-bit-mix
 make bench INPUT=data/enwik9 CODEC=wikimix5
 make roundtrip INPUT=data/enwik9 CODEC=huffman ARCHIVE=build/enwik9.ahf1 RESTORED=build/enwik9.ahf1.restored
 make roundtrip INPUT=data/enwik9 CODEC=huffman-o1 ARCHIVE=build/enwik9.ahf1 RESTORED=build/enwik9.ahf1.restored
 make roundtrip INPUT=data/enwik9 CODEC=lz77 ARCHIVE=build/enwik9.lz77 RESTORED=build/enwik9.lz77.restored
-make roundtrip INPUT=data/enwik9 CODEC=ppm ARCHIVE=build/enwik9.ppm RESTORED=build/enwik9.ppm.restored
-make roundtrip INPUT=data/enwik9 CODEC=ppm-mix ARCHIVE=build/enwik9.pmix RESTORED=build/enwik9.pmix.restored
+make roundtrip INPUT=data/enwik9 CODEC=ppm-bit ARCHIVE=build/enwik9.ppm RESTORED=build/enwik9.ppm.restored
+make roundtrip INPUT=data/enwik9 CODEC=ppm-bit-mix ARCHIVE=build/enwik9.pmix RESTORED=build/enwik9.pmix.restored
 make roundtrip INPUT=data/enwik9 CODEC=wikimix5 ARCHIVE=build/enwik9.wmx5 RESTORED=build/enwik9.wmx5.restored
 ```
 

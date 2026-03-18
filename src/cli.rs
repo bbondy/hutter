@@ -40,7 +40,7 @@ pub fn parse_args<'a>(args: &'a [String]) -> io::Result<Command<'a>> {
 pub fn print_usage(program: &str) {
     eprintln!("usage:");
     eprintln!(
-        "  {program} compress [--codec huffman|huffman-o1|lz77|ppm-o1|ppm-o2|ppm-o3|ppm-o4|ppm-o5|ppm-o6|ppm-mix|wikimix5] <input> <archive>"
+        "  {program} compress [--codec huffman|huffman-o1|lz77|ppm-bit-o1|ppm-bit-o2|ppm-bit|ppm-bit-o4|ppm-bit-o5|ppm-bit-o6|ppm-bit-mix|wikimix5] <input> <archive>"
     );
     eprintln!("  {program} decompress <archive> <output>");
     eprintln!("  {program} stats <input> <archive>");
