@@ -510,7 +510,11 @@ impl Context {
     }
 
     fn escape_freq(&self) -> u32 {
-        self.counts.iter().filter(|&&count| count > 0).count().max(1) as u32
+        self.counts
+            .iter()
+            .filter(|&&count| count > 0)
+            .count()
+            .max(1) as u32
     }
 
     fn total_with_escape(&self) -> u32 {
@@ -612,10 +616,9 @@ fn add_weight(target: &mut Vec<WeightedSymbol>, symbol: u8, weight: u32) {
 }
 
 fn normalize_candidate_weights(candidates: &mut [WeightedSymbol]) {
-    while candidates
-        .iter()
-        .fold(0u32, |total, candidate| total.saturating_add(candidate.weight))
-        >= MAX_CONTEXT_TOTAL
+    while candidates.iter().fold(0u32, |total, candidate| {
+        total.saturating_add(candidate.weight)
+    }) >= MAX_CONTEXT_TOTAL
     {
         for candidate in candidates.iter_mut() {
             candidate.weight = candidate.weight.div_ceil(2).max(1);

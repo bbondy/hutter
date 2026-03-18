@@ -1,6 +1,6 @@
 # WikiMix-5
 
-`WikiMix-5` is a future mixed-model codec for this repo. It is additive work only: the existing `ppm-o1` through `ppm-o6` codecs stay as they are.
+`WikiMix-5` is a future mixed-model codec for this repo. It is additive work only: the existing byte-level `ppm-o1` through `ppm-o6` codecs and bit-level `ppm-bit-o1` through `ppm-bit-o6` codecs stay as they are.
 
 ## Codebase mapping
 

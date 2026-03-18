@@ -23,8 +23,10 @@ help:
 	@echo "make enwik9                   Download and verify enwik9 if needed"
 	@echo "make verify-enwik8            Verify the local enwik8 checksum"
 	@echo "make verify-enwik9            Verify the local enwik9 checksum"
-	@echo "make roundtrip INPUT=path CODEC=huffman|huffman-o1|lz77|ppm-bit-o1|ppm-bit-o2|ppm-bit|ppm-bit-o4|ppm-bit-o5|ppm-bit-o6|ppm-bit-mix   Compress + decompress + verify"
-	@echo "make bench INPUT=path CODEC=huffman|huffman-o1|lz77|ppm-bit-o1|ppm-bit-o2|ppm-bit|ppm-bit-o4|ppm-bit-o5|ppm-bit-o6|ppm-bit-mix       Print size stats for a corpus"
+	@echo "make roundtrip INPUT=path CODEC=huffman|huffman-o1|lz77|ppm-o1|ppm-o2|ppm|ppm-o4|ppm-o5|ppm-o6|ppm-bit-o1|ppm-bit-o2|ppm-bit|ppm-bit-o4|ppm-bit-o5|ppm-bit-o6|ppm-bit-mix   Compress + decompress + verify"
+	@echo "                              Note: ppm-oN is byte-level PPM; ppm-bit-oN is bit-level PPM"
+	@echo "make bench INPUT=path CODEC=huffman|huffman-o1|lz77|ppm-o1|ppm-o2|ppm|ppm-o4|ppm-o5|ppm-o6|ppm-bit-o1|ppm-bit-o2|ppm-bit|ppm-bit-o4|ppm-bit-o5|ppm-bit-o6|ppm-bit-mix       Print size stats for a corpus"
+	@echo "                              Note: ppm-oN is byte-level PPM; ppm-bit-oN is bit-level PPM"
 	@echo "make clean                    Remove build artifacts"
 
 build:

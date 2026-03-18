@@ -2,11 +2,12 @@
 
 This repo is a workspace for experimenting toward a future Hutter Prize submission in Rust.
 
-It is not competitive yet. The current repo contains three small experimental codecs:
+It is not competitive yet. The current repo contains several small experimental codecs:
 
 - adaptive block Huffman
 - order-1 adaptive block Huffman
 - naive LZ77 with literal and back-reference tokens
+- byte-level PPM with arithmetic coding
 - bit-level PPM with arithmetic coding
 
 There is also an additive `WikiMix-5` design skeleton for a future mixed-model codec:
@@ -19,8 +20,14 @@ Codec names in the CLI:
 - `huffman`: original block-model Huffman codec, faster and the default
 - `huffman-o1`: order-1 Huffman codec, usually slower
 - `lz77`: naive LZ77 codec
+- `ppm`: order-3 byte-level PPM-style arithmetic coder
 - `ppm-bit`: order-3 bit-level PPM-style arithmetic coder
 - `ppm-bit-mix`: mixed-order bit-level PPM candidates with adaptive per-order weights
+
+Family note:
+
+- `ppm-o1` through `ppm-o6` are byte-level PPM codecs
+- `ppm-bit-o1` through `ppm-bit-o6` are bit-level PPM codecs
 
 Their purpose is to give you a clean, testable loop for:
 
@@ -72,6 +79,7 @@ Rust is not the common language in public Hutter Prize winners, but it is still 
 - `src/block_huffman.rs`: original adaptive block-Huffman codec
 - `src/adaptive_huffman.rs`: slower order-1 adaptive block-Huffman codec
 - `src/lz77.rs`: simple LZ77 codec
+- `src/byte_ppm.rs`: byte-level PPM-style arithmetic codec
 - `src/ppm.rs`: bit-level PPM-style arithmetic codec
 - `data/sample.txt`: tiny sample corpus for smoke tests
 - `data/enwik8`: optional 100 MB Hutter corpus for faster iteration
