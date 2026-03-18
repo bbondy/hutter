@@ -514,7 +514,7 @@ impl Context {
     }
 
     fn total_with_escape(&self) -> u32 {
-        (2 * self.total).max(self.escape_freq() + 1)
+        self.total + self.escape_freq()
     }
 
     fn rescale(&mut self) {
