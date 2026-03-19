@@ -3,12 +3,14 @@ use std::io::{self, Read, Write};
 
 const MAGIC: &[u8; 4] = b"PMM2";
 const MAGIC_MATCH_ONLY: &[u8; 4] = b"PMAT";
+const MATCH_BYTE_MARKER: &[u8; 4] = b"MBY1";
 const BIT_MAX_ORDER: usize = 64;
 const BYTE_MAX_ORDER: usize = 6;
 const MATCH_HASH_LEN: usize = 4;
 const MATCH_MAX_CANDIDATES: usize = 8;
 const MATCH_WINDOW: usize = 1 << 15;
 const MATCH_MAX_LOOKAHEAD: usize = 64;
+const MATCH_ESCAPE_WEIGHT: u32 = 16;
 const MAX_CONTEXT_TOTAL: u32 = 1 << 15;
 const MIX_LEARNING_RATE: f64 = 0.2;
 const STATE_BITS: u32 = 32;
@@ -35,12 +37,23 @@ pub fn compress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<()
 }
 
 pub fn compress_match_only<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<()> {
-    compress_with_config(
-        &mut input,
-        &mut output,
-        MAGIC_MATCH_ONLY,
-        ModelConfig::new(false, false, true),
-    )
+    let mut data = Vec::new();
+    input.read_to_end(&mut data)?;
+
+    output.write_all(MAGIC_MATCH_ONLY)?;
+    output.write_all(&(data.len() as u64).to_le_bytes())?;
+    output.write_all(MATCH_BYTE_MARKER)?;
+
+    let mut model = MatchModel::new(MATCH_WINDOW, MATCH_HASH_LEN, MATCH_MAX_CANDIDATES);
+    let mut encoder = ArithmeticEncoder::new();
+
+    for &byte in &data {
+        model.encode_byte(byte, &mut encoder)?;
+        model.observe(byte);
+    }
+
+    output.write_all(&encoder.finish()?)?;
+    Ok(())
 }
 
 fn compress_with_config<R: Read, W: Write>(
@@ -79,13 +92,72 @@ pub fn decompress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<
     )
 }
 
-pub fn decompress_match_only<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<()> {
-    decompress_with_config(
-        &mut input,
-        &mut output,
-        MAGIC_MATCH_ONLY,
+pub fn decompress_match_only<R: Read, W: Write>(mut input: R, output: W) -> io::Result<()> {
+    let mut magic = [0u8; 4];
+    input.read_exact(&mut magic)?;
+    if &magic != MAGIC_MATCH_ONLY {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "invalid archive magic",
+        ));
+    }
+
+    let original_size = read_u64(&mut input)? as usize;
+    let mut payload = Vec::new();
+    input.read_to_end(&mut payload)?;
+
+    if payload.starts_with(MATCH_BYTE_MARKER) {
+        return decompress_match_only_byte(
+            &payload[MATCH_BYTE_MARKER.len()..],
+            original_size,
+            output,
+        );
+    }
+
+    decompress_match_only_legacy(&payload, original_size, output)
+}
+
+fn decompress_match_only_byte<W: Write>(
+    payload: &[u8],
+    original_size: usize,
+    mut output: W,
+) -> io::Result<()> {
+    let mut model = MatchModel::new(MATCH_WINDOW, MATCH_HASH_LEN, MATCH_MAX_CANDIDATES);
+    let mut decoder = ArithmeticDecoder::new(payload)?;
+    let mut restored = Vec::with_capacity(original_size);
+
+    while restored.len() < original_size {
+        let byte = model.decode_byte(&mut decoder)?;
+        restored.push(byte);
+        model.observe(byte);
+    }
+
+    output.write_all(&restored)?;
+    Ok(())
+}
+
+fn decompress_match_only_legacy<W: Write>(
+    payload: &[u8],
+    original_size: usize,
+    mut output: W,
+) -> io::Result<()> {
+    let mut model = HybridModel::new(
+        BIT_MAX_ORDER,
+        BYTE_MAX_ORDER,
         ModelConfig::new(false, false, true),
-    )
+    );
+    let mut decoder = ArithmeticDecoder::new(payload)?;
+    let mut restored = ByteCollector::with_capacity(original_size);
+
+    while restored.len() < original_size {
+        let predictions = model.predictions();
+        let bit = model.decode_bit(&predictions, &mut decoder)?;
+        restored.push(bit)?;
+        model.observe_bit(bit, &predictions);
+    }
+
+    output.write_all(restored.finish()?.as_slice())?;
+    Ok(())
 }
 
 fn decompress_with_config<R: Read, W: Write>(
@@ -407,6 +479,7 @@ struct MatchModel {
     hash_len: usize,
     max_candidates: usize,
     cached_candidates: Vec<MatchCandidate>,
+    cached_symbols: Vec<WeightedSymbol>,
 }
 
 impl MatchModel {
@@ -418,6 +491,7 @@ impl MatchModel {
             hash_len,
             max_candidates,
             cached_candidates: Vec::with_capacity(max_candidates),
+            cached_symbols: Vec::with_capacity(max_candidates),
         }
     }
 
@@ -460,9 +534,9 @@ impl MatchModel {
             }
 
             if next_bit(candidate.symbol, used_bits) == 0 {
-                count0 += candidate.weight;
+                count0 += f64::from(candidate.weight);
             } else {
-                count1 += candidate.weight;
+                count1 += f64::from(candidate.weight);
             }
         }
 
@@ -474,8 +548,70 @@ impl MatchModel {
         }
     }
 
+    fn encode_byte(&self, byte: u8, encoder: &mut ArithmeticEncoder) -> io::Result<()> {
+        let predicted_total = self.predicted_total();
+        if let Some((cum, freq, total)) = self.predicted_byte_range(byte) {
+            encoder.encode(MATCH_ESCAPE_WEIGHT, total - MATCH_ESCAPE_WEIGHT, total)?;
+            encoder.encode(cum, freq, total - MATCH_ESCAPE_WEIGHT)
+        } else {
+            let total = MATCH_ESCAPE_WEIGHT + predicted_total;
+            encoder.encode(0, MATCH_ESCAPE_WEIGHT, total)?;
+            encoder.encode(u32::from(byte), 1, 256)
+        }
+    }
+
+    fn decode_byte(&self, decoder: &mut ArithmeticDecoder<'_>) -> io::Result<u8> {
+        let predicted_total = self.predicted_total();
+        let total = MATCH_ESCAPE_WEIGHT + predicted_total;
+        let target = decoder.target(total)?;
+        if target < MATCH_ESCAPE_WEIGHT {
+            decoder.consume(0, MATCH_ESCAPE_WEIGHT, total)?;
+            let symbol = decoder.target(256)?;
+            decoder.consume(symbol, 1, 256)?;
+            Ok(symbol as u8)
+        } else {
+            decoder.consume(MATCH_ESCAPE_WEIGHT, predicted_total, total)?;
+            let symbol_target = decoder.target(predicted_total)?;
+            let mut cum = 0u32;
+            for symbol in &self.cached_symbols {
+                let next = cum + symbol.weight;
+                if symbol_target < next {
+                    decoder.consume(cum, symbol.weight, predicted_total)?;
+                    return Ok(symbol.symbol);
+                }
+                cum = next;
+            }
+
+            Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                "predicted symbol target out of range",
+            ))
+        }
+    }
+
+    fn predicted_byte_range(&self, byte: u8) -> Option<(u32, u32, u32)> {
+        if self.cached_symbols.is_empty() {
+            return None;
+        }
+
+        let mut cum = 0u32;
+        for symbol in &self.cached_symbols {
+            if symbol.symbol == byte {
+                let total = MATCH_ESCAPE_WEIGHT + self.predicted_total();
+                return Some((cum, symbol.weight, total));
+            }
+            cum += symbol.weight;
+        }
+        None
+    }
+
+    fn predicted_total(&self) -> u32 {
+        self.cached_symbols.iter().map(|symbol| symbol.weight).sum()
+    }
+
     fn refresh_candidates(&mut self) {
         self.cached_candidates.clear();
+        self.cached_symbols.clear();
         if self.data.len() < self.hash_len {
             return;
         }
@@ -506,23 +642,43 @@ impl MatchModel {
                 weight: match_weight(length, distance),
             });
         }
+
+        for candidate in &self.cached_candidates {
+            if let Some(existing) = self
+                .cached_symbols
+                .iter_mut()
+                .find(|symbol| symbol.symbol == candidate.symbol)
+            {
+                existing.weight = existing.weight.saturating_add(candidate.weight);
+            } else {
+                self.cached_symbols.push(WeightedSymbol {
+                    symbol: candidate.symbol,
+                    weight: candidate.weight,
+                });
+            }
+        }
     }
+}
+
+struct WeightedSymbol {
+    symbol: u8,
+    weight: u32,
 }
 
 struct MatchCandidate {
     symbol: u8,
-    weight: f64,
+    weight: u32,
 }
 
-fn match_weight(length: usize, distance: usize) -> f64 {
-    let length_score = (length.saturating_sub(MATCH_HASH_LEN) + 1).min(MATCH_MAX_LOOKAHEAD) as f64;
+fn match_weight(length: usize, distance: usize) -> u32 {
+    let length_score = (length.saturating_sub(MATCH_HASH_LEN) + 1).min(MATCH_MAX_LOOKAHEAD) as u32;
     let recency = match distance {
-        1..=64 => 2.5,
-        65..=512 => 1.8,
-        513..=4096 => 1.25,
-        _ => 0.9,
+        1..=64 => 25,
+        65..=512 => 18,
+        513..=4096 => 13,
+        _ => 9,
     };
-    length_score * recency
+    length_score.saturating_mul(recency)
 }
 
 fn match_length(data: &[u8], candidate: usize, current: usize) -> usize {

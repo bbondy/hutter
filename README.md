@@ -25,7 +25,7 @@ Codec names in the CLI:
 - `ppm-byte-mix`: mixed-order byte-level PPM with adaptive per-order weights
 - `ppm-bit-mix`: mixed-order bit-level PPM candidates with adaptive per-order weights
 - `ppm-mix`: hybrid bit coder that mixes byte-level and bit-level predictions
-- `match`: standalone LZ-style match predictor coded bitwise
+- `match`: standalone byte-level match predictor with arithmetic coding
 - `ppm-match-mix`: hybrid bit coder that mixes bit, byte, and match-model predictions
 
 Family note:
@@ -34,7 +34,7 @@ Family note:
 - `ppm-bit`, `ppm-bit-o16`, `ppm-bit-o32`, and `ppm-bit-o64` are bit-level PPM codecs
 - `ppm-byte-mix` is byte-level mixed-order PPM
 - `ppm-mix` uses both byte-level and bit-level models
-- `match` isolates the hashed match model on its own
+- `match` isolates the hashed match model on its own and codes whole bytes directly
 - `ppm-match-mix` adds the hashed match model to the `ppm-mix` bit+byte backbone
 
 Their purpose is to give you a clean, testable loop for:
@@ -85,7 +85,7 @@ Rust is not the common language in public Hutter Prize winners, but it is still 
 - `src/cli.rs`: command-line parsing and usage text
 - `src/codec.rs`: codec selection and archive-format dispatch
 - `src/hybrid_ppm.rs`: hybrid byte+bit mixed PPM codec
-- `src/ppm_match_mix.rs`: standalone match model codec and match-augmented hybrid codec
+- `src/ppm_match_mix.rs`: standalone byte-level match codec, legacy match-only decoder, and match-augmented hybrid codec
 - `src/block_huffman.rs`: original adaptive block-Huffman codec
 - `src/adaptive_huffman.rs`: slower order-1 adaptive block-Huffman codec
 - `src/lz77.rs`: simple LZ77 codec
@@ -169,6 +169,8 @@ cmp data/sample.txt build/sample.restored
 ```
 
 If `--codec` is omitted, `compress` defaults to `huffman`. `decompress` auto-detects the archive format from the file header, so you do not need to specify the codec when restoring.
+
+The `match` codec writes new `PMAT` archives with a byte-oriented payload marker. The decoder still accepts older `PMAT` archives produced by the previous bitwise match-only implementation.
 
 Progress bars are shown by default on terminal runs of `compress`, `decompress`, and `stats`. Use `--no-progress` to disable them:
 
