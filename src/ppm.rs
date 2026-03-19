@@ -10,10 +10,9 @@ const MAGIC_ORDER6: &[u8; 4] = b"PB16";
 const MAGIC_MIX: &[u8; 4] = b"PBMX";
 const MAX_ORDER: usize = 6;
 const MAX_CONTEXT_TOTAL: u32 = 1 << 15;
-const MIX_BASE_WEIGHTS: [u32; MAX_ORDER + 1] = [3, 5, 7, 10, 14, 19, 25];
-const MIX_INITIAL_WEIGHT: u32 = 16;
-const MIX_LEARNING_RATE: u32 = 3;
-const MIX_ESCAPE_FREQ: u32 = 32;
+const MIX_LEARNING_RATE: f64 = 0.3;
+const MIX_INITIAL_WEIGHTS: [f64; MAX_ORDER + 1] = [0.3, 0.5, 0.7, 1.0, 1.4, 1.9, 2.5];
+const MIX_ESCAPE_FREQ: u32 = 8;
 const STATE_BITS: u32 = 32;
 const MAX_RANGE: u64 = (1u64 << STATE_BITS) - 1;
 const HALF: u64 = 1u64 << (STATE_BITS - 1);
@@ -366,7 +365,6 @@ impl MixedModel {
         let mut predictions = Vec::with_capacity(self.max_order + 1);
         predictions.push(OrderPrediction {
             order: 0,
-            best_symbol: self.order0.best_symbol(),
             symbols: self.order0.top_symbols(2),
         });
 
@@ -374,7 +372,6 @@ impl MixedModel {
             let context = self.contexts[order - 1].get(&history.key(order));
             predictions.push(OrderPrediction {
                 order,
-                best_symbol: context.and_then(Context::best_symbol),
                 symbols: context
                     .map(|context| context.top_symbols(2))
                     .unwrap_or_default(),
@@ -394,54 +391,115 @@ struct WeightedSymbol {
 #[derive(Clone, Debug)]
 struct OrderPrediction {
     order: usize,
-    best_symbol: Option<u8>,
     symbols: Vec<(u8, u32)>,
 }
 
 struct OrderMixer {
-    adaptive_weights: Vec<u32>,
+    weights: Vec<[f64; 8]>, // per bit-position weights
+    bit_position: usize,
 }
 
 impl OrderMixer {
     fn new(max_order: usize) -> Self {
+        let weights = (0..=max_order)
+            .map(|order| {
+                let w = if order < MIX_INITIAL_WEIGHTS.len() {
+                    MIX_INITIAL_WEIGHTS[order]
+                } else {
+                    *MIX_INITIAL_WEIGHTS.last().unwrap()
+                };
+                [w; 8]
+            })
+            .collect();
         Self {
-            adaptive_weights: vec![MIX_INITIAL_WEIGHT; max_order + 1],
+            weights,
+            bit_position: 0,
         }
     }
 
     fn combine(&self, predictions: &[OrderPrediction]) -> Vec<WeightedSymbol> {
-        let mut combined = Vec::new();
+        let mixed_p1 = self.mixed_probability(predictions);
 
-        for prediction in predictions {
-            let order_weight = self.weight_for(prediction.order);
-            for &(symbol, count) in &prediction.symbols {
-                add_weight(&mut combined, symbol, count.saturating_mul(order_weight));
-            }
-        }
+        let scale = 16384.0;
+        let w0 = ((1.0 - mixed_p1) * scale).round().max(1.0) as u32;
+        let w1 = (mixed_p1 * scale).round().max(1.0) as u32;
 
-        combined.sort_by(|left, right| {
-            right
-                .weight
-                .cmp(&left.weight)
-                .then_with(|| left.symbol.cmp(&right.symbol))
+        let mut candidates = Vec::with_capacity(2);
+        candidates.push(WeightedSymbol {
+            symbol: 0,
+            weight: w0,
         });
-        combined.truncate(2);
-        normalize_candidate_weights(&mut combined);
-        combined.sort_by_key(|candidate| candidate.symbol);
-        combined
+        candidates.push(WeightedSymbol {
+            symbol: 1,
+            weight: w1,
+        });
+        candidates
     }
 
     fn observe(&mut self, symbol: u8, predictions: &[OrderPrediction]) {
+        let bp = self.bit_position;
+        let mixed_p1 = self.mixed_probability(predictions);
+        let error = f64::from(symbol) - mixed_p1;
+
         for prediction in predictions {
-            if prediction.best_symbol == Some(symbol) {
-                let weight = &mut self.adaptive_weights[prediction.order];
-                *weight = weight.saturating_add(MIX_LEARNING_RATE);
+            if let Some(p1) = Self::order_probability(prediction) {
+                let stretched = Self::stretch(p1);
+                self.weights[prediction.order][bp] += MIX_LEARNING_RATE * error * stretched;
             }
         }
+
+        self.bit_position = (self.bit_position + 1) % 8;
     }
 
-    fn weight_for(&self, order: usize) -> u32 {
-        MIX_BASE_WEIGHTS[order].saturating_mul(self.adaptive_weights[order])
+    fn mixed_probability(&self, predictions: &[OrderPrediction]) -> f64 {
+        let bp = self.bit_position;
+        let mut logit_sum = 0.0;
+        let mut any_context = false;
+
+        for prediction in predictions {
+            if let Some(p1) = Self::order_probability(prediction) {
+                logit_sum += self.weights[prediction.order][bp] * Self::stretch(p1);
+                any_context = true;
+            }
+        }
+
+        if !any_context {
+            return 0.5;
+        }
+
+        Self::squash(logit_sum)
+    }
+
+    fn order_probability(prediction: &OrderPrediction) -> Option<f64> {
+        if prediction.symbols.is_empty() {
+            return None;
+        }
+
+        let mut count0 = 0u32;
+        let mut count1 = 0u32;
+        for &(symbol, count) in &prediction.symbols {
+            match symbol {
+                0 => count0 = count,
+                _ => count1 = count,
+            }
+        }
+
+        let total = count0 + count1;
+        if total == 0 {
+            return None;
+        }
+
+        // Laplace smoothing
+        Some((count1 as f64 + 0.5) / (total as f64 + 1.0))
+    }
+
+    fn stretch(p: f64) -> f64 {
+        let p = p.clamp(0.001, 0.999);
+        (p / (1.0 - p)).ln()
+    }
+
+    fn squash(logit: f64) -> f64 {
+        1.0 / (1.0 + (-logit).exp())
     }
 }
 
@@ -546,10 +604,6 @@ impl Context {
         top.truncate(limit);
         top
     }
-
-    fn best_symbol(&self) -> Option<u8> {
-        self.top_symbols(1).first().map(|(symbol, _)| *symbol)
-    }
 }
 
 fn encode_mixed_symbol(
@@ -597,33 +651,6 @@ fn mixed_total(candidates: &[WeightedSymbol]) -> u32 {
     candidates.iter().fold(MIX_ESCAPE_FREQ, |total, candidate| {
         total.saturating_add(candidate.weight)
     })
-}
-
-fn add_weight(target: &mut Vec<WeightedSymbol>, symbol: u8, weight: u32) {
-    if weight == 0 {
-        return;
-    }
-
-    if let Some(candidate) = target
-        .iter_mut()
-        .find(|candidate| candidate.symbol == symbol)
-    {
-        candidate.weight = candidate.weight.saturating_add(weight);
-        return;
-    }
-
-    target.push(WeightedSymbol { symbol, weight });
-}
-
-fn normalize_candidate_weights(candidates: &mut [WeightedSymbol]) {
-    while candidates.iter().fold(0u32, |total, candidate| {
-        total.saturating_add(candidate.weight)
-    }) >= MAX_CONTEXT_TOTAL
-    {
-        for candidate in candidates.iter_mut() {
-            candidate.weight = candidate.weight.div_ceil(2).max(1);
-        }
-    }
 }
 
 #[derive(Clone, Copy)]
@@ -959,7 +986,7 @@ fn read_u64<R: Read>(input: &mut R) -> io::Result<u64> {
 #[cfg(test)]
 mod tests {
     use super::{
-        MixedModel, OrderPrediction, compress_mix, compress_order1, compress_order2,
+        OrderMixer, OrderPrediction, compress_mix, compress_order1, compress_order2,
         compress_order3, compress_order4, compress_order5, compress_order6, decompress_mix,
         decompress_order1, decompress_order2, decompress_order3, decompress_order4,
         decompress_order5, decompress_order6,
@@ -1017,24 +1044,36 @@ mod tests {
     }
 
     #[test]
-    fn mixed_model_rewards_orders_that_vote_correctly() {
-        let mut model = MixedModel::new(3);
-        let history = super::BitHistory::new(3);
+    fn gradient_mixer_adjusts_weights_toward_correct_prediction() {
+        let mut mixer = OrderMixer::new(3);
 
-        for &symbol in &[0, 1, 0, 1, 0, 1, 0, 1] {
-            model.observe(symbol, &history);
-        }
-
-        let before = model.mixer.weight_for(0);
+        // Order 0 predicts bit=1 strongly
         let predictions = vec![OrderPrediction {
             order: 0,
-            best_symbol: Some(1),
-            symbols: vec![(1, 3)],
+            symbols: vec![(1, 10), (0, 1)],
         }];
-        model.mixer.observe(1, &predictions);
-        let after = model.mixer.weight_for(0);
 
-        assert!(after > before);
+        let bp = mixer.bit_position;
+        let before = mixer.weights[0][bp];
+        // Actual symbol is 1, matching the prediction — weight should increase
+        mixer.observe(1, &predictions);
+        let after = mixer.weights[0][bp];
+
+        assert!(
+            after > before,
+            "weight should increase when prediction is correct: before={before}, after={after}"
+        );
+
+        // Now actual symbol is 0, contradicting the prediction — weight should decrease
+        let bp = mixer.bit_position;
+        let before = mixer.weights[0][bp];
+        mixer.observe(0, &predictions);
+        let after = mixer.weights[0][bp];
+
+        assert!(
+            after < before,
+            "weight should decrease when prediction is wrong: before={before}, after={after}"
+        );
     }
 
     fn roundtrip_order1(input: &[u8]) {

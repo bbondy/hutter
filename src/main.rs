@@ -3,6 +3,7 @@ mod block_huffman;
 mod byte_ppm;
 mod cli;
 mod codec;
+mod hybrid_ppm;
 mod lz77;
 mod ppm;
 mod wikimix;

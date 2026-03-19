@@ -40,9 +40,9 @@ pub fn parse_args<'a>(args: &'a [String]) -> io::Result<Command<'a>> {
 pub fn print_usage(program: &str) {
     eprintln!("usage:");
     eprintln!(
-        "  {program} compress [--codec huffman|huffman-o1|lz77|ppm-o1|ppm-o2|ppm|ppm-o4|ppm-o5|ppm-o6|ppm-bit-o1|ppm-bit-o2|ppm-bit|ppm-bit-o4|ppm-bit-o5|ppm-bit-o6|ppm-bit-mix|wikimix5] <input> <archive>"
+        "  {program} compress [--codec huffman|huffman-o1|lz77|ppm-o1|ppm-o2|ppm|ppm-o4|ppm-o5|ppm-o6|ppm-byte-mix|ppm-bit-o1|ppm-bit-o2|ppm-bit|ppm-bit-o4|ppm-bit-o5|ppm-bit-o6|ppm-bit-mix|ppm-mix|wikimix5] <input> <archive>"
     );
-    eprintln!("  note: ppm-oN is byte-level PPM; ppm-bit-oN is bit-level PPM");
+    eprintln!("  note: ppm-oN is byte-level PPM; ppm-bit-oN is bit-level PPM; ppm-mix uses both");
     eprintln!("  {program} decompress <archive> <output>");
     eprintln!("  {program} stats <input> <archive>");
 }
