@@ -43,11 +43,16 @@ fn run() -> io::Result<()> {
             codec,
             input_path,
             output_path,
+            show_progress,
         } => {
             let input = fs::File::open(input_path)?;
             let input_size = input.metadata()?.len();
             let output = fs::File::create(output_path)?;
-            let progress = Progress::new(format!("compressing {}", codec.name()), input_size);
+            let progress = Progress::with_enabled(
+                format!("compressing {}", codec.name()),
+                input_size,
+                show_progress,
+            );
             let tracked_input = progress.reader(input);
             let result = codec.compress(tracked_input, output);
             progress.finish(&format!("compressing {} done", codec.name()));
@@ -56,11 +61,13 @@ fn run() -> io::Result<()> {
         Command::Decompress {
             input_path,
             output_path,
+            show_progress,
         } => {
-            let input = read_file_with_progress(input_path, "reading archive")?;
+            let input = read_file_with_progress(input_path, "reading archive", show_progress)?;
             let output = fs::File::create(output_path)?;
             let input_size = input.len() as u64;
-            let progress = Progress::new("decompressing archive", input_size);
+            let progress =
+                Progress::with_enabled("decompressing archive", input_size, show_progress);
             progress.set_processing();
             let result = decompress_auto(&input, output);
             progress.finish("decompressing archive done");
@@ -69,12 +76,13 @@ fn run() -> io::Result<()> {
         Command::Stats {
             input_path,
             archive_path,
-        } => print_stats(input_path, archive_path),
+            show_progress,
+        } => print_stats(input_path, archive_path, show_progress),
     }
 }
 
-fn print_stats(input_path: &str, archive_path: &str) -> io::Result<()> {
-    let progress = Progress::new("collecting stats", 0);
+fn print_stats(input_path: &str, archive_path: &str, show_progress: bool) -> io::Result<()> {
+    let progress = Progress::with_enabled("collecting stats", 0, show_progress);
     progress.set_processing();
     let input_size = file_len(input_path)?;
     let archive_size = file_len(archive_path)?;

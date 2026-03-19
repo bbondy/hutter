@@ -170,6 +170,14 @@ cmp data/sample.txt build/sample.restored
 
 If `--codec` is omitted, `compress` defaults to `huffman`. `decompress` auto-detects the archive format from the file header, so you do not need to specify the codec when restoring.
 
+Progress bars are shown by default on terminal runs of `compress`, `decompress`, and `stats`. Use `--no-progress` to disable them:
+
+```sh
+cargo run --release -- compress --no-progress --codec ppm-match-mix data/sample.txt build/sample.pmm2
+cargo run --release -- decompress --no-progress build/sample.pmm2 build/sample.restored
+cargo run --release -- stats --no-progress data/sample.txt build/sample.pmm2
+```
+
 Run the unit tests:
 
 ```sh

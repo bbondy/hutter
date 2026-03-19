@@ -1,5 +1,5 @@
 use std::fmt::Write as _;
-use std::io::{self, IsTerminal, Read, Write};
+use std::io::{self, Read, Write};
 use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, AtomicU8, AtomicU64, Ordering};
 use std::thread;
@@ -23,8 +23,7 @@ struct State {
 }
 
 impl Progress {
-    pub fn new(label: impl Into<String>, total: u64) -> Self {
-        let enabled = io::stderr().is_terminal();
+    pub fn with_enabled(label: impl Into<String>, total: u64, enabled: bool) -> Self {
         let state = Arc::new(State {
             label: label.into(),
             total,

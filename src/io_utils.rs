@@ -3,10 +3,14 @@ use std::fs::File;
 use std::io::{self, Read};
 use std::path::Path;
 
-pub fn read_file_with_progress(path: &str, label: &str) -> io::Result<Vec<u8>> {
+pub fn read_file_with_progress(
+    path: &str,
+    label: &str,
+    show_progress: bool,
+) -> io::Result<Vec<u8>> {
     let file = File::open(path)?;
     let total = file.metadata()?.len();
-    let progress = Progress::new(label, total);
+    let progress = Progress::with_enabled(label, total, show_progress);
     let mut reader = progress.reader(file);
     let mut data = Vec::new();
     reader.read_to_end(&mut data)?;
