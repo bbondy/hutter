@@ -29,7 +29,7 @@ Codec names in the CLI:
 Family note:
 
 - `ppm-o1` through `ppm-o6` are byte-level PPM codecs
-- `ppm-bit-o1` through `ppm-bit-o6` are bit-level PPM codecs
+- `ppm-bit`, `ppm-bit-o16`, `ppm-bit-o32`, and `ppm-bit-o64` are bit-level PPM codecs
 - `ppm-byte-mix` is byte-level mixed-order PPM
 - `ppm-mix` uses both byte-level and bit-level models
 

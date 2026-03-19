@@ -2,11 +2,10 @@ use std::collections::{HashMap, VecDeque};
 use std::io::{self, Read, Write};
 
 const MAGIC: &[u8; 4] = b"PMIX";
-const MAX_ORDER: usize = 6;
+const BIT_MAX_ORDER: usize = 64;
+const BYTE_MAX_ORDER: usize = 6;
 const MAX_CONTEXT_TOTAL: u32 = 1 << 15;
 const MIX_LEARNING_RATE: f64 = 0.2;
-const BIT_INITIAL_WEIGHTS: [f64; MAX_ORDER + 1] = [0.2, 0.4, 0.7, 1.0, 1.4, 1.8, 2.2];
-const BYTE_INITIAL_WEIGHTS: [f64; MAX_ORDER + 1] = [0.2, 0.4, 0.7, 1.0, 1.3, 1.7, 2.0];
 const STATE_BITS: u32 = 32;
 const MAX_RANGE: u64 = (1u64 << STATE_BITS) - 1;
 const HALF: u64 = 1u64 << (STATE_BITS - 1);
@@ -24,7 +23,7 @@ pub fn compress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<()
     output.write_all(MAGIC)?;
     output.write_all(&(data.len() as u64).to_le_bytes())?;
 
-    let mut model = HybridModel::new(MAX_ORDER);
+    let mut model = HybridModel::new(BIT_MAX_ORDER, BYTE_MAX_ORDER);
     let mut encoder = ArithmeticEncoder::new();
 
     for &byte in &data {
@@ -52,7 +51,7 @@ pub fn decompress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<
     let mut payload = Vec::new();
     input.read_to_end(&mut payload)?;
 
-    let mut model = HybridModel::new(MAX_ORDER);
+    let mut model = HybridModel::new(BIT_MAX_ORDER, BYTE_MAX_ORDER);
     let mut decoder = ArithmeticDecoder::new(&payload)?;
     let mut restored = ByteCollector::with_capacity(original_size);
 
@@ -76,22 +75,24 @@ struct HybridModel {
     byte_history: ByteHistory,
     current_byte: u8,
     used_bits: u8,
-    max_order: usize,
+    bit_max_order: usize,
+    byte_max_order: usize,
 }
 
 impl HybridModel {
-    fn new(max_order: usize) -> Self {
+    fn new(bit_max_order: usize, byte_max_order: usize) -> Self {
         Self {
             bit_order0: BitContext::new(),
-            bit_contexts: (0..max_order).map(|_| HashMap::new()).collect(),
+            bit_contexts: (0..bit_max_order).map(|_| HashMap::new()).collect(),
             byte_order0: ByteContext::new(),
-            byte_contexts: (0..max_order).map(|_| HashMap::new()).collect(),
-            mixer: HybridMixer::new(max_order),
-            bit_history: BitHistory::new(max_order),
-            byte_history: ByteHistory::new(max_order),
+            byte_contexts: (0..byte_max_order).map(|_| HashMap::new()).collect(),
+            mixer: HybridMixer::new(bit_max_order, byte_max_order),
+            bit_history: BitHistory::new(bit_max_order),
+            byte_history: ByteHistory::new(byte_max_order),
             current_byte: 0,
             used_bits: 0,
-            max_order,
+            bit_max_order,
+            byte_max_order,
         }
     }
 
@@ -110,7 +111,7 @@ impl HybridModel {
         self.mixer.observe(bit, &predictions);
 
         self.bit_order0.observe(bit);
-        for order in 1..=self.bit_history.len().min(self.max_order) {
+        for order in 1..=self.bit_history.len().min(self.bit_max_order) {
             self.bit_contexts[order - 1]
                 .entry(self.bit_history.key(order))
                 .or_insert_with(BitContext::new)
@@ -123,7 +124,7 @@ impl HybridModel {
         if self.used_bits == 8 {
             let byte = self.current_byte;
             self.byte_order0.observe(byte);
-            for order in 1..=self.byte_history.len().min(self.max_order) {
+            for order in 1..=self.byte_history.len().min(self.byte_max_order) {
                 self.byte_contexts[order - 1]
                     .entry(self.byte_history.key(order))
                     .or_insert_with(ByteContext::new)
@@ -141,12 +142,12 @@ impl HybridModel {
     }
 
     fn predictions(&self) -> Predictions {
-        let mut bit_predictions = Vec::with_capacity(self.max_order + 1);
+        let mut bit_predictions = Vec::with_capacity(self.bit_max_order + 1);
         bit_predictions.push(OrderProbability {
             order: 0,
             p1: self.bit_order0.probability(),
         });
-        for order in 1..=self.bit_history.len().min(self.max_order) {
+        for order in 1..=self.bit_history.len().min(self.bit_max_order) {
             let context = self.bit_contexts[order - 1].get(&self.bit_history.key(order));
             bit_predictions.push(OrderProbability {
                 order,
@@ -154,14 +155,14 @@ impl HybridModel {
             });
         }
 
-        let mut byte_predictions = Vec::with_capacity(self.max_order + 1);
+        let mut byte_predictions = Vec::with_capacity(self.byte_max_order + 1);
         byte_predictions.push(OrderProbability {
             order: 0,
             p1: self
                 .byte_order0
                 .bit_probability(self.current_byte, self.used_bits),
         });
-        for order in 1..=self.byte_history.len().min(self.max_order) {
+        for order in 1..=self.byte_history.len().min(self.byte_max_order) {
             let context = self.byte_contexts[order - 1].get(&self.byte_history.key(order));
             byte_predictions.push(OrderProbability {
                 order,
@@ -194,12 +195,12 @@ struct HybridMixer {
 }
 
 impl HybridMixer {
-    fn new(max_order: usize) -> Self {
-        let bit_weights = (0..=max_order)
-            .map(|order| [BIT_INITIAL_WEIGHTS[order]; 8])
+    fn new(bit_max_order: usize, byte_max_order: usize) -> Self {
+        let bit_weights = (0..=bit_max_order)
+            .map(|order| [bit_initial_weight(order); 8])
             .collect();
-        let byte_weights = (0..=max_order)
-            .map(|order| [BYTE_INITIAL_WEIGHTS[order]; 8])
+        let byte_weights = (0..=byte_max_order)
+            .map(|order| [byte_initial_weight(order); 8])
             .collect();
         Self {
             bit_weights,
@@ -250,6 +251,28 @@ impl HybridMixer {
         }
 
         self.bit_position = (self.bit_position + 1) % 8;
+    }
+}
+
+fn bit_initial_weight(order: usize) -> f64 {
+    match order {
+        0 => 0.2,
+        1..=8 => 0.2 + (order as f64 * 0.11),
+        9..=16 => 1.08 + ((order - 8) as f64 * 0.08),
+        17..=32 => 1.72 + ((order - 16) as f64 * 0.045),
+        _ => 2.44 + ((order - 32) as f64 * 0.02),
+    }
+}
+
+fn byte_initial_weight(order: usize) -> f64 {
+    match order {
+        0 => 0.2,
+        1 => 0.4,
+        2 => 0.7,
+        3 => 1.0,
+        4 => 1.3,
+        5 => 1.7,
+        _ => 2.0,
     }
 }
 

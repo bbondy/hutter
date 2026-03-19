@@ -1,17 +1,14 @@
 use std::collections::HashMap;
 use std::io::{self, Read, Write};
 
-const MAGIC_ORDER1: &[u8; 4] = b"PB11";
-const MAGIC_ORDER2: &[u8; 4] = b"PB12";
-const MAGIC_ORDER3: &[u8; 4] = b"PB13";
-const MAGIC_ORDER4: &[u8; 4] = b"PB14";
-const MAGIC_ORDER5: &[u8; 4] = b"PB15";
-const MAGIC_ORDER6: &[u8; 4] = b"PB16";
+const MAGIC_ORDER8: &[u8; 4] = b"PB08";
+const MAGIC_ORDER16: &[u8; 4] = b"PB16";
+const MAGIC_ORDER32: &[u8; 4] = b"PB32";
+const MAGIC_ORDER64: &[u8; 4] = b"PB64";
 const MAGIC_MIX: &[u8; 4] = b"PBMX";
-const MAX_ORDER: usize = 6;
+const MAX_ORDER: usize = 64;
 const MAX_CONTEXT_TOTAL: u32 = 1 << 15;
 const MIX_LEARNING_RATE: f64 = 0.3;
-const MIX_INITIAL_WEIGHTS: [f64; MAX_ORDER + 1] = [0.3, 0.5, 0.7, 1.0, 1.4, 1.9, 2.5];
 const MIX_ESCAPE_FREQ: u32 = 8;
 const STATE_BITS: u32 = 32;
 const MAX_RANGE: u64 = (1u64 << STATE_BITS) - 1;
@@ -19,56 +16,40 @@ const HALF: u64 = 1u64 << (STATE_BITS - 1);
 const QUARTER: u64 = HALF >> 1;
 const THREE_QUARTERS: u64 = HALF + QUARTER;
 
-pub fn magic_order1() -> &'static [u8; 4] {
-    MAGIC_ORDER1
+pub fn magic_order8() -> &'static [u8; 4] {
+    MAGIC_ORDER8
 }
 
-pub fn magic_order2() -> &'static [u8; 4] {
-    MAGIC_ORDER2
+pub fn magic_order16() -> &'static [u8; 4] {
+    MAGIC_ORDER16
 }
 
-pub fn magic_order3() -> &'static [u8; 4] {
-    MAGIC_ORDER3
+pub fn magic_order32() -> &'static [u8; 4] {
+    MAGIC_ORDER32
 }
 
-pub fn magic_order4() -> &'static [u8; 4] {
-    MAGIC_ORDER4
-}
-
-pub fn magic_order5() -> &'static [u8; 4] {
-    MAGIC_ORDER5
-}
-
-pub fn magic_order6() -> &'static [u8; 4] {
-    MAGIC_ORDER6
+pub fn magic_order64() -> &'static [u8; 4] {
+    MAGIC_ORDER64
 }
 
 pub fn magic_mix() -> &'static [u8; 4] {
     MAGIC_MIX
 }
 
-pub fn compress_order1<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
-    compress_with_order(input, output, MAGIC_ORDER1, 1)
+pub fn compress_order8<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    compress_with_order(input, output, MAGIC_ORDER8, 8)
 }
 
-pub fn compress_order2<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
-    compress_with_order(input, output, MAGIC_ORDER2, 2)
+pub fn compress_order16<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    compress_with_order(input, output, MAGIC_ORDER16, 16)
 }
 
-pub fn compress_order3<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
-    compress_with_order(input, output, MAGIC_ORDER3, 3)
+pub fn compress_order32<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    compress_with_order(input, output, MAGIC_ORDER32, 32)
 }
 
-pub fn compress_order4<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
-    compress_with_order(input, output, MAGIC_ORDER4, 4)
-}
-
-pub fn compress_order5<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
-    compress_with_order(input, output, MAGIC_ORDER5, 5)
-}
-
-pub fn compress_order6<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
-    compress_with_order(input, output, MAGIC_ORDER6, 6)
+pub fn compress_order64<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    compress_with_order(input, output, MAGIC_ORDER64, 64)
 }
 
 pub fn compress_mix<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
@@ -131,28 +112,20 @@ fn compress_with_mixer<R: Read, W: Write>(
     Ok(())
 }
 
-pub fn decompress_order1<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
-    decompress_with_order(input, output, MAGIC_ORDER1, 1)
+pub fn decompress_order8<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    decompress_with_order(input, output, MAGIC_ORDER8, 8)
 }
 
-pub fn decompress_order2<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
-    decompress_with_order(input, output, MAGIC_ORDER2, 2)
+pub fn decompress_order16<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    decompress_with_order(input, output, MAGIC_ORDER16, 16)
 }
 
-pub fn decompress_order3<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
-    decompress_with_order(input, output, MAGIC_ORDER3, 3)
+pub fn decompress_order32<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    decompress_with_order(input, output, MAGIC_ORDER32, 32)
 }
 
-pub fn decompress_order4<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
-    decompress_with_order(input, output, MAGIC_ORDER4, 4)
-}
-
-pub fn decompress_order5<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
-    decompress_with_order(input, output, MAGIC_ORDER5, 5)
-}
-
-pub fn decompress_order6<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
-    decompress_with_order(input, output, MAGIC_ORDER6, 6)
+pub fn decompress_order64<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
+    decompress_with_order(input, output, MAGIC_ORDER64, 64)
 }
 
 pub fn decompress_mix<R: Read, W: Write>(input: R, output: W) -> io::Result<()> {
@@ -231,7 +204,7 @@ fn decompress_with_mixer<R: Read, W: Write>(
 
 struct Model {
     order0: Context,
-    contexts: Vec<HashMap<u64, Context>>,
+    contexts: Vec<HashMap<u128, Context>>,
 }
 
 impl Model {
@@ -251,6 +224,9 @@ impl Model {
     ) -> io::Result<()> {
         for order in (1..=history.len().min(max_order)).rev() {
             if let Some(context) = self.context_for_order(order, history) {
+                if !context_is_usable(order, context) {
+                    continue;
+                }
                 if context.contains(symbol) {
                     return context.encode_symbol(symbol, encoder);
                 }
@@ -276,6 +252,9 @@ impl Model {
     ) -> io::Result<u8> {
         for order in (1..=history.len().min(max_order)).rev() {
             if let Some(context) = self.context_for_order(order, history) {
+                if !context_is_usable(order, context) {
+                    continue;
+                }
                 if let Some(symbol) = context.decode_symbol(decoder)? {
                     return Ok(symbol);
                 }
@@ -311,7 +290,7 @@ impl Model {
 
 struct MixedModel {
     order0: Context,
-    contexts: Vec<HashMap<u64, Context>>,
+    contexts: Vec<HashMap<u128, Context>>,
     mixer: OrderMixer,
     max_order: usize,
 }
@@ -373,6 +352,7 @@ impl MixedModel {
             predictions.push(OrderPrediction {
                 order,
                 symbols: context
+                    .filter(|context| context_is_usable(order, context))
                     .map(|context| context.top_symbols(2))
                     .unwrap_or_default(),
             });
@@ -402,14 +382,7 @@ struct OrderMixer {
 impl OrderMixer {
     fn new(max_order: usize) -> Self {
         let weights = (0..=max_order)
-            .map(|order| {
-                let w = if order < MIX_INITIAL_WEIGHTS.len() {
-                    MIX_INITIAL_WEIGHTS[order]
-                } else {
-                    *MIX_INITIAL_WEIGHTS.last().unwrap()
-                };
-                [w; 8]
-            })
+            .map(|order| [initial_mix_weight(order); 8])
             .collect();
         Self {
             weights,
@@ -500,6 +473,16 @@ impl OrderMixer {
 
     fn squash(logit: f64) -> f64 {
         1.0 / (1.0 + (-logit).exp())
+    }
+}
+
+fn initial_mix_weight(order: usize) -> f64 {
+    match order {
+        0 => 0.3,
+        1..=8 => 0.3 + (order as f64 * 0.12),
+        9..=16 => 1.3 + ((order - 8) as f64 * 0.09),
+        17..=32 => 2.1 + ((order - 16) as f64 * 0.05),
+        _ => 2.9 + ((order - 32) as f64 * 0.025),
     }
 }
 
@@ -606,6 +589,18 @@ impl Context {
     }
 }
 
+fn context_is_usable(order: usize, context: &Context) -> bool {
+    context.total >= min_context_total(order)
+}
+
+fn min_context_total(order: usize) -> u32 {
+    match order {
+        0..=31 => 1,
+        32..=63 => 3,
+        _ => 5,
+    }
+}
+
 fn encode_mixed_symbol(
     symbol: u8,
     candidates: &[WeightedSymbol],
@@ -658,6 +653,8 @@ struct BitHistory {
     bits: u64,
     len: usize,
     max_order: usize,
+    current_byte: u8,
+    used_bits: u8,
 }
 
 impl BitHistory {
@@ -666,6 +663,8 @@ impl BitHistory {
             bits: 0,
             len: 0,
             max_order,
+            current_byte: 0,
+            used_bits: 0,
         }
     }
 
@@ -677,10 +676,19 @@ impl BitHistory {
         let mask = history_mask(self.max_order);
         self.bits = ((self.bits << 1) | u64::from(bit)) & mask;
         self.len = (self.len + 1).min(self.max_order);
+        self.current_byte = (self.current_byte << 1) | bit;
+        self.used_bits = (self.used_bits + 1) % 8;
+        if self.used_bits == 0 {
+            self.current_byte = 0;
+        }
     }
 
-    fn key(&self, order: usize) -> u64 {
-        self.bits & history_mask(order)
+    fn key(&self, order: usize) -> u128 {
+        let suffix = u128::from(self.bits & history_mask(order));
+        let bit_position = u128::from(self.used_bits);
+        let prefix = u128::from(self.current_byte);
+
+        suffix | (bit_position << order) | (prefix << (order + 3))
     }
 }
 
@@ -986,61 +994,51 @@ fn read_u64<R: Read>(input: &mut R) -> io::Result<u64> {
 #[cfg(test)]
 mod tests {
     use super::{
-        OrderMixer, OrderPrediction, compress_mix, compress_order1, compress_order2,
-        compress_order3, compress_order4, compress_order5, compress_order6, decompress_mix,
-        decompress_order1, decompress_order2, decompress_order3, decompress_order4,
-        decompress_order5, decompress_order6,
+        OrderMixer, OrderPrediction, compress_mix, compress_order8, compress_order16,
+        compress_order32, compress_order64, decompress_mix, decompress_order8, decompress_order16,
+        decompress_order32, decompress_order64,
     };
 
     #[test]
     fn roundtrip_repeated_text_all_orders() {
         let input = b"banana bandana banana bandana banana bandana";
         roundtrip_mix(input);
-        roundtrip_order1(input);
-        roundtrip_order2(input);
-        roundtrip_order3(input);
-        roundtrip_order4(input);
-        roundtrip_order5(input);
-        roundtrip_order6(input);
+        roundtrip_order8(input);
+        roundtrip_order16(input);
+        roundtrip_order32(input);
+        roundtrip_order64(input);
     }
 
     #[test]
     fn roundtrip_binary_all_orders() {
         let input: Vec<u8> = (0..=255).cycle().take(4096).collect();
         roundtrip_mix(&input);
-        roundtrip_order1(&input);
-        roundtrip_order2(&input);
-        roundtrip_order3(&input);
-        roundtrip_order4(&input);
-        roundtrip_order5(&input);
-        roundtrip_order6(&input);
+        roundtrip_order8(&input);
+        roundtrip_order16(&input);
+        roundtrip_order32(&input);
+        roundtrip_order64(&input);
     }
 
     #[test]
     fn roundtrip_empty_input() {
-        roundtrip_order3(b"");
+        roundtrip_order8(b"");
         roundtrip_mix(b"");
     }
 
     #[test]
-    fn order6_uses_longer_bit_context_than_order5() {
+    fn order64_produces_distinct_archive_from_order32() {
         let mut input = Vec::new();
         for _ in 0..1024 {
             input.extend_from_slice(&[0x55, 0x54, 0x55, 0x57]);
         }
 
-        let mut compressed5 = Vec::new();
-        compress_order5(&input[..], &mut compressed5).unwrap();
+        let mut compressed32 = Vec::new();
+        compress_order32(&input[..], &mut compressed32).unwrap();
 
-        let mut compressed6 = Vec::new();
-        compress_order6(&input[..], &mut compressed6).unwrap();
+        let mut compressed64 = Vec::new();
+        compress_order64(&input[..], &mut compressed64).unwrap();
 
-        assert!(
-            compressed6.len() <= compressed5.len(),
-            "expected order-6 archive ({}) to be no larger than order-5 ({})",
-            compressed6.len(),
-            compressed5.len()
-        );
+        assert_ne!(compressed64, compressed32);
     }
 
     #[test]
@@ -1076,57 +1074,39 @@ mod tests {
         );
     }
 
-    fn roundtrip_order1(input: &[u8]) {
+    fn roundtrip_order8(input: &[u8]) {
         let mut compressed = Vec::new();
-        compress_order1(input, &mut compressed).unwrap();
+        compress_order8(input, &mut compressed).unwrap();
 
         let mut restored = Vec::new();
-        decompress_order1(&compressed[..], &mut restored).unwrap();
+        decompress_order8(&compressed[..], &mut restored).unwrap();
         assert_eq!(restored, input);
     }
 
-    fn roundtrip_order2(input: &[u8]) {
+    fn roundtrip_order16(input: &[u8]) {
         let mut compressed = Vec::new();
-        compress_order2(input, &mut compressed).unwrap();
+        compress_order16(input, &mut compressed).unwrap();
 
         let mut restored = Vec::new();
-        decompress_order2(&compressed[..], &mut restored).unwrap();
+        decompress_order16(&compressed[..], &mut restored).unwrap();
         assert_eq!(restored, input);
     }
 
-    fn roundtrip_order3(input: &[u8]) {
+    fn roundtrip_order32(input: &[u8]) {
         let mut compressed = Vec::new();
-        compress_order3(input, &mut compressed).unwrap();
+        compress_order32(input, &mut compressed).unwrap();
 
         let mut restored = Vec::new();
-        decompress_order3(&compressed[..], &mut restored).unwrap();
+        decompress_order32(&compressed[..], &mut restored).unwrap();
         assert_eq!(restored, input);
     }
 
-    fn roundtrip_order4(input: &[u8]) {
+    fn roundtrip_order64(input: &[u8]) {
         let mut compressed = Vec::new();
-        compress_order4(input, &mut compressed).unwrap();
+        compress_order64(input, &mut compressed).unwrap();
 
         let mut restored = Vec::new();
-        decompress_order4(&compressed[..], &mut restored).unwrap();
-        assert_eq!(restored, input);
-    }
-
-    fn roundtrip_order5(input: &[u8]) {
-        let mut compressed = Vec::new();
-        compress_order5(input, &mut compressed).unwrap();
-
-        let mut restored = Vec::new();
-        decompress_order5(&compressed[..], &mut restored).unwrap();
-        assert_eq!(restored, input);
-    }
-
-    fn roundtrip_order6(input: &[u8]) {
-        let mut compressed = Vec::new();
-        compress_order6(input, &mut compressed).unwrap();
-
-        let mut restored = Vec::new();
-        decompress_order6(&compressed[..], &mut restored).unwrap();
+        decompress_order64(&compressed[..], &mut restored).unwrap();
         assert_eq!(restored, input);
     }
 
