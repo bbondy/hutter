@@ -59,8 +59,9 @@ fn compress_with_config<R: Read, W: Write>(
 
     for &byte in &data {
         for bit in ByteBits::new(byte) {
-            model.encode_bit(bit, &mut encoder)?;
-            model.observe_bit(bit);
+            let predictions = model.predictions();
+            model.encode_bit(bit, &predictions, &mut encoder)?;
+            model.observe_bit(bit, &predictions);
         }
     }
 
@@ -110,9 +111,10 @@ fn decompress_with_config<R: Read, W: Write>(
     let mut restored = ByteCollector::with_capacity(original_size);
 
     while restored.len() < original_size {
-        let bit = model.decode_bit(&mut decoder)?;
+        let predictions = model.predictions();
+        let bit = model.decode_bit(&predictions, &mut decoder)?;
         restored.push(bit)?;
-        model.observe_bit(bit);
+        model.observe_bit(bit, &predictions);
     }
 
     output.write_all(restored.finish()?.as_slice())?;
@@ -171,18 +173,26 @@ impl HybridModel {
         }
     }
 
-    fn encode_bit(&self, bit: u8, encoder: &mut ArithmeticEncoder) -> io::Result<()> {
-        let p1 = self.mixed_probability();
+    fn encode_bit(
+        &self,
+        bit: u8,
+        predictions: &Predictions,
+        encoder: &mut ArithmeticEncoder,
+    ) -> io::Result<()> {
+        let p1 = self.mixed_probability(predictions);
         encode_probability(bit, p1, encoder)
     }
 
-    fn decode_bit(&self, decoder: &mut ArithmeticDecoder<'_>) -> io::Result<u8> {
-        let p1 = self.mixed_probability();
+    fn decode_bit(
+        &self,
+        predictions: &Predictions,
+        decoder: &mut ArithmeticDecoder<'_>,
+    ) -> io::Result<u8> {
+        let p1 = self.mixed_probability(predictions);
         decode_probability(p1, decoder)
     }
 
-    fn observe_bit(&mut self, bit: u8) {
-        let predictions = self.predictions();
+    fn observe_bit(&mut self, bit: u8, predictions: &Predictions) {
         self.mixer.observe(bit, &predictions);
 
         self.bit_order0.observe(bit);
@@ -212,8 +222,7 @@ impl HybridModel {
         }
     }
 
-    fn mixed_probability(&self) -> f64 {
-        let predictions = self.predictions();
+    fn mixed_probability(&self, predictions: &Predictions) -> f64 {
         self.mixer.mixed_probability(&predictions)
     }
 
@@ -396,6 +405,7 @@ struct MatchModel {
     window: usize,
     hash_len: usize,
     max_candidates: usize,
+    cached_candidates: Vec<MatchCandidate>,
 }
 
 impl MatchModel {
@@ -406,6 +416,7 @@ impl MatchModel {
             window,
             hash_len,
             max_candidates,
+            cached_candidates: Vec::with_capacity(max_candidates),
         }
     }
 
@@ -430,19 +441,49 @@ impl MatchModel {
             }
             entry.pop_front();
         }
+
+        self.refresh_candidates();
     }
 
     fn bit_probability(&self, prefix: u8, used_bits: u8) -> Option<f64> {
-        if self.data.len() < self.hash_len {
+        if self.cached_candidates.is_empty() {
             return None;
+        }
+
+        let mut count0 = 0.0;
+        let mut count1 = 0.0;
+
+        for candidate in &self.cached_candidates {
+            if !byte_matches_prefix(candidate.symbol, prefix, used_bits) {
+                continue;
+            }
+
+            if next_bit(candidate.symbol, used_bits) == 0 {
+                count0 += candidate.weight;
+            } else {
+                count1 += candidate.weight;
+            }
+        }
+
+        let total = count0 + count1;
+        if total == 0.0 {
+            None
+        } else {
+            Some((count1 + 0.5) / (total + 1.0))
+        }
+    }
+
+    fn refresh_candidates(&mut self) {
+        self.cached_candidates.clear();
+        if self.data.len() < self.hash_len {
+            return;
         }
 
         let suffix_start = self.data.len() - self.hash_len;
         let key = match_key_at(&self.data, suffix_start, self.hash_len);
-        let positions = self.positions.get(&key)?;
-
-        let mut count0 = 0.0;
-        let mut count1 = 0.0;
+        let Some(positions) = self.positions.get(&key) else {
+            return;
+        };
 
         for &candidate in positions.iter().rev() {
             if candidate >= suffix_start {
@@ -459,26 +500,17 @@ impl MatchModel {
                 continue;
             }
 
-            let next_symbol = self.data[candidate + (length % distance)];
-            if !byte_matches_prefix(next_symbol, prefix, used_bits) {
-                continue;
-            }
-
-            let weight = match_weight(length, distance);
-            if next_bit(next_symbol, used_bits) == 0 {
-                count0 += weight;
-            } else {
-                count1 += weight;
-            }
-        }
-
-        let total = count0 + count1;
-        if total == 0.0 {
-            None
-        } else {
-            Some((count1 + 0.5) / (total + 1.0))
+            self.cached_candidates.push(MatchCandidate {
+                symbol: self.data[candidate + (length % distance)],
+                weight: match_weight(length, distance),
+            });
         }
     }
+}
+
+struct MatchCandidate {
+    symbol: u8,
+    weight: f64,
 }
 
 fn match_weight(length: usize, distance: usize) -> f64 {
