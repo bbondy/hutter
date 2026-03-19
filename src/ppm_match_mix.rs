@@ -8,6 +8,7 @@ const BYTE_MAX_ORDER: usize = 6;
 const MATCH_HASH_LEN: usize = 4;
 const MATCH_MAX_CANDIDATES: usize = 8;
 const MATCH_WINDOW: usize = 1 << 15;
+const MATCH_MAX_LOOKAHEAD: usize = 64;
 const MAX_CONTEXT_TOTAL: u32 = 1 << 15;
 const MIX_LEARNING_RATE: f64 = 0.2;
 const STATE_BITS: u32 = 32;
@@ -514,7 +515,7 @@ struct MatchCandidate {
 }
 
 fn match_weight(length: usize, distance: usize) -> f64 {
-    let length_score = (length.saturating_sub(MATCH_HASH_LEN) + 1).min(64) as f64;
+    let length_score = (length.saturating_sub(MATCH_HASH_LEN) + 1).min(MATCH_MAX_LOOKAHEAD) as f64;
     let recency = match distance {
         1..=64 => 2.5,
         65..=512 => 1.8,
@@ -528,7 +529,8 @@ fn match_length(data: &[u8], candidate: usize, current: usize) -> usize {
     let distance = current - candidate;
     let mut length = 0usize;
 
-    while current + length < data.len()
+    while length < MATCH_MAX_LOOKAHEAD
+        && current + length < data.len()
         && data[candidate + (length % distance)] == data[current + length]
     {
         length += 1;
