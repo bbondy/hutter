@@ -27,6 +27,30 @@ pub enum Codec {
 }
 
 impl Codec {
+    pub fn name(self) -> &'static str {
+        match self {
+            Self::BlockHuffman => "huffman",
+            Self::AdaptiveHuffman => "huffman-o1",
+            Self::Lz77 => "lz77",
+            Self::BytePpmO1 => "ppm-o1",
+            Self::BytePpmO2 => "ppm-o2",
+            Self::BytePpmO3 => "ppm",
+            Self::BytePpmO4 => "ppm-o4",
+            Self::BytePpmO5 => "ppm-o5",
+            Self::BytePpmO6 => "ppm-o6",
+            Self::BitPpmO8 => "ppm-bit",
+            Self::BitPpmO16 => "ppm-bit-o16",
+            Self::BitPpmO32 => "ppm-bit-o32",
+            Self::BitPpmO64 => "ppm-bit-o64",
+            Self::BytePpmMix => "ppm-byte-mix",
+            Self::BitPpmMix => "ppm-bit-mix",
+            Self::PpmMix => "ppm-mix",
+            Self::MatchModel => "match",
+            Self::PpmMatchMix => "ppm-match-mix",
+            Self::WikiMix5 => "wikimix5",
+        }
+    }
+
     pub fn parse(value: &str) -> io::Result<Self> {
         match value {
             "block-huffman" | "huffman" => Ok(Self::BlockHuffman),

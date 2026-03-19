@@ -4,13 +4,17 @@ mod byte_ppm;
 mod cli;
 mod codec;
 mod hybrid_ppm;
+mod io_utils;
 mod lz77;
 mod ppm;
 mod ppm_match_mix;
+mod progress;
 mod wikimix;
 
 use crate::cli::Command;
 use crate::codec::decompress_auto;
+use crate::io_utils::{file_len, read_file_with_progress};
+use crate::progress::Progress;
 use std::env;
 use std::fs;
 use std::io;
@@ -41,16 +45,26 @@ fn run() -> io::Result<()> {
             output_path,
         } => {
             let input = fs::File::open(input_path)?;
+            let input_size = input.metadata()?.len();
             let output = fs::File::create(output_path)?;
-            codec.compress(input, output)
+            let progress = Progress::new(format!("compressing {}", codec.name()), input_size);
+            let tracked_input = progress.reader(input);
+            let result = codec.compress(tracked_input, output);
+            progress.finish(&format!("compressing {} done", codec.name()));
+            result
         }
         Command::Decompress {
             input_path,
             output_path,
         } => {
-            let input = fs::read(input_path)?;
+            let input = read_file_with_progress(input_path, "reading archive")?;
             let output = fs::File::create(output_path)?;
-            decompress_auto(&input, output)
+            let input_size = input.len() as u64;
+            let progress = Progress::new("decompressing archive", input_size);
+            progress.set_processing();
+            let result = decompress_auto(&input, output);
+            progress.finish("decompressing archive done");
+            result
         }
         Command::Stats {
             input_path,
@@ -60,9 +74,12 @@ fn run() -> io::Result<()> {
 }
 
 fn print_stats(input_path: &str, archive_path: &str) -> io::Result<()> {
-    let input_size = fs::metadata(input_path)?.len();
-    let archive_size = fs::metadata(archive_path)?.len();
+    let progress = Progress::new("collecting stats", 0);
+    progress.set_processing();
+    let input_size = file_len(input_path)?;
+    let archive_size = file_len(archive_path)?;
     let exe_size = current_exe_size()?;
+    progress.finish("collecting stats done");
     let total_size = archive_size + exe_size;
     let ratio = if archive_size == 0 {
         0.0
