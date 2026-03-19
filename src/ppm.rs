@@ -415,9 +415,11 @@ impl OrderMixer {
         let error = f64::from(symbol) - mixed_p1;
 
         for prediction in predictions {
-            if let Some(p1) = Self::order_probability(prediction) {
+            if let Some((p1, total)) = Self::order_probability(prediction) {
                 let stretched = Self::stretch(p1);
-                self.weights[prediction.order][bp] += MIX_LEARNING_RATE * error * stretched;
+                let confidence = Self::order_confidence(prediction.order, total);
+                self.weights[prediction.order][bp] +=
+                    MIX_LEARNING_RATE * error * stretched * confidence;
             }
         }
 
@@ -430,8 +432,9 @@ impl OrderMixer {
         let mut any_context = false;
 
         for prediction in predictions {
-            if let Some(p1) = Self::order_probability(prediction) {
-                logit_sum += self.weights[prediction.order][bp] * Self::stretch(p1);
+            if let Some((p1, total)) = Self::order_probability(prediction) {
+                let confidence = Self::order_confidence(prediction.order, total);
+                logit_sum += self.weights[prediction.order][bp] * confidence * Self::stretch(p1);
                 any_context = true;
             }
         }
@@ -443,7 +446,7 @@ impl OrderMixer {
         Self::squash(logit_sum)
     }
 
-    fn order_probability(prediction: &OrderPrediction) -> Option<f64> {
+    fn order_probability(prediction: &OrderPrediction) -> Option<(f64, u32)> {
         if prediction.symbols.is_empty() {
             return None;
         }
@@ -463,7 +466,18 @@ impl OrderMixer {
         }
 
         // Laplace smoothing
-        Some((count1 as f64 + 0.5) / (total as f64 + 1.0))
+        Some(((count1 as f64 + 0.5) / (total as f64 + 1.0), total))
+    }
+
+    fn order_confidence(order: usize, total: u32) -> f64 {
+        let target = match order {
+            0..=8 => 4.0,
+            9..=16 => 8.0,
+            17..=32 => 16.0,
+            _ => 24.0,
+        };
+
+        (f64::from(total) / target).clamp(0.0, 1.0)
     }
 
     fn stretch(p: f64) -> f64 {
