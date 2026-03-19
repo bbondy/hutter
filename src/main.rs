@@ -6,6 +6,7 @@ mod codec;
 mod hybrid_ppm;
 mod lz77;
 mod ppm;
+mod ppm_match_mix;
 mod wikimix;
 
 use crate::cli::Command;
