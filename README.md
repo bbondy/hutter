@@ -41,6 +41,7 @@ Their purpose is to give you a clean, testable loop for:
 
 - compress
 - decompress
+- profile `ppm-match-mix` internals
 - verify correctness
 - inspect file sizes quickly
 
@@ -179,6 +180,23 @@ cargo run --release -- compress --no-progress --codec ppm-match-mix data/sample.
 cargo run --release -- decompress --no-progress build/sample.pmm2 build/sample.restored
 cargo run --release -- stats --no-progress data/sample.txt build/sample.pmm2
 ```
+
+Profile the internal `ppm-match-mix` model combinations on one input:
+
+```sh
+cargo run --release -- profile data/sample.txt
+cargo run --release -- profile --no-progress data/enwik8
+```
+
+`profile` prints timings and archive sizes for:
+
+- `bit-only`
+- `byte-only`
+- `match-only`
+- `byte+match`
+- `ppm-match-mix`
+
+It also prints the percentage of time saved versus the current `ppm-match-mix` implementation.
 
 Run the unit tests:
 

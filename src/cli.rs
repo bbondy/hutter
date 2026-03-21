@@ -18,6 +18,10 @@ pub enum Command<'a> {
         archive_path: &'a str,
         show_progress: bool,
     },
+    Profile {
+        input_path: &'a str,
+        show_progress: bool,
+    },
 }
 
 pub fn parse_args<'a>(args: &'a [String]) -> io::Result<Command<'a>> {
@@ -31,6 +35,7 @@ pub fn parse_args<'a>(args: &'a [String]) -> io::Result<Command<'a>> {
         "compress" => parse_compress_args(args, show_progress),
         "decompress" => parse_decompress_args(args, show_progress),
         "stats" => parse_stats_args(args, show_progress),
+        "profile" => parse_profile_args(args, show_progress),
         _ => Err(usage_error("unknown command")),
     }
 }
@@ -45,6 +50,8 @@ pub fn print_usage(program: &str) {
     );
     eprintln!("  {program} decompress [--no-progress] <archive> <output>");
     eprintln!("  {program} stats [--no-progress] <input> <archive>");
+    eprintln!("  {program} profile [--no-progress] <input>");
+    eprintln!("  note: profile benchmarks internal ppm-match-mix model combinations");
 }
 
 fn parse_compress_args<'a>(args: &'a [String], show_progress: bool) -> io::Result<Command<'a>> {
@@ -86,6 +93,17 @@ fn parse_stats_args<'a>(args: &'a [String], show_progress: bool) -> io::Result<C
         [_, _, input_path, archive_path] => Ok(Command::Stats {
             input_path,
             archive_path,
+            show_progress,
+        }),
+        _ => Err(usage_error("invalid arguments")),
+    }
+}
+
+fn parse_profile_args<'a>(args: &'a [String], show_progress: bool) -> io::Result<Command<'a>> {
+    let filtered = filtered_args(args);
+    match filtered.as_slice() {
+        [_, _, input_path] => Ok(Command::Profile {
+            input_path,
             show_progress,
         }),
         _ => Err(usage_error("invalid arguments")),

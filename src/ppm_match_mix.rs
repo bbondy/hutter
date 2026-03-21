@@ -27,6 +27,50 @@ pub fn magic_match_only() -> &'static [u8; 4] {
     MAGIC_MATCH_ONLY
 }
 
+pub struct ProfileResult {
+    pub name: &'static str,
+    pub elapsed: std::time::Duration,
+    pub output_size: usize,
+    pub ns_per_byte: f64,
+}
+
+pub fn profile_model_configs<R: Read>(mut input: R) -> io::Result<Vec<ProfileResult>> {
+    let mut data = Vec::new();
+    input.read_to_end(&mut data)?;
+    profile_model_configs_for_data(&data)
+}
+
+fn profile_model_configs_for_data(data: &[u8]) -> io::Result<Vec<ProfileResult>> {
+    let cases = [
+        ("bit-only", ModelConfig::new(true, false, false)),
+        ("byte-only", ModelConfig::new(false, true, false)),
+        ("match-only", ModelConfig::new(false, false, true)),
+        ("byte+match", ModelConfig::new(false, true, true)),
+        ("ppm-match-mix", ModelConfig::new(true, true, true)),
+    ];
+
+    let mut results = Vec::with_capacity(cases.len());
+    for (name, config) in cases {
+        let start = std::time::Instant::now();
+        let mut output = Vec::new();
+        compress_with_config(std::io::Cursor::new(data), &mut output, MAGIC, config)?;
+        let elapsed = start.elapsed();
+        let ns_per_byte = if data.is_empty() {
+            0.0
+        } else {
+            elapsed.as_secs_f64() * 1e9 / data.len() as f64
+        };
+        results.push(ProfileResult {
+            name,
+            elapsed,
+            output_size: output.len(),
+            ns_per_byte,
+        });
+    }
+
+    Ok(results)
+}
+
 pub fn compress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<()> {
     compress_with_config(
         &mut input,

@@ -78,6 +78,10 @@ fn run() -> io::Result<()> {
             archive_path,
             show_progress,
         } => print_stats(input_path, archive_path, show_progress),
+        Command::Profile {
+            input_path,
+            show_progress,
+        } => print_profile(input_path, show_progress),
     }
 }
 
@@ -101,6 +105,51 @@ fn print_stats(input_path: &str, archive_path: &str, show_progress: bool) -> io:
     println!("total S:      {} bytes", total_size);
     println!("archive ratio {:.4}x", ratio);
     println!("note: Hutter Prize compares total S, not archive size alone");
+
+    Ok(())
+}
+
+fn print_profile(input_path: &str, show_progress: bool) -> io::Result<()> {
+    let input = read_file_with_progress(input_path, "reading profile input", show_progress)?;
+    let progress = Progress::with_enabled("profiling ppm-match-mix", 0, show_progress);
+    progress.set_processing();
+    let results = ppm_match_mix::profile_model_configs(&input[..])?;
+    progress.finish("profiling ppm-match-mix done");
+
+    println!("input: {} bytes", input.len());
+    println!(
+        "{:<16} {:>12} {:>14} {:>14}",
+        "config", "time_ms", "ns/byte", "archive_bytes"
+    );
+    for result in &results {
+        println!(
+            "{:<16} {:>12.3} {:>14.1} {:>14}",
+            result.name,
+            result.elapsed.as_secs_f64() * 1000.0,
+            result.ns_per_byte,
+            result.output_size
+        );
+    }
+
+    if let Some(full) = results.iter().find(|result| result.name == "ppm-match-mix") {
+        for result in &results {
+            if result.name == full.name {
+                continue;
+            }
+
+            let saved = if full.elapsed.is_zero() {
+                0.0
+            } else {
+                (full.elapsed.as_secs_f64() - result.elapsed.as_secs_f64())
+                    / full.elapsed.as_secs_f64()
+                    * 100.0
+            };
+            println!(
+                "save vs full by dropping to {:<16}: {:>6.2}%",
+                result.name, saved
+            );
+        }
+    }
 
     Ok(())
 }
