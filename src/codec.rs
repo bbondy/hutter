@@ -1,6 +1,6 @@
 use crate::{
-    adaptive_huffman, block_huffman, byte_ppm, hybrid_ppm, lz77, ppmd, ppm, ppm_match_mix,
-    wikimix,
+    adaptive_huffman, block_huffman, byte_ppm, hybrid_ppm, lz77, ppmd, ppmd_bit, ppm,
+    ppm_match_mix, wikimix,
 };
 use std::io::{self, Read, Write};
 
@@ -21,6 +21,7 @@ pub enum Codec {
     BitPpmO64,
     BytePpmMix,
     Ppmd,
+    PpmdBit,
     BitPpmMix,
     PpmMix,
     MatchModel,
@@ -46,6 +47,7 @@ impl Codec {
             Self::BitPpmO64 => "ppm-bit-o64",
             Self::BytePpmMix => "ppm-byte-mix",
             Self::Ppmd => "ppmd",
+            Self::PpmdBit => "ppmd-bit",
             Self::BitPpmMix => "ppm-bit-mix",
             Self::PpmMix => "ppm-mix",
             Self::MatchModel => "match",
@@ -71,6 +73,7 @@ impl Codec {
             "ppm-bit-o64" => Ok(Self::BitPpmO64),
             "ppm-byte-mix" | "ppm-mix-byte" | "ppmbmix" => Ok(Self::BytePpmMix),
             "ppmd" => Ok(Self::Ppmd),
+            "ppmd-bit" | "ppmdbit" => Ok(Self::PpmdBit),
             "ppm-bit-mix" | "ppmbitmix" => Ok(Self::BitPpmMix),
             "ppm-mix" | "ppmmix" | "pmix" => Ok(Self::PpmMix),
             "match" | "match-model" | "match-only" => Ok(Self::MatchModel),
@@ -100,6 +103,7 @@ impl Codec {
             Self::BitPpmO64 => ppm::compress_order64(input, output),
             Self::BytePpmMix => byte_ppm::compress_mix(input, output),
             Self::Ppmd => ppmd::compress(input, output),
+            Self::PpmdBit => ppmd_bit::compress(input, output),
             Self::BitPpmMix => ppm::compress_mix(input, output),
             Self::PpmMix => hybrid_ppm::compress(input, output),
             Self::MatchModel => ppm_match_mix::compress_match_only(input, output),
@@ -147,6 +151,8 @@ pub fn decompress_auto<W: Write>(input: &[u8], output: W) -> io::Result<()> {
         byte_ppm::decompress_mix(input, output)
     } else if &input[..4] == ppmd::magic() {
         ppmd::decompress(input, output)
+    } else if &input[..4] == ppmd_bit::magic() {
+        ppmd_bit::decompress(input, output)
     } else if &input[..4] == ppm::magic_mix() {
         ppm::decompress_mix(input, output)
     } else if &input[..4] == hybrid_ppm::magic() {
@@ -179,6 +185,7 @@ mod tests {
         assert_eq!(Codec::parse("ppm-bit").unwrap(), Codec::BitPpmO8);
         assert_eq!(Codec::parse("ppm-byte-mix").unwrap(), Codec::BytePpmMix);
         assert_eq!(Codec::parse("ppmd").unwrap(), Codec::Ppmd);
+        assert_eq!(Codec::parse("ppmd-bit").unwrap(), Codec::PpmdBit);
         assert_eq!(Codec::parse("ppm-bit-mix").unwrap(), Codec::BitPpmMix);
         assert_eq!(Codec::parse("ppm-mix").unwrap(), Codec::PpmMix);
         assert_eq!(Codec::parse("match").unwrap(), Codec::MatchModel);
