@@ -43,10 +43,10 @@ pub fn parse_args<'a>(args: &'a [String]) -> io::Result<Command<'a>> {
 pub fn print_usage(program: &str) {
     eprintln!("usage:");
     eprintln!(
-        "  {program} compress [--no-progress] [--codec huffman|huffman-o1|lz77|ppm-o1|ppm-o2|ppm|ppm-o4|ppm-o5|ppm-o6|ppm-byte-mix|ppm-bit|ppm-bit-o16|ppm-bit-o32|ppm-bit-o64|ppm-bit-mix|ppm-mix|match|ppm-match-mix|wikimix5] <input> <archive>"
+        "  {program} compress [--no-progress] [--codec huffman|huffman-o1|lz77|ppm-o1|ppm-o2|ppm|ppm-o4|ppm-o5|ppm-o6|ppm-byte-mix|ppmd|ppm-bit|ppm-bit-o16|ppm-bit-o32|ppm-bit-o64|ppm-bit-mix|ppm-mix|match|ppm-match-mix|wikimix5] <input> <archive>"
     );
     eprintln!(
-        "  note: ppm-oN is byte-level PPM; ppm-bit-oN is bit-level PPM; match is the standalone LZ-style match predictor; ppm-match-mix adds that match model to the bit+byte mix"
+        "  note: ppm-oN is byte-level PPM; ppm-bit-oN is bit-level PPM; match is the standalone LZ-style match predictor; ppm-match-mix is the byte+match hybrid"
     );
     eprintln!("  {program} decompress [--no-progress] <archive> <output>");
     eprintln!("  {program} stats [--no-progress] <input> <archive>");

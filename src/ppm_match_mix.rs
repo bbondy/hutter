@@ -1,7 +1,8 @@
 use std::collections::{HashMap, VecDeque};
 use std::io::{self, Read, Write};
 
-const MAGIC: &[u8; 4] = b"PMM2";
+const MAGIC: &[u8; 4] = b"PMM3";
+const MAGIC_LEGACY: &[u8; 4] = b"PMM2";
 const MAGIC_MATCH_ONLY: &[u8; 4] = b"PMAT";
 const MATCH_BYTE_MARKER: &[u8; 4] = b"MBY1";
 const BIT_MAX_ORDER: usize = 64;
@@ -21,6 +22,10 @@ const THREE_QUARTERS: u64 = HALF + QUARTER;
 
 pub fn magic() -> &'static [u8; 4] {
     MAGIC
+}
+
+pub fn magic_legacy() -> &'static [u8; 4] {
+    MAGIC_LEGACY
 }
 
 pub fn magic_match_only() -> &'static [u8; 4] {
@@ -46,7 +51,8 @@ fn profile_model_configs_for_data(data: &[u8]) -> io::Result<Vec<ProfileResult>>
         ("byte-only", ModelConfig::new(false, true, false)),
         ("match-only", ModelConfig::new(false, false, true)),
         ("byte+match", ModelConfig::new(false, true, true)),
-        ("ppm-match-mix", ModelConfig::new(true, true, true)),
+        ("legacy bit+byte+match", ModelConfig::new(true, true, true)),
+        ("ppm-match-mix", ModelConfig::new(false, true, true)),
     ];
 
     let mut results = Vec::with_capacity(cases.len());
@@ -76,7 +82,7 @@ pub fn compress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<()
         &mut input,
         &mut output,
         MAGIC,
-        ModelConfig::new(true, true, true),
+        ModelConfig::new(false, true, true),
     )
 }
 
@@ -128,12 +134,18 @@ fn compress_with_config<R: Read, W: Write>(
 }
 
 pub fn decompress<R: Read, W: Write>(mut input: R, mut output: W) -> io::Result<()> {
-    decompress_with_config(
-        &mut input,
-        &mut output,
-        MAGIC,
-        ModelConfig::new(true, true, true),
-    )
+    let mut magic = [0u8; 4];
+    input.read_exact(&mut magic)?;
+    match &magic {
+        MAGIC => decompress_payload(&mut input, &mut output, ModelConfig::new(false, true, true)),
+        MAGIC_LEGACY => {
+            decompress_payload(&mut input, &mut output, ModelConfig::new(true, true, true))
+        }
+        _ => Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "invalid archive magic",
+        )),
+    }
 }
 
 pub fn decompress_match_only<R: Read, W: Write>(mut input: R, output: W) -> io::Result<()> {
@@ -204,21 +216,11 @@ fn decompress_match_only_legacy<W: Write>(
     Ok(())
 }
 
-fn decompress_with_config<R: Read, W: Write>(
+fn decompress_payload<R: Read, W: Write>(
     mut input: R,
     mut output: W,
-    expected_magic: &[u8; 4],
     config: ModelConfig,
 ) -> io::Result<()> {
-    let mut magic = [0u8; 4];
-    input.read_exact(&mut magic)?;
-    if &magic != expected_magic {
-        return Err(io::Error::new(
-            io::ErrorKind::InvalidData,
-            "invalid archive magic",
-        ));
-    }
-
     let original_size = read_u64(&mut input)? as usize;
     let mut payload = Vec::new();
     input.read_to_end(&mut payload)?;

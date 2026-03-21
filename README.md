@@ -26,7 +26,7 @@ Codec names in the CLI:
 - `ppm-bit-mix`: mixed-order bit-level PPM candidates with adaptive per-order weights
 - `ppm-mix`: hybrid bit coder that mixes byte-level and bit-level predictions
 - `match`: standalone byte-level match predictor with arithmetic coding
-- `ppm-match-mix`: hybrid bit coder that mixes bit, byte, and match-model predictions
+- `ppm-match-mix`: byte+match hybrid that mixes byte-level PPM and match-model predictions
 
 Family note:
 
@@ -35,7 +35,7 @@ Family note:
 - `ppm-byte-mix` is byte-level mixed-order PPM
 - `ppm-mix` uses both byte-level and bit-level models
 - `match` isolates the hashed match model on its own and codes whole bytes directly
-- `ppm-match-mix` adds the hashed match model to the `ppm-mix` bit+byte backbone
+- `ppm-match-mix` combines the byte-level mixed model with the hashed match model
 
 Their purpose is to give you a clean, testable loop for:
 
@@ -172,6 +172,7 @@ cmp data/sample.txt build/sample.restored
 If `--codec` is omitted, `compress` defaults to `huffman`. `decompress` auto-detects the archive format from the file header, so you do not need to specify the codec when restoring.
 
 The `match` codec writes new `PMAT` archives with a byte-oriented payload marker. The decoder still accepts older `PMAT` archives produced by the previous bitwise match-only implementation.
+The `ppm-match-mix` codec now writes `PMM3` archives for the byte+match design. The decoder still accepts older `PMM2` archives produced by the previous bit+byte+match implementation.
 
 Progress bars are shown by default on terminal runs of `compress`, `decompress`, and `stats`. Use `--no-progress` to disable them:
 
@@ -194,6 +195,7 @@ cargo run --release -- profile --no-progress data/enwik8
 - `byte-only`
 - `match-only`
 - `byte+match`
+- `legacy bit+byte+match`
 - `ppm-match-mix`
 
 It also prints the percentage of time saved versus the current `ppm-match-mix` implementation.
