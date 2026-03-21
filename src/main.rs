@@ -8,6 +8,7 @@ mod io_utils;
 mod lz77;
 mod ppmd;
 mod ppmd_bit;
+mod ppmd_mix;
 mod ppm;
 mod ppm_match_mix;
 mod progress;
