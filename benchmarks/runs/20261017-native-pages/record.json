@@ -1,0 +1,9 @@
+{
+  "id": "20261017-native-pages",
+  "note": "Native ARM64 full predictor with explicit small-corpus article count; phda9 Wikipedia fixture, payload-only",
+  "source_run": "/Users/bbondy/projects/bbondy/hutter-native-mac/build/native-pages-bench",
+  "recorded_utc": "2026-10-17T19:11:34.643250+00:00",
+  "trials": 1,
+  "verified_trials": 1,
+  "commit": "b37e1871e9a2c5945c4094c4b3e20e9a3c12a2b8"
+}

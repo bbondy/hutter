@@ -1,0 +1,13 @@
+{
+  "raw_roundtrip": true,
+  "raw_bytes": 117161,
+  "raw_restored_sha256": "7264a04d1802659f721e241872fad5e1050d203c2d80bfbf161a7209fd5f7563",
+  "sample_1m_preprocessing": "passed separately; compression not run",
+  "simd_rounding_checks": [
+    "precise: passed",
+    "fast: passed"
+  ],
+  "upstream_snapshot": "561 files, zero differences",
+  "compression_log": "native development metadata: 19 articles\nip pack: compiled 35618 addresses / 143576 B, counted 0 / 0\nnative PPMd: anonymous heap 14000 MiB; no Linux RSS clamp\npretraining the model on the dictionary ... 136.68 s.\nprogress 0.00 %\nentering metadata block at 0.06 %\nentering redirect block at 0.83 %\n      185.57 real       184.19 user         1.18 sys\n          5762269184  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n              351830  page reclaims\n                   7  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   1  voluntary context switches\n                5355  involuntary context switches\n       1685660149429  instructions retired\n        795313311700  cycles elapsed\n          5748020240  peak memory footprint\n",
+  "decompression_log": "native development metadata: 19 articles\nnative PPMd: anonymous heap 14000 MiB; no Linux RSS clamp\npretraining the model on the dictionary ... 139.04 s.\nprogress 0.00 %\nentering metadata block at 0.06 %\nentering redirect block at 0.83 %\nundoing the preprocessing ... 0.06 s.\n      188.54 real       187.11 user         1.32 sys\n          5754765312  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n              351665  page reclaims\n                   7  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                5576  involuntary context switches\n       1686130504901  instructions retired\n        798558579352  cycles elapsed\n          5737255952  peak memory footprint\n"
+}
