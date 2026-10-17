@@ -1,0 +1,9 @@
+{
+  "id": "20261017-order-screen-source-v1",
+  "note": "Predeclared article-order screen: source order; payload only; concurrent exploratory timing",
+  "source_run": "/Users/bbondy/projects/bbondy/hutter-article-order/build/order-screen-source-v1",
+  "recorded_utc": "2026-10-17T22:01:46.159174+00:00",
+  "trials": 1,
+  "verified_trials": 1,
+  "commit": "466d7eefaa6f89681bc1c598acbdacaff8a6525c"
+}

@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "kind": "article-order-standard-controls",
+  "role": "holdout",
+  "manifest_sha256": "9b341239687b6db916179f5785d02d925cb56df712be83a2aa720e5511af6a4d",
+  "script_sha256": "181e70506e3a5c27d84c9d9f6cee14b66ea22ed79b26a046c7e499eb0cab4724",
+  "python": "3.12.8",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "zlib_runtime": "1.2.12",
+  "library_modules_sha256": {
+    "_bz2": "33df15b7cebca72688dea0477a828b96dcc72b39c9d619fdb3f92ef737e46873",
+    "_lzma": "65803b00e2a169b24b027c30be3e910a61311df59e6e36c9fc28396060b615d2",
+    "zlib": "6c0e1c026fbeacca9ed5360bc8bfce9cbe4ccc2d541f9daa82c1b9ada17c9ea6"
+  },
+  "scope": "Prepared-stream codec payload controls; not a cmix or prize score",
+  "results": [
+    {
+      "codec": "zlib-9",
+      "variant": "source",
+      "input_sha256": "7e7cdd4187b9a46f87374633174603d66baf10a28ff38cafdb24aff68581774f",
+      "archive_bytes": 350839,
+      "archive_sha256": "6dcd941ac2e885ddad34f73ea687d0efedd30ef793756f7d5cf27ef6ea0d4b39",
+      "prepared_roundtrip": true
+    },
+    {
+      "codec": "bzip2-9",
+      "variant": "source",
+      "input_sha256": "7e7cdd4187b9a46f87374633174603d66baf10a28ff38cafdb24aff68581774f",
+      "archive_bytes": 283732,
+      "archive_sha256": "33f7d14e3df94dd49a8540472d153d1b59e39f0d82ff22b1e03a1d8ec28dd0f4",
+      "prepared_roundtrip": true
+    },
+    {
+      "codec": "xz-9",
+      "variant": "source",
+      "input_sha256": "7e7cdd4187b9a46f87374633174603d66baf10a28ff38cafdb24aff68581774f",
+      "archive_bytes": 289676,
+      "archive_sha256": "1e4743ca656caec63cbe37d4070042b3074706e70dc38b59bbc7b30dbc38a81c",
+      "prepared_roundtrip": true
+    },
+    {
+      "codec": "zlib-9",
+      "variant": "graph",
+      "input_sha256": "717c63d4fdef6513217bb6bddd469e8b2dccdd754772e2dc919ae12a35772476",
+      "archive_bytes": 349965,
+      "archive_sha256": "bbb940206c214bab42bb82d34a5cdba19f8e2bb79e7d6750f3c8f0d4905a6210",
+      "prepared_roundtrip": true
+    },
+    {
+      "codec": "bzip2-9",
+      "variant": "graph",
+      "input_sha256": "717c63d4fdef6513217bb6bddd469e8b2dccdd754772e2dc919ae12a35772476",
+      "archive_bytes": 283888,
+      "archive_sha256": "a24ab613fcff6bc72f9e438555586eba8000d55c0825d11ca3828265fc9b0f28",
+      "prepared_roundtrip": true
+    },
+    {
+      "codec": "xz-9",
+      "variant": "graph",
+      "input_sha256": "717c63d4fdef6513217bb6bddd469e8b2dccdd754772e2dc919ae12a35772476",
+      "archive_bytes": 289712,
+      "archive_sha256": "cb2951675a195751ab66cd50cba82afedfcbb654b4fe6bc8001b1863dcaffdac",
+      "prepared_roundtrip": true
+    },
+    {
+      "codec": "zlib-9",
+      "variant": "random",
+      "input_sha256": "706bd5e9729fedab5bf03edf2befe09e3ed61627e897f91ff578e98e436b8cba",
+      "archive_bytes": 357132,
+      "archive_sha256": "5fb86f9b5a3959766a669116dbd5b5b67a0f67e00743d974c0d9181e2567385c",
+      "prepared_roundtrip": true
+    },
+    {
+      "codec": "bzip2-9",
+      "variant": "random",
+      "input_sha256": "706bd5e9729fedab5bf03edf2befe09e3ed61627e897f91ff578e98e436b8cba",
+      "archive_bytes": 284772,
+      "archive_sha256": "26a495f7a002425c5a97c764ba42732b8aa0893898d103e7fc3be13934b2b2b9",
+      "prepared_roundtrip": true
+    },
+    {
+      "codec": "xz-9",
+      "variant": "random",
+      "input_sha256": "706bd5e9729fedab5bf03edf2befe09e3ed61627e897f91ff578e98e436b8cba",
+      "archive_bytes": 291216,
+      "archive_sha256": "0d03891376fb8a47cd9c24bb1a53f12a9744f37f9f3c4b2a4f7f883a6e1f63b7",
+      "prepared_roundtrip": true
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+native development metadata: 12 articles
+native PPMd: anonymous heap 14000 MiB; no Linux RSS clamp
+dictionary: Loaded 54857 words
+pretraining the model on the dictionary ... 150.39 s.
+progress 0.00 %
+entering metadata block at 0.04 %
+entering redirect block at 0.40 %
+undoing the preprocessing ... 0.07 s.
+decoding preprocessed enwik9: 21149 bytes -> 154286 bytes in 226.25 s.
+      226.43 real       224.39 user         1.46 sys
+          5830492160  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              356037  page reclaims
+                   7  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   1  voluntary context switches
+               27045  involuntary context switches
+       2001033696715  instructions retired
+        894598224313  cycles elapsed
+          5815014440  peak memory footprint

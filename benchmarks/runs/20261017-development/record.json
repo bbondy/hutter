@@ -1,0 +1,9 @@
+{
+  "id": "20261017-development",
+  "note": "Ten codecs on two 1 MB regions; one trial each; identify mixture regressions.",
+  "source_run": "/Users/bbondy/projects/bbondy/hutter/build/bench-development-20261017b",
+  "recorded_utc": "2026-10-17T17:17:26.354801+00:00",
+  "trials": 20,
+  "verified_trials": 20,
+  "commit": "98217887abd1abfc99aa0a41a7ae8b4b49e9b425"
+}

@@ -6,11 +6,11 @@ mod codec;
 mod hybrid_ppm;
 mod io_utils;
 mod lz77;
+mod ppm;
+mod ppm_match_mix;
 mod ppmd;
 mod ppmd_bit;
 mod ppmd_mix;
-mod ppm;
-mod ppm_match_mix;
 mod progress;
 mod wikimix;
 
@@ -95,7 +95,9 @@ fn print_stats(input_path: &str, archive_path: &str, show_progress: bool) -> io:
     let archive_size = file_len(archive_path)?;
     let exe_size = current_exe_size()?;
     progress.finish("collecting stats done");
-    let total_size = archive_size + exe_size;
+    // Separate archive relaxation: the same executable serves as compressor
+    // and decompressor, so it is counted once in each role.
+    let total_size = archive_size + 2 * exe_size;
     let ratio = if archive_size == 0 {
         0.0
     } else {
@@ -105,9 +107,14 @@ fn print_stats(input_path: &str, archive_path: &str, show_progress: bool) -> io:
     println!("input:        {} bytes", input_size);
     println!("archive:      {} bytes", archive_size);
     println!("compressor:   {} bytes", exe_size);
-    println!("total S:      {} bytes", total_size);
+    println!(
+        "2*exe+archive {} bytes (unpacked development estimate)",
+        total_size
+    );
     println!("archive ratio {:.4}x", ratio);
-    println!("note: Hutter Prize compares total S, not archive size alone");
+    println!(
+        "note: submission S also depends on packaging and required options; this is not a validated prize score"
+    );
 
     Ok(())
 }

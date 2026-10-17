@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "source": "data/enwik8",
+  "source_bytes": 100000000,
+  "source_sha1": "57b8363b814821dc9d47aa4d41f58733519076b2",
+  "source_sha256": "2b49720ec4d78c3c9fabaee6e4179a5e997302b3a70029f30f2d582218c024a8",
+  "samples": [
+    {
+      "path": "data/samples/prefix-100k",
+      "offset": 0,
+      "bytes": 100000,
+      "role": "screen",
+      "sha256": "581bee9758c531de3795885a1adb331b9c51bfdeefd9a63407815479e22a9072"
+    },
+    {
+      "path": "data/samples/prefix-1m",
+      "offset": 0,
+      "bytes": 1000000,
+      "role": "development",
+      "sha256": "369b688978f649681136198fb96db14c1616756260c55fb4b65e9bc049552cad"
+    },
+    {
+      "path": "data/samples/middle-1m",
+      "offset": 49000000,
+      "bytes": 1000000,
+      "role": "development",
+      "sha256": "0485050d93b7f69827bc8dfb681f7c9287978cda2a1ca0572eda5ee28c0ddd09"
+    },
+    {
+      "path": "data/samples/tail-1m",
+      "offset": 89000000,
+      "bytes": 1000000,
+      "role": "confirmation",
+      "sha256": "836949095feaa34d5e9b42eae6e140d02097f777d0b23aee9f315f3c6c56d80d"
+    },
+    {
+      "path": "data/samples/prefix-10m",
+      "offset": 0,
+      "bytes": 10000000,
+      "role": "promotion",
+      "sha256": "5985c81c39d927ae0e169625790ca4d9e7d1531270c8b09ad73176a375bb3d97"
+    }
+  ]
+}

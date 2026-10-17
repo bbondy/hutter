@@ -1,0 +1,27 @@
+native development metadata: 12 articles
+ip pack: compiled 35618 addresses / 143576 B, counted 5 / 20
+native PPMd: anonymous heap 14000 MiB; no Linux RSS clamp
+dictionary: Loaded 54857 words
+pretraining the model on the dictionary ... 151.36 s.
+progress 0.00 %
+entering metadata block at 0.04 %
+entering redirect block at 0.40 %
+encoding preprocessed enwik9: 154286 bytes -> 21149 bytes in 226.53 s.
+      226.72 real       225.41 user         1.04 sys
+          5837881344  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              356448  page reclaims
+                   7  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   1  voluntary context switches
+                8714  involuntary context switches
+       2000401993797  instructions retired
+        900659948991  cycles elapsed
+          5816849448  peak memory footprint

@@ -1,0 +1,194 @@
+# Hutter Prize research plan — 2026-10-17
+
+**Decision after review:** winning is the primary objective. We have selected
+cmix-neif 1.0 as the competitive implementation and vendored its pinned source
+into this repo. See [engine setup and reproduction](../engines/README.md).
+The original analysis below remains useful context, but reproducing the upstream
+baseline now takes priority over making the Rust implementation competitive.
+
+## Recommendation
+
+Keep the Rust code as a small experiment lab. Make reproducing and improving a
+recent competitive compressor the main prize effort. The current codecs are
+useful baselines, but extending this collection without a stronger reference is
+unlikely to catch the frontier. No result here establishes prize competitiveness.
+
+First fix measurement and wasted work, then run isolated experiments. Do not
+start with a rewrite, an enormous model, or a sweep of every constant.
+
+## Target and accounting
+
+The [official page](https://hutter1.net/prize/index.htm), checked October 17,
+lists fx2-cmix-T at **100,424,672 total bytes** and the next target below
+**99,420,425 bytes**. The README previously used the 2024 record.
+
+[cmix-neif 1.0](https://github.com/marwoelk/cmix-neif-1.0) reports **95,914,051
+total bytes**, with acceptance pending in the
+[Large Text Compression Benchmark](https://mattmahoney.net/dc/text.html).
+If accepted at that score, its mathematical 1% threshold is at most 94,954,910
+integer bytes. Plan for **under 94 MB total**, with margin; this is an engineering
+target, not a prediction that this will win. Recheck the submission queue.
+LTCB's headline ranking omits the compressor cost used in the prize: its numbers
+are not interchangeable with prize totals.
+
+The [detailed rules](https://hutter1.net/prize/hrules.htm) score compressor plus
+SFX archive, or compressor + twice decoder + payload for the separate-decoder
+alternative. The latter reduces to **2 × executable + payload** when the same
+executable serves both roles. Required options count too; permitted zipped
+representations affect final accounting. We corrected `stats`, which previously
+counted only one copy of this repo's shared executable. It now labels the number
+as a development estimate, not a validated submission score.
+
+Each executable must fit the machine-normalized time budget `70,000/T` hours,
+10 GB RAM and 100 GB temporary disk, with no GPU at runtime. Target Linux x86-64
+for verification. Leave headroom, including input/output buffers and models.
+
+## Sample decision: add real slices, retain the tiny smoke test
+
+`data/sample.txt` is 179 bytes in two English sentences. It has none of the scale
+needed to measure Wikipedia context learning, XML/wiki syntax, metadata, repeated
+articles or memory growth. Repeating those sentences would create misleadingly
+easy artificial data. Keep the file for fast roundtrips, not model selection.
+
+`scripts/make_samples.py` checks official size and SHA-1, preserves raw bytes,
+and writes a manifest with SHA-256 and exact offsets. No XML parsing, whitespace
+normalization, random byte sampling or concatenated artificial boundaries.
+
+| Tier | Source interval, in decimal bytes | Use |
+|---|---|---|
+| Smoke | Existing 179-byte file | Wiring only; add edge fixtures when modifying codecs |
+| Screen | `[0, 100000)` | All codecs; reject obvious failures, not close contenders |
+| Development | `[0, 1000000)`, `[49000000, 50000000)` | Fast comparison on two different contiguous regions |
+| Confirmation | `[89000000, 90000000)` | Freeze a candidate before checking this slice |
+| Promotion | `[0, 10000000)` | Model warm-up and resource scaling |
+| Reference | Official enwik8, 100 MB | External comparability and longer-context behavior |
+| Prize | Official enwik9, 1 GB | Only basis for a prize claim |
+
+Once enwik9 is downloaded, the generator adds 1 MB regions at each 100 MB offset
+from 100 MB through 900 MB. They expose regions absent from enwik8. Do not call
+the enwik8-only suite representative of the whole gigabyte.
+
+Cold slices discard earlier learned state and long-range matches. Preserve order
+and compare identical streams. For mature models, add checkpointed warm-prefix
+experiments and per-region coding loss, but always verify the final full stream.
+Sample size and full-corpus size improvements can disagree. Held-back slices
+protect research decisions; the contest itself permits corpus-specific tuning.
+
+## Findings in the current models
+
+| Family | Assessment | Next action |
+|---|---|---|
+| Huffman / naive LZ77 | Useful simple references; the LZ77 window is 4 KiB | Freeze as controls; do not spend prize research here |
+| Byte `ppm-o1`…`ppm-o6` | Simple escape/backoff; no exclusion in this implementation | Retain order-four reference; higher order is not automatically better |
+| `ppmd` | Exclusion-based order-six PPM-style model; currently useful ratio/speed reference | Use for fast Rust experiments; it is not equivalent to mature upstream PPMd |
+| `ppmd-bit` | Codes a byte-context PPM distribution bitwise | Small measured size gain over `ppmd`, substantial time cost |
+| Raw bit PPM | Orders count bits, not bytes; high orders grow huge tables and perform poorly here | Stop broad high-order sweeps; diagnose smoothing and memory first |
+| `ppm-byte-mix` | Copies predictions and builds a score HashMap each byte; weight update differs from final coded loss | Fix probability objective before optimizing its allocation overhead |
+| `ppm-mix` / `ppmd-mix` | Many correlated logits with large positive initial weights | Measure saturation and overconfidence; compare conservative initialization and calibration |
+| `ppm-match-mix` | Disabled bit predictor still updates its full state; match evidence limited to four bytes | Highest-priority local iteration fix, followed by a match-model experiment |
+| `wikimix5` | Implemented heuristic coder, not the documented skeleton; fixed weights and top-k truncation | Requires calibrated probabilities/escapes, not more hand-picked candidate bonuses |
+
+Specific code evidence:
+
+- `HybridModel::observe_bit` in `src/ppm_match_mix.rs` ignores the expert enable
+  flags when updating state. The current byte+match configuration still populates
+  64 bit-context maps. `profile` therefore cannot measure true expert-removal
+  savings; two of its rows also use the identical configuration.
+- `refresh_candidates` passes `current = data.len() - 4` into `match_length`,
+  whose loop requires `current + length < data.len()`. Thus the nominal 64-byte
+  lookahead cannot see more than four bytes. Use evidence from already-decoded
+  history or maintained active matches, never future plaintext.
+- Most context maps have no capacity limit. Count rescaling does not free
+  contexts. Match windows do not bound the retained `data` vectors or key sets.
+  Entire input, output or payload buffers introduce further memory costs.
+- WikiMix keeps only two/three top symbols from some experts, then twelve from
+  the fixed-weight sum. Its constant escape weight competes against increasing
+  raw counts; a miss then costs a uniform byte. This can explain expansion,
+  but individual ablations are needed to quantify each cause.
+- Model families duplicate arithmetic coding and history logic across thousands
+  of lines. Consolidate only after capturing golden archives and establishing
+  improvement; a large cleanup is not the first compression experiment.
+- Floating-point `ln`/`exp` and quantized probabilities need cross-machine
+  determinism checks. A local roundtrip alone does not prove Intel/AMD portability.
+
+## Experiment sequence and stop conditions
+
+1. **Establish the reference and trustworthy measurements.**
+   [Issue #1](https://github.com/bbondy/hutter/issues/1): pin and reproduce
+   fx2-cmix-transformer on Linux x86-64; then assess cmix-neif. Keep licensed
+   upstream checkouts separate from the MIT lab and preserve attribution.
+   Generic sample support may require a different frontend from the submitted
+   enwik9-specialized executable; record that distinction. Reuse public weights
+   before allocating training compute.
+2. **Remove wasted work, then bound memory.**
+   [Issue #7](https://github.com/bbondy/hutter/issues/7): disabled experts must not
+   update state. Expect a resource win with identical PMM3 archives; this alone
+   cannot improve ratio. [Issue #2](https://github.com/bbondy/hutter/issues/2):
+   deterministic table capacities/eviction, compact allocation and bounded
+   history. Measure 100 KB → 1 MB → 10 MB → 100 MB before trying 1 GB.
+3. **Make the existing predictors useful.**
+   [Issue #3](https://github.com/bbondy/hutter/issues/3): repair long-match evidence
+   and test window sizes. [Issue #4](https://github.com/bbondy/hutter/issues/4):
+   compare expert-only, fixed linear mixture, conservative logistic mixture,
+   context-dependent mixing and probability calibration. Track actual coded
+   loss, including escapes and quantization. Reject added experts that have no
+   net contribution within the full mixture.
+4. **Improve Wikipedia representation against a strong backend.**
+   [Issue #5](https://github.com/bbondy/hutter/issues/5): metadata/prose separation
+   and integer deltas; dictionary/case/entity transforms; article ordering with
+   inverse permutation costs. Existing winners already do substantial
+   preprocessing: compare incremental improvements, not toy-codec-only gains.
+   Every transform must restore exact bytes, including the truncated last record.
+5. **Experiment with compact neural corrections.**
+   [Issue #6](https://github.com/bbondy/hutter/issues/6): start with a small residual
+   corrector or quantized byte model. The accepted
+   [transformer writeup](https://github.com/astOwOlfo/fx2-cmix-transformer-v1/blob/main/writeup.md)
+   demonstrates offline GPU training plus shipped compact weights and CPU
+   inference. Training on enwik9 is not inherently disallowed; omitting the
+   resulting knowledge from the scored package is the accounting trap. Count
+   weights wherever stored, often twice, and measure the final mixture's benefit.
+
+For each experiment record a hypothesis, baseline revision, one change, exact
+configuration and expected cost. Run both development slices, then confirmation,
+10 MB, enwik8 and finally enwik9 for promising survivors. This funnel is a default,
+not a proof: models that require long warm-up deserve a deliberate longer probe.
+Repeat timing trials at least three times before choosing between close results;
+archive bytes should be deterministic. Re-measure combinations: benefits overlap.
+
+`8 * archive_bytes / input_bytes` is the development bits-per-byte metric.
+On enwik9, 0.01 bits/byte represents 1.25 MB of payload; subtract all added
+code/weight/metadata bytes before calling it a win. Smaller archives that exceed
+resource constraints do not advance the prize objective.
+
+## Things likely to waste time
+
+- Ranking on the tiny file or a single short prefix; extrapolating a percentage
+  gain to enwik9 without measuring warm-up, eviction and long-distance effects.
+- Adding all available experts, raising every order/window, or treating larger
+  context counts as automatically better. Current measured mixtures refute that.
+- Optimizing Huffman/naive LZ77 into the prize strategy, or porting an entire
+  winning C++ compressor to Rust before testing a new idea.
+- Using a huge pretrained LLM while ignoring serialized model cost or assuming
+  GPU inference is allowed. Compact neural models remain a valid research path.
+- Lossy XML cleanup, article reordering without inverse information, or a
+  dictionary available only on the encoder's machine.
+- Confusing a short-input likelihood gain, an LTCB result, or the CLI's native
+  executable estimate with a compliant prize score.
+- Assuming a pending submission is accepted, or that today's 1% threshold will
+  survive the experiment cycle. Submission order matters.
+
+## What this setup provides
+
+`make samples` and `make bench-suite` now provide reproducible inputs and serial
+round-trip measurements. The runner stores commands, input/archive/binary hashes,
+revision/status, platform, time and peak RSS for both phases. Repeats check archive
+identity. Failures/timeouts remain in JSONL and cause a nonzero exit. Output
+directories cannot be reused accidentally. Restored duplicates are deleted only
+after size and SHA-256 verification; archives and logs remain.
+
+Limitations: no hard RSS enforcement, no Linux reference-machine run, no temporary
+disk peak measurement, no model-loss traces, and no full enwik8/enwik9 compression
+yet. Small timings include process startup and timer/polling overhead. Record a
+clean commit and fixed build flags for subsequent publishable experiments.
+
+See [the initial benchmark report](benchmarks/2026-10-17/README.md) for measurements.

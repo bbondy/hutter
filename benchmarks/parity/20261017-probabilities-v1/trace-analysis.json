@@ -1,0 +1,22 @@
+{
+  "events": {
+    "native": 473488,
+    "linux": 473488
+  },
+  "event_type_and_input_bits_equal": true,
+  "probability_mismatches": 272752,
+  "first_mismatch_event": 190,
+  "first_native_probability": 27039,
+  "first_linux_probability": 27029,
+  "first_mismatch_bit": 0,
+  "native": {
+    "event_identity_sha256": "b865ab4284910d9da20354413aacf5fe751c2c0195d82396a3f3aabf8028c424",
+    "payload_bytes": 15221,
+    "wall_seconds": 195.6070117090003
+  },
+  "linux": {
+    "event_identity_sha256": "b865ab4284910d9da20354413aacf5fe751c2c0195d82396a3f3aabf8028c424",
+    "payload_bytes": 15222,
+    "wall_seconds": 817.3564910829991
+  }
+}

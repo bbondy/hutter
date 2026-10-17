@@ -1,0 +1,9 @@
+{
+  "id": "20261017-native-prepared",
+  "note": "Native ARM64 full-predictor feasibility on phda9-prepared complete Wikipedia articles; payload-only, external dictionary and weights",
+  "source_run": "/Users/bbondy/projects/bbondy/hutter-native-mac/build/native-prepared-bench",
+  "recorded_utc": "2026-10-17T19:03:22.313501+00:00",
+  "trials": 1,
+  "verified_trials": 0,
+  "commit": "b37e1871e9a2c5945c4094c4b3e20e9a3c12a2b8"
+}

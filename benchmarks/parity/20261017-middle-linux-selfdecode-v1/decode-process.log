@@ -1,0 +1,31 @@
+native development metadata: 12 articles
+dictionary: Loaded 54857 words
+pretraining the model on the dictionary ... 178.17 s.
+progress 0.00 %
+entering metadata block at 0.04 %
+entering redirect block at 0.40 %
+undoing the preprocessing ... 0.23 s.
+decoding preprocessed enwik9: 21147 bytes -> 154286 bytes in 1043.84 s.
+	Command being timed: "./cmix --native-pages 12 -d dictionary.dic input output"
+	User time (seconds): 1041.88
+	System time (seconds): 1.97
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 17:23.88
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 6200600
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2963126
+	Voluntary context switches: 30
+	Involuntary context switches: 3183
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 53624
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

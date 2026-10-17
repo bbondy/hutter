@@ -7,3 +7,5 @@
 /docs/website/node_modules/
 /docs/website/build/
 /docs/website/.docusaurus/
+/data/samples/
+__pycache__/

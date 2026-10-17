@@ -1,0 +1,9 @@
+{
+  "id": "20261017-native-profile",
+  "note": "Native ARM64 feasibility: upstream prepared profiling fixture; payload-only, dictionary and weights external",
+  "source_run": "/Users/bbondy/projects/bbondy/hutter-native-mac/build/native-profile-bench",
+  "recorded_utc": "2026-10-17T19:00:51.599757+00:00",
+  "trials": 1,
+  "verified_trials": 0,
+  "commit": "c87bb30f26359910e94971261779c7f37f5dc307"
+}

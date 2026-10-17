@@ -1,0 +1,56 @@
+{
+  "first_difference_by_stage": {
+    "model_inputs": {
+      "event": 0,
+      "name": "model_inputs",
+      "bytes": 2352,
+      "float_index": 556,
+      "native": -5.960464477539063e-08,
+      "linux": 0.0
+    },
+    "lstm_pre_norm": {
+      "event": 8,
+      "name": "lstm_pre_norm",
+      "bytes": 320,
+      "float_index": 3,
+      "native": 1.1518527269363403,
+      "linux": 1.1518526077270508
+    },
+    "lstm_inverse_norm": {
+      "event": 8,
+      "name": "lstm_inverse_norm",
+      "bytes": 4,
+      "float_index": 0,
+      "native": 0.9746555685997009,
+      "linux": 0.9746554493904114
+    },
+    "mixer_bank": {
+      "event": 10,
+      "name": "mixer_bank",
+      "bytes": 108,
+      "float_index": 7,
+      "native": -3.30934053636156e-05,
+      "linux": -3.241125523345545e-05
+    },
+    "predictor_probability": {
+      "event": 190,
+      "name": "predictor_probability",
+      "bytes": 4,
+      "float_index": 0,
+      "native": 0.4125923216342926,
+      "linux": 0.4124397337436676
+    }
+  },
+  "instrumentation_prefix_checks": {
+    "native": {
+      "events": 256,
+      "matches_full_run": true,
+      "prefix_sha256": "65b93f316c05554d4504381c72c3dfd8fc9e7805232ab6c2be1644f29ecd41fa"
+    },
+    "linux": {
+      "events": 256,
+      "matches_full_run": true,
+      "prefix_sha256": "720399cd3f4f9eeedb2ebab70944dc83555350ca06d4c99a2e8517775033d57a"
+    }
+  }
+}

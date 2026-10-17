@@ -1,0 +1,714 @@
+--- a/makefile
++++ b/makefile
+@@ -17,57 +17,57 @@
+ # cosmetic: several files must be compiled with -ffp-model=precise and without
+ # contraction, and the binary is only reproducible when they are.
+ 
+-ADEPTHDET_CXXFLAGS := -O2 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wall -Wno-unused-variable
++ADEPTHDET_CXXFLAGS := -O2  -std=c++17     -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wall -Wno-unused-variable
+ ADEPTHDET_DEP := adepthdet
+ ADEPTHDET_OBJ := adaptive_depth.o
+ ADEPTHDET_SRC := src/adaptive_depth.cpp
+ ALLOC2_DEP := 
+ ALLOC2_OBJ := 
+-ARCH_FLAGS := -march=x86-64-v3 -mtune=znver2
++ARCH_FLAGS :=  
+ B6_HINTS_DEP := b6hints
+ B6_HINTS_OBJ := dict_derive.o
+-BITL_CXXFLAGS := -O3 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wall -Wno-unused-variable
++BITL_CXXFLAGS := -O3  -std=c++17     -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wall -Wno-unused-variable
+ BITL_DEP := bitl
+ BITL_OBJ := bit_head.o
+ BITL_SRC := src/bit_head.cpp
+ CC ?= clang++-18
+ CFLAGS_DEFINES ?= -DSEED=923 -DUPDATE_LIMIT=3000
+-CPPFLAGS_PART-THAT-CAN-BE-SLOW := -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG -m64 -Wall -std=c++17 -ffp-model=fast -mrecip=none -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format -march=x86-64-v3 -mtune=znver2 -Os -fdata-sections -ffunction-sections -fno-unroll-loops -fno-pie -fmerge-all-constants -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -Oz
+-CPPFLAGS_PART-THAT-IS-COLD := -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG -m64 -Wall -std=c++17 -ffp-model=fast -mrecip=none -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format -Oz -fdata-sections -ffunction-sections -march=x86-64-v3 -mtune=znver2 -fno-unroll-loops -fno-pie -fmerge-all-constants -fno-direct-access-external-data -fno-rtti -fvisibility=hidden
+-CPPFLAGS_PART-THAT-SHOULD-BE-FAST := -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG -m64 -Wall -std=c++17 -ffp-model=fast -mrecip=none -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format -march=x86-64-v3 -mtune=znver2 -O3 -fdata-sections -ffunction-sections -fno-unroll-loops -fno-pie -fmerge-all-constants -fno-direct-access-external-data -fno-rtti -fvisibility=hidden
+-DETNUM_CXXFLAGS := -O2 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections
++CPPFLAGS_PART-THAT-CAN-BE-SLOW := -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG  -Wall -std=c++17 -ffp-model=fast  -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format   -Os -fdata-sections -ffunction-sections -fno-unroll-loops  -fmerge-all-constants  -fno-rtti -fvisibility=hidden -Oz
++CPPFLAGS_PART-THAT-IS-COLD := -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG  -Wall -std=c++17 -ffp-model=fast  -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format -Oz -fdata-sections -ffunction-sections   -fno-unroll-loops  -fmerge-all-constants  -fno-rtti -fvisibility=hidden
++CPPFLAGS_PART-THAT-SHOULD-BE-FAST := -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG  -Wall -std=c++17 -ffp-model=fast  -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format   -O3 -fdata-sections -ffunction-sections -fno-unroll-loops  -fmerge-all-constants  -fno-rtti -fvisibility=hidden
++DETNUM_CXXFLAGS := -O2  -std=c++17     -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections
+ DETNUM_DEP := detnum
+ DETNUM_OBJ := detmath.o
+ DETNUM_SRC := src/detmath.cpp
+-DET_ARCH := -march=x86-64-v3 -mtune=znver2
+-DET_FP := -ffp-model=fast -mrecip=none
+-FP_MODEL := -ffp-model=fast -mrecip=none
+-LFLAGS := -m64 -fuse-ld=lld-18 -Wl,--gc-sections -std=c++17 -no-pie -Wl,--icf=all -Wl,-z,norelro -Wl,--version-script=runtime_exports.map -Wl,--as-needed -Wl,--build-id=none
+-STRIP_FLAG ?= -s
++DET_ARCH :=  
++DET_FP := -ffp-model=fast 
++FP_MODEL := -ffp-model=fast 
++LFLAGS := -std=c++17 -Wl,-dead_strip
++STRIP_FLAG ?=
+ OKB_EXTRA := 
+-OPT1VEC_CXXFLAGS := -O3 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections
++OPT1VEC_CXXFLAGS := -O3  -std=c++17     -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections
+ OPT1VEC_DEP := opt1vec
+ OPT1VEC_OBJ := optimizer_vec.o
+ OPT1VEC_SRC := src/optimizer_vec.cpp
+-RT_COMPAT_OBJ := glibc_compat.o
+-S26VEC_CXXFLAGS := -O3 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections
++RT_COMPAT_OBJ :=
++S26VEC_CXXFLAGS := -O3  -std=c++17     -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections
+ S26VEC_DEP := s26vec
+ S26VEC_OBJ := fast_math_vec.o
+ S26VEC_SRC := src/fast_math_vec.cpp
+-TF1_CXXFLAGS := -O3 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -mrecip=none -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wno-unused-variable -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG
++TF1_CXXFLAGS := -O3  -std=c++17      -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wno-unused-variable -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG
+ TF1_DEP := tf1
+ TF1_GATE_G1_DEFS := 
+ TF1_OBJ := tf1_engine.o weights_io.o weights_io_compressed.o kernels.o model.o arena_build.o attn.o glue.o kda.o qmat_dense.o qmat_sparse.o model_opt.o tf1_z3.o tf1_prompt.o tf1_gate.o
+ TF1_OZ_FLAGS := -Oz
+ TF1_SRCS := src/tf1/tf1_engine.cpp src/tf1/weights_io.cpp src/tf1/weights_io_compressed.cpp src/tf1/kernels.cpp src/tf1/model.cpp src/tf1/opt/arena_build.cpp src/tf1/opt/attn.cpp src/tf1/opt/glue.cpp src/tf1/opt/kda.cpp src/tf1/opt/qmat_dense.cpp src/tf1/opt/qmat_sparse.cpp src/tf1/opt/model_opt.cpp src/tf1/tf1_z3.cpp src/tf1/tf1_prompt.cpp src/tf1/tf1_gate.cpp
+ TF1_SRCS_OZ := src/tf1/weights_io.cpp src/tf1/weights_io_compressed.cpp src/tf1/opt/arena_build.cpp
+-WORDLBL_CXXFLAGS := -Os -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wall -Wno-unused-variable
++WORDLBL_CXXFLAGS := -Os  -std=c++17     -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wall -Wno-unused-variable
+ WORDLBL_DEP := wordlbl
+ WORDLBL_OBJ := word_label.o
+ WORDLBL_SRC := src/word_label.cpp
+ 
+ ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+-LFLAGS += -Wl,-T,$(ROOT_DIR)/encoder_split.lds
++
+ 
+ prof_gen: CPPFLAGS_PART-THAT-CAN-BE-SLOW    += -fprofile-generate=$(ROOT_DIR)/pgo_data
+ prof_gen: CPPFLAGS_PART-THAT-SHOULD-BE-FAST += -fprofile-generate=$(ROOT_DIR)/pgo_data
+@@ -127,7 +127,7 @@
+ b6hints: src/preprocess/dict_derive.cpp src/preprocess/dict_derive.h
+ 	$(CC) $(CPPFLAGS_PART-THAT-IS-COLD) src/preprocess/dict_derive.cpp -c
+ 
+-# -Wl,-Map=cmix.map writes the linker map for the section guard
++# -Wl,-map,cmix.map writes the linker map for the section guard
+ # (tools_src/packer/cut_dpath.py, run from tools_src/packer/build_packer.sh
+ # on the image before sstrip).  The guard stops the build if a function that
+ # the linker script moved to the encoder-only section is reachable from the
+@@ -141,7 +141,7 @@
+ 	$(CC) $(TF1_CXXFLAGS) $(TF1_OZ_FLAGS) -c $(filter $(TF1_SRCS_OZ),$(TF1_SRCS))
+ 
+ cmix: fast slow cold $(RT_COMPAT_OBJ) $(DETNUM_DEP) $(S26VEC_DEP) $(OPT1VEC_DEP) $(B6_HINTS_DEP) $(BITL_DEP) $(TF1_DEP) $(WORDLBL_DEP) $(ADEPTHDET_DEP) $(ALLOC2_DEP)
+-	$(CC) $(LFLAGS) -Wl,-Map=cmix.map bit-context.o bracket-context.o bracket.o byte-mixer.o byte-model.o combined-context.o context-hash.o context-manager.o decoder.o dictionary.o direct-hash.o direct.o encoder.o indirect-hash.o indirect.o interval-hash.o interval.o match.o grammar-match.o mixer-input.o mixer.o nonstationary.o fxcmv1.o ppmd.o predictor.o preprocessor.o r1_reorder_transform.o run-map.o runner.o sigmoid.o sparse.o sse.o $(RT_COMPAT_OBJ) $(DETNUM_OBJ) $(S26VEC_OBJ) $(OPT1VEC_OBJ) $(B6_HINTS_OBJ) $(BITL_OBJ) $(TF1_OBJ) $(WORDLBL_OBJ) $(ADEPTHDET_OBJ) $(ALLOC2_OBJ) $(STRIP_FLAG) -o cmix
++	$(CC) $(LFLAGS) -Wl,-map,cmix.map bit-context.o bracket-context.o bracket.o byte-mixer.o byte-model.o combined-context.o context-hash.o context-manager.o decoder.o dictionary.o direct-hash.o direct.o encoder.o indirect-hash.o indirect.o interval-hash.o interval.o match.o grammar-match.o mixer-input.o mixer.o nonstationary.o fxcmv1.o ppmd.o predictor.o preprocessor.o r1_reorder_transform.o run-map.o runner.o sigmoid.o sparse.o sse.o $(RT_COMPAT_OBJ) $(DETNUM_OBJ) $(S26VEC_OBJ) $(OPT1VEC_OBJ) $(B6_HINTS_OBJ) $(BITL_OBJ) $(TF1_OBJ) $(WORDLBL_OBJ) $(ADEPTHDET_OBJ) $(ALLOC2_OBJ) $(STRIP_FLAG) -o cmix
+ 	rm -f *.o
+ 
+ # sstrip drops the section header table and .shstrtab from the linked ELF
+--- a/src/adaptive_depth.cpp
++++ b/src/adaptive_depth.cpp
+@@ -2,7 +2,7 @@
+ 
+ #include <math.h>
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ #include "isa_floor.h"
+ #include "fast_math.h"
+--- a/src/arena_alloc.h
++++ b/src/arena_alloc.h
+@@ -45,7 +45,7 @@
+     if (base > raw) munmap(raw, (size_t)(base - raw));
+     size_t hinten = (size_t)(raw + n + kPmd - (base + n));
+     if (hinten) munmap(base + n, hinten);
+-    madvise(base, n, MADV_HUGEPAGE);
++    // macOS has no Linux transparent huge-page advice.
+     PAGE_REGISTRY_ADD(base, n);
+     cur = base;
+     end = base + n;
+--- a/src/bit_head.cpp
++++ b/src/bit_head.cpp
+@@ -28,7 +28,7 @@
+ #include <cstring>
+ 
+ #include "isa_floor.h"
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ #include "bit_head_weights.h"
+ 
+--- a/src/console_progress.h
++++ b/src/console_progress.h
+@@ -12,7 +12,7 @@
+ // Monotonic wall clock in seconds (clock_gettime through syscall()).
+ inline double Now() {
+   timespec ts;
+-  syscall(SYS_clock_gettime, CLOCK_MONOTONIC, &ts);
++  clock_gettime(CLOCK_MONOTONIC, &ts);
+   return ts.tv_sec + 1e-9 * ts.tv_nsec;
+ }
+ 
+--- a/src/fast_math.h
++++ b/src/fast_math.h
+@@ -10,7 +10,7 @@
+ 
+ #include <stdint.h>
+ #include <string.h>
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ namespace fastmath {
+ 
+--- a/src/fast_math_vec.cpp
++++ b/src/fast_math_vec.cpp
+@@ -1,7 +1,7 @@
+ #include "fast_math.h"
+ 
+ #include "isa_floor.h"
+-#include <immintrin.h>
++#include "native_simd.h"
+ #include <stdint.h>
+ namespace fastmath {
+ namespace {
+--- a/src/helper_process.h
++++ b/src/helper_process.h
+@@ -4,7 +4,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+-#include <malloc.h>
++#include "native_os.h"
+ #include <unistd.h>
+ #include <fcntl.h>
+ 
+--- a/src/isa_floor.h
++++ b/src/isa_floor.h
+@@ -1,9 +1,2 @@
+-
+-#ifndef ISA_FLOOR_H_
+-#define ISA_FLOOR_H_
+-
+-#if !defined(__AVX2__) || !defined(__FMA__)
+-#error "this compressor requires AVX2+FMA (build with -march=x86-64-v3 or higher)"
+-#endif
+-
+-#endif
++#pragma once
++#include "native_simd.h"
+--- a/src/metablock.h
++++ b/src/metablock.h
+@@ -1,3 +1,4 @@
++#include "native_corpus.h"
+ #ifndef METABLOCK_H_
+ #define METABLOCK_H_
+ 
+@@ -42,7 +43,7 @@
+     if (b != kNL) return kKein;
+     ++lf_;
+     const unsigned long long kz = (unsigned long long)3;
+-    const unsigned long long nn = (unsigned long long)243425;
++    const unsigned long long nn = (unsigned long long)native_corpus::PageCount();
+     if (lf_ <= kz) {
+       if (lf_ == kz) { ab_ = pos_; offen_ = true; }
+       return kKopfzeile;
+@@ -141,7 +142,7 @@
+   long long BSek() const { return bsek_; }
+   long long BT() const { return bt_; }
+ 
+-  size_t Seiten() const { return g_.Fertig() ? (size_t)243425 : (size_t)0; }
++  size_t Seiten() const { return g_.Fertig() ? (size_t)native_corpus::PageCount() : (size_t)0; }
+   long long RevidNachRang(size_t k) const {
+     if (k >= rang_.size()) return -1;
+     return (long long)(satz_[3 * (size_t)rang_[k]] >> kLenBits);
+@@ -209,8 +210,8 @@
+           "\nmetablock (%s): opened but never closed, %llu newlines of %llu (%d head lines + 2 x %d records), %llu A and %llu B lines\n",
+           page_index, g_.Zeilenvorschuebe(),
+           (unsigned long long)3 +
+-              2ull * (unsigned long long)243425,
+-          (int)3, (int)243425,
++              2ull * (unsigned long long)native_corpus::PageCount(),
++          (int)3, (int)native_corpus::PageCount(),
+           st_.a_zeilen, st_.b_zeilen);
+       fflush(stderr);
+       exit(1);
+@@ -270,15 +271,15 @@
+     if (zl_n_ > (int)kZeile) Fail("metablock line longer than the buffer");
+     const int n = zl_n_;
+     if (n <= 0) Fail("empty metablock line");
+-    const int art = (idx < (long long)243425) ? 1 : 2;
++    const int art = (idx < (long long)native_corpus::PageCount()) ? 1 : 2;
+     if (KlasseHeuristik(zl_, n) != art) ++st_.kdiff;
+     if (art == 1) ZeileA((size_t)idx, zl_, n);
+-    else ZeileB((size_t)(idx - (long long)243425), zl_, n);
++    else ZeileB((size_t)(idx - (long long)native_corpus::PageCount()), zl_, n);
+   }
+ 
+   void ZeileA(size_t i, const unsigned char* p, int n) {
+     if (satz_.empty()) {
+-      satz_.assign(3u * (size_t)243425, 0u);
++      satz_.assign(3u * (size_t)native_corpus::PageCount(), 0u);
+       text_.reserve(600000);
+       hoff_.assign((size_t)kHash, kLeer);
+       hlen_.assign((size_t)kHash, 0u);
+@@ -317,7 +318,7 @@
+   }
+ 
+   void RangBauen() {
+-    const size_t N = (size_t)243425;
++    const size_t N = (size_t)native_corpus::PageCount();
+     rang_.resize(N);
+     for (size_t i = 0; i < N; ++i) rang_[i] = (unsigned int)i;
+     const unsigned int* s = satz_.data();
+@@ -434,8 +435,8 @@
+   }
+ 
+   void Abschluss() {
+-    if (st_.a_zeilen != (unsigned long long)243425 ||
+-        st_.b_zeilen != (unsigned long long)243425)
++    if (st_.a_zeilen != (unsigned long long)native_corpus::PageCount() ||
++        st_.b_zeilen != (unsigned long long)native_corpus::PageCount())
+       Fail("A or B line count differs from the page count");
+     text_.shrink_to_fit();
+     std::vector<unsigned int>().swap(hoff_);
+--- a/src/metablock_form.h
++++ b/src/metablock_form.h
+@@ -1,3 +1,4 @@
++#include "native_corpus.h"
+ #ifndef METABLOCK_FORM_H_
+ #define METABLOCK_FORM_H_
+ 
+@@ -137,7 +138,7 @@
+ 
+  static inline void Zeilen(const std::vector<unsigned char>& d, size_t ab,
+                           size_t bis, std::vector<size_t>* z) {
+-  const size_t nn = (size_t)243425;
++  const size_t nn = (size_t)native_corpus::PageCount();
+   z->resize(2 * nn + 1);
+   size_t p = ab;
+   for (size_t i = 0; i < 2 * nn; ++i) {
+@@ -182,7 +183,7 @@
+   if (!LiesDatei(pfad, &d)) return false;
+   size_t ab = 0, bis = 0;
+   if (!Grenzen(d, &ab, &bis)) return true;       // no complete block: unchanged
+-  const size_t nn = (size_t)243425;
++  const size_t nn = (size_t)native_corpus::PageCount();
+   std::vector<size_t> z;
+   Zeilen(d, ab, bis, &z);
+ 
+@@ -254,7 +255,7 @@
+   if (!LiesDatei(pfad, &d)) return false;
+   size_t ab = 0, bis = 0;
+   if (!Grenzen(d, &ab, &bis)) return true;       // no complete block: unchanged
+-  const size_t nn = (size_t)243425;
++  const size_t nn = (size_t)native_corpus::PageCount();
+   std::vector<size_t> z;
+   Zeilen(d, ab, bis, &z);
+ 
+--- a/src/mixer_bank.h
++++ b/src/mixer_bank.h
+@@ -1,7 +1,7 @@
+ #ifndef MIXER_BANK_H_
+ #define MIXER_BANK_H_
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ namespace mixbank {
+ 
+--- a/src/mixer_chain.h
++++ b/src/mixer_chain.h
+@@ -66,7 +66,7 @@
+ //   and decoder because it is the same function fed the same values.
+ // ===========================================================================
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ #include "fast_math.h"
+ 
+ #define MIXER_CHAIN_W(x) ((float)(x))
+--- a/src/models/fxcmv1.cpp
++++ b/src/models/fxcmv1.cpp
+@@ -63,7 +63,7 @@
+ #include <assert.h>
+ 
+ // AVX2
+-#include <immintrin.h>
++#include "native_simd.h"
+ #include "../simd_scan.h"
+ #include "../lstm_fx_link.h"
+ #include "../match_extra.h"
+--- a/src/models/ppmd.cpp
++++ b/src/models/ppmd.cpp
+@@ -18,7 +18,7 @@
+ #include "../ppmd_prewarm.h"
+ 
+ #include <cstring>
+-#include <malloc.h>
++#include "native_os.h"
+ #include <sys/mman.h>
+ #include <stdlib.h>
+ #include <sys/stat.h>
+--- a/src/models/ppmd_page.h
++++ b/src/models/ppmd_page.h
+@@ -157,9 +157,7 @@
+ // FREMD = 1: the address may lie outside the heap.  SCHREIB = 1: write access.
+ template <int FREMD, int HEISS, int SCHREIB>
+ static inline unsigned char* xl_t(unsigned char* a, unsigned long long len) {
+-  if (HEISS) return xl_kern<FREMD, SCHREIB>(a, len);
+-  if (SCHREIB) return FREMD ? xl_ruf1w(a, len) : xl_ruf0w(a, len);
+-  return FREMD ? xl_ruf1(a, len) : xl_ruf0(a, len);
++  (void)len; return a;
+ }
+ 
+ // Raw translations for the few sites that reinterpret heap bytes (casts,
+--- a/src/optimizer.h
++++ b/src/optimizer.h
+@@ -8,7 +8,7 @@
+              unsigned int n, unsigned int rows);
+ }
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ namespace optimizer {
+ 
+ static inline void UpdAxpy8(float* u,
+--- a/src/optimizer_vec.cpp
++++ b/src/optimizer_vec.cpp
+@@ -1,7 +1,7 @@
+ #include "optimizer.h"
+ 
+ #include "isa_floor.h"
+-#include <immintrin.h>
++#include "native_simd.h"
+ #include <string.h>
+ 
+ namespace optimizer {
+@@ -70,7 +70,7 @@
+ 
+ }
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ namespace optimizer {
+ namespace {
+--- a/src/preprocess/dict_derive.cpp
++++ b/src/preprocess/dict_derive.cpp
+@@ -5,7 +5,7 @@
+ #include <cstdint>
+ #include <cstdlib>
+ #include <cstring>
+-#include <malloc.h>
++#include "native_os.h"
+ 
+ // Derives the word dictionary at run time from enwik9 plus the hint package:
+ // count words, keep the most frequent candidates, apply the hint parts
+--- a/src/r1_reorder_impl.inc
++++ b/src/r1_reorder_impl.inc
+@@ -1,3 +1,12 @@
++#include <stdlib.h>
++// Adapt GNU comparator order to Darwin's qsort_r API.
++static void native_qsort_r(void* base,size_t n,size_t size,
++    int (*cmp)(const void*,const void*,void*),void* arg) {
++  struct Context { int (*cmp)(const void*,const void*,void*); void* arg; } ctx{cmp,arg};
++  ::qsort_r(base,n,size,&ctx,[](void* p,const void* a,const void* b) {
++    Context* c=(Context*)p;return c->cmp(a,b,c->arg);
++  });
++}
+ 
+ #include <stdint.h>
+ #include <sys/types.h>
+@@ -426,7 +435,7 @@
+   IdxResize(order, block_count);
+   for (size_t i = 0; i < block_count; ++i) order->d[i] = i;
+   if (block_count) {
+-    qsort_r(order->d, block_count, sizeof(size_t), Fast2CmpD86a,
++    native_qsort_r(order->d, block_count, sizeof(size_t), Fast2CmpD86a,
+         (void*)d86a.d);
+   }
+   U64Free(&d86a);
+@@ -451,7 +460,7 @@
+   IdxResize(&d86_order, sorted_count);
+   for (size_t i = 0; i < sorted_count; ++i) d86_order.d[i] = i;
+   if (sorted_count) {
+-    qsort_r(d86_order.d, sorted_count, sizeof(size_t), Fast2CmpD86a,
++    native_qsort_r(d86_order.d, sorted_count, sizeof(size_t), Fast2CmpD86a,
+         (void*)d86a.d);
+   }
+   U64Free(&d86a);
+@@ -590,7 +599,7 @@
+     BlockCmpCtx ctx;
+     ctx.data = input.d;
+     ctx.blocks = blocks.d;
+-    qsort_r(sorted_indices.d, blocks.n, sizeof(size_t), Fast2CmpBlock,
++    native_qsort_r(sorted_indices.d, blocks.n, sizeof(size_t), Fast2CmpBlock,
+         (void*)&ctx);
+   }
+ 
+--- a/src/readalike_prepr/self_extract.h
++++ b/src/readalike_prepr/self_extract.h
+@@ -5,7 +5,7 @@
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+-#include <malloc.h>
++#include "native_os.h"
+ #include <unistd.h>
+ 
+ #include <string>
+--- a/src/runner.cpp
++++ b/src/runner.cpp
+@@ -5,7 +5,7 @@
+ #include <vector>
+ #include <string.h>
+ #include <sys/stat.h>
+-#include <malloc.h>
++#include "native_os.h"
+ 
+ #include "preprocess/preprocessor.h"
+ #include "coder/encoder.h"
+@@ -90,7 +90,7 @@
+ 
+ 
+ 
+-#include <malloc.h>
++#include "native_os.h"
+ #ifndef AUX_BUILD
+ #define AUX_BUILD 0
+ #endif
+@@ -601,6 +601,7 @@
+ 
+ namespace ppmd_page { extern int hilfs; }
+ int main(int argc, char** argv) {
++  if (!native_corpus::Configure(&argc, argv)) return 2;
+   console_progress::Begin();
+   if (argc > 1 && argv[1][0] == '-' && (argv[1][1] == 'c' || argv[1][1] == 'd'
+       || argv[1][1] == 'C' || argv[1][1] == 'D'))
+--- a/src/sentence_intersect.h
++++ b/src/sentence_intersect.h
+@@ -1,7 +1,7 @@
+ #ifndef SENTENCE_INTERSECT_H_
+ #define SENTENCE_INTERSECT_H_
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ // Sentence similarity of the text model: how many word codes of the current
+ // sentence also occur in a stored one (AVX2 compare, 8 codes per step).
+--- a/src/simd_scan.h
++++ b/src/simd_scan.h
+@@ -14,7 +14,7 @@
+ #define SIMD_SCAN_H_
+ 
+ #include "isa_floor.h"
+-#include <immintrin.h>
++#include "native_simd.h"
+ #include <stdint.h>
+ 
+ namespace simdscan {
+--- a/src/tf1/kernels.cpp
++++ b/src/tf1/kernels.cpp
+@@ -3,7 +3,7 @@
+ // sections 3 and 4 of README.md.
+ #include "kernels.h"
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ #include <cassert>
+ #include <cmath>
+--- a/src/tf1/opt/arena_build.cpp
++++ b/src/tf1/opt/arena_build.cpp
+@@ -39,7 +39,7 @@
+   void* m = ::mmap(nullptr, bytes, PROT_READ | PROT_WRITE,
+                    MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+   if (m == MAP_FAILED) die("mmap failed");
+-  ::madvise(m, bytes, MADV_HUGEPAGE);
++  // Linux huge-page advice is unavailable on macOS.
+   std::memset(m, 0, bytes);  // touch every page
+   p = static_cast<uint8_t*>(m);
+   PAGE_REGISTRY_ADD(p, bytes);
+--- a/src/tf1/opt/attn.cpp
++++ b/src/tf1/opt/attn.cpp
+@@ -23,7 +23,7 @@
+ //      into 8 fp32 accumulators; (sv/den) folded into one final multiply.
+ #include "attn.h"
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ #include <cmath>
+ #include <cstring>
+@@ -310,58 +310,11 @@
+ 
+ __attribute__((noinline)) void pv_dense_i8(const int8_t* v, const float* eb,
+                                            int n, float rfac, float* out64) {
+-  int n2 = n >> 1;
+-  const int odd = n & 1;
+-  asm volatile(
+-      "vxorps %%xmm0,%%xmm0,%%xmm0\n\t"
+-      "vxorps %%xmm1,%%xmm1,%%xmm1\n\t"
+-      "vxorps %%xmm2,%%xmm2,%%xmm2\n\t"
+-      "vxorps %%xmm3,%%xmm3,%%xmm3\n\t"
+-      "vxorps %%xmm4,%%xmm4,%%xmm4\n\t"
+-      "vxorps %%xmm5,%%xmm5,%%xmm5\n\t"
+-      "vxorps %%xmm6,%%xmm6,%%xmm6\n\t"
+-      "vxorps %%xmm7,%%xmm7,%%xmm7\n\t"
+-      "testl %[n2], %[n2]\n\t"
+-      "jz 2f\n\t"
+-      ".p2align 4\n\t"
+-      "1:\n\t"
+-      "vbroadcastss (%[eb]), %%ymm12\n\t"
+-      "vbroadcastss 4(%[eb]), %%ymm13\n\t"
+-      "prefetcht0 " AK1_STR(AK1_PVPF) "(%[v])\n\t"
+-      "prefetcht0 " AK1_STR(AK1_PVPF) "+64(%[v])\n\t"
+-      PV_ROW(0, 12, 8, 9)
+-      PV_ROW(64, 13, 10, 11)
+-      "addq $128, %[v]\n\t"
+-      "addq $8, %[eb]\n\t"
+-      "decl %[n2]\n\t"
+-      "jnz 1b\n\t"
+-      "2:\n\t"
+-      "testl %[odd], %[odd]\n\t"
+-      "jz 3f\n\t"
+-      "vbroadcastss (%[eb]), %%ymm12\n\t"
+-      PV_ROW(0, 12, 8, 9)
+-      "3:\n\t"
+-      "vbroadcastss %[rf], %%ymm13\n\t"
+-      "vmulps %%ymm13, %%ymm0, %%ymm0\n\t"
+-      "vmulps %%ymm13, %%ymm1, %%ymm1\n\t"
+-      "vmulps %%ymm13, %%ymm2, %%ymm2\n\t"
+-      "vmulps %%ymm13, %%ymm3, %%ymm3\n\t"
+-      "vmulps %%ymm13, %%ymm4, %%ymm4\n\t"
+-      "vmulps %%ymm13, %%ymm5, %%ymm5\n\t"
+-      "vmulps %%ymm13, %%ymm6, %%ymm6\n\t"
+-      "vmulps %%ymm13, %%ymm7, %%ymm7\n\t"
+-      "vmovaps %%ymm0, (%[out])\n\t"
+-      "vmovaps %%ymm1, 32(%[out])\n\t"
+-      "vmovaps %%ymm2, 64(%[out])\n\t"
+-      "vmovaps %%ymm3, 96(%[out])\n\t"
+-      "vmovaps %%ymm4, 128(%[out])\n\t"
+-      "vmovaps %%ymm5, 160(%[out])\n\t"
+-      "vmovaps %%ymm6, 192(%[out])\n\t"
+-      "vmovaps %%ymm7, 224(%[out])\n\t"
+-      : [v] "+r"(v), [eb] "+r"(eb), [n2] "+r"(n2)
+-      : [rf] "x"(rfac), [out] "r"(out64), [odd] "r"(odd)
+-      : "ymm0", "ymm1", "ymm2", "ymm3", "ymm4", "ymm5", "ymm6", "ymm7",
+-        "ymm8", "ymm9", "ymm10", "ymm11", "ymm12", "ymm13", "cc", "memory");
++  __m256 acc[8];
++  for (int t=0;t<8;++t) acc[t]=_mm256_setzero_ps();
++  for (int j=0;j<n;++j) pv_row(v+size_t(j)*64,_mm256_set1_ps(eb[j]),acc);
++  for (int t=0;t<8;++t)
++    _mm256_store_ps(out64+t*8,_mm256_mul_ps(acc[t],_mm256_set1_ps(rfac)));
+ }
+ 
+ // dense fp32-mirror sweep (measurement variant)
+--- a/src/tf1/opt/glue.cpp
++++ b/src/tf1/opt/glue.cpp
+@@ -4,7 +4,7 @@
+ #include "glue.h"
+ #include "../../cold_size.h"
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ #include <cassert>
+ #include <cmath>
+--- a/src/tf1/opt/kda.cpp
++++ b/src/tf1/opt/kda.cpp
+@@ -42,9 +42,7 @@
+ namespace {
+ 
+ inline uint64_t rdt() {
+-  unsigned lo, hi;
+-  asm volatile("lfence\n\trdtsc" : "=a"(lo), "=d"(hi)::"memory");
+-  return (static_cast<uint64_t>(hi) << 32) | lo;
++  return 0; // Optional cycle telemetry unavailable in native experiment.
+ }
+ 
+ KdaSweep g_sweep = KdaSweep::ONEFIVE;
+--- a/src/tf1/opt/kda_math.h
++++ b/src/tf1/opt/kda_math.h
+@@ -21,7 +21,7 @@
+ //                gated-norm statistics match the naive path bit-for-bit.
+ #pragma once
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ #include "vec_math.h"
+ 
+--- a/src/tf1/opt/model_opt.cpp
++++ b/src/tf1/opt/model_opt.cpp
+@@ -20,7 +20,7 @@
+ #include "model_opt.h"
+ #include "../../cold_size.h"
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ #include <algorithm>
+ #include <cmath>
+--- a/src/tf1/opt/qmat_dense.cpp
++++ b/src/tf1/opt/qmat_dense.cpp
+@@ -4,7 +4,7 @@
+ #include "qmat_dense.h"
+ #include "../../cold_size.h"
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ #include <cstdio>
+ #include <cstdlib>
+--- a/src/tf1/opt/qmat_sparse.cpp
++++ b/src/tf1/opt/qmat_sparse.cpp
+@@ -3,7 +3,7 @@
+ // sections 3 and 4 of README.md.
+ #include "qmat_sparse.h"
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ #include <algorithm>
+ #include <cstring>
+--- a/src/tf1/opt/vec_math.h
++++ b/src/tf1/opt/vec_math.h
+@@ -32,7 +32,7 @@
+ // (libm scalar baselines on this box: expf 9.1 c/elem, tanhf 44-56 c/elem.)
+ #pragma once
+ 
+-#include <immintrin.h>
++#include "native_simd.h"
+ 
+ namespace fx2 {
+ 
+--- a/src/tf1/tf1_engine.cpp
++++ b/src/tf1/tf1_engine.cpp
+@@ -12,8 +12,8 @@
+ 
+ #include <cmath>
+ 
+-#ifdef __F16C__
+-#include <immintrin.h>
++#if 1 // Native experiment: F16C supplied by SIMDe
++#include "native_simd.h"
+ #else
+ 
+ #error "needs F16C (build with -march=x86-64-v3 or newer)."
+@@ -104,7 +104,7 @@
+ 
+ void FloatsToHalves(const float* src, uint16_t* dst, size_t n) {
+   size_t i = 0;
+-#ifdef __F16C__
++#if 1 // Native experiment: F16C supplied by SIMDe
+   for (; i + 8 <= n; i += 8) {
+     _mm_storeu_si128(reinterpret_cast<__m128i*>(dst + i),
+         _mm256_cvtps_ph(_mm256_loadu_ps(src + i), _MM_FROUND_TO_NEAREST_INT));
+@@ -115,7 +115,7 @@
+ 
+ void HalvesToFloats(const uint16_t* src, float* dst, size_t n) {
+   size_t i = 0;
+-#ifdef __F16C__
++#if 1 // Native experiment: F16C supplied by SIMDe
+   for (; i + 8 <= n; i += 8) {
+     _mm256_storeu_ps(dst + i, _mm256_cvtph_ps(
+         _mm_loadu_si128(reinterpret_cast<const __m128i*>(src + i))));
+--- a/src/tf1/tf1_z3.cpp
++++ b/src/tf1/tf1_z3.cpp
+@@ -1,5 +1,6 @@
+ 
+ #include "tf1_z3.h"
++#include "native_os.h"
+ #include "../cold_size.h"
+ 
+ #include "tf1_prior0.h"   // the stamped prior0 table

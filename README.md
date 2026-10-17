@@ -4,9 +4,30 @@
 
 The [compression guide](https://bbondy.github.io/hutter/) explains the algorithms, archive formats, code structure, and contributor setup. Its source is in [`docs/website`](docs/website/README.md).
 
-This repo is a workspace for experimenting toward a future Hutter Prize submission in Rust.
+This repository's objective is to win the Hutter Prize. The primary implementation
+track is now a pinned, source-vendored **cmix-neif 1.0** in
+[`engines/cmix-neif/`](engines/cmix-neif/). Our Rust codecs remain an experiment lab.
 
-It is not competitive yet. The current repo contains several small experimental codecs:
+Start with [the competitive-engine workflow](engines/README.md):
+
+```sh
+make competitive-verify
+make competitive-doctor
+# On the required Linux x86-64 host:
+make competitive-build COMPETITIVE_OUTPUT=build/competitive/baseline-001
+```
+
+The imported compressor is GPL-3.0-only with upstream notices retained; the
+original lab/tooling remains MIT. See [license scope](LICENSE-SCOPE.md), including
+the upstream documented open points. The full enwik9 score has not yet been
+reproduced locally.
+
+For Apple Silicon development, see the [native Mac port](engines/ports/cmix-neif-macos/README.md)
+and [native/Linux parity investigation](docs/benchmarks/2026-10-17/native-parity.md).
+Randomized model state now matches, but native and Linux coder probabilities diverge;
+keep native experiment results separate from the Linux reference.
+
+The Rust lab is not competitive yet. It contains several small experimental codecs:
 
 - adaptive block Huffman
 - order-1 adaptive block Huffman
@@ -14,7 +35,7 @@ It is not competitive yet. The current repo contains several small experimental 
 - byte-level PPM with arithmetic coding
 - bit-level PPM with arithmetic coding
 
-There is also an additive `WikiMix-5` design skeleton for a future mixed-model codec:
+There is also an experimental `WikiMix-5` codec with five heuristic predictors:
 
 - `src/wikimix.rs`
 - `docs/wikimix5.md`
@@ -49,35 +70,71 @@ Their purpose is to give you a clean, testable loop for:
 - verify correctness
 - inspect file sizes quickly
 
+## Research plan and reproducible benchmarks
+
+See [the October 2026 assessment and experiment plan](docs/research-plan.md).
+Keep `data/sample.txt` as a smoke test only: its 179 bytes cannot rank models.
+
+```sh
+make samples
+make bench-suite BENCH_OUTPUT=build/screen-001
+python3 scripts/benchmark.py data/samples/prefix-1m data/samples/middle-1m \
+  --codecs ppmd ppmd-bit ppm-o4 gzip bzip2 xz --output build/dev-001 \
+  --record dev-001 --note "Initial development baseline" \
+  --manifest data/samples/manifest.json
+python3 scripts/benchmark_history.py list
+python3 scripts/benchmark_history.py compare dev-001 dev-002
+```
+
+The Python standard-library runner executes codecs serially, checks restored size
+and SHA-256, and records archive bytes, bits per byte, compression/decompression
+wall time and peak RSS, commands, binary hash, commit, and platform. It retains
+archives and logs in a new output directory and records failures/timeouts. Use
+`--repeats 3` for timing comparisons and archive repeatability checks. The default
+120-second timeout is **per phase**; there is no hard memory limit. Use only small
+samples for the uncapped high-order bit models. `make bench` remains a quick
+compression-only command; use `bench-suite` for verified comparisons.
+
+[Benchmark history](benchmarks/README.md) lives in Git under `benchmarks/runs/`.
+Use `--record` to retain small immutable records with experiment notes and corpus
+manifests. Large archives/logs remain in `build/`. Comparisons match input hashes
+and codec names and exclude failed or nonrepeatable trials. Today's 55 trials
+are saved, with a [readable report](docs/benchmarks/2026-10-17/README.md).
+
+`make samples` verifies official enwik8 before generating 100 KB, 1 MB and 10 MB
+prefixes, plus two disjoint 1 MB slices, with offsets and checksums in a manifest.
+Once enwik9 is present, `python3 scripts/make_samples.py data/enwik9` also creates
+nine spread-out regions. Generated corpora stay untracked; preserve manifests
+with any published benchmark results. Reuse the same source/manifest within an
+experiment and don't compare cold-slice ratios directly with full-stream ratios.
+
 ## Current target
 
-As of the latest official record on the Hutter Prize site, the enwik9 record to beat is:
-
-- `110,793,128` total bytes by Kaido Orav and Byron Knoll with `fx2-cmix` on September 3, 2024
-
-For a prize-eligible submission, you need at least a 1% improvement over the previous record, which means:
-
-- your total `S = compressor + archive` must be below `109,685,197` bytes
-
-Recent enwik9 records listed by the official site:
-
-- `110,793,128` bytes, `fx2-cmix`, Kaido Orav and Byron Knoll, September 3, 2024
-- `112,578,322` bytes, `fx-cmix`, Kaido Orav, February 2, 2024
-- `114,156,155` bytes, `fast cmix`, Saurabh Kumar, July 16, 2023
-- `115,352,938` bytes, `starlit`, Artemiy Margaritov, May 31, 2021
-- `116,673,681` bytes, `phda9v1.8`, Alexander Rhatushnyak, July 4, 2019
+Checked October 17, 2026: the [official prize page](https://hutter1.net/prize/index.htm)
+lists **100,424,672 total bytes**, fx2-cmix-T (Vladimir Ivanov), as the accepted
+record and lists a next target below **99,420,425 bytes**. The old 2024 target in
+this README is obsolete. [Newer submissions are pending](https://mattmahoney.net/dc/text.html),
+including cmix-neif 1.0 at a reported **95,914,051 total bytes**; submission order
+and acceptance can move the threshold. Recheck before any prize claim.
 
 ## What the contest actually requires
 
-The official task is to create a Linux or Windows compressor plus a self-extracting archive that reproduces `enwik9` exactly, with these practical constraints:
+Use the [detailed rules](https://hutter1.net/prize/hrules.htm), not archive size alone:
 
-- lossless reconstruction of the exact `enwik9`
-- total size counts both the compressor executable and the produced archive
-- the archive must be self-contained, so yes, you effectively need decompression support
-- documented source code must be published under an OSI-approved license before prize payment
-- practical limits are roughly single-core, under 10 GB RAM, and under about 50 hours on the prize machine
+- Reproduce the exact billion-byte enwik9, without external information.
+- SFX packaging counts compressor plus self-extracting archive. The separate
+  decoder relaxation counts compressor + twice the decoder + payload; when one
+  executable serves both roles, this becomes twice that executable + payload.
+  Required command/compile option lengths also count. Permitted zipped program
+  representations may change the final score.
+- Each program must meet the machine-normalized time limit `70,000 / T` hours,
+  where T is its Geekbench 5 score, and the 10 GB RAM / 100 GB temporary disk
+  limits. No GPU at runtime. The headline target is about 50 hours on one core.
+- Supply Windows/Linux x86 executables and documented source under an OSI license.
+  An ARM macOS benchmark is useful for development but does not establish compliance.
 
-For this starter repo, the CLI uses separate `compress` and `decompress` commands because that is easier to iterate on. Later, if you approach a serious submission, you would likely switch to a self-extracting archive flow.
+`stats` reports an unpacked development estimate for this repo's shared binary,
+not a validated submission score. We have not built a prize submission package.
 
 ## Language notes
 
