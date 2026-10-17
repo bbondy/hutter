@@ -10,6 +10,12 @@ def page(page_id, title, text):
 
 
 class ArticleOrderTests(unittest.TestCase):
+    def test_self_closing_text_keeps_original_bytes(self):
+        raw = page(1, 'Empty', '').replace(b'<text xml:space="preserve"></text>',
+                                         b'<text xml:space="preserve" />')
+        self.assertEqual(pages_from_bytes(raw)[0]['text'], '')
+        self.assertEqual(restore_source(raw), raw)
+
     def test_graph_direction_and_exact_link_semantics(self):
         pages = pages_from_bytes(page(1, 'A &amp; B', '[[C#part|alias]] [[C]] [[c]] [[A &amp; B]]')
                                  + page(2, 'C', '[[A &amp; B]] [[A_&amp;_B]]'))

@@ -31,10 +31,11 @@ def pages_from_bytes(data):
         title = re.search(rb"<title>(.*?)</title>", raw)
         page_id = re.search(rb"<id>(\d+)</id>", raw)
         text = re.search(rb"<text\b[^>]*>(.*?)</text>", raw, re.S)
-        if not all((title, page_id, text)):
+        empty_text = re.search(rb"<text\b[^>]*/>", raw)
+        if not title or not page_id or (text is None and empty_text is None):
             raise ValueError("page lacks title, id or text")
         pages.append({"id": int(page_id[1]), "title": html.unescape(title[1].decode()),
-                      "text": html.unescape(text[1].decode()), "raw": raw})
+                      "text": html.unescape(text[1].decode()) if text else "", "raw": raw})
     if not pages or b"".join(p["raw"] for p in pages) != data:
         raise ValueError("input must contain only complete, consecutive pages")
     if len({p["id"] for p in pages}) != len(pages):
@@ -61,14 +62,8 @@ def link_graph(pages):
     return edges
 
 
-def graph_order(edges):
-    """Stable SCC topological order; greedily break cycles inside each SCC.
-
-    A source should precede a page it links to. Strongly connected components
-    have unavoidable backward edges; choose max remaining outdegree-indegree
-    inside each, breaking ties by source position. Isolated pages and available
-    components retain source order. This is a heuristic, not an optimum claim.
-    """
+def strong_components(edges):
+    """Iterative SCC decomposition, without the costly within-component ordering."""
     n = len(edges)
     reverse = [set() for _ in edges]
     for u, targets in enumerate(edges):
@@ -103,6 +98,18 @@ def graph_order(edges):
                     owner[v] = cid
                     stack.append(v)
         components.append(members)
+    return components, owner, reverse
+
+
+def graph_order(edges):
+    """Stable SCC topological order; greedily break cycles inside each SCC.
+
+    A source should precede a page it links to. Strongly connected components
+    have unavoidable backward edges; choose max remaining outdegree-indegree
+    inside each, breaking ties by source position. Isolated pages and available
+    components retain source order. This is a heuristic, not an optimum claim.
+    """
+    components, owner, reverse = strong_components(edges)
     successors = [set() for _ in components]
     indegree = [0 for _ in components]
     for u, targets in enumerate(edges):

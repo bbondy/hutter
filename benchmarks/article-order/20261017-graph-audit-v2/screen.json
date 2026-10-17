@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "kind": "article-graph-audit",
+  "input_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+  "input_bytes": 1033597,
+  "source_offset": 0,
+  "source_end": 1033597,
+  "raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+  "pages": 172,
+  "exact_title_edges": 66,
+  "reciprocal_pairs": 11,
+  "forward_edge_upper_bound": 55,
+  "upper_bound_note": "Each reciprocal pair forces at least one backward edge; other cycles may tighten the bound.",
+  "source_forward_edges": 42,
+  "largest_scc": 8,
+  "scc_size_histogram": {
+    "8": 1,
+    "2": 3,
+    "1": 158
+  },
+  "script_sha256": "bdd4b29ffd97ab80a260dfdffa6c168c4922605a2d2158b00a86dcdad3aa4ecf",
+  "graph_code_sha256": "8c0a3da504022bd129d80eb5e7d6c026e7c73f32ae1ea4799a47158175bdf95b",
+  "scope": "Exact-title graph proxy, not cmix context telemetry or a compression benchmark"
+}
