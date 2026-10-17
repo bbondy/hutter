@@ -1,0 +1,9 @@
+{
+  "id": "20261017-native-linux-rng-trace-off",
+  "note": "Explicit Linux RNG; tracing disabled. Compare payload with parity trace-on run. Linux emulation was running concurrently, so timings are not an isolated performance baseline.",
+  "source_run": "/Users/bbondy/projects/bbondy/hutter-native-mac/build/native-parity-trace-off-v1",
+  "recorded_utc": "2026-10-17T20:08:02.350935+00:00",
+  "trials": 1,
+  "verified_trials": 1,
+  "commit": "3e6e73cfdd729d3785de8c9d01d8a7adb8c01203"
+}

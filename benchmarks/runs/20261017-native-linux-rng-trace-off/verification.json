@@ -1,0 +1,8 @@
+{
+  "trace_on_payload_sha256": "11adf0398f6a91e4bbe2a5819c56500bae7a3f65c0561512440de3b41fa1cc82",
+  "trace_off_payload_sha256": "11adf0398f6a91e4bbe2a5819c56500bae7a3f65c0561512440de3b41fa1cc82",
+  "tracing_preserves_payload": true,
+  "restored_raw_bytes": 117161,
+  "restored_raw_sha256": "7264a04d1802659f721e241872fad5e1050d203c2d80bfbf161a7209fd5f7563",
+  "raw_roundtrip": true
+}

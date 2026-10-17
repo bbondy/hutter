@@ -15,8 +15,13 @@ make competitive-build COMPETITIVE_OUTPUT=build/competitive/baseline-001
 
 The imported compressor is GPL-3.0-only with upstream notices retained; the
 original lab/tooling remains MIT. See [license scope](LICENSE-SCOPE.md), including
-the upstream documented open points. The competitive baseline has not yet been
-built or benchmarked locally.
+the upstream documented open points. The full enwik9 score has not yet been
+reproduced locally.
+
+For Apple Silicon development, see the [native Mac port](engines/ports/cmix-neif-macos/README.md)
+and [native/Linux parity investigation](docs/benchmarks/2026-10-17/native-parity.md).
+Randomized model state now matches, but native and Linux coder probabilities diverge;
+keep native experiment results separate from the Linux reference.
 
 The Rust lab is not competitive yet. It contains several small experimental codecs:
 
