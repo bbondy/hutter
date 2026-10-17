@@ -96,9 +96,14 @@ def samples(args):
     if digest(helper) != provenance["sample_helper"]["sha256"]:
         raise ValueError("sample helper differs from its build record")
     data = source.read_bytes()
-    start = data.index(b"  <page>\n")
+    start = data.find(b"  <page>\n", args.start_offset)
+    if start < 0:
+        raise ValueError("no complete article starts at or after the requested offset")
     end_marker = b"  </page>\n"
-    end = data.index(end_marker, start + args.target_bytes) + len(end_marker)
+    end = data.find(end_marker, start + args.target_bytes)
+    if end < 0:
+        raise ValueError("no complete article ends after the target sample size")
+    end += len(end_marker)
     destination = args.output.resolve()
     destination.mkdir(parents=True, exist_ok=False)
     raw, ready, restored = [destination / name for name in ("articles.xml", "articles.ready", "articles.restored")]
@@ -109,13 +114,14 @@ def samples(args):
         raise ValueError("sample preprocessing did not round-trip")
     manifest = {
         "version": 1, "source": str(source), "source_bytes": len(data), "source_sha256": digest(source),
+        "source_requested_offset": args.start_offset,
         "source_offset": start, "source_end": end, "raw_bytes": raw.stat().st_size,
         "raw_sha256": digest(raw), "preprocessing_roundtrip": True,
         "page_count": data[start:end].count(b"  <page>\n"),
         "preprocessing": "upstream phda9 on complete articles in original order; no full-corpus reorder or census/comment-index transforms",
         "helper_sha256": digest(helper), "upstream_commit": provenance["upstream_commit"],
         "samples": [{"path": str(ready), "bytes": ready.stat().st_size,
-                     "sha256": digest(ready), "role": "native-feasibility"}],
+                     "sha256": digest(ready), "role": "held-out" if args.start_offset else "native-feasibility"}],
     }
     write_json(destination / "manifest.json", manifest)
     print(f"Prepared and restored {raw.stat().st_size} raw bytes; coder input: {ready}")
@@ -217,6 +223,8 @@ def main():
     sample.add_argument("--build", type=Path, default=ROOT / "build/native-cmix")
     sample.add_argument("--output", type=Path, required=True)
     sample.add_argument("--target-bytes", type=int, default=100_000)
+    sample.add_argument("--start-offset", type=int, default=0,
+                        help="first complete article beginning at or after this enwik8 byte offset")
     test = sub.add_parser("bench")
     test.add_argument("inputs", type=Path, nargs="+")
     test.add_argument("--build", type=Path, default=ROOT / "build/native-cmix")
@@ -231,8 +239,9 @@ def main():
         parser.error("this experimental port is scoped to macOS ARM64")
     if args.command == "build" and args.jobs < 1:
         parser.error("--jobs must be positive")
-    if args.command == "samples" and not 0 < args.target_bytes < 99_000_000:
-        parser.error("target bytes must be positive and below 99 MB")
+    if args.command == "samples" and (not 0 < args.target_bytes < 99_000_000 or
+                                       not 0 <= args.start_offset < 100_000_000):
+        parser.error("sample target and start offset must fit enwik8")
     if args.command == "bench":
         if args.timeout <= 0 or args.repeats < 1:
             parser.error("timeout and repeats must be positive")

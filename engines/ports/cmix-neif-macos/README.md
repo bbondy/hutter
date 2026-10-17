@@ -20,6 +20,9 @@ It checks the corpus hash, takes complete articles from the first page through
 the first closing page tag after 100 KB, applies upstream phda9, and verifies
 the inverse transformation. The raw and transformed hashes and byte offsets
 are recorded. `--target-bytes` selects a larger screening sample.
+`--start-offset` selects the first complete article at or after a chosen byte
+offset, so a disjoint middle or tail fixture can challenge results from the
+opening articles. The manifest records the requested and actual offsets.
 Output directories and history IDs must be new. Build dependencies are Apple
 command-line tools, Python 3, Git, make and patch. The build downloads the
 MIT-licensed [SIMDe](https://github.com/simd-everywhere/simde) v0.8.2 source at
