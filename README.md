@@ -1,5 +1,7 @@
 # Hutter Prize
 
+<img src="docs/website/static/img/hutter-project-logo.png" alt="Hutter project logo" width="112">
+
 The [compression guide](https://bbondy.github.io/hutter/) explains the algorithms, archive formats, code structure, and contributor setup. Its source is in [`docs/website`](docs/website/README.md).
 
 This repo is a workspace for experimenting toward a future Hutter Prize submission in Rust.
