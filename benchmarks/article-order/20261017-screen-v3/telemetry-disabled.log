@@ -1,0 +1,27 @@
+native development corpus: 172 articles, 127 redirect prefix, frame=1
+ip pack: compiled 35618 addresses / 143576 B, counted 13 / 59
+native PPMd: anonymous heap 14000 MiB; no Linux RSS clamp
+pretraining the model on the dictionary ... 159.94 s.
+progress 0.00 %
+entering metadata block at 0.01 %
+entering redirect block at 0.75 %
+entering main text block at 1.79 %
+progress 90.00 %
+      640.08 real       636.08 user         2.37 sys
+          6000345088  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              366376  page reclaims
+                   7  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   2  voluntary context switches
+              163455  involuntary context switches
+       6995560573516  instructions retired
+       2460833275530  cycles elapsed
+          5981770816  peak memory footprint

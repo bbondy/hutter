@@ -237,8 +237,9 @@ before pretraining. The exact pinned upstream source is unchanged.
 Read-only JSON reports expose actual transformer link-prefix tokens fed, prompt
 counts and alias-channel activity. Accepted comparisons require matching encoder
 and decoder counters, the declared redirect prompt count and main-text entry.
-Six native round trips, a telemetry-disabled repeat of screen source and a
-shared Linux build are running; no corrected size result is claimed yet.
+Six native round trips and a telemetry-disabled repeat of screen source completed
+under this protocol. They are retained below as rejected diagnostic evidence;
+the shared Linux build was also corrected for its include search paths.
 
 ## Preparation and runtime configuration (v3)
 
@@ -258,6 +259,33 @@ reject a wrong declared page count. The frozen raw pages and all three orders
 are unchanged. Prepared streams shed exactly 45 escape bytes on the screen and
 109 on the disjoint fixture; one ordinary body in the latter needed no escape.
 This is a protocol correction, not an ordering gain.
+
+## Accepted v3 results
+
+The [screen](../../../benchmarks/article-order/20261017-screen-v3/report.json) and
+[disjoint comparison](../../../benchmarks/article-order/20261017-holdout-v3/report.json)
+pass prepared-stream decoding, inverse preparation and original-byte restoration
+for all six trials. Both sides report identical context counters, the expected
+126/27 redirect prompts and main-text entry.
+
+| Order | Screen payload | Delta | Disjoint payload | Delta |
+| --- | ---: | ---: | ---: | ---: |
+| Source | 119,969 | — | 118,411 | — |
+| Graph | 119,975 | +6 | 118,433 | +22 |
+| Random | 120,083 | +114 | 118,646 | +235 |
+
+Graph order feeds **2,897 vs 2,319** actual link-prefix tokens on the screen and
+**1,531 vs 1,359** on the disjoint set. Pages receiving prefixes rise from 24 to
+26 and 33 to 35. More supplied context therefore did not improve either payload.
+This comparison changes order and several model contexts together; it does not
+isolate the value of the link channel itself.
+
+The [telemetry-disabled repeat](../../../benchmarks/article-order/20261017-screen-v3/telemetry-invariance.json)
+produces the identical 119,969-byte archive. Encoding took 659–669 seconds and
+decoding 763–776 seconds with other jobs active; these are exploratory timings.
+All payloads include the same 16-byte development frame and exclude executables,
+dictionary and weights. No candidate from this source-order batch is promoted.
+The projected upstream-order comparison remains a separate, predeclared test.
 
 ## Full upstream order reconstructed natively
 

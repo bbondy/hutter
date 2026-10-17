@@ -1,0 +1,30 @@
+native development corpus: 138 articles, 28 redirect prefix, frame=1
+native PPMd: anonymous heap 14000 MiB; no Linux RSS clamp
+pretraining the model on the dictionary ... 158.18 s.
+progress 0.00 %
+entering metadata block at 0.01 %
+entering redirect block at 0.65 %
+entering main text block at 0.93 %
+progress 89.70 %
+CMIX_CONTEXT {"kind":"alias","articles":138,"titles":136,"blocks":1,"bytes":9,"links":9056,"links_piped":1529,"links_dropped":0,"redirects":27,"from_redirect":4,"from_linktext":2}
+undoing the preprocessing ... CMIX_CONTEXT {"kind":"z3","articles":111,"usable_titles":109,"articles_with_mentions":33,"articles_with_prefix":33,"mentions_total":40,"prefix_tokens_total":1359,"chunks_total":40,"anchors":10022,"fed_tokens":1359}
+CMIX_CONTEXT {"kind":"prompt","articles":138,"redirect_prompt_pages":27,"redirect_prompt_tokens":108,"redirect_pages":27,"meta_pages":138,"alias_tokens":0,"alias_articles":0,"links":0,"links_piped":0,"redirects":0,"fed_tokens":17880}
+0.17 s.
+      763.22 real       751.12 user         4.05 sys
+          5982158848  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              388563  page reclaims
+                   8  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  61  voluntary context switches
+              401228  involuntary context switches
+       6880566187279  instructions retired
+       2480330229624  cycles elapsed
+          5994861680  peak memory footprint

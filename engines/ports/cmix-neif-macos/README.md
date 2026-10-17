@@ -89,7 +89,7 @@ so their fixed startup cost can dominate small samples.
 The [article-order investigation](../../../docs/benchmarks/2026-10-17/article-order.md)
 found that legacy fixtures retain the 71,148-page redirect-block cutoff in both
 `redirect_table.h` and `tf1_prompt.h`. Thus small fixtures stay in that block:
-ordinary page text is escaped reversibly, and every page gets a four-token
+ordinary page text is escaped reversibly, and pages after the first get a four-token
 `#rd` prompt absent from the full corpus's main-text phase. Those saved samples do not reproduce representative phase boundaries.
 
 New builds share a development-only phase patch with the Linux harness.
@@ -118,7 +118,10 @@ Upstream emits page-prefix rows after a separator, so the first page receives
 no redirect prompt: the expected count is `max(R - 1, 0)`. Tests cover zero,
 mixed and all-redirect preparation prefixes and exact inverse restoration.
 The v2 runtime-only correction is rejected because its helper still used the
-release cutoff. The v3 comparisons and instrumentation invariance check are pending.
+release cutoff. Both v3 fixtures now pass source/graph/random exact original-byte
+restoration and matching context counters. Graph order loses by 6 and 22 payload
+bytes. Disabling telemetry produces the identical 119,969-byte screen baseline.
+See the saved `benchmarks/article-order/20261017-{screen,holdout}-v3` records.
 Do not reinterpret older sizes as if their binaries or phases had changed.
 
 The patch and compressor overlays are GPL-3.0-only derivatives of the imported

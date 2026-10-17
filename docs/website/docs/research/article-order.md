@@ -129,8 +129,7 @@ higher forward-link count. This does not settle whether better ordering can
 help the full compressor. It rejects the shortcut of treating more available
 links as evidence of fewer compressed bytes.
 
-The disjoint fixture is prepared and its standard-codec controls are saved.
-Its corrected-phase cmix comparison is now running, as described below.
+The disjoint fixture's corrected-phase comparison is now verified below.
 “Disjoint” means separate from the experiment's first sample; it does not mean
 unseen by the inherited pretrained weights. No model or order was retuned from
 these measurements.
@@ -161,8 +160,28 @@ passes the same phase settings through preparation, encoding, decoding and inver
 preparation. Tests cover zero, mixed and all-redirect prefixes and exact raw
 restoration. Upstream emits prompts after page separators, so the first page
 receives no redirect prompt; the expected count is one fewer than the redirect
-prefix length when it is nonempty. The new comparisons are running, with a
-telemetry-disabled repeat to check that collecting counters preserves the archive.
+prefix length when it is nonempty.
+
+All six corrected comparisons restore the original articles exactly:
+
+| Order | First fixture payload | Change | Disjoint fixture payload | Change |
+| --- | ---: | ---: | ---: | ---: |
+| Source | 119,969 bytes | — | 118,411 bytes | — |
+| Graph | 119,975 bytes | +6 bytes | 118,433 bytes | +22 bytes |
+| Random | 120,083 bytes | +114 bytes | 118,646 bytes | +235 bytes |
+
+The [first-fixture record](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-screen-v3/report.json)
+and [disjoint record](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-holdout-v3/report.json)
+retain every trial. Graph order actually feeds more link-prefix tokens: **2,897
+instead of 2,319**, and **1,531 instead of 1,359**. Yet both payloads grow.
+This is stronger evidence than counting graph edges alone, but order also changes
+the other models' context, so it does not isolate what the link channel gains.
+The [fixed-order model tests](link-context.md) address that next question.
+
+Encoder and decoder context counters match, and all runs enter main text.
+A repeat with telemetry disabled produces the identical 119,969-byte baseline
+archive. These results establish corrected native fixture baselines; they do
+not promote this graph heuristic or establish a full-submission improvement.
 
 ## Reconstructing the competitive order
 
@@ -176,25 +195,28 @@ full-corpus compressed size is claimed.
 
 An important detail emerged: the 71,148-page front block contains 71,110 redirects
 and 38 excluded ordinary pages. Calendar pages and five other page classes also
-have prescribed placements. The next ordering comparison will use a projection
-of this exact upstream order onto our frozen article sets and preserve its
-special groups. Even that projection omits the surrounding corpus context, so a
-fixture improvement still needs a full-pipeline confirmation.
+have prescribed placements. The next comparison, now running, projects this
+exact order onto the same frozen article sets. One candidate makes a few adjacent
+link-guided swaps; another applies the graph heuristic within ordinary-page
+regions. Both preserve special positions and full-order class-region boundaries.
+The [protocol](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-projection-protocol-v1/protocol.json)
+was frozen before measuring. Even this projection omits surrounding corpus
+context, so a fixture improvement still needs full-pipeline confirmation.
 
 ## Limits that matter before promotion
 
-The baseline here is **source order**, not upstream's competitive embedding order.
-A win over source order would justify a better-controlled next experiment.
+The completed tables compare against **source order**. The separate competitive
+order projection is needed to test improvements against upstream's ordering.
 
 Code inspection found that the legacy development runner retained the full corpus's
 fixed **71,148-page redirect-block boundary**. Every legacy small fixture remained inside
 that block. Non-redirect text can still round-trip through its escaped form,
-and link processing remains present, but every page also receives a four-token
+and link processing remains present, but pages after the first receive a four-token
 `#rd` redirect-block prompt. That differs from the main-text phase of a full
 submission. These results must be identified
-as experiments with that inherited boundary. Correct fixture phase boundaries
-and actual context-token measurements are prerequisites for stronger conclusions.
-The concrete implementation checks are tracked in
+as experiments with that inherited boundary. The v3 results above correct the
+fixture phases and verify actual context-token measurements. The implementation
+and acceptance checks are tracked in
 [issue #13](https://github.com/bbondy/hutter/issues/13).
 
 Further limitations are frozen weights trained on another order, very sparse
@@ -215,9 +237,11 @@ to the common original byte stream. It refuses different models or article sets.
 python3 scripts/order_history.py list
 ```
 
-The next gates are correct fixture boundaries; a comparison against upstream's
-actual order with local changes that preserve its topical groups; actual supplied
-context counts; then Linux confirmation and, if justified, matched retraining.
+The next gates are the upstream-order comparison, controlled changes to retrieved
+context, independent confirmation of a promising candidate, then Linux ranking
+and, if justified, matched retraining. A third enwik8 range starting at byte
+80,000,000 is reserved before selection; the repeatedly used disjoint set is
+not untouched validation.
 Only a full enwik9 round trip with packaged size and resource measurements can
 support a prize claim. The [experiment playbook](experiment-playbook.md) explains
 how these gates fit the broader research plan.

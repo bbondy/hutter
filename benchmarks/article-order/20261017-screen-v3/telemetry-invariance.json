@@ -1,0 +1,44 @@
+{
+  "kind": "context-telemetry-invariance",
+  "baseline": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/order-screen-source-v3",
+  "baseline_metadata_sha256": "d479380de0a4579c3e6f938ede3e6e488516ca6b36c65f7135817bd88d0d068d",
+  "binary_sha256": "888b1baf9393401e810c68f899e84ab25ce5082cf5e69f6a8dc1816d19285adc",
+  "input_sha256": "2d9fa9da2fa92f868cf5c39a3327b1912a01ef495605921087037c4ae46b70b1",
+  "manifest_sha256": "73574c3ad2937bbed320dde21ab835127c2b439f0e0a4cbe91ff6a46f77f82fd",
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "script_sha256": "71539da6df3c7fc7e02fb8f7940bb47cd356696dfd22b15efdbd99dff8c82501",
+  "context_report": "0",
+  "compress": {
+    "command": [
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/context-invariance-v3/cmix",
+      "--native-corpus",
+      "172",
+      "127",
+      "-c",
+      "dictionary.dic",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/order-screen-v3/source.ready",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/context-invariance-v3/payload.cmix"
+    ],
+    "status": "ok",
+    "exit_code": 0,
+    "wall_seconds": 640.1602483329989,
+    "peak_rss_bytes": 6000345088,
+    "log": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/context-invariance-v3/compress.log"
+  },
+  "log_sha256": "23d9eac34ea29fc9de03ececda00fadf6e00a2a00abcf339a2ef1c531f52bece",
+  "archive_sha256": "fdd1cc09f5fb2cf5f3f8561ee1838755bf21edf3920233bde7709525eb5f9ada",
+  "archive_bytes": 119969,
+  "baseline_results_sha256": "a7c44a506ee963fdaf09cbd5b28b3c65b4dd1ebcb9cc84791fe03c6c58d69595",
+  "baseline_archive_sha256": "fdd1cc09f5fb2cf5f3f8561ee1838755bf21edf3920233bde7709525eb5f9ada",
+  "archive_matches": true,
+  "scope": "One repeated screen-source encoding; identical archive inherits its verified decoder round trip."
+}

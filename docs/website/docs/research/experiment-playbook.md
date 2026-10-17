@@ -9,7 +9,7 @@ For a small model change, ask two questions: **does the decoder still restore th
 
 ## Use samples that exercise the real pipeline
 
-The competitive candidate expects its own text preprocessing and metadata. An arbitrary byte slice from `enwik8` is not a valid dictionary-mode input. The research tooling selects complete Wikipedia articles, applies the upstream `phda9` transform and verifies that the inverse restores the selected raw bytes. A manifest records source offsets, article count, hashes and transform details. The 19-article fixture has 117,161 raw bytes and 108,927 prepared bytes. The larger 172-article fixture now has a [verified three-order comparison](article-order.md): source order produced 120,337 bytes, graph order 120,359, and the random control 120,936. All restored the same 1,033,597 original bytes. These fixture payloads are not full submission scores.
+The competitive candidate expects its own text preprocessing and metadata. An arbitrary byte slice from `enwik8` is not a valid dictionary-mode input. The research tooling selects complete Wikipedia articles, applies the upstream `phda9` transform and verifies that the inverse restores the selected raw bytes. A manifest records source offsets, article count, hashes and transform details. The 19-article fixture has 117,161 raw bytes and 108,927 prepared bytes. The corrected 172-article fixture has a [verified three-order comparison](article-order.md): source order produced 119,969 bytes, graph order 119,975, and the random control 120,083. All restored the same 1,033,597 original bytes. The disjoint fixture also rejects this graph heuristic, by 22 bytes. These fixture payloads are not full submission scores.
 
 Tiny samples help catch correctness problems. They are poor throughput tests for this engine because dictionary pretraining costs roughly 145 seconds per native encoding even on the small fixture. Use a small valid fixture for screening, then a larger and a held-out fixture before promoting a result. The repository also measured a disjoint middle-of-`enwik8` fixture with the same article-aware transform; its manifest records where extraction actually began. Its Mac/Linux size gap reversed direction from the first fixture. Change one model idea at a time and keep the baseline binary and input fixed for each paired comparison.
 
@@ -43,12 +43,14 @@ example: the old 19-page fixture has no internal exact-title links, so testing
 link-guided ordering requires the larger article set. It also exposes an inherited
 redirect-block boundary. New fixture builds parameterize it and keep redirects
 in a fixed prefix, with identical phase settings on the encoder and decoder.
-The corrected screen and disjoint comparisons are running. Preserve legacy
-results separately: a protocol change is a new baseline, not a model gain.
+The corrected screen and disjoint comparisons now pass exact original-byte
+restoration and actual context-counter checks. A telemetry-disabled encoding
+produces the identical baseline archive. Preserve legacy results separately:
+a protocol change is a new baseline, not a model gain.
 
 1. Use the saved Linux development decoder round trip as the first correctness gate; repeat it after relevant model changes.
-2. Compare actual model changes on both recorded fixtures and a larger article set. Both held-out self-decoders passed, but the two baseline fixtures alone do not tell us whether a changed model's gains transfer.
-3. Reproduce the pinned submission's full `enwik9` result and packaged size on native Linux x86-64, with exact restoration and resource measurements.
+2. Finish the frozen upstream-order comparisons and [link-context model tests](link-context.md). Reuse exact baselines and report every candidate. A third range beginning at byte 80,000,000 is reserved for confirmation if a candidate improves both existing sets; neither reused set is untouched validation.
+3. Reproduce the pinned submission's full `enwik9` result and packaged size on native Linux x86-64, with exact restoration and resource measurements. Native full-corpus dictionary derivation and upstream ordering now match exactly; the full compressed result remains unverified.
 4. Evaluate one promising predictor change against that frozen baseline. Investigate exact ARM floating-point parity where it changes a real decision; keep Linux as the scoring reference meanwhile.
 
 The [native/Linux comparison](native-parity.md) explains why those gates are separate. The [Rust experiments guide](../contribute/experiments.md) remains useful for learning codecs and testing their own archive formats.
