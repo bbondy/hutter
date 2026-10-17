@@ -36,6 +36,8 @@ def replay(manifest_path, enwik8, build, output):
     manifest["helper_sha256"] = digest(helper)
     manifest["source"] = str(enwik8.resolve())
     manifest["replay_script_sha256"] = digest(Path(__file__))
+    checks = {"source_manifest_sha256": digest(manifest_path), "helper_sha256": digest(helper),
+              "helper_arguments": flags, "samples": {}}
     for sample in manifest["samples"]:
         raw = output / (sample["variant"] + ".xml")
         ready = output / (sample["variant"] + ".ready")
@@ -43,10 +45,18 @@ def replay(manifest_path, enwik8, build, output):
         raw.write_bytes(b"".join(by_id[pid] for pid in sample["page_ids"]))
         checked_restoration(raw.read_bytes(), sample, original)
         subprocess.run([str(helper), *flags, "encode", str(raw), str(ready)], check=True)
-        if (ready.stat().st_size, digest(ready)) != (sample["bytes"], sample["sha256"]):
-            raise ValueError("platform preparation differs from frozen input")
+        row = {"bytes": ready.stat().st_size, "sha256": digest(ready),
+               "expected_bytes": sample["bytes"], "expected_sha256": sample["sha256"],
+               "original_bytes_roundtrip": False}
+        row["matches_expected"] = (row["bytes"], row["sha256"]) == (sample["bytes"], sample["sha256"])
+        checks["samples"][sample["variant"]] = row
+        (output / "replay-report.json").write_text(json.dumps(checks, indent=2) + "\n")
         subprocess.run([str(helper), *flags, "decode", str(ready), str(restored)], check=True)
         checked_restoration(restored.read_bytes(), sample, original)
+        row["original_bytes_roundtrip"] = True
+        (output / "replay-report.json").write_text(json.dumps(checks, indent=2) + "\n")
+        if not row["matches_expected"]:
+            raise ValueError("platform preparation differs from frozen input; see replay-report.json")
         sample["path"] = str(ready)
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     print("Recreated all frozen prepared bytes and restored original articles:", output)

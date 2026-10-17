@@ -12,6 +12,7 @@ from benchmark import capture
 from cmix_fixture_support import instrument_fixture, provenance
 from cmix_parity_support import SUPPORT, instrument
 from cmix_variants import VARIANTS, apply_variant
+from cmix_preprocess_support import apply_portable_preprocessing
 from competitive import ENGINE, MANIFEST, differences, inventory
 from make_samples import digest
 import native_cmix
@@ -33,6 +34,7 @@ def build(args):
     with (SUPPORT / "corpus.patch").open("rb") as patch:
         subprocess.run(["patch", "-p1", "--batch", "--fuzz=0"], cwd=source, stdin=patch, check=True)
     variant = apply_variant(source, args.variant)
+    preprocessing_support = apply_portable_preprocessing(source)
     instrument_fixture(source)
     instrument(source, portable_random=False)
     command = ["make", f"-j{args.jobs}", "CC=clang++-18", "prof_use"]
@@ -44,6 +46,7 @@ def build(args):
         "compiler": capture("clang++-18", "--version"), "command": command,
         "linker": capture("ld.lld-18", "--version"), "libc": capture("ldd", "--version"),
         "fixture_support": provenance(), "model_variant": variant,
+        "preprocessing_support": preprocessing_support,
         "initialization": "original Linux libc generator", "source_files": inventory(source),
         "support_files": inventory(SUPPORT), "script_sha256": digest(Path(__file__)),
         "scope": "Original x86 kernels, paging and upstream PGO/LTO flags. Development phases and declared model variant; no submission packaging or published-binary equivalence claim.",

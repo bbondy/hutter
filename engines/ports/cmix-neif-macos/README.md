@@ -124,6 +124,20 @@ bytes. Disabling telemetry produces the identical 119,969-byte screen baseline.
 See the saved `benchmarks/article-order/20261017-{screen,holdout}-v3` records.
 Do not reinterpret older sizes as if their binaries or phases had changed.
 
+Full-corpus comparison later exposed inherited signed overflow in two XML entity
+reductions (`k * 256 + ' '`). Apple Clang left `&lt;`/`&gt;` text unreduced where
+the Linux build reduced it. The shared `cmix_preprocess_support.py` patch makes
+those two operations explicitly unsigned in disposable Mac/Linux source copies.
+The original code triggers the signed-overflow sanitizer; the fix passes at
+`-O2` and `-Oz`. A corrected Mac helper reproduces the Linux screen input and
+restores its raw XML exactly. Full corrected Mac stream validation is pending.
+
+Earlier v1–v3 fixtures remain valid native round trips but use the old entity
+representation. Regenerate prepared fixtures and establish fresh baselines
+before comparing them with canonical Linux preparation. Treat this as a
+portability correction, not a compression-model gain. The untouched upstream
+Linux training tool already reproduces both documented full-stream hashes.
+
 The patch and compressor overlays are GPL-3.0-only derivatives of the imported
 compressor; all upstream licenses and attribution still apply. See
 `engines/cmix-neif/LICENSE`, `NOTICE.md`, `training/ATTRIBUTION.md`, and the root

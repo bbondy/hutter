@@ -18,6 +18,7 @@ from competitive import ENGINE, MANIFEST, differences, inventory
 from make_samples import digest
 from cmix_fixture_support import instrument_fixture, provenance as fixture_provenance, corpus_arguments
 from cmix_variants import VARIANTS, apply_variant, require_same_model
+from cmix_preprocess_support import apply_portable_preprocessing
 from native_cmix import PORT, WEIGHTS, write_json
 
 
@@ -78,6 +79,7 @@ def build_linux(args):
     with (SUPPORT/'corpus.patch').open('rb') as patch:
         subprocess.run(['patch','-p1','--batch'],cwd=source,stdin=patch,check=True)
     model_variant = apply_variant(source, args.variant)
+    preprocessing_support = apply_portable_preprocessing(source)
     instrument_fixture(source)
     instrument(source,portable_random=False)  # Linux uses its original libc RNG.
     name='hutter-parity-build-'+uuid.uuid4().hex[:10]
@@ -88,6 +90,7 @@ def build_linux(args):
               'source_files':inventory(source),'support_files':inventory(SUPPORT),
               'fixture_support':fixture_provenance(),
               'model_variant':model_variant,
+              'preprocessing_support':preprocessing_support,
               'container':name,'commit':capture('git','-C',str(ROOT),'rev-parse','HEAD'),
               'scope':'Original x86 kernels, Linux paging, upstream PGO/LTO/FP flags; shared corpus-count, diagnostics and the explicitly recorded model variant'}
     write_json(destination/'build.json',metadata)
@@ -249,6 +252,8 @@ def compare(args):
     native=args.native.resolve();linux=args.linux.resolve();run=args.output.resolve()
     nm=json.loads((native/'build.json').read_text());lm=json.loads((linux/'build.json').read_text())
     require_same_model(nm,lm)
+    if nm.get('preprocessing_support')!=lm.get('preprocessing_support'):
+        raise ValueError('preprocessing portability configurations differ')
     bins={'native':native/'source/cmix','linux':linux/'cmix'}
     for name,meta in [('native',nm),('linux',lm)]:
         if digest(bins[name])!=meta['binary_sha256']: raise ValueError(f'{name} binary differs from build record')

@@ -67,6 +67,8 @@ def main():
                                   build=builds[0], runs=runs, output=evidence / "comparison"))
     finally:
         # Keep partial evidence even after a compile, timeout or round-trip failure.
+        if (work / "fixture").exists():
+            shutil.copytree(work / "fixture", evidence / "fixture")
         for build in builds:
             dest = evidence / build.name
             dest.mkdir()

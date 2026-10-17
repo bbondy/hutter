@@ -12,6 +12,7 @@ from benchmark import capture, measured
 from competitive import ENGINE, MANIFEST, differences, inventory
 from make_samples import digest
 from native_cmix import PORT, SIMDE_COMMIT, write_json
+from cmix_preprocess_support import apply_portable_preprocessing
 
 ROOT = Path(__file__).resolve().parents[1]
 PATCH = ENGINE / "training/tf/1_dump/trainmodes.patch"
@@ -61,6 +62,7 @@ def run(args):
             with (out / "native-training.patch").open("rb") as patch:
                 subprocess.run(["patch", "-p1", "--batch", "--fuzz=0"], cwd=source, stdin=patch,
                                stdout=log, stderr=subprocess.STDOUT, check=True)
+    preprocessing_support = apply_portable_preprocessing(source) if args.portable_entities else None
     compiler = "clang++" if darwin else "clang++-18"
     cc = "CC=" + compiler + " -DTRAIN_MODE=1" + (" -Isrc -I../simde" if darwin else "")
     command = ["make", f"-j{args.jobs}", cc, "cmix"]
@@ -69,6 +71,7 @@ def run(args):
         "commit": capture("git", "-C", str(ROOT), "rev-parse", "HEAD"),
         "script_sha256": digest(Path(__file__)), "upstream_commit": upstream["commit"],
         "training_patch_sha256": digest(PATCH), "port_files": inventory(PORT) if darwin else {},
+        "preprocessing_support": preprocessing_support,
         "adapted_port_patch_sha256": digest(out / "native-training.patch") if darwin else None,
         "source_files": inventory(source), "simde_commit": SIMDE_COMMIT if darwin else None,
         "platform": platform.platform(), "compiler": capture(compiler, "--version"),
@@ -115,6 +118,7 @@ def main():
     for key in ("enwik9", "output"):
         parser.add_argument("--" + key, type=Path, required=True)
     parser.add_argument("--native", type=Path, help="existing native Mac build providing pinned SIMDe")
+    parser.add_argument("--portable-entities", action="store_true", help="apply the explicit unsigned XML entity arithmetic fix")
     parser.add_argument("--jobs", type=int, default=4)
     parser.add_argument("--timeout", type=float, default=1800)
     args = parser.parse_args()

@@ -17,6 +17,7 @@ from make_samples import digest
 from cmix_parity_support import instrument, SUPPORT
 from cmix_fixture_support import instrument_fixture, provenance as fixture_provenance, corpus_arguments, context_report, validate_context
 from cmix_variants import VARIANTS, apply_variant
+from cmix_preprocess_support import apply_portable_preprocessing
 
 ROOT = Path(__file__).resolve().parents[1]
 PORT = ROOT / "engines/ports/cmix-neif-macos"
@@ -55,6 +56,7 @@ def build(args):
     with (PORT / "port.patch").open("rb") as patch:
         subprocess.run(["patch", "-p1", "--batch"], cwd=source, stdin=patch, check=True)
     model_variant = apply_variant(source, args.variant)
+    preprocessing_support = apply_portable_preprocessing(source)
     instrument_fixture(source)
     instrument(source, portable_random=True)
     simde = destination / "simde"
@@ -80,6 +82,7 @@ def build(args):
         "port_files": inventory(PORT), "parity_files": inventory(SUPPORT),
         "fixture_support": fixture_provenance(),
         "model_variant": model_variant,
+        "preprocessing_support": preprocessing_support,
         "initialization": "explicit glibc-compatible generator", "source_files": inventory(source),
         "scope": "Unpacked dictionary-mode development binary; no Linux RSS clamp, PGO or submission packaging.",
     }
