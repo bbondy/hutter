@@ -62,8 +62,12 @@ Verification checks the pristine upstream files. After intentional engine edits
 it reports the changed files and exits nonzero; this is useful for distinguishing
 the reference from a candidate. `doctor` checks platform, CPU flags and tools
 without installing software. The current Apple Silicon macOS host cannot run
-this Linux x86-64-v3/AVX2/FMA implementation natively. Emulation would not establish
-prize timing. No Linux runner or paid machine has been provisioned.
+this Linux x86-64-v3/AVX2/FMA implementation natively. An emulated x86-64 Linux
+container is now available for development comparisons; its reference image
+contains `comp9` with the expected published SHA-256. The
+[parity harness](ports/cmix-neif-parity/README.md) runs article-aware fixtures
+against it. Emulated times do not establish prize eligibility, and no native
+Linux x86-64 runner has been provisioned for the full measured submission.
 
 On a suitable Linux x86-64 host, preferably the upstream Ubuntu 24.04 environment:
 
