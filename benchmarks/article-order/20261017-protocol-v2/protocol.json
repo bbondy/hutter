@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "implementation_commit": "ceb877de5ce451d12dbd0e8393a45a172f7420d2",
+  "reason": "Correct fixture redirect/main-text phases before interpreting ordering results.",
+  "selection": "Same frozen raw page sets as v1. No new sample selection or score-based retuning.",
+  "ordering": "Upstream exact redirect prefixes fixed in source order; SCC/greedy order only on ordinary induced graph; seed 20261017.",
+  "scope": "Native development baseline; 16-byte configuration header counted; external assets and executables excluded.",
+  "gates": [
+    "same binary/assets and phase parameters within each trio",
+    "exact archive/prepared/raw hashes and original-order restoration",
+    "matching encoder/decoder context counters and declared redirect prompt pages",
+    "main-text phase reached",
+    "telemetry-on/off payload equality on screen source"
+  ],
+  "limitations": [
+    "not upstream embedding/residual order",
+    "frozen pretrained weights",
+    "one trial per order; source telemetry-off repeat only",
+    "concurrent times are exploratory",
+    "Linux candidate ranking and full prize pipeline still separate gates"
+  ]
+}

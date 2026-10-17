@@ -45,7 +45,7 @@ optimal-order claim.
 
 The upstream author explicitly lists ordering for greater link-context
 availability as untested and notes the possible need for transformer retraining.
-See the imported [README's link-context and article-order sections](https://github.com/bbondy/hutter/blob/research/article-order/engines/cmix-neif/README.md).
+See the imported [README's link-context and article-order sections](https://github.com/bbondy/hutter/blob/main/engines/cmix-neif/README.md).
 
 ## The controlled experiment
 
@@ -80,7 +80,7 @@ compressed size.
 A graph-only audit of all **12,346 complete pages in enwik8** finds a mutually
 reachable component containing **5,726 pages**. Grouping cycles therefore leaves
 a substantial internal-order problem. The
-[saved audit](https://github.com/bbondy/hutter/blob/research/article-order/benchmarks/article-order/20261017-graph-audit-v2/enwik8.json)
+[saved audit](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-graph-audit-v2/enwik8.json)
 records its source bounds and hashes. This was not a full-corpus compression run.
 
 ## How the decoder restores the original
@@ -110,11 +110,11 @@ Negative means smaller. Ordering is not uniformly beneficial: it can improve one
 model's locality while hurting another's. These controls do not have cmix's
 link-context model and cannot establish what causes a cmix improvement.
 
-## Native cmix screen
+## Legacy native cmix screen
 
 All three native decoders passed. Inverse preprocessing and page-ID sorting then
 restored the same **1,033,597 original bytes** for every variant. The
-[verified comparison](https://github.com/bbondy/hutter/blob/research/article-order/benchmarks/article-order/20261017-screen-v1/report.json)
+[verified comparison](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-screen-v1/report.json)
 retains the hashes, manifest and process logs. These are single trials; repeated
 encoding determinism and Linux candidate ranking were not tested here.
 
@@ -130,18 +130,40 @@ help the full compressor. It rejects the shortcut of treating more available
 links as evidence of fewer compressed bytes.
 
 The disjoint fixture is prepared and its standard-codec controls are saved.
-We defer its expensive cmix run until correcting the phase limitation below.
+Its corrected-phase cmix comparison is now running, as described below.
 “Disjoint” means separate from the experiment's first sample; it does not mean
 unseen by the inherited pretrained weights. No model or order was retuned from
 these measurements.
+
+## Corrected phase experiment
+
+The new fixture mode declares both the total article count and the length of the
+redirect prefix. It applies the same boundary in the preprocessor and model,
+and writes the counts in a 16-byte development header. The decoder rejects a
+configuration mismatch before pretraining. Those 16 bytes count toward every
+reported fixture payload.
+
+We kept the same two raw article sets. Each order now starts with the same
+redirect pages in source order; only ordinary articles move. The screen contains
+127 redirects and 45 ordinary articles. The disjoint fixture contains 28 redirects
+and 110 ordinary articles. The graph algorithm operates on the movable ordinary
+subgraph; the random seed stays fixed. This creates a new baseline rather than
+revising the historical measurements.
+
+The model now reports actual incoming-link prefix tokens fed, redirect prompts
+and alias context. Verification requires equal encoder/decoder counters, the
+expected number of redirect prompts and entry into main text. The six corrected
+native round trips are running, alongside a telemetry-disabled repeat that checks
+whether collecting these counters leaves the archive unchanged. Results will be
+saved with the [v2 protocol](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-protocol-v2/protocol.json).
 
 ## Limits that matter before promotion
 
 The baseline here is **source order**, not upstream's competitive embedding order.
 A win over source order would justify a better-controlled next experiment.
 
-Code inspection also found that the development runner retains the full corpus's
-fixed **71,148-page redirect-block boundary**. Every small fixture remains inside
+Code inspection found that the legacy development runner retained the full corpus's
+fixed **71,148-page redirect-block boundary**. Every legacy small fixture remained inside
 that block. Non-redirect text can still round-trip through its escaped form,
 and link processing remains present, but every page also receives a four-token
 `#rd` redirect-block prompt. That differs from the main-text phase of a full
@@ -159,7 +181,7 @@ component in enwik9.
 
 ## Keep the evidence and choose the next experiment
 
-The [research protocol and saved records](https://github.com/bbondy/hutter/blob/research/article-order/docs/benchmarks/2026-10-17/article-order.md)
+The [research protocol and saved records](https://github.com/bbondy/hutter/blob/main/docs/benchmarks/2026-10-17/article-order.md)
 retain source ranges, page hashes, all permutations, graph counts, binary and
 asset hashes, and codec results. The comparison verifier additionally checks
 the actual archive, decoded prepared bytes, inverse preprocessing and restoration

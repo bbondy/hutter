@@ -98,10 +98,10 @@ next experiment, not a claim of beating upstream or winning the prize.
 ```sh
 python3 scripts/article_order.py prepare \
   --enwik8 data/enwik8 --build build/native-parity-v1 \
-  --output build/order-screen-v1
+  --output build/order-screen-v1 --phase-mode legacy
 python3 scripts/article_order.py prepare \
   --enwik8 data/enwik8 --build build/native-parity-v1 \
-  --output build/order-holdout-v1 --start-offset 49000000 --role holdout
+  --output build/order-holdout-v1 --phase-mode legacy --start-offset 49000000 --role holdout
 python3 scripts/native_cmix.py bench \
   build/order-screen-v1/source.ready \
   --build build/native-parity-v1 --manifest build/order-screen-v1/manifest.json \
@@ -218,3 +218,24 @@ remove the very cross-article structure being tested.
 Decoding took 612 seconds per variant, with about 150 seconds of dictionary
 pretraining. Peak reported resident memory was approximately 6.0 GB per process.
 No Linux ranking confirmation or full-submission package result is claimed.
+
+## Corrected phase protocol (v2)
+
+The [v2 protocol](../../../benchmarks/article-order/20261017-protocol-v2/protocol.json)
+retains both original raw page sets. Redirects move into one fixed prefix using
+upstream's literal classifier; only the remaining ordinary pages are permuted.
+The screen has 127 redirects and 45 ordinary articles; the disjoint fixture has
+28 redirects and 110 ordinary articles. Source/graph/random forward-link counts
+are now 42/54/44 and 34/38/34 respectively. These are new baselines.
+
+The shared development patch parameterizes both redirect-cutoff consumers.
+`--native-corpus N R` is required on both sides, with an explicit 16-byte header
+that stores N and R and is included in payload sizes. The full-corpus defaults
+and old `--native-pages` behavior remain available. Header mismatch checks run
+before pretraining. The exact pinned upstream source is unchanged.
+
+Read-only JSON reports expose actual transformer link-prefix tokens fed, prompt
+counts and alias-channel activity. Accepted comparisons require matching encoder
+and decoder counters, the declared redirect prompt count and main-text entry.
+Six native round trips, a telemetry-disabled repeat of screen source and a
+shared Linux build are running; no corrected size result is claimed yet.

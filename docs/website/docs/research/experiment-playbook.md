@@ -11,11 +11,11 @@ For a small model change, ask two questions: **does the decoder still restore th
 
 The competitive candidate expects its own text preprocessing and metadata. An arbitrary byte slice from `enwik8` is not a valid dictionary-mode input. The research tooling selects complete Wikipedia articles, applies the upstream `phda9` transform and verifies that the inverse restores the selected raw bytes. A manifest records source offsets, article count, hashes and transform details. The 19-article fixture has 117,161 raw bytes and 108,927 prepared bytes. The larger 172-article fixture now has a [verified three-order comparison](article-order.md): source order produced 120,337 bytes, graph order 120,359, and the random control 120,936. All restored the same 1,033,597 original bytes. These fixture payloads are not full submission scores.
 
-Tiny samples help catch correctness problems. They are poor throughput tests for this engine because dictionary pretraining costs roughly 145 seconds per native encoding even on the small fixture. Use a small valid fixture for screening, then a larger and a held-out fixture before promoting a result. The research branch also measured a disjoint middle-of-`enwik8` fixture with the same article-aware transform; its manifest records where extraction actually began. Its Mac/Linux size gap reversed direction from the first fixture. Change one model idea at a time and keep the baseline binary and input fixed for each paired comparison.
+Tiny samples help catch correctness problems. They are poor throughput tests for this engine because dictionary pretraining costs roughly 145 seconds per native encoding even on the small fixture. Use a small valid fixture for screening, then a larger and a held-out fixture before promoting a result. The repository also measured a disjoint middle-of-`enwik8` fixture with the same article-aware transform; its manifest records where extraction actually began. Its Mac/Linux size gap reversed direction from the first fixture. Change one model idea at a time and keep the baseline binary and input fixed for each paired comparison.
 
 ## Save enough to reproduce a result
 
-For every run, retain the input hash and preprocessing manifest, binary hash, source revision and patch, compiler and flags, dictionary and weight hashes, exact command, payload bytes, encode/decode times, peak memory and round-trip outcome. Save failed trials too: a mismatch is evidence about where a change stopped working. The research branch has [benchmark history](https://github.com/bbondy/hutter/blob/research/native-mac/benchmarks/README.md) for codec trials and a separate [parity harness](https://github.com/bbondy/hutter/blob/research/native-mac/engines/ports/cmix-neif-parity/README.md) for cross-platform checks. Large trace streams stay local; reports and hashes are committed to Git.
+For every run, retain the input hash and preprocessing manifest, binary hash, source revision and patch, compiler and flags, dictionary and weight hashes, exact command, payload bytes, encode/decode times, peak memory and round-trip outcome. Save failed trials too: a mismatch is evidence about where a change stopped working. The repository has [benchmark history](https://github.com/bbondy/hutter/blob/main/benchmarks/README.md) for codec trials and a separate [parity harness](https://github.com/bbondy/hutter/blob/main/engines/ports/cmix-neif-parity/README.md) for cross-platform checks. Large trace streams stay local; reports and hashes are committed to Git.
 
 The saved parity reports are readable as a small table:
 
@@ -41,8 +41,10 @@ For performance claims, run several comparable trials on an idle machine. Do not
 The [cycle-inspired article-order experiment](article-order.md) adds a concrete
 example: the old 19-page fixture has no internal exact-title links, so testing
 link-guided ordering requires the larger article set. It also exposes an inherited
-redirect-block boundary that must be corrected before treating small fixtures
-as representative of the full pipeline.
+redirect-block boundary. New fixture builds parameterize it and keep redirects
+in a fixed prefix, with identical phase settings on the encoder and decoder.
+The corrected screen and disjoint comparisons are running. Preserve legacy
+results separately: a protocol change is a new baseline, not a model gain.
 
 1. Use the saved Linux development decoder round trip as the first correctness gate; repeat it after relevant model changes.
 2. Compare actual model changes on both recorded fixtures and a larger article set. Both held-out self-decoders passed, but the two baseline fixtures alone do not tell us whether a changed model's gains transfer.
@@ -51,4 +53,4 @@ as representative of the full pipeline.
 
 The [native/Linux comparison](native-parity.md) explains why those gates are separate. The [Rust experiments guide](../contribute/experiments.md) remains useful for learning codecs and testing their own archive formats.
 
-There are two tempting dead ends. Shrinking a fixture to a few bytes does not remove dictionary pretraining, so it barely speeds up an experiment. Making every Apple Silicon floating-point calculation identical to the x86 build could be a large project; begin with the measured first difference and spend that effort only when it improves the research loop. The current candidate also has upstream [attribution and licensing questions](https://github.com/bbondy/hutter/blob/research/native-mac/engines/cmix-neif/training/ATTRIBUTION.md#7-open-points) that need review before distributing a derived submission.
+There are two tempting dead ends. Shrinking a fixture to a few bytes does not remove dictionary pretraining, so it barely speeds up an experiment. Making every Apple Silicon floating-point calculation identical to the x86 build could be a large project; begin with the measured first difference and spend that effort only when it improves the research loop. The current candidate also has upstream [attribution and licensing questions](https://github.com/bbondy/hutter/blob/main/engines/cmix-neif/training/ATTRIBUTION.md#7-open-points) that need review before distributing a derived submission.

@@ -56,6 +56,15 @@ class HistoryTests(unittest.TestCase):
         different = {**self.row, "archive_sha256": "different-archive"}
         self.assertFalse(aggregates(self.run_dir("unstable", [self.row, different])))
 
+    def test_phase_mismatch_and_invalid_context_cannot_win(self):
+        before = self.run_dir("legacy", [self.row])
+        after = self.run_dir("corrected", [self.row])
+        (before / "metadata.json").write_text(json.dumps({"native_arguments": ["--native-pages", "19"]}))
+        (after / "metadata.json").write_text(json.dumps({"native_arguments": ["--native-corpus", "19", "4"]}))
+        with self.assertRaisesRegex(ValueError, "phase arguments"):
+            compare(before, after)
+        self.assertFalse(aggregates(self.run_dir("context-failure", [{**self.row, "context_valid": False}])))
+
     def test_invalid_manifest_and_id_leave_no_history(self):
         source = self.run_dir("run", [self.row])
         manifest = self.root / "manifest.json"

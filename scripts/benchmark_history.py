@@ -50,7 +50,7 @@ def aggregates(run):
         groups.setdefault(key, []).append(row)
     result = {}
     for key, rows in groups.items():
-        if any(not r["roundtrip"] or not r.get("repeat_matches", True) for r in rows):
+        if any(not r["roundtrip"] or not r.get("repeat_matches", True) or not r.get("context_valid", True) for r in rows):
             continue
         if len({r["archive_sha256"] for r in rows}) != 1:
             continue
@@ -70,6 +70,8 @@ def compare(before, after):
     if not keys:
         raise ValueError("no matching verified input SHA-256 + codec pairs")
     meta_old, meta_new = [json.loads((p / "metadata.json").read_text()) for p in (before, after)]
+    if meta_old.get("native_arguments") != meta_new.get("native_arguments"):
+        raise ValueError("native corpus phase arguments differ; establish a new baseline")
     print("Negative deltas are improvements. Only exact input SHA-256 + codec matches are compared.")
     if any(meta_old.get(k) != meta_new.get(k) for k in ("cpu", "platform", "machine")):
         print("WARNING: machines/platforms differ; time and memory deltas are not controlled comparisons.")
