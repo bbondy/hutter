@@ -130,3 +130,23 @@ prepared bytes. These codecs do not have cmix's link-context model.
 This establishes that graph order is not uniformly better across codecs. Even
 XZ's small direction changes between fixtures. These controls cannot predict
 cmix's result or establish that an improvement comes from link context.
+
+## Pipeline limitation found while the screen ran
+
+The development binaries parameterize metadata article count but retain the
+full-corpus redirect-block cutoff of **71,148 pages**. See
+`src/redirect_table.h:redirect_block` and
+`src/tf1/tf1_prompt.h:CoderPrompt::ImRedirectBlock` in the pinned engine.
+`page_form.h` uses the former to escape non-redirect text inside that block;
+the prompt code uses the latter to choose metadata placement. The running
+fixtures all log entry into the redirect block and never reach main text.
+
+This does not by itself break reversibility or turn off all link processing.
+It does mean that these scores describe the inherited small-fixture pipeline,
+not a representative main-text phase of the full submission. Retain the first
+screen for evidence, but correct fixture phase boundaries and measure actual
+supplied context before expensive full-corpus or retraining work. Do not silently
+replace the existing binary and compare the resulting size change as an ordering
+gain. Earlier parity round-trip findings remain valid for their saved binaries.
+The correction and telemetry acceptance checks are tracked in
+[issue #13](https://github.com/bbondy/hutter/issues/13).
