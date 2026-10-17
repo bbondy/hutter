@@ -91,9 +91,14 @@ initialization and full probability trace. Its measured wall time was 226.50
 seconds; see the [native decoder record](../../../benchmarks/parity/20261017-middle-native-selfdecode-v1/report.json).
 That decoder began while the paired Linux encoder was still running. Its report
 retains the interim source-report hash and explicitly verifies that the finalized
-paired report kept the identical native encoder phase. The Linux self-decoder for
-this fixture is still running, so the paired encoding result alone is not an
-exact-restoration claim for the Linux payload.
+paired report kept the identical native encoder phase. The Linux self-decoder
+also restored all 154,286 prepared bytes, matched its encoder's initialization
+and every probability event, and passed its recorded validation. It took
+1,044.36 wall seconds under emulation, with maximum resident set size
+6,200,600 KiB as reported by `/usr/bin/time -v`. See the
+[Linux decoder record](../../../benchmarks/parity/20261017-middle-linux-selfdecode-v1/report.json).
+These are separate same-platform round trips; the differing Mac and Linux
+archives have not been cross-decoded.
 
 The native trace-disabled run produced the identical 15,221-byte payload and
 passed decompression. Inverse phda9 reconstruction restored all 117,161 raw bytes
@@ -150,10 +155,10 @@ predictor starts identically.
    Its development decoder passed the first fixture. Reproduce the complete
    enwik9 pipeline and packaged score on native x86-64 Linux, with runtime and
    peak-memory checks.
-2. Complete the Linux self-decoder check on the held-out fixture. Evaluate
-   larger article sets and actual model changes on both platforms. A reversed
-   two-fixture size gap does not demonstrate that a model change's gains transfer.
-   Confirm every promising Mac experiment against Linux.
+2. Evaluate larger article sets and actual model changes on both platforms.
+   Both held-out self-decoders passed, but a reversed two-fixture size gap does
+   not demonstrate that a model change's gains transfer. Confirm every
+   promising Mac experiment against Linux.
 3. Use the first numerical divergence to estimate the cost of exact ARM parity.
    Avoid making a complete floating-point portability rewrite a prerequisite
    for compression research. The existing Linux environment can run authoritative
