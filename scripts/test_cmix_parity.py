@@ -1,8 +1,10 @@
 from pathlib import Path
+import json
+import hashlib
 import tempfile
 import unittest
 
-from cmix_parity import first_difference, validate_trace
+from cmix_parity import decode_source, first_difference, validate_trace
 
 
 class ParityTests(unittest.TestCase):
@@ -68,6 +70,31 @@ class ParityTests(unittest.TestCase):
             self.assertTrue(validate_trace(root,event_limit=3))
             (root/'detail.bin').write_bytes(b'abc')
             self.assertTrue(validate_trace(root,event_limit=2))
+
+    def test_decoder_rejects_modified_encoder_artifacts(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            prepared=root/'prepared';prepared.write_bytes(b'sample')
+            encoded=root/'linux-encode';encoded.mkdir()
+            payload=encoded/'output';payload.write_bytes(b'archive')
+            trace=encoded/'probabilities.bin';trace.write_bytes(b'12345678')
+            initial=encoded/'initial.bin';initial.write_bytes(b'state')
+            sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+            manifest={'page_count':19,'samples':[{'bytes':6,'sha256':sha(prepared)}]}
+            phase={'status':'ok','input_sha256':sha(prepared),'files':{
+                name:{'sha256':sha(encoded/name)} for name in ('output','probabilities.bin','initial.bin')}}
+            (root/'report.json').write_text(json.dumps({'manifest':manifest,'phases':{'linux-encode':phase}}))
+            self.assertEqual(decode_source(root,'linux',prepared,manifest)[2],payload)
+            payload.write_bytes(b'changed')
+            with self.assertRaisesRegex(ValueError,'payload differs'):
+                decode_source(root,'linux',prepared,manifest)
+            payload.write_bytes(b'archive')
+            trace.write_bytes(b'changed')
+            with self.assertRaisesRegex(ValueError,'trace differs'):
+                decode_source(root,'linux',prepared,manifest)
+            trace.write_bytes(b'12345678')
+            with self.assertRaisesRegex(ValueError,'manifest differs'):
+                decode_source(root,'linux',prepared,{**manifest,'page_count':20})
 
 
 if __name__ == '__main__':

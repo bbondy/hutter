@@ -293,12 +293,90 @@ def compare(args):
     return 0 if report['passed'] else 1
 
 
+def decode_source(source_run, platform, prepared, manifest):
+    """Resolve a completed encode using its saved hashes, not a loose payload."""
+    report=json.loads((source_run/'report.json').read_text())
+    key=platform+'-encode'
+    encoded=report['phases'][key]
+    payload=source_run/key/'output'
+    sample_sha=digest(prepared)
+    if not any(s['sha256']==sample_sha and s['bytes']==prepared.stat().st_size
+               for s in manifest['samples']):
+        raise ValueError('prepared sample does not match manifest')
+    if report['manifest']!=manifest:
+        raise ValueError('sample manifest differs from source run')
+    if encoded['status']!='ok' or encoded['input_sha256']!=sample_sha:
+        raise ValueError('source run did not successfully encode this sample')
+    if not payload.is_file() or digest(payload)!=encoded['files']['output']['sha256']:
+        raise ValueError('encoded payload differs from source run record')
+    trace=source_run/key/'probabilities.bin'
+    if not trace.is_file() or digest(trace)!=encoded['files']['probabilities.bin']['sha256']:
+        raise ValueError('encoder probability trace differs from source run record')
+    initial=source_run/key/'initial.bin'
+    if not initial.is_file() or digest(initial)!=encoded['files']['initial.bin']['sha256']:
+        raise ValueError('encoder initial state differs from source run record')
+    return report, encoded, payload, trace
+
+
+def decode(args):
+    source_run=args.source_run.resolve()
+    prepared=args.input.resolve()
+    manifest=json.loads(args.manifest.read_text())
+    origin, encoded, payload, encoder_trace=decode_source(source_run,args.platform,prepared,manifest)
+    build=args.build.resolve()
+    metadata=json.loads((build/'build.json').read_text())
+    binary=build/('source/cmix' if args.platform=='native' else 'cmix')
+    if digest(binary)!=metadata['binary_sha256'] or encoded['binary_sha256']!=metadata['binary_sha256']:
+        raise ValueError('decoder binary does not match the encoded run')
+    for asset in (WEIGHTS,'dictionary/english.dic'):
+        if digest(ENGINE/asset)!=metadata['source_files'][asset]['sha256']:
+            raise ValueError(f'build asset changed: {asset}')
+    ref=reference(args)
+    if ref['image_id']!=origin['reference']['image_id']:
+        raise ValueError('reference image changed since encoding')
+    if args.platform=='linux' and ref['image_id']!=metadata['reference']['image_id']:
+        raise ValueError('Linux build image changed since encoding')
+    run=args.output.resolve()
+    run.mkdir(parents=True,exist_ok=False)
+    report={'date_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            'commit':capture('git','-C',str(ROOT),'rev-parse','HEAD'),
+            'scope':'same-platform decoder validation', 'reference':ref,
+            'source_run':str(source_run),'source_report_sha256':digest(source_run/'report.json'),
+            'encoder_phase':encoded,'encoder_trace_sha256':digest(encoder_trace),
+            'build':metadata,'manifest':manifest,'runner_sha256':digest(Path(__file__)),
+            'prepared_sha256':digest(prepared),'payload_sha256':digest(payload)}
+    write_json(run/'report.json',report)
+    row=phase(args,args.platform,binary,ref['image_id'],run/'decode','-d',payload,manifest['page_count'])
+    restored=run/'decode/output'
+    row['roundtrip']=row['status']=='ok' and restored.is_file() and digest(restored)==digest(prepared)
+    if row['status']=='ok':
+        row['initial_matches_encoder']=first_difference(run/'decode/initial.bin',source_run/(args.platform+'-encode')/'initial.bin',4) is None
+        row['trace_matches_encoder']=first_difference(run/'decode/probabilities.bin',encoder_trace,8) is None
+    else:
+        row['initial_matches_encoder']=False
+        row['trace_matches_encoder']=False
+    report['decoder_phase']=row
+    report['passed']=all(row.get(k,False) for k in ('roundtrip','initial_matches_encoder','trace_matches_encoder'))
+    write_json(run/'report.json',report)
+    if args.record:
+        target=ROOT/'benchmarks/parity'/args.record
+        target.mkdir(parents=True,exist_ok=False)
+        for name in ('report.json','decode/process.log','decode/initial.jsonl'):
+            source=run/name
+            shutil.copyfile(source,target/name.replace('/','-'))
+    print(json.dumps({'passed':report['passed'],'roundtrip':row['roundtrip'],
+                      'initial_matches_encoder':row['initial_matches_encoder'],
+                      'trace_matches_encoder':row['trace_matches_encoder'],
+                      'wall_seconds':row['wall_seconds']},indent=2))
+    return 0 if report['passed'] else 1
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--context',default='colima-hutter')
     p.add_argument('--image',default='hutter-cmix-neif:baseline')
     sub=p.add_subparsers(dest='command',required=True)
-    for name in ('rng','build-linux','compare'):
+    for name in ('rng','build-linux','compare','decode'):
         sp=sub.add_parser(name);sp.add_argument('--output',type=Path,required=True)
         if name!='rng':sp.add_argument('--timeout',type=float,default=7200)
         if name=='compare':
@@ -306,6 +384,13 @@ def main():
             sp.add_argument('--manifest',type=Path,required=True);sp.add_argument('--input',type=Path,required=True)
             sp.add_argument('--init-only',action='store_true');sp.add_argument('--record')
             sp.add_argument('--event-limit',type=int,default=0,help='diagnostic prefix only, with model-stage snapshots; no valid payload')
+        if name=='decode':
+            sp.add_argument('--platform',choices=('native','linux'),required=True)
+            sp.add_argument('--build',type=Path,required=True)
+            sp.add_argument('--source-run',type=Path,required=True)
+            sp.add_argument('--manifest',type=Path,required=True)
+            sp.add_argument('--input',type=Path,required=True)
+            sp.add_argument('--record')
     args=p.parse_args()
     if getattr(args,'timeout',1)<=0:p.error('timeout must be positive')
     if getattr(args,'event_limit',0)<0:p.error('event limit must be nonnegative')
@@ -314,7 +399,7 @@ def main():
         import re
         if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]*',args.record):p.error('invalid record ID')
         if (ROOT/'benchmarks/parity'/args.record).exists():p.error('record already exists')
-    try:return {'rng':rng,'build-linux':build_linux,'compare':compare}[args.command](args)
+    try:return {'rng':rng,'build-linux':build_linux,'compare':compare,'decode':decode}[args.command](args)
     except (OSError,ValueError,subprocess.SubprocessError) as e:p.exit(1,str(e)+'\n')
 
 

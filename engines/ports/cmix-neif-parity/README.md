@@ -29,6 +29,14 @@ python3 scripts/cmix_parity.py compare \
   --input build/parity-sample/articles.ready \
   --manifest build/parity-sample/manifest.json \
   --output build/parity-full --record parity-full
+
+# A failed cross-platform encoding comparison can still validate either
+# platform's decoder against its own completed archive without recompression:
+python3 scripts/cmix_parity.py decode \
+  --platform linux --build build/linux-parity --source-run build/parity-full \
+  --input build/parity-sample/articles.ready \
+  --manifest build/parity-sample/manifest.json \
+  --output build/linux-self-decode --record linux-self-decode
 ```
 
 Use `--context NAME --image IMAGE` before the subcommand to override the default
@@ -70,6 +78,9 @@ prefixes match the ordinary builds before interpreting the added instrumentation
 `benchmarks/parity/ID`. Large binaries, state dumps and event streams remain in
 the local build directory. Failed completed comparisons are retained too. A
 partially interrupted run keeps its phase records in its output directory.
+The decoder-only command verifies the saved encoder archive and trace hashes,
+then compares restored bytes, initial state and every decoder event against its
+own encoder. It does not imply cross-platform decoding when encodings differ.
 
 A fixture pass would establish compatibility only for that fixture. Before
 claiming a comparable competitive baseline, test larger and held-out article
