@@ -1,0 +1,19 @@
+{
+  "date_utc": "2026-10-17T17:12:14.516467+00:00",
+  "commit": "98217887abd1abfc99aa0a41a7ae8b4b49e9b425",
+  "git_status": "M .gitignore\n M Makefile\n M README.md\n M docs/wikimix5.md\n M src/main.rs\n?? scripts/",
+  "platform": "macOS-15.3.1-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "cpu": "Apple M4 Max",
+  "rustc": "rustc 1.93.1 (01f6ddf75 2026-02-11)\nbinary: rustc\ncommit-hash: 01f6ddf7588f42ae2d7eb0a2f21d44e8e96674cf\ncommit-date: 2026-02-11\nhost: aarch64-apple-darwin\nrelease: 1.93.1\nLLVM version: 21.1.8",
+  "binary": "/Users/bbondy/projects/bbondy/hutter/target/release/hutter-starter",
+  "binary_bytes": 724656,
+  "binary_sha256": "7cf68a2316c6942d427296da78d285ccb5eb2602d7a054e0fc9a6335d2f763dc",
+  "rustflags": "",
+  "timeout_seconds": 120.0,
+  "repeats": 1,
+  "external_binary_sha256": {
+    "bzip2": "32849305cef6d514f0b1ba8c09b60442763437172c2d7949d015b6d50df2edbb",
+    "xz": "c9dcafa572798a90870e71dd211c303aa7b7d4b7a01b8cb51c5402b133ca1698"
+  }
+}

@@ -1,75 +1,30 @@
-# WikiMix-5
+# WikiMix-5 status
 
-`WikiMix-5` is a future mixed-model codec for this repo. It is additive work only: the existing byte-level `ppm-o1` through `ppm-o6` codecs and bit-level `ppm-bit-o1` through `ppm-bit-o6` codecs stay as they are.
+`wikimix5` is an implemented experimental byte coder, not a design skeleton.
+See [the research plan](research-plan.md) for measured limitations and priorities.
 
-## Codebase mapping
+[src/wikimix.rs](../src/wikimix.rs) combines five predictors: byte contexts up to
+order six, a syntax state, recent words/current prefix, a four-byte keyed matcher,
+and character classes. It arithmetic-codes a candidate or an escape followed by
+a uniform byte. All predictors update from already-coded bytes.
 
-- [`src/ppm.rs`](/Users/brianbondy/projects/bbondy/hutter/src/ppm.rs) remains the byte-context baseline and the source for arithmetic-coding machinery.
-- [`src/lz77.rs`](/Users/brianbondy/projects/bbondy/hutter/src/lz77.rs) is the starting point for a probabilistic match model.
-- [`src/codec.rs`](/Users/brianbondy/projects/bbondy/hutter/src/codec.rs) is the right place to add `WikiMix-5` later, as a new codec, without touching the current PPM variants.
-- [`src/wikimix.rs`](/Users/brianbondy/projects/bbondy/hutter/src/wikimix.rs) now holds the compileable model skeleton.
+The current mixer multiplies raw candidate counts by fixed weights
+`[14, 8, 5, 10, 6]`, adds them, and keeps twelve candidates. It neither selects
+only one winner nor learns normalized model weights. Individual context models
+also discard all but their top two or three symbols. These choices lose useful
+probability mass and can make escapes very costly as counts grow.
 
-## Top-level interface
+Before adding more models:
 
-`WikiMix5Model` owns:
+1. Measure each predictor's coding loss and the contribution of each to the mix.
+2. Use complete, smoothed distributions or a calibrated escape/backoff path.
+3. Compare adaptive linear and logistic mixing with conservative initialization.
+4. Bound context tables and match history. The current `window` is not a global
+   memory bound: retained data and keys keep growing, and stale positions in
+   other buckets are not removed on every byte.
+5. Promote only improvements that survive independent slices and longer runs.
 
-- `ByteHistory`
-- `BytePpmModel`
-- `StructStateModel`
-- `WordModel`
-- `MatchModel`
-- `ClassModel`
-- `Mixer`
-
-The intended coding loop is the same synchronized online pattern used by the current PPM code:
-
-1. gather predictions from all submodels,
-2. mix them into one next-byte distribution,
-3. arithmetic-code the chosen byte,
-4. update every submodel with the actual byte.
-
-## Five models
-
-### `BytePpmModel`
-
-- Reuse the current `ppm` ideas: byte contexts, backoff, adaptive counts.
-- Stop rebuilding history from the full prefix each symbol.
-- Use `ByteHistory` directly.
-
-### `StructStateModel`
-
-- Detect XML tags, wiki links, templates, tables, headings, entities, URLs, numbers, and UTF-8 regions.
-- Maintain per-state next-byte counts.
-- Give syntax bytes much more context than plain text.
-
-### `WordModel`
-
-- Track recent token-like words and current word prefix.
-- Bias predictions for article prose, tag names, and frequent schema words like `title` or `revision`.
-
-### `MatchModel`
-
-- Convert the current LZ idea from hard token output into next-byte prediction from recent matches.
-- Start simple, then replace naive scanning with a hashed matcher.
-
-### `ClassModel`
-
-- Handle patterned classes: dates, years, ISBN-like strings, URLs, entities, UTF-8 continuations.
-- Predict by character class first, then byte.
-
-## Mixer plan
-
-The placeholder mixer in [`src/wikimix.rs`](/Users/brianbondy/projects/bbondy/hutter/src/wikimix.rs) just picks the strongest weighted candidate. The real version should:
-
-- take one normalized byte distribution from each model,
-- combine them with adaptive weights,
-- update those weights online using coding loss on the actual byte.
-
-## Implementation order
-
-1. Extract reusable arithmetic coding from [`src/ppm.rs`](/Users/brianbondy/projects/bbondy/hutter/src/ppm.rs).
-2. Make `BytePpmModel` real.
-3. Add a hashed `MatchModel`.
-4. Fill in `StructStateModel`.
-5. Fill in `ClassModel`.
-6. Add `WordModel` last.
+The simpler `ppmd` codec is the initial Rust reference. A byte model lives in
+[byte_ppm.rs](../src/byte_ppm.rs); [ppm.rs](../src/ppm.rs) contains bit contexts
+(orders count bits). Arithmetic-coder consolidation can follow captured archive
+fixtures; it should not precede useful compression experiments.
