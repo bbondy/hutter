@@ -13,10 +13,15 @@ ENWIK9_SHA1 ?= 2996e86fb978f93cca8f566cc56998923e7fe581
 BENCH_INPUT ?= data/samples/prefix-100k
 BENCH_OUTPUT ?= build/benchmark
 BENCH_ARGS ?=
+COMPETITIVE_OUTPUT ?= build/competitive/cmix-neif
 
 .PHONY: build test fmt clean roundtrip bench help corpora data-files enwik8 enwik9 verify-enwik8 verify-enwik9 samples bench-suite
+.PHONY: competitive-verify competitive-doctor competitive-build
 
 help:
+	@echo "make competitive-verify       Verify the pinned competitive engine source"
+	@echo "make competitive-doctor       Check Linux x86-64 build requirements"
+	@echo "make competitive-build        Build the competitive engine into a fresh output directory"
 	@echo "make build                    Compile the Rust CLI"
 	@echo "make test                     Run unit tests"
 	@echo "make fmt                      Format the code"
@@ -38,6 +43,15 @@ help:
 
 build:
 	cargo build --release
+
+competitive-verify:
+	python3 scripts/competitive.py verify
+
+competitive-doctor:
+	python3 scripts/competitive.py doctor
+
+competitive-build:
+	python3 scripts/competitive.py build --output "$(COMPETITIVE_OUTPUT)"
 
 test:
 	cargo test

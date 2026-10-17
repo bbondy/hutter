@@ -1,5 +1,11 @@
 # Hutter Prize research plan — 2026-10-17
 
+**Decision after review:** winning is the primary objective. We have selected
+cmix-neif 1.0 as the competitive implementation and vendored its pinned source
+into this repo. See [engine setup and reproduction](../engines/README.md).
+The original analysis below remains useful context, but reproducing the upstream
+baseline now takes priority over making the Rust implementation competitive.
+
 ## Recommendation
 
 Keep the Rust code as a small experiment lab. Make reproducing and improving a

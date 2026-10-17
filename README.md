@@ -1,8 +1,24 @@
 # Hutter Prize
 
-This repo is a workspace for experimenting toward a future Hutter Prize submission in Rust.
+This repository's objective is to win the Hutter Prize. The primary implementation
+track is now a pinned, source-vendored **cmix-neif 1.0** in
+[`engines/cmix-neif/`](engines/cmix-neif/). Our Rust codecs remain an experiment lab.
 
-It is not competitive yet. The current repo contains several small experimental codecs:
+Start with [the competitive-engine workflow](engines/README.md):
+
+```sh
+make competitive-verify
+make competitive-doctor
+# On the required Linux x86-64 host:
+make competitive-build COMPETITIVE_OUTPUT=build/competitive/baseline-001
+```
+
+The imported compressor is GPL-3.0-only with upstream notices retained; the
+original lab/tooling remains MIT. See [license scope](LICENSE-SCOPE.md), including
+the upstream documented open points. The competitive baseline has not yet been
+built or benchmarked locally.
+
+The Rust lab is not competitive yet. It contains several small experimental codecs:
 
 - adaptive block Huffman
 - order-1 adaptive block Huffman
