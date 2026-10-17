@@ -17,6 +17,7 @@ from cmix_parity_support import ROOT, SUPPORT, instrument
 from competitive import ENGINE, MANIFEST, differences, inventory
 from make_samples import digest
 from cmix_fixture_support import instrument_fixture, provenance as fixture_provenance, corpus_arguments
+from cmix_variants import VARIANTS, apply_variant, require_same_model
 from native_cmix import PORT, WEIGHTS, write_json
 
 
@@ -76,6 +77,7 @@ def build_linux(args):
     shutil.copyfile(PORT/'overlay/src/native_corpus.h', source/'src/native_corpus.h')
     with (SUPPORT/'corpus.patch').open('rb') as patch:
         subprocess.run(['patch','-p1','--batch'],cwd=source,stdin=patch,check=True)
+    model_variant = apply_variant(source, args.variant)
     instrument_fixture(source)
     instrument(source,portable_random=False)  # Linux uses its original libc RNG.
     name='hutter-parity-build-'+uuid.uuid4().hex[:10]
@@ -85,8 +87,9 @@ def build_linux(args):
     metadata={'reference':ref,'upstream_commit':upstream['commit'],'command':command,
               'source_files':inventory(source),'support_files':inventory(SUPPORT),
               'fixture_support':fixture_provenance(),
+              'model_variant':model_variant,
               'container':name,'commit':capture('git','-C',str(ROOT),'rev-parse','HEAD'),
-              'scope':'Original x86 kernels, Linux paging, upstream PGO/LTO/FP flags; shared corpus-count and diagnostics only'}
+              'scope':'Original x86 kernels, Linux paging, upstream PGO/LTO/FP flags; shared corpus-count, diagnostics and the explicitly recorded model variant'}
     write_json(destination/'build.json',metadata)
     try:
         docker(args,'cp',source,f'{cid}:/work/source')
@@ -245,6 +248,7 @@ def phase(args, platform, binary, image_id, trial, mode, input_file, page_count,
 def compare(args):
     native=args.native.resolve();linux=args.linux.resolve();run=args.output.resolve()
     nm=json.loads((native/'build.json').read_text());lm=json.loads((linux/'build.json').read_text())
+    require_same_model(nm,lm)
     bins={'native':native/'source/cmix','linux':linux/'cmix'}
     for name,meta in [('native',nm),('linux',lm)]:
         if digest(bins[name])!=meta['binary_sha256']: raise ValueError(f'{name} binary differs from build record')
@@ -429,6 +433,7 @@ def main():
     for name in ('rng','build-linux','compare','decode'):
         sp=sub.add_parser(name);sp.add_argument('--output',type=Path,required=True)
         if name!='rng':sp.add_argument('--timeout',type=float,default=7200)
+        if name=='build-linux':sp.add_argument('--variant',choices=VARIANTS,default='baseline')
         if name=='compare':
             sp.add_argument('--native',type=Path,required=True);sp.add_argument('--linux',type=Path,required=True)
             sp.add_argument('--manifest',type=Path,required=True);sp.add_argument('--input',type=Path,required=True)

@@ -16,6 +16,7 @@ from competitive import ENGINE, MANIFEST, differences, inventory
 from make_samples import digest
 from cmix_parity_support import instrument, SUPPORT
 from cmix_fixture_support import instrument_fixture, provenance as fixture_provenance, corpus_arguments, context_report, validate_context
+from cmix_variants import VARIANTS, apply_variant
 
 ROOT = Path(__file__).resolve().parents[1]
 PORT = ROOT / "engines/ports/cmix-neif-macos"
@@ -44,6 +45,7 @@ def build(args):
     shutil.copytree(PORT / "overlay", source, dirs_exist_ok=True)
     with (PORT / "port.patch").open("rb") as patch:
         subprocess.run(["patch", "-p1", "--batch"], cwd=source, stdin=patch, check=True)
+    model_variant = apply_variant(source, args.variant)
     instrument_fixture(source)
     instrument(source, portable_random=True)
     simde = destination / "simde"
@@ -68,6 +70,7 @@ def build(args):
         "compiler": capture("clang++", "--version"), "command": command,
         "port_files": inventory(PORT), "parity_files": inventory(SUPPORT),
         "fixture_support": fixture_provenance(),
+        "model_variant": model_variant,
         "initialization": "explicit glibc-compatible generator", "source_files": inventory(source),
         "scope": "Unpacked dictionary-mode development binary; no Linux RSS clamp, PGO or submission packaging.",
     }
@@ -231,6 +234,7 @@ def main():
     compile_parser = sub.add_parser("build")
     compile_parser.add_argument("--output", type=Path, default=ROOT / "build/native-cmix")
     compile_parser.add_argument("--jobs", type=int, default=8)
+    compile_parser.add_argument("--variant", choices=VARIANTS, default="baseline")
     sample = sub.add_parser("samples")
     sample.add_argument("--enwik8", type=Path, default=ROOT / "data/enwik8")
     sample.add_argument("--build", type=Path, default=ROOT / "build/native-cmix")

@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "hypothesis": "Test whether fixed-weight link-context selection benefits these sparse projected-order fixtures. Change one parameter at a time.",
+  "variants": {
+    "baseline": {
+      "budget": 256,
+      "chunk": 64
+    },
+    "z3-budget128": {
+      "budget": 128,
+      "chunk": 64
+    },
+    "z3-chunk32": {
+      "budget": 256,
+      "chunk": 32
+    },
+    "z3-off": {
+      "budget": 0,
+      "chunk": 64
+    }
+  },
+  "unchanged": "Frozen transformer weights, dictionary, all other model parameters, corrected fixture phases, and exact upstream-projected input order.",
+  "input_variant": "upstream",
+  "fixtures": {
+    "screen": {
+      "manifest_sha256": "827e4d74cb9cb38113735c2c30b3e6e4eda3ae9d476d44b64bbf58174386efbc",
+      "input_sha256": "a6f0571934c4b1ac5cad55528c91e8f0f3f10873155840c622023512ce6422a0"
+    },
+    "holdout": {
+      "manifest_sha256": "17fac4a0fa4cb16fe4812221420bca943cf7981d38042ce6e66df3db27bdaa73",
+      "input_sha256": "626b4eb54494636779e10cd85ff287f7a84b5478504173a916c681c8920cb64b"
+    }
+  },
+  "runner_control": {
+    "baseline_commit": "bfdf3173cd305e02bdaeb006cd36064ef034a296",
+    "bench_function_ast_unchanged": true,
+    "bench_function_ast_sha256": "8f67354bb7e238ffc7b90a0de6e1035fc92a136aa8096ec865f20905f4ae4277",
+    "changes": "Build-only variant options and provenance; native bench implementation unchanged."
+  },
+  "acceptance": [
+    "Prepared and exact original raw bytes restored",
+    "Encoder and decoder context counters agree",
+    "z3-off feeds zero link-prefix tokens",
+    "Same platform/assets/input/phase arguments; source changes confined to declared header parameters",
+    "Report all three candidates on both reused fixtures, including regressions"
+  ],
+  "promotion": "Only candidates improving both reused fixtures proceed to the predeclared 80,000,000-byte-offset confirmation range; Linux ranking and full package accounting are still required.",
+  "limitations": [
+    "Fixed weights were trained with upstream defaults; this is inference-time ablation, not retraining.",
+    "Small sparse projections may misrank behavior on dense full-corpus context.",
+    "Single concurrent trials measure payload size; time is exploratory.",
+    "Disabling link prefixes does not remove the mention index or establish a RAM optimization."
+  ]
+}
