@@ -72,6 +72,17 @@ model matches token sequences, has context limits and can match title prefixes.
 On the first larger fixture, graph order adds twelve forward links but only two
 additional pages gain any prior incoming link: 26 instead of 24.
 
+There are also 11 reciprocal pairs: if A links to B and B links to A, one link
+must point backward. This caps the first fixture at at most 55 forward links;
+the heuristic reaches 54. Near-maximizing that proxy still need not improve
+compressed size.
+
+A graph-only audit of all **12,346 complete pages in enwik8** finds a mutually
+reachable component containing **5,726 pages**. Grouping cycles therefore leaves
+a substantial internal-order problem. The
+[saved audit](https://github.com/bbondy/hutter/blob/research/article-order/benchmarks/article-order/20261017-graph-audit-v2/enwik8.json)
+records its source bounds and hashes. This was not a full-corpus compression run.
+
 ## How the decoder restores the original
 
 All selected source pages have unique, increasing page IDs. After decoding and
@@ -99,6 +110,31 @@ Negative means smaller. Ordering is not uniformly beneficial: it can improve one
 model's locality while hurting another's. These controls do not have cmix's
 link-context model and cannot establish what causes a cmix improvement.
 
+## Native cmix screen
+
+All three native decoders passed. Inverse preprocessing and page-ID sorting then
+restored the same **1,033,597 original bytes** for every variant. The
+[verified comparison](https://github.com/bbondy/hutter/blob/research/article-order/benchmarks/article-order/20261017-screen-v1/report.json)
+retains the hashes, manifest and process logs. These are single trials; repeated
+encoding determinism and Linux candidate ranking were not tested here.
+
+| Order | Payload bytes | Change from source |
+| --- | ---: | ---: |
+| Source | 120,337 | — |
+| Graph | 120,359 | +22 bytes (+0.018%) |
+| Random | 120,936 | +599 bytes (+0.498%) |
+
+The tested graph heuristic does not improve the first fixture, despite its
+higher forward-link count. This does not settle whether better ordering can
+help the full compressor. It rejects the shortcut of treating more available
+links as evidence of fewer compressed bytes.
+
+The disjoint fixture is prepared and its standard-codec controls are saved.
+We defer its expensive cmix run until correcting the phase limitation below.
+“Disjoint” means separate from the experiment's first sample; it does not mean
+unseen by the inherited pretrained weights. No model or order was retuned from
+these measurements.
+
 ## Limits that matter before promotion
 
 The baseline here is **source order**, not upstream's competitive embedding order.
@@ -107,10 +143,13 @@ A win over source order would justify a better-controlled next experiment.
 Code inspection also found that the development runner retains the full corpus's
 fixed **71,148-page redirect-block boundary**. Every small fixture remains inside
 that block. Non-redirect text can still round-trip through its escaped form,
-and link processing remains present, but formatting and prompt placement differ
-from the main-text phase of a full submission. These results must be identified
+and link processing remains present, but every page also receives a four-token
+`#rd` redirect-block prompt. That differs from the main-text phase of a full
+submission. These results must be identified
 as experiments with that inherited boundary. Correct fixture phase boundaries
 and actual context-token measurements are prerequisites for stronger conclusions.
+The concrete implementation checks are tracked in
+[issue #13](https://github.com/bbondy/hutter/issues/13).
 
 Further limitations are frozen weights trained on another order, very sparse
 within-sample links, and the native/Linux numerical differences described in
