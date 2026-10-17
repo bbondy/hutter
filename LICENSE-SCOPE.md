@@ -12,7 +12,8 @@ upstream notices and provide the corresponding source when distributing it as
 required by those terms.
 
 The compressor patch, C++ drivers and overlays in
-`engines/ports/cmix-neif-macos/` are GPL-3.0-only derivatives. The independent
+`engines/ports/cmix-neif-macos/` and `engines/ports/cmix-neif-parity/` are
+GPL-3.0-only derivatives. The independent
 Python build/benchmark orchestration remains under the root MIT license. SIMDe
 is fetched at a pinned revision for native builds and retains its MIT license
 and notices in the build directory.

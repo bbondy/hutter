@@ -69,10 +69,12 @@ compared directly to a complete Hutter submission score.
 Cross-decoding and payload comparisons with the pinned Linux x86-64 build remain
 necessary: floating-point/code-generation differences can change this adaptive
 coder's stream. A Mac round trip alone cannot establish x86 compatibility.
-There is also a confirmed initialization difference: the LSTM and indirect-map
-setup use libc `rand()`, whose sequence differs between Darwin and Linux/glibc.
-This first feasibility port retains Darwin's sequence. Matching the release's
-initialization and checking numerical parity is tracked in
+The first feasibility build used Darwin's libc `rand()`, which differs from
+Linux/glibc. New builds use an explicit glibc-compatible generator and include
+optional initialization and coder-probability diagnostics. See the
+[parity harness](../cmix-neif-parity/README.md) for reproducible checks and saved
+results. Matching initialization alone does not establish numerical parity;
+the remaining comparison is tracked in
 [issue #10](https://github.com/bbondy/hutter/issues/10). Do not interpret native
 payloads as reproductions of the published Linux sizes.
 Likewise, these samples preserve original article order and omit the census and

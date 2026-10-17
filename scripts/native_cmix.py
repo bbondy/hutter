@@ -14,6 +14,7 @@ from benchmark import capture, measured
 from benchmark_history import record
 from competitive import ENGINE, MANIFEST, differences, inventory
 from make_samples import digest
+from cmix_parity_support import instrument, SUPPORT
 
 ROOT = Path(__file__).resolve().parents[1]
 PORT = ROOT / "engines/ports/cmix-neif-macos"
@@ -42,6 +43,7 @@ def build(args):
     shutil.copytree(PORT / "overlay", source, dirs_exist_ok=True)
     with (PORT / "port.patch").open("rb") as patch:
         subprocess.run(["patch", "-p1", "--batch"], cwd=source, stdin=patch, check=True)
+    instrument(source, portable_random=True)
     simde = destination / "simde"
     subprocess.run(["git", "init", "-q", str(simde)], check=True)
     subprocess.run(["git", "-C", str(simde), "fetch", "--depth=1", SIMDE_URL, SIMDE_COMMIT], check=True)
@@ -62,7 +64,8 @@ def build(args):
         "upstream_commit": upstream["commit"], "simde_commit": SIMDE_COMMIT,
         "simde_url": SIMDE_URL, "platform": platform.platform(), "machine": platform.machine(),
         "compiler": capture("clang++", "--version"), "command": command,
-        "port_files": inventory(PORT), "source_files": inventory(source),
+        "port_files": inventory(PORT), "parity_files": inventory(SUPPORT),
+        "initialization": "explicit glibc-compatible generator", "source_files": inventory(source),
         "scope": "Unpacked dictionary-mode development binary; no Linux RSS clamp, PGO or submission packaging.",
     }
     started = time.monotonic()

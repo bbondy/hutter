@@ -1,5 +1,10 @@
 # Benchmark history
 
+Native/Linux compatibility checks are stored separately under `parity/<id>/`.
+They retain initialization, probability-stream and cross-decoding outcomes,
+including failed comparisons. See the [parity harness](../engines/ports/cmix-neif-parity/README.md).
+These are correctness records, not eligible full-corpus prize scores.
+
 Keep small experiment records in Git under `runs/<unique-id>/`. Each record has
 the original metadata and JSONL trials, a note, and optionally the source patch
 and corpus manifest. Run IDs cannot be overwritten. Large archives, executable
