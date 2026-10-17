@@ -7,9 +7,9 @@ description: Lossless compression concepts, codec implementations, and developme
 
 # Hutter compression guide
 
-This site explains lossless compression using the codecs in the [Hutter Rust repository](https://github.com/bbondy/hutter). It covers the underlying concepts, the implementation of each codec, the archive formats, and how to make and test changes. It assumes no prior knowledge of compression.
+This site explains lossless compression using the codecs in the [Hutter repository](https://github.com/bbondy/hutter). It covers the underlying concepts, the Rust implementation of each teaching codec, the archive formats, and how to make and test changes. A separate research section follows the project's competitive Hutter Prize candidate. It assumes no prior knowledge of compression.
 
-The repository is an experimental workspace for the [Hutter Prize](https://prize.hutter1.net/). Its codecs work on arbitrary byte files, but the project is not yet a competitive prize submission.
+The repository is an experimental workspace for the [Hutter Prize](https://prize.hutter1.net/). The Rust codecs work on arbitrary byte files. The current research branch studies a pinned published compressor, but the project has not reproduced a full prize-valid result locally.
 
 ## Read in order
 
@@ -28,6 +28,8 @@ The [course sequence](course/path.md) starts with files and bits, then explains 
 | Understand the project layout and follow the code | [Codebase overview](codebase/overview.md), then [follow one file](codebase/flow.md) |
 | Find a module or make a change | [Source map](codebase/map.md) and [developer onboarding](contribute/onboarding.md) |
 | Read the source but are new to Rust | [Rust notation used here](codebase/rust-primer.md) |
+| Understand the competitive candidate and measured Mac/Linux comparison | [Competitive research track](research/competitive-baseline.md), then [native/Linux case study](research/native-parity.md) |
+| Plan and save a compression experiment | [Experiment playbook](research/experiment-playbook.md) |
 
 ## What the codecs have in common
 

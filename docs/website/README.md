@@ -1,6 +1,6 @@
 # Compression guide website
 
-This is the Docusaurus course for [Hutter compression experiments](https://github.com/bbondy/hutter). The [course sequence](docs/course/path.md) orders the concepts from bytes and lossless reconstruction through the codecs, then separates source-code reading and contributor material. Chapters use worked explanations rather than exercises. The interactive examples are simplified; the Rust source defines the actual codecs.
+This is the Docusaurus course for [Hutter compression experiments](https://github.com/bbondy/hutter). The [course sequence](docs/course/path.md) orders the concepts from bytes and lossless reconstruction through the codecs, then separates source-code reading and contributor material. The [prize research section](docs/research/competitive-baseline.md) explains the current competitive candidate, measured native/Linux comparison and experiment workflow. Chapters use worked explanations rather than exercises. The interactive examples are simplified; the Rust source defines the teaching codecs.
 
 ## Run locally
 

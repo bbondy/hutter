@@ -7,6 +7,8 @@ description: Compare codecs without losing correctness, and understand what the 
 
 Compression research has two separate questions: **does it restore the exact bytes?** and **does it improve a useful metric?** Check correctness first. A smaller archive is meaningless if it changes the data.
 
+This page uses the Rust CLI and its archive formats. For the published candidate and its article-aware Wikipedia samples, see the [prize experiment playbook](../research/experiment-playbook.md) and the [native/Linux case study](../research/native-parity.md).
+
 ## A simple experiment loop
 
 ```sh
