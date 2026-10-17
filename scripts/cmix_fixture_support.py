@@ -5,13 +5,14 @@ import re
 
 from make_samples import digest
 
-CAPABILITY = "corpus-frame-v2-context-v1"
+CAPABILITY = "corpus-frame-v2-context-v1-preparer-v2"
 HEADER = Path(__file__).resolve().parents[1] / "engines/ports/cmix-neif-macos/overlay/src/native_corpus.h"
 
 
 def provenance():
     return {"capability": CAPABILITY, "header_sha256": digest(HEADER),
-            "instrumenter_sha256": digest(Path(__file__))}
+            "instrumenter_sha256": digest(Path(__file__)),
+            "preparer_source_sha256": digest(HEADER.parents[2] / "prepare_sample.cpp")}
 
 
 def corpus_arguments(manifest, build=None):
@@ -23,6 +24,9 @@ def corpus_arguments(manifest, build=None):
     redirects = manifest["redirect_prefix_count"]
     if type(redirects) is not int or not 0 <= redirects <= count:
         raise ValueError("invalid development redirect prefix")
+    expected = ["--native-corpus", str(count), str(redirects)]
+    if manifest.get("helper_arguments") != expected:
+        raise ValueError("fixture helper must use the same declared corpus phases as the coder")
     if build is not None and build.get("fixture_support", {}).get("capability") != CAPABILITY:
         raise ValueError("build lacks corrected corpus phases and context telemetry")
     return ["--native-corpus", str(count), str(redirects)]
@@ -43,7 +47,10 @@ def context_report(path):
 def validate_context(encode, decode, manifest):
     if set(encode) != {"z3", "prompt", "alias"} or encode != decode:
         raise ValueError("missing or unequal encoder/decoder context reports")
-    if encode["prompt"]["redirect_prompt_pages"] != manifest["redirect_prefix_count"]:
+    # Upstream emits page-prefix prompts AFTER a page separator. The first
+    # article has no preceding separator, so it receives no redirect prompt.
+    expected_prompts = max(0, manifest["redirect_prefix_count"] - 1)
+    if encode["prompt"]["redirect_prompt_pages"] != expected_prompts:
         raise ValueError("redirect prompt boundary differs from fixture")
     if encode["prompt"]["articles"] != manifest["page_count"]:
         raise ValueError("observed article count differs from fixture")

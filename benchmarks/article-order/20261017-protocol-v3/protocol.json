@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "supersedes": "20261017-protocol-v2",
+  "reason": "Pass the same redirect cutoff to standalone phda9 preparation/inverse and coder; v2 configured only the coder.",
+  "selection": "Identical original raw page sets, order algorithm and seed to v2.",
+  "first_page": "Upstream page-prefix prompts are emitted after separators. The first page gets no redirect prompt: expected max(R-1,0). Preserve this behavior.",
+  "helper_gate": "Exact --native-corpus N R helper arguments must match coder arguments; verify prepared and original raw restoration.",
+  "baseline": "fixed redirect prefix, source-ID ordinary pages; not the competitive embedding/residual order",
+  "scope": "Development payload includes 16-byte header; executable and assets excluded; concurrent timing exploratory."
+}

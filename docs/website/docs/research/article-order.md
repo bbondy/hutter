@@ -152,10 +152,17 @@ revising the historical measurements.
 
 The model now reports actual incoming-link prefix tokens fed, redirect prompts
 and alias context. Verification requires equal encoder/decoder counters, the
-expected number of redirect prompts and entry into main text. The six corrected
-native round trips are running, alongside a telemetry-disabled repeat that checks
-whether collecting these counters leaves the archive unchanged. Results will be
-saved with the [v2 protocol](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-protocol-v2/protocol.json).
+expected number of redirect prompts and entry into main text. The first runtime-only correction caught another issue: the standalone phda9
+helper still used the release cutoff and added unnecessary escapes to ordinary
+article bodies. That batch is retained as rejected diagnostic evidence.
+
+The [v3 protocol](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-protocol-v3/protocol.json)
+passes the same phase settings through preparation, encoding, decoding and inverse
+preparation. Tests cover zero, mixed and all-redirect prefixes and exact raw
+restoration. Upstream emits prompts after page separators, so the first page
+receives no redirect prompt; the expected count is one fewer than the redirect
+prefix length when it is nonempty. The new comparisons are running, with a
+telemetry-disabled repeat to check that collecting counters preserves the archive.
 
 ## Limits that matter before promotion
 

@@ -9,8 +9,20 @@
 #include "readalike_prepr/phda9_preprocess.h"
 
 int main(int argc, char** argv) {
+  const bool configured = argc > 1 && !strcmp(argv[1], "--native-corpus");
+  if (configured) {
+    if (argc != 7 || !native_corpus::Number(argv[2], &native_corpus::page_count) ||
+        !native_corpus::page_count || !native_corpus::Number(argv[3], &native_corpus::redirect_count) ||
+        native_corpus::redirect_count > native_corpus::page_count) {
+      fprintf(stderr, "helper requires --native-corpus N R with pages 1..243425, redirects 0..pages\n");
+      return 2;
+    }
+    argc -= 3;
+    for (int i = 1; i < argc; ++i) argv[i] = argv[i + 3];
+    argv[argc] = nullptr;
+  }
   if (argc != 4 || (strcmp(argv[1], "encode") && strcmp(argv[1], "decode"))) {
-    fprintf(stderr, "usage: prepare-sample encode|decode input output\n");
+    fprintf(stderr, "usage: prepare-sample [--native-corpus N R] encode|decode input output\n");
     return 2;
   }
   FILE* in = fopen(argv[2], "rb");
@@ -25,7 +37,12 @@ int main(int argc, char** argv) {
     rewind(in);
     decode_txt_wit(in, out, n);
   }
+  const long long pages = !strcmp(argv[1], "encode") ? g1_seiten : g1_rc_dseiten;
   bool failed = ferror(in) || ferror(out);
+  if (configured && pages != (long long)native_corpus::PageCount()) {
+    fprintf(stderr, "helper page count differs: %lld observed, %u declared\n", pages, native_corpus::PageCount());
+    failed = true;
+  }
   if (fclose(in)) failed = true;
   if (fclose(out)) failed = true;
   return failed ? 1 : 0;

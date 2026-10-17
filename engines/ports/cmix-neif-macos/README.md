@@ -102,16 +102,23 @@ The header is included in reported payload bytes. Release defaults (243,425 /
 `article_order.py prepare` now defaults to corrected mode: identify redirects
 using upstream's exact raw XML line prefixes, keep them in source order at the
 front, and vary only ordinary articles. The manifest records the prefix count.
-Use `--phase-mode legacy` only to reproduce historical fixtures. Existing
+The same `--native-corpus N R` arguments reach the standalone phda9 helper and
+its inverse; this matters because that helper performs the page-form redirect
+transform before the runtime coder sees the data. Manifests retain both sets of
+arguments and verification rejects mismatches. Use `--phase-mode legacy` only to reproduce historical fixtures. Existing
 `native_cmix.py samples` still produces legacy original-order fixtures.
 
 Corrected-mode logs include read-only `CMIX_CONTEXT` JSON for transformer link
 prefixes (including actually fed tokens), redirect/metadata prompts and the byte
 model's alias channel. Benchmark verification requires matching encoder/decoder
-counters, the declared redirect prompt count and entry into main text whenever
+counters, the expected redirect prompt count and entry into main text whenever
 ordinary articles exist. `CMIX_CONTEXT_REPORT=0` suppresses reports for a
 telemetry-invariance check; normal benchmark verification requires reports.
-The full corrected comparisons and instrumentation invariance check are pending.
+Upstream emits page-prefix rows after a separator, so the first page receives
+no redirect prompt: the expected count is `max(R - 1, 0)`. Tests cover zero,
+mixed and all-redirect preparation prefixes and exact inverse restoration.
+The v2 runtime-only correction is rejected because its helper still used the
+release cutoff. The v3 comparisons and instrumentation invariance check are pending.
 Do not reinterpret older sizes as if their binaries or phases had changed.
 
 The patch and compressor overlays are GPL-3.0-only derivatives of the imported

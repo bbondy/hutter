@@ -85,7 +85,7 @@ def summarize(args):
                     if digest(path) != info["sha256"] or path.stat().st_size != info["bytes"]:
                         raise ValueError("trial asset differs from recorded build")
                 raw = Path(tmp) / f"{name}.xml"
-                subprocess.run([str(helper), "decode", str(restored), str(raw)], check=True)
+                subprocess.run([str(helper), *manifest.get("helper_arguments", []), "decode", str(restored), str(raw)], check=True)
                 final_sha = checked_restoration(raw.read_bytes(), sample, manifest)
                 log_hashes = {}
                 for phase in ("compress", "decompress"):

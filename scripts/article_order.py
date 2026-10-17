@@ -14,6 +14,7 @@ import re
 import subprocess
 
 from make_samples import digest
+from cmix_fixture_support import CAPABILITY
 
 PAGE = re.compile(rb"  <page>\n.*?  </page>\n", re.S)
 LINK = re.compile(r"\[\[([^\[\]|#\n]+)")
@@ -199,7 +200,7 @@ def prepare(args):
     orders, metrics = orders_for(pages, args.seed, fixed_redirects=fixed)
     destination.mkdir(parents=True, exist_ok=False)
     manifest = {
-        "version": 2 if fixed else 1, "kind": "article-order-fixture", "role": args.role,
+        "version": 3 if fixed else 1, "kind": "article-order-fixture", "role": args.role,
         "source": str(source), "source_sha256": sha(data), "source_bytes": len(data),
         "source_requested_offset": args.start_offset, "source_offset": start, "source_end": end,
         "raw_bytes": len(raw), "raw_sha256": sha(raw), "page_count": len(pages),
@@ -218,15 +219,16 @@ def prepare(args):
     if fixed:
         manifest.update(redirect_prefix_count=sum(is_redirect(p) for p in pages),
                         redirect_classifier="upstream article_reorder.h exact raw line prefixes",
-                        phase_protocol="corpus-frame-v2-context-v1",
+                        phase_protocol=CAPABILITY,
+                        helper_arguments=["--native-corpus", str(len(pages)), str(sum(is_redirect(p) for p in pages))],
                         development_header_bytes=16,
                         baseline="fixed redirect prefix, then ordinary pages in source page-ID order; NOT upstream embedding/residual order")
     for name, order in orders.items():
         ordered = b"".join(pages[i]["raw"] for i in order)
         xml, ready, restored = [destination / f"{name}.{ext}" for ext in ("xml", "ready", "restored.xml")]
         xml.write_bytes(ordered)
-        subprocess.run([str(helper), "encode", str(xml), str(ready)], check=True)
-        subprocess.run([str(helper), "decode", str(ready), str(restored)], check=True)
+        subprocess.run([str(helper), *manifest.get("helper_arguments", []), "encode", str(xml), str(ready)], check=True)
+        subprocess.run([str(helper), *manifest.get("helper_arguments", []), "decode", str(ready), str(restored)], check=True)
         if restored.read_bytes() != ordered or restore_source(restored.read_bytes()) != raw:
             raise ValueError(f"{name} preprocessing and source restoration failed")
         manifest["samples"].append({"variant": name, "path": str(ready), "bytes": ready.stat().st_size,

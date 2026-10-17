@@ -14,7 +14,7 @@ from competitive import ENGINE
 
 class FixtureSupportTests(unittest.TestCase):
     def test_manifest_configuration_and_build_compatibility(self):
-        good = {"page_count": 10, "redirect_prefix_count": 2}
+        good = {"page_count": 10, "redirect_prefix_count": 2, "helper_arguments": ["--native-corpus", "10", "2"]}
         build = {"fixture_support": {"capability": CAPABILITY}}
         self.assertEqual(corpus_arguments(good, build), ["--native-corpus", "10", "2"])
         self.assertEqual(corpus_arguments({"page_count": 10}, {}), ["--native-pages", "10"])
@@ -24,9 +24,11 @@ class FixtureSupportTests(unittest.TestCase):
                 corpus_arguments(bad, build)
         with self.assertRaises(ValueError):
             corpus_arguments(good, {})
+        with self.assertRaisesRegex(ValueError, "fixture helper"):
+            corpus_arguments({"page_count": 10, "redirect_prefix_count": 2}, build)
 
     def test_context_requires_equal_counts_and_correct_phase(self):
-        report = {"z3": {"fed_tokens": 20}, "prompt": {"articles": 10, "redirect_prompt_pages": 2},
+        report = {"z3": {"fed_tokens": 20}, "prompt": {"articles": 10, "redirect_prompt_pages": 1},
                   "alias": {"bytes": 5}}
         manifest = {"page_count": 10, "redirect_prefix_count": 2}
         validate_context(report, copy.deepcopy(report), manifest)
@@ -111,3 +113,60 @@ int main(int argc, char** argv) {
         for n, r in (('0', '0'), ('243426', '0'), ('7', '8'), ('-1', '0'), (' 7', '0'), ('7', '-1')):
             self.assertEqual(self.invoke('--native-corpus', n, r, '-c', 'dict', 'in', archive), 2)
         self.assertEqual(self.invoke('--native-corpus', 7), 2)
+
+
+@unittest.skipUnless(shutil.which('clang++'), 'requires C++17 compiler')
+class PreparationPhaseTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = tempfile.TemporaryDirectory()
+        cls.root = Path(cls.tmp.name)
+        source = cls.root / 'source'
+        shutil.copytree(ENGINE, source)
+        shutil.copyfile(HEADER, source / 'src/native_corpus.h')
+        instrument_fixture(source)
+        cls.binary = cls.root / 'prepare-sample'
+        subprocess.run(['clang++', '-O1', '-std=c++17', '-I' + str(source / 'src'),
+                        str(HEADER.parents[2] / 'prepare_sample.cpp'), '-o', str(cls.binary)],
+                       check=True, capture_output=True)
+        def page(pid, title, text):
+            return (f'  <page>\n    <title>{title}</title>\n    <id>{pid}</id>\n'
+                    f'    <revision>\n      <id>{100+pid}</id>\n'
+                    '      <timestamp>2005-01-01T00:00:00Z</timestamp>\n'
+                    '      <contributor>\n        <username>Tester</username>\n'
+                    '        <id>42</id>\n      </contributor>\n'
+                    f'      <text xml:space="preserve">{text}</text>\n'
+                    '    </revision>\n  </page>\n').encode()
+        cls.raw = cls.root / 'raw.xml'
+        cls.raw.write_bytes(page(1, 'Redirect', '#REDIRECT [[Target]]')
+                            + page(2, 'Target', 'Ordinary body [[Third]].')
+                            + page(3, 'Third', 'Another ordinary body.'))
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmp.cleanup()
+
+    def invoke(self, *args):
+        return subprocess.run([str(self.binary), *map(str, args)], capture_output=True)
+
+    def test_phase_configuration_reaches_text_transform_and_inverse(self):
+        outputs = {}
+        for redirects in (0, 1, 3):
+            flags = ['--native-corpus', 3, redirects]
+            ready, restored = self.root / f'{redirects}.ready', self.root / f'{redirects}.xml'
+            self.assertEqual(self.invoke(*flags, 'encode', self.raw, ready).returncode, 0)
+            self.assertEqual(self.invoke(*flags, 'decode', ready, restored).returncode, 0)
+            self.assertEqual(restored.read_bytes(), self.raw.read_bytes())
+            outputs[redirects] = ready.read_bytes()
+        self.assertIn(b'#REDIRECT', outputs[0])
+        self.assertNotIn(b'#REDIRECT', outputs[1])
+        self.assertNotIn(b'\x01Ordinary body', outputs[1])
+        self.assertIn(b'\x01Ordinary body', outputs[3])
+        legacy = self.root / 'legacy.ready'
+        self.assertEqual(self.invoke('encode', self.raw, legacy).returncode, 0)
+        self.assertEqual(legacy.read_bytes(), outputs[3])
+
+    def test_helper_rejects_incorrect_declared_page_count(self):
+        result = self.invoke('--native-corpus', 4, 1, 'encode', self.raw, self.root / 'wrong.ready')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn(b'3 observed, 4 declared', result.stderr)

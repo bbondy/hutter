@@ -43,6 +43,7 @@ class ParityHistoryTests(unittest.TestCase):
         old = fixture(self.example())
         report = self.example()
         report['manifest']['redirect_prefix_count'] = 2
+        report['manifest']['helper_arguments'] = ['--native-corpus', '19', '2']
         new = fixture(report)
         with self.assertRaisesRegex(ValueError, 'corpus_arguments'):
             comparable(old, new)

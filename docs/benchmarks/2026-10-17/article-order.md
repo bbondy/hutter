@@ -219,7 +219,7 @@ Decoding took 612 seconds per variant, with about 150 seconds of dictionary
 pretraining. Peak reported resident memory was approximately 6.0 GB per process.
 No Linux ranking confirmation or full-submission package result is claimed.
 
-## Corrected phase protocol (v2)
+## Runtime-only phase attempt (v2, rejected)
 
 The [v2 protocol](../../../benchmarks/article-order/20261017-protocol-v2/protocol.json)
 retains both original raw page sets. Redirects move into one fixed prefix using
@@ -239,3 +239,22 @@ counts and alias-channel activity. Accepted comparisons require matching encoder
 and decoder counters, the declared redirect prompt count and main-text entry.
 Six native round trips, a telemetry-disabled repeat of screen source and a
 shared Linux build are running; no corrected size result is claimed yet.
+
+## Preparation and runtime configuration (v3)
+
+Telemetry exposed two issues in v2. First, upstream emits redirect prompts after
+page separators, so the first page has no leading redirect prompt. The expected
+count is `max(R - 1, 0)`, not R. Second, the standalone phda9 helper includes
+`page_form.h` and performs redirect coding itself. Configuring only the runtime
+left the helper's full-corpus cutoff active: ordinary articles retained escapes.
+The v2 trials are diagnostic evidence, not accepted corrected baselines.
+
+The [v3 protocol](../../../benchmarks/article-order/20261017-protocol-v3/protocol.json)
+requires identical `--native-corpus N R` arguments in preparation, encoding,
+decoding and inverse preparation. Manifests save helper arguments, and the
+comparison gate rejects a missing or different helper configuration. New tests
+exercise zero, mixed and all-redirect prefixes with exact raw restoration and
+reject a wrong declared page count. The frozen raw pages and all three orders
+are unchanged. Prepared streams shed exactly 45 escape bytes on the screen and
+109 on the disjoint fixture; one ordinary body in the latter needed no escape.
+This is a protocol correction, not an ordering gain.
