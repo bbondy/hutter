@@ -1,9 +1,10 @@
 # Native / Linux parity investigation
 
 Native Mac and Linux initialize the captured LSTM arrays and indirect-map
-offsets identically, but their coder probabilities diverge. Their payload sizes
-are just one byte apart on this fixture. That is encouraging for local screening,
-but does not establish bitstream compatibility or agreement on candidate ranking.
+offsets identically, but their coder probabilities diverge. Payload differences
+are small on two article-aware fixtures, yet the direction reverses between them.
+Mac is useful for local screening, but neither bitstream compatibility nor
+agreement on candidate ranking has been established.
 
 The portable RNG reproduces 10,000 consecutive glibc outputs for each of seeds
 0, 1, 923, 2147483648 and 4294967295. The Linux build still uses its original
@@ -62,6 +63,38 @@ The emulated decode took 796.66 wall seconds with maximum resident set size
 and [process log](../../../benchmarks/parity/20261017-linux-selfdecode-v1/decode-process.log).
 This is same-platform correctness, not cross-platform archive compatibility.
 
+## Disjoint middle-of-enwik8 fixture
+
+A second fixture starts at actual source offset 49,000,139, well away from the
+first fixture. It contains 12 complete articles: 162,057 raw XML bytes and
+154,286 phda9-prepared bytes. The inverse transform restored all selected raw
+bytes before encoding. Its manifest and input hashes are in the
+[paired comparison](../../../benchmarks/parity/20261017-middle-fixture-v1/report.json).
+
+| Measurement | Native ARM64 Mac | Linux x86-64, emulated |
+|---|---:|---:|
+| Prepared input bytes | 154,286 | 154,286 |
+| Payload bytes | 21,149 | 21,147 |
+| Coder events | 720,856 | 720,856 |
+| Encoding wall seconds | 226.76 | 1,083.93 |
+
+Initialization matches again. Every event type and input bit matches, while
+405,844 quantized probabilities differ. The first difference is event 386:
+32,856 on Mac versus 32,846 on Linux while coding a zero bit. Payloads first
+differ at byte 50. See the [event analysis](../../../benchmarks/parity/20261017-middle-fixture-v1/trace-analysis.json).
+The Linux payload is **two bytes smaller** here, reversing the first fixture's
+one-byte Mac advantage. These are different samples, not before/after trials of
+a model change; they show why Mac-only gains must be confirmed on Linux.
+
+The native decoder restored all 154,286 prepared bytes and matched its encoder's
+initialization and full probability trace. Its measured wall time was 226.50
+seconds; see the [native decoder record](../../../benchmarks/parity/20261017-middle-native-selfdecode-v1/report.json).
+That decoder began while the paired Linux encoder was still running. Its report
+retains the interim source-report hash and explicitly verifies that the finalized
+paired report kept the identical native encoder phase. The Linux self-decoder for
+this fixture is still running, so the paired encoding result alone is not an
+exact-restoration claim for the Linux payload.
+
 The native trace-disabled run produced the identical 15,221-byte payload and
 passed decompression. Inverse phda9 reconstruction restored all 117,161 raw bytes
 with the expected hash. Its compression/decompression took 205.94 / 202.43
@@ -117,9 +150,10 @@ predictor starts identically.
    Its development decoder passed the first fixture. Reproduce the complete
    enwik9 pipeline and packaged score on native x86-64 Linux, with runtime and
    peak-memory checks.
-2. Evaluate larger and held-out article fixtures on both platforms. A one-byte
-   difference on one small fixture does not demonstrate that a model change's
-   gains transfer. Confirm every promising Mac experiment against Linux.
+2. Complete the Linux self-decoder check on the held-out fixture. Evaluate
+   larger article sets and actual model changes on both platforms. A reversed
+   two-fixture size gap does not demonstrate that a model change's gains transfer.
+   Confirm every promising Mac experiment against Linux.
 3. Use the first numerical divergence to estimate the cost of exact ARM parity.
    Avoid making a complete floating-point portability rewrite a prerequisite
    for compression research. The existing Linux environment can run authoritative
