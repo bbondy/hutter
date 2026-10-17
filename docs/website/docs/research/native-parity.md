@@ -77,8 +77,18 @@ The [saved derivation record](https://github.com/bbondy/hutter/blob/main/benchma
 includes the input, source, compiler, executable and output hashes. The measured
 run took 67.69 seconds with other jobs active.
 
-These checks strengthen confidence in the preparation stages. They do not erase
-the adaptive coder's numerical differences or reproduce the full packaged score.
+The combined stream check, however, **failed**. The upstream preparation-only
+training tool, adapted for the Mac port, produced **559,634,858 packed stream
+bytes**, versus the documented **552,750,198**. Its unpacked stream is also
+6,884,660 bytes larger, and both reference hashes differ. These are bytes fed to
+the coder, not compressed archive sizes. The
+[failed result and exact driver](https://github.com/bbondy/hutter/tree/main/benchmarks/pipeline/20261017-native-stream-rejected)
+are retained. The cause is under investigation; we have not established whether
+the same training-tool reproduction matches on Linux.
+
+The separate dictionary/order matches therefore validate those specific stages.
+They do not establish the full preprocessing stream, erase adaptive coder
+numerical differences or reproduce the full packaged score.
 
 ## What to do with this result
 

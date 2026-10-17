@@ -1,0 +1,19 @@
+preprocessing enwik9 ... 292.74 s.
+      292.88 real       280.33 user         9.86 sys
+          1637203968  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              235521  page reclaims
+                   3  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 344  voluntary context switches
+              156251  involuntary context switches
+       4595135798965  instructions retired
+        883886339083  cycles elapsed
+          1458571232  peak memory footprint

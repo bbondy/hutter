@@ -11,6 +11,14 @@ runtime/memory eligibility for the compressor.
 - [Native upstream order](../article-order/20261017-upstream-order/validation.json):
   census, comment-index and order stages reproduce upstream's full reordered
   main-stream digest and account for all 243,425 page IDs.
+- [Rejected full native coder-stream check](20261017-native-stream-rejected/report.json):
+  upstream's `TRAIN_MODE=1` tool, adapted with the Mac port, produced 559,634,858
+  packed bytes versus the recorded 552,750,198. The unpacked form is also
+  6,884,660 bytes larger. Both expected hashes fail. This is a preprocessing
+  stream, not a compressed archive. Cause and Linux behavior remain unverified.
+  The exact driver source and generated patch are saved alongside the failed
+  result because this first run used an uncommitted driver. Stage hashes help
+  locate the disagreement without modifying this diagnostic record.
 
 To repeat dictionary derivation after building the native development source:
 
@@ -28,3 +36,15 @@ executable hashes, output hash, log and native source inventory. Its 67.69-secon
 run and 1,137,393,664-byte peak RSS were measured with other jobs active and are
 exploratory. The Mac adapter only replaces the Linux allocator header/trim calls
 in this derivation source. It keeps the integer dictionary algorithm.
+
+The full-stream diagnostic can be repeated with:
+
+```sh
+python3 scripts/native_stream.py --enwik9 data/enwik9 \
+  --native build/native-fixture-v3 --output build/native-stream-check
+```
+
+It applies the pinned upstream training patch before the Mac port, changing only
+one patch-context include to compose them without fuzzy hunk matching. It stops
+after preprocessing and compares both forms with the hashes in upstream's
+`training/tf/1_dump/README.md`. A successful build alone does not pass the check.
