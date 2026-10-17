@@ -33,7 +33,27 @@ The total budget includes separators. Both existing article sets use a projectio
 of the verified upstream order. Dictionary, weights, other model settings and
 fixture phases stay fixed. The
 [predeclared protocol](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-protocol-v1/protocol.json)
-records the exact inputs. Results are pending; no improvement is claimed.
+records the exact inputs. The first native results were:
+
+| Model | Screen payload | Change | Disjoint payload | Change |
+| --- | ---: | ---: | ---: | ---: |
+| Upstream settings | 119,868 bytes | — | 118,442 bytes | — |
+| Half total budget | 119,871 bytes | +3 bytes | 118,450 bytes | +8 bytes |
+| Shorter chunks | 119,878 bytes | +10 bytes | 118,444 bytes | +2 bytes |
+| Link prefixes disabled | 119,885 bytes | +17 bytes | 118,458 bytes | +16 bytes |
+
+All eight model/input pairs restore original XML exactly, with matching context
+counters; the disabled model feeds zero link-prefix tokens. No candidate improves
+either fixture. The [screen record](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-screen-v1/report.json)
+and [disjoint record](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-holdout-v1/report.json)
+retain every result.
+
+These trials used the earlier Mac entity representation. The later
+[preprocessing portability fix](native-parity.md) changes prepared bytes, so
+[protocol v2](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-protocol-v2/protocol.json)
+re-establishes baselines on matching Mac/Linux inputs. Raw pages, permutations,
+weights and model settings stay fixed; the third confirmation range remains
+untouched. Earlier fixture losses are not full-corpus ablation estimates.
 
 The disabled control keeps the mention index and other context channels. It
 measures removing link prefixes from this trained model, not the best possible
@@ -46,7 +66,7 @@ Encoder and decoder must report identical context counters; the disabled control
 must feed zero link-prefix tokens. Comparisons reject source changes outside the
 declared parameter header, different compiler settings or different assets.
 The [saved model records](https://github.com/bbondy/hutter/tree/main/benchmarks/model-variants)
-will retain regressions alongside gains.
+retain regressions alongside gains.
 
 These are sparse, repeatedly examined fixtures. A candidate that improves both
 must face the reserved third range, Linux comparison and full-pipeline accounting.

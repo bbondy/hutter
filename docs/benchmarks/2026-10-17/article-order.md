@@ -332,3 +332,31 @@ follow-up pages (33 to 34). The broader graph proposal moves 27 and 42 pages
 whether any is worth continuing. A third range starting at enwik8 byte 80,000,000
 is reserved in advance for confirmation if a candidate wins both existing sets;
 the repeatedly examined disjoint set is not an untouched validation set.
+
+## Projected-order v1 outcome and subsequent portability correction
+
+The [screen](../../../benchmarks/article-order/20261017-projected-screen-v1/report.json)
+and [disjoint result](../../../benchmarks/article-order/20261017-projected-holdout-v1/report.json)
+restore the original bytes for all six orders:
+
+| Order | Screen payload | Delta | Disjoint payload | Delta |
+| --- | ---: | ---: | ---: | ---: |
+| Upstream projection | 119,868 | — | 118,442 | — |
+| Local swaps | 119,884 | +16 | 118,438 | −4 |
+| Graph within regions | 119,896 | +28 | 118,456 | +14 |
+
+Actual prefix tokens are 1,893 / 2,183 / 2,733 on the screen and
+1,361 / 1,417 / 1,417 on the follow-up. Neither candidate improves both sets;
+the reserved third range remains untouched.
+
+A later full-stream check found an independent entity-preprocessing portability
+defect. All v1–v3 Mac fixture results above use that older entity representation.
+They remain valid native round trips, but are not canonical Linux-input results.
+The Linux training tool matched both full upstream stream hashes. Defining two
+inherited signed-overflow operations as unsigned then made the Mac tool match
+those hashes too. See the [pipeline records](../../../benchmarks/pipeline/README.md).
+
+Projection protocol v2 regenerates the prepared bytes after this fix, retaining
+identical raw pages, permutations, local-swap parameters and model weights. It
+establishes new baselines; any size change from the representation correction is
+not an ordering improvement. The fixed-input model tests have the same reset.

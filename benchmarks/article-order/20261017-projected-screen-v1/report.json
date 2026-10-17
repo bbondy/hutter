@@ -1,0 +1,353 @@
+{
+  "version": 1,
+  "kind": "article-order-comparison",
+  "role": "screen",
+  "date_utc": "2026-10-17T23:42:45.624860+00:00",
+  "manifest_sha256": "827e4d74cb9cb38113735c2c30b3e6e4eda3ae9d476d44b64bbf58174386efbc",
+  "page_set_sha256": "ab2aa99fa5551386e0680180ca6caba995615ca7c3a0b9661209c868113cffd3",
+  "raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+  "raw_bytes": 1033597,
+  "page_count": 172,
+  "binary_sha256": "888b1baf9393401e810c68f899e84ab25ce5082cf5e69f6a8dc1816d19285adc",
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "verifier_sha256": "3fab565479fa6332489de3abc19e81d01baf4d303ba382e1baed04d5c36650c4",
+  "restoration_code_sha256": "9c78d6edd9c4aa73a773a654f3ffb75ae04c105b511efdae6c2494760b362570",
+  "size_scope": "Payload plus explicit order side data only. Decoder/encoder code and assets must be packaged and charged for a prize score.",
+  "baseline": "Projection of exact upstream full-corpus order; surrounding pages/context omitted",
+  "timing_scope": "single trials, potentially concurrent; not a performance benchmark",
+  "baseline_variant": "upstream",
+  "variant_names": [
+    "upstream",
+    "local",
+    "graph"
+  ],
+  "native_arguments": [
+    "--native-corpus",
+    "172",
+    "127"
+  ],
+  "development_header_bytes": 16,
+  "variants": {
+    "upstream": {
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "payload_bytes": 119868,
+      "archive_sha256": "23767911f27474f6378c9538b818857f4f2c8ff0667ffe71f51b1e328383ccc3",
+      "prepared_bytes": 950817,
+      "prepared_sha256": "a6f0571934c4b1ac5cad55528c91e8f0f3f10873155840c622023512ce6422a0",
+      "order_side_information_bytes": 0,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "original_bytes_roundtrip": true,
+      "compress_seconds": 781.2487428330023,
+      "decompress_seconds": 761.1750086669999,
+      "peak_rss_bytes": 5995954176,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/project-screen-upstream-v1",
+      "source_metadata_sha256": "3ae3d672f1e8bd5154a2a2bce3b2ba547a7bb635ce8a341f8a84adc88e6812de",
+      "source_results_sha256": "ca2f965bef3632095b1ab529b5a0cc1496c26d8d037447ea4b09920eff437bc9",
+      "log_sha256": {
+        "compress": "df58085ee3ccb320700a6cec00c5a49e88b9d07d1f90599171b62e939342ed11",
+        "decompress": "b45bdedbe7ae8bc53c0892a7fd73e89c78a194ce8b82904a724ac33e3f9c5ed0"
+      },
+      "graph": {
+        "forward_edges": 45,
+        "pages_with_prior_incoming_link": 23,
+        "displaced_pages_vs_upstream": 0
+      },
+      "delta_bytes_vs_baseline": 0,
+      "delta_percent_vs_baseline": 0.0
+    },
+    "local": {
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 24,
+            "articles_with_prefix": 24,
+            "mentions_total": 94,
+            "prefix_tokens_total": 2183,
+            "chunks_total": 50,
+            "anchors": 10472,
+            "fed_tokens": 2183
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 24,
+            "articles_with_prefix": 24,
+            "mentions_total": 94,
+            "prefix_tokens_total": 2183,
+            "chunks_total": 50,
+            "anchors": 10472,
+            "fed_tokens": 2183
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "payload_bytes": 119884,
+      "archive_sha256": "79b36729112c1dc905b8e45a49bc596db9011e98ced0b9bed5913969722de8d6",
+      "prepared_bytes": 950815,
+      "prepared_sha256": "25fcfe648a538253253ca9e5b259b4ae79712d33ff28438117d13fad4cccd899",
+      "order_side_information_bytes": 0,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "original_bytes_roundtrip": true,
+      "compress_seconds": 780.9907827080024,
+      "decompress_seconds": 760.728190124999,
+      "peak_rss_bytes": 6003359744,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/project-screen-local-v1",
+      "source_metadata_sha256": "410523b65a179f62880bbc725a96b6271dadbcfdaf072f90e1883ffe8848a135",
+      "source_results_sha256": "2a27b36ca5bfa2c6e683bff24b53b4c7c800623770e8044320b6da6cec93dcbb",
+      "log_sha256": {
+        "compress": "b1f731000a9d177c6dbc34813d71f178a184c6e1564341f12b0410751b12dd9b",
+        "decompress": "90978b1cd90e6961e801994f5ea3c11fa58b7ec0286c9fb0884a7025c4e61a81"
+      },
+      "graph": {
+        "forward_edges": 47,
+        "pages_with_prior_incoming_link": 24,
+        "displaced_pages_vs_upstream": 4
+      },
+      "delta_bytes_vs_baseline": 16,
+      "delta_percent_vs_baseline": 0.013348016151099543
+    },
+    "graph": {
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 7,
+            "bytes": 171,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 37
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 109,
+            "prefix_tokens_total": 2733,
+            "chunks_total": 57,
+            "anchors": 10472,
+            "fed_tokens": 2733
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 7,
+            "bytes": 171,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 37
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 109,
+            "prefix_tokens_total": 2733,
+            "chunks_total": 57,
+            "anchors": 10472,
+            "fed_tokens": 2733
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "payload_bytes": 119896,
+      "archive_sha256": "9c107139fc7449d076917f38f84bdd6babe713be076bd3bddc504c15490ade9f",
+      "prepared_bytes": 950815,
+      "prepared_sha256": "a5ce85f33db44ea349e98f632eb2231fcc9bb12839cb2850b0131da51d464fb9",
+      "order_side_information_bytes": 0,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "original_bytes_roundtrip": true,
+      "compress_seconds": 781.6189060420002,
+      "decompress_seconds": 761.5521499999995,
+      "peak_rss_bytes": 5999853568,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/project-screen-graph-v1",
+      "source_metadata_sha256": "deca7561b57e9ab5c0928a858562edf52a6e581d1c475f43380bf46dd65431fa",
+      "source_results_sha256": "ce982c6b1e6243d98e812f9f90e6eea55aed100ede2a1ce670af221ed762ade7",
+      "log_sha256": {
+        "compress": "3b1698ee0785b706623f1b2057372d024c1c38dfeb4c2b695668a81517a2698b",
+        "decompress": "1c0923fef3ebdd0cad38dcc6b8c093ae33740be85064f33cf960011c1d10b0c1"
+      },
+      "graph": {
+        "forward_edges": 54,
+        "pages_with_prior_incoming_link": 24,
+        "displaced_pages_vs_upstream": 27
+      },
+      "delta_bytes_vs_baseline": 28,
+      "delta_percent_vs_baseline": 0.023359028264424198
+    }
+  }
+}

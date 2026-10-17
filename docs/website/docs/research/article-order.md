@@ -10,6 +10,11 @@ relationships in the input expose structure that a compressor can use? Our first
 test changes Wikipedia article order so that more incoming links appear before
 the article they describe. The measured archive size decides whether this helps.
 
+The completed tables below use the earlier Mac entity representation. A later
+[full-stream check](native-parity.md) found and fixed an inherited arithmetic
+portability defect. Fresh comparisons preserve these same pages and algorithms
+while using prepared bytes that match Linux; earlier round trips remain saved.
+
 ## What transfers from the puzzle
 
 In the puzzle, each numbered box points to another box, so the arrangement is a
@@ -195,13 +200,28 @@ full-corpus compressed size is claimed.
 
 An important detail emerged: the 71,148-page front block contains 71,110 redirects
 and 38 excluded ordinary pages. Calendar pages and five other page classes also
-have prescribed placements. The next comparison, now running, projects this
+have prescribed placements. The next comparison projected this
 exact order onto the same frozen article sets. One candidate makes a few adjacent
 link-guided swaps; another applies the graph heuristic within ordinary-page
 regions. Both preserve special positions and full-order class-region boundaries.
 The [protocol](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-projection-protocol-v1/protocol.json)
 was frozen before measuring. Even this projection omits surrounding corpus
 context, so a fixture improvement still needs full-pipeline confirmation.
+
+Its first verified results were:
+
+| Order | First fixture payload | Change | Disjoint fixture payload | Change |
+| --- | ---: | ---: | ---: | ---: |
+| Upstream projection | 119,868 bytes | — | 118,442 bytes | — |
+| Local swaps | 119,884 bytes | +16 bytes | 118,438 bytes | −4 bytes |
+| Graph within regions | 119,896 bytes | +28 bytes | 118,456 bytes | +14 bytes |
+
+All six restore the original articles. The
+[screen](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-projected-screen-v1/report.json)
+and [disjoint report](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-projected-holdout-v1/report.json)
+retain the evidence. Neither candidate improves both fixtures. The subsequent
+entity correction requires fresh baselines, with exactly the same permutations;
+it is not a newly tuned ordering candidate.
 
 ## Limits that matter before promotion
 
