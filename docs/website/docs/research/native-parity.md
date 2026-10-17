@@ -37,7 +37,7 @@ The team prepared 12 complete articles from the middle of `enwik8`, beginning at
 
 Initialization and every event type and input bit match again. This time, 405,844 integer probabilities differ; the first is at event 386, and payloads first differ at byte 50. The Linux payload is **two bytes smaller** than the Mac payload, reversing the first sample's one-byte Mac advantage. The [paired report](https://github.com/bbondy/hutter/blob/research/native-mac/benchmarks/parity/20261017-middle-fixture-v1/report.json) and [event analysis](https://github.com/bbondy/hutter/blob/research/native-mac/benchmarks/parity/20261017-middle-fixture-v1/trace-analysis.json) preserve the measurements.
 
-The Mac decoder restored this prepared sample exactly and reproduced its encoder's initialization and probability trace. The Linux self-decoder for this sample is still running. Two different fixtures do not measure a model change, but the reversed size gap is direct evidence against assuming that Mac-only size gains will have the same sign on Linux.
+Both decoders restored this prepared sample exactly and reproduced their respective encoders' initialization and full probability traces. The Linux self-decode took 1,044.36 seconds under emulation; its [validation record](https://github.com/bbondy/hutter/blob/research/native-mac/benchmarks/parity/20261017-middle-linux-selfdecode-v1/report.json) is saved separately. This is same-platform validation for two different archives, not cross-platform decoding. Two different fixtures do not measure a model change, but the reversed size gap is direct evidence against assuming that Mac-only size gains will have the same sign on Linux.
 
 ## What matched, and what did not?
 

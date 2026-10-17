@@ -39,7 +39,7 @@ For performance claims, run several comparable trials on an idle machine. Do not
 ## Current next moves
 
 1. Use the saved Linux development decoder round trip as the first correctness gate; repeat it after relevant model changes.
-2. Complete the held-out Linux decoder check, then compare actual model changes on both recorded fixtures and a larger article set. The two baseline fixtures alone do not tell us whether a changed model's gains transfer.
+2. Compare actual model changes on both recorded fixtures and a larger article set. Both held-out self-decoders passed, but the two baseline fixtures alone do not tell us whether a changed model's gains transfer.
 3. Reproduce the pinned submission's full `enwik9` result and packaged size on native Linux x86-64, with exact restoration and resource measurements.
 4. Evaluate one promising predictor change against that frozen baseline. Investigate exact ARM floating-point parity where it changes a real decision; keep Linux as the scoring reference meanwhile.
 
