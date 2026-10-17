@@ -35,6 +35,12 @@ the build directory. No Docker or Homebrew compiler installation is required.
   the same row order. Optional x86 cycle-counter telemetry is disabled.
 - Darwin sort callbacks, clock calls and memory growth replace Linux interfaces.
   Huge-page advice and glibc allocator tuning become no-ops.
+- `--native-pages N` sets the metadata record count for a development corpus.
+  The default remains the release's 243,425 articles. Both encoding and decoding
+  need the same value; the benchmark runner takes it from the sample manifest
+  and records it with both commands. It is not encoded in the payload. All
+  metadata validation stays active. The release timestamp-format boundary of
+  87,813 is retained, so small samples use the existing absolute timestamp form.
 - PPMd retains its 14,000 MiB logical heap, using demand-zero anonymous memory
   instead of Linux's bounded resident page cache. This can exceed the prize RAM
   limit on larger inputs. Memory measurements cannot validate Linux eligibility.
@@ -49,6 +55,10 @@ Raw chunks such as `data/samples/prefix-100k` are not valid inputs to this mode:
 the models expect phda9 metadata, not raw Wikipedia XML. The 179-byte smoke
 sample also contains bytes excluded from the transformer's frozen alphabet.
 Do not disable the transformer or its format guards to hide these failures.
+Even a phda9-prepared subset needs its article count supplied through
+`--manifest`; the unparameterized release expects the entire enwik9 metadata
+block. Its inherited `prof_input/input` fixture fails the current metadata
+parser too, so it is not a valid small baseline for this release.
 
 Benchmark records include binary/input/asset hashes, patched source inventory,
 compiler, flags, elapsed time, peak RSS and round-trip/repeat checks. Archive

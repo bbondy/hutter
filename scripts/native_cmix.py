@@ -33,6 +33,8 @@ def build(args):
     if any(delta.values()):
         raise ValueError(f"pinned upstream was modified: {delta}")
     destination = args.output.resolve()
+    if destination.is_relative_to(ENGINE) or destination.is_relative_to(PORT):
+        raise ValueError("build output must be outside the upstream and port directories")
     destination.mkdir(parents=True, exist_ok=False)
     source = destination / "source"
     shutil.copytree(ENGINE, source)
@@ -106,6 +108,7 @@ def samples(args):
         "version": 1, "source": str(source), "source_bytes": len(data), "source_sha256": digest(source),
         "source_offset": start, "source_end": end, "raw_bytes": raw.stat().st_size,
         "raw_sha256": digest(raw), "preprocessing_roundtrip": True,
+        "page_count": data[start:end].count(b"  <page>\n"),
         "preprocessing": "upstream phda9 on complete articles in original order; no full-corpus reorder or census/comment-index transforms",
         "helper_sha256": digest(helper), "upstream_commit": provenance["upstream_commit"],
         "samples": [{"path": str(ready), "bytes": ready.stat().st_size,
@@ -127,6 +130,17 @@ def bench(args):
     inputs = [p.resolve() for p in args.inputs]
     if not all(p.is_file() for p in inputs):
         raise ValueError("all inputs must be existing files")
+    native_args = []
+    if args.manifest:
+        manifest = json.loads(args.manifest.read_text())
+        known = {s["sha256"]: s["bytes"] for s in manifest["samples"]}
+        if any(known.get(digest(p)) != p.stat().st_size for p in inputs):
+            raise ValueError("manifest does not describe every input; refusing an expensive unmatched run")
+        if "page_count" in manifest:
+            count = manifest["page_count"]
+            if not isinstance(count, int) or not 1 <= count <= 243425:
+                raise ValueError("invalid development article count")
+            native_args = ["--native-pages", str(count)]
     run = args.output.resolve()
     run.mkdir(parents=True, exist_ok=False)
     shutil.copy2(source / "cmix", run / "cmix")
@@ -139,6 +153,7 @@ def bench(args):
         "runner_sha256": digest(Path(__file__)), "binary_sha256": digest(run / "cmix"),
         "binary_bytes": (run / "cmix").stat().st_size, "build": provenance,
         "timeout_seconds": args.timeout, "repeats": args.repeats,
+        "native_arguments": native_args,
         "size_scope": "Payload only; external dictionary and weights required. Not a Hutter Prize score.",
         "side_data": {name: {"bytes": (source / name).stat().st_size, "sha256": digest(source / name)}
                       for name in (WEIGHTS, "dictionary/english.dic")},
@@ -158,8 +173,8 @@ def bench(args):
                     # Upstream writes fixed-name scratch files and loads weights from cwd.
                     os.chdir(trial)
                     archive, restored = trial / "payload.cmix", trial / "restored"
-                    enc = [str(run / "cmix"), "-c", "dictionary.dic", str(input_file), str(archive)]
-                    dec = [str(run / "cmix"), "-d", "dictionary.dic", str(archive), str(restored)]
+                    enc = [str(run / "cmix"), *native_args, "-c", "dictionary.dic", str(input_file), str(archive)]
+                    dec = [str(run / "cmix"), *native_args, "-d", "dictionary.dic", str(archive), str(restored)]
                     row = {"input": str(input_file), "input_sha256": digest(input_file),
                            "input_bytes": input_file.stat().st_size, "codec": CODEC,
                            "repeat": repeat, "roundtrip": False, "size_scope": "payload-only"}
@@ -172,6 +187,11 @@ def bench(args):
                         row["decompress"] = measured(dec, trial / "decompress.log", args.timeout)
                         row["roundtrip"] = (row["decompress"]["status"] == "ok" and restored.is_file()
                                             and digest(restored) == row["input_sha256"])
+                    if not row["roundtrip"]:
+                        row["failure_log_tails"] = {
+                            phase: Path(row[phase]["log"]).read_text(errors="replace")[-8192:]
+                            for phase in ("compress", "decompress") if phase in row
+                        }
                     failed |= not row["roundtrip"] or not row.get("repeat_matches", True)
                     results.write(json.dumps(row) + "\n")
                     results.flush()

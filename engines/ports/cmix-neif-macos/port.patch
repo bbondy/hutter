@@ -185,6 +185,115 @@
 -#endif
 +#pragma once
 +#include "native_simd.h"
+--- a/src/metablock.h
++++ b/src/metablock.h
+@@ -1,3 +1,4 @@
++#include "native_corpus.h"
+ #ifndef METABLOCK_H_
+ #define METABLOCK_H_
+ 
+@@ -42,7 +43,7 @@
+     if (b != kNL) return kKein;
+     ++lf_;
+     const unsigned long long kz = (unsigned long long)3;
+-    const unsigned long long nn = (unsigned long long)243425;
++    const unsigned long long nn = (unsigned long long)native_corpus::PageCount();
+     if (lf_ <= kz) {
+       if (lf_ == kz) { ab_ = pos_; offen_ = true; }
+       return kKopfzeile;
+@@ -141,7 +142,7 @@
+   long long BSek() const { return bsek_; }
+   long long BT() const { return bt_; }
+ 
+-  size_t Seiten() const { return g_.Fertig() ? (size_t)243425 : (size_t)0; }
++  size_t Seiten() const { return g_.Fertig() ? (size_t)native_corpus::PageCount() : (size_t)0; }
+   long long RevidNachRang(size_t k) const {
+     if (k >= rang_.size()) return -1;
+     return (long long)(satz_[3 * (size_t)rang_[k]] >> kLenBits);
+@@ -209,8 +210,8 @@
+           "\nmetablock (%s): opened but never closed, %llu newlines of %llu (%d head lines + 2 x %d records), %llu A and %llu B lines\n",
+           page_index, g_.Zeilenvorschuebe(),
+           (unsigned long long)3 +
+-              2ull * (unsigned long long)243425,
+-          (int)3, (int)243425,
++              2ull * (unsigned long long)native_corpus::PageCount(),
++          (int)3, (int)native_corpus::PageCount(),
+           st_.a_zeilen, st_.b_zeilen);
+       fflush(stderr);
+       exit(1);
+@@ -270,15 +271,15 @@
+     if (zl_n_ > (int)kZeile) Fail("metablock line longer than the buffer");
+     const int n = zl_n_;
+     if (n <= 0) Fail("empty metablock line");
+-    const int art = (idx < (long long)243425) ? 1 : 2;
++    const int art = (idx < (long long)native_corpus::PageCount()) ? 1 : 2;
+     if (KlasseHeuristik(zl_, n) != art) ++st_.kdiff;
+     if (art == 1) ZeileA((size_t)idx, zl_, n);
+-    else ZeileB((size_t)(idx - (long long)243425), zl_, n);
++    else ZeileB((size_t)(idx - (long long)native_corpus::PageCount()), zl_, n);
+   }
+ 
+   void ZeileA(size_t i, const unsigned char* p, int n) {
+     if (satz_.empty()) {
+-      satz_.assign(3u * (size_t)243425, 0u);
++      satz_.assign(3u * (size_t)native_corpus::PageCount(), 0u);
+       text_.reserve(600000);
+       hoff_.assign((size_t)kHash, kLeer);
+       hlen_.assign((size_t)kHash, 0u);
+@@ -317,7 +318,7 @@
+   }
+ 
+   void RangBauen() {
+-    const size_t N = (size_t)243425;
++    const size_t N = (size_t)native_corpus::PageCount();
+     rang_.resize(N);
+     for (size_t i = 0; i < N; ++i) rang_[i] = (unsigned int)i;
+     const unsigned int* s = satz_.data();
+@@ -434,8 +435,8 @@
+   }
+ 
+   void Abschluss() {
+-    if (st_.a_zeilen != (unsigned long long)243425 ||
+-        st_.b_zeilen != (unsigned long long)243425)
++    if (st_.a_zeilen != (unsigned long long)native_corpus::PageCount() ||
++        st_.b_zeilen != (unsigned long long)native_corpus::PageCount())
+       Fail("A or B line count differs from the page count");
+     text_.shrink_to_fit();
+     std::vector<unsigned int>().swap(hoff_);
+--- a/src/metablock_form.h
++++ b/src/metablock_form.h
+@@ -1,3 +1,4 @@
++#include "native_corpus.h"
+ #ifndef METABLOCK_FORM_H_
+ #define METABLOCK_FORM_H_
+ 
+@@ -137,7 +138,7 @@
+ 
+  static inline void Zeilen(const std::vector<unsigned char>& d, size_t ab,
+                           size_t bis, std::vector<size_t>* z) {
+-  const size_t nn = (size_t)243425;
++  const size_t nn = (size_t)native_corpus::PageCount();
+   z->resize(2 * nn + 1);
+   size_t p = ab;
+   for (size_t i = 0; i < 2 * nn; ++i) {
+@@ -182,7 +183,7 @@
+   if (!LiesDatei(pfad, &d)) return false;
+   size_t ab = 0, bis = 0;
+   if (!Grenzen(d, &ab, &bis)) return true;       // no complete block: unchanged
+-  const size_t nn = (size_t)243425;
++  const size_t nn = (size_t)native_corpus::PageCount();
+   std::vector<size_t> z;
+   Zeilen(d, ab, bis, &z);
+ 
+@@ -254,7 +255,7 @@
+   if (!LiesDatei(pfad, &d)) return false;
+   size_t ab = 0, bis = 0;
+   if (!Grenzen(d, &ab, &bis)) return true;       // no complete block: unchanged
+-  const size_t nn = (size_t)243425;
++  const size_t nn = (size_t)native_corpus::PageCount();
+   std::vector<size_t> z;
+   Zeilen(d, ab, bis, &z);
+ 
 --- a/src/mixer_bank.h
 +++ b/src/mixer_bank.h
 @@ -1,7 +1,7 @@
@@ -357,6 +466,14 @@
  #ifndef AUX_BUILD
  #define AUX_BUILD 0
  #endif
+@@ -601,6 +601,7 @@
+ 
+ namespace ppmd_page { extern int hilfs; }
+ int main(int argc, char** argv) {
++  if (!native_corpus::Configure(&argc, argv)) return 2;
+   console_progress::Begin();
+   if (argc > 1 && argv[1][0] == '-' && (argv[1][1] == 'c' || argv[1][1] == 'd'
+       || argv[1][1] == 'C' || argv[1][1] == 'D'))
 --- a/src/sentence_intersect.h
 +++ b/src/sentence_intersect.h
 @@ -1,7 +1,7 @@

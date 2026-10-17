@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "source": "/Users/bbondy/projects/bbondy/hutter/data/enwik8",
+  "source_bytes": 100000000,
+  "source_sha256": "2b49720ec4d78c3c9fabaee6e4179a5e997302b3a70029f30f2d582218c024a8",
+  "source_offset": 1404,
+  "source_end": 118565,
+  "raw_bytes": 117161,
+  "raw_sha256": "7264a04d1802659f721e241872fad5e1050d203c2d80bfbf161a7209fd5f7563",
+  "preprocessing_roundtrip": true,
+  "preprocessing": "upstream phda9 on complete articles in original order; no full-corpus reorder or census/comment-index transforms",
+  "helper_sha256": "55e51b993f3253f12144f4af623943cc56eef9791e9d6bc9d01ae62792a958b3",
+  "upstream_commit": "1c9ea5ed57ec9718bcb681d20b79e81a60b7a728",
+  "samples": [
+    {
+      "path": "/Users/bbondy/projects/bbondy/hutter-native-mac/build/native-sample-100k/articles.ready",
+      "bytes": 108927,
+      "sha256": "41c15fd48e12fa85b936132f95aac51223c9296ba9b297020d9171a39c5f7ea0",
+      "role": "native-feasibility"
+    }
+  ]
+}
