@@ -5,6 +5,12 @@ They retain initialization, probability-stream and cross-decoding outcomes,
 including failed comparisons. See the [parity harness](../engines/ports/cmix-neif-parity/README.md).
 These are correctness records, not eligible full-corpus prize scores.
 
+Fixed-input model experiments are stored under `model-variants/<id>/`. Their
+[protocols and verifier](model-variants/README.md) require identical input bytes,
+assets and compiler settings, only declared source edits, matching context
+counters and exact original-article restoration. They preserve every candidate's
+results, including regressions, separately from experiments that change order.
+
 `python3 scripts/parity_history.py list` shows completed paired fixture encodings.
 `python3 scripts/parity_history.py decoders` shows the separate same-platform
 restoration and probability-trace checks.

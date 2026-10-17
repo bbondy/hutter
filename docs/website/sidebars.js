@@ -63,6 +63,7 @@ const sidebars = {
         'research/native-parity',
         'research/experiment-playbook',
         'research/article-order',
+        'research/link-context',
       ],
     },
     {
