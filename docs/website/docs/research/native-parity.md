@@ -61,6 +61,25 @@ different payload, despite almost equal size
 
 The test harness saves binary hashes, source inventories, input hashes, traces and failed comparisons so this result can be checked later. The full [benchmark report](https://github.com/bbondy/hutter/blob/research/native-mac/docs/benchmarks/2026-10-17/native-parity.md), [probability comparison](https://github.com/bbondy/hutter/blob/research/native-mac/benchmarks/parity/20261017-probabilities-v1/report.json), and [stage analysis](https://github.com/bbondy/hutter/blob/research/native-mac/benchmarks/parity/20261017-numerical-prefix-v1/stage-analysis.json) contain the measurements and precise hashes.
 
+## Full-corpus stages that do match
+
+We can verify important parts of the pipeline without first running the full
+adaptive compressor. The native Mac helper reproduced the pinned upstream
+article order for all **243,425 pages**, including its census and comment-index
+transforms. Its 998,030,918-byte main stream matches upstream's recorded digest.
+The [ordering investigation](article-order.md) explains that check.
+
+The native dictionary derivation also consumed the full verified billion-byte
+enwik9 file and the pinned hints. It produced the **exact shipped 520,804-byte
+dictionary**, with SHA-256
+`0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535`.
+The [saved derivation record](https://github.com/bbondy/hutter/blob/main/benchmarks/pipeline/20261017-native-dictionary/report.json)
+includes the input, source, compiler, executable and output hashes. The measured
+run took 67.69 seconds with other jobs active.
+
+These checks strengthen confidence in the preparation stages. They do not erase
+the adaptive coder's numerical differences or reproduce the full packaged score.
+
 ## What to do with this result
 
 Use the Mac build to explore ideas quickly. Check any promising size change on Linux before treating it as progress toward the prize. Neither of these two small samples establishes that candidates will rank the same on both systems. Full `enwik9` score, runtime, memory and packaging remain separate gates.

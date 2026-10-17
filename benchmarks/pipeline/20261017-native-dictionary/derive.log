@@ -1,0 +1,19 @@
+BuildDictFromInput: OK, 65.5 s CPU
+       67.63 real        64.60 user         0.91 sys
+          1137393664  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               86759  page reclaims
+                   1  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   3  voluntary context switches
+               43245  involuntary context switches
+        268420688798  instructions retired
+        194686102909  cycles elapsed
+          1112556936  peak memory footprint
