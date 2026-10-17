@@ -13,6 +13,16 @@ changes only when both records use the same prepared input, article count, asset
 reference image and upstream source. Initialization-only, diagnostic-prefix and
 decoder-only records remain accessible by ID but are not treated as scores.
 
+Article-order experiments are stored under `article-order/<id>/`, with their
+fixed protocol, page-set manifests, cheap codec controls and verified cmix
+comparisons. `python3 scripts/order_history.py list` displays accepted
+comparisons. Its `summarize` command permits different prepared input hashes
+only after checking the same model/assets and exact restoration to the same
+original raw article set. It retains logs and hashes and refuses incomplete or
+failed trials. See the [article-order protocol](../docs/benchmarks/2026-10-17/article-order.md).
+These source-order fixture comparisons do not establish gains against the full
+competitive pipeline.
+
 Keep small experiment records in Git under `runs/<unique-id>/`. Each record has
 the original metadata and JSONL trials, a note, and optionally the source patch
 and corpus manifest. Run IDs cannot be overwritten. Large archives, executable
@@ -36,7 +46,7 @@ python3 scripts/benchmark_history.py record build/experiment-001 \
 python3 scripts/benchmark_history.py list
 python3 scripts/benchmark_history.py compare experiment-001 experiment-002
 git add benchmarks/runs/experiment-001
-git commit -m "Record baseline escape-estimation benchmark"
+git commit -S -m "Record baseline escape-estimation benchmark"
 ```
 
 Choose either automatic `--record` or the later `record` command for a given ID.

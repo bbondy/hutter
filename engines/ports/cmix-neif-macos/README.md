@@ -89,8 +89,8 @@ so their fixed startup cost can dominate small samples.
 The [article-order investigation](../../../docs/benchmarks/2026-10-17/article-order.md)
 also found that the 71,148-page redirect-block cutoff remains fixed in both
 `redirect_table.h` and `tf1_prompt.h`. Thus small fixtures stay in that block:
-ordinary page text is escaped reversibly, but formatting and metadata-prompt
-placement differ from the full corpus's main-text phase. These samples do not
+ordinary page text is escaped reversibly, and every page gets a four-token
+`#rd` prompt absent from the full corpus's main-text phase. These samples do not
 yet reproduce representative phase boundaries. Correct those boundaries before
 promoting graph-order results; do not reinterpret older saved sizes as if their
 binaries had been changed.

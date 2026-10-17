@@ -21,6 +21,8 @@ only fixture order; it retains the existing model weights.
 - Disjoint follow-up: first complete page at/after offset 49,000,000, through the
   first complete end after 1 MB: `[49000139, 50006116)`, 1,005,977 bytes, 138 pages.
   Selection, graph algorithm and random seed are fixed before reading scores.
+  Disjointness concerns experiment selection, not data unseen by the inherited
+  pretrained weights.
 - Three orders of exactly the same pages: source order, graph order, and a random
   control (sort SHA-256 of `20261017:PAGE_ID`). No page text changes.
 - Graph: exact-title wiki-link pairs after XML unescaping; remove fragments and
@@ -57,6 +59,21 @@ link. More edges do not guarantee more useful tokens or fewer compressed bytes.
 The disjoint fixture has 63 edges, of which 31/38/31 are forward in
 source/graph/random order. Graph ordering displaces 123 of its 138 pages, compared
 with 45 of 172 in the screen. That disruption can lose locality in other models.
+
+The [saved graph audit](../../../benchmarks/article-order/20261017-graph-audit-v2/screen.json)
+finds 11 reciprocal link pairs in the screen. Each forces one backward edge,
+so no order can exceed 55 forward links; the heuristic reaches 54. This is an
+upper bound, not a proof that 55 is attainable. A near-maximal proxy can still
+fail to improve compression.
+
+An [audit of all complete enwik8 pages](../../../benchmarks/article-order/20261017-graph-audit-v2/enwik8.json)
+covers 12,346 pages and 62,552 internal exact-title edges. Its largest strongly
+connected component contains **5,726 pages**. The prisoners' picture of disjoint
+simple loops does not transfer directly: a large mutually reachable region
+still needs an internal ordering. The audit only decomposes the graph; it does
+not run the expensive greedy ordering or compress this larger set. Both frozen
+fixture orders and graph metrics remained unchanged when the SCC audit was
+factored out and support for empty self-closing text elements was added.
 
 ## Interpretation gates
 
@@ -138,7 +155,8 @@ full-corpus redirect-block cutoff of **71,148 pages**. See
 `src/redirect_table.h:redirect_block` and
 `src/tf1/tf1_prompt.h:CoderPrompt::ImRedirectBlock` in the pinned engine.
 `page_form.h` uses the former to escape non-redirect text inside that block;
-the prompt code uses the latter to choose metadata placement. The running
+the prompt code uses the latter to insert a four-token `#rd` prompt before each
+page. Thus ordinary fixture pages receive that redirect-block marker too. The running
 fixtures all log entry into the redirect block and never reach main text.
 
 This does not by itself break reversibility or turn off all link processing.
@@ -150,3 +168,53 @@ replace the existing binary and compare the resulting size change as an ordering
 gain. Earlier parity round-trip findings remain valid for their saved binaries.
 The correction and telemetry acceptance checks are tracked in
 [issue #13](https://github.com/bbondy/hutter/issues/13).
+
+## Native screen
+
+All three native decoders restored their prepared inputs exactly. Inverse phda9
+and page-ID sorting then restored the same **1,033,597 original bytes** for every
+variant. The [verified comparison](../../../benchmarks/article-order/20261017-screen-v1/report.json)
+retains the checks, archive/input/build/asset hashes, manifest and process logs.
+Each variant has one trial; repeat determinism was not independently tested here.
+
+| Order | Payload bytes | Delta from source | Forward links |
+| --- | ---: | ---: | ---: |
+| Source | 120,337 | 0 | 42 |
+| Graph | 120,359 | +22 (+0.018%) | 54 |
+| Random | 120,936 | +599 (+0.498%) | 35 |
+
+This particular heuristic has no measured payload advantage on the first
+fixture. It is much closer to source order than the random control, but that
+does not isolate a link-context effect: model locality, metadata coding and
+the inherited redirect-block prompts also change the result.
+
+The disjoint fixture remains preselected and prepared; its standard-codec
+controls are saved. After discovering the phase-boundary limitation, we defer
+its expensive cmix comparison until a corrected baseline exists. Likewise,
+there is no promising current graph gain to send to Linux confirmation.
+
+## Next moves and iteration cost
+
+1. Fix phase configuration and add actual context telemetry under issue #13.
+   Include a small correctness fixture with a real incoming-link example and
+   both redirect and main-text pages. This deliberately structured fixture
+   exercises behavior; it is not a ranking benchmark.
+2. Freeze a new three-order baseline after that correction. Use the same
+   contiguous first and disjoint article sets and retain the negative v1 result.
+3. Compare upstream's actual competitive order with small graph-guided changes
+   inside its topical groups, preserving redirect and calendar handling. Our
+   full SCC ordering can disrupt locality and cannot be applied naively to a
+   large cyclic component.
+4. Only pursue matching transformer retraining or full-corpus Linux runs after
+   that experiment produces a gain worth the code/side-data and resource costs.
+
+The three native encoders ran concurrently and each took about 616 seconds,
+including about 153 seconds of dictionary pretraining. These are exploratory
+wall times, not prize hardware measurements. Keep exact-hash baseline results
+so new order candidates do not require recomputing the unchanged baseline.
+Use graph auditing and cheap codecs to reject broken setups, not to predict a
+cmix winner. Smaller fixtures retain the expensive dictionary startup and can
+remove the very cross-article structure being tested.
+Decoding took 612 seconds per variant, with about 150 seconds of dictionary
+pretraining. Peak reported resident memory was approximately 6.0 GB per process.
+No Linux ranking confirmation or full-submission package result is claimed.
