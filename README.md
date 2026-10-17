@@ -1,5 +1,7 @@
 # Hutter Prize
 
+The [compression guide](https://bbondy.github.io/hutter/) explains the algorithms, archive formats, code structure, and contributor setup. Its source is in [`docs/website`](docs/website/README.md).
+
 This repo is a workspace for experimenting toward a future Hutter Prize submission in Rust.
 
 It is not competitive yet. The current repo contains several small experimental codecs:
