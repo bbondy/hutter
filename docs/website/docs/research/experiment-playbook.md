@@ -38,6 +38,12 @@ For performance claims, run several comparable trials on an idle machine. Do not
 
 ## Current next moves
 
+The [cycle-inspired article-order experiment](article-order.md) adds a concrete
+example: the old 19-page fixture has no internal exact-title links, so testing
+link-guided ordering requires the larger article set. It also exposes an inherited
+redirect-block boundary that must be corrected before treating small fixtures
+as representative of the full pipeline.
+
 1. Use the saved Linux development decoder round trip as the first correctness gate; repeat it after relevant model changes.
 2. Compare actual model changes on both recorded fixtures and a larger article set. Both held-out self-decoders passed, but the two baseline fixtures alone do not tell us whether a changed model's gains transfer.
 3. Reproduce the pinned submission's full `enwik9` result and packaged size on native Linux x86-64, with exact restoration and resource measurements.

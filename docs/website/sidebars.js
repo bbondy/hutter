@@ -62,6 +62,7 @@ const sidebars = {
         'research/competitive-baseline',
         'research/native-parity',
         'research/experiment-playbook',
+        'research/article-order',
       ],
     },
     {
