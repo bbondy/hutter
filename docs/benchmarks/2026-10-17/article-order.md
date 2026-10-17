@@ -97,3 +97,36 @@ Repeat the benchmark command for `graph` and `random`, using unique output and
 history IDs. The sample manifests retain page hashes, exact permutations,
 graph statistics, helper and preparation-source hashes. The runner retains
 binary, dictionary and weight hashes alongside each result.
+
+`scripts/order_history.py summarize` is the comparison gate for this experiment.
+Unlike the ordinary benchmark history command, it permits different prepared
+hashes only when the declared variants restore the same original bytes and
+article set. It verifies the saved archive, decoder output, model/asset hashes,
+article count and helper, then retains the logs, manifest and result hashes.
+
+```sh
+python3 scripts/order_history.py summarize \
+  --manifest build/order-screen-v1/manifest.json --build build/native-parity-v1 \
+  --runs build/order-screen-source-v1 build/order-screen-graph-v1 build/order-screen-random-v1 \
+  --output benchmarks/article-order/20261017-screen-v1
+python3 scripts/order_history.py list
+```
+
+## Cheap codec controls
+
+The saved `20261017-standard-v1` controls use Python zlib level 9, bzip2 level 9
+and XZ preset 9 on the same prepared streams. All 18 decoder checks restored the
+prepared bytes. These codecs do not have cmix's link-context model.
+
+| Fixture | Codec | Source bytes | Graph bytes | Random bytes | Graph delta |
+| --- | --- | ---: | ---: | ---: | ---: |
+| First 1 MB | zlib-9 | 355,673 | 355,102 | 358,646 | −571 |
+| First 1 MB | bzip2-9 | 284,665 | 287,207 | 287,106 | +2,542 |
+| First 1 MB | xz-9 | 294,760 | 294,624 | 295,660 | −136 |
+| Disjoint 1 MB | zlib-9 | 350,839 | 349,965 | 357,132 | −874 |
+| Disjoint 1 MB | bzip2-9 | 283,732 | 283,888 | 284,772 | +156 |
+| Disjoint 1 MB | xz-9 | 289,676 | 289,712 | 291,216 | +36 |
+
+This establishes that graph order is not uniformly better across codecs. Even
+XZ's small direction changes between fixtures. These controls cannot predict
+cmix's result or establish that an improvement comes from link context.
