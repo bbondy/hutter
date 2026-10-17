@@ -22,6 +22,8 @@ The one-byte size gap is interesting, but the payloads are **different streams**
 
 These times are exploratory single runs with concurrent activity. In particular, Linux ran under x86 emulation on an ARM host. They are not a prize runtime comparison. Payloads here exclude the dictionary, weights and executable. The native build round-tripped the prepared sample and reversed preprocessing to restore all 117,161 original XML bytes. Tracing enabled and disabled yielded the same native payload hash.
 
+The Linux development build also decoded **its own** 15,222-byte archive. It restored the 108,927 prepared bytes exactly, with initialization and the full probability trace matching its encoder. That emulated decode took 796.66 wall seconds. This closes a same-platform correctness check; it does not show that Linux can decode the different Mac payload. The [decoder validation record](https://github.com/bbondy/hutter/blob/research/native-mac/benchmarks/parity/20261017-linux-selfdecode-v1/report.json) contains the result.
+
 ## What matched, and what did not?
 
 The original Mac build used Darwin's `rand()` sequence; Linux uses a different one. An explicit generator was added to the Mac port. It matches 10,000 consecutive Linux draws for each of five seeds, including the entry's seed 923. The captured randomized LSTM weights and indirect-map offsets then matched byte for byte: 20,621,872 snapshot bytes with the same SHA-256 on both systems.
@@ -46,6 +48,6 @@ The test harness saves binary hashes, source inventories, input hashes, traces a
 
 ## What to do with this result
 
-Use the Mac build to explore ideas quickly. Check any promising size change on Linux before treating it as progress toward the prize. The one-byte agreement on one small sample does not establish that candidates will rank the same on both systems. The Linux decoder still needs its own measured round trip in this recorded comparison, and full `enwik9` score, runtime, memory and packaging are separate gates.
+Use the Mac build to explore ideas quickly. Check any promising size change on Linux before treating it as progress toward the prize. The one-byte size gap on one small sample does not establish that candidates will rank the same on both systems. Full `enwik9` score, runtime, memory and packaging remain separate gates.
 
 **Next:** [Plan comparable experiments](experiment-playbook.md).

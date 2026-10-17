@@ -37,7 +37,7 @@ For performance claims, run several comparable trials on an idle machine. Do not
 
 ## Current next moves
 
-1. Finish the Linux development decoder's own round-trip check and keep the result with the existing encoder record.
+1. Use the saved Linux development decoder round trip as the first correctness gate; repeat it after relevant model changes.
 2. Measure more than one article-aware fixture on both platforms to see whether model changes rank consistently.
 3. Reproduce the pinned submission's full `enwik9` result and packaged size on native Linux x86-64, with exact restoration and resource measurements.
 4. Evaluate one promising predictor change against that frozen baseline. Investigate exact ARM floating-point parity where it changes a real decision; keep Linux as the scoring reference meanwhile.
