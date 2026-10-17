@@ -9,7 +9,7 @@ For a small model change, ask two questions: **does the decoder still restore th
 
 ## Use samples that exercise the real pipeline
 
-The competitive candidate expects its own text preprocessing and metadata. An arbitrary byte slice from `enwik8` is not a valid dictionary-mode input. The research tooling selects complete Wikipedia articles, applies the upstream `phda9` transform and verifies that the inverse restores the selected raw bytes. A manifest records source offsets, article count, hashes and transform details. The 19-article fixture has 117,161 raw bytes and 108,927 prepared bytes. A larger 172-article fixture has also passed preprocessing and inverse checks, but has not yet been compressed in the recorded comparison.
+The competitive candidate expects its own text preprocessing and metadata. An arbitrary byte slice from `enwik8` is not a valid dictionary-mode input. The research tooling selects complete Wikipedia articles, applies the upstream `phda9` transform and verifies that the inverse restores the selected raw bytes. A manifest records source offsets, article count, hashes and transform details. The 19-article fixture has 117,161 raw bytes and 108,927 prepared bytes. The larger 172-article fixture now has a [verified three-order comparison](article-order.md): source order produced 120,337 bytes, graph order 120,359, and the random control 120,936. All restored the same 1,033,597 original bytes. These fixture payloads are not full submission scores.
 
 Tiny samples help catch correctness problems. They are poor throughput tests for this engine because dictionary pretraining costs roughly 145 seconds per native encoding even on the small fixture. Use a small valid fixture for screening, then a larger and a held-out fixture before promoting a result. The research branch also measured a disjoint middle-of-`enwik8` fixture with the same article-aware transform; its manifest records where extraction actually began. Its Mac/Linux size gap reversed direction from the first fixture. Change one model idea at a time and keep the baseline binary and input fixed for each paired comparison.
 
@@ -37,6 +37,12 @@ python3 scripts/parity_history.py compare BEFORE AFTER
 For performance claims, run several comparable trials on an idle machine. Do not compare an emulated Linux time with a native Mac time as a hardware benchmark. Prize scoring needs the archive and required executable and arguments, not just the payload shown by a local fixture test.
 
 ## Current next moves
+
+The [cycle-inspired article-order experiment](article-order.md) adds a concrete
+example: the old 19-page fixture has no internal exact-title links, so testing
+link-guided ordering requires the larger article set. It also exposes an inherited
+redirect-block boundary that must be corrected before treating small fixtures
+as representative of the full pipeline.
 
 1. Use the saved Linux development decoder round trip as the first correctness gate; repeat it after relevant model changes.
 2. Compare actual model changes on both recorded fixtures and a larger article set. Both held-out self-decoders passed, but the two baseline fixtures alone do not tell us whether a changed model's gains transfer.
