@@ -4,10 +4,30 @@ import hashlib
 import tempfile
 import unittest
 
-from cmix_parity import decode_source, first_difference, validate_trace
+from cmix_parity import analyze_trace, decode_source, first_difference, validate_trace
 
 
 class ParityTests(unittest.TestCase):
+    def test_trace_analysis_separates_input_identity_from_probability(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            a,b=root/'native',root/'linux'
+            event=lambda kind,bit,p:bytes((kind,bit,0,0))+p.to_bytes(4,'little')
+            a.write_bytes(event(0,1,27039)+event(3,0,0))
+            b.write_bytes(event(0,1,27029)+event(3,0,0))
+            phases={name+'-encode':{'files':{'output':{'bytes':size}},'wall_seconds':1.0}
+                    for name,size in (('native',5),('linux',6))}
+            result=analyze_trace(a,b,phases)
+            self.assertTrue(result['event_type_and_input_bits_equal'])
+            self.assertEqual(result['probability_mismatches'],1)
+            self.assertEqual(result['first_mismatch_event'],0)
+            self.assertEqual(result['first_linux_probability'],27029)
+            b.write_bytes(event(0,0,27029)+event(3,0,0))
+            self.assertFalse(analyze_trace(a,b,phases)['event_type_and_input_bits_equal'])
+            b.write_bytes(b'broken')
+            with self.assertRaisesRegex(ValueError,'unequal'):
+                analyze_trace(a,b,phases)
+
     def test_stream_comparison_detects_prefix_and_chunk_boundary(self):
         with tempfile.TemporaryDirectory() as directory:
             a, b = Path(directory)/'a', Path(directory)/'b'

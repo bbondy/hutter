@@ -122,6 +122,38 @@ def first_difference(a,b,record_size=1):
             offset+=len(x)
 
 
+def analyze_trace(native,linux,phases):
+    """Summarize event identity and probability differences without retaining traces."""
+    length=native.stat().st_size
+    if length!=linux.stat().st_size or length%8:
+        raise ValueError('probability traces have unequal or incomplete records')
+    identities={name:hashlib.sha256() for name in ('native','linux')}
+    mismatches=0
+    first=None
+    with native.open('rb') as left, linux.open('rb') as right:
+        for event in range(length//8):
+            a,b=left.read(8),right.read(8)
+            identities['native'].update(a[:2]);identities['linux'].update(b[:2])
+            if a[4:]!=b[4:]:
+                mismatches+=1
+                if first is None:
+                    first=(event,int.from_bytes(a[4:],'little'),
+                           int.from_bytes(b[4:],'little'),a[1])
+    result={'events':{'native':length//8,'linux':length//8},
+            'event_type_and_input_bits_equal':identities['native'].digest()==identities['linux'].digest(),
+            'probability_mismatches':mismatches,
+            'first_mismatch_event':first[0] if first else None,
+            'first_native_probability':first[1] if first else None,
+            'first_linux_probability':first[2] if first else None,
+            'first_mismatch_bit':first[3] if first else None}
+    for name in ('native','linux'):
+        row=phases[name+'-encode']
+        result[name]={'event_identity_sha256':identities[name].hexdigest(),
+                      'payload_bytes':row['files']['output']['bytes'],
+                      'wall_seconds':row['wall_seconds']}
+    return result
+
+
 def validate_trace(trial, init_only=False, event_limit=0):
     """Require complete, nonempty state/trace files before accepting equality."""
     errors=[]
@@ -259,6 +291,13 @@ def compare(args):
     else:
         report['probabilities']=compare_file('probabilities.bin',8)
         report['payload']=compare_file('output')
+        if all(p['status']=='ok' for p in report['phases'].values()):
+            try:
+                report['trace_analysis']=analyze_trace(run/'native-encode/probabilities.bin',
+                                                       run/'linux-encode/probabilities.bin',report['phases'])
+                write_json(run/'trace-analysis.json',report['trace_analysis'])
+            except ValueError as error:
+                report['trace_analysis_error']=str(error)
         # Divergent adaptive streams cannot cross-decode reliably; diagnose the
         # first difference before spending hours decoding a known mismatch.
         matched=all(report[k].get('equal',False) for k in ('initialization','probabilities','payload'))
@@ -284,6 +323,8 @@ def compare(args):
         target=ROOT/'benchmarks/parity'/args.record
         target.mkdir(parents=True,exist_ok=False)
         shutil.copyfile(run/'report.json',target/'report.json')
+        if (run/'trace-analysis.json').is_file():
+            shutil.copyfile(run/'trace-analysis.json',target/'trace-analysis.json')
         for key in report['phases']:
             # Preserve diagnostics and timings, not large binaries or trace streams.
             for name in ('process.log','initial.jsonl','detail.jsonl'):

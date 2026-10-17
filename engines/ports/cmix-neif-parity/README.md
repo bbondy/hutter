@@ -64,6 +64,11 @@ lengths and FNV hashes. `probabilities.bin` has 8-byte little-endian records:
 kind, bit, two reserved zero bytes, and a u32 probability. Kinds 0/1/2/3 mean
 normal/forced/raw/known. Known and forced bits carry a zero probability marker.
 This observes coding, not every internal prediction during dictionary training.
+Completed full paired encodings also save `trace-analysis.json`: event counts,
+input/type identity hashes, probability mismatch count and first difference,
+plus each payload size and elapsed time. Unequal or incomplete trace lengths are
+reported as an analysis error in the main report without discarding the failed
+comparison.
 
 For a bounded numerical investigation, rebuild both platforms with current
 support files and add `compare --event-limit 256`. This retains full dictionary
