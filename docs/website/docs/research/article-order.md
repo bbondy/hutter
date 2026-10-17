@@ -164,6 +164,23 @@ receives no redirect prompt; the expected count is one fewer than the redirect
 prefix length when it is nonempty. The new comparisons are running, with a
 telemetry-disabled repeat to check that collecting counters preserves the archive.
 
+## Reconstructing the competitive order
+
+We have now run the pinned census, comment-index and article-order stages on the
+full, checksum-verified enwik9 file using a native Mac helper. The resulting
+**998,030,918-byte reordered main stream matches upstream's recorded digest**.
+All 243,425 page IDs are accounted for. The
+[saved validation](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-upstream-order/validation.json)
+records the hashes and process measurements. This validates those stages; no
+full-corpus compressed size is claimed.
+
+An important detail emerged: the 71,148-page front block contains 71,110 redirects
+and 38 excluded ordinary pages. Calendar pages and five other page classes also
+have prescribed placements. The next ordering comparison will use a projection
+of this exact upstream order onto our frozen article sets and preserve its
+special groups. Even that projection omits the surrounding corpus context, so a
+fixture improvement still needs a full-pipeline confirmation.
+
 ## Limits that matter before promotion
 
 The baseline here is **source order**, not upstream's competitive embedding order.

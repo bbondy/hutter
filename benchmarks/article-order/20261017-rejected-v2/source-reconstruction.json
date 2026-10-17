@@ -1,0 +1,12 @@
+{
+  "kind": "reconstruct-patched-build-source",
+  "repository_commit": "60afe2ddc2c73bb19d9e16453a0c9b402284412e",
+  "build_json_sha256": "7799823eadc7c9e9ca34975fb7d34db022b64fa14da955aacc27983dcb7426a4",
+  "differences": {
+    "changed": [],
+    "missing": [],
+    "added": []
+  },
+  "passed": true,
+  "scope": "Reapply committed overlay and patches to pinned upstream, then match every pre-compilation source hash recorded by the experimental build."
+}

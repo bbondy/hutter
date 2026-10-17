@@ -1,0 +1,303 @@
+{
+  "kind": "rejected-article-order-protocol",
+  "accepted_for_ranking": false,
+  "reason": "Runtime cutoff was configured, but standalone preparation and its inverse retained the release cutoff of 71148; ordinary articles remained escaped.",
+  "counter_correction": "The old validation expected R redirect prompts. Upstream omits the first page prompt, so the correct count is max(R-1,0). Original failed rows are retained unchanged.",
+  "size_scope": "Diagnostic payloads include a 16-byte development header; not corrected baselines or prize scores.",
+  "fixtures": {
+    "screen": {
+      "page_count": 172,
+      "redirect_prefix_count": 127,
+      "variants": {
+        "source": {
+          "diagnostic_payload_bytes": 120007,
+          "archive_sha256": "ce9b66e52ca382f4e56fff6e869afff9d361e887309bdc62c2567232950eb1a8",
+          "original_raw_roundtrip": true,
+          "raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+          "context_counters_match": true,
+          "observed_context": {
+            "alias": {
+              "articles": 172,
+              "titles": 170,
+              "blocks": 5,
+              "bytes": 134,
+              "links": 9460,
+              "links_piped": 2193,
+              "links_dropped": 0,
+              "redirects": 126,
+              "from_redirect": 19,
+              "from_linktext": 23
+            },
+            "z3": {
+              "articles": 46,
+              "usable_titles": 44,
+              "articles_with_mentions": 24,
+              "articles_with_prefix": 24,
+              "mentions_total": 91,
+              "prefix_tokens_total": 2320,
+              "chunks_total": 50,
+              "anchors": 10472,
+              "fed_tokens": 2320
+            },
+            "prompt": {
+              "articles": 172,
+              "redirect_prompt_pages": 126,
+              "redirect_prompt_tokens": 504,
+              "redirect_pages": 126,
+              "meta_pages": 172,
+              "alias_tokens": 0,
+              "alias_articles": 0,
+              "links": 0,
+              "links_piped": 0,
+              "redirects": 0,
+              "fed_tokens": 12012
+            }
+          },
+          "metadata_sha256": "d09b11746aa06cd0ac13c8fdf8acfc7e47f5ac27233dcaad660a8e2dc4a0e082",
+          "results_sha256": "789d44db1e179aaba1b716e13bf69ac17dd174f9244448d442bd72db15772354"
+        },
+        "graph": {
+          "diagnostic_payload_bytes": 120034,
+          "archive_sha256": "abd113a93e62d20b5961ec161f0ae39a7a336942d2358c4b58ec9e1efbc7b7fd",
+          "original_raw_roundtrip": true,
+          "raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+          "context_counters_match": true,
+          "observed_context": {
+            "alias": {
+              "articles": 172,
+              "titles": 170,
+              "blocks": 7,
+              "bytes": 164,
+              "links": 9460,
+              "links_piped": 2193,
+              "links_dropped": 0,
+              "redirects": 126,
+              "from_redirect": 19,
+              "from_linktext": 38
+            },
+            "z3": {
+              "articles": 46,
+              "usable_titles": 44,
+              "articles_with_mentions": 26,
+              "articles_with_prefix": 26,
+              "mentions_total": 113,
+              "prefix_tokens_total": 2898,
+              "chunks_total": 62,
+              "anchors": 10472,
+              "fed_tokens": 2898
+            },
+            "prompt": {
+              "articles": 172,
+              "redirect_prompt_pages": 126,
+              "redirect_prompt_tokens": 504,
+              "redirect_pages": 126,
+              "meta_pages": 172,
+              "alias_tokens": 0,
+              "alias_articles": 0,
+              "links": 0,
+              "links_piped": 0,
+              "redirects": 0,
+              "fed_tokens": 12012
+            }
+          },
+          "metadata_sha256": "00a3509032a77f5d440ae1055dc6c71d6480a86aeeb02dab4c287500b17c7107",
+          "results_sha256": "29f9a6de70ef3258a4b38bf3f044bedc237421dfb9333bcc052a3dc90cd111df"
+        },
+        "random": {
+          "diagnostic_payload_bytes": 120164,
+          "archive_sha256": "de37579523eb05d5e4bbb6c39ab32f563399d1f8e9153bcd3ed37bbcd0f0abca",
+          "original_raw_roundtrip": true,
+          "raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+          "context_counters_match": true,
+          "observed_context": {
+            "alias": {
+              "articles": 172,
+              "titles": 170,
+              "blocks": 7,
+              "bytes": 167,
+              "links": 9460,
+              "links_piped": 2193,
+              "links_dropped": 0,
+              "redirects": 126,
+              "from_redirect": 19,
+              "from_linktext": 43
+            },
+            "z3": {
+              "articles": 46,
+              "usable_titles": 44,
+              "articles_with_mentions": 24,
+              "articles_with_prefix": 24,
+              "mentions_total": 99,
+              "prefix_tokens_total": 2320,
+              "chunks_total": 53,
+              "anchors": 10472,
+              "fed_tokens": 2320
+            },
+            "prompt": {
+              "articles": 172,
+              "redirect_prompt_pages": 126,
+              "redirect_prompt_tokens": 504,
+              "redirect_pages": 126,
+              "meta_pages": 172,
+              "alias_tokens": 0,
+              "alias_articles": 0,
+              "links": 0,
+              "links_piped": 0,
+              "redirects": 0,
+              "fed_tokens": 13651
+            }
+          },
+          "metadata_sha256": "fcd9e9e849b0820fd1eec3f21f305d0d2346ba74d488ae854bcdbad9ca05f0a2",
+          "results_sha256": "25139f4b086d261a10207717824a69d81331213ad885a62626354dd1b004834e"
+        }
+      }
+    },
+    "holdout": {
+      "page_count": 138,
+      "redirect_prefix_count": 28,
+      "variants": {
+        "source": {
+          "diagnostic_payload_bytes": 118587,
+          "archive_sha256": "c249787be52c7b467372b48d654acfebc5feed2e682da4500f373a78da13d1e0",
+          "original_raw_roundtrip": true,
+          "raw_sha256": "06456d1767a9ccbd78d7a7db4020da8323afeaa5abe7cf3f77fcaf0b10b2d740",
+          "context_counters_match": true,
+          "observed_context": {
+            "alias": {
+              "articles": 138,
+              "titles": 136,
+              "blocks": 1,
+              "bytes": 9,
+              "links": 9056,
+              "links_piped": 1529,
+              "links_dropped": 0,
+              "redirects": 27,
+              "from_redirect": 4,
+              "from_linktext": 2
+            },
+            "z3": {
+              "articles": 111,
+              "usable_titles": 109,
+              "articles_with_mentions": 33,
+              "articles_with_prefix": 33,
+              "mentions_total": 40,
+              "prefix_tokens_total": 1359,
+              "chunks_total": 40,
+              "anchors": 10022,
+              "fed_tokens": 1359
+            },
+            "prompt": {
+              "articles": 138,
+              "redirect_prompt_pages": 27,
+              "redirect_prompt_tokens": 108,
+              "redirect_pages": 27,
+              "meta_pages": 138,
+              "alias_tokens": 0,
+              "alias_articles": 0,
+              "links": 0,
+              "links_piped": 0,
+              "redirects": 0,
+              "fed_tokens": 17880
+            }
+          },
+          "metadata_sha256": "002ce7a1c9fa1c80f47c3ed686f170044e0c6164b71a3940ba5e5a9c788a30cd",
+          "results_sha256": "8805a017fa68ca3f938c074865deea82fdebc778d5f096a05ef469fd7378da08"
+        },
+        "graph": {
+          "diagnostic_payload_bytes": 118622,
+          "archive_sha256": "873eb00c8847c9184cd692fbf108c31a718c6e47d9944ab51504f75bc4e7ec9f",
+          "original_raw_roundtrip": true,
+          "raw_sha256": "06456d1767a9ccbd78d7a7db4020da8323afeaa5abe7cf3f77fcaf0b10b2d740",
+          "context_counters_match": true,
+          "observed_context": {
+            "alias": {
+              "articles": 138,
+              "titles": 136,
+              "blocks": 1,
+              "bytes": 9,
+              "links": 9056,
+              "links_piped": 1529,
+              "links_dropped": 0,
+              "redirects": 27,
+              "from_redirect": 4,
+              "from_linktext": 2
+            },
+            "z3": {
+              "articles": 111,
+              "usable_titles": 109,
+              "articles_with_mentions": 35,
+              "articles_with_prefix": 35,
+              "mentions_total": 45,
+              "prefix_tokens_total": 1531,
+              "chunks_total": 45,
+              "anchors": 10022,
+              "fed_tokens": 1531
+            },
+            "prompt": {
+              "articles": 138,
+              "redirect_prompt_pages": 27,
+              "redirect_prompt_tokens": 108,
+              "redirect_pages": 27,
+              "meta_pages": 138,
+              "alias_tokens": 0,
+              "alias_articles": 0,
+              "links": 0,
+              "links_piped": 0,
+              "redirects": 0,
+              "fed_tokens": 17880
+            }
+          },
+          "metadata_sha256": "729033cb0bfc0cd39e0a1720d6cae140a2bb6f3569796e056ac37ff5f0522164",
+          "results_sha256": "48c9deed460c40c00a4f9267e7fcf0d30c24a9b4e9b6c225ea22fdeb124839bb"
+        },
+        "random": {
+          "diagnostic_payload_bytes": 118866,
+          "archive_sha256": "430b0f288612b13b88c789b0d8941e9c9af7a9edd8299dc849db992bfc5a117a",
+          "original_raw_roundtrip": true,
+          "raw_sha256": "06456d1767a9ccbd78d7a7db4020da8323afeaa5abe7cf3f77fcaf0b10b2d740",
+          "context_counters_match": true,
+          "observed_context": {
+            "alias": {
+              "articles": 138,
+              "titles": 136,
+              "blocks": 2,
+              "bytes": 12,
+              "links": 9056,
+              "links_piped": 1529,
+              "links_dropped": 0,
+              "redirects": 27,
+              "from_redirect": 4,
+              "from_linktext": 5
+            },
+            "z3": {
+              "articles": 111,
+              "usable_titles": 109,
+              "articles_with_mentions": 32,
+              "articles_with_prefix": 32,
+              "mentions_total": 43,
+              "prefix_tokens_total": 1395,
+              "chunks_total": 42,
+              "anchors": 10022,
+              "fed_tokens": 1395
+            },
+            "prompt": {
+              "articles": 138,
+              "redirect_prompt_pages": 27,
+              "redirect_prompt_tokens": 108,
+              "redirect_pages": 27,
+              "meta_pages": 138,
+              "alias_tokens": 0,
+              "alias_articles": 0,
+              "links": 0,
+              "links_piped": 0,
+              "redirects": 0,
+              "fed_tokens": 17802
+            }
+          },
+          "metadata_sha256": "3a1c5a17625d1473a00ad7a5195904b6fe9041cf3514a04d99026db3608ef443",
+          "results_sha256": "ca04f46206bd7da70a796b8035f396c09a86519f7b37bf87c57f8871a350b409"
+        }
+      }
+    }
+  }
+}

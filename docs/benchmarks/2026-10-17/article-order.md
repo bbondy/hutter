@@ -258,3 +258,32 @@ reject a wrong declared page count. The frozen raw pages and all three orders
 are unchanged. Prepared streams shed exactly 45 escape bytes on the screen and
 109 on the disjoint fixture; one ordinary body in the latter needed no escape.
 This is a protocol correction, not an ordering gain.
+
+## Full upstream order reconstructed natively
+
+The new `prepare_order.cpp` driver calls the pinned census transform, fixed
+intro/main/coda split, comment-index transform and article reorder on verified
+enwik9. On this Mac it reproduces the upstream acceptance digest for the entire
+998,030,918-byte reordered main stream:
+`28ca879dcfdafe7833b042f58cfee517` (MD5), with independently saved SHA-256
+`b30426195038b77c57dd207db613232c1058523176399f7b4800647f6ed28d7e`.
+The [saved validation](../../../benchmarks/article-order/20261017-upstream-order/validation.json)
+contains input, source, compiler, residual, executable and page-index provenance.
+The run took 94 seconds and indexed all 243,425 unique page IDs. This validates
+these preprocessing/order stages; it is not a full compression result.
+
+The front block contains **71,110 redirects plus 38 excluded ordinary pages**.
+Its physical length is 71,148. The order also preserves 3,417 calendar pages and
+five special article classes. A faithful projected-order experiment must preserve
+these groups, including excluded pages, instead of assuming the front block is
+purely redirects. The next comparison will project the exact upstream order
+onto the frozen raw article sets, then test limited graph-guided changes.
+
+The [v2 rejection record](../../../benchmarks/article-order/20261017-rejected-v2/rejection.json)
+retains all six exact raw round trips, the failed original counter checks and the
+helper-configuration issue. Its telemetry-disabled repeat produced an identical
+archive. The corrected v3 Mac/Linux builds also pass the saved
+[initialization check](../../../benchmarks/parity/20261017-fixture-v3-init/report.json).
+The native and Linux binaries are respectively byte-identical to their preceding
+v2 builds; the v3 preparation helper and input streams changed. Initialization
+agreement still does not prove cross-decoding or Linux candidate ranking.

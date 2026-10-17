@@ -1,0 +1,42 @@
+{
+  "kind": "context-telemetry-invariance",
+  "baseline": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/order-screen-source-v2",
+  "baseline_metadata_sha256": "d09b11746aa06cd0ac13c8fdf8acfc7e47f5ac27233dcaad660a8e2dc4a0e082",
+  "binary_sha256": "888b1baf9393401e810c68f899e84ab25ce5082cf5e69f6a8dc1816d19285adc",
+  "input_sha256": "416aa9e5d2ab99b7be7734ea9692dd43e0e28e9a8e6f7c34ecb743f26c2487a0",
+  "manifest_sha256": "260a33211fc1f179154c60981ce805c4f02cc608d4450f1a8387217740c14351",
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "script_sha256": "71539da6df3c7fc7e02fb8f7940bb47cd356696dfd22b15efdbd99dff8c82501",
+  "context_report": "0",
+  "compress": {
+    "command": [
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/context-invariance-v2/cmix",
+      "--native-corpus",
+      "172",
+      "127",
+      "-c",
+      "dictionary.dic",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/order-screen-v2/source.ready",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/context-invariance-v2/payload.cmix"
+    ],
+    "status": "ok",
+    "exit_code": 0,
+    "wall_seconds": 633.4451892079996,
+    "peak_rss_bytes": 6002507776,
+    "log": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/context-invariance-v2/compress.log"
+  },
+  "log_sha256": "e082cce5d58dbd547247184c191112b18d06b08b6d49c7fb8f7629df21c4fb8e",
+  "archive_sha256": "ce9b66e52ca382f4e56fff6e869afff9d361e887309bdc62c2567232950eb1a8",
+  "archive_bytes": 120007,
+  "archive_matches": true,
+  "scope": "Telemetry invariance on rejected v2 protocol; same binary also used by v3, but this is not a v3 input repeat."
+}

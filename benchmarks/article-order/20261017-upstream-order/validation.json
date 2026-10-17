@@ -1,0 +1,28 @@
+{
+  "kind": "upstream-order-reconstruction-validation",
+  "metadata_sha256": "6d5bf1d61afa6603f5f5a3e6d085d15d50dfe2282153e802131b4b626b201661",
+  "input_sha256": "159b85351e5f76e60cbe32e04c677847a9ecba3adc79addab6f4c6c7aa3744bc",
+  "reordered_bytes": 998030918,
+  "reordered_md5": "28ca879dcfdafe7833b042f58cfee517",
+  "reordered_sha256": "b30426195038b77c57dd207db613232c1058523176399f7b4800647f6ed28d7e",
+  "order_index_sha256": "2a445b5bb10e65667fe603d7e421baa5888251b99fb42d658000902a1de9fab0",
+  "page_count": 243425,
+  "unique_page_ids": 243425,
+  "class_counts": {
+    "8": 71110,
+    "6": 38,
+    "0": 110508,
+    "7": 3417,
+    "1": 36519,
+    "2": 13908,
+    "3": 7448,
+    "4": 320,
+    "5": 157
+  },
+  "upstream_digest_matches": true,
+  "front_prefix_classes": {
+    "8": 71110,
+    "6": 38
+  },
+  "log_sha256": "03d78b12e7685962e388a3bf665ea9660418839654d2235353b2007a912d9c75"
+}
