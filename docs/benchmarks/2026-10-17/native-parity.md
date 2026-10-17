@@ -50,8 +50,17 @@ payload byte difference is offset 29. See the
 [full comparison](../../../benchmarks/parity/20261017-probabilities-v1/report.json)
 and [trace analysis](../../../benchmarks/parity/20261017-probabilities-v1/trace-analysis.json).
 Cross-decoding was deliberately skipped after this failed encoding gate;
-interoperability has not been demonstrated. This run also did not test the
-Linux development decoder's own round trip.
+interoperability has not been demonstrated.
+
+The Linux development decoder was subsequently tested against **its own**
+15,222-byte archive, using the same 19-article manifest and binary. It restored
+all 108,927 prepared bytes exactly. Its captured initialization and complete
+probability trace matched the Linux encoder, and the recorded validation passed.
+The emulated decode took 796.66 wall seconds with maximum resident set size
+6,191,896 KiB as reported by `/usr/bin/time -v`. See the
+[decoder-only record](../../../benchmarks/parity/20261017-linux-selfdecode-v1/report.json)
+and [process log](../../../benchmarks/parity/20261017-linux-selfdecode-v1/decode-process.log).
+This is same-platform correctness, not cross-platform archive compatibility.
 
 The native trace-disabled run produced the identical 15,221-byte payload and
 passed decompression. Inverse phda9 reconstruction restored all 117,161 raw bytes
@@ -105,8 +114,9 @@ predictor starts identically.
 ## Next steps toward the prize
 
 1. Keep the pinned Linux implementation as the authoritative score baseline.
-   Validate its development decoder, then reproduce the complete enwik9 pipeline
-   and packaged score on native x86-64 Linux, with runtime and peak-memory checks.
+   Its development decoder passed the first fixture. Reproduce the complete
+   enwik9 pipeline and packaged score on native x86-64 Linux, with runtime and
+   peak-memory checks.
 2. Evaluate larger and held-out article fixtures on both platforms. A one-byte
    difference on one small fixture does not demonstrate that a model change's
    gains transfer. Confirm every promising Mac experiment against Linux.
