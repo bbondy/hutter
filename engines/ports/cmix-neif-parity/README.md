@@ -9,7 +9,12 @@ The Linux image must contain the published `comp9` at `/opt/cmix-build/comp9`,
 Python 3, LLVM 18, make and `/usr/bin/time`. The harness verifies the published
 binary's SHA-256, then pins the local image ID. Our development comparison binary
 is rebuilt with the original x86 kernels, paging and upstream PGO/LTO/FP flags.
-It adds the same article-count parameter as the Mac port plus optional tracing.
+It shares the Mac port's development corpus configuration and context reports,
+plus optional probability tracing. New article-order manifests declare both total
+pages and the redirect prefix; both platforms use `--native-corpus N R` and its
+16-byte checked header. Old manifests still use legacy `--native-pages N`.
+The runner rejects corrected manifests paired with a build lacking this support.
+Fixture comparisons refuse different phase settings, even on identical inputs.
 Instrumentation changes control flow, so some inherited PGO counts are rejected
 by LLVM. This binary is not the byte-identical published executable.
 

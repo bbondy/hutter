@@ -92,7 +92,10 @@ def build_linux(args):
         docker(args,'cp',source,f'{cid}:/work/source')
         t=time.monotonic()
         with (destination/'build.log').open('wb') as log:
-            docker(args,'start','-a',cid,stdout=log,stderr=subprocess.STDOUT,timeout=args.timeout)
+            try:
+                docker(args,'start','-a',cid,stdout=log,stderr=subprocess.STDOUT,timeout=args.timeout)
+            except subprocess.CalledProcessError:
+                pass  # Save the container's exit status and log before reporting failure.
         code=int(output(args,'inspect','--format','{{.State.ExitCode}}',cid))
         metadata.update(exit_code=code,wall_seconds=time.monotonic()-t)
         if code==0:

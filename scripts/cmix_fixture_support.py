@@ -59,7 +59,8 @@ def instrument_fixture(source):
 
     def include(name):
         path = source / "src" / name
-        path.write_text('#include "native_corpus.h"\n' + path.read_text())
+        relative = "../" * (len(Path(name).parts) - 1)
+        path.write_text(f'#include "{relative}native_corpus.h"\n' + path.read_text())
 
     for name in ("redirect_table.h", "tf1/tf1_prompt.h"):
         include(name)
