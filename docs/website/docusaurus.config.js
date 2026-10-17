@@ -6,7 +6,7 @@ const config = {
   tagline: 'Lossless compression algorithms and Rust implementation notes',
   url: 'https://bbondy.github.io',
   baseUrl: '/hutter/',
-  favicon: 'img/logo.svg',
+  favicon: 'img/hutter-project-logo.png',
   organizationName: 'bbondy',
   projectName: 'hutter',
   onBrokenLinks: 'throw',
@@ -38,7 +38,7 @@ const config = {
     },
     navbar: {
       title: 'Hutter compression guide',
-      logo: {alt: 'Hutter compression guide', src: 'img/logo.svg'},
+      logo: {alt: 'Hutter project logo', src: 'img/hutter-project-logo.png'},
       items: [
         {type: 'docSidebar', sidebarId: 'guide', label: 'Guide', position: 'left'},
         {to: '/course/path', label: 'Course', position: 'left'},

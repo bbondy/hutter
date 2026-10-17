@@ -35,6 +35,10 @@ html[data-theme='dark'] {
   letter-spacing: -.025em;
 }
 
+.navbar__logo img {
+  border-radius: 6px;
+}
+
 .theme-doc-markdown h1,
 .theme-doc-markdown h2,
 .theme-doc-markdown h3 {
