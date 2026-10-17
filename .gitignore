@@ -4,3 +4,6 @@
 /data/enwik8.zip
 /data/enwik9
 /data/enwik9.zip
+/docs/website/node_modules/
+/docs/website/build/
+/docs/website/.docusaurus/

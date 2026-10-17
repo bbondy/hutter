@@ -1,0 +1,38 @@
+---
+id: intro
+slug: /
+title: Hutter compression guide
+description: Lossless compression concepts, codec implementations, and development instructions.
+---
+
+# Hutter compression guide
+
+This site explains lossless compression using the codecs in the [Hutter Rust repository](https://github.com/bbondy/hutter). It covers the underlying concepts, the implementation of each codec, the archive formats, and how to make and test changes. It assumes no prior knowledge of compression.
+
+The repository is an experimental workspace for the [Hutter Prize](https://prize.hutter1.net/). Its codecs work on arbitrary byte files, but the project is not yet a competitive prize submission.
+
+## Read in order
+
+The [course sequence](course/path.md) starts with files and bits, then explains how Huffman, LZ77, and predictive codecs represent the same data in different ways. Later chapters trace those ideas through the Rust source. Concepts are defined before they are used; the codebase chapters are separate from the introductory material.
+
+## Start here
+
+| If you want to… | Read… |
+| --- | --- |
+| Run the program and verify that decompression works | [Your first round trip](start/quickstart.md) |
+| Follow the complete sequence | [Course sequence](course/path.md) |
+| Understand the repository and the Hutter Prize | [Project and Hutter Prize](start/project.md) |
+| Learn the basic ideas from the beginning | [What compression does](foundations/what-is-compression.md), then [bytes and bits](foundations/bytes-and-bits.md) |
+| Change a small input and see how three methods respond | [Interactive examples](lab.mdx) |
+| Understand a specific algorithm | [Huffman](algorithms/huffman.md), [LZ77](algorithms/lz77.md), [byte PPM](algorithms/byte-ppm.md), or the [full codec list](reference/codecs.md) |
+| Understand the project layout and follow the code | [Codebase overview](codebase/overview.md), then [follow one file](codebase/flow.md) |
+| Find a module or make a change | [Source map](codebase/map.md) and [developer onboarding](contribute/onboarding.md) |
+| Read the source but are new to Rust | [Rust notation used here](codebase/rust-primer.md) |
+
+## What the codecs have in common
+
+A compressor reads bytes and writes an archive. A decoder reads that archive and must reproduce the original bytes exactly. Some codecs describe repeated bytes with shorter codes; some point backward to repeated sequences; others predict the next byte or bit from what came before.
+
+The encoder and decoder must use the same model state at each step. When a model learns from a byte, the decoder must update it at the same point as the encoder. The [archive walkthrough](codebase/flow.md) shows where this happens in the Rust code.
+
+The [interactive examples](lab.mdx) use simplified models to illustrate individual ideas. The algorithm pages distinguish those examples from the repository's actual archive implementations.

@@ -1,0 +1,23 @@
+---
+title: Interactive examples
+description: Change a short input and watch prefix codes, LZ77 references, and context predictions change.
+---
+
+import CompressionLab from '@site/src/components/CompressionLab';
+
+# Interactive examples
+
+The worked-input buttons show several short cases; the text box also accepts any input. The tabs show three compression ideas for the current bytes. These examples use UTF-8 bytes, just like the Rust codecs. The implementations here are simplified; their bit counts do **not** include an archive header or model cost.
+
+<CompressionLab />
+
+## Worked inputs
+
+- With `AAAABBCD`, `A` occurs four times, so the toy Huffman tree gives it a short code. The [prefix-code chapter](foundations/prefix-codes.md) shows the tree construction.
+- With `abcabcabc`, the first `abc` is emitted as literals; later bytes can be represented by a backward match. The [LZ77 chapter](algorithms/lz77.md) explains the copy rule.
+- With `ABABABAB`, the last byte is `B`, and every earlier `B` with a following byte was followed by `A`. The next-byte view therefore favors `A`; [byte PPM](algorithms/byte-ppm.md) adds escape and fallback behavior missing from this toy view.
+- With `ééé`, each `é` occupies two UTF-8 bytes, so the display shows six bytes for three visible letters. [Bytes and bits](foundations/bytes-and-bits.md) explains the distinction.
+
+## From toy to source
+
+These examples show one part of an algorithm at a time. The Rust implementation also has to write a stable archive format, handle empty input, agree exactly with the decoder about updates, and keep its counts within finite integer limits. [Follow one archive](codebase/flow.md) to see those additional responsibilities.

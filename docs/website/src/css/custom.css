@@ -1,0 +1,174 @@
+:root {
+  --ifm-color-primary: #0d776a;
+  --ifm-color-primary-dark: #096b60;
+  --ifm-color-primary-darker: #08655b;
+  --ifm-color-primary-darkest: #064e47;
+  --ifm-color-primary-light: #0f8a7a;
+  --ifm-color-primary-lighter: #189785;
+  --ifm-color-primary-lightest: #44b19d;
+  --ifm-background-color: #fffdf8;
+  --ifm-font-family-base: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ifm-heading-font-family: Georgia, Cambria, 'Times New Roman', serif;
+  --ifm-code-font-size: 92%;
+  --ifm-navbar-background-color: #fffdf8;
+  --ifm-menu-color-background-active: #e5f5ef;
+}
+
+html[data-theme='dark'] {
+  --ifm-color-primary: #79dcc4;
+  --ifm-color-primary-dark: #59caae;
+  --ifm-color-primary-darker: #4fc1a5;
+  --ifm-color-primary-darkest: #31a98d;
+  --ifm-color-primary-light: #96e7d2;
+  --ifm-color-primary-lighter: #a6ebda;
+  --ifm-color-primary-lightest: #c7f4e8;
+  --ifm-background-color: #10202b;
+  --ifm-navbar-background-color: #10202b;
+  --ifm-menu-color-background-active: #1a3940;
+}
+
+.navbar {
+  box-shadow: 0 1px 0 rgba(66, 88, 87, .17);
+}
+
+.navbar__title {
+  letter-spacing: -.025em;
+}
+
+.theme-doc-markdown h1,
+.theme-doc-markdown h2,
+.theme-doc-markdown h3 {
+  letter-spacing: -.03em;
+}
+
+.theme-doc-markdown h1 {
+  font-size: clamp(2.25rem, 5vw, 3.65rem);
+}
+
+.theme-doc-markdown p,
+.theme-doc-markdown li {
+  line-height: 1.75;
+}
+
+.theme-doc-markdown table th,
+.theme-doc-markdown table td {
+  text-align: left;
+  vertical-align: top;
+}
+
+.theme-doc-markdown table {
+  width: 100%;
+}
+
+.lab-shell {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  background: var(--ifm-background-surface-color);
+}
+
+.lab-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: .8rem;
+  padding: 1.2rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.lab-controls label {
+  font-weight: 700;
+  flex: 1 1 18rem;
+}
+
+.lab-controls textarea {
+  display: block;
+  width: 100%;
+  min-height: 5rem;
+  margin-top: .35rem;
+  padding: .7rem;
+  border: 1px solid var(--ifm-color-emphasis-400);
+  border-radius: 8px;
+  color: var(--ifm-font-color-base);
+  background: var(--ifm-background-color);
+  font: inherit;
+}
+
+.lab-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  padding: .8rem 1.2rem 0;
+}
+
+.lab-presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem;
+  padding: .8rem 1.2rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.lab-presets span {
+  font-weight: 700;
+  margin-right: .3rem;
+}
+
+.lab-presets button {
+  border: 1px solid var(--ifm-color-emphasis-400);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  padding: .3rem .55rem;
+  cursor: pointer;
+}
+
+.lab-presets button[aria-pressed='true'] {
+  border-color: var(--ifm-color-primary);
+  background: var(--ifm-menu-color-background-active);
+}
+
+.lab-example-note {
+  flex-basis: 100%;
+  margin: .25rem 0 0;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.lab-tabs button {
+  border: 1px solid var(--ifm-color-emphasis-400);
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  border-radius: 999px;
+  padding: .4rem .8rem;
+  cursor: pointer;
+}
+
+.lab-tabs button[aria-pressed='true'] {
+  background: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-background-color);
+}
+
+.lab-panel {
+  padding: 1.2rem;
+  overflow-x: auto;
+}
+
+.lab-panel h3 {
+  margin-top: .25rem;
+}
+
+.lab-panel table {
+  width: 100%;
+}
+
+.lab-panel code {
+  word-break: break-all;
+}
+
+.lab-note {
+  font-size: .88rem;
+  color: var(--ifm-color-emphasis-700);
+}
