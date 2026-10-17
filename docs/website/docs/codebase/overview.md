@@ -5,7 +5,7 @@ description: Where the Rust program starts, how codec modules fit together, and 
 
 # Codebase overview
 
-This section is for reading or changing the Rust program. It is separate from the [compression foundations](../foundations/what-is-compression.md): you can learn the algorithms without reading Rust. If you do want to work on the code, begin here and then follow one archive through its encoder and decoder.
+This section is for reading or changing the Rust program. The [competitive research track](../research/competitive-baseline.md) studies a separate published C++ compressor on a research branch. The foundations apply to both, but the source walkthroughs here describe the Rust codecs. If you want to work on that code, begin here and then follow one archive through its encoder and decoder.
 
 ## Repository layout
 

@@ -57,6 +57,15 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Prize research',
+      items: [
+        'research/competitive-baseline',
+        'research/native-parity',
+        'research/experiment-playbook',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Reference',
       items: ['reference/codecs', 'reference/glossary'],
     },
