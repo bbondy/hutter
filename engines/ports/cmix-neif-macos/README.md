@@ -130,7 +130,10 @@ the Linux build reduced it. The shared `cmix_preprocess_support.py` patch makes
 those two operations explicitly unsigned in disposable Mac/Linux source copies.
 The original code triggers the signed-overflow sanitizer; the fix passes at
 `-O2` and `-Oz`. A corrected Mac helper reproduces the Linux screen input and
-restores its raw XML exactly. Full corrected Mac stream validation is pending.
+restores its raw XML exactly. The corrected Mac preparation-only tool now also
+matches both full upstream coder-stream hashes, as does native Linux. Evidence
+is saved under `benchmarks/pipeline/20261017-native-stream-v3` and
+`20261017-linux-stream-v1`. This does not establish a full compressed score.
 
 Earlier v1–v3 fixtures remain valid native round trips but use the old entity
 representation. Regenerate prepared fixtures and establish fresh baselines

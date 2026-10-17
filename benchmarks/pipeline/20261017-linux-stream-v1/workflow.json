@@ -1,0 +1,8 @@
+{
+  "run_id": 39080076414,
+  "url": "https://github.com/bbondy/hutter/actions/runs/39080076414",
+  "source_commit": "a4cd7942412025883c992b554c04f25ba16a9b04",
+  "job": "coder-stream",
+  "conclusion": "success",
+  "scope": "Native Linux preparation only; two separate fixture jobs failed their input replay checks."
+}

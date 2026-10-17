@@ -1,0 +1,8 @@
+{
+  "recipe_commit": "f58ca74cd0a6ff13ffa9d70d5ac77a06b2d82cfe",
+  "source_sha256": {
+    "scripts/native_stream.py": "070380ce71af51944d3dfa45734a315d90d431dce398c569dd686db5308c87d3",
+    "scripts/cmix_preprocess_support.py": "fa1b6a6ebc5579a7726ec32e7e6f34c8c23cedde75ed9f8c7ed5f779d2a8f544"
+  },
+  "note": "Run began before its exact driver/patcher recipe was committed; original run metadata and source inventories are retained."
+}

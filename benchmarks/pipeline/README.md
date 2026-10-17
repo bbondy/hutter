@@ -15,10 +15,18 @@ runtime/memory eligibility for the compressor.
   upstream's `TRAIN_MODE=1` tool, adapted with the Mac port, produced 559,634,858
   packed bytes versus the recorded 552,750,198. The unpacked form is also
   6,884,660 bytes larger. Both expected hashes fail. This is a preprocessing
-  stream, not a compressed archive. Cause and Linux behavior remain unverified.
+  stream, not a compressed archive. The cause was subsequently located in two
+  signed-overflow-dependent XML entity expressions; the failed record is kept.
   The exact driver source and generated patch are saved alongside the failed
   result because this first run used an uncommitted driver. Stage hashes help
   locate the disagreement without modifying this diagnostic record.
+
+- [Native Linux full stream](20261017-linux-stream-v1/report.json): the untouched
+  upstream training tool reproduces both reference hashes on Ubuntu x86-64.
+- [Corrected Mac full stream](20261017-native-stream-v3/report.json): explicit
+  unsigned entity arithmetic restores the identical 555,771,398-byte unpacked
+  and 552,750,198-byte packed streams. Its supplemental recipe record verifies
+  the driver and patcher against their subsequent signed source commit.
 
 To repeat dictionary derivation after building the native development source:
 
@@ -41,10 +49,16 @@ The full-stream diagnostic can be repeated with:
 
 ```sh
 python3 scripts/native_stream.py --enwik9 data/enwik9 \
-  --native build/native-fixture-v3 --output build/native-stream-check
+  --native build/native-fixture-v4 --output build/native-stream-check --portable-entities
 ```
 
 It applies the pinned upstream training patch before the Mac port, changing only
 one patch-context include to compose them without fuzzy hunk matching. It stops
 after preprocessing and compares both forms with the hashes in upstream's
 `training/tf/1_dump/README.md`. A successful build alone does not pass the check.
+
+On native Linux x86-64, omit `--native`. Omitting `--portable-entities` replays the
+original upstream arithmetic; it passed with the recorded Linux compiler and
+failed with the recorded Mac compiler. The fix is applied automatically in new
+development model builds, while `native_stream.py` retains an explicit option
+so the original diagnostic remains reproducible.
