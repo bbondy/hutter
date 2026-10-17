@@ -28,6 +28,7 @@ jobs:
       - name: Verify pinned sources and download official fixture corpus
         run: |
           python3 scripts/competitive.py verify
+          python3 -m unittest discover -s scripts -p 'test_*.py'
           make enwik8 ENWIK8_URL=https://mattmahoney.net/dc/enwik8.zip
       - name: Compare all frozen model variants on one host
         run: python3 scripts/ci_link_context.py --role "${{ matrix.role }}" --enwik8 data/enwik8
@@ -52,7 +53,7 @@ jobs:
       - name: Download and verify full corpus
         run: make enwik9 ENWIK9_URL=https://mattmahoney.net/dc/enwik9.zip
       - name: Compare exact coder stream with upstream reference
-        run: python3 scripts/native_stream.py --enwik9 data/enwik9 --output build/linux-stream-v1 --jobs 2
+        run: python3 scripts/native_stream.py --enwik9 data/enwik9 --output build/linux-stream-v1 --jobs 2 --portable-entities
       - name: Preserve preparation evidence including mismatches
         if: always()
         uses: actions/upload-artifact@v4

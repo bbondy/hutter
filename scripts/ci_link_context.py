@@ -41,9 +41,9 @@ def main():
             subprocess.run([sys.executable, "scripts/linux_cmix.py", "build", "--variant", name,
                             "--output", str(build), "--jobs", "2"], cwd=ROOT, check=True)
             if manifest is None:
-                source_manifest = ROOT / "benchmarks/article-order/20261017-projection-protocol-v1" / (args.role + ".json")
+                source_manifest = ROOT / "benchmarks/article-order/20261017-projection-protocol-v2" / (args.role + ".json")
                 manifest = replay(source_manifest, args.enwik8, build, work / "fixture")
-                original_protocol = ROOT / "benchmarks/model-variants/20261017-protocol-v1/protocol.json"
+                original_protocol = ROOT / "benchmarks/model-variants/20261017-protocol-v2/protocol.json"
                 protocol = json.loads(original_protocol.read_text())
                 protocol["parent_protocol_sha256"] = digest(original_protocol)
                 protocol["platform_scope"] = "Native Linux x86-64, all models serial on one CI host; not a full prize run"

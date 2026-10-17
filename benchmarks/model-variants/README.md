@@ -4,7 +4,12 @@ Save protocols before measuring, then retain every candidate's input, build,
 asset, archive and restoration evidence, including regressions. These runs use
 the native development port and measure fixture payloads, not prize scores.
 
-The first protocol changes one link-context parameter at a time on the exact
+Protocol v2 establishes fresh baselines after the XML entity portability fix.
+It keeps the same raw pages, permutations and model settings as v1; only prepared
+bytes change to match Linux. The old v1 records remain labeled with their earlier
+Mac representation and must not be used as canonical-input baselines.
+
+The experiment changes one link-context parameter at a time on the exact
 upstream-projected screen and follow-up inputs. Its baseline encodings are
 shared with the article-order experiment. Frozen weights remain unchanged;
 inference-time changes may disagree with the training distribution.
@@ -29,12 +34,12 @@ and manifest. After all four models finish, save the comparison with:
 
 ```sh
 python3 scripts/model_history.py \
-  --protocol benchmarks/model-variants/20261017-protocol-v1/protocol.json \
-  --manifest build/project-screen-v2/manifest.json --role screen \
-  --build build/native-fixture-v3 \
-  --runs build/project-screen-upstream-v1 build/model-screen-z3-budget128-v1 \
-         build/model-screen-z3-chunk32-v1 build/model-screen-z3-off-v1 \
-  --output benchmarks/model-variants/20261017-screen-v1
+  --protocol benchmarks/model-variants/20261017-protocol-v2/protocol.json \
+  --manifest build/project-screen-v4/manifest.json --role screen \
+  --build build/native-fixture-v4 \
+  --runs build/project-screen-upstream-v2 build/model-screen-z3-budget128-v2 \
+         build/model-screen-z3-chunk32-v2 build/model-screen-z3-off-v2 \
+  --output benchmarks/model-variants/20261017-screen-v2
 ```
 
 The verifier checks generated source inventories, compiler settings, assets,
