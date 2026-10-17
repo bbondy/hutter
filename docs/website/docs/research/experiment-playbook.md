@@ -21,10 +21,11 @@ The saved parity reports are readable as a small table:
 
 ```bash
 python3 scripts/parity_history.py list
+python3 scripts/parity_history.py decoders
 python3 scripts/parity_history.py compare BEFORE AFTER
 ```
 
-`list` includes completed paired encodings, with their source offset, article count, prepared size, both payload sizes and byte-equality status. `compare` reports byte deltas only when the prepared input, page count, assets, reference image and upstream source match. A different fixture is a **generalization check**, not a fair before/after score for a model change. Decoder-only and diagnostic records remain available by record ID, but do not appear as compressed-size results.
+`list` includes completed paired encodings, with their source offset, article count, prepared size, both payload sizes and byte-equality status. `decoders` separately shows which same-platform archives restored exactly and reproduced their encoder traces. `compare` reports byte deltas only when the prepared input, page count, assets, reference image and upstream source match. A different fixture is a **generalization check**, not a fair before/after score for a model change. Decoder-only and diagnostic records remain available by record ID, but do not appear as compressed-size results.
 
 | Gate | Promote when… |
 | --- | --- |
