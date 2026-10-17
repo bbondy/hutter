@@ -4,3 +4,5 @@
 /data/enwik8.zip
 /data/enwik9
 /data/enwik9.zip
+/data/samples/
+__pycache__/

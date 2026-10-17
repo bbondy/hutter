@@ -10,13 +10,19 @@ ENWIK9_URL ?= http://mattmahoney.net/dc/enwik9.zip
 ENWIK9_ZIP ?= data/enwik9.zip
 ENWIK9 ?= data/enwik9
 ENWIK9_SHA1 ?= 2996e86fb978f93cca8f566cc56998923e7fe581
+BENCH_INPUT ?= data/samples/prefix-100k
+BENCH_OUTPUT ?= build/benchmark
+BENCH_ARGS ?=
 
-.PHONY: build test fmt clean roundtrip bench help corpora data-files enwik8 enwik9 verify-enwik8 verify-enwik9
+.PHONY: build test fmt clean roundtrip bench help corpora data-files enwik8 enwik9 verify-enwik8 verify-enwik9 samples bench-suite
 
 help:
 	@echo "make build                    Compile the Rust CLI"
 	@echo "make test                     Run unit tests"
 	@echo "make fmt                      Format the code"
+	@echo "make samples                  Verify enwik8 and generate reproducible iteration samples"
+	@echo "make bench-suite              Round-trip all codecs on 100 KB; save timing/RSS/size JSONL"
+	@echo "                              Set BENCH_INPUT, a new BENCH_OUTPUT, and optional BENCH_ARGS"
 	@echo "make corpora                  Download and verify enwik8 and enwik9"
 	@echo "make data-files               Alias for corpora"
 	@echo "make enwik8                   Download and verify enwik8 if needed"
@@ -35,6 +41,7 @@ build:
 
 test:
 	cargo test
+	python3 -m unittest discover -s scripts -p 'test_*.py'
 
 fmt:
 	cargo fmt
@@ -50,6 +57,12 @@ bench: build
 	mkdir -p build
 	target/release/hutter-starter compress --codec $(CODEC) $(INPUT) $(ARCHIVE)
 	target/release/hutter-starter stats $(INPUT) $(ARCHIVE)
+
+samples: enwik8
+	python3 scripts/make_samples.py $(ENWIK8)
+
+bench-suite: build
+	python3 scripts/benchmark.py $(BENCH_INPUT) --output $(BENCH_OUTPUT) $(BENCH_ARGS)
 
 corpora: enwik8 enwik9
 
