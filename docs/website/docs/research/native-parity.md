@@ -1,6 +1,6 @@
 ---
 title: A native and Linux comparison
-description: A measured example of matching initialization, diverging probabilities, and nearly equal archive sizes.
+description: Two measured fixtures with matching initialization, diverging probabilities, and a reversed size gap.
 ---
 
 # A native and Linux comparison
@@ -23,6 +23,21 @@ The one-byte size gap is interesting, but the payloads are **different streams**
 These times are exploratory single runs with concurrent activity. In particular, Linux ran under x86 emulation on an ARM host. They are not a prize runtime comparison. Payloads here exclude the dictionary, weights and executable. The native build round-tripped the prepared sample and reversed preprocessing to restore all 117,161 original XML bytes. Tracing enabled and disabled yielded the same native payload hash.
 
 The Linux development build also decoded **its own** 15,222-byte archive. It restored the 108,927 prepared bytes exactly, with initialization and the full probability trace matching its encoder. That emulated decode took 796.66 wall seconds. This closes a same-platform correctness check; it does not show that Linux can decode the different Mac payload. The [decoder validation record](https://github.com/bbondy/hutter/blob/research/native-mac/benchmarks/parity/20261017-linux-selfdecode-v1/report.json) contains the result.
+
+## A second, disjoint sample
+
+The team prepared 12 complete articles from the middle of `enwik8`, beginning at source offset 49,000,139. This gives 162,057 raw XML bytes and 154,286 bytes after the same upstream preprocessing. The inverse transform restored the raw selection before either build ran.
+
+| Measurement | Apple Silicon Mac | Linux x86-64 in emulation |
+| --- | ---: | ---: |
+| Prepared input | 154,286 bytes | 154,286 bytes |
+| Compressed payload | 21,149 bytes | 21,147 bytes |
+| Coder events | 720,856 | 720,856 |
+| Encode time in this run | 226.76 s | 1,083.93 s |
+
+Initialization and every event type and input bit match again. This time, 405,844 integer probabilities differ; the first is at event 386, and payloads first differ at byte 50. The Linux payload is **two bytes smaller** than the Mac payload, reversing the first sample's one-byte Mac advantage. The [paired report](https://github.com/bbondy/hutter/blob/research/native-mac/benchmarks/parity/20261017-middle-fixture-v1/report.json) and [event analysis](https://github.com/bbondy/hutter/blob/research/native-mac/benchmarks/parity/20261017-middle-fixture-v1/trace-analysis.json) preserve the measurements.
+
+The Mac decoder restored this prepared sample exactly and reproduced its encoder's initialization and probability trace. The Linux self-decoder for this sample is still running. Two different fixtures do not measure a model change, but the reversed size gap is direct evidence against assuming that Mac-only size gains will have the same sign on Linux.
 
 ## What matched, and what did not?
 
@@ -48,6 +63,6 @@ The test harness saves binary hashes, source inventories, input hashes, traces a
 
 ## What to do with this result
 
-Use the Mac build to explore ideas quickly. Check any promising size change on Linux before treating it as progress toward the prize. The one-byte size gap on one small sample does not establish that candidates will rank the same on both systems. Full `enwik9` score, runtime, memory and packaging remain separate gates.
+Use the Mac build to explore ideas quickly. Check any promising size change on Linux before treating it as progress toward the prize. Neither of these two small samples establishes that candidates will rank the same on both systems. Full `enwik9` score, runtime, memory and packaging remain separate gates.
 
 **Next:** [Plan comparable experiments](experiment-playbook.md).

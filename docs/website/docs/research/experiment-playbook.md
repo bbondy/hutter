@@ -11,7 +11,7 @@ For a small model change, ask two questions: **does the decoder still restore th
 
 The competitive candidate expects its own text preprocessing and metadata. An arbitrary byte slice from `enwik8` is not a valid dictionary-mode input. The research tooling selects complete Wikipedia articles, applies the upstream `phda9` transform and verifies that the inverse restores the selected raw bytes. A manifest records source offsets, article count, hashes and transform details. The 19-article fixture has 117,161 raw bytes and 108,927 prepared bytes. A larger 172-article fixture has also passed preprocessing and inverse checks, but has not yet been compressed in the recorded comparison.
 
-Tiny samples help catch correctness problems. They are poor throughput tests for this engine because dictionary pretraining costs roughly 145 seconds per native encoding even on the small fixture. Use a small valid fixture for screening, then a larger and a held-out fixture before promoting a result. The research branch also prepares a disjoint middle-of-`enwik8` fixture with the same article-aware transform; its manifest records where extraction actually began. Change one model idea at a time and keep the baseline binary and input fixed for each paired comparison.
+Tiny samples help catch correctness problems. They are poor throughput tests for this engine because dictionary pretraining costs roughly 145 seconds per native encoding even on the small fixture. Use a small valid fixture for screening, then a larger and a held-out fixture before promoting a result. The research branch also measured a disjoint middle-of-`enwik8` fixture with the same article-aware transform; its manifest records where extraction actually began. Its Mac/Linux size gap reversed direction from the first fixture. Change one model idea at a time and keep the baseline binary and input fixed for each paired comparison.
 
 ## Save enough to reproduce a result
 
@@ -38,7 +38,7 @@ For performance claims, run several comparable trials on an idle machine. Do not
 ## Current next moves
 
 1. Use the saved Linux development decoder round trip as the first correctness gate; repeat it after relevant model changes.
-2. Measure more than one article-aware fixture on both platforms to see whether model changes rank consistently.
+2. Complete the held-out Linux decoder check, then compare actual model changes on both recorded fixtures and a larger article set. The two baseline fixtures alone do not tell us whether a changed model's gains transfer.
 3. Reproduce the pinned submission's full `enwik9` result and packaged size on native Linux x86-64, with exact restoration and resource measurements.
 4. Evaluate one promising predictor change against that frozen baseline. Investigate exact ARM floating-point parity where it changes a real decision; keep Linux as the scoring reference meanwhile.
 
