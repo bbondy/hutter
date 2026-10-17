@@ -5,6 +5,12 @@ They retain initialization, probability-stream and cross-decoding outcomes,
 including failed comparisons. See the [parity harness](../engines/ports/cmix-neif-parity/README.md).
 These are correctness records, not eligible full-corpus prize scores.
 
+`python3 scripts/parity_history.py list` shows completed paired fixture encodings.
+`python3 scripts/parity_history.py compare BEFORE AFTER` reports payload-byte
+changes only when both records use the same prepared input, article count, assets,
+reference image and upstream source. Initialization-only, diagnostic-prefix and
+decoder-only records remain accessible by ID but are not treated as scores.
+
 Keep small experiment records in Git under `runs/<unique-id>/`. Each record has
 the original metadata and JSONL trials, a note, and optionally the source patch
 and corpus manifest. Run IDs cannot be overwritten. Large archives, executable
