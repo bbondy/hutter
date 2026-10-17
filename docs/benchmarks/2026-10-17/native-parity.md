@@ -6,6 +6,12 @@ are small on two article-aware fixtures, yet the direction reverses between them
 Mac is useful for local screening, but neither bitstream compatibility nor
 agreement on candidate ranking has been established.
 
+Later [article-order inspection](article-order.md) found that both development
+binaries retain the full corpus's 71,148-page redirect-block boundary. These small
+fixtures therefore stay in that phase. The exact restoration and trace results
+below stand, but they do not establish behavior in the main-text phase; fixture
+phase boundaries need correction before more representative candidate screening.
+
 The portable RNG reproduces 10,000 consecutive glibc outputs for each of seeds
 0, 1, 923, 2147483648 and 4294967295. The Linux build still uses its original
 libc RNG. See [golden comparisons](../../../benchmarks/parity/20261017-rng-v1/result.json).

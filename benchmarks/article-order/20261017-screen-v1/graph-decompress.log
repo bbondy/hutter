@@ -1,0 +1,26 @@
+native development metadata: 172 articles
+native PPMd: anonymous heap 14000 MiB; no Linux RSS clamp
+pretraining the model on the dictionary ... 150.28 s.
+progress 0.00 %
+entering metadata block at 0.01 %
+entering redirect block at 0.75 %
+progress 89.99 %
+undoing the preprocessing ... 0.11 s.
+      612.02 real       609.67 user         1.93 sys
+          5997494272  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              366461  page reclaims
+                   7  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+               29724  involuntary context switches
+       6984957777315  instructions retired
+       2403166289062  cycles elapsed
+          5991633936  peak memory footprint

@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "kind": "article-order-comparison",
+  "role": "screen",
+  "date_utc": "2026-10-17T22:04:41.829188+00:00",
+  "manifest_sha256": "d6dbd41c20affa54ebb23730dba9f42a61ad788048f33ed6e94ce325a80c90e4",
+  "page_set_sha256": "ab2aa99fa5551386e0680180ca6caba995615ca7c3a0b9661209c868113cffd3",
+  "raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+  "raw_bytes": 1033597,
+  "page_count": 172,
+  "binary_sha256": "100cf1ec93ff5f5bace9cd189a2dbc99bae96465a5dc6aa050646f014c11f3a7",
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "verifier_sha256": "181e70506e3a5c27d84c9d9f6cee14b66ea22ed79b26a046c7e499eb0cab4724",
+  "restoration_code_sha256": "8c0a3da504022bd129d80eb5e7d6c026e7c73f32ae1ea4799a47158175bdf95b",
+  "size_scope": "Payload plus explicit order side data only. Decoder/encoder code and assets must be packaged and charged for a prize score.",
+  "baseline": "source page-ID order, NOT upstream embedding/residual order",
+  "timing_scope": "single trials, potentially concurrent; not a performance benchmark",
+  "variants": {
+    "source": {
+      "payload_bytes": 120337,
+      "archive_sha256": "b5d760c9285b6e51415e7b2304b1914468dcc8faa42a8a79534814340b2f9f5d",
+      "prepared_bytes": 950787,
+      "prepared_sha256": "7fc52a912c44ef2c47a0d671fa7261d38b59cc5c70a4f37e5bda224d64d701e7",
+      "order_side_information_bytes": 0,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "original_bytes_roundtrip": true,
+      "compress_seconds": 616.1304454160017,
+      "decompress_seconds": 611.7835232920006,
+      "peak_rss_bytes": 6001983488,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-article-order/build/order-screen-source-v1",
+      "source_metadata_sha256": "13ea84e55eb362b96a001e09a6a12504dc0be67a7da466ca94b41124ec6e8e2a",
+      "source_results_sha256": "ad8d65d36e9207953306ecf955c7c0ebefb27d554502acd8a7075554789b21ed",
+      "log_sha256": {
+        "compress": "d07c5026a888a649f198a7d9d9db0fc91de04581465ce59bcba75ed8ddab0b6b",
+        "decompress": "118e2d49020b0e85c6145cf572becff0b0c5149112323ac13e72d6293a9273f5"
+      },
+      "graph": {
+        "forward_edges": 42,
+        "pages_with_prior_incoming_link": 24,
+        "displaced_pages": 0
+      },
+      "delta_bytes_vs_source": 0,
+      "delta_percent_vs_source": 0.0
+    },
+    "graph": {
+      "payload_bytes": 120359,
+      "archive_sha256": "0940d9ed37bb5945809c61e3204255d52b8958c1c43ef75a13b9194c05d8b114",
+      "prepared_bytes": 950814,
+      "prepared_sha256": "a4c9d26768d94126dc9c7dad4983cd17b10d3e6df617c256bcf693840f26b67f",
+      "order_side_information_bytes": 0,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "original_bytes_roundtrip": true,
+      "compress_seconds": 616.3311613339974,
+      "decompress_seconds": 612.0474178749973,
+      "peak_rss_bytes": 6005440512,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-article-order/build/order-screen-graph-v1",
+      "source_metadata_sha256": "a9b620a1675c4e5f3e7c0c8a0417bcd8521876a2d60eaea9cb5c92d57c8ea92c",
+      "source_results_sha256": "2fd78a0f9194e7198e153b17ddd94e8fa9229559353e0d5e405e91a942034231",
+      "log_sha256": {
+        "compress": "9189ecf589226ab61b105c0d890a6d46b0a03813cff47a7e3c813df9d5d3f13e",
+        "decompress": "659d0c3ff9b9a414060955dcf157c5ebe3647545ee64eb116351adaae051c268"
+      },
+      "graph": {
+        "forward_edges": 54,
+        "pages_with_prior_incoming_link": 26,
+        "displaced_pages": 45
+      },
+      "delta_bytes_vs_source": 22,
+      "delta_percent_vs_source": 0.01828199140746404
+    },
+    "random": {
+      "payload_bytes": 120936,
+      "archive_sha256": "d4eb4bb8ac2df9042c9415f07b1dcd575b535db1fd9ad354f62cf1560f1bbff2",
+      "prepared_bytes": 951132,
+      "prepared_sha256": "f9a8bb7eb73c3846f2d0163586643aa3a25d94a9f9ad59b548f90b04dc1e4349",
+      "order_side_information_bytes": 0,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "original_bytes_roundtrip": true,
+      "compress_seconds": 616.1188718749981,
+      "decompress_seconds": 612.2520827499975,
+      "peak_rss_bytes": 6003277824,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-article-order/build/order-screen-random-v1",
+      "source_metadata_sha256": "2d353f31813325318431ebce5596c967c38ed4e33c9a4f9a7cefcb5b60948f3d",
+      "source_results_sha256": "65c3715f0c28a01ec59c20980a3bab1422af70d422c418f85a394ace9915a99b",
+      "log_sha256": {
+        "compress": "f0b40cc588b5e969242cef9efc971d3804e4922962f832afa8d2f59f60899a29",
+        "decompress": "231558d5d270ac9d6e6d6fa9ce2146b6ca43c3b149d2f2d1bc36ab2ed9c9662b"
+      },
+      "graph": {
+        "forward_edges": 35,
+        "pages_with_prior_incoming_link": 21,
+        "displaced_pages": 171
+      },
+      "delta_bytes_vs_source": 599,
+      "delta_percent_vs_source": 0.49776876604868
+    }
+  }
+}
