@@ -122,7 +122,7 @@ def first_difference(a,b,record_size=1):
             offset+=len(x)
 
 
-def validate_trace(trial, init_only=False):
+def validate_trace(trial, init_only=False, event_limit=0):
     """Require complete, nonempty state/trace files before accepting equality."""
     errors=[]
     try:
@@ -134,6 +134,14 @@ def validate_trace(trial, init_only=False):
             count=int((trial/'trace.complete').read_text())
             if count<=0 or (trial/'probabilities.bin').stat().st_size!=8*count:
                 errors.append('probability trace count/length mismatch')
+            if event_limit:
+                if count!=event_limit or int((trial/'prefix.complete').read_text())!=event_limit:
+                    errors.append('diagnostic prefix count mismatch')
+                rows=[json.loads(line) for line in (trial/'detail.jsonl').read_text().splitlines()]
+                if not rows or sum(r['bytes'] for r in rows)!=(trial/'detail.bin').stat().st_size:
+                    errors.append('detail index/length mismatch')
+            elif (trial/'prefix.complete').exists():
+                errors.append('diagnostic prefix is not a completed encoding')
     except (OSError,ValueError,KeyError,TypeError) as e:
         errors.append(str(e))
     return errors
@@ -147,11 +155,14 @@ def phase(args, platform, binary, image_id, trial, mode, input_file, page_count,
     shutil.copyfile(input_file,trial/'input')
     flags=['--native-pages',str(page_count),mode,'dictionary.dic','input','output']
     started=time.monotonic()
+    event_limit=getattr(args,'event_limit',0)
     status='failed'; code=None
     if platform=='native':
         env={**os.environ,'LC_ALL':'C','CMIX_PARITY_DIR':str(trial)}
         env.pop('CMIX_PARITY_INIT_ONLY',None)
+        env.pop('CMIX_PARITY_EVENT_LIMIT',None)
         if init_only: env['CMIX_PARITY_INIT_ONLY']='1'
+        if event_limit: env['CMIX_PARITY_EVENT_LIMIT']=str(event_limit)
         with (trial/'process.log').open('wb') as log:
             p=subprocess.Popen(['/usr/bin/time','-l','./cmix',*flags],cwd=trial,env=env,
                                stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
@@ -162,6 +173,7 @@ def phase(args, platform, binary, image_id, trial, mode, input_file, page_count,
         cid=output(args,'create','--network','none','--platform','linux/amd64','--memory','20g',
                    '--workdir','/work','-e','CMIX_PARITY_DIR=/work',
                    *(['-e','CMIX_PARITY_INIT_ONLY=1'] if init_only else []),
+                   *(['-e',f'CMIX_PARITY_EVENT_LIMIT={event_limit}'] if event_limit else []),
                    image_id,'/usr/bin/time','-v','./cmix',*flags)
         try:
             for file in trial.iterdir(): docker(args,'cp',file,f'{cid}:/work/{file.name}')
@@ -171,19 +183,21 @@ def phase(args, platform, binary, image_id, trial, mode, input_file, page_count,
                     code=int(output(args,'inspect','--format','{{.State.ExitCode}}',cid))
                 except subprocess.TimeoutExpired:
                     status='timeout';docker(args,'kill',cid,stdout=subprocess.DEVNULL)
-            for name in ('output','initial.jsonl','initial.bin','initial.complete','probabilities.bin','trace.complete'):
+            for name in ('output','initial.jsonl','initial.bin','initial.complete','probabilities.bin','trace.complete',
+                         'prefix.complete','detail.jsonl','detail.bin'):
                 subprocess.run(['docker','--context',args.context,'cp',f'{cid}:/work/{name}',str(trial/name)],
                                stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,check=False)
         finally: docker(args,'rm','-f',cid,stdout=subprocess.DEVNULL)
     if code==0: status='ok'
-    trace_errors=validate_trace(trial,init_only)
+    trace_errors=validate_trace(trial,init_only,event_limit)
     if status=='ok' and trace_errors: status='invalid-trace'
     row={'platform':platform,'mode':mode,'init_only':init_only,'exit_code':code,'status':status,
-         'trace_errors':trace_errors,
+         'trace_errors':trace_errors,'event_limit':event_limit,
          'wall_seconds':time.monotonic()-started,'command':['./cmix',*flags],
          'input_sha256':digest(input_file),'binary_sha256':digest(binary),
          'files':{p.name:{'bytes':p.stat().st_size,'sha256':digest(p)} for p in trial.iterdir()
-                  if p.name in ('output','initial.bin','initial.jsonl','probabilities.bin','trace.complete','initial.complete')}}
+                  if p.name in ('output','initial.bin','initial.jsonl','probabilities.bin','trace.complete','initial.complete',
+                                'prefix.complete','detail.jsonl','detail.bin')}}
     if status!='ok': row['failure_log_tail']=(trial/'process.log').read_text(errors='replace')[-8192:]
     write_json(trial/'phase.json',row)
     print(f'{trial.name}: {status}, {row["wall_seconds"]:.2f}s',flush=True)
@@ -208,7 +222,9 @@ def compare(args):
     report={'date_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
             'commit':capture('git','-C',str(ROOT),'rev-parse','HEAD'),
             'reference':ref,'native_build':nm,'linux_build':lm,'manifest':manifest,
-            'runner_sha256':digest(Path(__file__)),'phases':{},'scope':'initialization' if args.init_only else 'cross-platform fixture',
+            'runner_sha256':digest(Path(__file__)),'phases':{},
+            'scope':'initialization' if args.init_only else ('diagnostic prefix' if args.event_limit else 'cross-platform fixture'),
+            'event_limit':args.event_limit,
             'assets':{n:{'sha256':digest(ENGINE/n),'bytes':(ENGINE/n).stat().st_size} for n in (WEIGHTS,'dictionary/english.dic')}}
     write_json(run/'report.json',report)
     # Sequential: measured elapsed time includes emulator/container overhead.
@@ -224,6 +240,22 @@ def compare(args):
     report['initialization']=compare_file('initial.bin',4)
     if args.init_only:
         report['passed']=all(p['status']=='ok' and 'initial.complete' in p['files'] for p in report['phases'].values()) and report['initialization'].get('equal',False)
+    elif args.event_limit:
+        report['probabilities']=compare_file('probabilities.bin',8)
+        report['details']=compare_file('detail.bin',4)
+        report['detail_index']=compare_file('detail.jsonl')
+        diff=report['details'].get('first_difference')
+        if diff and report['detail_index'].get('equal'):
+            offset=0
+            for line in (run/'native-encode/detail.jsonl').read_text().splitlines():
+                row=json.loads(line)
+                if offset+row['bytes']>diff['byte_offset']:
+                    diff['stage']=row;diff['float_index']=(diff['byte_offset']-offset)//4
+                    break
+                offset+=row['bytes']
+        report['passed']=(all(p['status']=='ok' for p in report['phases'].values())
+                          and all(report[k].get('equal',False) for k in ('initialization','probabilities','details','detail_index')))
+        report['decoding_skipped']='Diagnostic prefix only; no valid payload or full compatibility claim.'
     else:
         report['probabilities']=compare_file('probabilities.bin',8)
         report['payload']=compare_file('output')
@@ -254,10 +286,10 @@ def compare(args):
         shutil.copyfile(run/'report.json',target/'report.json')
         for key in report['phases']:
             # Preserve diagnostics and timings, not large binaries or trace streams.
-            for name in ('process.log','initial.jsonl'):
+            for name in ('process.log','initial.jsonl','detail.jsonl'):
                 f=run/key/name
                 if f.exists():shutil.copyfile(f,target/(key+'-'+name))
-    print(json.dumps({k:v for k,v in report.items() if k in ('passed','initialization','payload','probabilities')},indent=2))
+    print(json.dumps({k:v for k,v in report.items() if k in ('passed','initialization','payload','probabilities','details')},indent=2))
     return 0 if report['passed'] else 1
 
 
@@ -273,8 +305,11 @@ def main():
             sp.add_argument('--native',type=Path,required=True);sp.add_argument('--linux',type=Path,required=True)
             sp.add_argument('--manifest',type=Path,required=True);sp.add_argument('--input',type=Path,required=True)
             sp.add_argument('--init-only',action='store_true');sp.add_argument('--record')
+            sp.add_argument('--event-limit',type=int,default=0,help='diagnostic prefix only, with model-stage snapshots; no valid payload')
     args=p.parse_args()
     if getattr(args,'timeout',1)<=0:p.error('timeout must be positive')
+    if getattr(args,'event_limit',0)<0:p.error('event limit must be nonnegative')
+    if getattr(args,'event_limit',0) and args.init_only:p.error('event limit and init-only are mutually exclusive')
     if getattr(args,'record',None):
         import re
         if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]*',args.record):p.error('invalid record ID')

@@ -11,6 +11,12 @@ inline FILE* probabilities = nullptr;
 inline FILE* initial = nullptr;
 inline FILE* initial_bytes = nullptr;
 inline unsigned long long events = 0;
+inline unsigned long long event_limit = []() {
+  const char* s = getenv("CMIX_PARITY_EVENT_LIMIT");
+  return s ? strtoull(s, nullptr, 10) : 0ULL;
+}();
+inline FILE* details = nullptr;
+inline FILE* detail_bytes = nullptr;
 inline bool Enabled() { return directory && directory[0]; }
 inline FILE* Open(const char* name) {
   std::string path = std::string(directory) + "/" + name;
@@ -36,6 +42,14 @@ inline void Ready() {
   FILE* f = Open("initial.complete"); fclose(f);
   if (getenv("CMIX_PARITY_INIT_ONLY")) exit(0);
 }
+// Optional bounded model-stage snapshots. Never label these as initialization.
+inline void Detail(const char* label, const void* p, size_t n) {
+  if (!Enabled() || !event_limit || events >= event_limit) return;
+  if (!details) { details=Open("detail.jsonl"); detail_bytes=Open("detail.bin"); }
+  fprintf(details,"{\"event\":%llu,\"name\":\"%s\",\"bytes\":%zu}\n",events,label,n);
+  Write(detail_bytes,p,n);
+}
+inline void Finish();
 // Fixed 8-byte LE records: kind (normal=0, forced=1, raw=2, known=3),
 // bit, two reserved bytes, final integer arithmetic-coder probability (u32).
 inline void Event(unsigned kind, unsigned bit, unsigned p) {
@@ -44,10 +58,18 @@ inline void Event(unsigned kind, unsigned bit, unsigned p) {
   unsigned char b[8] = {(unsigned char)kind,(unsigned char)bit,0,0,0,0,0,0};
   for (unsigned j=0;j<4;++j) b[4+j]=(p>>(8*j))&255;
   Write(probabilities,b,8); ++events;
+  if (event_limit && events == event_limit) {
+    Finish();
+    FILE* f=Open("prefix.complete"); fprintf(f,"%llu\n",events); fclose(f);
+    exit(0);  // Intentional diagnostic prefix; no valid compressed output.
+  }
 }
 inline void Finish() {
   if (!Enabled()) return;
   if (probabilities && fflush(probabilities)) { perror("parity flush"); exit(3); }
+  if ((details && fflush(details)) || (detail_bytes && fflush(detail_bytes))) {
+    perror("detail flush"); exit(3);
+  }
   FILE* f=Open("trace.complete");
   fprintf(f,"%llu\n",events); fclose(f);
 }

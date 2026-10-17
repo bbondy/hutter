@@ -41,6 +41,16 @@ def instrument(source, portable_random=False):
            '  map_offset_ = rand() % (map_.size() - 257);\n  parity_trace::State("indirect_offset", &map_offset_, sizeof(map_offset_));')
     change("predictor.cpp", '#include "predictor.h"', '#include "predictor.h"\n#include "parity_trace.h"')
     change("predictor.cpp", '  sigmoid_.S52Activate();', '  sigmoid_.S52Activate();\n  parity_trace::Ready();')
+    change("predictor.cpp", '  const float aux_aux_in = aux_fxcm_input;',
+           '  parity_trace::Detail("model_inputs", &layers_[0].Inputs()[0], input_index*sizeof(float));\n  const float aux_aux_in = aux_fxcm_input;')
+    change("predictor.cpp", '  const float m1raw = mixer_1_[0].Mix();',
+           '  parity_trace::Detail("mixer_bank", &layers_[1].Inputs()[0], (mixer_0_.size()+3)*sizeof(float));\n  const float m1raw = mixer_1_[0].Mix();')
+    change("predictor.cpp", '  last_p16_ = (unsigned int)(1 + 65534 * p);',
+           '  parity_trace::Detail("predictor_probability", &p, sizeof(p));\n  last_p16_ = (unsigned int)(1 + 65534 * p);')
+    change("mixer/lstm-layer.hpp", '  neurons.ivar_[epoch_] = 1.0f / sqrt(',
+           '  parity_trace::Detail("lstm_pre_norm", &neurons.norm_[epoch_][0], num_cells_*sizeof(float));\n  neurons.ivar_[epoch_] = 1.0f / sqrt(')
+    change("mixer/lstm-layer.hpp", '  neurons.norm_[epoch_] *= neurons.ivar_[epoch_];',
+           '  parity_trace::Detail("lstm_inverse_norm", &neurons.ivar_[epoch_], sizeof(float));\n  neurons.norm_[epoch_] *= neurons.ivar_[epoch_];')
     for name in ("encoder", "decoder"):
         change(f"coder/{name}.cpp", f'#include "{name}.h"',
                f'#include "{name}.h"\n#include "../parity_trace.h"')

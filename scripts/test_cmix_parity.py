@@ -52,6 +52,23 @@ class ParityTests(unittest.TestCase):
             (root/'trace.complete').write_text('not a count')
             self.assertTrue(validate_trace(root))
 
+    def test_prefix_cannot_be_accepted_as_full_encoding(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root/'initial.bin').write_bytes(b'abcd')
+            (root/'initial.jsonl').write_text('{"bytes":4}\n')
+            (root/'initial.complete').touch()
+            (root/'probabilities.bin').write_bytes(b'\0'*16)
+            (root/'trace.complete').write_text('2\n')
+            (root/'prefix.complete').write_text('2\n')
+            (root/'detail.bin').write_bytes(b'abcd')
+            (root/'detail.jsonl').write_text('{"event":0,"bytes":4}\n')
+            self.assertFalse(validate_trace(root,event_limit=2))
+            self.assertTrue(validate_trace(root))
+            self.assertTrue(validate_trace(root,event_limit=3))
+            (root/'detail.bin').write_bytes(b'abc')
+            self.assertTrue(validate_trace(root,event_limit=2))
+
 
 if __name__ == '__main__':
     unittest.main()

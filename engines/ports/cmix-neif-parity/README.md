@@ -57,6 +57,15 @@ kind, bit, two reserved zero bytes, and a u32 probability. Kinds 0/1/2/3 mean
 normal/forced/raw/known. Known and forced bits carry a zero probability marker.
 This observes coding, not every internal prediction during dictionary training.
 
+For a bounded numerical investigation, rebuild both platforms with current
+support files and add `compare --event-limit 256`. This retains full dictionary
+pretraining, captures model inputs, mixer outputs and LSTM normalization stages,
+then stops after 256 coder events. The report identifies the first differing
+stage, event and float index. It is explicitly a diagnostic prefix: it produces
+no valid archive and cannot pass the full encoding validator. Keep these runs
+under separate output directories and record IDs. Check that their probability
+prefixes match the ordinary builds before interpreting the added instrumentation.
+
 `--record ID` saves provenance, hashes, outcomes and text diagnostics under
 `benchmarks/parity/ID`. Large binaries, state dumps and event streams remain in
 the local build directory. Failed completed comparisons are retained too. A
