@@ -6,6 +6,8 @@ including failed comparisons. See the [parity harness](../engines/ports/cmix-nei
 These are correctness records, not eligible full-corpus prize scores.
 
 `python3 scripts/parity_history.py list` shows completed paired fixture encodings.
+`python3 scripts/parity_history.py decoders` shows the separate same-platform
+restoration and probability-trace checks.
 `python3 scripts/parity_history.py compare BEFORE AFTER` reports payload-byte
 changes only when both records use the same prepared input, article count, assets,
 reference image and upstream source. Initialization-only, diagnostic-prefix and
