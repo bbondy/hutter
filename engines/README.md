@@ -4,6 +4,11 @@ Our primary objective is to win the Hutter Prize. The main implementation track
 is now `cmix-neif/`; the Rust codecs in `src/` remain experimental references.
 Both tracks live in this repository and share the benchmark-history tooling.
 
+For local Apple Silicon experiments, see the
+[native Mac port](ports/cmix-neif-macos/README.md). It builds without Docker,
+keeps the predictor models, and uses separately identified development results.
+It does not replace verification of the pinned Linux submission build.
+
 ## Starting point
 
 We imported the complete, unmodified source tree of
