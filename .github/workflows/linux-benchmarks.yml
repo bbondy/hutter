@@ -1,0 +1,67 @@
+name: Native Linux fixture comparisons
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-linux-fixture-comparisons
+  cancel-in-progress: false
+
+jobs:
+  link-context:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        role: [screen, holdout]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install native compiler and measurement tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y clang-18 lld-18 llvm-18 libclang-rt-18-dev make time
+      - name: Verify pinned sources and download official fixture corpus
+        run: |
+          python3 scripts/competitive.py verify
+          make enwik8 ENWIK8_URL=https://mattmahoney.net/dc/enwik8.zip
+      - name: Compare all frozen model variants on one host
+        run: python3 scripts/ci_link_context.py --role "${{ matrix.role }}" --enwik8 data/enwik8
+      - name: Preserve completed and failed trials
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-link-context-${{ matrix.role }}-${{ github.run_id }}
+          path: build/linux-evidence/
+          if-no-files-found: warn
+          retention-days: 7
+
+  coder-stream:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install native compiler and measurement tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y clang-18 lld-18 llvm-18 libclang-rt-18-dev make time
+      - name: Download and verify full corpus
+        run: make enwik9 ENWIK9_URL=https://mattmahoney.net/dc/enwik9.zip
+      - name: Compare exact coder stream with upstream reference
+        run: python3 scripts/native_stream.py --enwik9 data/enwik9 --output build/linux-stream-v1 --jobs 2
+      - name: Preserve preparation evidence including mismatches
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-coder-stream-${{ github.run_id }}
+          path: |
+            build/linux-stream-v1/report.json
+            build/linux-stream-v1/patch.log
+            build/linux-stream-v1/build.log
+            build/linux-stream-v1/prepare.log
+          if-no-files-found: warn
+          retention-days: 7

@@ -30,6 +30,15 @@ def write_json(path, obj):
     path.write_text(json.dumps(obj, indent=2) + "\n")
 
 
+def cpu_name():
+    if platform.system() == "Darwin":
+        return capture("sysctl", "-n", "machdep.cpu.brand_string")
+    for line in Path("/proc/cpuinfo").read_text().splitlines():
+        if line.startswith("model name"):
+            return line.split(":", 1)[1].strip()
+    return platform.processor()
+
+
 def build(args):
     upstream = json.loads(MANIFEST.read_text())
     delta = differences(upstream["files"], inventory(ENGINE))
@@ -161,7 +170,7 @@ def bench(args):
         "commit": capture("git", "-C", str(ROOT), "rev-parse", "HEAD"),
         "git_status": capture("git", "-C", str(ROOT), "status", "--porcelain"),
         "platform": platform.platform(), "machine": platform.machine(),
-        "cpu": capture("sysctl", "-n", "machdep.cpu.brand_string"),
+        "cpu": cpu_name(),
         "runner_sha256": digest(Path(__file__)), "binary_sha256": digest(run / "cmix"),
         "binary_bytes": (run / "cmix").stat().st_size, "build": provenance,
         "timeout_seconds": args.timeout, "repeats": args.repeats,

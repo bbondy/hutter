@@ -44,3 +44,31 @@ in the declared parameter header. It rechecks local archives, decoded streams,
 context reports and original article bytes before saving every model's result.
 Required executable sizes are recorded separately; fixture payload deltas still
 cannot establish packaged prize savings.
+
+## Native Linux confirmation
+
+The manually triggered
+[Linux fixture workflow](../../.github/workflows/linux-benchmarks.yml) uses
+standard Ubuntu 24.04 x86-64 runners. It runs all four fixed variants serially on
+each fixture's host, with original x86 kernels, Linux paging and upstream PGO/LTO
+flags. `replay_fixture.py` reconstructs the saved article permutations and refuses
+any prepared byte that differs from the Mac fixture. The shared verifier checks
+all original article bytes after decoding. No Docker is required on the runner.
+
+```sh
+gh workflow run linux-benchmarks.yml --ref main
+```
+
+The workflow also independently checks the upstream full-corpus training stream
+in preparation-only mode, to investigate the saved Mac mismatch. It does not run
+the full adaptive enwik9 compressor. Artifacts include failed trials and expire
+after seven days; download the small verified reports and commit them into this
+history before expiry. Keep the GitHub run URL and source revision with them.
+
+This repository is public. GitHub currently provides standard Linux x64 runners
+with 4 CPUs and 16 GB RAM free for public repositories; each hosted job is limited
+to six hours ([runner specifications](https://docs.github.com/en/actions/reference/runners/github-hosted-runners),
+[limits](https://docs.github.com/en/actions/reference/limits)). These are useful
+for bounded fixture experiments, not the published full-run time requirement.
+Compiler/libc versions are recorded; the runner's package set is not asserted to
+match the upstream submission's pinned Ubuntu snapshot.
