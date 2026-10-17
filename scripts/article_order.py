@@ -136,13 +136,34 @@ def graph_order(edges):
     return order, sorted((len(c) for c in components), reverse=True)
 
 
-def orders_for(pages, seed):
+# Match upstream article_reorder.h on RAW XML, including its exact casing and
+# lack of a word boundary. Do not broaden this classifier silently.
+REDIRECT_PREFIXES = tuple(b'      <text xml:space="preserve">' + prefix
+                          for prefix in (b"#REDIRECT", b"#redirect", b"#Redirect", b"#REdirect", b"{{softredirect"))
+
+
+def is_redirect(page):
+    return any(line.startswith(REDIRECT_PREFIXES) for line in page["raw"].splitlines())
+
+
+def orders_for(pages, seed, fixed_redirects=False):
     edges = link_graph(pages)
     graph, components = graph_order(edges)
     # Hash sorting specifies a reproducible control across Python versions.
     random = sorted(range(len(pages)),
                     key=lambda i: (sha(f"{seed}:{pages[i]['id']}".encode()), i))
     orders = {"source": list(range(len(pages))), "graph": graph, "random": random}
+    if fixed_redirects:
+        prefix = [i for i, page in enumerate(pages) if is_redirect(page)]
+        ordinary = [i for i, page in enumerate(pages) if not is_redirect(page)]
+        # Graph ordering is computed only on the movable ordinary subgraph.
+        # The prefix's placement is fixed, so its edges are not objectives.
+        remap = {old: new for new, old in enumerate(ordinary)}
+        subgraph = [{remap[v] for v in edges[u] if v in remap} for u in ordinary]
+        ordered, _ = graph_order(subgraph)
+        orders = {"source": prefix + ordinary,
+                  "graph": prefix + [ordinary[i] for i in ordered],
+                  "random": prefix + [i for i in random if i in remap]}
     metrics = {}
     for name, order in orders.items():
         rank = {u: i for i, u in enumerate(order)}
@@ -174,10 +195,11 @@ def prepare(args):
     pages = pages_from_bytes(raw)
     if restore_source(raw) != raw:
         raise ValueError("source must have strictly increasing page IDs for zero-permutation restoration")
-    orders, metrics = orders_for(pages, args.seed)
+    fixed = args.phase_mode == "corrected"
+    orders, metrics = orders_for(pages, args.seed, fixed_redirects=fixed)
     destination.mkdir(parents=True, exist_ok=False)
     manifest = {
-        "version": 1, "kind": "article-order-fixture", "role": args.role,
+        "version": 2 if fixed else 1, "kind": "article-order-fixture", "role": args.role,
         "source": str(source), "source_sha256": sha(data), "source_bytes": len(data),
         "source_requested_offset": args.start_offset, "source_offset": start, "source_end": end,
         "raw_bytes": len(raw), "raw_sha256": sha(raw), "page_count": len(pages),
@@ -193,6 +215,12 @@ def prepare(args):
         "graph_scope": "Exact-title unique wiki-link pairs; XML unescaped; fragments/pipes removed; no case/underscore normalization. Proxy, not actual cmix prompt telemetry.",
         "graph": metrics, "samples": [],
     }
+    if fixed:
+        manifest.update(redirect_prefix_count=sum(is_redirect(p) for p in pages),
+                        redirect_classifier="upstream article_reorder.h exact raw line prefixes",
+                        phase_protocol="corpus-frame-v2-context-v1",
+                        development_header_bytes=16,
+                        baseline="fixed redirect prefix, then ordinary pages in source page-ID order; NOT upstream embedding/residual order")
     for name, order in orders.items():
         ordered = b"".join(pages[i]["raw"] for i in order)
         xml, ready, restored = [destination / f"{name}.{ext}" for ext in ("xml", "ready", "restored.xml")]
@@ -219,6 +247,7 @@ def main():
     prep.add_argument("--output", type=Path, required=True)
     prep.add_argument("--target-bytes", type=int, default=1_000_000)
     prep.add_argument("--start-offset", type=int, default=0)
+    prep.add_argument("--phase-mode", choices=("corrected", "legacy"), default="corrected")
     prep.add_argument("--seed", type=int, default=20261017)
     prep.add_argument("--role", choices=("screen", "holdout"), default="screen")
     args = parser.parse_args()

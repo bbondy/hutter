@@ -15,6 +15,7 @@ from benchmark_history import record
 from competitive import ENGINE, MANIFEST, differences, inventory
 from make_samples import digest
 from cmix_parity_support import instrument, SUPPORT
+from cmix_fixture_support import instrument_fixture, provenance as fixture_provenance, corpus_arguments, context_report, validate_context
 
 ROOT = Path(__file__).resolve().parents[1]
 PORT = ROOT / "engines/ports/cmix-neif-macos"
@@ -43,6 +44,7 @@ def build(args):
     shutil.copytree(PORT / "overlay", source, dirs_exist_ok=True)
     with (PORT / "port.patch").open("rb") as patch:
         subprocess.run(["patch", "-p1", "--batch"], cwd=source, stdin=patch, check=True)
+    instrument_fixture(source)
     instrument(source, portable_random=True)
     simde = destination / "simde"
     subprocess.run(["git", "init", "-q", str(simde)], check=True)
@@ -65,6 +67,7 @@ def build(args):
         "simde_url": SIMDE_URL, "platform": platform.platform(), "machine": platform.machine(),
         "compiler": capture("clang++", "--version"), "command": command,
         "port_files": inventory(PORT), "parity_files": inventory(SUPPORT),
+        "fixture_support": fixture_provenance(),
         "initialization": "explicit glibc-compatible generator", "source_files": inventory(source),
         "scope": "Unpacked dictionary-mode development binary; no Linux RSS clamp, PGO or submission packaging.",
     }
@@ -146,10 +149,7 @@ def bench(args):
         if any(known.get(digest(p)) != p.stat().st_size for p in inputs):
             raise ValueError("manifest does not describe every input; refusing an expensive unmatched run")
         if "page_count" in manifest:
-            count = manifest["page_count"]
-            if not isinstance(count, int) or not 1 <= count <= 243425:
-                raise ValueError("invalid development article count")
-            native_args = ["--native-pages", str(count)]
+            native_args = corpus_arguments(manifest, provenance)
     run = args.output.resolve()
     run.mkdir(parents=True, exist_ok=False)
     shutil.copy2(source / "cmix", run / "cmix")
@@ -196,12 +196,25 @@ def bench(args):
                         row["decompress"] = measured(dec, trial / "decompress.log", args.timeout)
                         row["roundtrip"] = (row["decompress"]["status"] == "ok" and restored.is_file()
                                             and digest(restored) == row["input_sha256"])
+                    if native_args and native_args[0] == "--native-corpus" and row["roundtrip"]:
+                        row["context"] = {phase: context_report(Path(row[phase]["log"]))
+                                          for phase in ("compress", "decompress")}
+                        try:
+                            validate_context(row["context"]["compress"], row["context"]["decompress"], manifest)
+                            if manifest["redirect_prefix_count"] < manifest["page_count"]:
+                                if any("entering main text block" not in Path(row[phase]["log"]).read_text(errors="replace")
+                                       for phase in ("compress", "decompress")):
+                                    raise ValueError("main text phase was not observed")
+                            row["context_valid"] = True
+                        except ValueError as error:
+                            row["context_valid"] = False
+                            row["context_error"] = str(error)
                     if not row["roundtrip"]:
                         row["failure_log_tails"] = {
                             phase: Path(row[phase]["log"]).read_text(errors="replace")[-8192:]
                             for phase in ("compress", "decompress") if phase in row
                         }
-                    failed |= not row["roundtrip"] or not row.get("repeat_matches", True)
+                    failed |= not row["roundtrip"] or not row.get("repeat_matches", True) or not row.get("context_valid", True)
                     results.write(json.dumps(row) + "\n")
                     results.flush()
                     print(json.dumps(row), flush=True)

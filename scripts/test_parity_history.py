@@ -39,6 +39,14 @@ class ParityHistoryTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'input_sha256'):
             comparable(first,second)
 
+    def test_phase_protocols_cannot_be_compared_as_model_gains(self):
+        old = fixture(self.example())
+        report = self.example()
+        report['manifest']['redirect_prefix_count'] = 2
+        new = fixture(report)
+        with self.assertRaisesRegex(ValueError, 'corpus_arguments'):
+            comparable(old, new)
+
     def test_decoder_result_links_restored_input_and_encoded_payload(self):
         report={'scope':'same-platform decoder validation',
                 'decoder_phase':{'platform':'linux','roundtrip':True,

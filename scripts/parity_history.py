@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 import re
 
+from cmix_fixture_support import corpus_arguments
+
 ROOT=Path(__file__).resolve().parents[1]/'benchmarks/parity'
 
 
@@ -24,6 +26,7 @@ def fixture(report):
         raise ValueError('manifest does not describe the encoded input')
     return {'input_sha256':input_sha,'prepared_bytes':sample['bytes'],
             'source_offset':manifest.get('source_offset'),'page_count':manifest['page_count'],
+            'corpus_arguments':corpus_arguments(manifest),
             'native_payload_bytes':native['files']['output']['bytes'],
             'linux_payload_bytes':linux['files']['output']['bytes'],
             'payloads_equal':report['payload']['equal'],
@@ -60,7 +63,7 @@ def load(record_id,root=ROOT):
 
 def comparable(before,after):
     fields=('input_sha256','prepared_bytes','page_count','assets',
-            'reference_image_id','upstream_commits')
+            'reference_image_id','upstream_commits','corpus_arguments')
     changed=[field for field in fields if before[field]!=after[field]]
     if changed:
         raise ValueError('records are not comparable; changed '+', '.join(changed))

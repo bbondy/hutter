@@ -13,6 +13,7 @@ import zlib
 
 from article_order import VARIANTS, pages_from_bytes, restore_source, sha
 from make_samples import digest
+from cmix_fixture_support import corpus_arguments, context_report, validate_context
 
 ROOT = Path(__file__).resolve().parents[1] / "benchmarks/article-order"
 
@@ -52,7 +53,7 @@ def summarize(args):
         raise ValueError("preprocessor hash differs from fixture")
     metadata = [json.loads((p / "metadata.json").read_text()) for p in args.runs]
     same_setup(metadata)
-    if metadata[0]["native_arguments"] != ["--native-pages", str(manifest["page_count"])]:
+    if metadata[0]["native_arguments"] != corpus_arguments(manifest, metadata[0]["build"]):
         raise ValueError("native article count differs from fixture")
     if metadata[0]["build"]["upstream_commit"] != manifest["upstream_commit"]:
         raise ValueError("model and preprocessor upstream differ")
@@ -91,7 +92,16 @@ def summarize(args):
                     log = Path(row[phase]["log"])
                     log_hashes[phase] = digest(log)
                     logs.append((log, f"{name}-{phase}.log"))
+                context = {}
+                if "redirect_prefix_count" in manifest:
+                    context = {phase: context_report(Path(row[phase]["log"])) for phase in ("compress", "decompress")}
+                    validate_context(context["compress"], context["decompress"], manifest)
+                    if manifest["redirect_prefix_count"] < manifest["page_count"]:
+                        if any("entering main text block" not in Path(row[phase]["log"]).read_text(errors="replace")
+                               for phase in ("compress", "decompress")):
+                            raise ValueError("main text phase was not observed")
                 variants[name] = {
+                    "context": context,
                     "payload_bytes": row["archive_bytes"], "archive_sha256": row["archive_sha256"],
                     "prepared_bytes": row["input_bytes"], "prepared_sha256": row["input_sha256"],
                     "order_side_information_bytes": manifest["order_side_information_bytes"],
@@ -119,6 +129,8 @@ def summarize(args):
         "restoration_code_sha256": digest(Path(__file__).with_name("article_order.py")),
         "size_scope": manifest["size_scope"], "baseline": manifest["baseline"],
         "timing_scope": "single trials, potentially concurrent; not a performance benchmark",
+        "native_arguments": metadata[0]["native_arguments"],
+        "development_header_bytes": manifest.get("development_header_bytes", 0),
         "variants": variants,
     }
     args.output.mkdir(parents=True, exist_ok=False)

@@ -16,6 +16,7 @@ from benchmark import capture
 from cmix_parity_support import ROOT, SUPPORT, instrument
 from competitive import ENGINE, MANIFEST, differences, inventory
 from make_samples import digest
+from cmix_fixture_support import instrument_fixture, provenance as fixture_provenance, corpus_arguments
 from native_cmix import PORT, WEIGHTS, write_json
 
 
@@ -75,6 +76,7 @@ def build_linux(args):
     shutil.copyfile(PORT/'overlay/src/native_corpus.h', source/'src/native_corpus.h')
     with (SUPPORT/'corpus.patch').open('rb') as patch:
         subprocess.run(['patch','-p1','--batch'],cwd=source,stdin=patch,check=True)
+    instrument_fixture(source)
     instrument(source,portable_random=False)  # Linux uses its original libc RNG.
     name='hutter-parity-build-'+uuid.uuid4().hex[:10]
     command='cd /work/source && make CC=clang++-18 -j4 prof_use'
@@ -82,6 +84,7 @@ def build_linux(args):
                '--memory','20g','--workdir','/work',ref['image_id'],'bash','-lc',command)
     metadata={'reference':ref,'upstream_commit':upstream['commit'],'command':command,
               'source_files':inventory(source),'support_files':inventory(SUPPORT),
+              'fixture_support':fixture_provenance(),
               'container':name,'commit':capture('git','-C',str(ROOT),'rev-parse','HEAD'),
               'scope':'Original x86 kernels, Linux paging, upstream PGO/LTO/FP flags; shared corpus-count and diagnostics only'}
     write_json(destination/'build.json',metadata)
@@ -179,13 +182,13 @@ def validate_trace(trial, init_only=False, event_limit=0):
     return errors
 
 
-def phase(args, platform, binary, image_id, trial, mode, input_file, page_count, init_only=False):
+def phase(args, platform, binary, image_id, trial, mode, input_file, page_count, init_only=False, corpus_flags=None):
     trial.mkdir(parents=True,exist_ok=False)
     shutil.copy2(binary,trial/'cmix')
     for name,dest in ((WEIGHTS,WEIGHTS),('dictionary/english.dic','dictionary.dic')):
         shutil.copyfile(ENGINE/name,trial/dest)
     shutil.copyfile(input_file,trial/'input')
-    flags=['--native-pages',str(page_count),mode,'dictionary.dic','input','output']
+    flags=(corpus_flags or ['--native-pages',str(page_count)])+[mode,'dictionary.dic','input','output']
     started=time.monotonic()
     event_limit=getattr(args,'event_limit',0)
     status='failed'; code=None
@@ -248,6 +251,8 @@ def compare(args):
     manifest=json.loads(args.manifest.read_text());input_file=args.input.resolve()
     if not any(s['sha256']==digest(input_file) and s['bytes']==input_file.stat().st_size for s in manifest['samples']):
         raise ValueError('sample does not match manifest')
+    corpus_flags=corpus_arguments(manifest,nm)
+    if corpus_flags!=corpus_arguments(manifest,lm): raise ValueError('corpus phase mismatch')
     ref=reference(args)
     if ref['image_id']!=lm['reference']['image_id']:raise ValueError('Linux runtime image changed')
     run.mkdir(parents=True,exist_ok=False)
@@ -262,7 +267,7 @@ def compare(args):
     # Sequential: measured elapsed time includes emulator/container overhead.
     for name in ('native','linux'):
         key=name+'-encode'
-        report['phases'][key]=phase(args,name,bins[name],ref['image_id'],run/key,'-c',input_file,manifest['page_count'],args.init_only)
+        report['phases'][key]=phase(args,name,bins[name],ref['image_id'],run/key,'-c',input_file,manifest['page_count'],args.init_only,corpus_flags=corpus_flags)
         write_json(run/'report.json',report)
     def compare_file(name,width=1):
         a,b=run/'native-encode'/name,run/'linux-encode'/name
@@ -308,7 +313,7 @@ def compare(args):
             if report['phases'][encoder+'-encode']['status']!='ok' or not encoded.is_file():continue
             for decoder in ('native','linux'):
                 key=encoder+'-to-'+decoder
-                row=phase(args,decoder,bins[decoder],ref['image_id'],run/key,'-d',encoded,manifest['page_count'])
+                row=phase(args,decoder,bins[decoder],ref['image_id'],run/key,'-d',encoded,manifest['page_count'],corpus_flags=corpus_arguments(manifest))
                 row['roundtrip']=row['status']=='ok' and (run/key/'output').is_file() and digest(run/key/'output')==digest(input_file)
                 row['trace_matches_encoder']=(row['status']=='ok' and first_difference(
                     run/key/'probabilities.bin',run/(encoder+'-encode')/'probabilities.bin',8) is None)
@@ -366,6 +371,7 @@ def decode(args):
     origin, encoded, payload, encoder_trace=decode_source(source_run,args.platform,prepared,manifest)
     build=args.build.resolve()
     metadata=json.loads((build/'build.json').read_text())
+    corpus_arguments(manifest,metadata)
     binary=build/('source/cmix' if args.platform=='native' else 'cmix')
     if digest(binary)!=metadata['binary_sha256'] or encoded['binary_sha256']!=metadata['binary_sha256']:
         raise ValueError('decoder binary does not match the encoded run')
@@ -387,7 +393,7 @@ def decode(args):
             'build':metadata,'manifest':manifest,'runner_sha256':digest(Path(__file__)),
             'prepared_sha256':digest(prepared),'payload_sha256':digest(payload)}
     write_json(run/'report.json',report)
-    row=phase(args,args.platform,binary,ref['image_id'],run/'decode','-d',payload,manifest['page_count'])
+    row=phase(args,args.platform,binary,ref['image_id'],run/'decode','-d',payload,manifest['page_count'],corpus_flags=corpus_arguments(manifest))
     restored=run/'decode/output'
     row['roundtrip']=row['status']=='ok' and restored.is_file() and digest(restored)==digest(prepared)
     if row['status']=='ok':

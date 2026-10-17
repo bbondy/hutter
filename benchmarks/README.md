@@ -20,8 +20,24 @@ comparisons. Its `summarize` command permits different prepared input hashes
 only after checking the same model/assets and exact restoration to the same
 original raw article set. It retains logs and hashes and refuses incomplete or
 failed trials. See the [article-order protocol](../docs/benchmarks/2026-10-17/article-order.md).
-These source-order fixture comparisons do not establish gains against the full
-competitive pipeline.
+These fixture comparisons do not establish gains against the full competitive
+pipeline. Corrected article-order fixtures keep a fixed redirect prefix and use
+`--native-corpus N R` on both sides. Their 16-byte configuration header is counted
+in payload size; phase parameters and matching context reports are verified and
+saved. Legacy `--native-pages` results remain separate baselines.
+
+```sh
+python3 scripts/article_order.py prepare --enwik8 data/enwik8 \
+  --build build/native-cmix --output build/order-screen-v2
+# Run source.ready, graph.ready and random.ready into distinct directories:
+python3 scripts/native_cmix.py bench build/order-screen-v2/source.ready \
+  --build build/native-cmix --manifest build/order-screen-v2/manifest.json \
+  --output build/order-screen-source-v2 --timeout 3600
+python3 scripts/order_history.py summarize \
+  --manifest build/order-screen-v2/manifest.json --build build/native-cmix \
+  --runs build/order-screen-source-v2 build/order-screen-graph-v2 build/order-screen-random-v2 \
+  --output benchmarks/article-order/order-screen-v2
+```
 
 Keep small experiment records in Git under `runs/<unique-id>/`. Each record has
 the original metadata and JSONL trials, a note, and optionally the source patch

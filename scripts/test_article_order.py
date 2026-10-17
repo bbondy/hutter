@@ -1,6 +1,6 @@
 import unittest
 
-from article_order import graph_order, link_graph, orders_for, pages_from_bytes, restore_source
+from article_order import graph_order, link_graph, orders_for, pages_from_bytes, restore_source, is_redirect
 
 
 def page(page_id, title, text):
@@ -44,6 +44,22 @@ class ArticleOrderTests(unittest.TestCase):
         self.assertEqual(orders_for(pages, 123)[0], orders)
         for order in orders.values():
             self.assertEqual(restore_source(b''.join(pages[i]['raw'] for i in order)), raw)
+
+    def test_fixed_redirect_prefix_and_ordinary_graph_restore_original(self):
+        def official(pid, title, text):
+            return page(pid, title, text).replace(b'<text xml:', b'\n      <text xml:')
+        raw = (official(1, 'A', 'body') + official(2, 'RA', '#REDIRECT [[A]]')
+               + official(3, 'B', '[[A]]') + official(4, 'RB', '{{softredirect|B}}'))
+        pages = pages_from_bytes(raw)
+        orders, _ = orders_for(pages, 123, fixed_redirects=True)
+        self.assertEqual(orders['source'], [1, 3, 0, 2])
+        self.assertEqual(orders['graph'], [1, 3, 2, 0])
+        for order in orders.values():
+            self.assertEqual(order[:2], [1, 3])
+            self.assertEqual(restore_source(b''.join(pages[i]['raw'] for i in order)), raw)
+        # Match upstream's literal prefixes, including this surprising case.
+        self.assertTrue(is_redirect(pages_from_bytes(official(5, 'C', '#redirecting'))[0]))
+        self.assertFalse(is_redirect(pages_from_bytes(official(5, 'C', ' #REDIRECT [[A]]'))[0]))
 
     def test_reject_lossy_or_ambiguous_inputs(self):
         raw = page(1, 'A', 'x')
