@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "baseline": "Projection of hash-verified exact upstream article order onto the existing frozen page sets.",
+  "variants": [
+    "upstream",
+    "local",
+    "graph"
+  ],
+  "local": "Four left-to-right passes. Swap adjacent normal fixture pages only for a strict increase in forward exact-title links. Keep each page within 4096 full-corpus ranks of its destination slot baseline rank.",
+  "graph": "Apply the existing SCC/greedy heuristic separately within each contiguous full-order normal region, with baseline-position tie breaks.",
+  "preserved": "All non-normal page positions, the front prefix (including excluded pages), and every full-order class-region boundary.",
+  "timing": "Single native size trials with full raw reconstruction; concurrent times exploratory.",
+  "limitations": [
+    "Projection omits intervening pages and their context.",
+    "Not a full-pipeline or prize gain.",
+    "The existing disjoint set has already informed earlier experiments; do not present repeated selection as untouched validation."
+  ],
+  "future_confirmation": {
+    "source": "official enwik8",
+    "start_offset": 80000000,
+    "target_bytes": 1000000,
+    "policy": "If a frozen candidate improves both existing sets, prepare this predeclared third range and test without tuning on its score."
+  },
+  "promotion": "Require full raw round trips, comparable phase/binary/assets, and Linux ranking before pursuing a full-corpus candidate."
+}

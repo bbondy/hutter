@@ -287,3 +287,20 @@ archive. The corrected v3 Mac/Linux builds also pass the saved
 The native and Linux binaries are respectively byte-identical to their preceding
 v2 builds; the v3 preparation helper and input streams changed. Initialization
 agreement still does not prove cross-decoding or Linux candidate ranking.
+
+## Projected competitive-order comparison, predeclared
+
+The [projection protocol](../../../benchmarks/article-order/20261017-projection-protocol-v1/protocol.json)
+compares exact upstream order with two candidates on the same raw pages and the
+same v3 binary/assets. All special-page positions and full-order class-region
+boundaries stay fixed. The local candidate makes only strictly improving adjacent
+link swaps, with four passes and a 4,096-full-rank displacement bound. The graph
+candidate runs the existing SCC heuristic separately within each ordinary region.
+The baseline supplies tie order. No scores from these variants have been read.
+
+The local proposal moves four screen pages (forward links 45 to 47) and two
+follow-up pages (33 to 34). The broader graph proposal moves 27 and 42 pages
+(45 to 54, and 33 to 35). Their measured sizes and actual context use will decide
+whether any is worth continuing. A third range starting at enwik8 byte 80,000,000
+is reserved in advance for confirmation if a candidate wins both existing sets;
+the repeatedly examined disjoint set is not an untouched validation set.

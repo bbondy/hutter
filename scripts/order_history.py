@@ -46,8 +46,10 @@ def checked_restoration(raw, sample, manifest):
 def summarize(args):
     manifest = json.loads(args.manifest.read_text())
     samples = {s["variant"]: s for s in manifest["samples"]}
-    if set(samples) != set(VARIANTS):
-        raise ValueError("manifest must contain source, graph and random")
+    names = manifest.get("variant_names", list(VARIANTS))
+    baseline_name = manifest.get("baseline_variant", "source")
+    if len(names) != len(set(names)) or set(samples) != set(names) or baseline_name not in names:
+        raise ValueError("manifest variants or baseline are incomplete")
     helper = args.build.resolve() / "prepare-sample"
     if digest(helper) != manifest["helper_sha256"]:
         raise ValueError("preprocessor hash differs from fixture")
@@ -113,12 +115,15 @@ def summarize(args):
                     "source_results_sha256": digest(run / "results.jsonl"), "log_sha256": log_hashes,
                     "graph": manifest["graph"]["variants"][name],
                 }
-    if set(variants) != set(VARIANTS):
-        raise ValueError("all three variants need verified results")
-    baseline = variants["source"]["payload_bytes"]
+    if set(variants) != set(names):
+        raise ValueError("all declared variants need verified results")
+    baseline = variants[baseline_name]["payload_bytes"]
     for result in variants.values():
-        result["delta_bytes_vs_source"] = result["payload_bytes"] - baseline
-        result["delta_percent_vs_source"] = 100 * result["delta_bytes_vs_source"] / baseline
+        result["delta_bytes_vs_baseline"] = result["payload_bytes"] - baseline
+        result["delta_percent_vs_baseline"] = 100 * result["delta_bytes_vs_baseline"] / baseline
+        if baseline_name == "source":
+            result["delta_bytes_vs_source"] = result["delta_bytes_vs_baseline"]
+            result["delta_percent_vs_source"] = result["delta_percent_vs_baseline"]
     report = {
         "version": 1, "kind": "article-order-comparison", "role": manifest["role"],
         "date_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
@@ -129,6 +134,7 @@ def summarize(args):
         "restoration_code_sha256": digest(Path(__file__).with_name("article_order.py")),
         "size_scope": manifest["size_scope"], "baseline": manifest["baseline"],
         "timing_scope": "single trials, potentially concurrent; not a performance benchmark",
+        "baseline_variant": baseline_name, "variant_names": names,
         "native_arguments": metadata[0]["native_arguments"],
         "development_header_bytes": manifest.get("development_header_bytes", 0),
         "variants": variants,
@@ -183,10 +189,11 @@ def standard(args):
 def print_table(report, name):
     print(f"{name}: {report['page_count']} pages, {report['raw_bytes']} raw bytes; payload only")
     print("Order      Bytes      Delta    Delta %   Exact original")
-    for name in VARIANTS:
+    for name in report.get("variant_names", list(VARIANTS)):
         r = report["variants"][name]
-        print(f"{name:8} {r['payload_bytes']:8} {r['delta_bytes_vs_source']:+10} "
-              f"{r['delta_percent_vs_source']:+9.3f}   {r['original_bytes_roundtrip']}")
+        delta = r.get("delta_bytes_vs_baseline", r.get("delta_bytes_vs_source"))
+        pct = r.get("delta_percent_vs_baseline", r.get("delta_percent_vs_source"))
+        print(f"{name:12} {r['payload_bytes']:8} {delta:+10} {pct:+9.3f}   {r['original_bytes_roundtrip']}")
 
 
 def main():
