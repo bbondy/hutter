@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "question": "Does physical row/column removal implement the same MLP function as zeroing the same full-width up rows? This investigates whether width handling explains the already observed pruning losses; it does not reopen the failed size gate.",
+  "weights_file": "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4",
+  "weights_sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719",
+  "container_report_sha256": "38a204a43f1ea08963dac0a622f2e6765f08cf508fdf85091e50f6e2741d50b9",
+  "variants": [
+    "mlp-prune5",
+    "mlp-prune10",
+    "mlp-prune25"
+  ],
+  "control": "Retain original tensor shapes, scales and down weights. Independently zero only the removed up-weight rows. Recheck all masked tensors and the previously generated pruned containers against their exact intended tensors.",
+  "kernel_cases": "16 layers x 1024 fixed synthetic inputs per candidate. Seed 0x92f375ab; biased-u8 extremes, centered zero, alternating extremes and xorshift inputs. Use actual recorded native kernels and compiler flags; force both sparse and dense down routes.",
+  "acceptance": [
+    "Retained quantized activations match exactly after index mapping",
+    "Dropped masked activations are zero",
+    "Sparse and dense residual float outputs match bit for bit",
+    "Unmasked original versus pruned must fail via a semantic mismatch exit, not a crash or timeout"
+  ],
+  "limits": "Synthetic block evidence only; no proof for every input, full transformer, full arithmetic coder or prize submission. The original unmasked model is intentionally not equivalent to pruning. Existing rejected fixture results remain rejected.",
+  "followup": "If masked and pruned kernels disagree, locate the mismatch before interpreting pruning as a clean model intervention. If all agree, prioritize measured activations or training over more weight-norm pruning sweeps."
+}
