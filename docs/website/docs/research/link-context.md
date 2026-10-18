@@ -172,6 +172,14 @@ start and one-million-byte target. It preserves upstream projected order and
 all existing model settings. After this test, that range is examined evidence
 and cannot serve as untouched validation for further tuning.
 
+The [Mac third-range result](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-retrieval-confirmation-v1/report.json)
+also loses: 125,996 bytes against the baseline's 125,991, a **5-byte increase**.
+Both restore all 1,000,794 original XML bytes. The filter removes two retrieved
+mentions (16 → 14) and reduces prefix tokens from 702 to 626; it changes actual
+context rather than acting as a no-op. This previously reserved check therefore
+supports keeping the original rule. Native Linux confirmation of this same
+range is still running.
+
 ## Separate follow-up: refresh the prediction after alias text
 
 The upstream notes identify another mismatch. The compressor feeds some alias

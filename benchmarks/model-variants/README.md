@@ -128,6 +128,12 @@ again locally. The candidate fails the Linux promotion gate. The already-started
 reserved-range runs will be retained without changing the recipe or using a
 third result to erase this regression.
 
+The [previously reserved Mac range](20261017-retrieval-confirmation-v1/report.json)
+also loses by 5 bytes: 125,996 versus 125,991, with exact restoration and matching
+context counters. The unchanged filter is rejected on both the Linux disjoint
+gate and this additional range; its pending Linux third-range record will be
+retained as confirmation evidence, not used to retune it.
+
 ## Alias prediction refresh
 
 The [alias protocol](20261017-alias-protocol-v1/protocol.json) changes only
