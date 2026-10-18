@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/screen.json",
+      "manifest_sha256": "fd9b852429f18cecc15ecefa0eb0378d919ac9be348fc6c24d8608fc35439731",
+      "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f"
+    },
+    "holdout": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/holdout.json",
+      "manifest_sha256": "880ad288323503c874b18d8d3aadaebde268f6960f546352d0efb0d08e84d47b",
+      "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "changes": "CPU identity display supports Linux; round-trip/context checks are unchanged."
+  },
+  "input_variant": "upstream",
+  "hypothesis": "Embed the screen-selected BF16 bit predictor and verify that its replay gains survive real compression, without changing higher-level prediction state.",
+  "variants": [
+    "baseline",
+    "bit-weight-warm-start-lr3000-v1"
+  ],
+  "bit_weight_recipe_sha256": "91f2aa17e6ec986bb73edb9446d5487e964bd91161dad996b23dfe47ba25d470",
+  "training_report_sha256": "4f36397fbc7b4a961158bab842f41feb9923ec2ad659f9467751cabea8b77f35",
+  "selection_sha256": "60142d5779e31c83fcdf2413d8e701922175e9a84c83efe45ef5cfcc995b7c47",
+  "model_sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0",
+  "model_bytes": 7386,
+  "rule": "Replace only src/bit_head_weights.h embedded array and SHA comment. Keep model code, online-learning threshold, dictionary, transformer, order, contexts, initialization and compile flags unchanged.",
+  "prospective_replay_cost_delta_bytes": {
+    "screen": -147.7,
+    "holdout": -91.2
+  },
+  "acceptance": [
+    "Both fixtures restore prepared bytes and original XML exactly",
+    "All context counts match the unchanged baseline; only the declared weight-header source differs",
+    "Actual payload strictly smaller on both fixtures before Linux promotion",
+    "Preserve every outcome and package binary sizes; same raw model size is not final packed executable accounting"
+  ],
+  "limitations": [
+    "These are reused fixtures and screening-only trained weights. No full-corpus improvement is established.",
+    "Actual arithmetic-coder bytes may differ slightly from rounded replay cost through termination and framing.",
+    "The existing online-learning threshold is unchanged; long-stream behavior remains untested.",
+    "Local concurrent timings are exploratory, not controlled performance measurements."
+  ],
+  "scope": "Native fixture archive comparison; embedded-model bytes are shipped in the development executable. A passing result still requires Linux, full package cost, full-corpus restoration and resource verification."
+}

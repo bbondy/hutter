@@ -168,10 +168,23 @@ reused across all three settings. These timings describe this small replay
 workload, not full compression performance.
 
 A [separate archive protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-archive-protocol-v1)
-now embeds that exact model hash and changes only its weight header. Real
-restored archives on both fixtures must improve before Linux promotion. This
-is a promising small screening result, not a full-corpus or prize gain.
+embeds that exact model hash and changes only its weight header. The completed
+native Mac archive comparisons pass the predeclared promotion gate:
 
-Full trace collection has not started. The [training-row dump](training-data.md) is a different dataset: it cannot replace
-the final mixer's bit-level inputs. A changed transformer also requires a new
-bit-model trace, because its features and upstream predictions change.
+| Fixture | Baseline payload | Trained payload | Change | Original XML |
+| --- | ---: | ---: | ---: | --- |
+| [Screen](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-archive-screen-v1) | 119,065 B | 118,917 B | −148 B | Exact restoration |
+| [Disjoint](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-archive-holdout-v1) | 117,438 B | 117,347 B | −91 B | Exact restoration |
+
+All context counters match their baselines. Both development binaries are
+873,096 bytes, though packed release package cost remains unmeasured. The
+model was selected on the screen before the disjoint archive was tested.
+That second fixture has been used in earlier research, so it is a useful
+generalization check rather than untouched validation. Native Linux and a
+longer stream are the next gates; these savings are far below a demonstrated
+full-corpus prize margin.
+
+The [training-row dump](training-data.md) is a different dataset: it cannot
+replace the final mixer's bit-level inputs. A changed transformer also
+requires a new bit-model trace, because its features and upstream predictions
+change.

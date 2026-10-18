@@ -57,14 +57,15 @@ Priorities:
 
 5. Investigate the [small final bit predictor](website/docs/research/bit-predictor.md)
    as a CPU training route. Upstream trained its 7,386-byte model on only the
-   first 20% of model bits. Its replay trainer and float32 checkpoint are
-   present, but the original trace writer and roughly 40 GB trace are absent.
-   The bounded trace writer and public replay verifier are now implemented
-   with frozen protocols. Fixture trace/archive checks are running; replay
-   must match every live integer probability and reject a deliberately wrong
-   reference before training. These tools pass synthetic checks on native Mac
-   and Linux. This is a separate dataset from the transformer row dump;
-   no new training gain has been measured here.
+   first 20% of model bits. The original large trace is absent, but the new
+   bounded writer and public replay verifier match every live integer
+   probability on both Mac fixtures with the compressor's deterministic math.
+   A one-pass screen-selected BF16 update saves [148 bytes on the screen](../benchmarks/training/20261017-bitl-archive-screen-v1)
+   and [91 bytes on the disjoint fixture](../benchmarks/training/20261017-bitl-archive-holdout-v1)
+   in actual Mac archives; both restore exact original XML and retain matching
+   context counts. Promote this fixed model to native Linux, then measure
+   packed release size and longer streams. These reused fixtures are not a
+   full-corpus or prize score.
 
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)
