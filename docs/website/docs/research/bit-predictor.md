@@ -79,6 +79,12 @@ then deliberately changes the first reference probability and requires a
 mismatch at bit zero. Passing this checks frozen inference, not the later
 online-training arithmetic or a new model's compression performance.
 
+[Native Linux diagnostic checks](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-diagnostic-linux-checks-v1)
+pass the compiled writer/driver controls and source-change guards. These are
+synthetic checks; real model traces still need their own archive and replay
+comparisons. A separate summary reports the current head's discrete-probability
+cost by model-bit decile and recorded channel state. This can guide a later
+experiment, but does not measure an archive with the head removed.
 
 ## A staged experiment
 

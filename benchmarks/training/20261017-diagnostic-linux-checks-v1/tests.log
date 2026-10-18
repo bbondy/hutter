@@ -1,0 +1,80 @@
+﻿2026-10-18T02:31:30.0243445Z ##[group]Run python3 -m unittest discover -s scripts -p 'test_*.py' -v
+2026-10-18T02:31:30.0244456Z [36;1mpython3 -m unittest discover -s scripts -p 'test_*.py' -v[0m
+2026-10-18T02:31:30.0502260Z shell: /usr/bin/bash -e {0}
+2026-10-18T02:31:30.0502863Z ##[endgroup]
+2026-10-18T02:31:32.7502361Z test_compiled_callback_updates_only_after_last_eligible_row (test_alias_refresh.AliasRefreshTests.test_compiled_callback_updates_only_after_last_eligible_row) ... ok
+2026-10-18T02:31:32.7505057Z test_cycle_and_disconnected_graph_preserve_all_pages (test_article_order.ArticleOrderTests.test_cycle_and_disconnected_graph_preserve_all_pages) ... ok
+2026-10-18T02:31:32.7507902Z test_dag_prioritizes_sources_even_when_ids_run_backwards (test_article_order.ArticleOrderTests.test_dag_prioritizes_sources_even_when_ids_run_backwards) ... ok
+2026-10-18T02:31:32.7510630Z test_each_order_restores_exact_original_without_permutation (test_article_order.ArticleOrderTests.test_each_order_restores_exact_original_without_permutation) ... ok
+2026-10-18T02:31:32.7514995Z test_fixed_redirect_prefix_and_ordinary_graph_restore_original (test_article_order.ArticleOrderTests.test_fixed_redirect_prefix_and_ordinary_graph_restore_original) ... ok
+2026-10-18T02:31:32.7522832Z test_graph_direction_and_exact_link_semantics (test_article_order.ArticleOrderTests.test_graph_direction_and_exact_link_semantics) ... ok
+2026-10-18T02:31:32.7532632Z test_reject_lossy_or_ambiguous_inputs (test_article_order.ArticleOrderTests.test_reject_lossy_or_ambiguous_inputs) ... ok
+2026-10-18T02:31:32.7534522Z test_self_closing_text_keeps_original_bytes (test_article_order.ArticleOrderTests.test_self_closing_text_keeps_original_bytes) ... ok
+2026-10-18T02:31:32.7536542Z test_comparison_uses_content_and_reports_regression (test_benchmark_history.HistoryTests.test_comparison_uses_content_and_reports_regression) ... ok
+2026-10-18T02:31:32.7545622Z test_failed_or_nondeterministic_trials_cannot_win (test_benchmark_history.HistoryTests.test_failed_or_nondeterministic_trials_cannot_win) ... ok
+2026-10-18T02:31:32.7554791Z test_invalid_manifest_and_id_leave_no_history (test_benchmark_history.HistoryTests.test_invalid_manifest_and_id_leave_no_history) ... ok
+2026-10-18T02:31:32.7572467Z test_phase_mismatch_and_invalid_context_cannot_win (test_benchmark_history.HistoryTests.test_phase_mismatch_and_invalid_context_cannot_win) ... ok
+2026-10-18T02:31:32.7587823Z test_record_is_immutable_and_survives_source_removal (test_benchmark_history.HistoryTests.test_record_is_immutable_and_survives_source_removal) ... ok
+2026-10-18T02:31:33.1372250Z test_actual_writer_preserves_column_selection_bit_phase_and_probabilities (test_bit_trace.BitTraceTests.test_actual_writer_preserves_column_selection_bit_phase_and_probabilities) ... ok
+2026-10-18T02:31:33.8784049Z test_actual_driver_accepts_equal_probabilities_and_rejects_mismatch_and_extra_data (test_bitl_replay.ReplayVerifierTests.test_actual_driver_accepts_equal_probabilities_and_rejects_mismatch_and_extra_data) ... ok
+2026-10-18T02:31:33.8787171Z test_patch_requires_exact_anchors (test_bitl_replay.ReplayVerifierTests.test_patch_requires_exact_anchors) ... ok
+2026-10-18T02:31:34.6042323Z test_mismatches_corruption_and_invalid_parameters_fail_early (test_cmix_fixture_support.CorpusHeaderTests.test_mismatches_corruption_and_invalid_parameters_fail_early) ... ok
+2026-10-18T02:31:34.6152321Z test_release_defaults_legacy_and_explicit_header_roundtrip (test_cmix_fixture_support.CorpusHeaderTests.test_release_defaults_legacy_and_explicit_header_roundtrip) ... ok
+2026-10-18T02:31:34.6165834Z test_context_requires_equal_counts_and_correct_phase (test_cmix_fixture_support.FixtureSupportTests.test_context_requires_equal_counts_and_correct_phase) ... ok
+2026-10-18T02:31:34.6167931Z test_manifest_configuration_and_build_compatibility (test_cmix_fixture_support.FixtureSupportTests.test_manifest_configuration_and_build_compatibility) ... ok
+2026-10-18T02:31:34.6249783Z test_shared_patch_consumes_every_cutoff_and_fails_on_changed_source (test_cmix_fixture_support.FixtureSupportTests.test_shared_patch_consumes_every_cutoff_and_fails_on_changed_source) ... ok
+2026-10-18T02:31:35.8402928Z test_helper_rejects_incorrect_declared_page_count (test_cmix_fixture_support.PreparationPhaseTests.test_helper_rejects_incorrect_declared_page_count) ... ok
+2026-10-18T02:31:35.8504121Z test_phase_configuration_reaches_text_transform_and_inverse (test_cmix_fixture_support.PreparationPhaseTests.test_phase_configuration_reaches_text_transform_and_inverse) ... ok
+2026-10-18T02:31:35.8659325Z test_completion_counts_reject_missing_or_truncated_trace (test_cmix_parity.ParityTests.test_completion_counts_reject_missing_or_truncated_trace) ... ok
+2026-10-18T02:31:35.8681414Z test_decoder_rejects_modified_encoder_artifacts (test_cmix_parity.ParityTests.test_decoder_rejects_modified_encoder_artifacts) ... ok
+2026-10-18T02:31:35.8690646Z test_empty_equal_files_do_not_prove_completed_run (test_cmix_parity.ParityTests.test_empty_equal_files_do_not_prove_completed_run) ... ok
+2026-10-18T02:31:35.8706803Z test_prefix_cannot_be_accepted_as_full_encoding (test_cmix_parity.ParityTests.test_prefix_cannot_be_accepted_as_full_encoding) ... ok
+2026-10-18T02:31:35.8718916Z test_stream_comparison_detects_prefix_and_chunk_boundary (test_cmix_parity.ParityTests.test_stream_comparison_detects_prefix_and_chunk_boundary) ... ok
+2026-10-18T02:31:35.8727626Z test_trace_analysis_separates_input_identity_from_probability (test_cmix_parity.ParityTests.test_trace_analysis_separates_input_identity_from_probability) ... ok
+2026-10-18T02:31:39.4912709Z test_entity_reduction_with_optimization_and_overflow_checks (test_cmix_preprocess_support.EntityPortabilityTests.test_entity_reduction_with_optimization_and_overflow_checks) ... ok
+2026-10-18T02:31:39.4917431Z test_depth_recipe_cannot_hide_a_link_context_change (test_cmix_variants.ModelVariantTests.test_depth_recipe_cannot_hide_a_link_context_change) ... ok
+2026-10-18T02:31:39.5026406Z test_exact_source_edits_and_historical_baseline_identity (test_cmix_variants.ModelVariantTests.test_exact_source_edits_and_historical_baseline_identity) ... ok
+2026-10-18T02:31:39.5034856Z test_modified_source_and_forged_provenance_are_rejected (test_cmix_variants.ModelVariantTests.test_modified_source_and_forged_provenance_are_rejected) ... ok
+2026-10-18T02:31:39.5043955Z test_fingerprint_agrees_with_standard_fnv1a_vectors (test_cmix_weight_support.WeightBindingTests.test_fingerprint_agrees_with_standard_fnv1a_vectors) ... ok
+2026-10-18T02:31:39.5046284Z test_stamp_is_confined_to_the_original_binding_function (test_cmix_weight_support.WeightBindingTests.test_stamp_is_confined_to_the_original_binding_function) ... ok
+2026-10-18T02:31:39.5096864Z test_inventory_detects_content_mode_missing_and_extra_files (test_competitive.CompetitiveTests.test_inventory_detects_content_mode_missing_and_extra_files) ... ok
+2026-10-18T02:31:39.5105436Z test_linux_arm_is_not_treated_as_compatible (test_competitive.CompetitiveTests.test_linux_arm_is_not_treated_as_compatible) ... ok
+2026-10-18T02:31:39.5111680Z test_unsupported_host_does_not_execute_tools (test_competitive.CompetitiveTests.test_unsupported_host_does_not_execute_tools) ... ok
+2026-10-18T02:31:39.6330125Z test_actual_counter_block_records_sparse_zero_calls_and_moments (test_mlp_activity.ActivationTests.test_actual_counter_block_records_sparse_zero_calls_and_moments) ... ok
+2026-10-18T02:31:39.6372467Z test_activity_requires_exact_source_transformation (test_model_history.ModelComparisonTests.test_activity_requires_exact_source_transformation) ... ok
+2026-10-18T02:31:39.6407656Z test_alias_refresh_requires_exact_source_transformation (test_model_history.ModelComparisonTests.test_alias_refresh_requires_exact_source_transformation) ... ok
+2026-10-18T02:31:39.6447308Z test_bit_trace_requires_exact_source_transformation (test_model_history.ModelComparisonTests.test_bit_trace_requires_exact_source_transformation) ... ok
+2026-10-18T02:31:39.6463644Z test_depth_change_requires_an_unchanged_reference_header (test_model_history.ModelComparisonTests.test_depth_change_requires_an_unchanged_reference_header) ... ok
+2026-10-18T02:31:39.6492704Z test_only_declared_model_change_and_build_parallelism_are_allowed (test_model_history.ModelComparisonTests.test_only_declared_model_change_and_build_parallelism_are_allowed) ... ok
+2026-10-18T02:31:39.6529422Z test_retrieval_requires_exact_source_transformation (test_model_history.ModelComparisonTests.test_retrieval_requires_exact_source_transformation) ... ok
+2026-10-18T02:31:39.6532034Z test_allows_reordered_input_but_rejects_different_model_or_assets (test_order_history.OrderHistoryTests.test_allows_reordered_input_but_rejects_different_model_or_assets) ... ok
+2026-10-18T02:31:39.6535592Z test_requires_same_article_set_and_exact_original_restoration (test_order_history.OrderHistoryTests.test_requires_same_article_set_and_exact_original_restoration) ... ok
+2026-10-18T02:31:39.6538096Z test_corrupt_boundaries_and_archive_footers_are_rejected (test_package_structure.PackageStructureTests.test_corrupt_boundaries_and_archive_footers_are_rejected) ... ok
+2026-10-18T02:31:39.6540441Z test_partition_and_decoder_cut_match_the_format (test_package_structure.PackageStructureTests.test_partition_and_decoder_cut_match_the_format) ... ok
+2026-10-18T02:31:39.6542979Z test_comparison_requires_identical_input_and_assets (test_parity_history.ParityHistoryTests.test_comparison_requires_identical_input_and_assets) ... ok
+2026-10-18T02:31:39.6545212Z test_decoder_result_links_restored_input_and_encoded_payload (test_parity_history.ParityHistoryTests.test_decoder_result_links_restored_input_and_encoded_payload) ... ok
+2026-10-18T02:31:39.6547394Z test_only_completed_fixture_encodings_are_listed (test_parity_history.ParityHistoryTests.test_only_completed_fixture_encodings_are_listed) ... ok
+2026-10-18T02:31:39.6549639Z test_phase_protocols_cannot_be_compared_as_model_gains (test_parity_history.ParityHistoryTests.test_phase_protocols_cannot_be_compared_as_model_gains) ... ok
+2026-10-18T02:31:39.6550813Z test_multiple_passes_preserve_final_displacement_bound (test_project_order.ProjectOrderTests.test_multiple_passes_preserve_final_displacement_bound) ... ok
+2026-10-18T02:31:39.6552563Z test_normal_regions_separated_by_special_blocks_do_not_mix (test_project_order.ProjectOrderTests.test_normal_regions_separated_by_special_blocks_do_not_mix) ... ok
+2026-10-18T02:31:39.6553608Z test_special_classes_stay_fixed (test_project_order.ProjectOrderTests.test_special_classes_stay_fixed) ... ok
+2026-10-18T02:31:39.6554453Z test_strict_gain_within_full_corpus_distance (test_project_order.ProjectOrderTests.test_strict_gain_within_full_corpus_distance) ... ok
+2026-10-18T02:31:39.6732177Z test_disk_counts_hardlinks_once_and_open_unlinked_files (test_release_full.FullReleaseTests.test_disk_counts_hardlinks_once_and_open_unlinked_files) ... ok
+2026-10-18T02:31:39.6909595Z test_full_result_requires_original_bytes_and_published_archive (test_release_full.FullReleaseTests.test_full_result_requires_original_bytes_and_published_archive) ... ok
+2026-10-18T02:31:39.7338348Z test_success_and_failure_are_persisted (test_release_full.FullReleaseTests.test_success_and_failure_are_persisted) ... ok
+2026-10-18T02:31:40.1258396Z test_successful_parent_does_not_leave_owned_children_running (test_release_full.FullReleaseTests.test_successful_parent_does_not_leave_owned_children_running) ... ok
+2026-10-18T02:31:40.1921447Z test_timeout_and_resource_stops_are_failures (test_release_full.FullReleaseTests.test_timeout_and_resource_stops_are_failures) ... ok
+2026-10-18T02:31:40.9457375Z test_accepts_output_beyond_a_previously_observed_phase_marker (test_release_prefix.ReleasePrefixTests.test_accepts_output_beyond_a_previously_observed_phase_marker) ... ok
+2026-10-18T02:31:41.4507903Z test_rejects_metadata_only_and_marker_without_sufficient_later_output (test_release_prefix.ReleasePrefixTests.test_rejects_metadata_only_and_marker_without_sufficient_later_output) ... ok
+2026-10-18T02:31:41.7033260Z test_snapshot_terminates_the_owned_writer_without_finishing_archive (test_release_prefix.ReleasePrefixTests.test_snapshot_terminates_the_owned_writer_without_finishing_archive) ... ok
+2026-10-18T02:31:42.2069350Z test_timeout_and_early_exit_are_not_accepted (test_release_prefix.ReleasePrefixTests.test_timeout_and_early_exit_are_not_accepted) ... ok
+2026-10-18T02:31:42.2072226Z test_sentinels_are_input_only_and_previous_reset_marker_is_allowed (test_training_dump_summary.DumpVocabularyTests.test_sentinels_are_input_only_and_previous_reset_marker_is_allowed) ... skipped 'requires the NumPy research environment'
+2026-10-18T02:31:42.5625549Z test_compiled_reader_handles_appends_mapping_growth_and_fallback (test_training_read_cache.ReadCacheTests.test_compiled_reader_handles_appends_mapping_growth_and_fallback) ... ok
+2026-10-18T02:31:42.5628373Z test_exact_source_guards_and_pinned_tree_protection (test_training_read_cache.ReadCacheTests.test_exact_source_guards_and_pinned_tree_protection) ... ok
+2026-10-18T02:31:42.5630526Z test_break_even_is_not_a_win_and_different_sample_lengths_matter (test_weight_tradeoff.WeightTradeoffTests.test_break_even_is_not_a_win_and_different_sample_lengths_matter) ... ok
+2026-10-18T02:31:42.5633148Z test_two_weight_copies_and_full_corpus_scaling_are_counted (test_weight_tradeoff.WeightTradeoffTests.test_two_weight_copies_and_full_corpus_scaling_are_counted) ... ok
+2026-10-18T02:31:42.5634470Z 
+2026-10-18T02:31:42.5635059Z ----------------------------------------------------------------------
+2026-10-18T02:31:42.5635826Z Ran 71 tests in 12.334s
+2026-10-18T02:31:42.5636230Z 
+2026-10-18T02:31:42.5636522Z OK (skipped=1)

@@ -1,0 +1,20 @@
+{
+  "kind": "native-linux-diagnostic-harness-tests",
+  "commit": "af3033e8a622035e054b19fc7788cec1a3e6c414",
+  "workflow_url": "https://github.com/bbondy/hutter/actions/runs/39090389605",
+  "tests_run": 71,
+  "tests_passed": 70,
+  "tests_skipped": 1,
+  "skipped_reason": "NumPy training-vocabulary analysis test; covered locally in the NumPy environment.",
+  "tests_log_sha256": "e29cdb4241c02563cfbd36a9ec6f848f89d4eb0fa15fd6eef712bee9740cabec",
+  "source_sha256": {
+    "scripts/training_read_cache.py": "e3b706fd924ce60733cbb317878656c8e1f36eae77bb15a55ead03257c6e1664",
+    "scripts/test_training_read_cache.py": "de6779d01cc7a2506a745d68279e9f7b5f3e99e57aa595759fb15402c7e255cf",
+    "scripts/cmix_bit_trace_support.py": "d4feb6e3c6cfe4e3459f07ebb68e0f38984fba44d38acb80a0a835de5fe1d9f0",
+    "scripts/test_bit_trace.py": "6a9c1a6da7f84608a0979090cc2c62eee81911701367c60fdc45fa8211351a0e",
+    "scripts/bitl_replay.py": "a02876202eff7ec151f3d03dfe2e33bd664377112de44bdefa161593d39ce308",
+    "scripts/test_bitl_replay.py": "bd27c0626731c8d7eef4d1183ed1a52c75d6634419fddd6353487e93802cd364",
+    "scripts/test_model_history.py": "448c86bdf75e50187961de4e89a46e3b6bda3a1815ee5e543ea2b5ca36dd16ac"
+  },
+  "scope": "Synthetic/compiled tests on native Ubuntu 24.04, including mmap fallback/causality, actual trace-writer column/phase layout, actual replay-driver equality/mismatch controls, and source-rewrite forgery guards. Does not run a real Linux model trace, train weights or establish a prize score."
+}

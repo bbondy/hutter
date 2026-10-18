@@ -47,18 +47,24 @@ Priorities:
    expressive models of correlations. The first unretrained pruning choices
    fail by a large margin. The
    [full training-row dump](../benchmarks/training/20261017-native-dump-v1) now
-   matches its published 7.1 GB hash. Inspect its verified prompt coverage and
-   the active MLP instrumentation before a separate activation-aware,
-   compensated or retrained-model experiment; data reproduction does not
-   itself establish a better model.
+   matches its published 7.1 GB hash. The diagnostic read cache reproduces all
+   four original output hashes, with observed 13.5 versus 40 minute concurrent
+   run times and about 509 MB extra resident memory; this is not a controlled
+   production speed result. MLP instrumentation preserves both archives: all
+   12,218 neurons activate, and the old 5% removals can include about 17% of a
+   layer's squared activation mass. A separate activation-aware, compensated
+   or retrained-model experiment would still need new measured archives.
 
 5. Investigate the [small final bit predictor](website/docs/research/bit-predictor.md)
    as a CPU training route. Upstream trained its 7,386-byte model on only the
    first 20% of model bits. Its replay trainer and float32 checkpoint are
    present, but the original trace writer and roughly 40 GB trace are absent.
-   Reconstruct and verify fixture tracing/replay before considering a broader
-   training run. This is a separate dataset from the transformer row dump;
-   no training gain or runtime estimate has been measured here.
+   The bounded trace writer and public replay verifier are now implemented
+   with frozen protocols. Fixture trace/archive checks are running; replay
+   must match every live integer probability and reject a deliberately wrong
+   reference before training. These tools pass synthetic checks on native Mac
+   and Linux. This is a separate dataset from the transformer row dump;
+   no new training gain has been measured here.
 
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)

@@ -1,0 +1,59 @@
+{
+  "conclusion": "success",
+  "headSha": "af3033e8a622035e054b19fc7788cec1a3e6c414",
+  "jobs": [
+    {
+      "completedAt": "2026-10-18T02:31:44Z",
+      "conclusion": "success",
+      "databaseId": 117565687376,
+      "name": "check",
+      "startedAt": "2026-10-18T02:31:27Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-18T02:31:28Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-18T02:31:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-18T02:31:30Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-10-18T02:31:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-18T02:31:42Z",
+          "conclusion": "success",
+          "name": "Exercise process cleanup, resource sampling and package guards",
+          "number": 3,
+          "startedAt": "2026-10-18T02:31:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-18T02:31:42Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 6,
+          "startedAt": "2026-10-18T02:31:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-18T02:31:43Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 7,
+          "startedAt": "2026-10-18T02:31:42Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/bbondy/hutter/actions/runs/39090389605/job/117565687376"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/bbondy/hutter/actions/runs/39090389605"
+}
