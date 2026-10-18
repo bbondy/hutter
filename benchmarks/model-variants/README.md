@@ -149,3 +149,23 @@ The completed [screen](20261017-alias-screen-v1/report.json) adds 4 bytes
 ties at 117,438. Both restore original XML and preserve all context counts.
 This fails the frozen both-fixture improvement requirement: no Linux or larger
 promotion under this protocol. The original callback remains the control.
+
+
+## MLP activation diagnostics
+
+The [frozen activity protocol](20261017-activity-protocol-v1/protocol.json) uses
+`--activity-variant mlp`. It leaves all model settings fixed and requires archive
+identity, original-byte restoration and identical encoder/decoder counters.
+After saving its comparison with `model_history.py`, summarize it with:
+
+```sh
+build/weight-audit-env/bin/python scripts/mlp_activity_summary.py \
+  --comparison benchmarks/model-variants/20261017-activity-screen-v1 \
+  --pruning-record benchmarks/weights/20261017-pruning-containers-v1 \
+  --output benchmarks/weights/20261017-activity-screen-summary-v1
+```
+
+The summary relates measured activation moments to the already rejected removal
+maps. Its per-neuron squared-contribution score is a diagnostic, not coding loss;
+adding these scores omits cross-neuron correlations. No new removal is authorized
+by this data alone, and observed inactivity is not universal deadness.
