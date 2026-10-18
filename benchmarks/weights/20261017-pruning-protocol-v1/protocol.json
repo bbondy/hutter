@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "hypothesis": "Structured removal of low-ranked MLP neurons may reduce two stored model copies by more than it increases the full corpus payload. Unlike permutation, this intentionally changes predictions.",
+  "weights_file": "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4",
+  "weights_sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719",
+  "rates_percent": [
+    5,
+    10,
+    25
+  ],
+  "ranking": "Within each layer, stable ascending (up_row_scale^2 * sum(up_row_int4^2)) * sqrt(sum((down_column_int4 * down_row_scale)^2)). Float64 computation. This is a contribution heuristic for the ReLU-squared MLP, not measured activation frequency or a proof of deadness.",
+  "selection": "Drop floor(width * rate / 100) neurons per layer; preserve surviving order. Remove paired up rows/scales and down columns through the pinned upstream structural-pruning function. Start each candidate from the original container; do not combine with neuron permutation or other model changes.",
+  "acceptance": [
+    "Unchanged tensors must rewrite to the exact original container",
+    "All intended candidate tensors must round-trip through the original v4 coder",
+    "Retain every candidate, its removed indices, ranking scores, container bytes and hashes"
+  ],
+  "coder_followup": "Bind each candidate explicitly, restore original raw XML on both canonical reused fixtures and measure payload changes. Archive identity is not an acceptance condition for pruning. Freeze candidate hashes and the tradeoff decision rule before reading coder results.",
+  "tradeoff_gate": "For each fixture, compare added payload bytes per raw input byte with gross two-container savings per 1,000,000,000 raw bytes. A candidate must fit that break-even budget on both fixtures before larger/native Linux confirmation. This proportional extrapolation is only a screening heuristic; full package and full corpus decide.",
+  "limitations": [
+    "The fixtures use cold model state and sparse projected order; their byte rate is not an unbiased full-corpus estimate.",
+    "Empirical neuron-importance scores can discard useful rare features.",
+    "A compressed container saving alone is not a win; payload deterioration and executable changes count.",
+    "Changing model geometry can affect runtime and online model interactions."
+  ],
+  "scope": "Predeclared container and subsequent model/payload tradeoff screening; no inference-equivalence or prize score claim."
+}
