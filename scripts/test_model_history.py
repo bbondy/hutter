@@ -1,10 +1,15 @@
 import copy
 import unittest
+import tempfile
+from pathlib import Path
+import shutil
+import hashlib
 
 from cmix_variants import HEADER, DEPTH_HEADER, recipe
 from competitive import ENGINE
 from make_samples import digest
 from model_history import compatible_builds
+import cmix_retrieval_support as retrieval
 
 
 class ModelComparisonTests(unittest.TestCase):
@@ -42,6 +47,33 @@ class ModelComparisonTests(unittest.TestCase):
             compatible_builds(baseline, candidate)
         with self.assertRaisesRegex(ValueError, "unchanged baseline model"):
             compatible_builds(candidate, self.build("depth-no-skip"))
+
+    def test_retrieval_requires_exact_source_transformation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            original = Path(directory) / "original"
+            candidate_dir = Path(directory) / "candidate"
+            for folder in (original, candidate_dir):
+                path = folder / retrieval.SOURCE
+                path.parent.mkdir(parents=True)
+                shutil.copyfile(ENGINE / retrieval.SOURCE, path)
+            baseline, candidate = self.build("baseline"), self.build("baseline")
+            baseline["source_files"][retrieval.SOURCE] = {"sha256": digest(original / retrieval.SOURCE)}
+            info = retrieval.apply(candidate_dir, retrieval.VARIANT)
+            candidate["retrieval_variant"] = info
+            candidate["source_files"][retrieval.SOURCE] = {"sha256": info["after_sha256"]}
+            self.assertEqual(compatible_builds(baseline, candidate, original), "retrieval-exact-target")
+            with self.assertRaisesRegex(ValueError, "baseline source file"):
+                compatible_builds(baseline, candidate)
+            bad = copy.deepcopy(candidate)
+            forged = hashlib.sha256((candidate_dir / retrieval.SOURCE).read_bytes() + b"\nint undeclared;\n").hexdigest()
+            bad["retrieval_variant"]["after_sha256"] = forged
+            bad["source_files"][retrieval.SOURCE]["sha256"] = forged
+            with self.assertRaisesRegex(ValueError, "more than the declared"):
+                compatible_builds(baseline, bad, original)
+            with self.assertRaisesRegex(ValueError, "anchor changed"):
+                retrieval.apply(candidate_dir, retrieval.VARIANT)
+            with self.assertRaisesRegex(ValueError, "pinned upstream"):
+                retrieval.apply(ENGINE, retrieval.VARIANT)
 
 
 if __name__ == "__main__":

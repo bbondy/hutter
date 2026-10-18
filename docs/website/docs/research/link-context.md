@@ -107,3 +107,22 @@ These are sparse, repeatedly examined fixtures. A candidate that improves both
 must face the reserved third range, Linux comparison and full-pipeline accounting.
 A payload improvement here does not establish a Hutter Prize score. See the
 [experiment playbook](experiment-playbook.md) for those promotion checks.
+
+## Next hypothesis: retrieve the correct link target
+
+The budget tests above reduced how much context the model received. A separate
+[frozen experiment](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-retrieval-protocol-v1/protocol.json)
+changes which links qualify. The upstream README explicitly lists an unmeasured
+opportunity: a link to a longer title can currently qualify for the shorter
+article whose title is its prefix.
+
+The new candidate requires the existing exact title match to end at a closing
+bracket, link pipe or section marker, already available to the decoder. A link
+to `University of ...` therefore stops qualifying merely as `University`.
+Case folding and underscore handling stay as they were. Budgets, weights,
+article order and all other model settings remain fixed.
+
+This may remove noise, but the frozen model was trained with the original
+retrieval rule, so an improvement is not guaranteed. The candidate must restore
+all original bytes, show matching context counters and improve both reused
+fixtures before promotion. No compression result is claimed yet.

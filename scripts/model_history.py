@@ -13,17 +13,41 @@ import tempfile
 
 from cmix_fixture_support import context_report, corpus_arguments, validate_context
 from cmix_variants import model_identity, recipe
+import cmix_retrieval_support as retrieval
 from make_samples import digest
 from order_history import checked_restoration
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def compatible_builds(baseline, candidate):
+def model_name(build):
+    if build.get("retrieval_variant"):
+        model_identity({**build, "retrieval_variant": None})
+        return "retrieval-" + build["retrieval_variant"]["name"]
+    return model_identity(build)[0]
+
+
+def compatible_builds(baseline, candidate, baseline_source=None):
     if model_identity(baseline)[0] != "baseline":
         raise ValueError("comparison requires the unchanged baseline model")
-    name = model_identity(candidate)[0]
-    _, change = recipe(name)
+    name = model_name(candidate)
+    if candidate.get("retrieval_variant"):
+        change = candidate["retrieval_variant"]
+        if baseline_source is None:
+            raise ValueError("retrieval comparison requires the baseline source file")
+        if baseline.get("weight_binding") or candidate.get("weight_binding"):
+            raise ValueError("retrieval comparison requires original weights")
+        if model_identity({**candidate, "retrieval_variant": None})[0] != "baseline":
+            raise ValueError("retrieval comparison changes model parameters")
+        path = baseline_source / retrieval.SOURCE
+        if (change["source_file"] != retrieval.SOURCE or digest(path) != change["before_sha256"]
+                or change["recipe_sha256"] != digest(Path(retrieval.__file__))):
+            raise ValueError("retrieval recipe or baseline source differs")
+        expected = hashlib.sha256(retrieval.rewrite(path.read_text(), change["name"]).encode()).hexdigest()
+        if expected != change["after_sha256"] or candidate["source_files"][retrieval.SOURCE]["sha256"] != expected:
+            raise ValueError("candidate changes more than the declared retrieval rule")
+    else:
+        _, change = recipe(name)
     for key in ("upstream_commit", "simde_commit", "compiler",
                 "fixture_support", "initialization", "platform", "machine"):
         if key not in baseline or baseline[key] != candidate.get(key):
@@ -68,7 +92,7 @@ def summarize(args):
     if digest(helper) != manifest["helper_sha256"]:
         raise ValueError("inverse helper differs from the fixture")
     metadata = [json.loads((run / "metadata.json").read_text()) for run in args.runs]
-    names = [model_identity(meta["build"])[0] for meta in metadata]
+    names = [model_name(meta["build"]) for meta in metadata]
     if len(names) != len(set(names)) or set(names) != set(protocol["variants"]):
         raise ValueError("requires exactly one run per declared model, including baseline")
     for name, frozen in protocol.get("variant_recipes", {}).items():
@@ -77,11 +101,14 @@ def summarize(args):
         current = recipe(name)[1]
         if any(current.get(key) != value for key, value in frozen.items()):
             raise ValueError("model recipe differs from the frozen experiment")
+    if protocol.get("retrieval_recipe_sha256"):
+        if protocol["retrieval_recipe_sha256"] != digest(Path(retrieval.__file__)):
+            raise ValueError("retrieval recipe differs from frozen experiment")
     base = metadata[names.index("baseline")]
     records, logs = {}, []
     with tempfile.TemporaryDirectory(prefix="hutter-model-verify-") as tmp:
         for name, meta, run in zip(names, metadata, args.runs):
-            compatible_builds(base["build"], meta["build"])
+            compatible_builds(base["build"], meta["build"], args.build.resolve() / "source")
             validate_runner(meta, protocol)
             for key in ("platform", "machine", "cpu", "side_data", "native_arguments"):
                 if key not in base or base[key] != meta.get(key):
@@ -128,7 +155,7 @@ def summarize(args):
                 logs.append((log, name + "-" + phase + ".log"))
             records[name] = {"payload_bytes": row["archive_bytes"], "archive_sha256": row["archive_sha256"],
                              "binary_sha256": meta["binary_sha256"], "binary_bytes": meta["binary_bytes"],
-                             "model": model_identity(meta["build"])[1], "context": context,
+                             "model": meta["build"].get("retrieval_variant") or model_identity(meta["build"])[1], "context": context,
                              "original_bytes_roundtrip": True, "restored_raw_sha256": final_sha,
                              "compress_seconds": row["compress"]["wall_seconds"],
                              "decompress_seconds": row["decompress"]["wall_seconds"],
