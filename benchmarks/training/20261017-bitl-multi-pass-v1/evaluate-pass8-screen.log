@@ -1,0 +1,5 @@
+BITLSTM: loaded /Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-multi-pass-v1/pass8.nblb (C=16 nin=89 inw=96 n1=28)
+trace: v3, recorded columns 13 of 28, mask=132120703
+channel: n_tf=4 n_hid=32 (projected=1) n_lhid=32 (projected=1) zone=1
+bits=2418045 cells=16 inputs=90 params=3585 base_B=117453.4 head_B=116910.5 delta_B=-542.8 rel=-0.462168% tailbits=2418045 tail_delta_B=-542.8
+  zone 0 tailbits=2418045 tail_delta_B=-542.8

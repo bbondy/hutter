@@ -66,7 +66,11 @@ Priorities:
    in actual Mac archives; both restore exact original XML and retain matching
    context counts. Promote this fixed model to native Linux, then measure
    packed release size and longer streams. These reused fixtures are not a
-   full-corpus or prize score.
+   full-corpus or prize score. A separate frozen [extra-pass trial](../benchmarks/training/20261017-bitl-multi-pass-v1)
+   lowers screen probability cost by another 282.3 bytes at 16 passes but
+   worsens disjoint cost by 90.6 bytes against the one-pass model. Reject that
+   checkpoint and expand training coverage rather than fitting this trace
+   longer.
 
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)

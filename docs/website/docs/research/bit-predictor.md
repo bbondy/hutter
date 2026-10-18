@@ -192,6 +192,15 @@ generalization check rather than untouched validation. Native Linux and a
 longer stream are the next gates; these savings are far below a demonstrated
 full-corpus prize margin.
 
+A frozen [extra-pass experiment](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-multi-pass-v1)
+continued the one-pass checkpoint on the same screen trace. At 16 passes the
+screen's frozen cost improved another 282.3 bytes, but the disjoint cost
+**worsened by 90.6 bytes** against the one-pass model. The selected hash was
+saved before that disjoint check; the predeclared gate rejected it, and no
+alternative checkpoint was tried on the disjoint fixture. This is direct
+evidence of small-trace overfitting. Broader training data is a better next
+step than more epochs on this fixture.
+
 The [training-row dump](training-data.md) is a different dataset: it cannot
 replace the final mixer's bit-level inputs. A changed transformer also
 requires a new bit-model trace, because its features and upstream predictions

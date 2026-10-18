@@ -1,0 +1,14 @@
+{
+  "pass": 16,
+  "fp32": {
+    "bytes": 14748,
+    "sha256": "1aaa81bfbc653fc3790325dc9547e6401eb8e52d00b1ee11b3d523ec1f257bb9"
+  },
+  "bf16": {
+    "bytes": 7386,
+    "sha256": "7cb36b2137b418f23da0cdb2dc34050dd512f3a1fd577979997ce7ddf1b6a065"
+  },
+  "export_log_sha256": "3f379d6be767cf35c465a46ebe9f44ed915ec9e0bb1b4a7aabc6d4a755810106",
+  "screen_cost_bytes": 116833.1,
+  "delta_vs_one_pass_bytes": -282.29999999998836
+}
