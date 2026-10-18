@@ -30,8 +30,8 @@ small to make this a complete prize-winning strategy.
 The [saved protocol](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-depth-protocol-v1/protocol.json)
 fixes both canonical article inputs and the exact changed source hashes before
 measurement. Each candidate changes one constant. Dictionary, weights, link
-context, learning rules and compiler settings stay fixed. No results are claimed
-yet; the experiment must retain losses as well as gains.
+context, learning rules and compiler settings stay fixed. The experiment retains
+losses as well as gains.
 
 More computation need not improve compression. The shortcut also determines
 which bits train the mixer and BITLSTM, so changing it changes their future
@@ -44,3 +44,24 @@ fixtures earns a test on the reserved third range and a native Linux comparison.
 Concurrent Mac timings are exploratory; a useful size/time tradeoff needs paired
 serial timings and ultimately the full submission's runtime limit. The
 [experiment playbook](experiment-playbook.md) explains those gates.
+
+## First native Mac results
+
+| Model | Screen payload | Change | Disjoint payload | Change |
+| --- | ---: | ---: | ---: | ---: |
+| Upstream threshold 8 | 119,065 | — | 117,438 | — |
+| Threshold 9 | 119,071 | +6 | 117,436 | −2 |
+| Adaptive skips disabled | 119,084 | +19 | 117,451 | +13 |
+
+All six trials restore the exact original XML and pass context checks. Neither
+candidate improves both fixtures, so neither advances to the reserved third
+range. Disabling the shortcut makes both payloads larger: spending more
+computation does not necessarily improve the online ensemble's predictions.
+These are small fixture deltas; they do not contradict a different result on
+the full stream.
+
+The [screen](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-depth-screen-v1/report.json)
+and [disjoint record](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-depth-holdout-v1/report.json)
+retain all outcomes. Jobs overlapped with other experiments, so their timings
+are exploratory. The separately predeclared native Linux comparison is still
+running; the upstream threshold remains the default.

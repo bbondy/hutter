@@ -405,3 +405,21 @@ full-corpus cost for this channel. Remaining platform numerical differences
 change byte deltas but not these rejection decisions. Subsequent frozen tests
 investigate adaptive depth and model-neuron permutation separately; do not
 combine them with these rejected changes.
+
+## Adaptive-depth follow-up on canonical inputs
+
+The separate frozen depth protocol changes the cascade skip threshold from 8
+to 9 or 31 (unreachable after the ±30 gate clamp). Mac results are:
+
+| Threshold | Screen payload | Delta | Disjoint payload | Delta |
+| --- | ---: | ---: | ---: | ---: |
+| 8 | 119,065 | — | 117,438 | — |
+| 9 | 119,071 | +6 | 117,436 | −2 |
+| 31 | 119,084 | +19 | 117,451 | +13 |
+
+[Both](../../../benchmarks/model-variants/20261017-depth-screen-v1/report.json)
+[comparisons](../../../benchmarks/model-variants/20261017-depth-holdout-v1/report.json)
+pass original-byte restoration and context checks. Neither candidate advances;
+no reserved-range scores were read. More cascade computation changes online
+learning state too, so a size gain was not guaranteed. Native Linux comparisons
+were launched separately before these results. Timing remains exploratory.
