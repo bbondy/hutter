@@ -16,6 +16,16 @@ ROW = np.dtype([("src", "<i4"), ("tok", "u1"), ("prev1", "u1"), ("prev2", "u1"),
 FLAGS = ("inserted", "masked", "document_start", "redirect", "prior0", "alias_or_author", "author", "metadata_prompt")
 
 
+def validate_token_roles(block):
+    """208 output bytes, plus eight inserted digit-run sentinel inputs."""
+    inserted = block["src"] == -1
+    sentinel = block["tok"] >= 208
+    if (np.any(block["tok"] >= 216) or np.any(sentinel & ~inserted)
+            or np.any(inserted != ((block["flags"] & 1) != 0))):
+        raise ValueError("invalid token role or inserted-row flag")
+    return np.bincount(block["tok"][sentinel] - 208, minlength=8)
+
+
 def summarize(build, output):
     source = json.loads((build / "report.json").read_text())
     if source["kind"] != "upstream-training-row-dump-reproduction" or not source["passed"]:
@@ -38,9 +48,11 @@ def summarize(build, output):
                   alias_rows_excluding_author=0, unmasked_alias_rows_excluding_author=0)
     documents, previous_src, monotonic = [], -1, True
     token_max, reserved_nonzero, unknown_source_rows = 0, 0, 0
+    sentinels = np.zeros(8, dtype=np.int64)
     chunk = 1 << 20
     for start in range(0, n, chunk):
         block = rows[start:start + chunk]
+        sentinels += validate_token_roles(block)
         flags = block["flags"]
         for bit, key in enumerate(FLAGS):
             counts[key] += int(np.count_nonzero(flags & (1 << bit)))
@@ -58,7 +70,7 @@ def summarize(build, output):
         token_max = max(token_max, int(block["tok"].max()))
         reserved_nonzero += int(np.count_nonzero(block["reserved"]))
         unknown_source_rows += int(np.count_nonzero(block["src"] < -1))
-    if (not monotonic or previous_src != 552750203 or token_max >= 208
+    if (not monotonic or previous_src != 552750203 or token_max >= 216
             or reserved_nonzero or unknown_source_rows):
         raise ValueError("unexpected row ordering, tail, token or reserved field")
     lengths = np.diff(np.array(documents + [n], dtype=np.int64))
@@ -74,6 +86,9 @@ def summarize(build, output):
               "parent_dump_report_sha256": digest(build / "report.json"),
               "dump": source["outputs"][dump.name], "rows_excluding_header": n,
               "counts": counts, "strictly_increasing_stream_positions": bool(monotonic),
+              "sentinel_input_rows": int(sentinels.sum()),
+              "sentinel_token_counts": {str(i + 208): int(value) for i, value in enumerate(sentinels)},
+              "maximum_input_token": token_max,
               "last_stream_position": previous_src,
               "documents": {"count": len(documents), "minimum_rows": int(lengths.min()),
                             "median_rows": float(np.median(lengths)), "maximum_rows": int(lengths.max()),

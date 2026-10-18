@@ -31,3 +31,12 @@ adds `--read-cache` and a different output directory. It must reproduce the same
 published dump, and does not modify the pinned source or release binaries.
 Mapping growth/cap/fallback and causal reads have compiled tests. Concurrent
 single runs do not establish a production speedup.
+
+
+The [complete native Mac dump](20261017-native-dump-v1/report.json) matches the
+published row-file SHA-256 and all raster lengths. Its
+[coverage summary](20261017-native-coverage-v1/report.json) counts 593,115,276
+data rows, including 45,701,710 inserted rows and 31,821 unmasked alias rows
+excluding author bytes. Categories overlap. The original analyzer incorrectly
+rejected input sentinels 208–215; its [failure](20261017-coverage-analysis-failure-v1)
+is retained, and the corrected reader validates sentinel/stream roles.

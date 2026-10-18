@@ -1,0 +1,54 @@
+{
+  "kind": "training-row-coverage-summary",
+  "version": 1,
+  "date_utc": "2026-10-18T02:14:05.150131+00:00",
+  "script_sha256": "5d78b6b2d95f37a4cee86a5d151d8b06b670d32a1d01b1c6842b9d4a3a6eb66e",
+  "numpy_version": "2.5.4",
+  "parent_dump_report_sha256": "33f0d3cb8f0b3f60a27c9e75e0f423df9c11e9f4917181c2b7942e1bbbc32971",
+  "dump": {
+    "bytes": 7117383324,
+    "sha256": "58fc6c74c09400192c28cf3608e6eeb0387ba4f40b4255d39dbc8ac5e0bf66a0"
+  },
+  "rows_excluding_header": 593115276,
+  "counts": {
+    "inserted": 45701710,
+    "masked": 45529324,
+    "document_start": 172437,
+    "redirect": 2901367,
+    "prior0": 39319969,
+    "alias_or_author": 2157518,
+    "author": 1561159,
+    "metadata_prompt": 9459978,
+    "stream_rows": 547413566,
+    "inserted_rows": 45701710,
+    "unmasked_rows": 547585952,
+    "alias_rows_excluding_author": 596359,
+    "unmasked_alias_rows_excluding_author": 31821
+  },
+  "strictly_increasing_stream_positions": true,
+  "sentinel_input_rows": 7153276,
+  "sentinel_token_counts": {
+    "208": 1752156,
+    "209": 2495846,
+    "210": 910611,
+    "211": 1457181,
+    "212": 528254,
+    "213": 6283,
+    "214": 2824,
+    "215": 121
+  },
+  "maximum_input_token": 215,
+  "last_stream_position": 552750203,
+  "documents": {
+    "count": 172437,
+    "minimum_rows": 16,
+    "median_rows": 1926.0,
+    "maximum_rows": 131037,
+    "rows_before_first_document": 0
+  },
+  "zone_counts": {
+    "0": 547586002,
+    "3": 5164202
+  },
+  "scope": "Coverage of upstream input/training rows, not measured coding loss or an activation-importance estimate. Unmasked alias rows identify potential refresh targets; they do not measure their value in the final mixture."
+}

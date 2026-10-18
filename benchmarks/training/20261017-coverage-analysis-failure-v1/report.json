@@ -1,0 +1,10 @@
+{
+  "kind": "coverage-analysis-contract-failure",
+  "source_commit": "90a10f63096289cb15138559e106d544e7c048af",
+  "failed_script_sha256": "c80081adbbaa380b571d54d7ae408bdbd2b34c25b34a1acafce96c3f11938874",
+  "parent_dump_report_sha256": "33f0d3cb8f0b3f60a27c9e75e0f423df9c11e9f4917181c2b7942e1bbbc32971",
+  "analysis_log_sha256": "f08c6a84b3d6308e74af9b38504ead54a5f35b164125c608963d26655a445bd3",
+  "diagnosis_sha256": "a04b99ab24104063881873ebcf98fa983e348d5d2c4fc3f581d0f309a85f442e",
+  "cause": "Analyzer incorrectly treated the 208-symbol output alphabet as the complete input vocabulary; tokens 208-215 are inserted digit-run sentinels.",
+  "dump_changed": false
+}

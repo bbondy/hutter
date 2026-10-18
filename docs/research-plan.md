@@ -45,10 +45,12 @@ Priorities:
    about 2.2 KB between current int4 coding cost and independent per-tensor
    empirical entropy. This limits simple frequency-table tuning, not more
    expressive models of correlations. The first unretrained pruning choices
-   fail by a large margin. Reproduce the
-   [upstream training-row dump](../benchmarks/training) before a separate
-   activation-aware, compensated or retrained-model experiment; its data
-   reproduction does not itself establish a better model.
+   fail by a large margin. The
+   [full training-row dump](../benchmarks/training/20261017-native-dump-v1) now
+   matches its published 7.1 GB hash. Inspect its verified prompt coverage and
+   the active MLP instrumentation before a separate activation-aware,
+   compensated or retrained-model experiment; data reproduction does not
+   itself establish a better model.
 
 5. Investigate the [small final bit predictor](website/docs/research/bit-predictor.md)
    as a CPU training route. Upstream trained its 7,386-byte model on only the

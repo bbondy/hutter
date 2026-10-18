@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/bbondy/projects/bbondy/hutter-fixture-phases/scripts/training_dump_summary.py", line 97, in <module>
+    main()
+  File "/Users/bbondy/projects/bbondy/hutter-fixture-phases/scripts/training_dump_summary.py", line 93, in main
+    summarize(args.dump_build.resolve(), args.output.resolve())
+  File "/Users/bbondy/projects/bbondy/hutter-fixture-phases/scripts/training_dump_summary.py", line 63, in summarize
+    raise ValueError("unexpected row ordering, tail, token or reserved field")
+ValueError: unexpected row ordering, tail, token or reserved field

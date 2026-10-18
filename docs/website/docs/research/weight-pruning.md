@@ -82,9 +82,9 @@ the failed size screen. Concurrent timings are not speed measurements.
 This rejects these fixed removals without retraining. It does not establish
 that every smaller model loses. A later approach would need activation-aware
 selection, compensation or retraining and a fresh exported-model comparison.
-The immediate preparation step is to reproduce the upstream training-row dump
-without transformer inference, so prompt coverage and any future training data
-can be inspected. Generating that data is not itself a compression improvement.
+The [full training-row dump](training-data.md) now matches the published
+reference without running transformer inference, and its prompt coverage is
+recorded. Generating that data is not itself a compression improvement.
 
 ## Check the implementation before blaming the model
 

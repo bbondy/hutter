@@ -24,13 +24,45 @@ starts with the already verified full coder-stream preparation. It copies the
 recorded sources, checks their hashes and builds upstream's `TRAIN_MODE=2`.
 The full dump must match the published 7,117,383,324-byte file and its SHA-256;
 zone and match-channel files must also have the expected complete lengths.
-This reproduction is running; no matching dump result is claimed yet.
+The [native Mac reproduction](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-native-dump-v1)
+now passes: the entire row dump matches SHA-256 `58fc6c74…f66a0`, and all three
+zone/match files have the expected 552,750,204-byte lengths. The diagnostic
+completed in about 40 minutes in this concurrent run; that is not compressor
+runtime or a prize-resource result.
 
 Each 12-byte record identifies a source position or an inserted row, a token,
 previous tokens, a match feature and flags. Flags distinguish document starts,
 redirects, metadata prompts, alias/author rows and whether the row's prediction
 is masked from training targets. A streaming summary can count these without
 loading the entire multi-gigabyte dump into memory.
+
+The [verified full summary](https://github.com/bbondy/hutter/blob/main/benchmarks/training/20261017-native-coverage-v1/report.json)
+counts the rows actually supplied to the model:
+
+| Item | Count |
+| --- | ---: |
+| Data rows, excluding the header | 593,115,276 |
+| Rows tied to coded-stream positions | 547,413,566 |
+| Inserted rows | 45,701,710 |
+| Unmasked rows | 547,585,952 |
+| Metadata-prompt rows | 9,459,978 |
+| Alias rows, excluding author bytes | 596,359 |
+| Unmasked alias rows, excluding author bytes | 31,821 |
+| Digit-run sentinel input rows | 7,153,276 |
+| Model-document starts | 172,437 |
+
+Categories overlap; they must not be added as if they were a partition.
+Model documents are reset segments, not a count of raw XML pages. Stream
+positions are strictly increasing, reserved fields are zero, and the final
+position matches the full coded-stream length.
+
+The first summary had an analysis bug: it confused the 208-symbol output
+alphabet with the input vocabulary. Eight additional digit-run sentinel inputs
+use tokens 208–215; they occur only in inserted rows. Previous-token fields also
+use 216 as a reset marker. The
+[failed analysis and diagnosis](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-coverage-analysis-failure-v1)
+are retained. The corrected reader checks these roles and has a regression
+test; the published-matching dump itself was never changed.
 
 Coverage is different from value. Many retrieved tokens can hurt predictions;
 an alias row that predicts a real byte can still be unhelpful to the final

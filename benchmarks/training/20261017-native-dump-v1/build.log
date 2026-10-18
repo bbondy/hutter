@@ -1,0 +1,460 @@
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG  -Wall -std=c++17 -ffp-model=fast  -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format   -O3 -fdata-sections -ffunction-sections -fno-unroll-loops  -fmerge-all-constants  -fno-rtti -fvisibility=hidden src/coder/decoder.cpp src/coder/encoder.cpp src/context-manager.cpp src/contexts/bit-context.cpp src/contexts/bracket-context.cpp src/contexts/combined-context.cpp src/contexts/context-hash.cpp src/contexts/indirect-hash.cpp src/contexts/interval-hash.cpp src/contexts/interval.cpp src/contexts/sparse.cpp src/models/bracket.cpp src/models/byte-model.cpp src/models/direct-hash.cpp src/models/direct.cpp src/models/indirect.cpp src/models/match.cpp src/models/grammar-match.cpp src/models/fxcmv1.cpp src/models/ppmd.cpp src/states/nonstationary.cpp src/states/run-map.cpp src/mixer/byte-mixer.cpp src/mixer/mixer-input.cpp src/mixer/mixer.cpp src/mixer/sigmoid.cpp src/mixer/sse.cpp -c src/predictor.cpp
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG  -Wall -std=c++17 -ffp-model=fast  -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format   -Os -fdata-sections -ffunction-sections -fno-unroll-loops  -fmerge-all-constants  -fno-rtti -fvisibility=hidden -Oz src/preprocess/preprocessor.cpp src/preprocess/dictionary.cpp -c 
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG  -Wall -std=c++17 -ffp-model=fast  -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format -Oz -fdata-sections -ffunction-sections   -fno-unroll-loops  -fmerge-all-constants  -fno-rtti -fvisibility=hidden src/r1_reorder_transform.cpp src/runner.cpp -c
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -O2  -std=c++17     -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -c src/detmath.cpp -o detmath.o
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -O3  -std=c++17     -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -c src/fast_math_vec.cpp -o fast_math_vec.o
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -O3  -std=c++17     -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -c src/optimizer_vec.cpp -o optimizer_vec.o
+In file included from src/preprocess/preprocessor.cpp:7:
+In file included from src/preprocess/preprocessor.h:7:
+In file included from src/preprocess/../predictor.h:4:
+In file included from src/preprocess/../mixer/sigmoid.h:6:
+In file included from src/preprocess/../mixer/../fast_math.h:13:
+In file included from src/preprocess/../mixer/../native_simd.h:3:
+In file included from ../simde/simde/x86/avx2.h:33:
+In file included from ../simde/simde/x86/avx.h:28:
+In file included from ../simde/simde/x86/sse.h:33:
+In file included from ../simde/simde/x86/mmx.h:30:
+../simde/simde/x86/../simde-common.h:774:8: warning: use of NaN is undefined behavior due to the currently enabled floating-point options [-Wnan-infinity-disabled]
+  774 |   if (!simde_math_isnan(x)) {
+      |        ^~~~~~~~~~~~~~~~~~~
+../simde/simde/x86/../simde-math.h:311:33: note: expanded from macro 'simde_math_isnan'
+  311 |     #define simde_math_isnan(v) __builtin_isnan(v)
+      |                                 ^~~~~~~~~~~~~~~~~~
+In file included from src/coder/decoder.cpp:1:
+In file included from src/coder/decoder.h:6:
+In file included from src/coder/../predictor.h:4:
+In file included from src/coder/../mixer/sigmoid.h:6:
+In file included from src/coder/../mixer/../fast_math.h:13:
+In file included from src/coder/../mixer/../native_simd.h:3:
+In file included from ../simde/simde/x86/avx2.h:33:
+In file included from ../simde/simde/x86/avx.h:28:
+In file included from ../simde/simde/x86/sse.h:33:
+In file included from ../simde/simde/x86/mmx.h:30:
+../simde/simde/x86/../simde-common.h:774:8: warning: use of NaN is undefined behavior due to the currently enabled floating-point options [-Wnan-infinity-disabled]
+  774 |   if (!simde_math_isnan(x)) {
+      |        ^~~~~~~~~~~~~~~~~~~
+../simde/simde/x86/../simde-math.h:311:33: note: expanded from macro 'simde_math_isnan'
+  311 |     #define simde_math_isnan(v) __builtin_isnan(v)
+      |                                 ^~~~~~~~~~~~~~~~~~
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG  -Wall -std=c++17 -ffp-model=fast  -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format -Oz -fdata-sections -ffunction-sections   -fno-unroll-loops  -fmerge-all-constants  -fno-rtti -fvisibility=hidden src/preprocess/dict_derive.cpp -c
+In file included from src/coder/decoder.cpp:1:
+In file included from src/coder/decoder.h:6:
+In file included from src/coder/../predictor.h:8:
+In file included from src/coder/../mixer/byte-mixer.h:9:
+In file included from src/coder/../mixer/../transformer.h:5:
+In file included from src/coder/../mixer/../author_block.h:10:
+src/coder/../mixer/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/coder/decoder.cpp:1:
+In file included from src/coder/decoder.h:6:
+In file included from src/coder/../predictor.h:8:
+In file included from src/coder/../mixer/byte-mixer.h:9:
+In file included from src/coder/../mixer/../transformer.h:5:
+src/coder/../mixer/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+In file included from src/preprocess/preprocessor.cpp:7:
+In file included from src/preprocess/preprocessor.h:7:
+In file included from src/preprocess/../predictor.h:8:
+In file included from src/preprocess/../mixer/byte-mixer.h:9:
+In file included from src/preprocess/../mixer/../transformer.h:5:
+In file included from src/preprocess/../mixer/../author_block.h:10:
+src/preprocess/../mixer/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/preprocess/preprocessor.cpp:7:
+In file included from src/preprocess/preprocessor.h:7:
+In file included from src/preprocess/../predictor.h:8:
+In file included from src/preprocess/../mixer/byte-mixer.h:9:
+In file included from src/preprocess/../mixer/../transformer.h:5:
+src/preprocess/../mixer/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+3 warnings generated.
+3 warnings generated.
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -O3  -std=c++17     -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wall -Wno-unused-variable -c src/bit_head.cpp -o bit_head.o
+In file included from src/runner.cpp:10:
+In file included from src/preprocess/preprocessor.h:7:
+In file included from src/preprocess/../predictor.h:4:
+In file included from src/preprocess/../mixer/sigmoid.h:6:
+In file included from src/preprocess/../mixer/../fast_math.h:13:
+In file included from src/preprocess/../mixer/../native_simd.h:3:
+In file included from ../simde/simde/x86/avx2.h:33:
+In file included from ../simde/simde/x86/avx.h:28:
+In file included from ../simde/simde/x86/sse.h:33:
+In file included from ../simde/simde/x86/mmx.h:30:
+../simde/simde/x86/../simde-common.h:774:8: warning: use of NaN is undefined behavior due to the currently enabled floating-point options [-Wnan-infinity-disabled]
+  774 |   if (!simde_math_isnan(x)) {
+      |        ^~~~~~~~~~~~~~~~~~~
+../simde/simde/x86/../simde-math.h:311:33: note: expanded from macro 'simde_math_isnan'
+  311 |     #define simde_math_isnan(v) __builtin_isnan(v)
+      |                                 ^~~~~~~~~~~~~~~~~~
+In file included from src/runner.cpp:17:
+src/readalike_prepr/phda9_preprocess.h:198:13: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  198 |             sprintf(out+1, "#%d;",   nu);
+      |             ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:218:48: note: expanded from macro '__deprecated_msg'
+  218 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+In file included from src/runner.cpp:17:
+src/readalike_prepr/phda9_preprocess.h:459:22: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  459 |         o += (size_t)sprintf(out + o, "id>%lld\n", wr);
+      |                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:218:48: note: expanded from macro '__deprecated_msg'
+  218 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+In file included from src/runner.cpp:17:
+src/readalike_prepr/phda9_preprocess.h:672:21: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  672 |                     sprintf(o+j, "<id>%d</id>%c",   lastID, 10);
+      |                     ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:218:48: note: expanded from macro '__deprecated_msg'
+  218 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+In file included from src/runner.cpp:17:
+src/readalike_prepr/phda9_preprocess.h:680:21: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  680 |                     sprintf(o, "      <timestamp>%d-%02d-%02dT%02d:%02d:%02dZ</timestamp>%c",
+      |                     ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:218:48: note: expanded from macro '__deprecated_msg'
+  218 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+In file included from src/coder/encoder.cpp:1:
+In file included from src/coder/encoder.h:7:
+In file included from src/coder/../predictor.h:4:
+In file included from src/coder/../mixer/sigmoid.h:6:
+In file included from src/coder/../mixer/../fast_math.h:13:
+In file included from src/coder/../mixer/../native_simd.h:3:
+In file included from ../simde/simde/x86/avx2.h:33:
+In file included from ../simde/simde/x86/avx.h:28:
+In file included from ../simde/simde/x86/sse.h:33:
+In file included from ../simde/simde/x86/mmx.h:30:
+../simde/simde/x86/../simde-common.h:774:8: warning: use of NaN is undefined behavior due to the currently enabled floating-point options [-Wnan-infinity-disabled]
+  774 |   if (!simde_math_isnan(x)) {
+      |        ^~~~~~~~~~~~~~~~~~~
+../simde/simde/x86/../simde-math.h:311:33: note: expanded from macro 'simde_math_isnan'
+  311 |     #define simde_math_isnan(v) __builtin_isnan(v)
+      |                                 ^~~~~~~~~~~~~~~~~~
+In file included from src/runner.cpp:17:
+src/readalike_prepr/phda9_preprocess.h:770:8: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  770 |        sprintf(o,  ">%d%c", curID - lastID, 10);
+      |        ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:218:48: note: expanded from macro '__deprecated_msg'
+  218 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+In file included from src/runner.cpp:17:
+src/readalike_prepr/phda9_preprocess.h:784:13: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  784 |             sprintf(o, "timestamp>%02d%d:%d%c",
+      |             ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:218:48: note: expanded from macro '__deprecated_msg'
+  218 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+In file included from src/runner.cpp:17:
+src/readalike_prepr/phda9_preprocess.h:882:4: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  882 |    sprintf(o, "%d%c", headersize, 10);
+      |    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:218:48: note: expanded from macro '__deprecated_msg'
+  218 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+In file included from src/runner.cpp:17:
+src/readalike_prepr/phda9_preprocess.h:885:4: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  885 |    sprintf(o, "%d%c", tsize, 10);
+      |    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:218:48: note: expanded from macro '__deprecated_msg'
+  218 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+In file included from src/runner.cpp:17:
+src/readalike_prepr/phda9_preprocess.h:917:3: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  917 |   sprintf(o, "%d%c", tsize, 20);
+      |   ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h:218:48: note: expanded from macro '__deprecated_msg'
+  218 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -O3  -std=c++17      -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wno-unused-variable -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG -c src/tf1/tf1_engine.cpp src/tf1/kernels.cpp src/tf1/model.cpp src/tf1/opt/attn.cpp src/tf1/opt/glue.cpp src/tf1/opt/kda.cpp src/tf1/opt/qmat_dense.cpp src/tf1/opt/qmat_sparse.cpp src/tf1/opt/model_opt.cpp src/tf1/tf1_z3.cpp src/tf1/tf1_prompt.cpp src/tf1/tf1_gate.cpp
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -Os  -std=c++17     -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wall -Wno-unused-variable -c src/word_label.cpp -o word_label.o
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -O2  -std=c++17     -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wall -Wno-unused-variable -c src/adaptive_depth.cpp -o adaptive_depth.o
+In file included from src/runner.cpp:15:
+In file included from src/readalike_prepr/article_reorder.h:17:
+src/readalike_prepr/order_codec.h:443:13: warning: unused function 'DecodeOrder' [-Wunused-function]
+  443 | static bool DecodeOrder(const char* residual_path, const char* main_path,
+      |             ^~~~~~~~~~~
+src/readalike_prepr/order_codec.h:561:13: warning: unused function 'DecodeOrderV2' [-Wunused-function]
+  561 | static bool DecodeOrderV2(const char* residual_path, const char* main_path,
+      |             ^~~~~~~~~~~~~
+In file included from src/runner.cpp:16:
+src/readalike_prepr/self_extract.h:139:13: warning: unused function 'extract_weights_only' [-Wunused-function]
+  139 | static void extract_weights_only() {
+      |             ^~~~~~~~~~~~~~~~~~~~
+In file included from src/runner.cpp:17:
+src/readalike_prepr/phda9_preprocess.h:436:15: warning: unused function 'revid_apply' [-Wunused-function]
+  436 | static size_t revid_apply(const char *in, size_t n, char *out, int enc) {
+      |               ^~~~~~~~~~~
+In file included from src/runner.cpp:17:
+In file included from src/readalike_prepr/phda9_preprocess.h:603:
+src/readalike_prepr/header_sort.h:51:13: warning: unused function 'idnum_guard' [-Wunused-function]
+   51 | static void idnum_guard(long long v, long long lo, long long hi,
+      |             ^~~~~~~~~~~
+src/readalike_prepr/header_sort.h:61:13: warning: unused function 'idnum_pad' [-Wunused-function]
+   61 | static void idnum_pad(char *out, size_t *o, long long v, int dig) {
+      |             ^~~~~~~~~
+src/readalike_prepr/header_sort.h:67:13: warning: unused function 'idnum_dec' [-Wunused-function]
+   67 | static void idnum_dec(char *out, size_t *o, long long v) {
+      |             ^~~~~~~~~
+src/readalike_prepr/header_sort.h:74:18: warning: unused function 'idnum_num' [-Wunused-function]
+   74 | static long long idnum_num(const char *p, int len) {
+      |                  ^~~~~~~~~
+In file included from src/runner.cpp:10:
+In file included from src/preprocess/preprocessor.h:7:
+In file included from src/preprocess/../predictor.h:8:
+In file included from src/preprocess/../mixer/byte-mixer.h:9:
+In file included from src/preprocess/../mixer/../transformer.h:5:
+In file included from src/preprocess/../mixer/../author_block.h:10:
+src/preprocess/../mixer/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/runner.cpp:10:
+In file included from src/preprocess/preprocessor.h:7:
+In file included from src/preprocess/../predictor.h:8:
+In file included from src/preprocess/../mixer/byte-mixer.h:9:
+In file included from src/preprocess/../mixer/../transformer.h:5:
+src/preprocess/../mixer/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+In file included from src/coder/encoder.cpp:1:
+In file included from src/coder/encoder.h:7:
+In file included from src/coder/../predictor.h:8:
+In file included from src/coder/../mixer/byte-mixer.h:9:
+In file included from src/coder/../mixer/../transformer.h:5:
+In file included from src/coder/../mixer/../author_block.h:10:
+src/coder/../mixer/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/coder/encoder.cpp:1:
+In file included from src/coder/encoder.h:7:
+In file included from src/coder/../predictor.h:8:
+In file included from src/coder/../mixer/byte-mixer.h:9:
+In file included from src/coder/../mixer/../transformer.h:5:
+src/coder/../mixer/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+3 warnings generated.
+In file included from src/context-manager.cpp:1:
+In file included from src/context-manager.h:20:
+In file included from src/transformer.h:5:
+In file included from src/author_block.h:10:
+src/ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/context-manager.cpp:1:
+In file included from src/context-manager.h:20:
+In file included from src/transformer.h:5:
+src/author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+2 warnings generated.
+20 warnings generated.
+In file included from src/models/match.cpp:1:
+In file included from src/models/match.h:6:
+In file included from src/models/../transformer.h:5:
+In file included from src/models/../author_block.h:10:
+src/models/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/models/match.cpp:1:
+In file included from src/models/match.h:6:
+In file included from src/models/../transformer.h:5:
+src/models/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+2 warnings generated.
+src/tf1/opt/model_opt.cpp:455:19: warning: use of logical '&&' with constant operand [-Wconstant-logical-operand]
+  455 |     if (!((3 & 2) && 1) && kind == AttnKind::KVF32) {
+      |                   ^  ~
+src/tf1/opt/model_opt.cpp:455:19: note: use '&' for a bitwise operation
+  455 |     if (!((3 & 2) && 1) && kind == AttnKind::KVF32) {
+      |                   ^~
+      |                   &
+src/tf1/opt/model_opt.cpp:455:19: note: remove constant to silence this warning
+  455 |     if (!((3 & 2) && 1) && kind == AttnKind::KVF32) {
+      |                   ^~~~
+src/tf1/opt/model_opt.cpp:544:21: warning: use of logical '&&' with constant operand [-Wconstant-logical-operand]
+  544 |       if (!((3 & 2) && 1) &&
+      |                     ^  ~
+src/tf1/opt/model_opt.cpp:544:21: note: use '&' for a bitwise operation
+  544 |       if (!((3 & 2) && 1) &&
+      |                     ^~
+      |                     &
+src/tf1/opt/model_opt.cpp:544:21: note: remove constant to silence this warning
+  544 |       if (!((3 & 2) && 1) &&
+      |                     ^~~~
+In file included from src/models/fxcmv1.cpp:28:
+In file included from src/models/fxcmv1.h:5:
+In file included from src/models/../fast_math.h:13:
+In file included from src/models/../native_simd.h:3:
+In file included from ../simde/simde/x86/avx2.h:33:
+In file included from ../simde/simde/x86/avx.h:28:
+In file included from ../simde/simde/x86/sse.h:33:
+In file included from ../simde/simde/x86/mmx.h:30:
+../simde/simde/x86/../simde-common.h:774:8: warning: use of NaN is undefined behavior due to the currently enabled floating-point options [-Wnan-infinity-disabled]
+  774 |   if (!simde_math_isnan(x)) {
+      |        ^~~~~~~~~~~~~~~~~~~
+../simde/simde/x86/../simde-math.h:311:33: note: expanded from macro 'simde_math_isnan'
+  311 |     #define simde_math_isnan(v) __builtin_isnan(v)
+      |                                 ^~~~~~~~~~~~~~~~~~
+2 warnings generated.
+src/models/fxcmv1.cpp:727:10: warning: loop not vectorized: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+  727 |     void train (const short* const t, short* const w, int n, const int e) {
+      |          ^
+src/models/fxcmv1.cpp:727:10: warning: loop not vectorized: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+src/models/fxcmv1.cpp:727:10: warning: loop not vectorized: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+src/models/fxcmv1.cpp:727:10: warning: loop not vectorized: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+src/models/fxcmv1.cpp:727:10: warning: loop not vectorized: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+src/models/fxcmv1.cpp:727:10: warning: loop not vectorized: the optimizer was unable to perform the requested transformation; the transformation might be disabled or specified as part of an unsupported transformation ordering [-Wpass-failed=transform-warning]
+7 warnings generated.
+src/models/ppmd.cpp:1006:29: warning: use of bitwise '&' with boolean operands [-Wbitwise-instead-of-logical]
+ 1006 |       PAGE_WI(p,0).Freq += (!suff(pc)->NumStats & (p[0].Freq<16));
+      |                            ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                 &&
+src/models/ppmd.cpp:1006:29: note: cast one or both operands to int to silence this warning
+src/models/ppmd.cpp:1120:29: warning: use of bitwise '&' with boolean operands [-Wbitwise-instead-of-logical]
+ 1120 |       PAGE_WI(p,0).Freq += (!suff(pc)->NumStats & (p[0].Freq<16));
+      |                            ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                 &&
+src/models/ppmd.cpp:1120:29: note: cast one or both operands to int to silence this warning
+2 warnings generated.
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -O3  -std=c++17      -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wno-unused-variable -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG -Oz -c src/tf1/weights_io.cpp src/tf1/weights_io_compressed.cpp src/tf1/opt/arena_build.cpp
+In file included from src/mixer/byte-mixer.cpp:1:
+In file included from src/mixer/byte-mixer.h:8:
+In file included from src/mixer/lstm.h:11:
+In file included from src/mixer/lstm-layer.h:11:
+In file included from src/mixer/../fast_math.h:13:
+In file included from src/mixer/../native_simd.h:3:
+In file included from ../simde/simde/x86/avx2.h:33:
+In file included from ../simde/simde/x86/avx.h:28:
+In file included from ../simde/simde/x86/sse.h:33:
+In file included from ../simde/simde/x86/mmx.h:30:
+../simde/simde/x86/../simde-common.h:774:8: warning: use of NaN is undefined behavior due to the currently enabled floating-point options [-Wnan-infinity-disabled]
+  774 |   if (!simde_math_isnan(x)) {
+      |        ^~~~~~~~~~~~~~~~~~~
+../simde/simde/x86/../simde-math.h:311:33: note: expanded from macro 'simde_math_isnan'
+  311 |     #define simde_math_isnan(v) __builtin_isnan(v)
+      |                                 ^~~~~~~~~~~~~~~~~~
+In file included from src/mixer/byte-mixer.cpp:1:
+In file included from src/mixer/byte-mixer.h:9:
+In file included from src/mixer/../transformer.h:5:
+In file included from src/mixer/../author_block.h:10:
+src/mixer/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/mixer/byte-mixer.cpp:1:
+In file included from src/mixer/byte-mixer.h:9:
+In file included from src/mixer/../transformer.h:5:
+src/mixer/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+3 warnings generated.
+In file included from src/mixer/mixer-input.cpp:1:
+In file included from src/mixer/mixer-input.h:4:
+In file included from src/mixer/sigmoid.h:6:
+In file included from src/mixer/../fast_math.h:13:
+In file included from src/mixer/../native_simd.h:3:
+In file included from ../simde/simde/x86/avx2.h:33:
+In file included from ../simde/simde/x86/avx.h:28:
+In file included from ../simde/simde/x86/sse.h:33:
+In file included from ../simde/simde/x86/mmx.h:30:
+../simde/simde/x86/../simde-common.h:774:8: warning: use of NaN is undefined behavior due to the currently enabled floating-point options [-Wnan-infinity-disabled]
+  774 |   if (!simde_math_isnan(x)) {
+      |        ^~~~~~~~~~~~~~~~~~~
+../simde/simde/x86/../simde-math.h:311:33: note: expanded from macro 'simde_math_isnan'
+  311 |     #define simde_math_isnan(v) __builtin_isnan(v)
+      |                                 ^~~~~~~~~~~~~~~~~~
+1 warning generated.
+In file included from src/mixer/mixer.cpp:1:
+In file included from src/mixer/mixer.h:7:
+In file included from src/mixer/../fast_math.h:13:
+In file included from src/mixer/../native_simd.h:3:
+In file included from ../simde/simde/x86/avx2.h:33:
+In file included from ../simde/simde/x86/avx.h:28:
+In file included from ../simde/simde/x86/sse.h:33:
+In file included from ../simde/simde/x86/mmx.h:30:
+../simde/simde/x86/../simde-common.h:774:8: warning: use of NaN is undefined behavior due to the currently enabled floating-point options [-Wnan-infinity-disabled]
+  774 |   if (!simde_math_isnan(x)) {
+      |        ^~~~~~~~~~~~~~~~~~~
+../simde/simde/x86/../simde-math.h:311:33: note: expanded from macro 'simde_math_isnan'
+  311 |     #define simde_math_isnan(v) __builtin_isnan(v)
+      |                                 ^~~~~~~~~~~~~~~~~~
+1 warning generated.
+In file included from src/mixer/sigmoid.cpp:1:
+In file included from src/mixer/sigmoid.h:6:
+In file included from src/mixer/../fast_math.h:13:
+In file included from src/mixer/../native_simd.h:3:
+In file included from ../simde/simde/x86/avx2.h:33:
+In file included from ../simde/simde/x86/avx.h:28:
+In file included from ../simde/simde/x86/sse.h:33:
+In file included from ../simde/simde/x86/mmx.h:30:
+../simde/simde/x86/../simde-common.h:774:8: warning: use of NaN is undefined behavior due to the currently enabled floating-point options [-Wnan-infinity-disabled]
+  774 |   if (!simde_math_isnan(x)) {
+      |        ^~~~~~~~~~~~~~~~~~~
+../simde/simde/x86/../simde-math.h:311:33: note: expanded from macro 'simde_math_isnan'
+  311 |     #define simde_math_isnan(v) __builtin_isnan(v)
+      |                                 ^~~~~~~~~~~~~~~~~~
+1 warning generated.
+In file included from src/predictor.cpp:1:
+In file included from src/predictor.h:4:
+In file included from src/mixer/sigmoid.h:6:
+In file included from src/mixer/../fast_math.h:13:
+In file included from src/mixer/../native_simd.h:3:
+In file included from ../simde/simde/x86/avx2.h:33:
+In file included from ../simde/simde/x86/avx.h:28:
+In file included from ../simde/simde/x86/sse.h:33:
+In file included from ../simde/simde/x86/mmx.h:30:
+../simde/simde/x86/../simde-common.h:774:8: warning: use of NaN is undefined behavior due to the currently enabled floating-point options [-Wnan-infinity-disabled]
+  774 |   if (!simde_math_isnan(x)) {
+      |        ^~~~~~~~~~~~~~~~~~~
+../simde/simde/x86/../simde-math.h:311:33: note: expanded from macro 'simde_math_isnan'
+  311 |     #define simde_math_isnan(v) __builtin_isnan(v)
+      |                                 ^~~~~~~~~~~~~~~~~~
+In file included from src/predictor.cpp:1:
+In file included from src/predictor.h:8:
+In file included from src/mixer/byte-mixer.h:9:
+In file included from src/mixer/../transformer.h:5:
+In file included from src/mixer/../author_block.h:10:
+src/mixer/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/predictor.cpp:1:
+In file included from src/predictor.h:8:
+In file included from src/mixer/byte-mixer.h:9:
+In file included from src/mixer/../transformer.h:5:
+src/mixer/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+3 warnings generated.
+clang++ -DTRAIN_MODE=2 -Isrc -I../simde -std=c++17 -Wl,-dead_strip -Wl,-map,cmix.map bit-context.o bracket-context.o bracket.o byte-mixer.o byte-model.o combined-context.o context-hash.o context-manager.o decoder.o dictionary.o direct-hash.o direct.o encoder.o indirect-hash.o indirect.o interval-hash.o interval.o match.o grammar-match.o mixer-input.o mixer.o nonstationary.o fxcmv1.o ppmd.o predictor.o preprocessor.o r1_reorder_transform.o run-map.o runner.o sigmoid.o sparse.o sse.o  detmath.o fast_math_vec.o optimizer_vec.o dict_derive.o bit_head.o tf1_engine.o weights_io.o weights_io_compressed.o kernels.o model.o arena_build.o attn.o glue.o kda.o qmat_dense.o qmat_sparse.o model_opt.o tf1_z3.o tf1_prompt.o tf1_gate.o word_label.o adaptive_depth.o   -o cmix
+rm -f *.o
