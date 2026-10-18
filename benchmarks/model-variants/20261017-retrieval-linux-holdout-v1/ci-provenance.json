@@ -1,0 +1,7 @@
+{
+  "workflow_run": "https://github.com/bbondy/hutter/actions/runs/39085744092",
+  "artifact": "linux-exact-target-holdout-39085744092",
+  "source_commit": "16365542732dbf4778f1a60ccd1356c71cc914d7",
+  "verification": "Reconstructed and matched every baseline Linux source file; checked the frozen exact-target rewrite, compiler/runner/asset controls, all downloaded binary/archive/restored/log/metadata hashes, context counters and original raw XML using the canonical Mac inverse helper. Both models ran serially on the fixture host.",
+  "scope": "Canonical fixture payloads; no full score or cross-platform speed claim."
+}

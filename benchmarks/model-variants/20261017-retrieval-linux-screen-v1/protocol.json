@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "hypothesis": "Filtering links that only share the beginning of an article title can improve retrieved context without shrinking its budget. This follows an explicitly listed upstream optimization opportunity.",
+  "variants": [
+    "baseline",
+    "retrieval-exact-target"
+  ],
+  "input_variant": "upstream",
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/screen.json",
+      "manifest_sha256": "7294851140f86d5f058ae4776f3448c647c9d532a0107cd719af519959421588",
+      "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f"
+    },
+    "holdout": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/holdout.json",
+      "manifest_sha256": "880ad288323503c874b18d8d3aadaebde268f6960f546352d0efb0d08e84d47b",
+      "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "commit": "16365542732dbf4778f1a60ccd1356c71cc914d7",
+    "changes": "Shared benchmark now records Linux CPU identity; same round-trip procedure."
+  },
+  "retrieval_recipe_sha256": "f1ddb65bf16baf7f7fcc286fcc04851ae7548f4d93521ad130929cb0a11241ad",
+  "rule": "Match the existing exact title bytes and require the next already-decoded token to be a closing bracket, WRT pipe, or section marker. Do not change case folding, underscore handling, budgets, chunk selection, weights, order or other model parameters.",
+  "acceptance": [
+    "Restore prepared input and original XML exactly",
+    "Encoder and decoder context counters match",
+    "Only the declared tf1_z3.cpp transformation differs from the saved baseline sources",
+    "Record all outcomes, including no-ops and losses"
+  ],
+  "promotion": "Advance only if the candidate improves both reused canonical fixtures without retuning, then test native Linux and the reserved third range. The third range remains unread.",
+  "scope": "Mac fixture payload screening; source-code filter, not a new trained model or a full prize score.",
+  "parent_protocol_sha256": "9c5d325d6fc23e1c744f79581089123ee13ca616d4f98c5acc8b180cb3edd9eb",
+  "platform_scope": "Native Linux x86-64, all models serial on one CI host; not a full prize run"
+}

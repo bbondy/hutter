@@ -148,6 +148,23 @@ different platform has already reversed similarly small gains in the
 [depth experiment](adaptive-depth.md). Concurrent timings do not establish a
 speed improvement.
 
+Native Linux confirmation reverses the disjoint result:
+
+| Model | Linux screen | Change | Linux disjoint | Change |
+| --- | ---: | ---: | ---: | ---: |
+| Upstream matching | 119,067 | — | 117,426 | — |
+| Exact target boundary | 119,064 | −3 | 117,431 | +5 |
+
+Both trials restore the original XML exactly, with matching context counters.
+Downloaded binaries, archives, decoded inputs and logs were checked locally;
+the baseline Linux source inventory was reconstructed and the exact candidate
+rewrite verified. Saved evidence:
+[Linux screen](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-retrieval-linux-screen-v1/report.json)
+and [Linux disjoint](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-retrieval-linux-holdout-v1/report.json).
+The candidate **does not improve both Linux fixtures** and currently fails
+promotion. The already-started reserved-range trials will be retained without
+retuning; a good third result would not erase this regression.
+
 The [reserved-range protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/model-variants/20261017-retrieval-confirmation-protocol-v1)
 now freezes a third input before measuring it: 150 complete articles beginning
 at raw byte 80,020,050, selected by the previously declared 80,000,000-byte

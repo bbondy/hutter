@@ -120,3 +120,10 @@ gh workflow run linux-benchmarks.yml --ref main -f experiment=exact-target
 
 Builds use `--retrieval-variant exact-target`; source comparison checks the
 declared `tf1_z3.cpp` rewrite rather than the parameter-header recipes above.
+
+Native Linux [screen](20261017-retrieval-linux-screen-v1/report.json) and
+[disjoint](20261017-retrieval-linux-holdout-v1/report.json) save 3 and lose 5 bytes
+respectively. Both restore exactly, and downloaded evidence has been verified
+again locally. The candidate fails the Linux promotion gate. The already-started
+reserved-range runs will be retained without changing the recipe or using a
+third result to erase this regression.

@@ -17,7 +17,7 @@ has since established a stronger reference and a repeatable research loop:
 | [Canonical preprocessing](../benchmarks/pipeline/20261017-native-stream-v3) | An inherited signed-overflow expression changed Mac entity encodings despite successful raw round trips. Explicit unsigned reduction reproduces both upstream full-stream hashes on Mac and Linux. | Use corrected frozen inputs; retain older representations separately. |
 | [Order](../benchmarks/article-order/20261017-projected-screen-v2), [context](../benchmarks/model-variants/20261017-linux-screen-v2), [depth](../benchmarks/model-variants/20261017-depth-linux-screen-v1) | No proposed ordering wins both Mac fixtures; reduced context and tested depth settings lose both native Linux fixtures. | Keep upstream settings. More graph edges or computation alone do not establish better compression. |
 | [Neuron permutation](../benchmarks/weights/20261017-linux-packages-gcc13-v1) | Both platform fixture archives stay identical; measured release components shrink 8,563 bytes. | Check the real release encoder on full input, then complete package equivalence. This saving alone is far short of the next 1% improvement. |
-| [Exact link target](../benchmarks/model-variants/20261017-retrieval-screen-v1) | Mac fixture payloads improve by 5 and 2 bytes, with exact restoration. | Freeze the candidate and test native Linux plus the previously reserved third range. |
+| [Exact link target](../benchmarks/model-variants/20261017-retrieval-linux-screen-v1) | Mac fixture payloads improve by 5 and 2 bytes; native Linux saves 3 bytes on the screen but loses 5 on the disjoint fixture. All restore exactly. | Fails Linux promotion; retain the already-started reserved-range results without retuning. |
 | [Structured pruning](../benchmarks/weights/20261017-pruning-screen-summary-v1) | All six round trips pass, but 5%, 10% and 25% removals add roughly 16–17 KB, 30–31 KB and 54–55 KB per fixture, about 49–76 times their gross model-saving budgets. | Reject all three unretrained candidates; do not spend Linux or reserved-range runs on them. |
 
 Priorities:
@@ -30,7 +30,8 @@ Priorities:
    requires main-text coverage before accepting a 4 MiB prefix. It remains a
    bounded invariance check, not a complete archive, round trip or score.
 2. Move only surviving hypotheses to larger probes. The exact-target candidate
-   has activated the [reserved confirmation range](../benchmarks/model-variants/20261017-retrieval-confirmation-protocol-v1):
+   activated the [reserved confirmation range](../benchmarks/model-variants/20261017-retrieval-confirmation-protocol-v1)
+   before Linux exposed its disjoint regression:
    150 complete pages, 1,000,794 raw bytes. Do not reuse its score for tuning
    while calling it untouched validation. The upstream model already trained
    on the target corpus; this separation protects our experiment decisions.
