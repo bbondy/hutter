@@ -18,6 +18,7 @@ from cmix_parity_support import instrument, SUPPORT
 from cmix_fixture_support import instrument_fixture, provenance as fixture_provenance, corpus_arguments, context_report, validate_context
 from cmix_variants import VARIANTS, apply_variant
 from cmix_preprocess_support import apply_portable_preprocessing
+from cmix_weight_support import apply_container
 
 ROOT = Path(__file__).resolve().parents[1]
 PORT = ROOT / "engines/ports/cmix-neif-macos"
@@ -41,6 +42,8 @@ def cpu_name():
 
 
 def build(args):
+    if args.weight_container and args.variant != "baseline":
+        raise ValueError("change weights or model parameters in one experiment, not both")
     upstream = json.loads(MANIFEST.read_text())
     delta = differences(upstream["files"], inventory(ENGINE))
     if any(delta.values()):
@@ -59,6 +62,7 @@ def build(args):
     preprocessing_support = apply_portable_preprocessing(source)
     instrument_fixture(source)
     instrument(source, portable_random=True)
+    weight_binding = apply_container(source, args.weight_container) if args.weight_container else None
     simde = destination / "simde"
     subprocess.run(["git", "init", "-q", str(simde)], check=True)
     subprocess.run(["git", "-C", str(simde), "fetch", "--depth=1", SIMDE_URL, SIMDE_COMMIT], check=True)
@@ -82,6 +86,7 @@ def build(args):
         "port_files": inventory(PORT), "parity_files": inventory(SUPPORT),
         "fixture_support": fixture_provenance(),
         "model_variant": model_variant,
+        "weight_binding": weight_binding,
         "preprocessing_support": preprocessing_support,
         "initialization": "explicit glibc-compatible generator", "source_files": inventory(source),
         "scope": "Unpacked dictionary-mode development binary; no Linux RSS clamp, PGO or submission packaging.",
@@ -247,6 +252,7 @@ def main():
     compile_parser.add_argument("--output", type=Path, default=ROOT / "build/native-cmix")
     compile_parser.add_argument("--jobs", type=int, default=8)
     compile_parser.add_argument("--variant", choices=VARIANTS, default="baseline")
+    compile_parser.add_argument("--weight-container", type=Path)
     sample = sub.add_parser("samples")
     sample.add_argument("--enwik8", type=Path, default=ROOT / "data/enwik8")
     sample.add_argument("--build", type=Path, default=ROOT / "build/native-cmix")

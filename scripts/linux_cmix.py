@@ -13,6 +13,7 @@ from cmix_fixture_support import instrument_fixture, provenance
 from cmix_parity_support import SUPPORT, instrument
 from cmix_variants import VARIANTS, apply_variant
 from cmix_preprocess_support import apply_portable_preprocessing
+from cmix_weight_support import apply_container
 from competitive import ENGINE, MANIFEST, differences, inventory
 from make_samples import digest
 import native_cmix
@@ -21,6 +22,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def build(args):
+    if args.weight_container and args.variant != "baseline":
+        raise ValueError("change weights or model parameters in one experiment, not both")
     upstream = json.loads(MANIFEST.read_text())
     if any(differences(upstream["files"], inventory(ENGINE)).values()):
         raise ValueError("pinned upstream source differs")
@@ -37,6 +40,7 @@ def build(args):
     preprocessing_support = apply_portable_preprocessing(source)
     instrument_fixture(source)
     instrument(source, portable_random=False)
+    weight_binding = apply_container(source, args.weight_container) if args.weight_container else None
     command = ["make", f"-j{args.jobs}", "CC=clang++-18", "prof_use"]
     metadata = {
         "kind": "native-linux-development-build", "commit": capture("git", "-C", str(ROOT), "rev-parse", "HEAD"),
@@ -46,6 +50,7 @@ def build(args):
         "compiler": capture("clang++-18", "--version"), "command": command,
         "linker": capture("ld.lld-18", "--version"), "libc": capture("ldd", "--version"),
         "fixture_support": provenance(), "model_variant": variant,
+        "weight_binding": weight_binding,
         "preprocessing_support": preprocessing_support,
         "initialization": "original Linux libc generator", "source_files": inventory(source),
         "support_files": inventory(SUPPORT), "script_sha256": digest(Path(__file__)),
@@ -74,6 +79,7 @@ def main():
     compile_parser.add_argument("--output", type=Path, required=True)
     compile_parser.add_argument("--jobs", type=int, default=2)
     compile_parser.add_argument("--variant", choices=VARIANTS, default="baseline")
+    compile_parser.add_argument("--weight-container", type=Path)
     bench = sub.add_parser("bench")
     bench.add_argument("inputs", type=Path, nargs="+")
     for name in ("build", "manifest", "output"):
