@@ -102,3 +102,21 @@ gh workflow run linux-benchmarks.yml --ref main -f experiment=adaptive-depth
 
 It runs the three models serially per fixture and omits the unrelated full-stream
 preparation job. Both experiment families remain manual dispatches.
+
+## Exact link-target follow-up
+
+The [frozen retrieval protocol](20261017-retrieval-protocol-v1/protocol.json)
+requires a decoded target delimiter after the existing exact title match.
+Native Mac [screen](20261017-retrieval-screen-v1/report.json) and
+[disjoint](20261017-retrieval-holdout-v1/report.json) results save 5 and 2 payload
+bytes respectively, with exact raw restoration and matching context counters.
+The candidate passes the predeclared screening rule; keep its recipe unchanged
+for native Linux and reserved-range confirmation. These are small fixture gains,
+not a package-size or speed claim.
+
+```sh
+gh workflow run linux-benchmarks.yml --ref main -f experiment=exact-target
+```
+
+Builds use `--retrieval-variant exact-target`; source comparison checks the
+declared `tf1_z3.cpp` rewrite rather than the parameter-header recipes above.

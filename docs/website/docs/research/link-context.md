@@ -108,7 +108,7 @@ must face the reserved third range, Linux comparison and full-pipeline accountin
 A payload improvement here does not establish a Hutter Prize score. See the
 [experiment playbook](experiment-playbook.md) for those promotion checks.
 
-## Next hypothesis: retrieve the correct link target
+## Follow-up: retrieve the correct link target
 
 The budget tests above reduced how much context the model received. A separate
 [frozen experiment](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-retrieval-protocol-v1/protocol.json)
@@ -125,4 +125,25 @@ article order and all other model settings remain fixed.
 This may remove noise, but the frozen model was trained with the original
 retrieval rule, so an improvement is not guaranteed. The candidate must restore
 all original bytes, show matching context counters and improve both reused
-fixtures before promotion. No compression result is claimed yet.
+fixtures before promotion.
+
+The first paired Mac measurements clear that screening rule:
+
+| Model | Screen payload | Change | Disjoint payload | Change |
+| --- | ---: | ---: | ---: | ---: |
+| Upstream matching | 119,065 | — | 117,438 | — |
+| Exact target boundary | 119,060 | −5 | 117,436 | −2 |
+
+Both restore original XML exactly and reproduce encoder context counters during
+decoding. The filter changes actual retrieval: screen mentions fall from 88 to
+84 and prefix tokens from 1,893 to 1,775; disjoint mentions fall from 50 to 41
+and tokens from 1,361 to 1,145. The source verifier permits only the frozen
+`tf1_z3.cpp` rewrite and checks all other compiled sources and assets.
+
+Saved evidence: [screen](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-retrieval-screen-v1/report.json)
+and [disjoint](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-retrieval-holdout-v1/report.json).
+These tiny gains justify testing the unchanged candidate on native Linux and
+the reserved third range. They do not establish a full-stream gain, and a
+different platform has already reversed similarly small gains in the
+[depth experiment](adaptive-depth.md). Concurrent timings do not establish a
+speed improvement.

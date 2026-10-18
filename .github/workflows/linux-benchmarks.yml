@@ -10,6 +10,7 @@ on:
         options:
           - link-context
           - adaptive-depth
+          - exact-target
 
 permissions:
   contents: read

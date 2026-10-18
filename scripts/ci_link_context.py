@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPERIMENTS = {
     "link-context": "20261017-protocol-v2",
     "adaptive-depth": "20261017-depth-protocol-v1",
+    "exact-target": "20261017-retrieval-protocol-v1",
 }
 
 
@@ -47,10 +48,14 @@ def main():
         for name in models:
             build = work / ("build-" + name)
             builds.append(build)
-            subprocess.run([sys.executable, "scripts/linux_cmix.py", "build", "--variant", name,
+            variant_args = (["--retrieval-variant", "exact-target"]
+                            if name == "retrieval-exact-target" else ["--variant", name])
+            subprocess.run([sys.executable, "scripts/linux_cmix.py", "build", *variant_args,
                             "--output", str(build), "--jobs", "2"], cwd=ROOT, check=True)
             if manifest is None:
-                source_manifest = ROOT / "benchmarks/article-order/20261017-projection-protocol-v2" / (args.role + ".json")
+                source_manifest = ROOT / frozen_protocol["fixtures"][args.role]["manifest_path"]
+                if digest(source_manifest) != frozen_protocol["fixtures"][args.role]["manifest_sha256"]:
+                    raise ValueError("fixture manifest differs from frozen protocol")
                 manifest = replay(source_manifest, args.enwik8, build, work / "fixture")
                 protocol = frozen_protocol
                 protocol["parent_protocol_sha256"] = digest(original_protocol)
