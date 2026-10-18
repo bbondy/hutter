@@ -1,0 +1,7 @@
+{
+  "workflow_run": "https://github.com/bbondy/hutter/actions/runs/39082944601",
+  "artifact": "linux-release-packages-39082944601",
+  "source_commit": "e6fa6f41b12e7034e34af0b812cd68d5cd841d5c",
+  "verification": "Downloaded compressor binaries, reconstructed decoder prefixes and log hashes rechecked locally. Re-running package_compare.py produced the byte-identical comparison report. Source inventories match untouched upstream or only the explicit weight-container/fingerprint change.",
+  "scope": "Native Ubuntu x86-64 real upstream release packages; no full corpus score, prediction equivalence, or resource eligibility. Published executable hash is not reproduced by this host."
+}

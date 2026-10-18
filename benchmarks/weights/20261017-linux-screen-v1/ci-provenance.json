@@ -1,0 +1,7 @@
+{
+  "workflow_run": "https://github.com/bbondy/hutter/actions/runs/39082571418",
+  "artifact": "linux-weights-screen-39082571418",
+  "source_commit": "39d5d6c031c7fbafd8c4c4f5a56780286f7928df",
+  "verification": "Downloaded model binaries, containers, archives, restored streams, metadata and logs agree with recorded hashes; source changes are only the bound weight container and fingerprint. An independent canonical Mac inverse helper restored all original XML bytes. Kernel logs and source provenance are retained; the probe binary itself is not included in the CI artifact.",
+  "scope": "Fixture archive identity and bounded native Linux kernel checks; no full-corpus or packaged score claim."
+}

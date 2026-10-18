@@ -1,0 +1,32 @@
+{
+  "reference_install_script_sha256": "70b4d3a4c9b74fa82518813e2cfd1b45ae69d683c21dabb2458fb0a06e01ec0f",
+  "reference_package_differences": {
+    "linux-libc-dev": {
+      "reference": "6.8.0-142.142",
+      "actual": "6.8.0-146.146"
+    }
+  },
+  "installed_compiler_packages": {
+    "g++-12": "12.4.0-2ubuntu1~24.04.1",
+    "g++-13": "13.3.0-6ubuntu2~24.04.1",
+    "g++-13-x86-64-linux-gnu": "13.3.0-6ubuntu2~24.04.1",
+    "g++-14": "14.2.0-4ubuntu2~24.04.1",
+    "g++-14-x86-64-linux-gnu": "14.2.0-4ubuntu2~24.04.1",
+    "gcc-12": "12.4.0-2ubuntu1~24.04.1",
+    "gcc-12-base": "12.4.0-2ubuntu1~24.04.1",
+    "gcc-13": "13.3.0-6ubuntu2~24.04.1",
+    "gcc-13-base": "13.3.0-6ubuntu2~24.04.1",
+    "gcc-13-x86-64-linux-gnu": "13.3.0-6ubuntu2~24.04.1",
+    "gcc-14": "14.2.0-4ubuntu2~24.04.1",
+    "gcc-14-base": "14.2.0-4ubuntu2~24.04.1",
+    "gcc-14-x86-64-linux-gnu": "14.2.0-4ubuntu2~24.04.1",
+    "libstdc++-12-dev": "12.4.0-2ubuntu1~24.04.1",
+    "libstdc++-13-dev": "13.3.0-6ubuntu2~24.04.1",
+    "libstdc++-14-dev": "14.2.0-4ubuntu2~24.04.1"
+  },
+  "hypothesis": "Clang may select the extra GCC 14 headers/toolchain instead of reference GCC 13. Capture actual selection and repeat without GCC 14 development packages on a fresh native runner; not yet proved as the cause.",
+  "published_compressor_bytes": 4000689,
+  "rebuilt_compressor_bytes": 3999867,
+  "published_decoder_prefix_bytes": 165545,
+  "rebuilt_decoder_prefix_bytes": 165104
+}

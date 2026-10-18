@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "hypothesis": "The smallest frozen neuron-permutation container preserves complete fixture archives with its explicit fingerprint binding.",
+  "candidate": "mlp-scale",
+  "selection": "Smallest of the three predeclared containers, after exact tensor reconstruction and passing Mac sparse/dense kernel tests; no corpus compression score used for selection.",
+  "original_container_sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719",
+  "candidate_container_sha256": "52ade19bd0fc51c22b4811f603cda2308223ef49f23ab1abd98d593c77714076",
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/screen.json",
+      "manifest_sha256": "e2853b06031ab36986151ec1483a347496d279ca34e3b4d47968f3b2939e7d1b",
+      "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f"
+    },
+    "holdout": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/holdout.json",
+      "manifest_sha256": "880ad288323503c874b18d8d3aadaebde268f6960f546352d0efb0d08e84d47b",
+      "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "changes": "CPU identity display supports Linux; round-trip/context checks are unchanged."
+  },
+  "preprocessing": "phda9-entities-u32-v1",
+  "acceptance": [
+    "Same fixture phases, inputs, dictionary, compiler and model parameter settings",
+    "Only weight-container bytes and the required fingerprint constant change",
+    "Both binaries restore prepared input and original XML exactly",
+    "Encoder/decoder context counters agree and match baseline",
+    "Complete archive SHA-256 matches the baseline on both reused fixtures"
+  ],
+  "promotion": "Require native Linux kernels and matching full fixture archives, then full-corpus/package accounting. Preserve mismatches. Kernel cases and archive identity do not prove all internal floating-point values identical on all possible inputs.",
+  "scope": "A gross two-container saving of 8,560 bytes is a lead, not a packaged score. No model selection on the reserved third range.",
+  "parent_protocol_sha256": "501932dc4f332a0912c4b2ef1d804ce084c9168df0b9e3de88040f47fc903c99"
+}

@@ -38,10 +38,10 @@ first reproduced the original container byte for byte. Every new container
 reads back to exactly its intended tensors, and inverse permutations recover
 the original tensors. No corpus scores selected these orderings.
 
-The submission carries two copies of this container. The best result therefore
-suggests a gross saving of 8,560 bytes before measuring the rebuilt executables
-and their binding data. It is a small component improvement, far from a complete
-prize-winning margin, and is not yet a packaged score.
+The submission carries two copies of this container. The initial gross estimate
+was an 8,560-byte saving. Real native Linux release builds now confirm that
+component delta below. It is a small improvement, far from a complete
+prize-winning margin, and is not a full-corpus score.
 
 ## Mathematical symmetry needs implementation checks
 
@@ -57,8 +57,47 @@ model is rejected at the first layer. The
 [kernel evidence](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-native-kernels-v1/report.json)
 records compiler flags, source hashes and logs.
 
-These are bounded block tests, not full-compressor results. Next checks are
-native Linux kernels, complete coder archives and exact original-byte restoration
-with the best container, followed by rebuilding and counting the complete
-submission. The model's fingerprint check stays active: each experimental
-binary must explicitly bind its intended container.
+The model's fingerprint check stays active: each experimental binary explicitly
+binds its intended container. Mathematical symmetry alone does not authorize
+turning that check off.
+
+## Native Linux checks and measured package components
+
+Native Ubuntu x86-64 recreated all three candidate containers byte for byte and
+passed the same 16,384 sparse/dense block cases for each. The selected scale
+ordering then produced **identical complete fixture archives**:
+
+| Fixture | Original-container payload | Reordered-container payload | Archive SHA-256 |
+| --- | ---: | ---: | --- |
+| Screen | 119,067 bytes | 119,067 bytes | Identical |
+| Disjoint | 117,426 bytes | 117,426 bytes | Identical |
+
+All four trials restore the original XML and report the same context counters.
+The [screen evidence](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-linux-screen-v1/report.json)
+and [disjoint evidence](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-linux-holdout-v1/report.json)
+include kernel reports, container hashes and CI provenance. Downloaded artifacts
+were checked again locally, including inverse preparation to original XML.
+These fixtures and bounded kernel cases do not prove equivalence on every input.
+
+A separate native Linux job rebuilt both real release packages with upstream's
+unchanged build script, PGO/LTO, section guards and actual unpacking checks:
+
+| Component | Baseline | Reordered weights | Change |
+| --- | ---: | ---: | ---: |
+| Compressor executable | 3,999,867 bytes | 3,995,587 bytes | −4,280 bytes |
+| Decoder prefix | 165,104 bytes | 165,104 bytes | 0 |
+| Archive-side weight copy | 3,716,667 bytes | 3,712,387 bytes | −4,280 bytes |
+| Sum of these components | 7,881,638 bytes | 7,873,078 bytes | **−8,560 bytes** |
+
+The [package comparison](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-linux-packages-v1/comparison.json)
+rechecks actual binaries and decoder-prefix bytes. It excludes the compressed
+dictionary, full corpus payload, archive footer and invocation arguments.
+A full score still requires the complete archive and resource measurements.
+This was a native Linux build without Docker.
+
+The rebuilt baseline is 822 bytes smaller than the published compressor and
+has a different hash. This is a toolchain reproducibility question, not a gain
+credited to our weight permutation. Nearly all listed reference packages match,
+but the hosted image also has GCC 14 development files that Clang may select
+instead of GCC 13. A separate controlled rebuild tests that explanation. Keep
+same-host candidate deltas separate from published-binary reproduction.

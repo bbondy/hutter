@@ -1,0 +1,202 @@
+{
+  "kind": "weight-archive-equivalence",
+  "version": 1,
+  "role": "holdout",
+  "date_utc": "2026-10-18T00:35:30.952067+00:00",
+  "protocol_sha256": "a71b1b048227f07e8b9687eb427e839d4cc1e8a09f161aa808709242a69cb4f2",
+  "manifest_sha256": "d3af6451b9093d4ddb9ab21a4dc5e10d16a1fcc2636a9ff59f4c956736855798",
+  "verifier_sha256": "f4aaca92d5d22a7af29d1beff9365d2cc204cce2701d07123aae762e781eba8b",
+  "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8",
+  "archives_identical": true,
+  "context_identical": true,
+  "passed": true,
+  "variants": {
+    "baseline": {
+      "archive_sha256": "6dd1cc37ea3d5f85210f118bc207dc614047b82d5fd1498265abeadfa340a543",
+      "payload_bytes": 117426,
+      "restored_raw_sha256": "06456d1767a9ccbd78d7a7db4020da8323afeaa5abe7cf3f77fcaf0b10b2d740",
+      "original_bytes_roundtrip": true,
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 138,
+            "titles": 136,
+            "blocks": 2,
+            "bytes": 8,
+            "links": 9056,
+            "links_piped": 1529,
+            "links_dropped": 0,
+            "redirects": 27,
+            "from_redirect": 4,
+            "from_linktext": 5
+          },
+          "z3": {
+            "articles": 111,
+            "usable_titles": 109,
+            "articles_with_mentions": 16,
+            "articles_with_prefix": 16,
+            "mentions_total": 50,
+            "prefix_tokens_total": 1361,
+            "chunks_total": 31,
+            "anchors": 10022,
+            "fed_tokens": 1361
+          },
+          "prompt": {
+            "articles": 138,
+            "redirect_prompt_pages": 27,
+            "redirect_prompt_tokens": 108,
+            "redirect_pages": 27,
+            "meta_pages": 138,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 17880
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 138,
+            "titles": 136,
+            "blocks": 2,
+            "bytes": 8,
+            "links": 9056,
+            "links_piped": 1529,
+            "links_dropped": 0,
+            "redirects": 27,
+            "from_redirect": 4,
+            "from_linktext": 5
+          },
+          "z3": {
+            "articles": 111,
+            "usable_titles": 109,
+            "articles_with_mentions": 16,
+            "articles_with_prefix": 16,
+            "mentions_total": 50,
+            "prefix_tokens_total": 1361,
+            "chunks_total": 31,
+            "anchors": 10022,
+            "fed_tokens": 1361
+          },
+          "prompt": {
+            "articles": 138,
+            "redirect_prompt_pages": 27,
+            "redirect_prompt_tokens": 108,
+            "redirect_pages": 27,
+            "meta_pages": 138,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 17880
+          }
+        }
+      },
+      "binary_sha256": "146bf187158a9fb5fdc7c486356c692f9efc7de239f219dd082b8032fa4638b0",
+      "binary_bytes": 577272,
+      "weight_bytes": 3716667,
+      "metadata_sha256": "13c5026c4cd9be4146b5f5faa41feb795f8dd14c1cbe9a8a8c61bfa0003dff8e",
+      "results_sha256": "45277a4431a8fe1ab4e67532f206d4836b2fa23675bdf43817a8eca7057b27af",
+      "log_sha256": {
+        "compress": "852ece2168b1802adef9441aefc37b0377a5fbc8b73362f73c9238f798252a96",
+        "decompress": "19c86780b6b5890a7a8e12063cb2638465b8d26d4339dfcac91d44febb3e06bb"
+      }
+    },
+    "candidate": {
+      "archive_sha256": "6dd1cc37ea3d5f85210f118bc207dc614047b82d5fd1498265abeadfa340a543",
+      "payload_bytes": 117426,
+      "restored_raw_sha256": "06456d1767a9ccbd78d7a7db4020da8323afeaa5abe7cf3f77fcaf0b10b2d740",
+      "original_bytes_roundtrip": true,
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 138,
+            "titles": 136,
+            "blocks": 2,
+            "bytes": 8,
+            "links": 9056,
+            "links_piped": 1529,
+            "links_dropped": 0,
+            "redirects": 27,
+            "from_redirect": 4,
+            "from_linktext": 5
+          },
+          "z3": {
+            "articles": 111,
+            "usable_titles": 109,
+            "articles_with_mentions": 16,
+            "articles_with_prefix": 16,
+            "mentions_total": 50,
+            "prefix_tokens_total": 1361,
+            "chunks_total": 31,
+            "anchors": 10022,
+            "fed_tokens": 1361
+          },
+          "prompt": {
+            "articles": 138,
+            "redirect_prompt_pages": 27,
+            "redirect_prompt_tokens": 108,
+            "redirect_pages": 27,
+            "meta_pages": 138,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 17880
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 138,
+            "titles": 136,
+            "blocks": 2,
+            "bytes": 8,
+            "links": 9056,
+            "links_piped": 1529,
+            "links_dropped": 0,
+            "redirects": 27,
+            "from_redirect": 4,
+            "from_linktext": 5
+          },
+          "z3": {
+            "articles": 111,
+            "usable_titles": 109,
+            "articles_with_mentions": 16,
+            "articles_with_prefix": 16,
+            "mentions_total": 50,
+            "prefix_tokens_total": 1361,
+            "chunks_total": 31,
+            "anchors": 10022,
+            "fed_tokens": 1361
+          },
+          "prompt": {
+            "articles": 138,
+            "redirect_prompt_pages": 27,
+            "redirect_prompt_tokens": 108,
+            "redirect_pages": 27,
+            "meta_pages": 138,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 17880
+          }
+        }
+      },
+      "binary_sha256": "c0f8eb2af7394119fc182bad97ede7b1ea49de042f6329894bc4f097e720d6a1",
+      "binary_bytes": 577272,
+      "weight_bytes": 3712387,
+      "metadata_sha256": "32995377e602661e47710f363c173cb6a7e26cad929cece2e0037e9dd4a27047",
+      "results_sha256": "e5c6e17cd88717e645d032564237cd171bfd1965167b9eec14122893cb152f69",
+      "log_sha256": {
+        "compress": "8dcfbc5ae24776833d6372d8fe00b208a01b2c7b12bbaf8a3ae2fb9894101fff",
+        "decompress": "0f0ca123e404904c7e73048ff1b63fbf6084657e71adbcbc52cdd7e60d6df9e3"
+      }
+    }
+  },
+  "scope": "Fixture archives and exact original restoration; full prize package savings remain unverified."
+}

@@ -104,3 +104,18 @@ published SHA-256, without assuming the hosted runner has the pinned package set
 ```sh
 gh workflow run release-packages.yml --ref main
 ```
+
+## First native Linux results
+
+Both [screen](20261017-linux-screen-v1/report.json) and
+[disjoint](20261017-linux-holdout-v1/report.json) comparisons pass archive identity,
+context equality and exact original XML restoration. Their kernel subdirectories
+save all three candidates' passing native x86 checks. Both hosts recreate the
+same containers as Mac; fixture payloads are 119,067 and 117,426 bytes.
+
+The [real release comparison](20261017-linux-packages-v1/comparison.json) measures
+an 8,560-byte reduction in compressor + decoder prefix + archive-side weights.
+The packed program and decoder prefix retain their sizes, and each weight copy
+shrinks by 4,280 bytes. The baseline compressor does not match the published
+binary; package and compiler-selection evidence is retained separately. The
+full enwik9 payload, dictionary and resource limits remain unverified.

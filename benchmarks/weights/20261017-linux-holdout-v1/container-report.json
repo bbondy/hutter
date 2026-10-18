@@ -1,0 +1,56 @@
+{
+  "kind": "mlp-weight-permutation-screen",
+  "version": 1,
+  "date_utc": "2026-10-18T00:23:50.606423+00:00",
+  "commit": "39d5d6c031c7fbafd8c4c4f5a56780286f7928df",
+  "script_sha256": "d828d7ce2d9d7378f1f143a8426c69b8c91c27ab2fff23003242810f615313b4",
+  "protocol_sha256": "307479fabff5596a4cd4ec02a4ae2eb5454f112f2598d675c8436d4127862326",
+  "upstream_commit": "1c9ea5ed57ec9718bcb681d20b79e81a60b7a728",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "numpy": "2.5.4",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "weights_sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719",
+  "original_container_bytes": 3716667,
+  "upstream_writer_sha256": "9cfb3b1f1c39cc700ef569865e409d53b4849547f3d1b0f42f91476a79afa468",
+  "scope": "Exact candidate tensor reconstruction and inverse permutations; inference and packaged submission not yet verified.",
+  "variants": {
+    "mlp-scale": {
+      "container_bytes": 3712387,
+      "container_sha256": "52ade19bd0fc51c22b4811f603cda2308223ef49f23ab1abd98d593c77714076",
+      "delta_container_bytes": -4280,
+      "gross_two_container_delta_bytes": -8560,
+      "permutations_sha256": "af2d59353d0d340476060f9f4fd9b4d6e4eb2587fe2eac9a659affecff5127bc",
+      "tensor_roundtrip": true,
+      "inverse_permutations_exact": true,
+      "displaced_neurons": 12204,
+      "wall_seconds": 22.489417653000004,
+      "note": "Two-copy accounting excludes binding/packed-binary size changes; model inference remains unverified."
+    },
+    "mlp-zero-count": {
+      "container_bytes": 3714991,
+      "container_sha256": "dfe4d79a4e5aba0f5482d2603f227ed0ac34c334790c17288b0575a5ceb38fc1",
+      "delta_container_bytes": -1676,
+      "gross_two_container_delta_bytes": -3352,
+      "permutations_sha256": "1959b3b94bd0ef328c511a9908aa4599d890132278a49e9298e32a2474db13f8",
+      "tensor_roundtrip": true,
+      "inverse_permutations_exact": true,
+      "displaced_neurons": 12201,
+      "wall_seconds": 22.801963879999988,
+      "note": "Two-copy accounting excludes binding/packed-binary size changes; model inference remains unverified."
+    },
+    "mlp-row-mean": {
+      "container_bytes": 3715729,
+      "container_sha256": "75850427ab33d44b45d495bc1327722f7f1a2f6913cacc6ebf2fb15fd1e08fba",
+      "delta_container_bytes": -938,
+      "gross_two_container_delta_bytes": -1876,
+      "permutations_sha256": "9e1ef35117427ac66d17b7f0dc677c47c882d1f7adff9a511203b9c338d5f4d5",
+      "tensor_roundtrip": true,
+      "inverse_permutations_exact": true,
+      "displaced_neurons": 12208,
+      "wall_seconds": 22.753058995000004,
+      "note": "Two-copy accounting excludes binding/packed-binary size changes; model inference remains unverified."
+    }
+  },
+  "tensor_count": 584,
+  "upstream_writer_identity": true
+}
