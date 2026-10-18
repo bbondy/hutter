@@ -223,6 +223,14 @@ frozen screen selection, one disjoint check, real archives and native Linux
 verification. This range broadens training coverage without making the old
 evaluation fixtures into new training data.
 
+The fixed one-pass checkpoint was also measured once on a [third native Mac
+range](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-weight-third-range-v1):
+125,991 baseline payload bytes versus 125,896 with the trained weights
+(**95 bytes saved**). Both variants restore the exact 1,000,794-byte original
+XML and keep identical context counters. This range had been used for an
+unrelated retrieval test, so the result supports generalization but does not
+count as fresh final validation or a full prize archive.
+
 The [training-row dump](training-data.md) is a different dataset: it cannot
 replace the final mixer's bit-level inputs. A changed transformer also
 requires a new bit-model trace, because its features and upstream predictions

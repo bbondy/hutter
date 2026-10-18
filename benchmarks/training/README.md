@@ -67,6 +67,12 @@ published baseline executable and saves 16 bytes in `comp9` plus 16 bytes in
 the independent decoder prefix, with the transformer-weight block unchanged.
 These are small reused-fixture and component results, not a full prize score.
 
+The same fixed one-pass checkpoint also saves [95 payload bytes on a third
+Mac range](20261018-bit-weight-third-range-v1), with exact original XML
+restoration and baseline-identical context counts. That range was already
+used for a different retrieval experiment, so it is supporting evidence,
+not a fresh final holdout. No weights were retuned to it.
+
 The [extra-pass screen experiment](20261017-bitl-multi-pass-v1) is a recorded
 rejection: its 16-pass checkpoint gains 282.3 further probability-cost bytes
 on screen but loses 90.6 bytes on disjoint versus the one-pass model. A

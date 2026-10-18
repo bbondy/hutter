@@ -85,6 +85,10 @@ Priorities:
    both with exact restoration and matching context counters. The [Linux release package](../benchmarks/training/20261018-bit-release-v1)
    reproduces the published baseline and saves 16 bytes in the compressor and
    16 bytes in the independent decoder prefix, a 32-byte component reduction.
+   A fixed-weight [third Mac range](../benchmarks/training/20261018-bit-weight-third-range-v1)
+   also saves 95 payload bytes and restores exact original XML; it was previously
+   used for an unrelated retrieval experiment, so is supporting rather than
+   untouched validation.
    Measure longer streams and the complete prize archive. These reused fixtures are not a
    full-corpus or prize score. A separate frozen [extra-pass trial](../benchmarks/training/20261017-bitl-multi-pass-v1)
    lowers screen probability cost by another 282.3 bytes at 16 passes but
