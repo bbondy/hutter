@@ -29,3 +29,25 @@ are recorded. Containers remain in ignored build output; reports and permutation
 maps belong in Git. Save every candidate, including regressions. Any candidate
 requires kernel equivalence checks on both platforms and unchanged coder traces
 before full package accounting.
+
+The [first container results](20261017-container-permutations-v1/report.json)
+save 4,280 bytes for scale order, 1,676 for zero-count order and 938 for row-mean
+order. All three pass exact container rewriting and tensor reconstruction.
+These numbers alone do not establish inference equivalence.
+
+The kernel probe compiles the actual MLP kernels and loader from a verified
+development build, using that build's compiler and per-file transformer flags:
+
+```sh
+python3 scripts/weight_kernel_probe.py --build build/native-fixture-v4 \
+  --original engines/cmix-neif/weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4 \
+  --candidates build/weight-permutations-v1/mlp-scale.c4 \
+               build/weight-permutations-v1/mlp-zero-count.c4 \
+               build/weight-permutations-v1/mlp-row-mean.c4 \
+  --output build/weight-kernels-v1
+```
+
+It checks 1,024 synthetic activation vectors per layer, including range extremes,
+and forces both sparse and dense down-projection paths. All output float bits
+and nonzero counts must agree. This is a bounded kernel test; complete coder
+traces and package accounting remain separate checks.
