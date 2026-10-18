@@ -22,6 +22,7 @@ EXPERIMENTS = {
     "exact-target": "20261017-retrieval-protocol-v1",
     "exact-target-confirmation": "20261017-retrieval-confirmation-protocol-v1",
     "bitl-trace": "20261017-bitl-trace-protocol-v2",
+    "bitl-warm-start": "20261017-bitl-archive-protocol-v1",
 }
 
 
@@ -31,7 +32,7 @@ def main():
     parser.add_argument("--enwik8", type=Path, required=True)
     parser.add_argument("--experiment", choices=EXPERIMENTS, default="link-context")
     args = parser.parse_args()
-    group = "training" if args.experiment == "bitl-trace" else "model-variants"
+    group = "training" if args.experiment in ("bitl-trace", "bitl-warm-start") else "model-variants"
     original_protocol = ROOT / "benchmarks" / group / EXPERIMENTS[args.experiment] / "protocol.json"
     frozen_protocol = json.loads(original_protocol.read_text())
     if args.role not in frozen_protocol["fixtures"]:
@@ -54,7 +55,8 @@ def main():
             build = work / ("build-" + name)
             builds.append(build)
             variant_args = {"retrieval-exact-target": ["--retrieval-variant", "exact-target"],
-                            "bit-trace-fixture": ["--bit-trace-variant", "fixture"]}.get(name, ["--variant", name])
+                            "bit-trace-fixture": ["--bit-trace-variant", "fixture"],
+                            "bit-weight-warm-start-lr3000-v1": ["--bit-weight-variant", "warm-start-lr3000-v1"]}.get(name, ["--variant", name])
             subprocess.run([sys.executable, "scripts/linux_cmix.py", "build", *variant_args,
                             "--output", str(build), "--jobs", "2"], cwd=ROOT, check=True)
             if manifest is None:
