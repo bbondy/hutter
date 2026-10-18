@@ -99,8 +99,11 @@ On a suitable Linux x86-64 host, preferably the upstream Ubuntu 24.04 environmen
    sizes. Use the upstream README's timing and judging instructions.
 
 The build wrapper and native Mac/Linux article-fixture adapters are ready.
-Full-run execution and independent SFX validation remain the next integration
-step on a persistent Linux runner. The existing Rust CLI adapter
+The [full release harness and frozen protocol](../benchmarks/weights/20261017-full-release-protocol-v1)
+now automate the two separate working directories, exact restoration, published
+archive comparison, package accounting and sampled resource records. Execution
+on a persistent Linux runner remains outstanding; short harness tests are not a
+full compression result. The existing Rust CLI adapter
 does not understand SFX packaging or upstream specialized preprocessing. Do not
 pass it `comp9` and treat the result as comparable. Keep upstream published
 numbers separate from locally measured records in `benchmarks/runs/`.

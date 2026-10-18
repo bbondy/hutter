@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "purpose": "Complete published baseline reproduction, then unchanged frozen weight-permutation candidate if it clears bounded checks. No full run has been performed under this protocol yet.",
+  "source_artifact_run": 39083970011,
+  "packages": {
+    "baseline": {
+      "compressor": {
+        "bytes": 4000689,
+        "sha256": "8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7"
+      },
+      "weights_sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719",
+      "expected_archive": {
+        "bytes": 91913343,
+        "sha256": "30eaf239168bd4efb4c57af09002b968308d7614d0cca619540e971fc38f4f18"
+      }
+    },
+    "candidate": {
+      "compressor": {
+        "bytes": 3996407,
+        "sha256": "35354c2b0a5cb49c04ab1514509dd2ec00af38c3965471692acf392992344e35"
+      },
+      "weights_sha256": "52ade19bd0fc51c22b4811f603cda2308223ef49f23ab1abd98d593c77714076"
+    }
+  },
+  "input": {
+    "bytes": 1000000000,
+    "sha256": "159b85351e5f76e60cbe32e04c677847a9ecba3adc79addab6f4c6c7aa3744bc"
+  },
+  "required_free_bytes": 37580963840,
+  "required_tmp_free_bytes": 3221225472,
+  "limits": {
+    "phase_timeout_seconds": 240000,
+    "sample_seconds": 1.0,
+    "rss_stop_bytes": 10737418240,
+    "scratch_stop_bytes": 100000000000,
+    "minimum_free_bytes": 1073741824
+  },
+  "procedure": "Pin encoder and decoder to one logical CPU. Run ./comp9 -e enwik9 archive9; place only the completed archive in a fresh decoder working directory and execute ./archive9. Compare enwik9_uncompressed with official size and SHA-256. Preserve phase logs, resource heartbeats, binaries and restored data. Baseline must also reproduce the published archive hash.",
+  "scoring": "compressor bytes + actual completed SFX archive bytes + 19 bytes for comp9.args. Do not infer a candidate score before completing compression and exact restoration.",
+  "limitations": [
+    "Sampling can miss short resource peaks and is not a hard memory/disk cap. The 10 GiB RSS stop threshold follows upstream operational units; record raw bytes and use judging rules for eligibility.",
+    "Scratch sampling counts regular files in the active working directory and open file descriptors of the process tree, including unnamed/deleted temporary files. It is not a complete audit of all filesystem activity.",
+    "The separate decoder directory is not a filesystem or network sandbox; no claim of enforced self-containment follows from that alone.",
+    "Pinned CPU affinity does not reserve or isolate a physical core from other jobs. Record idle-host conditions and a measured Geekbench 5 score before assessing normalized runtime.",
+    "The 240000-second timeout is an operational bound, not the prize time allowance. Each phase needs independent machine-normalized evaluation.",
+    "Hosted six-hour CI cannot run this protocol to completion. A persistent native Linux host remains required."
+  ]
+}

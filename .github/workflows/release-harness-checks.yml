@@ -1,0 +1,16 @@
+name: Native Linux release harness checks
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exercise process cleanup, resource sampling and package guards
+        run: python3 -m unittest discover -s scripts -p 'test_*.py' -v

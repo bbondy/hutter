@@ -25,6 +25,15 @@ bytes in measured release components while preserving both platforms' developmen
 fixture archives. The complete release payload and full resource use remain
 separate checks.
 
+The [full-run harness](https://github.com/bbondy/hutter/tree/main/benchmarks/weights/20261017-full-release-protocol-v1)
+is now prepared for a persistent Linux host. It pins both phases to one logical
+CPU, decodes the SFX archive in a separate initially empty directory, checks
+the full original hash and saves package sizes and resource samples. Disk
+samples include open temporary files even after their directory entries are
+deleted. A passing small harness test is not a full compression result; the
+complete run has not yet happened. Resource sampling and directory separation
+also do not replace the final judging procedure or enforce a sandbox.
+
 Why not automatically adopt the smallest entry on a compression leaderboard? The [Large Text Compression Benchmark](https://mattmahoney.net/dc/text.html) ranks compressed size and lists `ex-girlfriend 1.0` ahead of cmix-neif as of its October 14, 2026 update. That benchmark does **not** award the Hutter Prize, and its timing and memory figures are approximate and may come from different machines. It reports about 10,204 MB and 220,071 ns per input byte for `ex-girlfriend`, versus 9,750 MB and 175,392 ns per byte for cmix-neif. The [prize task](https://prize.hutter1.net/) has roughly 10 GB and 50-hour limits on its own test machine. These numbers flag a real resource risk for either candidate; they cannot certify eligibility. The prize score also counts the submitted compressor, which the leaderboard's self-extracting archive column does not show as a separate cost. Measure the actual packaged submission on the target class of hardware before selecting a winner.
 
 ## Why keep two tracks?
