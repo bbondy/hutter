@@ -1,0 +1,13 @@
+{
+  "command": [
+    "build/weight-kernel-identity-v2/probe",
+    "engines/cmix-neif/weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4",
+    "build/weight-permutations-v1/negative-control.raw"
+  ],
+  "exit_code": 4,
+  "stderr": "nonzero count differs at layer 0 trial 0\n",
+  "expected_rejection": true,
+  "candidate_sha256": "dfd2af75b17920e2c0d5778872bdc3515cb9849b73fb6ee94d07b22db3a27f5a",
+  "construction": "Read the pinned container and write all tensors in raw FX2TFW01 format, setting only blocks.0.mlp.up.weight.scale to zero. This is an intentional defect, not a benchmark candidate.",
+  "probe_binary_sha256": "40e533439255dbc74e6e4c1b36432c8ba49c6ee94e5847a51ca8f7bc4f42abb9"
+}
