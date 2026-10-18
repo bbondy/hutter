@@ -16,8 +16,8 @@ not a measured gain here.
 
 The [upstream training record](https://github.com/bbondy/hutter/blob/main/engines/cmix-neif/training/bitl/README.md)
 uses 418,837,176 model bits from roughly the first 20% of the coder stream.
-A model bit is one where this predictor runs; metadata, forced symbols and
-other skipped bits make this different from a raw input-bit count. The 16-cell
+A model bit is one where this predictor runs; metadata, alphabet/grammar-fixed
+bits and adaptive-depth skips make this different from a raw input-bit count. The 16-cell
 model has 3,585 active parameters. Its weights stay frozen through that training
 range, then begin learning online at a complete training-window boundary.
 
@@ -52,8 +52,9 @@ estimate, and the actual record count must be measured. This is offline
 research data, separate from the final compressor's temporary-disk budget.
 
 The float32 checkpoint can be converted back to the shipped bfloat16 array.
-Our audit script verifies its published hash, geometry, finite values, zero
-padding and exact embedded bytes. It does not regenerate the missing trace or
+The [completed export audit](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-weight-audit-v1)
+verifies its published hash, geometry, finite values, zero padding and exact
+embedded bytes. The exported file and compiled array have the same SHA-256: `c72957f4…08a8e7d`. It does not regenerate the missing trace or
 reproduce the original training.
 
 ## A staged experiment
