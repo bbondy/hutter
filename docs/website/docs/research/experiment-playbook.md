@@ -9,7 +9,9 @@ For a small model change, ask two questions: **does the decoder still restore th
 
 ## Use samples that exercise the real pipeline
 
-The competitive candidate expects its own text preprocessing and metadata. An arbitrary byte slice from `enwik8` is not a valid dictionary-mode input. The research tooling selects complete Wikipedia articles, applies the upstream `phda9` transform and verifies that the inverse restores the selected raw bytes. A manifest records source offsets, article count, hashes and transform details. The 19-article fixture has 117,161 raw bytes and 108,927 prepared bytes. The corrected 172-article fixture has a [verified three-order comparison](article-order.md): source order produced 119,969 bytes, graph order 119,975, and the random control 120,083. All restored the same 1,033,597 original bytes. The disjoint fixture also rejects this graph heuristic, by 22 bytes. These fixture payloads are not full submission scores.
+The competitive candidate expects its own text preprocessing and metadata. An arbitrary byte slice from `enwik8` is not a valid dictionary-mode input. The research tooling selects complete Wikipedia articles, applies the upstream `phda9` transform and verifies that the inverse restores the selected raw bytes. A manifest records source offsets, article count, hashes and transform details. The current screening set has 172 pages and 1,033,597 raw bytes; a disjoint set has 138 pages and 1,005,977 raw bytes. Both include redirect and main-text phases.
+
+There are two separate preprocessing requirements: restore every original byte, and produce the representation used by the reference build. An inherited signed-overflow expression produced different XML entity encodings on Mac and Linux while both could still restore their own inputs. The [portability correction](native-parity.md) now reproduces both full upstream coder-stream hashes on both platforms. Fresh frozen fixtures keep the same raw pages and permutations while using those corrected entity encodings. Earlier tables remain available with their older representation clearly labeled.
 
 Tiny samples help catch correctness problems. They are poor throughput tests for this engine because dictionary pretraining costs roughly 145 seconds per native encoding even on the small fixture. Use a small valid fixture for screening, then a larger and a held-out fixture before promoting a result. The repository also measured a disjoint middle-of-`enwik8` fixture with the same article-aware transform; its manifest records where extraction actually began. Its Mac/Linux size gap reversed direction from the first fixture. Change one model idea at a time and keep the baseline binary and input fixed for each paired comparison.
 
@@ -29,7 +31,7 @@ python3 scripts/parity_history.py compare BEFORE AFTER
 
 | Gate | Promote when… |
 | --- | --- |
-| Preprocessing | The inverse restores every raw input byte. |
+| Preprocessing | The inverse restores every raw input byte, and prepared hashes match the reference representation. |
 | Local encoding | The decoder restores the prepared input and a repeat produces the same archive. |
 | Linux comparison | The same candidate improves on the same prepared input with the same assets and manifest. |
 | Full prize run | Packaged bytes, exact `enwik9` restoration, runtime and peak memory all meet the current rules. |
@@ -48,10 +50,11 @@ restoration and actual context-counter checks. A telemetry-disabled encoding
 produces the identical baseline archive. Preserve legacy results separately:
 a protocol change is a new baseline, not a model gain.
 
-1. Use the saved Linux development decoder round trip as the first correctness gate; repeat it after relevant model changes.
-2. Finish the frozen upstream-order comparisons and [link-context model tests](link-context.md). Reuse exact baselines and report every candidate. A third range beginning at byte 80,000,000 is reserved for confirmation if a candidate improves both existing sets; neither reused set is untouched validation.
-3. Reproduce the pinned submission's full `enwik9` result and packaged size on native Linux x86-64, with exact restoration and resource measurements. Native full-corpus dictionary derivation and upstream ordering now match exactly; the full compressed result remains unverified.
-4. Evaluate one promising predictor change against that frozen baseline. Investigate exact ARM floating-point parity where it changes a real decision; keep Linux as the scoring reference meanwhile.
+1. Complete the canonical-input [order comparisons](article-order.md) and [link-context tests](link-context.md) on the two existing fixtures. The three earlier context changes all lost on both sets; keep those results separate from this corrected baseline.
+2. Compare the same model choices on native Ubuntu x86-64. The [manual CI workflow](https://github.com/bbondy/hutter/actions/workflows/linux-benchmarks.yml) rebuilds the frozen inputs, rejects hash mismatches, runs all choices serially per fixture and retains failures. Save its reports in Git before temporary artifacts expire. Local concurrent timings are exploratory.
+3. Advance a candidate to the reserved range beginning at byte 80,000,000 only if it improves both reused fixtures without retuning. Neither existing set is untouched validation; upstream weights were also trained on the target corpus.
+4. Reproduce the pinned submission's full `enwik9` result and packaged size on native Linux x86-64, with exact restoration and resource measurements. Dictionary derivation, upstream ordering and both full coder-stream hashes now pass. Full compression and its resource limits remain unverified. Standard hosted CI has a six-hour job limit, so it cannot establish the much longer full reference run; that needs a persistent machine.
+5. Evaluate another predictor hypothesis against this baseline, keeping one source change per comparison. Investigate exact ARM floating-point parity where it changes a research decision; use Linux as the scoring reference meanwhile.
 
 The [native/Linux comparison](native-parity.md) explains why those gates are separate. The [Rust experiments guide](../contribute/experiments.md) remains useful for learning codecs and testing their own archive formats.
 

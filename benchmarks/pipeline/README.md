@@ -28,6 +28,11 @@ runtime/memory eligibility for the compressor.
   and 552,750,198-byte packed streams. Its supplemental recipe record verifies
   the driver and patcher against their subsequent signed source commit.
 
+- [Corrected Linux full stream](20261017-linux-stream-v2/report.json): the same
+  explicit unsigned arithmetic preserves both upstream reference hashes and all
+  recorded intermediate hashes on native Ubuntu x86-64. The saved CI provenance
+  links the workflow, source commit and unchanged Linux comparison.
+
 To repeat dictionary derivation after building the native development source:
 
 ```sh

@@ -1,0 +1,16 @@
+{
+  "workflow_run": "https://github.com/bbondy/hutter/actions/runs/39080868994",
+  "job_id": 117537353561,
+  "artifact": "linux-coder-stream-39080868994",
+  "source_commit": "e2d4ea186277b0a9f78be0fc64f37f4714c4b4f5",
+  "verified_checks": [
+    "Saved preparation log matches report hash",
+    "Driver source matches recorded Git revision",
+    "Both output hashes and all three saved stage hashes match untouched Linux and corrected Mac"
+  ],
+  "comparison_records": [
+    "../20261017-linux-stream-v1/report.json",
+    "../20261017-native-stream-v3/report.json"
+  ],
+  "scope": "Full preprocessing equivalence; no compressed score or resource-eligibility claim."
+}
