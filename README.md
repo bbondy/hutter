@@ -22,6 +22,14 @@ original lab/tooling remains MIT. See [license scope](LICENSE-SCOPE.md), includi
 the upstream documented open points. The full enwik9 score has not yet been
 reproduced locally.
 
+The native Ubuntu build now reproduces the **exact published 4,000,689-byte
+compressor**, without Docker. The [release evidence](benchmarks/weights/20261017-linux-packages-gcc13-v1)
+records its hash and the compiler dependency that made the difference. A neuron
+permutation preserves both Mac and Linux fixture archives and saves **8,563 bytes
+in measured release components**. That is a small lead, not a full-corpus gain
+or a winning margin. [Current priorities and measured outcomes](docs/research-plan.md#current-evidence-and-next-moves)
+cover the active experiments, rejected ideas and remaining full-run checks.
+
 For Apple Silicon development, see the [native Mac port](engines/ports/cmix-neif-macos/README.md)
 and [native/Linux parity investigation](docs/benchmarks/2026-10-17/native-parity.md).
 Randomized model state now matches, but native and Linux coder probabilities diverge;
@@ -98,7 +106,7 @@ compression-only command; use `bench-suite` for verified comparisons.
 [Benchmark history](benchmarks/README.md) lives in Git under `benchmarks/runs/`.
 Use `--record` to retain small immutable records with experiment notes and corpus
 manifests. Large archives/logs remain in `build/`. Comparisons match input hashes
-and codec names and exclude failed or nonrepeatable trials. Today's 55 trials
+and codec names and exclude failed or nonrepeatable trials. The initial 55 Rust-lab trials
 are saved, with a [readable report](docs/benchmarks/2026-10-17/README.md).
 
 `make samples` verifies official enwik8 before generating 100 KB, 1 MB and 10 MB

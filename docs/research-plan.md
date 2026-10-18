@@ -6,6 +6,48 @@ into this repo. See [engine setup and reproduction](../engines/README.md).
 The original analysis below remains useful context, but reproducing the upstream
 baseline now takes priority over making the Rust implementation competitive.
 
+## Current evidence and next moves
+
+The initial Rust assessment below is historical context. The competitive track
+has since established a stronger reference and a repeatable research loop:
+
+| Work | Saved finding | Decision |
+| --- | --- | --- |
+| [Native Linux release](../benchmarks/weights/20261017-linux-packages-gcc13-v1) | Exact published `comp9`: 4,000,689 bytes, matching SHA-256, built on Ubuntu without Docker. Extra GCC 14 headers had changed the first build. | Use this package as the release control; full compression and independent SFX decoding remain unverified. |
+| [Canonical preprocessing](../benchmarks/pipeline/20261017-native-stream-v3) | An inherited signed-overflow expression changed Mac entity encodings despite successful raw round trips. Explicit unsigned reduction reproduces both upstream full-stream hashes on Mac and Linux. | Use corrected frozen inputs; retain older representations separately. |
+| [Order](../benchmarks/article-order/20261017-projected-screen-v2), [context](../benchmarks/model-variants/20261017-linux-screen-v2), [depth](../benchmarks/model-variants/20261017-depth-linux-screen-v1) | No proposed ordering wins both Mac fixtures; reduced context and tested depth settings lose both native Linux fixtures. | Keep upstream settings. More graph edges or computation alone do not establish better compression. |
+| [Neuron permutation](../benchmarks/weights/20261017-linux-packages-gcc13-v1) | Both platform fixture archives stay identical; measured release components shrink 8,563 bytes. | Check the real release encoder on full input, then complete package equivalence. This saving alone is far short of the next 1% improvement. |
+| [Exact link target](../benchmarks/model-variants/20261017-retrieval-screen-v1) | Mac fixture payloads improve by 5 and 2 bytes, with exact restoration. | Freeze the candidate and test native Linux plus the previously reserved third range. |
+| [Structured pruning](../benchmarks/weights/20261017-pruning-containers-v1) | Removing 5%, 10% or 25% of MLP neurons saves 216,942, 434,500 or 1,092,566 bytes across the two weight copies. | Measure added payload before promotion. These are gross model savings; coder results are pending. |
+
+Priorities:
+
+1. Finish the active paired experiments and preserve every outcome. The
+   [real release prefix protocol](../benchmarks/weights/20261017-release-prefix-protocol-v1)
+   compares the first 1 MiB emitted after full enwik9 preprocessing. It is a
+   bounded invariance check, not a complete archive, round trip or score.
+2. Move only surviving hypotheses to larger probes. The exact-target candidate
+   has activated the [reserved confirmation range](../benchmarks/model-variants/20261017-retrieval-confirmation-protocol-v1):
+   150 complete pages, 1,000,794 raw bytes. Do not reuse its score for tuning
+   while calling it untouched validation. The upstream model already trained
+   on the target corpus; this separation protects our experiment decisions.
+3. Run the exact baseline and eventual candidate to completion on persistent
+   native Linux x86-64 hardware, with isolated SFX restoration and time, memory
+   and scratch-disk measurements. A standard hosted CI job cannot finish the
+   upstream-reported roughly 49-hour encoder and another 49-hour decoder.
+4. Seek a material improvement in prediction or the model-size/payload tradeoff.
+   The [weight audit](../benchmarks/weights/20261017-container-audit-v1) finds only
+   about 2.2 KB between current int4 coding cost and independent per-tensor
+   empirical entropy. This limits simple frequency-table tuning, not more
+   expressive models of correlations. Weight pruning can save much more, but
+   its prediction penalty is the deciding cost.
+
+Continue signing and pushing immutable reports, protocols, hashes and failures
+to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)
+in sync. The full prize score, resource eligibility and eventual submission
+license/attribution review are still outstanding. No measured result here yet
+establishes a winning entry.
+
 ## Recommendation
 
 Keep the Rust code as a small experiment lab. Make reproducing and improving a
@@ -111,7 +153,7 @@ Specific code evidence:
 - Floating-point `ln`/`exp` and quantized probabilities need cross-machine
   determinism checks. A local roundtrip alone does not prove Intel/AMD portability.
 
-## Experiment sequence and stop conditions
+## Initial experiment sequence and stop conditions
 
 1. **Establish the reference and trustworthy measurements.**
    [Issue #1](https://github.com/bbondy/hutter/issues/1): pin and reproduce
@@ -186,7 +228,7 @@ identity. Failures/timeouts remain in JSONL and cause a nonzero exit. Output
 directories cannot be reused accidentally. Restored duplicates are deleted only
 after size and SHA-256 verification; archives and logs remain.
 
-Limitations: no hard RSS enforcement, no Linux reference-machine run, no temporary
+Initial Rust-runner limitations: no hard RSS enforcement, no Linux reference-machine run, no temporary
 disk peak measurement, no model-loss traces, and no full enwik8/enwik9 compression
 yet. Small timings include process startup and timer/polling overhead. Record a
 clean commit and fixed build flags for subsequent publishable experiments.
