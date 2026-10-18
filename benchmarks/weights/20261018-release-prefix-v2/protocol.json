@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "hypothesis": "The real weight-bound release package preserves emitted coder bytes after the full official enwik9 preprocessing, not only development fixtures.",
+  "source_artifact_run": 39083970011,
+  "packages": {
+    "baseline": {
+      "compressor_sha256": "8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7",
+      "weights_sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "candidate": {
+      "compressor_sha256": "35354c2b0a5cb49c04ab1514509dd2ec00af38c3965471692acf392992344e35",
+      "weights_sha256": "52ade19bd0fc51c22b4811f603cda2308223ef49f23ab1abd98d593c77714076"
+    }
+  },
+  "prefix_bytes": 4194304,
+  "timeout_per_run_seconds": 7200,
+  "enwik9_sha256": "159b85351e5f76e60cbe32e04c677847a9ecba3adc79addab6f4c6c7aa3744bc",
+  "stages": {
+    ".dict": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    },
+    ".ready4cmix": {
+      "bytes": 888096401,
+      "sha256": "4dec8cb4b3e453afbfbc436d7cb6e68b1338516191fcd0c5d9d17926d740a424"
+    },
+    "archive9.cmix.temp": {
+      "bytes": 552750198,
+      "sha256": "8e0b264a777cb56a6be48c58002450c4711b1cebf3ffcb0129a32ef34273c3ba"
+    }
+  },
+  "procedure": "Run the same frozen release pair serially on full enwik9. Compare the first 4 MiB of emitted coder bytes. Before capture, observe the main-text log marker and require the fixed prefix endpoint to exceed the on-disk output position at that observation by more than 2 MiB. This margin exceeds the 1 MiB writer buffer plus ordinary stream buffering. Reject a prefix that reaches its bound without sufficient main-text coverage.",
+  "acceptance": [
+    "Both prefix captures complete within the declared bound",
+    "Both real full-input preprocessing pipelines match canonical hashes",
+    "The 1 MiB emitted prefixes and compressed dictionary bytes are identical",
+    "Main-text marker observed before capture and fixed prefix extends more than 2 MiB beyond its observed output offset"
+  ],
+  "limitations": [
+    "Intentionally truncated encodings are not complete self-extracting archives and cannot establish a round trip or a prize size.",
+    "Identical output prefixes do not prove every internal probability identical or equivalence on the remaining corpus.",
+    "Timing and sampled process-tree RSS cover only this prefix; they cannot certify full-run resources.",
+    "This is an invariance check, not parameter selection on the reserved third fixture.",
+    "A phase marker plus output margin establishes bounded main-text execution, not an all-input numerical-equivalence proof or an independent decoder check."
+  ],
+  "scope": "Bounded real-release behavior on full input; full compression and independent decoder remain required.",
+  "parent_protocol_sha256": "9daf6a625257d0d8bbd2ac8ee83f7186e82794db0b00f1f2e5f80af52c591f5f",
+  "required_log_marker": "entering main text block",
+  "post_marker_output_margin_bytes": 2097152,
+  "motivation": "v1 matched 1 MiB prefixes but both logs stopped at 0.60% in metadata, where transformer inference is gated off. Preserve that valid but insufficient result and require explicit main-text coverage here."
+}

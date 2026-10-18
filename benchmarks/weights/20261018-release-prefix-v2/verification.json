@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "run_id": 39086476933,
+  "head_sha": "f9848c7a2fe38d35f8887b2cf2c0a4cc99c577c0",
+  "checks": {
+    "source revision": true,
+    "frozen protocol": true,
+    "script source": true,
+    "success": true,
+    "baseline prefix": true,
+    "baseline log": true,
+    "baseline captured": true,
+    "baseline main text margin": true,
+    "baseline package": true,
+    "baseline stages": true,
+    "candidate prefix": true,
+    "candidate log": true,
+    "candidate captured": true,
+    "candidate main text margin": true,
+    "candidate package": true,
+    "candidate stages": true,
+    "prefix file equality": true,
+    "compressed dictionary equality": true
+  },
+  "local_prefix_files": {
+    "baseline": {
+      "prefix_bytes": 4194304,
+      "prefix_sha256": "51f88a5285dc397a7c9cfa966fcf08ddbd1b8415a58c70ab0f56b15af1e19490",
+      "log_sha256": "487b726a4d8590233193d8da862bbbe000758e0d641488d555e0fc9a4c1bebb2"
+    },
+    "candidate": {
+      "prefix_bytes": 4194304,
+      "prefix_sha256": "51f88a5285dc397a7c9cfa966fcf08ddbd1b8415a58c70ab0f56b15af1e19490",
+      "log_sha256": "d9520f949032034603610fc52a592122776f9bda06ed7d222543aa4675752727"
+    }
+  },
+  "retained_sha256": {
+    "baseline/run.log": "487b726a4d8590233193d8da862bbbe000758e0d641488d555e0fc9a4c1bebb2",
+    "candidate/run.log": "d9520f949032034603610fc52a592122776f9bda06ed7d222543aa4675752727",
+    "protocol.json": "76ad6bb58bf9636754be4dad5da184866522df1f31e372f2e0cdd5ba51f3154b",
+    "report.json": "4240eb599794eb31ddfad333fb0d09209781cdff3f3123e4005b0e6c6d46db66"
+  }
+}

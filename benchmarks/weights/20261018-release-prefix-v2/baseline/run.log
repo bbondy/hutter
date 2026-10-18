@@ -1,0 +1,54 @@
+decoding article order: 43780 bytes -> 115870 bytes in 10.50 s.
+decoding dictionary hints: 57504 bytes -> 205067 bytes in 14.59 s.
+deriving the dictionary from enwik9 ... 50.07 s.
+encoding dictionary: 520804 bytes -> 134912 bytes in 39.26 s.
+preprocessing enwik9 ... 64.21 s.
+dictionary: Loaded 54857 words
+pretraining the model on the dictionary ... 18.25 s.
+progress 0.00 %
+entering metadata block at 0.00 %
+progress 0.10 %
+progress 0.20 %
+progress 0.30 %
+progress 0.40 %
+progress 0.50 %
+progress 0.60 %
+progress 0.70 %
+progress 0.80 %
+progress 0.90 %
+entering redirect block at 0.93 %
+progress 1.00 %
+progress 1.10 %
+progress 1.20 %
+progress 1.30 %
+progress 1.40 %
+progress 1.50 %
+progress 1.60 %
+entering main text block at 1.60 %
+progress 1.70 %
+progress 1.80 %
+progress 1.90 %
+progress 2.00 %
+progress 2.10 %
+progress 2.20 %
+progress 2.30 %
+progress 2.40 %
+progress 2.50 %
+progress 2.60 %
+progress 2.70 %
+progress 2.80 %
+progress 2.90 %
+progress 3.00 %
+progress 3.10 %
+progress 3.20 %
+progress 3.30 %
+progress 3.40 %
+progress 3.50 %
+progress 3.60 %
+progress 3.70 %
+progress 3.80 %
+progress 3.90 %
+progress 4.00 %
+progress 4.10 %
+progress 4.20 %
+progress 4.30 %

@@ -146,10 +146,16 @@ The logs reveal a coverage problem: both captures stop at 0.60% in metadata,
 where the transformer is gated off. Matching these prefixes therefore does not
 test the modified MLPs on ordinary text. A longer
 [v2 check](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-release-prefix-protocol-v2/protocol.json)
-now fixes the capture at four MiB and requires the main-text marker, followed
-by more than two MiB of emitted output within that prefix. This margin exceeds
-the encoder's one-MiB output buffer. The release pair stays unchanged.
+fixed the capture at four MiB and required the main-text marker, followed
+by more than two MiB of emitted output within that prefix. Both real runs
+passed: the [saved v2 evidence](https://github.com/bbondy/hutter/tree/main/benchmarks/weights/20261018-release-prefix-v2)
+has identical 4,194,304-byte coder prefixes and compressed dictionaries.
+Each prefix extends 3,145,723 bytes beyond the observed main-text marker,
+exceeding the encoder's one-MiB output buffer and the frozen two-MiB margin.
+The release pair stayed unchanged.
 
 An intentionally stopped prefix is not a complete archive and cannot establish
 an independent decode or a full prize score. Even a matching prefix leaves the
-rest of the stream unverified. The longer check has no result yet.
+rest of the stream unverified. The bounded captures took about 5,360 and
+5,317 seconds, with sampled process-tree peak RSS near 10.45 billion bytes;
+neither number certifies full-run resource eligibility.

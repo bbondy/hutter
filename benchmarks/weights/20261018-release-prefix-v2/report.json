@@ -1,0 +1,106 @@
+{
+  "kind": "release-full-input-prefix-comparison",
+  "version": 1,
+  "protocol_sha256": "76ad6bb58bf9636754be4dad5da184866522df1f31e372f2e0cdd5ba51f3154b",
+  "script_sha256": "88f383d0c9c9377409b8d1f62caff7a77c8cf2654f722531e6dd0aa51759caa5",
+  "commit": "f9848c7a2fe38d35f8887b2cf2c0a4cc99c577c0",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "cpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  4\nOn-line CPU(s) list:                     0-3\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC 9V45 96-Core Processor\nCPU family:                              26\nModel:                                   2\nThread(s) per core:                      2\nCore(s) per socket:                      2\nSocket(s):                               1\nStepping:                                1\nBogoMIPS:                                5192.19\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology tsc_reliable nonstop_tsc cpuid extd_apicid aperfmperf tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves user_shstk avx_vnni avx512_bf16 clzero xsaveerptr rdpru arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect\nVirtualization:                          AMD-V\nHypervisor vendor:                       Microsoft\nVirtualization type:                     full\nL1d cache:                               96 KiB (2 instances)\nL1i cache:                               64 KiB (2 instances)\nL2 cache:                                2 MiB (2 instances)\nL3 cache:                                32 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-3\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Vulnerable: Safe RET, no microcode\nVulnerability Spec store bypass:         Vulnerable\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Retpolines; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected",
+  "enwik9_sha256": "159b85351e5f76e60cbe32e04c677847a9ecba3adc79addab6f4c6c7aa3744bc",
+  "runs": {
+    "baseline": {
+      "command": [
+        "./comp9",
+        "-e",
+        "enwik9",
+        "archive9"
+      ],
+      "complete_archive": false,
+      "sampled_process_tree_peak_rss_bytes": 10446999552,
+      "status": "prefix_captured",
+      "required_phase_observed": {
+        "marker": "entering main text block",
+        "output_bytes_when_observed": 1048581,
+        "wall_seconds": 1907.240470366
+      },
+      "prefix_bytes": 4194304,
+      "prefix_sha256": "51f88a5285dc397a7c9cfa966fcf08ddbd1b8415a58c70ab0f56b15af1e19490",
+      "output_bytes_at_stop": 4194309,
+      "exit_code": -9,
+      "wall_seconds_to_stop": 5359.737597775999,
+      "log_sha256": "487b726a4d8590233193d8da862bbbe000758e0d641488d555e0fc9a4c1bebb2",
+      "compressor_sha256": "8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7",
+      "package_report_sha256": "e5bb500ee8ff2c058bba26e24e245b033dc439ee8790be3b0b2f42942de3e903",
+      "stages": {
+        ".dict": {
+          "bytes": 520804,
+          "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535",
+          "matches_reference": true
+        },
+        ".ready4cmix": {
+          "bytes": 888096401,
+          "sha256": "4dec8cb4b3e453afbfbc436d7cb6e68b1338516191fcd0c5d9d17926d740a424",
+          "matches_reference": true
+        },
+        "archive9.cmix.temp": {
+          "bytes": 552750198,
+          "sha256": "8e0b264a777cb56a6be48c58002450c4711b1cebf3ffcb0129a32ef34273c3ba",
+          "matches_reference": true
+        }
+      },
+      "compressed_dictionary": {
+        "bytes": 134912,
+        "sha256": "43c470f7b5e94163ab201dcc31f0dfa6d8d9c9353a2bb36e4df352616a959b7c"
+      }
+    },
+    "candidate": {
+      "command": [
+        "./comp9",
+        "-e",
+        "enwik9",
+        "archive9"
+      ],
+      "complete_archive": false,
+      "sampled_process_tree_peak_rss_bytes": 10448064512,
+      "status": "prefix_captured",
+      "required_phase_observed": {
+        "marker": "entering main text block",
+        "output_bytes_when_observed": 1048581,
+        "wall_seconds": 1898.4594542189998
+      },
+      "prefix_bytes": 4194304,
+      "prefix_sha256": "51f88a5285dc397a7c9cfa966fcf08ddbd1b8415a58c70ab0f56b15af1e19490",
+      "output_bytes_at_stop": 4194309,
+      "exit_code": -9,
+      "wall_seconds_to_stop": 5317.150188459,
+      "log_sha256": "d9520f949032034603610fc52a592122776f9bda06ed7d222543aa4675752727",
+      "compressor_sha256": "35354c2b0a5cb49c04ab1514509dd2ec00af38c3965471692acf392992344e35",
+      "package_report_sha256": "1099eba21b64eeef606413f493bedd86d5b56184a079a819a0cda8543cc07414",
+      "stages": {
+        ".dict": {
+          "bytes": 520804,
+          "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535",
+          "matches_reference": true
+        },
+        ".ready4cmix": {
+          "bytes": 888096401,
+          "sha256": "4dec8cb4b3e453afbfbc436d7cb6e68b1338516191fcd0c5d9d17926d740a424",
+          "matches_reference": true
+        },
+        "archive9.cmix.temp": {
+          "bytes": 552750198,
+          "sha256": "8e0b264a777cb56a6be48c58002450c4711b1cebf3ffcb0129a32ef34273c3ba",
+          "matches_reference": true
+        }
+      },
+      "compressed_dictionary": {
+        "bytes": 134912,
+        "sha256": "43c470f7b5e94163ab201dcc31f0dfa6d8d9c9353a2bb36e4df352616a959b7c"
+      }
+    }
+  },
+  "passed": true,
+  "scope": "Intentionally stopped full-input release encodings. Equal-length emitted prefixes are compared by hash, not size. No complete archive, independent decode, full-corpus ratio, or resource eligibility claim; RSS is sampled only.",
+  "prefixes_identical": true,
+  "compressed_dictionaries_identical": true
+}
