@@ -131,3 +131,15 @@ compressed sizes and are not limits on methods that exploit other dependencies.
 They do suggest that another simple frequency-counter tweak has limited scope.
 A larger gain needs stronger structure or model changes; retain this small
 permutation improvement while testing those higher-impact hypotheses.
+
+## A bounded test of the real release pair
+
+The next [frozen protocol](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-release-prefix-protocol-v1/protocol.json)
+runs both actual release binaries on full enwik9 and intentionally stops each
+after one MiB of emitted coder output. It checks the complete preprocessing
+hashes, derived dictionary and equality of the emitted prefix. This can catch a
+release-only difference that a development fixture misses.
+
+An intentionally stopped prefix is not a complete archive and cannot establish
+an independent decode or a full prize score. Even a matching prefix leaves the
+rest of the stream unverified. No result from this check is claimed yet.

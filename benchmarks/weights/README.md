@@ -137,3 +137,19 @@ GCC 13. Against this baseline the candidate saves **8,563 component bytes**:
 4,282 in the compressor, one in the decoder prefix, and 4,280 in archive weights.
 The earlier GCC 14 paired result stays separate. Full release payload equivalence
 and complete resource eligibility have not yet been established.
+
+## Bounded full-input release check
+
+The [release-prefix protocol](20261017-release-prefix-protocol-v1/protocol.json)
+freezes the reproduced published compressor and the GCC 13 weight-bound binary.
+`release-prefix.yml` runs both on official full enwik9, serially on one native
+Ubuntu host, and deliberately stops each after one MiB of emitted coder output.
+It compares those bytes by hash, the entire prepared stream and the compressed
+dictionary. Equal prefix lengths alone are not evidence of equivalence.
+
+This exercises the actual release packages beyond the development adapter.
+It is intentionally incomplete: the prefix cannot be decoded as a full archive,
+there is no full compression ratio, and sampled prefix resources do not establish
+eligibility. The complete encoder run and independent SFX decode remain required.
+The artifact source expires after seven days; retain the downloaded release pair
+locally and rebuild it with the frozen recipe for later repeats.

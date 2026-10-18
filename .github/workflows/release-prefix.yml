@@ -1,0 +1,44 @@
+name: Native Linux release prefix comparison
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: native-linux-release-prefix
+  cancel-in-progress: false
+
+jobs:
+  prefix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify the harness and fetch the frozen native release pair
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/competitive.py verify
+          python3 -m unittest discover -s scripts -p 'test_*.py'
+          gh run download 39083970011 --name linux-release-packages-39083970011 --dir build/frozen-release-packages
+      - name: Download and verify the complete official corpus
+        run: make enwik9 ENWIK9_URL=https://mattmahoney.net/dc/enwik9.zip
+      - name: Compare emitted prefixes after real full-input preprocessing
+        run: python3 -u scripts/release_prefix.py --packages build/frozen-release-packages --enwik9 data/enwik9 --protocol benchmarks/weights/20261017-release-prefix-protocol-v1/protocol.json --output build/release-prefix-v1
+      - name: Preserve bounded evidence including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-release-prefix-${{ github.run_id }}
+          path: |
+            build/release-prefix-v1/report.json
+            build/release-prefix-v1/protocol.json
+            build/release-prefix-v1/baseline/run.log
+            build/release-prefix-v1/baseline/coder-prefix.bin
+            build/release-prefix-v1/candidate/run.log
+            build/release-prefix-v1/candidate/coder-prefix.bin
+          if-no-files-found: warn
+          retention-days: 7
