@@ -108,6 +108,16 @@ experiment, but does not measure an archive with the head removed.
    claiming a competitive improvement. Record any revised point where online
    learning starts, total package cost, full restoration and runtime limits.
 
+A [small warm-start protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-warm-start-protocol-v1)
+is prepared, gated on both fixture replay checks. It tries one screening-only
+pass at learning rates 0.00003, 0.0003 and 0.003, each starting from the shipped
+bfloat16 weights with fresh optimizer state. Selection uses frozen, exported
+bfloat16 cost on the screen. The selected weight hash is saved before checking
+that one model on the disjoint fixture; a failure does not trigger a switch to
+a runner-up. Both probability costs must improve by at least one byte before
+spending time on a real archive trial. Equal raw weight sizes still need packed
+executable accounting later.
+
 No new bit-predictor training or full trace collection has started. The
 [training-row dump](training-data.md) is a different dataset: it cannot replace
 the final mixer's bit-level inputs. A changed transformer also requires a new
