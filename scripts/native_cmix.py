@@ -21,6 +21,7 @@ from cmix_retrieval_support import VARIANT as RETRIEVAL_VARIANT, apply as apply_
 from cmix_alias_support import VARIANT as ALIAS_VARIANT, apply as apply_alias
 from cmix_activity_support import VARIANT as ACTIVITY_VARIANT, apply as apply_activity
 from cmix_bit_trace_support import VARIANT as BIT_TRACE_VARIANT, apply as apply_bit_trace
+from cmix_bit_weight_support import VARIANT as BIT_WEIGHT_VARIANT, apply as apply_bit_weight
 from cmix_preprocess_support import apply_portable_preprocessing
 from cmix_weight_support import apply_container
 
@@ -57,6 +58,9 @@ def build(args):
     if args.bit_trace_variant and (args.activity_variant or args.alias_variant or args.retrieval_variant
                                    or args.weight_container or args.variant != "baseline"):
         raise ValueError("bit tracing requires the unchanged baseline model")
+    if args.bit_weight_variant and (args.bit_trace_variant or args.activity_variant or args.alias_variant
+                                    or args.retrieval_variant or args.weight_container or args.variant != "baseline"):
+        raise ValueError("bit-weight experiments require unchanged model code and transformer weights")
     upstream = json.loads(MANIFEST.read_text())
     delta = differences(upstream["files"], inventory(ENGINE))
     if any(delta.values()):
@@ -94,6 +98,7 @@ def build(args):
     alias_variant = apply_alias(source, args.alias_variant) if args.alias_variant else None
     activity_variant = apply_activity(source, args.activity_variant) if args.activity_variant else None
     bit_trace_variant = apply_bit_trace(source, args.bit_trace_variant) if args.bit_trace_variant else None
+    bit_weight_variant = apply_bit_weight(source, args.bit_weight_variant) if args.bit_weight_variant else None
     metadata = {
         "kind": "experimental-native-build", "commit": capture("git", "-C", str(ROOT), "rev-parse", "HEAD"),
         "date_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
@@ -107,6 +112,7 @@ def build(args):
         "alias_variant": alias_variant,
         "activity_variant": activity_variant,
         "bit_trace_variant": bit_trace_variant,
+        "bit_weight_variant": bit_weight_variant,
         "weight_binding": weight_binding,
         "preprocessing_support": preprocessing_support,
         "initialization": "explicit glibc-compatible generator", "source_files": inventory(source),
@@ -278,6 +284,7 @@ def main():
     compile_parser.add_argument("--alias-variant", choices=(ALIAS_VARIANT,))
     compile_parser.add_argument("--activity-variant", choices=(ACTIVITY_VARIANT,))
     compile_parser.add_argument("--bit-trace-variant", choices=(BIT_TRACE_VARIANT,))
+    compile_parser.add_argument("--bit-weight-variant", choices=(BIT_WEIGHT_VARIANT,))
     sample = sub.add_parser("samples")
     sample.add_argument("--enwik8", type=Path, default=ROOT / "data/enwik8")
     sample.add_argument("--build", type=Path, default=ROOT / "build/native-cmix")

@@ -1,0 +1,21 @@
+{
+  "learning_rate_1e6": 3000,
+  "fp32": {
+    "bytes": 14748,
+    "sha256": "f43aad10f89b04ef9ebbfd6d51b6771d05520b01b996b093a92f5187a6b54b84"
+  },
+  "bf16": {
+    "bytes": 7386,
+    "sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0"
+  },
+  "converter_command": [
+    "/usr/local/bin/python3",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/engines/cmix-neif/training/bitl/tools/nblb.py",
+    "v2",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-warm-start-v1/lr3000-fp32.nblb",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-warm-start-v1/lr3000.nblb"
+  ],
+  "export_log_sha256": "c192aa39f9b6e0e02e2687e3d1017e474ce00c72b52bf573d6be251ba61bd720",
+  "screen_cost_bytes": 117115.4,
+  "screen_delta_bytes": -147.70000000001164
+}

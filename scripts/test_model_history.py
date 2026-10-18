@@ -14,6 +14,7 @@ import cmix_retrieval_support as retrieval
 import cmix_alias_support as alias
 import cmix_activity_support as activity
 import cmix_bit_trace_support as bit_trace
+import cmix_bit_weight_support as bit_weight
 
 
 class ModelComparisonTests(unittest.TestCase):
@@ -84,6 +85,9 @@ class ModelComparisonTests(unittest.TestCase):
                 info["recipe_sha256"] = "forged historical recipe"
                 with self.assertRaisesRegex(ValueError, "historical source recipe differs"):
                     compatible_builds(baseline, candidate, source)
+
+    def test_bit_weights_require_exact_frozen_array_transformation(self):
+        self.check_source_transformation(bit_weight, "bit_weight_variant", "bit-weight-" + bit_weight.VARIANT)
 
     def check_source_transformation(self, module, field, model_name):
         with tempfile.TemporaryDirectory() as directory:

@@ -17,12 +17,14 @@ import cmix_retrieval_support as retrieval
 import cmix_alias_support as alias
 import cmix_activity_support as activity
 import cmix_bit_trace_support as bit_trace
+import cmix_bit_weight_support as bit_weight
 from make_samples import digest
 from order_history import checked_restoration
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_RECIPES = {"retrieval_variant": (retrieval, "retrieval-"), "alias_variant": (alias, "alias-"),
-                  "activity_variant": (activity, "activity-"), "bit_trace_variant": (bit_trace, "bit-trace-")}
+                  "activity_variant": (activity, "activity-"), "bit_trace_variant": (bit_trace, "bit-trace-"),
+                  "bit_weight_variant": (bit_weight, "bit-weight-")}
 
 
 def source_recipe(build):
@@ -137,6 +139,9 @@ def summarize(args):
     if protocol.get("bit_trace_recipe_sha256"):
         if protocol["bit_trace_recipe_sha256"] != digest(Path(bit_trace.__file__)):
             raise ValueError("bit trace recipe differs from frozen experiment")
+    if protocol.get("bit_weight_recipe_sha256"):
+        if protocol["bit_weight_recipe_sha256"] != digest(Path(bit_weight.__file__)):
+            raise ValueError("bit-weight recipe differs from frozen experiment")
     base = metadata[names.index("baseline")]
     records, logs = {}, []
     with tempfile.TemporaryDirectory(prefix="hutter-model-verify-") as tmp:
@@ -189,7 +194,7 @@ def summarize(args):
             records[name] = {"payload_bytes": row["archive_bytes"], "archive_sha256": row["archive_sha256"],
                              "binary_sha256": meta["binary_sha256"], "binary_bytes": meta["binary_bytes"],
                              "model": (meta["build"].get("retrieval_variant") or meta["build"].get("alias_variant")
-                                       or meta["build"].get("activity_variant") or meta["build"].get("bit_trace_variant")
+                                       or meta["build"].get("activity_variant") or meta["build"].get("bit_trace_variant") or meta["build"].get("bit_weight_variant")
                                        or model_identity(meta["build"])[1]), "context": context,
                              "original_bytes_roundtrip": True, "restored_raw_sha256": final_sha,
                              "compress_seconds": row["compress"]["wall_seconds"],
@@ -213,6 +218,9 @@ def summarize(args):
         probe["activity"] = phases["compress"]
         probe["activity_encoder_decoder_match"] = True
         probe["unchanged_archive"] = True
+    for name, probe in records.items():
+        if name.startswith("bit-weight-") and probe["context"] != records["baseline"]["context"]:
+            raise ValueError("bit-weight change altered upstream context counts")
     if "bit-trace-fixture" in records:
         probe = records["bit-trace-fixture"]
         if (probe["archive_sha256"] != records["baseline"]["archive_sha256"]

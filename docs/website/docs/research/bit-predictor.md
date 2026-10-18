@@ -119,9 +119,10 @@ reproduces the same first mismatches even with the runtime head, then matches
 all 4,817,984 probabilities after linking the compressor's math code. The public
 trainer also matches with that change. Inputs and weights remain unchanged.
 
-The v3 replay protocol explicitly binds that math source and its compile flags
-and repeats the positive and negative controls. Training stays gated on those
-formal checks. The earlier failures remain evidence: matching source formulas
+The [formal v3 checks](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-replay-screen-v2)
+now pass on both fixtures, including deliberately wrong first probabilities.
+They explicitly bind the math source and its compile flags, enabling the
+separately frozen CPU experiment. The earlier failures remain evidence: matching source formulas
 and floating-point flags alone did not identify the linked math implementation.
 Native Linux checks are separate from this Mac result.
 
@@ -151,7 +152,26 @@ a runner-up. Both probability costs must improve by at least one byte before
 spending time on a real archive trial. Equal raw weight sizes still need packed
 executable accounting later.
 
-No new bit-predictor training or full trace collection has started. The
-[training-row dump](training-data.md) is a different dataset: it cannot replace
+The [first CPU experiment](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-warm-start-v1)
+is complete:
+
+| Learning rate | Frozen screen cost change | Disjoint cost change |
+| --- | ---: | ---: |
+| 0.00003 | −11.9 B | Not evaluated |
+| 0.0003 | −66.4 B | Not evaluated |
+| 0.003 | −147.7 B | −91.2 B |
+
+The selected model passes both probability-cost gates. Its shape and raw
+7,386-byte size are unchanged. Each training pass took about 1.9 seconds in
+this local run; a frozen replay took about 0.9 seconds. The expensive trace is
+reused across all three settings. These timings describe this small replay
+workload, not full compression performance.
+
+A [separate archive protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-archive-protocol-v1)
+now embeds that exact model hash and changes only its weight header. Real
+restored archives on both fixtures must improve before Linux promotion. This
+is a promising small screening result, not a full-corpus or prize gain.
+
+Full trace collection has not started. The [training-row dump](training-data.md) is a different dataset: it cannot replace
 the final mixer's bit-level inputs. A changed transformer also requires a new
 bit-model trace, because its features and upstream predictions change.

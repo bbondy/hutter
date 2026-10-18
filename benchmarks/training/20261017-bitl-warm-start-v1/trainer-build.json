@@ -1,0 +1,90 @@
+{
+  "kind": "bitl-public-training-build",
+  "version": 1,
+  "commit": "f8200a025634778a46e4480640f7b97e499d3c03",
+  "date_utc": "2026-10-18T02:55:37.547835+00:00",
+  "script_sha256": "94a629df8bf1ac691d73b6d49d59956e4e0200058078be1457d597e0e6ad968a",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "passed": true,
+  "parent_build_sha256": "86b2022e5a077cfac347f4dfac673f8690d99359031652e8512dc93cd9484ffd",
+  "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)\nTarget: arm64-apple-darwin24.3.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "command": [
+    "clang++",
+    "-O3",
+    "-std=c++17",
+    "-ffp-model=precise",
+    "-ffp-contract=off",
+    "-fno-math-errno",
+    "-fno-builtin",
+    "-fno-exceptions",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-Wall",
+    "-Wno-unused-variable",
+    "-I/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/native-bit-trace-v1/simde",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/source/bit_head.cpp",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/source/replay_trainer.cpp",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/detmath.o",
+    "-o",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay"
+  ],
+  "source_files": {
+    "bit_head.cpp": {
+      "sha256": "33d765fef7abfda75293a6a62f02ef9f70b8076c4ffd4caaca69120c54e4bad6",
+      "executable": false
+    },
+    "bit_head.h": {
+      "sha256": "905dd4d0148ae1ba627633075bcc457f977ebe4bffc20c474321154cbc414b30",
+      "executable": false
+    },
+    "build.sh": {
+      "sha256": "409a9071f784b436dad9c572f9e15a43d485d9989895ecec21f3854b5a0981f6",
+      "executable": true
+    },
+    "detmath.cpp": {
+      "sha256": "2451e89378661dfa0aa66542ab3f22a7140ac6fb32f7fb5cfb5fc33cba2f4579",
+      "executable": false
+    },
+    "isa_floor.h": {
+      "sha256": "c3eee8059207579f8ed0102ee2d9f9523505db704994ec9dc3aaa1b7bfe4f688",
+      "executable": false
+    },
+    "native_simd.h": {
+      "sha256": "6da1b3d837b99f73e2ce25e25dcd47a59976c45baf7d60c5f098dd73bfafbd45",
+      "executable": false
+    },
+    "replay_trainer.cpp": {
+      "sha256": "06ded2dc28e52c578295040460b9ed564c01af92f9ad7115562608e610519b24",
+      "executable": false
+    }
+  },
+  "math_mode": "runtime",
+  "math_command": [
+    "clang++",
+    "-O2",
+    "-std=c++17",
+    "-fno-rtti",
+    "-fvisibility=hidden",
+    "-ffp-model=precise",
+    "-ffp-contract=off",
+    "-fno-math-errno",
+    "-fno-builtin",
+    "-fno-exceptions",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-c",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/source/detmath.cpp",
+    "-o",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/detmath.o"
+  ],
+  "driver_sha256": "06ded2dc28e52c578295040460b9ed564c01af92f9ad7115562608e610519b24",
+  "converter_sha256": "b3030300e2558ef8a5acef531ed97afa13f7fadb7ba6283902eb7637a17de72a",
+  "math_object_sha256": "7e46a9c2707a967e78225fd15ea85fb275b6206faf4e10ceb148fb1f1e7aa0bd",
+  "exit_code": 0,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binary_sha256": "853939f9f368fbdddf67ece2c2810870e48cf0ba1952404f51f1860b9ec1cf5a"
+}
