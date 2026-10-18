@@ -169,3 +169,11 @@ The summary relates measured activation moments to the already rejected removal
 maps. Its per-neuron squared-contribution score is a diagnostic, not coding loss;
 adding these scores omits cross-neuron correlations. No new removal is authorized
 by this data alone, and observed inactivity is not universal deadness.
+
+
+Both MLP activity comparisons now pass: [screen](20261017-activity-screen-v1/report.json)
+and [disjoint](20261017-activity-holdout-v1/report.json) reproduce baseline
+archives exactly and have matching encoder/decoder counters. All 12,218 neurons
+activate in each fixture. The [summaries](../weights/20261017-activity-screen-summary-v1)
+show that the old 5% weight-norm removals can include about 17% of a layer's
+squared activation mass. These diagnostics do not themselves change the model.

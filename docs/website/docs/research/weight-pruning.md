@@ -119,6 +119,37 @@ records actual quantized MLP activity during fixture compression: executed calls
 nonzero counts, sums and squared sums for each neuron. Integer counters must
 leave the archive identical and agree between encoding and decoding before we
 use their results. This will include prompt rows and ordinary text, with fewer
-calls in layers skipped by adaptive depth. Observed inactivity is not a proof
+calls where the runtime omits forward work, including the final MLP on prompt
+rows whose output is unread. Observed inactivity is not a proof
 that a neuron can be removed everywhere, and magnitude alone is not its value
-to the final predictor. No result from this diagnostic is claimed yet.
+to the final predictor.
+
+The completed [screen](https://github.com/bbondy/hutter/tree/main/benchmarks/weights/20261017-activity-screen-summary-v1)
+and [disjoint](https://github.com/bbondy/hutter/tree/main/benchmarks/weights/20261017-activity-holdout-summary-v1)
+diagnostics pass archive identity, exact raw restoration and identical
+encoder/decoder activation moments. **All 12,218 neurons activate on both
+fixtures.** The lowest individual activation frequencies are 1.22% and 1.29%
+of executed calls, respectively.
+
+Small weights did not reliably identify quiet neurons:
+
+| Previously removed | Largest per-layer share of squared activations removed: screen | Disjoint |
+| --- | ---: | ---: |
+| 5% | 16.73% | 17.04% |
+| 10% | 26.64% | 26.63% |
+| 25% | 46.23% | 46.55% |
+
+These are measured activation magnitudes, not losses in the arithmetic code.
+The saved reports also weight each neuron's squared activity by its outgoing
+column's squared magnitude; that estimates an isolated residual contribution.
+Adding those scores omits interactions and cancellation between neurons.
+
+Layers 0–14 execute 567,924 times on the screen and 563,625 on the disjoint
+fixture. The last layer executes 548,289 and 543,689 times: the runtime omits
+its MLP on prompt rows whose output nobody reads. This specific difference is
+distinct from the broader adaptive-depth skip mechanism.
+
+There is no observed all-zero shortcut here, and no new weights have been
+removed. These results favor compensation or retraining over another sweep
+of the same weight-only ranking. Any activation-based candidate still needs
+a separate frozen selection rule and complete archive comparison.
