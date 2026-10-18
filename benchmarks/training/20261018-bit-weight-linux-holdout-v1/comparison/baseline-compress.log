@@ -1,0 +1,34 @@
+native development corpus: 138 articles, 28 redirect prefix, frame=1
+ip pack: compiled 35618 addresses / 143576 B, counted 24 / 90
+pretraining the model on the dictionary ... 20.70 s.
+progress 0.00 %
+entering metadata block at 0.01 %
+entering redirect block at 0.69 %
+entering main text block at 0.97 %
+progress 91.35 %
+CMIX_CONTEXT {"kind":"alias","articles":138,"titles":136,"blocks":2,"bytes":8,"links":9056,"links_piped":1529,"links_dropped":0,"redirects":27,"from_redirect":4,"from_linktext":5}
+CMIX_CONTEXT {"kind":"z3","articles":111,"usable_titles":109,"articles_with_mentions":16,"articles_with_prefix":16,"mentions_total":50,"prefix_tokens_total":1361,"chunks_total":31,"anchors":10022,"fed_tokens":1361}
+CMIX_CONTEXT {"kind":"prompt","articles":138,"redirect_prompt_pages":27,"redirect_prompt_tokens":108,"redirect_pages":27,"meta_pages":138,"alias_tokens":0,"alias_articles":0,"links":0,"links_piped":0,"redirects":0,"fed_tokens":17880}
+	Command being timed: "/home/runner/work/hutter/hutter/build/linux-ci-bitl-warm-start-holdout/run-baseline/cmix --native-corpus 138 28 -c dictionary.dic /home/runner/work/hutter/hutter/build/linux-ci-bitl-warm-start-holdout/fixture/upstream.ready /home/runner/work/hutter/hutter/build/linux-ci-bitl-warm-start-holdout/run-baseline/trial-0-0/payload.cmix"
+	User time (seconds): 206.81
+	System time (seconds): 1.96
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:28.80
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 7341388
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 628771
+	Voluntary context switches: 18
+	Involuntary context switches: 1313
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 6704
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
