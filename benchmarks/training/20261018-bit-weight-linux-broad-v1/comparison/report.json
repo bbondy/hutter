@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "kind": "fixed-input-model-ablation",
+  "role": "screen",
+  "date_utc": "2026-10-18T05:15:20.801239+00:00",
+  "protocol_sha256": "310fc47b99d73e7d27b5e4970c4ed5b18b762d89a75664a570dbce3d596cbca6",
+  "manifest_sha256": "de5f2d8d30eba9599f32b798613a94905ea927560b66e91b02d6feedc681b8a9",
+  "input_sha256": "5b7be7d26bc39e49321d45f896fb4c15a5f6c5092eed029bd8a0c9c0cd35d66a",
+  "input_bytes": 3728154,
+  "raw_sha256": "a5c7c03549450aaadbf317b3f712af2cad18ae293f113f418b86d5c86ad4a1fa",
+  "raw_bytes": 4002523,
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "native_arguments": [
+    "--native-corpus",
+    "416",
+    "83"
+  ],
+  "verifier_sha256": "58b2371296bec2acec0bf5cfb389d7c59a6d0742733c51c6f87aaae5f43c8a29",
+  "scope": "Native Linux x86-64, all models serial on one CI host; not a full prize run",
+  "variants": {
+    "baseline": {
+      "payload_bytes": 476220,
+      "archive_sha256": "6dc65bd368a4c4635d953e92558a4967381f8616b399582f0d85fa4f56cfc240",
+      "binary_sha256": "146bf187158a9fb5fdc7c486356c692f9efc7de239f219dd082b8032fa4638b0",
+      "binary_bytes": 577272,
+      "model": {
+        "budget": 256,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 416,
+            "titles": 414,
+            "blocks": 8,
+            "bytes": 52,
+            "links": 36999,
+            "links_piped": 8837,
+            "links_dropped": 0,
+            "redirects": 82,
+            "from_redirect": 18,
+            "from_linktext": 13
+          },
+          "z3": {
+            "articles": 334,
+            "usable_titles": 332,
+            "articles_with_mentions": 72,
+            "articles_with_prefix": 72,
+            "mentions_total": 283,
+            "prefix_tokens_total": 6831,
+            "chunks_total": 146,
+            "anchors": 41281,
+            "fed_tokens": 6831
+          },
+          "prompt": {
+            "articles": 416,
+            "redirect_prompt_pages": 82,
+            "redirect_prompt_tokens": 328,
+            "redirect_pages": 82,
+            "meta_pages": 416,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 55894
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 416,
+            "titles": 414,
+            "blocks": 8,
+            "bytes": 52,
+            "links": 36999,
+            "links_piped": 8837,
+            "links_dropped": 0,
+            "redirects": 82,
+            "from_redirect": 18,
+            "from_linktext": 13
+          },
+          "z3": {
+            "articles": 334,
+            "usable_titles": 332,
+            "articles_with_mentions": 72,
+            "articles_with_prefix": 72,
+            "mentions_total": 283,
+            "prefix_tokens_total": 6831,
+            "chunks_total": 146,
+            "anchors": 41281,
+            "fed_tokens": 6831
+          },
+          "prompt": {
+            "articles": 416,
+            "redirect_prompt_pages": 82,
+            "redirect_prompt_tokens": 328,
+            "redirect_pages": 82,
+            "meta_pages": 416,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 55894
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "a5c7c03549450aaadbf317b3f712af2cad18ae293f113f418b86d5c86ad4a1fa",
+      "compress_seconds": 804.4794712549999,
+      "decompress_seconds": 808.4404117070001,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-bitl-broad-screen/run-baseline",
+      "metadata_sha256": "a125a6e6da16df84c6089af2ce437753194699fc09b460bc4d662b514f71ec53",
+      "results_sha256": "714cb490d0941c3c764726486f86b571b40fe6ba429da8011b3dd33b9e087376",
+      "log_sha256": {
+        "compress": "9a36643fedbf274c047870a1b57aadaa66c84cb0a1282dc18de9129fac0c4feb",
+        "decompress": "0e177755ffb41ec15bd5db67c2985be642df1f21e967ce6914c998b19a2c3413"
+      },
+      "delta_bytes_vs_baseline": 0
+    },
+    "bit-weight-warm-start-lr3000-v1": {
+      "payload_bytes": 475970,
+      "archive_sha256": "fbbcc22951053f82f73fac37c0ccd6f1e9a37f172fbf6ad36573b88d477dad44",
+      "binary_sha256": "8d2672d19a0874481597a6522f096f395e4dc5a1c390b179a01b30f9c3c52f89",
+      "binary_bytes": 577272,
+      "model": {
+        "name": "warm-start-lr3000-v1",
+        "source_file": "src/bit_head_weights.h",
+        "before_sha256": "c5977bd52281d05d02825c7a6a79dd9731e7ec239bc70755704e4baf8132010a",
+        "after_sha256": "75766a7201331d4382756157ebd4dad3741112b76b0ee17918c7b64babab1043",
+        "recipe_sha256": "91f2aa17e6ec986bb73edb9446d5487e964bd91161dad996b23dfe47ba25d470",
+        "model_sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0",
+        "model_bytes": 7386,
+        "model_path": "benchmarks/training/20261017-bitl-warm-start-v1/models/lr3000.nblb",
+        "scope": "Only the embedded BF16 array and its hash comment change. Model code, geometry, online-learning threshold, transformer weights and all other sources remain unchanged."
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 416,
+            "titles": 414,
+            "blocks": 8,
+            "bytes": 52,
+            "links": 36999,
+            "links_piped": 8837,
+            "links_dropped": 0,
+            "redirects": 82,
+            "from_redirect": 18,
+            "from_linktext": 13
+          },
+          "z3": {
+            "articles": 334,
+            "usable_titles": 332,
+            "articles_with_mentions": 72,
+            "articles_with_prefix": 72,
+            "mentions_total": 283,
+            "prefix_tokens_total": 6831,
+            "chunks_total": 146,
+            "anchors": 41281,
+            "fed_tokens": 6831
+          },
+          "prompt": {
+            "articles": 416,
+            "redirect_prompt_pages": 82,
+            "redirect_prompt_tokens": 328,
+            "redirect_pages": 82,
+            "meta_pages": 416,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 55894
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 416,
+            "titles": 414,
+            "blocks": 8,
+            "bytes": 52,
+            "links": 36999,
+            "links_piped": 8837,
+            "links_dropped": 0,
+            "redirects": 82,
+            "from_redirect": 18,
+            "from_linktext": 13
+          },
+          "z3": {
+            "articles": 334,
+            "usable_titles": 332,
+            "articles_with_mentions": 72,
+            "articles_with_prefix": 72,
+            "mentions_total": 283,
+            "prefix_tokens_total": 6831,
+            "chunks_total": 146,
+            "anchors": 41281,
+            "fed_tokens": 6831
+          },
+          "prompt": {
+            "articles": 416,
+            "redirect_prompt_pages": 82,
+            "redirect_prompt_tokens": 328,
+            "redirect_pages": 82,
+            "meta_pages": 416,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 55894
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "a5c7c03549450aaadbf317b3f712af2cad18ae293f113f418b86d5c86ad4a1fa",
+      "compress_seconds": 806.7164651449998,
+      "decompress_seconds": 807.7111785729999,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-bitl-broad-screen/run-bit-weight-warm-start-lr3000-v1",
+      "metadata_sha256": "2ee8c5d78468fe6738b3dcf9235741098e4d5358027f123ba5d7f9ae6dedcf3e",
+      "results_sha256": "a1374e14eb7a8bdabb598425edef497d9a68f4d07eff2607f6555b6e896d821b",
+      "log_sha256": {
+        "compress": "348bee245623920dd007a35ac7d15648ab32f292f38227bc2d93b19817d64846",
+        "decompress": "144bdcfabc32f27a2ee625df716336146aed7e50cff8288bc2ecd55f42b1d1de"
+      },
+      "delta_bytes_vs_baseline": -250
+    }
+  }
+}

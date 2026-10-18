@@ -89,6 +89,11 @@ Priorities:
    also saves 95 payload bytes and restores exact original XML; it was previously
    used for an unrelated retrieval experiment, so is supporting rather than
    untouched validation.
+   A separate 4 MB [native Linux comparison](../benchmarks/training/20261018-bit-weight-linux-broad-v1)
+   saves 250 payload bytes (476,220 → 475,970 B), with exact restoration and
+   matching contexts. This is a stronger length check for the fixed model;
+   after the same range is used for broader training, its score cannot be
+   treated as that new model's holdout.
    Measure longer streams and the complete prize archive. These reused fixtures are not a
    full-corpus or prize score. A separate frozen [extra-pass trial](../benchmarks/training/20261017-bitl-multi-pass-v1)
    lowers screen probability cost by another 282.3 bytes at 16 passes but

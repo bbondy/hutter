@@ -21,6 +21,8 @@ def main():
     parser.add_argument("--enwik8", type=Path, required=True)
     parser.add_argument("--run-id", type=int, required=True)
     parser.add_argument("--head-sha", required=True)
+    parser.add_argument("--source-protocol", type=Path, default=SOURCE_PROTOCOL,
+                        help="frozen repository protocol used to launch this Linux run")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     src = args.artifact_role
@@ -30,7 +32,7 @@ def main():
     comparison = json.loads((src / "comparison/report.json").read_text())
     protocol = json.loads((src / "protocol.json").read_text())
     manifest = json.loads((src / "manifest.json").read_text())
-    source_protocol = json.loads(SOURCE_PROTOCOL.read_text())
+    source_protocol = json.loads(args.source_protocol.read_text())
     host = json.loads((src / "host.json").read_text())
     checks = {}
 
@@ -40,7 +42,7 @@ def main():
             raise ValueError("artifact check failed: " + label)
 
     check("source revision", host["commit"] == args.head_sha)
-    check("source protocol", protocol["parent_protocol_sha256"] == digest(SOURCE_PROTOCOL)
+    check("source protocol", protocol["parent_protocol_sha256"] == digest(args.source_protocol)
           and source_protocol["model_sha256"] == MODEL_SHA)
     check("protocol", digest(src / "protocol.json") == comparison["protocol_sha256"])
     check("manifest", digest(src / "manifest.json") == comparison["manifest_sha256"])
@@ -85,7 +87,9 @@ def main():
             shutil.copy2(file, dest)
     inventory = {str(file.relative_to(out)): digest(file) for file in sorted(out.rglob("*")) if file.is_file()}
     (out / "verification.json").write_text(json.dumps({"version": 1, "run_id": args.run_id,
-        "head_sha": args.head_sha, "role": role, "checks": checks, "retained_sha256": inventory}, indent=2) + "\n")
+        "head_sha": args.head_sha, "role": role,
+        "source_protocol_sha256": digest(args.source_protocol),
+        "checks": checks, "retained_sha256": inventory}, indent=2) + "\n")
     print(json.dumps({"role": role, "checks": len(checks), "files": len(inventory),
                       "payload_delta_bytes": b["delta_bytes_vs_baseline"]}, indent=2))
 

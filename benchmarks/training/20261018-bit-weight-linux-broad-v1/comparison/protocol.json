@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "hypothesis": "The fixed screen-selected one-pass BF16 bit-model improvement might generalize to a larger 4,002,523-byte, 416-page range disjoint from its training and earlier evaluation ranges. Measure real native Linux payloads without retuning.",
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/training/20261018-broad-trace-protocol-v1/projected-manifest.json",
+      "manifest_sha256": "de5f2d8d30eba9599f32b798613a94905ea927560b66e91b02d6feedc681b8a9",
+      "input_sha256": "5b7be7d26bc39e49321d45f896fb4c15a5f6c5092eed029bd8a0c9c0cd35d66a"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "commit": "4b9f6e37704e00c458eccf3fddd20e33c50dcd93",
+    "changes": "Shared benchmark now records Linux CPU identity; same round-trip procedure."
+  },
+  "input_variant": "upstream",
+  "variants": [
+    "baseline",
+    "bit-weight-warm-start-lr3000-v1"
+  ],
+  "model_sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0",
+  "bit_weight_recipe_sha256": "91f2aa17e6ec986bb73edb9446d5487e964bd91161dad996b23dfe47ba25d470",
+  "timeout_per_phase_seconds": 7200,
+  "rule": "Replace only embedded BF16 weights in src/bit_head_weights.h; retain baseline runtime, article order, phases, transformer and assets. No retuning after this outcome.",
+  "acceptance": [
+    "Both complete Linux archives restore the prepared and original XML exactly",
+    "All encoder/decoder and baseline/candidate context counts match",
+    "Preserve actual payload delta and source/package hashes whether gain or regression",
+    "Treat a larger-range gain as another gate, not an extrapolated full enwik9 score"
+  ],
+  "limitations": [
+    "This separate range is reserved for the subsequent broader training experiment; after training on it, it will no longer be valid holdout for that new model",
+    "Full enwik9, resource bounds and total prize score remain unverified",
+    "Hosted runner timing is exploratory; each paired variant runs serially on the same host"
+  ],
+  "scope": "Fixed one-pass model on a new four-megabyte native Linux range. Development payloads only.",
+  "parent_protocol_sha256": "a35ababf2b06324a2330b09271011e4be13b4b255990571b478e7aa1589d5af2",
+  "platform_scope": "Native Linux x86-64, all models serial on one CI host; not a full prize run"
+}

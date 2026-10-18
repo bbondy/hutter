@@ -73,6 +73,12 @@ restoration and baseline-identical context counts. That range was already
 used for a different retrieval experiment, so it is supporting evidence,
 not a fresh final holdout. No weights were retuned to it.
 
+On a separate 4,002,523-byte raw range, the fixed model saves [250 payload
+bytes on native Linux](20261018-bit-weight-linux-broad-v1) against the
+same-host baseline (476,220 → 475,970 B). Both complete archives restore the
+original XML. The range is reserved for subsequent broader training and
+cannot remain its holdout afterward.
+
 The [extra-pass screen experiment](20261017-bitl-multi-pass-v1) is a recorded
 rejection: its 16-pass checkpoint gains 282.3 further probability-cost bytes
 on screen but loses 90.6 bytes on disjoint versus the one-pass model. A

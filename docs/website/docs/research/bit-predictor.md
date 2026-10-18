@@ -223,6 +223,14 @@ frozen screen selection, one disjoint check, real archives and native Linux
 verification. This range broadens training coverage without making the old
 evaluation fixtures into new training data.
 
+Before training on that range, a [frozen native Linux comparison](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-weight-linux-broad-v1)
+tested the *existing* one-pass checkpoint there. It reduced the 4 MB range's
+payload from 476,220 to 475,970 bytes (**250 bytes saved**); both variants
+restored every original XML byte and kept identical context counts. This
+extends evidence for the fixed model, but it does not predict the complete
+enwik9 package. Once this range trains a new checkpoint, it cannot also
+validate that checkpoint.
+
 The fixed one-pass checkpoint was also measured once on a [third native Mac
 range](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-weight-third-range-v1):
 125,991 baseline payload bytes versus 125,896 with the trained weights
