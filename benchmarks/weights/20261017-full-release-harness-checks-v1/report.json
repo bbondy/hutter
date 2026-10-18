@@ -1,0 +1,14 @@
+{
+  "kind": "synthetic-full-release-harness-tests",
+  "workflow_url": "https://github.com/bbondy/hutter/actions/runs/39086279136",
+  "commit": "110440089098d12ae74b65ed0a208af81d38ed4a",
+  "tests_passed": 58,
+  "platform": "native Ubuntu 24.04 GitHub runner",
+  "full_compression_run": false,
+  "tests_log_sha256": "1a59234aad198ed286382bb03f4ec56429110b7510175869255bb3723ab59510",
+  "source_sha256": {
+    "scripts/release_full.py": "1aa2df09d2436dc08d3cdac576441432406eaf913190e16d3182499c88daa791",
+    "scripts/test_release_full.py": "00d37c35b0050cbccbffb3db6d265ed1e3b83346c0d4cad5140b26bb790ae47c"
+  },
+  "scope": "Synthetic checks of timeout/resource stops, owned-child cleanup, saved failures, final acceptance, score arithmetic, and Linux open-unlinked-file sampling. No enwik9 compression or prize eligibility result."
+}

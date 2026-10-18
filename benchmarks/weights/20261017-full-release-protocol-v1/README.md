@@ -51,3 +51,8 @@ all resource and self-containment rules. No persistent host is configured yet.
 The manual `release-harness-checks.yml` workflow runs short synthetic tests of
 cleanup, failure retention, resource sampling and acceptance accounting. Those
 tests are explicitly separate from running the real compressor to completion.
+
+[Native Linux harness checks](../20261017-full-release-harness-checks-v1/report.json)
+pass all 58 tests at revision `1104400`, including the Linux-specific check of
+open unlinked files and hardlink deduplication. The saved log and workflow
+identify exactly which code was checked; this is not a full compressor run.
