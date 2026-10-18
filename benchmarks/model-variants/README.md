@@ -125,14 +125,16 @@ Native Linux [screen](20261017-retrieval-linux-screen-v1/report.json) and
 [disjoint](20261017-retrieval-linux-holdout-v1/report.json) save 3 and lose 5 bytes
 respectively. Both restore exactly, and downloaded evidence has been verified
 again locally. The candidate fails the Linux promotion gate. The already-started
-reserved-range runs will be retained without changing the recipe or using a
+reserved-range runs are retained without changing the recipe or using a
 third result to erase this regression.
 
 The [previously reserved Mac range](20261017-retrieval-confirmation-v1/report.json)
 also loses by 5 bytes: 125,996 versus 125,991, with exact restoration and matching
 context counters. The unchanged filter is rejected on both the Linux disjoint
-gate and this additional range; its pending Linux third-range record will be
-retained as confirmation evidence, not used to retune it.
+gate and this additional range. The completed
+[Linux third range](20261017-retrieval-linux-confirmation-v1/report.json) saves
+2 bytes (125,999 versus 126,001), with exact restoration. That result does not
+override the failed gates; all six comparisons are retained.
 
 ## Alias prediction refresh
 
@@ -142,4 +144,8 @@ slot and its cached first-bit probability. Other model state and the PPMd prior
 stay unchanged. Build with `--alias-variant refresh`; the same source guard
 checks the exact rewrite and rejects combining it with weights, retrieval or
 parameter changes. A compiled callback probe tests final-row and gate behavior.
-The experiment needs full fixture round trips and measured sizes before promotion.
+The completed [screen](20261017-alias-screen-v1/report.json) adds 4 bytes
+(119,069 versus 119,065), and the [disjoint](20261017-alias-holdout-v1/report.json)
+ties at 117,438. Both restore original XML and preserve all context counts.
+This fails the frozen both-fixture improvement requirement: no Linux or larger
+promotion under this protocol. The original callback remains the control.

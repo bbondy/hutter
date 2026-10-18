@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "kind": "fixed-input-model-ablation",
+  "role": "screen",
+  "date_utc": "2026-10-18T01:59:36.578782+00:00",
+  "protocol_sha256": "21e1eb8a810a5c2ed9ed0e841bac040629e92baf589634f5a643906e44452559",
+  "manifest_sha256": "fd9b852429f18cecc15ecefa0eb0378d919ac9be348fc6c24d8608fc35439731",
+  "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f",
+  "input_bytes": 947424,
+  "raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+  "raw_bytes": 1033597,
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "native_arguments": [
+    "--native-corpus",
+    "172",
+    "127"
+  ],
+  "verifier_sha256": "5dad5f9195184fb19a281ef2305d3b10e7560abf4b01a3c6dd5a66b7e3442503",
+  "scope": "Native fixture payloads; fixed weights; concurrent exploratory times; not prize scores",
+  "variants": {
+    "baseline": {
+      "payload_bytes": 119065,
+      "archive_sha256": "253ee258aac75a9eea480b316b8315c84e48c18ee420c51583e311cee02d096d",
+      "binary_sha256": "36211d75b46f4c4e6df4a428e1415039644b6d697f23b7aff9acab16591b9713",
+      "binary_bytes": 873096,
+      "model": {
+        "budget": 256,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "compress_seconds": 789.0174053749979,
+      "decompress_seconds": 912.623277499999,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/project-screen-upstream-v2",
+      "metadata_sha256": "4b80e3f172d27059879ee03014cac4856c104fc70131c4217f6bc179381b71c6",
+      "results_sha256": "1ddeee2d60bc9b89249f748518b4f5c2740e4e2a192d85ef8371568dd6a46db3",
+      "log_sha256": {
+        "compress": "9146314f698cca59ec53d5b4585856b240b82ca8f5fe6d15903a5a2d4c52de7b",
+        "decompress": "314bdd78512172a568f7035df176ccb814755785926f0e0fa064e14d2fe8c8ee"
+      },
+      "delta_bytes_vs_baseline": 0
+    },
+    "alias-refresh": {
+      "payload_bytes": 119069,
+      "archive_sha256": "879b2cd6ddabdae0424a66d9265563fe2f5740339c519af32fdaae1ded18dd9b",
+      "binary_sha256": "b9c0b688850727072166f71fc03db8267865b6878a8a4293e9372bf7f4cbfc98",
+      "binary_bytes": 873096,
+      "model": {
+        "name": "refresh",
+        "source_file": "src/predictor.cpp",
+        "before_sha256": "20b963cf3adcdcd7c20d4e49f9eeb987fd49f52a3fd88778c9294f8a80c89447",
+        "after_sha256": "56b04706530ce30d790debd9719273451bddf395c68cd0477950a6f9e91d2a41",
+        "recipe_sha256": "da8ca7d60c83dec2b4ce0512f2136b4d0cf4a9660d20376e1300b2fb99d271cc",
+        "scope": "Refresh only the transformer slot and cached first-bit probability after the final injected alias row; preserve model states, prior, gate and all other predictors."
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "compress_seconds": 608.6886687919978,
+      "decompress_seconds": 610.0168302499951,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-alias-refresh-v1",
+      "metadata_sha256": "f735ddd0544a7358f20afbcffaa540e90f6122488cf763783da4b9d526c45b2d",
+      "results_sha256": "0d023f4b78be2320ed4d596ca7a5a999eeb9b66f9a3a183c4fc9f5004a6871e2",
+      "log_sha256": {
+        "compress": "02cbc4b59e657257e1afaa1466d961ae84b2c75300b461968c0b5ab663ee84e9",
+        "decompress": "85d762d2e521bcf7230f6d651604556b1aecd9bb8d2bcf8ccf097048b61110b3"
+      },
+      "delta_bytes_vs_baseline": 4
+    }
+  }
+}

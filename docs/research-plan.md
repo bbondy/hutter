@@ -19,6 +19,7 @@ has since established a stronger reference and a repeatable research loop:
 | [Neuron permutation](../benchmarks/weights/20261017-linux-packages-gcc13-v1) | Both platform fixture archives stay identical; measured release components shrink 8,563 bytes. | Check the real release encoder on full input, then complete package equivalence. This saving alone is far short of the next 1% improvement. |
 | [Exact link target](../benchmarks/model-variants/20261017-retrieval-linux-screen-v1) | Mac fixture payloads improve by 5 and 2 bytes; native Linux saves 3 bytes on the screen but loses 5 on the disjoint fixture. All restore exactly. | Reject under this protocol; third-range Mac loses 5 bytes and Linux saves 2. All six outcomes are retained without retuning. |
 | [Structured pruning](../benchmarks/weights/20261017-pruning-screen-summary-v1) | All six round trips pass, but 5%, 10% and 25% removals add roughly 16–17 KB, 30–31 KB and 54–55 KB per fixture, about 49–76 times their gross model-saving budgets. | Reject all three unretrained candidates; do not spend Linux or reserved-range runs on them. |
+| [Alias prediction refresh](../benchmarks/model-variants/20261017-alias-screen-v1) | Exact restoration and unchanged context counts; Mac screen adds 4 bytes and disjoint ties. | Fails both-fixture improvement gate; keep the original callback. |
 
 Priorities:
 

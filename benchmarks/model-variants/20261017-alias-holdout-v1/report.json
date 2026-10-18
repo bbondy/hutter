@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "kind": "fixed-input-model-ablation",
+  "role": "holdout",
+  "date_utc": "2026-10-18T01:59:36.588287+00:00",
+  "protocol_sha256": "21e1eb8a810a5c2ed9ed0e841bac040629e92baf589634f5a643906e44452559",
+  "manifest_sha256": "880ad288323503c874b18d8d3aadaebde268f6960f546352d0efb0d08e84d47b",
+  "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8",
+  "input_bytes": 924848,
+  "raw_sha256": "06456d1767a9ccbd78d7a7db4020da8323afeaa5abe7cf3f77fcaf0b10b2d740",
+  "raw_bytes": 1005977,
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "native_arguments": [
+    "--native-corpus",
+    "138",
+    "28"
+  ],
+  "verifier_sha256": "5dad5f9195184fb19a281ef2305d3b10e7560abf4b01a3c6dd5a66b7e3442503",
+  "scope": "Native fixture payloads; fixed weights; concurrent exploratory times; not prize scores",
+  "variants": {
+    "baseline": {
+      "payload_bytes": 117438,
+      "archive_sha256": "25ffef9e94583f0cf42a46422f5d710e52966e109c50eb95530749316a4e0ddc",
+      "binary_sha256": "36211d75b46f4c4e6df4a428e1415039644b6d697f23b7aff9acab16591b9713",
+      "binary_bytes": 873096,
+      "model": {
+        "budget": 256,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 138,
+            "titles": 136,
+            "blocks": 2,
+            "bytes": 8,
+            "links": 9056,
+            "links_piped": 1529,
+            "links_dropped": 0,
+            "redirects": 27,
+            "from_redirect": 4,
+            "from_linktext": 5
+          },
+          "z3": {
+            "articles": 111,
+            "usable_titles": 109,
+            "articles_with_mentions": 16,
+            "articles_with_prefix": 16,
+            "mentions_total": 50,
+            "prefix_tokens_total": 1361,
+            "chunks_total": 31,
+            "anchors": 10022,
+            "fed_tokens": 1361
+          },
+          "prompt": {
+            "articles": 138,
+            "redirect_prompt_pages": 27,
+            "redirect_prompt_tokens": 108,
+            "redirect_pages": 27,
+            "meta_pages": 138,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 17880
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 138,
+            "titles": 136,
+            "blocks": 2,
+            "bytes": 8,
+            "links": 9056,
+            "links_piped": 1529,
+            "links_dropped": 0,
+            "redirects": 27,
+            "from_redirect": 4,
+            "from_linktext": 5
+          },
+          "z3": {
+            "articles": 111,
+            "usable_titles": 109,
+            "articles_with_mentions": 16,
+            "articles_with_prefix": 16,
+            "mentions_total": 50,
+            "prefix_tokens_total": 1361,
+            "chunks_total": 31,
+            "anchors": 10022,
+            "fed_tokens": 1361
+          },
+          "prompt": {
+            "articles": 138,
+            "redirect_prompt_pages": 27,
+            "redirect_prompt_tokens": 108,
+            "redirect_pages": 27,
+            "meta_pages": 138,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 17880
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "06456d1767a9ccbd78d7a7db4020da8323afeaa5abe7cf3f77fcaf0b10b2d740",
+      "compress_seconds": 768.0970314580009,
+      "decompress_seconds": 898.5839669589986,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/project-holdout-upstream-v2",
+      "metadata_sha256": "dcb45e4a5362cd84aacb8bab2acc9f8007785abdf6f2f8b61443d78c664eeeb3",
+      "results_sha256": "d1b630304bf174c5ae7f651a0cb5f57a9a1207e292919f6c2d972760dea73e7f",
+      "log_sha256": {
+        "compress": "a8a3b0ca1029a68d366e0d7018d9030c6c61dd6d4a353c6629d70d2c660fb5d6",
+        "decompress": "111864a037058a3986c7705ca2727f83370c7dcea98b44638e80b612f6dac6fb"
+      },
+      "delta_bytes_vs_baseline": 0
+    },
+    "alias-refresh": {
+      "payload_bytes": 117438,
+      "archive_sha256": "5d3b8c799b6cdc9a4360058ae6ba01b25884e758a3e914c0c0d9b82f213cc2cc",
+      "binary_sha256": "b9c0b688850727072166f71fc03db8267865b6878a8a4293e9372bf7f4cbfc98",
+      "binary_bytes": 873096,
+      "model": {
+        "name": "refresh",
+        "source_file": "src/predictor.cpp",
+        "before_sha256": "20b963cf3adcdcd7c20d4e49f9eeb987fd49f52a3fd88778c9294f8a80c89447",
+        "after_sha256": "56b04706530ce30d790debd9719273451bddf395c68cd0477950a6f9e91d2a41",
+        "recipe_sha256": "da8ca7d60c83dec2b4ce0512f2136b4d0cf4a9660d20376e1300b2fb99d271cc",
+        "scope": "Refresh only the transformer slot and cached first-bit probability after the final injected alias row; preserve model states, prior, gate and all other predictors."
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 138,
+            "titles": 136,
+            "blocks": 2,
+            "bytes": 8,
+            "links": 9056,
+            "links_piped": 1529,
+            "links_dropped": 0,
+            "redirects": 27,
+            "from_redirect": 4,
+            "from_linktext": 5
+          },
+          "z3": {
+            "articles": 111,
+            "usable_titles": 109,
+            "articles_with_mentions": 16,
+            "articles_with_prefix": 16,
+            "mentions_total": 50,
+            "prefix_tokens_total": 1361,
+            "chunks_total": 31,
+            "anchors": 10022,
+            "fed_tokens": 1361
+          },
+          "prompt": {
+            "articles": 138,
+            "redirect_prompt_pages": 27,
+            "redirect_prompt_tokens": 108,
+            "redirect_pages": 27,
+            "meta_pages": 138,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 17880
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 138,
+            "titles": 136,
+            "blocks": 2,
+            "bytes": 8,
+            "links": 9056,
+            "links_piped": 1529,
+            "links_dropped": 0,
+            "redirects": 27,
+            "from_redirect": 4,
+            "from_linktext": 5
+          },
+          "z3": {
+            "articles": 111,
+            "usable_titles": 109,
+            "articles_with_mentions": 16,
+            "articles_with_prefix": 16,
+            "mentions_total": 50,
+            "prefix_tokens_total": 1361,
+            "chunks_total": 31,
+            "anchors": 10022,
+            "fed_tokens": 1361
+          },
+          "prompt": {
+            "articles": 138,
+            "redirect_prompt_pages": 27,
+            "redirect_prompt_tokens": 108,
+            "redirect_pages": 27,
+            "meta_pages": 138,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 17880
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "06456d1767a9ccbd78d7a7db4020da8323afeaa5abe7cf3f77fcaf0b10b2d740",
+      "compress_seconds": 596.4304928749989,
+      "decompress_seconds": 597.5311432499948,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-holdout-alias-refresh-v1",
+      "metadata_sha256": "e7698ac03003d213f200ae262c632fdcb5f84f0ad8096e9f1f87ad7885cdd1e9",
+      "results_sha256": "c44f75871edef32c3fd9162dc9e7cf216204f8fb8106425bd7ee0319639e4f4b",
+      "log_sha256": {
+        "compress": "59381d62d5674b24aeae9a6b99ddb136a23204a1f92f1d1ad2bdc9273dc67e3c",
+        "decompress": "b6b8a2d1d7ce39fe4785405a4f0c4d47ae55bfa2087b4fc01d228a0809690e83"
+      },
+      "delta_bytes_vs_baseline": 0
+    }
+  }
+}

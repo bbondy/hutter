@@ -196,6 +196,20 @@ The [alias-refresh protocol](https://github.com/bbondy/hutter/blob/main/benchmar
 tests that one callback: update the transformer's mixer slot and its cached
 first-bit probability after the final eligible alias row. It preserves the
 other predictors, priors, weights, retrieval rule and input. A small compiled
-callback probe checks final-row handling and gates; actual compression results
-are still required. This is separate from exact-target filtering and will use
-the original model as its control.
+callback probe checks final-row handling and gates. The original model remains
+the control, separately from exact-target filtering.
+
+The completed Mac screen adds **4 bytes** (119,069 versus 119,065); the disjoint
+fixture ties at **117,438 bytes**. Both restore the original XML exactly and
+retain all baseline context counts, including eight alias blocks on the screen
+and two on the disjoint input. The source comparison permits only the declared
+prediction-refresh callback. Saved evidence:
+[screen](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-alias-screen-v1/report.json)
+and [disjoint](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-alias-holdout-v1/report.json).
+
+This fails the frozen requirement to improve both fixtures, so it does not
+advance to Linux or larger inputs under this protocol. Correcting a mismatch
+between training and inference does not guarantee a better final mixture.
+These sparse fixtures contain few alias blocks; they do not measure the
+full-corpus value of the mechanism. Keep the original callback as the control
+and retain the failed experiment.
