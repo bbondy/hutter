@@ -21,6 +21,7 @@ EXPERIMENTS = {
     "adaptive-depth": "20261017-depth-protocol-v1",
     "exact-target": "20261017-retrieval-protocol-v1",
     "exact-target-confirmation": "20261017-retrieval-confirmation-protocol-v1",
+    "bitl-trace": "20261017-bitl-trace-protocol-v2",
 }
 
 
@@ -30,7 +31,8 @@ def main():
     parser.add_argument("--enwik8", type=Path, required=True)
     parser.add_argument("--experiment", choices=EXPERIMENTS, default="link-context")
     args = parser.parse_args()
-    original_protocol = ROOT / "benchmarks/model-variants" / EXPERIMENTS[args.experiment] / "protocol.json"
+    group = "training" if args.experiment == "bitl-trace" else "model-variants"
+    original_protocol = ROOT / "benchmarks" / group / EXPERIMENTS[args.experiment] / "protocol.json"
     frozen_protocol = json.loads(original_protocol.read_text())
     if args.role not in frozen_protocol["fixtures"]:
         raise ValueError("fixture role is not declared by this experiment")
@@ -51,8 +53,8 @@ def main():
         for name in models:
             build = work / ("build-" + name)
             builds.append(build)
-            variant_args = (["--retrieval-variant", "exact-target"]
-                            if name == "retrieval-exact-target" else ["--variant", name])
+            variant_args = {"retrieval-exact-target": ["--retrieval-variant", "exact-target"],
+                            "bit-trace-fixture": ["--bit-trace-variant", "fixture"]}.get(name, ["--variant", name])
             subprocess.run([sys.executable, "scripts/linux_cmix.py", "build", *variant_args,
                             "--output", str(build), "--jobs", "2"], cwd=ROOT, check=True)
             if manifest is None:
@@ -81,6 +83,22 @@ def main():
                             "--timeout", "1800"], cwd=ROOT, check=True)
         summarize(SimpleNamespace(manifest=manifest, protocol=protocol_path, role=args.role,
                                   build=builds[0], runs=runs, output=evidence / "comparison"))
+        if args.experiment == "bitl-trace":
+            audit, replay_build, verification = work / "weight-audit", work / "replay-build", work / "replay-verification"
+            replay_protocol = ROOT / "benchmarks/training/20261017-bitl-replay-protocol-v2/protocol.json"
+            adapted = json.loads(replay_protocol.read_text())
+            adapted["parent_protocol_sha256"] = digest(replay_protocol)
+            adapted["trace_protocol_sha256"] = digest(protocol_path)
+            adapted["platform_scope"] = "Native Linux fixture tracing and frozen replay; not a full release result."
+            adapted_path = work / "replay-protocol.json"
+            adapted_path.write_text(json.dumps(adapted, indent=2) + "\n")
+            subprocess.run([sys.executable, "scripts/bitl_weight_audit.py", "--output", str(audit)], check=True, cwd=ROOT)
+            subprocess.run([sys.executable, "scripts/bitl_replay.py", "build", "--native-build", str(builds[-1]),
+                            "--output", str(replay_build)], check=True, cwd=ROOT)
+            subprocess.run([sys.executable, "scripts/bitl_replay.py", "verify", "--build", str(replay_build),
+                            "--run", str(runs[-1]), "--comparison", str(evidence / "comparison"),
+                            "--weights", str(audit / "F2L.nblb"), "--protocol", str(adapted_path),
+                            "--output", str(verification)], check=True, cwd=ROOT)
     finally:
         # Keep partial evidence even after a compile, timeout or round-trip failure.
         if (work / "fixture").exists():
@@ -103,6 +121,17 @@ def main():
             for name in ("compress.log", "decompress.log", "payload.cmix", "restored"):
                 if (trial / name).exists():
                     shutil.copyfile(trial / name, dest / name)
+        # Keep bounded replay evidence on success or failure. Raw traces remain
+        # on the temporary runner; their independently checked hashes are saved.
+        if args.experiment == "bitl-trace":
+            for name in ("weight-audit", "replay-build", "replay-verification"):
+                source = work / name
+                if source.is_dir():
+                    dest = evidence / name
+                    dest.mkdir()
+                    for file in source.iterdir():
+                        if file.is_file() and file.suffix in (".json", ".log"):
+                            shutil.copy2(file, dest / file.name)
 
 
 if __name__ == "__main__":

@@ -12,6 +12,7 @@ on:
           - adaptive-depth
           - exact-target
           - exact-target-confirmation
+          - bitl-trace
 
 permissions:
   contents: read
