@@ -1,0 +1,13 @@
+1,101,711 bytes  blocks.*.mlp.up.weight.q
+1,090,566 bytes  blocks.*.mlp.down.weight.q
+  279,350 bytes  blocks.*.attention.output_projection.weight.q
+  276,447 bytes  blocks.*.attention.value_projection.weight.q
+  272,362 bytes  blocks.*.attention.query_projection.weight.q
+  271,590 bytes  blocks.*.attention.key_projection.weight.q
+   68,943 bytes  blocks.*.attention.output_gate_projection.down.weight.q
+   67,567 bytes  blocks.*.attention.forget_gate_projection.down.weight.q
+   67,286 bytes  blocks.*.attention.output_gate_projection.up.weight.q
+   65,999 bytes  blocks.*.attention.forget_gate_projection.up.weight.q
+   19,387 bytes  embedding.weight.q
+   18,889 bytes  prior_embedding.weight.q
+Header and final flush: 17 bytes; exact original container reproduced

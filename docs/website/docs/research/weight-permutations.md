@@ -101,3 +101,19 @@ credited to our weight permutation. Nearly all listed reference packages match,
 but the hosted image also has GCC 14 development files that Clang may select
 instead of GCC 13. A separate controlled rebuild tests that explanation. Keep
 same-host candidate deltas separate from published-binary reproduction.
+
+## Where further weight savings could come from
+
+An [audit of the unchanged container](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-container-audit-v1/README.md)
+attributes every byte while reproducing the original file exactly. Int4 tensors
+consume 3,629,108 bytes, or 97.6% of the container. The MLP up and down matrices
+account for about 2.19 MB together.
+
+For those int4 tensors, fitting an independent-symbol distribution to each
+tensor gives a combined empirical entropy only about 2.2 KB below the current
+coding cost. Fitting each row separately leaves about 54.9 KB **before storing
+or learning the row distributions**. These fitted figures are not achievable
+compressed sizes and are not limits on methods that exploit other dependencies.
+They do suggest that another simple frequency-counter tweak has limited scope.
+A larger gain needs stronger structure or model changes; retain this small
+permutation improvement while testing those higher-impact hypotheses.

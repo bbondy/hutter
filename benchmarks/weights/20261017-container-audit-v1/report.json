@@ -1,0 +1,6997 @@
+{
+  "kind": "unchanged-weight-container-audit",
+  "version": 1,
+  "commit": "406e8686eec610cb53837faeb0da73241a14d559",
+  "script_sha256": "14ee9f69c7897d55a4d3358c0b2a839dc25549ae58fe6573298d3719b94c6fc3",
+  "numpy": "2.5.4",
+  "python": "3.12.8 (v3.12.8:2dc476bcb91, Dec  3 2024, 14:43:19) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "upstream_writer_sha256": "9cfb3b1f1c39cc700ef569865e409d53b4849547f3d1b0f42f91476a79afa468",
+  "container_sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719",
+  "container_bytes": 3716667,
+  "identity_rewrite": true,
+  "tensor_count": 584,
+  "attributed_tensor_bytes": 3716650,
+  "header_and_flush_bytes": 17,
+  "families": {
+    "blocks.*.mlp.up.weight.q": {
+      "coded_bytes": 1101711.0,
+      "raw_bytes": 2345856.0,
+      "coded_values": 2345856.0,
+      "zero_rows": 0.0,
+      "empirical_tensor_entropy_bytes": 1101052.4935129557,
+      "empirical_row_entropy_bytes": 1083874.9119904025
+    },
+    "blocks.*.mlp.down.weight.q": {
+      "coded_bytes": 1090566.0,
+      "raw_bytes": 2345856.0,
+      "coded_values": 2345856.0,
+      "zero_rows": 0.0,
+      "empirical_tensor_entropy_bytes": 1090138.307697881,
+      "empirical_row_entropy_bytes": 1084993.4252170708
+    },
+    "blocks.*.attention.output_projection.weight.q": {
+      "coded_bytes": 279350.0,
+      "raw_bytes": 589824.0,
+      "coded_values": 589824.0,
+      "zero_rows": 0.0,
+      "empirical_tensor_entropy_bytes": 279154.250666029,
+      "empirical_row_entropy_bytes": 274788.4976953774
+    },
+    "blocks.*.attention.value_projection.weight.q": {
+      "coded_bytes": 276447.0,
+      "raw_bytes": 589824.0,
+      "coded_values": 589632.0,
+      "zero_rows": 1.0,
+      "empirical_tensor_entropy_bytes": 276276.52856290276,
+      "empirical_row_entropy_bytes": 271921.7189368138
+    },
+    "blocks.*.attention.query_projection.weight.q": {
+      "coded_bytes": 272362.0,
+      "raw_bytes": 589824.0,
+      "coded_values": 584448.0,
+      "zero_rows": 28.0,
+      "empirical_tensor_entropy_bytes": 272350.5320625355,
+      "empirical_row_entropy_bytes": 267239.8076172159
+    },
+    "blocks.*.attention.key_projection.weight.q": {
+      "coded_bytes": 271590.0,
+      "raw_bytes": 589824.0,
+      "coded_values": 584448.0,
+      "zero_rows": 28.0,
+      "empirical_tensor_entropy_bytes": 271452.24822032667,
+      "empirical_row_entropy_bytes": 266546.3547450667
+    },
+    "blocks.*.attention.output_gate_projection.down.weight.q": {
+      "coded_bytes": 68943.0,
+      "raw_bytes": 147456.0,
+      "coded_values": 147392.0,
+      "zero_rows": 1.0,
+      "empirical_tensor_entropy_bytes": 68846.91098116385,
+      "empirical_row_entropy_bytes": 65553.73581406342
+    },
+    "blocks.*.attention.forget_gate_projection.down.weight.q": {
+      "coded_bytes": 67567.0,
+      "raw_bytes": 147456.0,
+      "coded_values": 145664.0,
+      "zero_rows": 28.0,
+      "empirical_tensor_entropy_bytes": 67436.86013370573,
+      "empirical_row_entropy_bytes": 64037.698175301135
+    },
+    "blocks.*.attention.output_gate_projection.up.weight.q": {
+      "coded_bytes": 67286.0,
+      "raw_bytes": 147456.0,
+      "coded_values": 147456.0,
+      "zero_rows": 0.0,
+      "empirical_tensor_entropy_bytes": 67202.6344799146,
+      "empirical_row_entropy_bytes": 66107.94305693361
+    },
+    "blocks.*.attention.forget_gate_projection.up.weight.q": {
+      "coded_bytes": 65999.0,
+      "raw_bytes": 147456.0,
+      "coded_values": 147456.0,
+      "zero_rows": 0.0,
+      "empirical_tensor_entropy_bytes": 65842.96137523372,
+      "empirical_row_entropy_bytes": 64711.0730503964
+    },
+    "embedding.weight.q": {
+      "coded_bytes": 19387.0,
+      "raw_bytes": 41472.0,
+      "coded_values": 41472.0,
+      "zero_rows": 0.0,
+      "empirical_tensor_entropy_bytes": 19352.36137458879,
+      "empirical_row_entropy_bytes": 19039.311115589364
+    },
+    "prior_embedding.weight.q": {
+      "coded_bytes": 18889.0,
+      "raw_bytes": 39936.0,
+      "coded_values": 39936.0,
+      "zero_rows": 0.0,
+      "empirical_tensor_entropy_bytes": 18906.160785624805,
+      "empirical_row_entropy_bytes": 18282.545287169436
+    },
+    "unembedding.weight.q": {
+      "coded_bytes": 18524.0,
+      "raw_bytes": 39936.0,
+      "coded_values": 39936.0,
+      "zero_rows": 0.0,
+      "empirical_tensor_entropy_bytes": 18505.09418672328,
+      "empirical_row_entropy_bytes": 18210.58979133109
+    },
+    "blocks.*.attention.query_convolution.weight": {
+      "coded_bytes": 13504.0,
+      "raw_bytes": 36864.0
+    },
+    "blocks.*.attention.value_convolution.weight": {
+      "coded_bytes": 13294.0,
+      "raw_bytes": 36864.0
+    },
+    "blocks.*.attention.key_convolution.weight": {
+      "coded_bytes": 13291.0,
+      "raw_bytes": 36864.0
+    },
+    "blocks.*.mlp.up.weight.scale": {
+      "coded_bytes": 10539.0,
+      "raw_bytes": 24436.0
+    },
+    "blocks.*.attention.beta_projection.weight": {
+      "coded_bytes": 9511.0,
+      "raw_bytes": 27648.0
+    },
+    "blocks.*.attention.dt_bias": {
+      "coded_bytes": 3270.0,
+      "raw_bytes": 9216.0
+    },
+    "blocks.*.attention.query_projection.weight.scale": {
+      "coded_bytes": 3221.0,
+      "raw_bytes": 6144.0
+    },
+    "embedding.last_table.weight.q": {
+      "coded_bytes": 3198.0,
+      "raw_bytes": 6944.0,
+      "coded_values": 6944.0,
+      "zero_rows": 0.0,
+      "empirical_tensor_entropy_bytes": 3161.1141208226218,
+      "empirical_row_entropy_bytes": 2555.7213438551844
+    },
+    "blocks.*.attention.key_projection.weight.scale": {
+      "coded_bytes": 3095.0,
+      "raw_bytes": 6144.0
+    },
+    "embedding.match_projection.weight.q": {
+      "coded_bytes": 2895.0,
+      "raw_bytes": 6144.0,
+      "coded_values": 6144.0,
+      "zero_rows": 0.0,
+      "empirical_tensor_entropy_bytes": 2874.8831778141807,
+      "empirical_row_entropy_bytes": 2587.7305980371802
+    },
+    "blocks.*.attention.value_projection.weight.scale": {
+      "coded_bytes": 2808.0,
+      "raw_bytes": 6144.0
+    },
+    "embedding.last_projection.weight.q": {
+      "coded_bytes": 2741.0,
+      "raw_bytes": 6144.0,
+      "coded_values": 6144.0,
+      "zero_rows": 0.0,
+      "empirical_tensor_entropy_bytes": 2709.2788234802692,
+      "empirical_row_entropy_bytes": 2435.3091040220947
+    },
+    "blocks.*.attention.output_projection.weight.scale": {
+      "coded_bytes": 2652.0,
+      "raw_bytes": 6144.0
+    },
+    "blocks.*.attention.forget_gate_projection.down.weight.scale": {
+      "coded_bytes": 2305.0,
+      "raw_bytes": 4608.0
+    },
+    "blocks.*.attention.output_gate_projection.down.weight.scale": {
+      "coded_bytes": 2283.0,
+      "raw_bytes": 4608.0
+    },
+    "blocks.*.mlp.down.weight.scale": {
+      "coded_bytes": 2226.0,
+      "raw_bytes": 6144.0
+    },
+    "embedding.match_table.weight.q": {
+      "coded_bytes": 1653.0,
+      "raw_bytes": 3600.0,
+      "coded_values": 3600.0,
+      "zero_rows": 0.0,
+      "empirical_tensor_entropy_bytes": 1628.2520859728907,
+      "empirical_row_entropy_bytes": 1325.0346570090726
+    },
+    "blocks.*.attention.output_fused_norm_gate.weight": {
+      "coded_bytes": 1056.0,
+      "raw_bytes": 3072.0
+    },
+    "blocks.*.attention.forget_gate_projection.up.weight.scale": {
+      "coded_bytes": 809.0,
+      "raw_bytes": 1536.0
+    },
+    "blocks.*.attention.output_gate_projection.up.weight.scale": {
+      "coded_bytes": 678.0,
+      "raw_bytes": 1536.0
+    },
+    "embedding.last_table.weight.scale": {
+      "coded_bytes": 482.0,
+      "raw_bytes": 868.0
+    },
+    "embedding.weight.scale": {
+      "coded_bytes": 237.0,
+      "raw_bytes": 432.0
+    },
+    "embedding.match_table.weight.scale": {
+      "coded_bytes": 237.0,
+      "raw_bytes": 450.0
+    },
+    "unembedding.weight.scale": {
+      "coded_bytes": 214.0,
+      "raw_bytes": 416.0
+    },
+    "embedding.last_projection.weight.scale": {
+      "coded_bytes": 212.0,
+      "raw_bytes": 384.0
+    },
+    "embedding.match_projection.weight.scale": {
+      "coded_bytes": 206.0,
+      "raw_bytes": 384.0
+    },
+    "prior_embedding.weight.scale": {
+      "coded_bytes": 191.0,
+      "raw_bytes": 384.0
+    },
+    "rope.inv_freq": {
+      "coded_bytes": 174.0,
+      "raw_bytes": 128.0
+    },
+    "blocks.*.attention.log_baseline_decay_rate": {
+      "coded_bytes": 144.0,
+      "raw_bytes": 144.0
+    },
+    "blocks.*.residual_stream_coefficient.value": {
+      "coded_bytes": 94.0,
+      "raw_bytes": 64.0
+    },
+    "blocks.*.token_embedding_coefficient.value": {
+      "coded_bytes": 59.0,
+      "raw_bytes": 64.0
+    },
+    "blocks.*.attention.quantize_queries.scale": {
+      "coded_bytes": 59.0,
+      "raw_bytes": 24.0
+    },
+    "config.ints": {
+      "coded_bytes": 54.0,
+      "raw_bytes": 44.0
+    },
+    "skip_connection_weights.value": {
+      "coded_bytes": 50.0,
+      "raw_bytes": 32.0
+    },
+    "blocks.*.attention.query_projection.quantize_activation.scale": {
+      "coded_bytes": 46.0,
+      "raw_bytes": 32.0
+    },
+    "blocks.*.mlp.down.quantize_activation.scale": {
+      "coded_bytes": 41.0,
+      "raw_bytes": 32.0
+    },
+    "config.kimi": {
+      "coded_bytes": 41.0,
+      "raw_bytes": 64.0
+    },
+    "blocks.*.attention.key_projection.quantize_activation.scale": {
+      "coded_bytes": 40.0,
+      "raw_bytes": 32.0
+    },
+    "blocks.*.attention.value_projection.quantize_activation.scale": {
+      "coded_bytes": 39.0,
+      "raw_bytes": 32.0
+    },
+    "blocks.*.attention.forget_gate_projection.down.quantize_activation.scale": {
+      "coded_bytes": 39.0,
+      "raw_bytes": 24.0
+    },
+    "blocks.*.mlp.up.quantize_activation.scale": {
+      "coded_bytes": 39.0,
+      "raw_bytes": 32.0
+    },
+    "blocks.*.attention.forget_gate_projection.up.quantize_activation.scale": {
+      "coded_bytes": 38.0,
+      "raw_bytes": 24.0
+    },
+    "blocks.*.attention.output_projection.quantize_activation.scale": {
+      "coded_bytes": 34.0,
+      "raw_bytes": 32.0
+    },
+    "embedding.last_projection.quantize_activation.scale": {
+      "coded_bytes": 33.0,
+      "raw_bytes": 2.0
+    },
+    "blocks.*.attention.output_gate_projection.down.quantize_activation.scale": {
+      "coded_bytes": 33.0,
+      "raw_bytes": 24.0
+    },
+    "blocks.*.attention.quantize_keys.scale": {
+      "coded_bytes": 30.0,
+      "raw_bytes": 24.0
+    },
+    "blocks.*.attention.output_gate_projection.up.quantize_activation.scale": {
+      "coded_bytes": 28.0,
+      "raw_bytes": 24.0
+    },
+    "blocks.*.attention.quantize_values.scale": {
+      "coded_bytes": 28.0,
+      "raw_bytes": 24.0
+    },
+    "embedding.match_projection.quantize_activation.scale": {
+      "coded_bytes": 22.0,
+      "raw_bytes": 2.0
+    },
+    "prior_embedding.quantize_activation.scale": {
+      "coded_bytes": 18.0,
+      "raw_bytes": 2.0
+    },
+    "unembedding.quantize_activation.scale": {
+      "coded_bytes": 13.0,
+      "raw_bytes": 2.0
+    },
+    "rope.sin": {
+      "coded_bytes": 13.0,
+      "raw_bytes": 16777216.0
+    },
+    "rope.cos": {
+      "coded_bytes": 12.0,
+      "raw_bytes": 16777216.0
+    }
+  },
+  "tensors": [
+    {
+      "name": "embedding.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        216,
+        192
+      ],
+      "raw_bytes": 41472,
+      "coded_bytes": 19387,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 41472,
+      "empirical_tensor_entropy_bytes": 19352.36137458879,
+      "empirical_row_entropy_bytes": 19039.311115589364
+    },
+    {
+      "name": "embedding.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        216
+      ],
+      "raw_bytes": 432,
+      "coded_bytes": 237,
+      "encoding": 2
+    },
+    {
+      "name": "embedding.last_table.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        434,
+        16
+      ],
+      "raw_bytes": 6944,
+      "coded_bytes": 3198,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 6944,
+      "empirical_tensor_entropy_bytes": 3161.1141208226218,
+      "empirical_row_entropy_bytes": 2555.7213438551844
+    },
+    {
+      "name": "embedding.last_table.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        434
+      ],
+      "raw_bytes": 868,
+      "coded_bytes": 482,
+      "encoding": 2
+    },
+    {
+      "name": "embedding.last_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        32
+      ],
+      "raw_bytes": 6144,
+      "coded_bytes": 2741,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 6144,
+      "empirical_tensor_entropy_bytes": 2709.2788234802692,
+      "empirical_row_entropy_bytes": 2435.3091040220947
+    },
+    {
+      "name": "embedding.last_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 212,
+      "encoding": 2
+    },
+    {
+      "name": "embedding.last_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 33,
+      "encoding": 2
+    },
+    {
+      "name": "embedding.match_table.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        225,
+        16
+      ],
+      "raw_bytes": 3600,
+      "coded_bytes": 1653,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 3600,
+      "empirical_tensor_entropy_bytes": 1628.2520859728907,
+      "empirical_row_entropy_bytes": 1325.0346570090726
+    },
+    {
+      "name": "embedding.match_table.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        225
+      ],
+      "raw_bytes": 450,
+      "coded_bytes": 237,
+      "encoding": 2
+    },
+    {
+      "name": "embedding.match_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        32
+      ],
+      "raw_bytes": 6144,
+      "coded_bytes": 2895,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 6144,
+      "empirical_tensor_entropy_bytes": 2874.8831778141807,
+      "empirical_row_entropy_bytes": 2587.7305980371802
+    },
+    {
+      "name": "embedding.match_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 206,
+      "encoding": 2
+    },
+    {
+      "name": "embedding.match_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 22,
+      "encoding": 2
+    },
+    {
+      "name": "prior_embedding.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        208
+      ],
+      "raw_bytes": 39936,
+      "coded_bytes": 18889,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 39936,
+      "empirical_tensor_entropy_bytes": 18906.160785624805,
+      "empirical_row_entropy_bytes": 18282.545287169436
+    },
+    {
+      "name": "prior_embedding.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 191,
+      "encoding": 2
+    },
+    {
+      "name": "prior_embedding.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 18,
+      "encoding": 2
+    },
+    {
+      "name": "skip_connection_weights.value",
+      "dtype_code": 2,
+      "shape": [
+        8
+      ],
+      "raw_bytes": 32,
+      "coded_bytes": 50,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.0.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 46,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.0.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 29,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.0.attention.log_baseline_decay_rate",
+      "dtype_code": 2,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 12,
+      "coded_bytes": 41,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.0.attention.dt_bias",
+      "dtype_code": 2,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 768,
+      "coded_bytes": 306,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.0.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17045,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 36672,
+      "empirical_tensor_entropy_bytes": 17012.541756237275,
+      "empirical_row_entropy_bytes": 16733.398951728068
+    },
+    {
+      "name": "blocks.0.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 221,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 19,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.query_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1105,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.0.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16946,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 36672,
+      "empirical_tensor_entropy_bytes": 16922.110978305245,
+      "empirical_row_entropy_bytes": 16642.294046021325
+    },
+    {
+      "name": "blocks.0.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 199,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 16,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.key_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1106,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.0.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17130,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17109.775602769965,
+      "empirical_row_entropy_bytes": 16821.75970749964
+    },
+    {
+      "name": "blocks.0.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 198,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 14,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.value_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1103,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.0.attention.forget_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5502,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5464.951736314896,
+      "empirical_row_entropy_bytes": 5365.121544862152
+    },
+    {
+      "name": "blocks.0.attention.forget_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 90,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.forget_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 20,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.forget_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5607,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 12224,
+      "empirical_tensor_entropy_bytes": 5581.036193618591,
+      "empirical_row_entropy_bytes": 5299.76747295915
+    },
+    {
+      "name": "blocks.0.attention.forget_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 203,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.forget_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 17,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.beta_projection.weight",
+      "dtype_code": 2,
+      "shape": [
+        3,
+        192
+      ],
+      "raw_bytes": 2304,
+      "coded_bytes": 806,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.0.attention.output_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5579,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5557.156220156924,
+      "empirical_row_entropy_bytes": 5473.059817173846
+    },
+    {
+      "name": "blocks.0.attention.output_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 65,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.output_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 16,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.output_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5741,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5719.525224987926,
+      "empirical_row_entropy_bytes": 5429.788318194955
+    },
+    {
+      "name": "blocks.0.attention.output_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 203,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.output_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 15,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.output_fused_norm_gate.weight",
+      "dtype_code": 2,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 256,
+      "coded_bytes": 103,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.0.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17458,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17439.437240013318,
+      "empirical_row_entropy_bytes": 17135.242449620055
+    },
+    {
+      "name": "blocks.0.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 187,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 13,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        767,
+        192
+      ],
+      "raw_bytes": 147264,
+      "coded_bytes": 69410,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147264,
+      "empirical_tensor_entropy_bytes": 69362.19929624986,
+      "empirical_row_entropy_bytes": 68250.83576026277
+    },
+    {
+      "name": "blocks.0.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        767
+      ],
+      "raw_bytes": 1534,
+      "coded_bytes": 741,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 11,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        767
+      ],
+      "raw_bytes": 147264,
+      "coded_bytes": 67843,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147264,
+      "empirical_tensor_entropy_bytes": 67804.75710002186,
+      "empirical_row_entropy_bytes": 67488.67990750982
+    },
+    {
+      "name": "blocks.0.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 159,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.0.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 11,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 21,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.1.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 3,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.1.attention.log_baseline_decay_rate",
+      "dtype_code": 2,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 12,
+      "coded_bytes": 7,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.1.attention.dt_bias",
+      "dtype_code": 2,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 768,
+      "coded_bytes": 268,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.1.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16877,
+      "encoding": 1,
+      "zero_rows": 4,
+      "coded_values": 36096,
+      "empirical_tensor_entropy_bytes": 16859.433387416204,
+      "empirical_row_entropy_bytes": 16594.073849804518
+    },
+    {
+      "name": "blocks.1.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 183,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 3,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.query_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1102,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.1.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16742,
+      "encoding": 1,
+      "zero_rows": 4,
+      "coded_values": 36096,
+      "empirical_tensor_entropy_bytes": 16727.883114247357,
+      "empirical_row_entropy_bytes": 16448.565039466823
+    },
+    {
+      "name": "blocks.1.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 183,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.key_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1106,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.1.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17249,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17238.92882703383,
+      "empirical_row_entropy_bytes": 16955.331470394725
+    },
+    {
+      "name": "blocks.1.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 176,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.value_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1098,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.1.attention.forget_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5475,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5461.27710450001,
+      "empirical_row_entropy_bytes": 5368.458229168756
+    },
+    {
+      "name": "blocks.1.attention.forget_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 63,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.forget_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.forget_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5543,
+      "encoding": 1,
+      "zero_rows": 4,
+      "coded_values": 12032,
+      "empirical_tensor_entropy_bytes": 5532.18070888724,
+      "empirical_row_entropy_bytes": 5260.150932672775
+    },
+    {
+      "name": "blocks.1.attention.forget_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 192,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.forget_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 3,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.beta_projection.weight",
+      "dtype_code": 2,
+      "shape": [
+        3,
+        192
+      ],
+      "raw_bytes": 2304,
+      "coded_bytes": 792,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.1.attention.output_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5562,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5556.943133024897,
+      "empirical_row_entropy_bytes": 5467.6161467943975
+    },
+    {
+      "name": "blocks.1.attention.output_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 53,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.output_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.output_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5728,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5720.307535237478,
+      "empirical_row_entropy_bytes": 5452.522073780629
+    },
+    {
+      "name": "blocks.1.attention.output_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 185,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.output_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.output_fused_norm_gate.weight",
+      "dtype_code": 2,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 256,
+      "coded_bytes": 80,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.1.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17684,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17665.17653410705,
+      "empirical_row_entropy_bytes": 17391.109649098435
+    },
+    {
+      "name": "blocks.1.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 168,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        760,
+        192
+      ],
+      "raw_bytes": 145920,
+      "coded_bytes": 68902,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 145920,
+      "empirical_tensor_entropy_bytes": 68855.03232535736,
+      "empirical_row_entropy_bytes": 67798.90150218552
+    },
+    {
+      "name": "blocks.1.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        760
+      ],
+      "raw_bytes": 1520,
+      "coded_bytes": 645,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        760
+      ],
+      "raw_bytes": 145920,
+      "coded_bytes": 68317,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 145920,
+      "empirical_tensor_entropy_bytes": 68294.15168144467,
+      "empirical_row_entropy_bytes": 67980.59421072999
+    },
+    {
+      "name": "blocks.1.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 131,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.1.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 3,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.2.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.2.attention.log_baseline_decay_rate",
+      "dtype_code": 2,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 12,
+      "coded_bytes": 4,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.2.attention.dt_bias",
+      "dtype_code": 2,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 768,
+      "coded_bytes": 275,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.2.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16096,
+      "encoding": 1,
+      "zero_rows": 11,
+      "coded_values": 34752,
+      "empirical_tensor_entropy_bytes": 16075.396793980772,
+      "empirical_row_entropy_bytes": 15810.444908015608
+    },
+    {
+      "name": "blocks.2.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 197,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.query_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1133,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.2.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16011,
+      "encoding": 1,
+      "zero_rows": 11,
+      "coded_values": 34752,
+      "empirical_tensor_entropy_bytes": 15997.656541193393,
+      "empirical_row_entropy_bytes": 15734.187765066103
+    },
+    {
+      "name": "blocks.2.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 197,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.key_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1124,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.2.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17296,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17284.315373250975,
+      "empirical_row_entropy_bytes": 17013.815112101445
+    },
+    {
+      "name": "blocks.2.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 174,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.value_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1095,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.2.attention.forget_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5470,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5453.909672128418,
+      "empirical_row_entropy_bytes": 5355.857964136258
+    },
+    {
+      "name": "blocks.2.attention.forget_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 67,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.forget_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.forget_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5366,
+      "encoding": 1,
+      "zero_rows": 11,
+      "coded_values": 11584,
+      "empirical_tensor_entropy_bytes": 5350.298687864399,
+      "empirical_row_entropy_bytes": 5065.678744138142
+    },
+    {
+      "name": "blocks.2.attention.forget_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 201,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.forget_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.beta_projection.weight",
+      "dtype_code": 2,
+      "shape": [
+        3,
+        192
+      ],
+      "raw_bytes": 2304,
+      "coded_bytes": 792,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.2.attention.output_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5572,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5566.33065010129,
+      "empirical_row_entropy_bytes": 5466.668303461921
+    },
+    {
+      "name": "blocks.2.attention.output_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 57,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.output_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.output_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5736,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5727.5761883758005,
+      "empirical_row_entropy_bytes": 5464.968884227375
+    },
+    {
+      "name": "blocks.2.attention.output_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 196,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.output_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.output_fused_norm_gate.weight",
+      "dtype_code": 2,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 256,
+      "coded_bytes": 85,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.2.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17592,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17580.100247446706,
+      "empirical_row_entropy_bytes": 17295.16629382262
+    },
+    {
+      "name": "blocks.2.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 167,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        762,
+        192
+      ],
+      "raw_bytes": 146304,
+      "coded_bytes": 68786,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 146304,
+      "empirical_tensor_entropy_bytes": 68741.64903459253,
+      "empirical_row_entropy_bytes": 67668.9124999588
+    },
+    {
+      "name": "blocks.2.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        762
+      ],
+      "raw_bytes": 1524,
+      "coded_bytes": 610,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        762
+      ],
+      "raw_bytes": 146304,
+      "coded_bytes": 67973,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 146304,
+      "empirical_tensor_entropy_bytes": 67944.9014249945,
+      "empirical_row_entropy_bytes": 67620.37607032814
+    },
+    {
+      "name": "blocks.2.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 138,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.2.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.3.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.3.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17365,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17548.078391695457,
+      "empirical_row_entropy_bytes": 16742.132229281146
+    },
+    {
+      "name": "blocks.3.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 238,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17445,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17460.393479322753,
+      "empirical_row_entropy_bytes": 16946.67962413396
+    },
+    {
+      "name": "blocks.3.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 220,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17618,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17604.848131770672,
+      "empirical_row_entropy_bytes": 17336.11668572108
+    },
+    {
+      "name": "blocks.3.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 179,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.attention.quantize_queries.scale",
+      "dtype_code": 1,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 6,
+      "coded_bytes": 19,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.attention.quantize_keys.scale",
+      "dtype_code": 1,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 6,
+      "coded_bytes": 17,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.attention.quantize_values.scale",
+      "dtype_code": 1,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 6,
+      "coded_bytes": 16,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17336,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17318.899975061686,
+      "empirical_row_entropy_bytes": 17058.080295475756
+    },
+    {
+      "name": "blocks.3.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 169,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        760,
+        192
+      ],
+      "raw_bytes": 145920,
+      "coded_bytes": 68382,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 145920,
+      "empirical_tensor_entropy_bytes": 68338.96922693364,
+      "empirical_row_entropy_bytes": 67280.93124899476
+    },
+    {
+      "name": "blocks.3.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        760
+      ],
+      "raw_bytes": 1520,
+      "coded_bytes": 642,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        760
+      ],
+      "raw_bytes": 145920,
+      "coded_bytes": 67869,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 145920,
+      "empirical_tensor_entropy_bytes": 67840.01680811294,
+      "empirical_row_entropy_bytes": 67529.85770831065
+    },
+    {
+      "name": "blocks.3.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 131,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.3.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.4.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.4.attention.log_baseline_decay_rate",
+      "dtype_code": 2,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 12,
+      "coded_bytes": 24,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.4.attention.dt_bias",
+      "dtype_code": 2,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 768,
+      "coded_bytes": 267,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.4.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16794,
+      "encoding": 1,
+      "zero_rows": 4,
+      "coded_values": 36096,
+      "empirical_tensor_entropy_bytes": 16779.817631049154,
+      "empirical_row_entropy_bytes": 16501.14603117847
+    },
+    {
+      "name": "blocks.4.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 192,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.query_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1136,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.4.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16637,
+      "encoding": 1,
+      "zero_rows": 4,
+      "coded_values": 36096,
+      "empirical_tensor_entropy_bytes": 16626.22913226909,
+      "empirical_row_entropy_bytes": 16358.519205923321
+    },
+    {
+      "name": "blocks.4.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 189,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.key_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1111,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.4.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17114,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17104.78052420377,
+      "empirical_row_entropy_bytes": 16831.24246266419
+    },
+    {
+      "name": "blocks.4.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 170,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.value_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1108,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.4.attention.forget_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5490,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5480.331161330278,
+      "empirical_row_entropy_bytes": 5387.19902585746
+    },
+    {
+      "name": "blocks.4.attention.forget_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 65,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.forget_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.forget_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5594,
+      "encoding": 1,
+      "zero_rows": 4,
+      "coded_values": 12032,
+      "empirical_tensor_entropy_bytes": 5583.01283154897,
+      "empirical_row_entropy_bytes": 5296.720050005079
+    },
+    {
+      "name": "blocks.4.attention.forget_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 183,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.forget_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.beta_projection.weight",
+      "dtype_code": 2,
+      "shape": [
+        3,
+        192
+      ],
+      "raw_bytes": 2304,
+      "coded_bytes": 788,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.4.attention.output_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5585,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5579.9077948808435,
+      "empirical_row_entropy_bytes": 5493.392004447303
+    },
+    {
+      "name": "blocks.4.attention.output_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 57,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.output_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.output_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5710,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5704.005267072369,
+      "empirical_row_entropy_bytes": 5434.5964786818895
+    },
+    {
+      "name": "blocks.4.attention.output_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 191,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.output_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.output_fused_norm_gate.weight",
+      "dtype_code": 2,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 256,
+      "coded_bytes": 83,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.4.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17510,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17499.58981316487,
+      "empirical_row_entropy_bytes": 17231.36164264733
+    },
+    {
+      "name": "blocks.4.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 157,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        760,
+        192
+      ],
+      "raw_bytes": 145920,
+      "coded_bytes": 68492,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 145920,
+      "empirical_tensor_entropy_bytes": 68456.94035469336,
+      "empirical_row_entropy_bytes": 67399.2399451806
+    },
+    {
+      "name": "blocks.4.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        760
+      ],
+      "raw_bytes": 1520,
+      "coded_bytes": 692,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        760
+      ],
+      "raw_bytes": 145920,
+      "coded_bytes": 68365,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 145920,
+      "empirical_tensor_entropy_bytes": 68345.1093230618,
+      "empirical_row_entropy_bytes": 68022.00954740468
+    },
+    {
+      "name": "blocks.4.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 134,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.4.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.5.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.5.attention.log_baseline_decay_rate",
+      "dtype_code": 2,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 12,
+      "coded_bytes": 6,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.5.attention.dt_bias",
+      "dtype_code": 2,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 768,
+      "coded_bytes": 268,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.5.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17021,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 36672,
+      "empirical_tensor_entropy_bytes": 17008.793146160773,
+      "empirical_row_entropy_bytes": 16734.06610403862
+    },
+    {
+      "name": "blocks.5.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 188,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.query_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1114,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.5.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16934,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 36672,
+      "empirical_tensor_entropy_bytes": 16922.145336630605,
+      "empirical_row_entropy_bytes": 16640.194165753765
+    },
+    {
+      "name": "blocks.5.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 190,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.key_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1098,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.5.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17263,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17252.41802707166,
+      "empirical_row_entropy_bytes": 16978.9393602927
+    },
+    {
+      "name": "blocks.5.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 168,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.value_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1092,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.5.attention.forget_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5448,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5434.296205711482,
+      "empirical_row_entropy_bytes": 5337.657452540123
+    },
+    {
+      "name": "blocks.5.attention.forget_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 69,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.forget_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.forget_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5689,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 12224,
+      "empirical_tensor_entropy_bytes": 5677.850928212792,
+      "empirical_row_entropy_bytes": 5390.8561052124
+    },
+    {
+      "name": "blocks.5.attention.forget_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 192,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.forget_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.beta_projection.weight",
+      "dtype_code": 2,
+      "shape": [
+        3,
+        192
+      ],
+      "raw_bytes": 2304,
+      "coded_bytes": 792,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.5.attention.output_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5643,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5638.030375896397,
+      "empirical_row_entropy_bytes": 5554.660507523779
+    },
+    {
+      "name": "blocks.5.attention.output_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 55,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.output_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.output_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5744,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5738.905512945593,
+      "empirical_row_entropy_bytes": 5460.884345245025
+    },
+    {
+      "name": "blocks.5.attention.output_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 193,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.output_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.output_fused_norm_gate.weight",
+      "dtype_code": 2,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 256,
+      "coded_bytes": 81,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.5.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17556,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17547.659353749328,
+      "empirical_row_entropy_bytes": 17245.93403800284
+    },
+    {
+      "name": "blocks.5.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 170,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        765,
+        192
+      ],
+      "raw_bytes": 146880,
+      "coded_bytes": 68874,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 146880,
+      "empirical_tensor_entropy_bytes": 68832.65543098304,
+      "empirical_row_entropy_bytes": 67763.53089178723
+    },
+    {
+      "name": "blocks.5.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        765
+      ],
+      "raw_bytes": 1530,
+      "coded_bytes": 682,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        765
+      ],
+      "raw_bytes": 146880,
+      "coded_bytes": 68380,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 146880,
+      "empirical_tensor_entropy_bytes": 68350.15342911372,
+      "empirical_row_entropy_bytes": 68039.38768602903
+    },
+    {
+      "name": "blocks.5.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 133,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.5.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 3,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.6.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.6.attention.log_baseline_decay_rate",
+      "dtype_code": 2,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 12,
+      "coded_bytes": 5,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.6.attention.dt_bias",
+      "dtype_code": 2,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 768,
+      "coded_bytes": 268,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.6.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17228,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17220.103543102377,
+      "empirical_row_entropy_bytes": 16947.35698374171
+    },
+    {
+      "name": "blocks.6.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 190,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.query_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1115,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.6.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17162,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17153.623608327136,
+      "empirical_row_entropy_bytes": 16890.02198756598
+    },
+    {
+      "name": "blocks.6.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 185,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.key_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1106,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.6.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17291,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17279.895633657998,
+      "empirical_row_entropy_bytes": 17025.20280420194
+    },
+    {
+      "name": "blocks.6.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 172,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.value_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1092,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.6.attention.forget_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5508,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5496.368711784764,
+      "empirical_row_entropy_bytes": 5406.128538000336
+    },
+    {
+      "name": "blocks.6.attention.forget_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 66,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.forget_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.forget_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5704,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5697.605075196723,
+      "empirical_row_entropy_bytes": 5413.187044693127
+    },
+    {
+      "name": "blocks.6.attention.forget_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 192,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.forget_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.beta_projection.weight",
+      "dtype_code": 2,
+      "shape": [
+        3,
+        192
+      ],
+      "raw_bytes": 2304,
+      "coded_bytes": 787,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.6.attention.output_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5620,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5614.383804542526,
+      "empirical_row_entropy_bytes": 5530.3526509636895
+    },
+    {
+      "name": "blocks.6.attention.output_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 60,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.output_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.output_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5739,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5734.582957381021,
+      "empirical_row_entropy_bytes": 5470.708000733678
+    },
+    {
+      "name": "blocks.6.attention.output_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 187,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.output_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.output_fused_norm_gate.weight",
+      "dtype_code": 2,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 256,
+      "coded_bytes": 87,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.6.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17512,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17503.97874747496,
+      "empirical_row_entropy_bytes": 17228.25519356975
+    },
+    {
+      "name": "blocks.6.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 160,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        768,
+        192
+      ],
+      "raw_bytes": 147456,
+      "coded_bytes": 69178,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147456,
+      "empirical_tensor_entropy_bytes": 69142.22963995227,
+      "empirical_row_entropy_bytes": 68058.66570819396
+    },
+    {
+      "name": "blocks.6.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        768
+      ],
+      "raw_bytes": 1536,
+      "coded_bytes": 692,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        768
+      ],
+      "raw_bytes": 147456,
+      "coded_bytes": 68200,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147456,
+      "empirical_tensor_entropy_bytes": 68176.71008541016,
+      "empirical_row_entropy_bytes": 67835.4998145207
+    },
+    {
+      "name": "blocks.6.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 143,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.6.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.7.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.7.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17306,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17291.631718859917,
+      "empirical_row_entropy_bytes": 16990.876610069532
+    },
+    {
+      "name": "blocks.7.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 218,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17273,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17267.78461621821,
+      "empirical_row_entropy_bytes": 16905.20198561498
+    },
+    {
+      "name": "blocks.7.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 208,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17618,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17600.678642595274,
+      "empirical_row_entropy_bytes": 17355.50116834533
+    },
+    {
+      "name": "blocks.7.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 156,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.attention.quantize_queries.scale",
+      "dtype_code": 1,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 6,
+      "coded_bytes": 13,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.attention.quantize_keys.scale",
+      "dtype_code": 1,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 6,
+      "coded_bytes": 5,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.attention.quantize_values.scale",
+      "dtype_code": 1,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 6,
+      "coded_bytes": 4,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17505,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17495.09658834024,
+      "empirical_row_entropy_bytes": 17251.242376935043
+    },
+    {
+      "name": "blocks.7.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 156,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        756,
+        192
+      ],
+      "raw_bytes": 145152,
+      "coded_bytes": 68176,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 145152,
+      "empirical_tensor_entropy_bytes": 68133.0152853504,
+      "empirical_row_entropy_bytes": 67069.67424773642
+    },
+    {
+      "name": "blocks.7.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        756
+      ],
+      "raw_bytes": 1512,
+      "coded_bytes": 677,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        756
+      ],
+      "raw_bytes": 145152,
+      "coded_bytes": 67429,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 145152,
+      "empirical_tensor_entropy_bytes": 67416.24313268572,
+      "empirical_row_entropy_bytes": 67069.6413557885
+    },
+    {
+      "name": "blocks.7.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 136,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.7.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.8.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.8.attention.log_baseline_decay_rate",
+      "dtype_code": 2,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 12,
+      "coded_bytes": 22,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.8.attention.dt_bias",
+      "dtype_code": 2,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 768,
+      "coded_bytes": 265,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.8.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17126,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 36672,
+      "empirical_tensor_entropy_bytes": 17116.265910938622,
+      "empirical_row_entropy_bytes": 16823.703208270163
+    },
+    {
+      "name": "blocks.8.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 201,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.query_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1127,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.8.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16999,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 36672,
+      "empirical_tensor_entropy_bytes": 16992.15982804261,
+      "empirical_row_entropy_bytes": 16710.292149864854
+    },
+    {
+      "name": "blocks.8.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 190,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.key_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1104,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.8.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17229,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17220.596458496446,
+      "empirical_row_entropy_bytes": 16956.880934205077
+    },
+    {
+      "name": "blocks.8.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 176,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.value_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1124,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.8.attention.forget_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5514,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5504.304597528444,
+      "empirical_row_entropy_bytes": 5407.058266314239
+    },
+    {
+      "name": "blocks.8.attention.forget_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 66,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.forget_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.forget_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5728,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 12224,
+      "empirical_tensor_entropy_bytes": 5720.010282744793,
+      "empirical_row_entropy_bytes": 5439.682484241981
+    },
+    {
+      "name": "blocks.8.attention.forget_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 194,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.forget_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.beta_projection.weight",
+      "dtype_code": 2,
+      "shape": [
+        3,
+        192
+      ],
+      "raw_bytes": 2304,
+      "coded_bytes": 791,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.8.attention.output_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5650,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5642.690004718497,
+      "empirical_row_entropy_bytes": 5547.227642591791
+    },
+    {
+      "name": "blocks.8.attention.output_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 57,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.output_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.output_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5782,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5775.786698003603,
+      "empirical_row_entropy_bytes": 5488.61257772233
+    },
+    {
+      "name": "blocks.8.attention.output_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 190,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.output_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.output_fused_norm_gate.weight",
+      "dtype_code": 2,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 256,
+      "coded_bytes": 87,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.8.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17568,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17554.091763267454,
+      "empirical_row_entropy_bytes": 17285.666925655496
+    },
+    {
+      "name": "blocks.8.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 160,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        766,
+        192
+      ],
+      "raw_bytes": 147072,
+      "coded_bytes": 68931,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147072,
+      "empirical_tensor_entropy_bytes": 68888.77905369714,
+      "empirical_row_entropy_bytes": 67825.475142603
+    },
+    {
+      "name": "blocks.8.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        766
+      ],
+      "raw_bytes": 1532,
+      "coded_bytes": 699,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        766
+      ],
+      "raw_bytes": 147072,
+      "coded_bytes": 68286,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147072,
+      "empirical_tensor_entropy_bytes": 68262.63409103075,
+      "empirical_row_entropy_bytes": 67935.27565077183
+    },
+    {
+      "name": "blocks.8.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 141,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.8.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.9.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.9.attention.log_baseline_decay_rate",
+      "dtype_code": 2,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 12,
+      "coded_bytes": 5,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.9.attention.dt_bias",
+      "dtype_code": 2,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 768,
+      "coded_bytes": 266,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.9.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17109,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17102.226678078026,
+      "empirical_row_entropy_bytes": 16828.731592801585
+    },
+    {
+      "name": "blocks.9.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 187,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.query_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1118,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.9.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17093,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17082.244591509116,
+      "empirical_row_entropy_bytes": 16802.198395905994
+    },
+    {
+      "name": "blocks.9.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 179,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.key_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1101,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.9.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17057,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 36672,
+      "empirical_tensor_entropy_bytes": 17049.812896239473,
+      "empirical_row_entropy_bytes": 16763.570694487535
+    },
+    {
+      "name": "blocks.9.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 174,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.value_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1100,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.9.attention.forget_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5517,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5506.559949628207,
+      "empirical_row_entropy_bytes": 5410.924736842905
+    },
+    {
+      "name": "blocks.9.attention.forget_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 63,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.forget_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.forget_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5730,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5722.066402315896,
+      "empirical_row_entropy_bytes": 5450.240939600908
+    },
+    {
+      "name": "blocks.9.attention.forget_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 192,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.forget_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.beta_projection.weight",
+      "dtype_code": 2,
+      "shape": [
+        3,
+        192
+      ],
+      "raw_bytes": 2304,
+      "coded_bytes": 789,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.9.attention.output_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5597,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5591.755296826059,
+      "empirical_row_entropy_bytes": 5503.664037355832
+    },
+    {
+      "name": "blocks.9.attention.output_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 53,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.output_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.output_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5747,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 12224,
+      "empirical_tensor_entropy_bytes": 5738.506501966296,
+      "empirical_row_entropy_bytes": 5449.246608010434
+    },
+    {
+      "name": "blocks.9.attention.output_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 188,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.output_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.output_fused_norm_gate.weight",
+      "dtype_code": 2,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 256,
+      "coded_bytes": 89,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.9.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17563,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17551.378989086614,
+      "empirical_row_entropy_bytes": 17263.768201302522
+    },
+    {
+      "name": "blocks.9.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 160,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        767,
+        192
+      ],
+      "raw_bytes": 147264,
+      "coded_bytes": 69248,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147264,
+      "empirical_tensor_entropy_bytes": 69204.7418829611,
+      "empirical_row_entropy_bytes": 68164.01929761177
+    },
+    {
+      "name": "blocks.9.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        767
+      ],
+      "raw_bytes": 1534,
+      "coded_bytes": 663,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        767
+      ],
+      "raw_bytes": 147264,
+      "coded_bytes": 68601,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147264,
+      "empirical_tensor_entropy_bytes": 68575.3247332345,
+      "empirical_row_entropy_bytes": 68253.06151624175
+    },
+    {
+      "name": "blocks.9.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 138,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.9.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.10.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.10.attention.log_baseline_decay_rate",
+      "dtype_code": 2,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 12,
+      "coded_bytes": 4,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.10.attention.dt_bias",
+      "dtype_code": 2,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 768,
+      "coded_bytes": 274,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.10.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17138,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17127.967735430564,
+      "empirical_row_entropy_bytes": 16860.686797483755
+    },
+    {
+      "name": "blocks.10.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 173,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.query_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1110,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.10.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17163,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17156.059527083664,
+      "empirical_row_entropy_bytes": 16880.75795621088
+    },
+    {
+      "name": "blocks.10.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 172,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.key_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1110,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.10.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17201,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17193.08941753378,
+      "empirical_row_entropy_bytes": 16926.247278913048
+    },
+    {
+      "name": "blocks.10.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 175,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.value_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1112,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.10.attention.forget_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5567,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5559.324508196335,
+      "empirical_row_entropy_bytes": 5464.709329660172
+    },
+    {
+      "name": "blocks.10.attention.forget_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 59,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.forget_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.forget_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5674,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5670.785633484059,
+      "empirical_row_entropy_bytes": 5385.694998020454
+    },
+    {
+      "name": "blocks.10.attention.forget_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 187,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.forget_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.beta_projection.weight",
+      "dtype_code": 2,
+      "shape": [
+        3,
+        192
+      ],
+      "raw_bytes": 2304,
+      "coded_bytes": 789,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.10.attention.output_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5641,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5634.94133103503,
+      "empirical_row_entropy_bytes": 5535.464988230841
+    },
+    {
+      "name": "blocks.10.attention.output_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 54,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.output_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.output_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5737,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5731.007238480579,
+      "empirical_row_entropy_bytes": 5462.5250079537045
+    },
+    {
+      "name": "blocks.10.attention.output_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 192,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.output_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.output_fused_norm_gate.weight",
+      "dtype_code": 2,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 256,
+      "coded_bytes": 95,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.10.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17470,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17458.665275894393,
+      "empirical_row_entropy_bytes": 17190.7846845708
+    },
+    {
+      "name": "blocks.10.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 168,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        768,
+        192
+      ],
+      "raw_bytes": 147456,
+      "coded_bytes": 69408,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147456,
+      "empirical_tensor_entropy_bytes": 69370.82649708677,
+      "empirical_row_entropy_bytes": 68278.98471623201
+    },
+    {
+      "name": "blocks.10.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        768
+      ],
+      "raw_bytes": 1536,
+      "coded_bytes": 654,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        768
+      ],
+      "raw_bytes": 147456,
+      "coded_bytes": 68766,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147456,
+      "empirical_tensor_entropy_bytes": 68740.49503852849,
+      "empirical_row_entropy_bytes": 68421.48451245225
+    },
+    {
+      "name": "blocks.10.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 136,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.10.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.11.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 1,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.11.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17256,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17241.352276628328,
+      "empirical_row_entropy_bytes": 16957.361168526775
+    },
+    {
+      "name": "blocks.11.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 210,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17380,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17379.6695301151,
+      "empirical_row_entropy_bytes": 17019.433299272536
+    },
+    {
+      "name": "blocks.11.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 219,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17641,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17623.457430370752,
+      "empirical_row_entropy_bytes": 17360.375794905765
+    },
+    {
+      "name": "blocks.11.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 167,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.attention.quantize_queries.scale",
+      "dtype_code": 1,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 6,
+      "coded_bytes": 14,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.attention.quantize_keys.scale",
+      "dtype_code": 1,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 6,
+      "coded_bytes": 4,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.attention.quantize_values.scale",
+      "dtype_code": 1,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 6,
+      "coded_bytes": 5,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17398,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17384.545004994245,
+      "empirical_row_entropy_bytes": 17123.468590667337
+    },
+    {
+      "name": "blocks.11.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 157,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        767,
+        192
+      ],
+      "raw_bytes": 147264,
+      "coded_bytes": 69438,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147264,
+      "empirical_tensor_entropy_bytes": 69396.42053813682,
+      "empirical_row_entropy_bytes": 68325.68788781633
+    },
+    {
+      "name": "blocks.11.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        767
+      ],
+      "raw_bytes": 1534,
+      "coded_bytes": 604,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        767
+      ],
+      "raw_bytes": 147264,
+      "coded_bytes": 68724,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147264,
+      "empirical_tensor_entropy_bytes": 68693.75785963712,
+      "empirical_row_entropy_bytes": 68376.00666064683
+    },
+    {
+      "name": "blocks.11.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 138,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.11.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.12.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.12.attention.log_baseline_decay_rate",
+      "dtype_code": 2,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 12,
+      "coded_bytes": 18,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.12.attention.dt_bias",
+      "dtype_code": 2,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 768,
+      "coded_bytes": 265,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.12.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17085,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 36672,
+      "empirical_tensor_entropy_bytes": 17072.316816826966,
+      "empirical_row_entropy_bytes": 16804.038320542193
+    },
+    {
+      "name": "blocks.12.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 180,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.query_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1141,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.12.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17019,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 36672,
+      "empirical_tensor_entropy_bytes": 17008.492492048223,
+      "empirical_row_entropy_bytes": 16729.188175616113
+    },
+    {
+      "name": "blocks.12.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 175,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.key_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1107,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.12.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17158,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17148.746657945154,
+      "empirical_row_entropy_bytes": 16877.092492420663
+    },
+    {
+      "name": "blocks.12.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 180,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.value_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1124,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.12.attention.forget_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5554,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5547.525304401567,
+      "empirical_row_entropy_bytes": 5455.868515731275
+    },
+    {
+      "name": "blocks.12.attention.forget_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 62,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.forget_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.forget_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5688,
+      "encoding": 1,
+      "zero_rows": 1,
+      "coded_values": 12224,
+      "empirical_tensor_entropy_bytes": 5678.882091248531,
+      "empirical_row_entropy_bytes": 5408.669284038867
+    },
+    {
+      "name": "blocks.12.attention.forget_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 185,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.forget_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.beta_projection.weight",
+      "dtype_code": 2,
+      "shape": [
+        3,
+        192
+      ],
+      "raw_bytes": 2304,
+      "coded_bytes": 798,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.12.attention.output_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5622,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5618.595938323327,
+      "empirical_row_entropy_bytes": 5517.183799032559
+    },
+    {
+      "name": "blocks.12.attention.output_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 54,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.output_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.output_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5756,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5748.806911203905,
+      "empirical_row_entropy_bytes": 5473.8684649658
+    },
+    {
+      "name": "blocks.12.attention.output_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 183,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.output_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.output_fused_norm_gate.weight",
+      "dtype_code": 2,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 256,
+      "coded_bytes": 92,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.12.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17384,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17373.48410403526,
+      "empirical_row_entropy_bytes": 17103.699947659192
+    },
+    {
+      "name": "blocks.12.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 166,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        768,
+        192
+      ],
+      "raw_bytes": 147456,
+      "coded_bytes": 69343,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147456,
+      "empirical_tensor_entropy_bytes": 69302.70045541246,
+      "empirical_row_entropy_bytes": 68230.29324977203
+    },
+    {
+      "name": "blocks.12.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        768
+      ],
+      "raw_bytes": 1536,
+      "coded_bytes": 626,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        768
+      ],
+      "raw_bytes": 147456,
+      "coded_bytes": 68451,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147456,
+      "empirical_tensor_entropy_bytes": 68421.961617559,
+      "empirical_row_entropy_bytes": 68110.29397896018
+    },
+    {
+      "name": "blocks.12.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 136,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.12.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.13.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.13.attention.log_baseline_decay_rate",
+      "dtype_code": 2,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 12,
+      "coded_bytes": 4,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.13.attention.dt_bias",
+      "dtype_code": 2,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 768,
+      "coded_bytes": 274,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.13.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16846,
+      "encoding": 1,
+      "zero_rows": 3,
+      "coded_values": 36288,
+      "empirical_tensor_entropy_bytes": 16834.19889396836,
+      "empirical_row_entropy_bytes": 16562.92204156965
+    },
+    {
+      "name": "blocks.13.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 199,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.query_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1154,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.13.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16673,
+      "encoding": 1,
+      "zero_rows": 3,
+      "coded_values": 36288,
+      "empirical_tensor_entropy_bytes": 16662.590677756958,
+      "empirical_row_entropy_bytes": 16384.733152690103
+    },
+    {
+      "name": "blocks.13.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 186,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.key_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1111,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.13.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17064,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17056.31999642224,
+      "empirical_row_entropy_bytes": 16776.60543543289
+    },
+    {
+      "name": "blocks.13.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 187,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.value_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1120,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.13.attention.forget_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5453,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5441.809974354788,
+      "empirical_row_entropy_bytes": 5352.297735629823
+    },
+    {
+      "name": "blocks.13.attention.forget_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 71,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.forget_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.forget_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5599,
+      "encoding": 1,
+      "zero_rows": 3,
+      "coded_values": 12096,
+      "empirical_tensor_entropy_bytes": 5589.208416447783,
+      "empirical_row_entropy_bytes": 5302.839604671441
+    },
+    {
+      "name": "blocks.13.attention.forget_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 186,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.forget_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.beta_projection.weight",
+      "dtype_code": 2,
+      "shape": [
+        3,
+        192
+      ],
+      "raw_bytes": 2304,
+      "coded_bytes": 798,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.13.attention.output_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5602,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5594.884689601196,
+      "empirical_row_entropy_bytes": 5499.604696693981
+    },
+    {
+      "name": "blocks.13.attention.output_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 54,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.output_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.output_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5752,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5743.749204389329,
+      "empirical_row_entropy_bytes": 5470.87775172584
+    },
+    {
+      "name": "blocks.13.attention.output_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 189,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.output_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.output_fused_norm_gate.weight",
+      "dtype_code": 2,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 256,
+      "coded_bytes": 89,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.13.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17289,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17278.459420123894,
+      "empirical_row_entropy_bytes": 17008.706536553163
+    },
+    {
+      "name": "blocks.13.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 166,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        766,
+        192
+      ],
+      "raw_bytes": 147072,
+      "coded_bytes": 68964,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147072,
+      "empirical_tensor_entropy_bytes": 68925.14222049553,
+      "empirical_row_entropy_bytes": 67854.68234411722
+    },
+    {
+      "name": "blocks.13.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        766
+      ],
+      "raw_bytes": 1532,
+      "coded_bytes": 639,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        766
+      ],
+      "raw_bytes": 147072,
+      "coded_bytes": 68248,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 147072,
+      "empirical_tensor_entropy_bytes": 68216.9549364671,
+      "empirical_row_entropy_bytes": 67920.65561350033
+    },
+    {
+      "name": "blocks.13.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 132,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.13.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.14.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.14.attention.log_baseline_decay_rate",
+      "dtype_code": 2,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 12,
+      "coded_bytes": 4,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.14.attention.dt_bias",
+      "dtype_code": 2,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 768,
+      "coded_bytes": 274,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.14.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16763,
+      "encoding": 1,
+      "zero_rows": 2,
+      "coded_values": 36480,
+      "empirical_tensor_entropy_bytes": 16752.49318748408,
+      "empirical_row_entropy_bytes": 16461.32800869978
+    },
+    {
+      "name": "blocks.14.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 210,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.query_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1149,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.14.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16822,
+      "encoding": 1,
+      "zero_rows": 2,
+      "coded_values": 36480,
+      "empirical_tensor_entropy_bytes": 16809.413870496563,
+      "empirical_row_entropy_bytes": 16538.935631201253
+    },
+    {
+      "name": "blocks.14.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 191,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.key_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1107,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.14.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 16978,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 16983.724411739342,
+      "empirical_row_entropy_bytes": 16683.71732535356
+    },
+    {
+      "name": "blocks.14.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 198,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.value_convolution.weight",
+      "dtype_code": 2,
+      "shape": [
+        192,
+        4
+      ],
+      "raw_bytes": 3072,
+      "coded_bytes": 1126,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.14.attention.forget_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5501,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5492.302449354518,
+      "empirical_row_entropy_bytes": 5399.791711652902
+    },
+    {
+      "name": "blocks.14.attention.forget_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 68,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.forget_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.forget_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5645,
+      "encoding": 1,
+      "zero_rows": 2,
+      "coded_values": 12160,
+      "empirical_tensor_entropy_bytes": 5633.922882135949,
+      "empirical_row_entropy_bytes": 5324.210515046817
+    },
+    {
+      "name": "blocks.14.attention.forget_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 198,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.forget_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.beta_projection.weight",
+      "dtype_code": 2,
+      "shape": [
+        3,
+        192
+      ],
+      "raw_bytes": 2304,
+      "coded_bytes": 789,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.14.attention.output_gate_projection.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        64,
+        192
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5613,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5607.015240807615,
+      "empirical_row_entropy_bytes": 5519.048462663662
+    },
+    {
+      "name": "blocks.14.attention.output_gate_projection.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 59,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.output_gate_projection.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.output_gate_projection.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        64
+      ],
+      "raw_bytes": 12288,
+      "coded_bytes": 5771,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 12288,
+      "empirical_tensor_entropy_bytes": 5764.151741119942,
+      "empirical_row_entropy_bytes": 5495.137302821746
+    },
+    {
+      "name": "blocks.14.attention.output_gate_projection.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 186,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.output_gate_projection.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.output_fused_norm_gate.weight",
+      "dtype_code": 2,
+      "shape": [
+        64
+      ],
+      "raw_bytes": 256,
+      "coded_bytes": 85,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.14.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17172,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17161.706248878614,
+      "empirical_row_entropy_bytes": 16899.147291306246
+    },
+    {
+      "name": "blocks.14.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 166,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        765,
+        192
+      ],
+      "raw_bytes": 146880,
+      "coded_bytes": 68767,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 146880,
+      "empirical_tensor_entropy_bytes": 68726.24071821773,
+      "empirical_row_entropy_bytes": 67628.15523249457
+    },
+    {
+      "name": "blocks.14.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        765
+      ],
+      "raw_bytes": 1530,
+      "coded_bytes": 616,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        765
+      ],
+      "raw_bytes": 146880,
+      "coded_bytes": 68181,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 146880,
+      "empirical_tensor_entropy_bytes": 68143.75227607792,
+      "empirical_row_entropy_bytes": 67854.01791673138
+    },
+    {
+      "name": "blocks.14.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 138,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.14.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.residual_stream_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 1,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.15.token_embedding_coefficient.value",
+      "dtype_code": 2,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 4,
+      "coded_bytes": 2,
+      "encoding": 3
+    },
+    {
+      "name": "blocks.15.attention.query_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17307,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17307.914194678677,
+      "empirical_row_entropy_bytes": 16887.54081146431
+    },
+    {
+      "name": "blocks.15.attention.query_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 234,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.attention.query_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.attention.key_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17291,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17283.790896760634,
+      "empirical_row_entropy_bytes": 16915.15216475876
+    },
+    {
+      "name": "blocks.15.attention.key_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 212,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.attention.key_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.attention.value_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17540,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17525.140531801462,
+      "empirical_row_entropy_bytes": 17259.320209874197
+    },
+    {
+      "name": "blocks.15.attention.value_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 158,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.attention.value_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 1,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.attention.quantize_queries.scale",
+      "dtype_code": 1,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 6,
+      "coded_bytes": 13,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.attention.quantize_keys.scale",
+      "dtype_code": 1,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 6,
+      "coded_bytes": 4,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.attention.quantize_values.scale",
+      "dtype_code": 1,
+      "shape": [
+        3
+      ],
+      "raw_bytes": 6,
+      "coded_bytes": 3,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.attention.output_projection.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        192
+      ],
+      "raw_bytes": 36864,
+      "coded_bytes": 17353,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 36864,
+      "empirical_tensor_entropy_bytes": 17341.981360390368,
+      "empirical_row_entropy_bytes": 17076.86357849079
+    },
+    {
+      "name": "blocks.15.attention.output_projection.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 175,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.attention.output_projection.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.mlp.up.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        753,
+        192
+      ],
+      "raw_bytes": 144576,
+      "coded_bytes": 67412,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 144576,
+      "empirical_tensor_entropy_bytes": 67374.95155283557,
+      "empirical_row_entropy_bytes": 66276.92231545533
+    },
+    {
+      "name": "blocks.15.mlp.up.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        753
+      ],
+      "raw_bytes": 1506,
+      "coded_bytes": 657,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.mlp.up.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.mlp.down.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        192,
+        753
+      ],
+      "raw_bytes": 144576,
+      "coded_bytes": 66933,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 144576,
+      "empirical_tensor_entropy_bytes": 66911.38416050076,
+      "empirical_row_entropy_bytes": 66536.58306714456
+    },
+    {
+      "name": "blocks.15.mlp.down.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        192
+      ],
+      "raw_bytes": 384,
+      "coded_bytes": 162,
+      "encoding": 2
+    },
+    {
+      "name": "blocks.15.mlp.down.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 2,
+      "encoding": 2
+    },
+    {
+      "name": "unembedding.weight.q",
+      "dtype_code": 0,
+      "shape": [
+        208,
+        192
+      ],
+      "raw_bytes": 39936,
+      "coded_bytes": 18524,
+      "encoding": 1,
+      "zero_rows": 0,
+      "coded_values": 39936,
+      "empirical_tensor_entropy_bytes": 18505.09418672328,
+      "empirical_row_entropy_bytes": 18210.58979133109
+    },
+    {
+      "name": "unembedding.weight.scale",
+      "dtype_code": 1,
+      "shape": [
+        208
+      ],
+      "raw_bytes": 416,
+      "coded_bytes": 214,
+      "encoding": 2
+    },
+    {
+      "name": "unembedding.quantize_activation.scale",
+      "dtype_code": 1,
+      "shape": [
+        1
+      ],
+      "raw_bytes": 2,
+      "coded_bytes": 13,
+      "encoding": 2
+    },
+    {
+      "name": "rope.inv_freq",
+      "dtype_code": 2,
+      "shape": [
+        32
+      ],
+      "raw_bytes": 128,
+      "coded_bytes": 174,
+      "encoding": 3
+    },
+    {
+      "name": "rope.sin",
+      "dtype_code": 2,
+      "shape": [
+        131072,
+        32
+      ],
+      "raw_bytes": 16777216,
+      "coded_bytes": 13,
+      "encoding": 4
+    },
+    {
+      "name": "rope.cos",
+      "dtype_code": 2,
+      "shape": [
+        131072,
+        32
+      ],
+      "raw_bytes": 16777216,
+      "coded_bytes": 12,
+      "encoding": 5
+    },
+    {
+      "name": "config.ints",
+      "dtype_code": 3,
+      "shape": [
+        11
+      ],
+      "raw_bytes": 44,
+      "coded_bytes": 54,
+      "encoding": 3
+    },
+    {
+      "name": "config.kimi",
+      "dtype_code": 3,
+      "shape": [
+        16
+      ],
+      "raw_bytes": 64,
+      "coded_bytes": 41,
+      "encoding": 3
+    }
+  ],
+  "scope": "Observed upstream coding including per-tensor metadata. Empirical entropy fits each tensor/row to itself, excludes model costs and is not an achievable size or a prize score."
+}

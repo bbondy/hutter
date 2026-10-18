@@ -119,3 +119,8 @@ The packed program and decoder prefix retain their sizes, and each weight copy
 shrinks by 4,280 bytes. The baseline compressor does not match the published
 binary; package and compiler-selection evidence is retained separately. The
 full enwik9 payload, dictionary and resource limits remain unverified.
+
+The [unchanged-container audit](20261017-container-audit-v1/README.md) attributes
+all bytes to tensor families and separates fitted entropy diagnostics from
+achievable coding gains. Its observer must reproduce the original container
+byte for byte before publishing any accounting.
