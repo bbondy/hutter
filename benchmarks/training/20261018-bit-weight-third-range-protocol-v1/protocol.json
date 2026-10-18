@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "hypothesis": "The previously screen-selected one-pass bit-model weights may improve an additional, geographically separate article range. Test the fixed model once without retuning, after the first two native Linux fixture gates passed.",
+  "fixtures": {
+    "confirmation": {
+      "manifest_path": "benchmarks/model-variants/20261017-retrieval-confirmation-protocol-v1/confirmation.json",
+      "manifest_sha256": "7a2d790580709ac043ec19b4487d3cea325f3285b1d46682b2ee69ccbf917b0d",
+      "input_sha256": "60436c2ca5b650bd1e8e7894447ce14de1499c19d45d79a0764d6186830cc2c9"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "changes": "Shared native benchmark records CPU identity; same paired roundtrip/context checks."
+  },
+  "input_variant": "upstream",
+  "variants": [
+    "baseline",
+    "bit-weight-warm-start-lr3000-v1"
+  ],
+  "model_sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0",
+  "bit_weight_recipe_sha256": "91f2aa17e6ec986bb73edb9446d5487e964bd91161dad996b23dfe47ba25d470",
+  "rule": "Replace only embedded BF16 weights in src/bit_head_weights.h; retain original runtime, phases, contexts, transformer and assets. No tuning after this outcome.",
+  "acceptance": [
+    "Exact prepared and original XML restoration for both variants",
+    "All context counts match baseline and encoder/decoder",
+    "Preserve measured payload delta whether positive or negative; third-range gain is supportive but not a substitute for full-stream testing"
+  ],
+  "limitations": [
+    "This 80 MB range was previously used for an unrelated retrieval comparison, so it is not untouched final validation",
+    "Small fixture payloads and development binaries are not prize scores",
+    "Concurrent Mac timings are exploratory"
+  ],
+  "scope": "One further native Mac fixture generalization probe of a fixed model. Do not alter prior frozen selection."
+}
