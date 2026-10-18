@@ -92,6 +92,31 @@ comparisons. A separate summary reports the current head's discrete-probability
 cost by model-bit decile and recorded channel state. This can guide a later
 experiment, but does not measure an archive with the head removed.
 
+## First fixture results
+
+Both Mac recordings preserve their entire baseline archive and restore the
+original XML. Encoder and decoder produce identical trace/channel/probability
+hashes. This gives 2,418,045 model bits on the screen and 2,399,939 on the
+disjoint fixture. All recorded channel zones are zero in these two traces.
+
+| Fixture | Archive bytes | Current head's probability-cost change | First trainer mismatch |
+| --- | ---: | ---: | --- |
+| Screen | 119,065, unchanged | −190.29 B | Bit 665,047: live 47,768, replay 47,767 |
+| Disjoint | 117,438, unchanged | −222.39 B | Bit 281,491: live 59,892, replay 59,893 |
+
+The [trace records](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-trace-screen-v2)
+and [failed replay records](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-replay-screen-v1)
+are saved with their disjoint counterparts. Replay stops at the first mismatch;
+these are zero-based positions, not counts of all differences. The deliberate
+wrong-probability controls also fail as intended. The probability-cost column
+sums the current head's actual discretized predictions only where it executes;
+it is not the size of an archive produced without that head.
+
+**Training remains gated off.** A one-unit probability difference is enough to
+fail the exact replay requirement. Its cause is under investigation; successful
+live encoder/decoder agreement does not prove that a separate trainer uses
+identical arithmetic. Real native Linux trace/replay checks are also running.
+
 ## A staged experiment
 
 1. Verify the unchanged checkpoint export and preserve its hashes.

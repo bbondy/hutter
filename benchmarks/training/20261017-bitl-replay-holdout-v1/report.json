@@ -1,0 +1,67 @@
+{
+  "kind": "bitl-frozen-replay-verification",
+  "version": 1,
+  "date_utc": "2026-10-18T02:47:51.635229+00:00",
+  "commit": "f1377263e5b4b7dc72cbec3b2f35c1126a7181f1",
+  "script_sha256": "a02876202eff7ec151f3d03dfe2e33bd664377112de44bdefa161593d39ce308",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "passed": false,
+  "comparison_sha256": "1f82084a4818506014fbed2872705cb6d51c042947f91f15a3d387b126447276",
+  "protocol_sha256": "d63ae05e81f3b29301b11aec0061ab1cacf911b83bbe0bc290e5dd80b071e233",
+  "build_sha256": "bddca27fae008cb0d593c6c9aba2f79d84a25f584fc7a052e634c19b35e1929b",
+  "binary_sha256": "b40c217e568466cc6548cdb784c8a1873bc20b3245630f9e177f1eb7dc8b946a",
+  "weights_sha256": "c72957f48c2ec81afa3aed2baae7acd964c17f96bb0406b8195818fc708a8e7d",
+  "trace": {
+    "bits": 2399939,
+    "channels": 299993,
+    "overrides": 1,
+    "one_bits": 1139098,
+    "channel_zones": {
+      "0": 299993
+    },
+    "files": {
+      "trace": {
+        "bytes": 143996368,
+        "sha256": "1d31b257f6348ab9e50304757270022cc7e5f33ed0e15b8582200ea426b157a9"
+      },
+      "channel": {
+        "bytes": 82798096,
+        "sha256": "34010bbe3b3ccea3c58945c3105aa769d2e72f8338be570c3cc7efd6167c4799"
+      },
+      "probability": {
+        "bytes": 4799878,
+        "sha256": "7da895e95b77455efe4aa2c0e16e9d07546eae1b6f759cc4e7f0414d43baf42e"
+      }
+    }
+  },
+  "command": [
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-replay-v1/replay",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-holdout-bit-trace-v1/trial-0-0/bitl-trace-40370.bin",
+    "0",
+    "0"
+  ],
+  "environment": {
+    "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-holdout-bit-trace-v1/trial-0-0/bitl-channel-40370.bin",
+    "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-weight-audit-v1/F2L.nblb",
+    "REPLAY_FREEZE_AT": "1",
+    "HUTTER_EXPECT_PROBABILITIES": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-holdout-bit-trace-v1/trial-0-0/bitl-probability-40370.bin"
+  },
+  "scope": "Fixture replay of shipped weights. Freeze after first Observe, before any complete 1024-bit backward window; no optimizer update. No training, archive improvement or full-stream online-learning equivalence claim.",
+  "replay": {
+    "exit_code": 6,
+    "status": "completed",
+    "wall_seconds": 0.26577487499889685,
+    "log_sha256": "2852b60c1ec7ef7e23c7574054ac386bf8c569d59a770af22d9c7aa4c88fbca9"
+  },
+  "probabilities_match": false,
+  "negative_control": {
+    "exit_code": 6,
+    "status": "completed",
+    "wall_seconds": 0.007147374999476597,
+    "log_sha256": "8e3aa18c214d887aa9717488a9118f76466f4ced4aa508e3c9d9a0ff0ffb6030",
+    "original_probability": 1,
+    "changed_probability": 2,
+    "input_sha256": "99be5efb88ca2013bd8e4eb035fd42d5245468fe9afa70d8ba9c1c419a48c4e8"
+  },
+  "negative_control_rejected": true
+}

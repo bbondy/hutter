@@ -1,0 +1,209 @@
+{
+  "kind": "bitl-current-coding-cost-summary",
+  "version": 1,
+  "date_utc": "2026-10-18T02:48:28.348172+00:00",
+  "commit": "f1377263e5b4b7dc72cbec3b2f35c1126a7181f1",
+  "script_sha256": "409b8d7eb571f5fd1f3f2acbcf6b0ba2feb522cd3da3e9667d4c8f512f460766",
+  "numpy_version": "2.5.4",
+  "comparison_sha256": "936c3448e255f83dde59c79e06a2115141782abd33a81be9b2f8ec5750b63053",
+  "trace": {
+    "bits": 2418045,
+    "channels": 302256,
+    "overrides": 1,
+    "one_bits": 1144419,
+    "channel_zones": {
+      "0": 302256
+    },
+    "files": {
+      "trace": {
+        "bytes": 145082728,
+        "sha256": "a00fdc8d14fce2276fea518c3caa63babae64ec3e1031639bf8e8d5ffc6a2d9c"
+      },
+      "channel": {
+        "bytes": 83422684,
+        "sha256": "27e51497de7861e9814c186bc4098cb06c14e4fb59b19b45fa387e925a364f27"
+      },
+      "probability": {
+        "bytes": 4836090,
+        "sha256": "6834e961b800e22160d78680966bad0fb3eba48803ca944a3d3aa8f90a2a0002"
+      }
+    }
+  },
+  "archive_bytes": 119065,
+  "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f",
+  "role": "screen",
+  "groups": {
+    "all": {
+      "bits": 2418045,
+      "overrides": 1,
+      "helped_bits": 1137781,
+      "hurt_bits": 1269825,
+      "base_cost_bytes": 117453.35785177047,
+      "head_cost_bytes": 117263.06992217475,
+      "delta_cost_bytes": -190.28792959572456
+    },
+    "decile-0": {
+      "bits": 241805,
+      "overrides": 1,
+      "helped_bits": 135451,
+      "hurt_bits": 105169,
+      "base_cost_bytes": 11121.538793709196,
+      "head_cost_bytes": 11002.704166874924,
+      "delta_cost_bytes": -118.83462683427206
+    },
+    "decile-1": {
+      "bits": 241804,
+      "overrides": 0,
+      "helped_bits": 95073,
+      "hurt_bits": 145673,
+      "base_cost_bytes": 11810.897788607404,
+      "head_cost_bytes": 11799.845489206842,
+      "delta_cost_bytes": -11.052299400562333
+    },
+    "decile-2": {
+      "bits": 241805,
+      "overrides": 0,
+      "helped_bits": 101239,
+      "hurt_bits": 139570,
+      "base_cost_bytes": 12077.880129215364,
+      "head_cost_bytes": 12074.823182097143,
+      "delta_cost_bytes": -3.0569471182207053
+    },
+    "decile-3": {
+      "bits": 241804,
+      "overrides": 0,
+      "helped_bits": 110290,
+      "hurt_bits": 130480,
+      "base_cost_bytes": 12419.106182527863,
+      "head_cost_bytes": 12413.685179701548,
+      "delta_cost_bytes": -5.421002826315089
+    },
+    "decile-4": {
+      "bits": 241805,
+      "overrides": 0,
+      "helped_bits": 116802,
+      "hurt_bits": 124037,
+      "base_cost_bytes": 12358.234598377696,
+      "head_cost_bytes": 12355.400726360998,
+      "delta_cost_bytes": -2.833872016697569
+    },
+    "decile-5": {
+      "bits": 241804,
+      "overrides": 0,
+      "helped_bits": 114541,
+      "hurt_bits": 126267,
+      "base_cost_bytes": 12296.475667765544,
+      "head_cost_bytes": 12281.819541096886,
+      "delta_cost_bytes": -14.656126668658544
+    },
+    "decile-6": {
+      "bits": 241805,
+      "overrides": 0,
+      "helped_bits": 112208,
+      "hurt_bits": 128649,
+      "base_cost_bytes": 12223.199490572813,
+      "head_cost_bytes": 12218.367761992547,
+      "delta_cost_bytes": -4.831728580265917
+    },
+    "decile-7": {
+      "bits": 241804,
+      "overrides": 0,
+      "helped_bits": 119390,
+      "hurt_bits": 121339,
+      "base_cost_bytes": 11308.24399767526,
+      "head_cost_bytes": 11304.05608198389,
+      "delta_cost_bytes": -4.187915691369199
+    },
+    "decile-8": {
+      "bits": 241805,
+      "overrides": 0,
+      "helped_bits": 115475,
+      "hurt_bits": 125308,
+      "base_cost_bytes": 11048.168235846671,
+      "head_cost_bytes": 11042.838542794378,
+      "delta_cost_bytes": -5.3296930522938055
+    },
+    "decile-9": {
+      "bits": 241804,
+      "overrides": 0,
+      "helped_bits": 117312,
+      "hurt_bits": 123333,
+      "base_cost_bytes": 10789.612967472662,
+      "head_cost_bytes": 10769.529250065585,
+      "delta_cost_bytes": -20.08371740707662
+    },
+    "gate-0": {
+      "bits": 2418045,
+      "overrides": 1,
+      "helped_bits": 1137781,
+      "hurt_bits": 1269825,
+      "base_cost_bytes": 117453.35785177047,
+      "head_cost_bytes": 117263.06992217475,
+      "delta_cost_bytes": -190.28792959572456
+    },
+    "gate-1": {
+      "bits": 0,
+      "overrides": 0,
+      "helped_bits": 0,
+      "hurt_bits": 0,
+      "base_cost_bytes": 0.0,
+      "head_cost_bytes": 0.0,
+      "delta_cost_bytes": 0.0
+    },
+    "zone-0": {
+      "bits": 2418045,
+      "overrides": 1,
+      "helped_bits": 1137781,
+      "hurt_bits": 1269825,
+      "base_cost_bytes": 117453.35785177047,
+      "head_cost_bytes": 117263.06992217475,
+      "delta_cost_bytes": -190.28792959572456
+    },
+    "zone-1": {
+      "bits": 0,
+      "overrides": 0,
+      "helped_bits": 0,
+      "hurt_bits": 0,
+      "base_cost_bytes": 0.0,
+      "head_cost_bytes": 0.0,
+      "delta_cost_bytes": 0.0
+    },
+    "zone-2": {
+      "bits": 0,
+      "overrides": 0,
+      "helped_bits": 0,
+      "hurt_bits": 0,
+      "base_cost_bytes": 0.0,
+      "head_cost_bytes": 0.0,
+      "delta_cost_bytes": 0.0
+    },
+    "zone-3": {
+      "bits": 0,
+      "overrides": 0,
+      "helped_bits": 0,
+      "hurt_bits": 0,
+      "base_cost_bytes": 0.0,
+      "head_cost_bytes": 0.0,
+      "delta_cost_bytes": 0.0
+    },
+    "zone-4": {
+      "bits": 0,
+      "overrides": 0,
+      "helped_bits": 0,
+      "hurt_bits": 0,
+      "base_cost_bytes": 0.0,
+      "head_cost_bytes": 0.0,
+      "delta_cost_bytes": 0.0
+    },
+    "zone-5": {
+      "bits": 0,
+      "overrides": 0,
+      "helped_bits": 0,
+      "hurt_bits": 0,
+      "base_cost_bytes": 0.0,
+      "head_cost_bytes": 0.0,
+      "delta_cost_bytes": 0.0
+    }
+  },
+  "scope": "Sum of -log2 probability of the actual bit, from discretized live inputs/outputs, only where BITLSTM executes. Not an archive size or a no-head ablation; excludes other coded bits, termination and framing. Groups overlap. Gate/zone describe the channel captured every eight model bits; deciles divide model-bit count, not raw bytes. No calibration or new training."
+}

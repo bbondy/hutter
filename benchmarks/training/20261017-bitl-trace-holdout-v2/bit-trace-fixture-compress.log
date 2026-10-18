@@ -1,0 +1,31 @@
+native development corpus: 138 articles, 28 redirect prefix, frame=1
+ip pack: compiled 35618 addresses / 143576 B, counted 24 / 90
+native PPMd: anonymous heap 14000 MiB; no Linux RSS clamp
+pretraining the model on the dictionary ... 143.42 s.
+progress 0.00 %
+entering metadata block at 0.01 %
+entering redirect block at 0.69 %
+entering main text block at 0.97 %
+progress 91.35 %
+CMIX_CONTEXT {"kind":"alias","articles":138,"titles":136,"blocks":2,"bytes":8,"links":9056,"links_piped":1529,"links_dropped":0,"redirects":27,"from_redirect":4,"from_linktext":5}
+CMIX_CONTEXT {"kind":"z3","articles":111,"usable_titles":109,"articles_with_mentions":16,"articles_with_prefix":16,"mentions_total":50,"prefix_tokens_total":1361,"chunks_total":31,"anchors":10022,"fed_tokens":1361}
+CMIX_CONTEXT {"kind":"prompt","articles":138,"redirect_prompt_pages":27,"redirect_prompt_tokens":108,"redirect_pages":27,"meta_pages":138,"alias_tokens":0,"alias_articles":0,"links":0,"links_piped":0,"redirects":0,"fed_tokens":17880}
+CMIX_BITL_TRACE {"bits":2399939,"channels":299993,"trace":"bitl-trace-40370.bin","channel":"bitl-channel-40370.bin","probability":"bitl-probability-40370.bin"}
+      584.64 real       581.38 user         2.60 sys
+          6018105344  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              367461  page reclaims
+                   7  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  12  voluntary context switches
+               23157  involuntary context switches
+       6783418765271  instructions retired
+       2337920971155  cycles elapsed
+          5991994432  peak memory footprint
