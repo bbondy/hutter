@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/screen.json",
+      "manifest_sha256": "fd9b852429f18cecc15ecefa0eb0378d919ac9be348fc6c24d8608fc35439731",
+      "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f"
+    },
+    "holdout": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/holdout.json",
+      "manifest_sha256": "880ad288323503c874b18d8d3aadaebde268f6960f546352d0efb0d08e84d47b",
+      "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "changes": "CPU identity display supports Linux; round-trip/context checks are unchanged."
+  },
+  "input_variant": "upstream",
+  "hypothesis": "Reconstruct the missing BITLSTM trace writer while preserving the original compressor and every live integer prediction. Establish replayable data before any training experiment.",
+  "variants": [
+    "baseline",
+    "bit-trace-fixture"
+  ],
+  "rule": "Change only src/bit_head.cpp in disposable builds. Copy live raw stage-1 columns 0..6 and 21..26, mixer output, base probability and actual bit. Copy already computed 32+32 state projections and four TF scalars/zone every eight model bits. Save the corrected integer probability separately. No model, retrieval, phase, seed, weight or FP-flag change.",
+  "acceptance": [
+    "Exact prepared and original XML restoration",
+    "Archive bytes and SHA-256 identical to the saved uninstrumented baseline",
+    "Context counts unchanged; trace, channel and integer-probability hashes equal for encoder and decoder",
+    "Validate upstream headers, exact record lengths, finite features, valid flags/probabilities, and ceil(model_bits/8) channel records",
+    "Trace is bounded to 16000000 model bits, safely below the runtime online-learning threshold; overflow fails rather than silently truncating",
+    "Preserve failures; do not train until a separate replay check reproduces every live integer probability"
+  ],
+  "limitations": [
+    "These reused fixtures are research data, not untouched validation.",
+    "Fixture traces include exactly the Adjust/Observe calls the development runner makes, including any pretraining calls; these are not advertised as the original full training trace.",
+    "The source package omits the original writer. Matching its documented format does not reconstruct its historical data.",
+    "Trace sizes and concurrent timings are developer costs, not a final submission score or runtime claim."
+  ],
+  "scope": "Read-only fixture trace reconstruction. Raw traces stay local; commit hashes, counts, logs and source provenance. No new model weights or training.",
+  "bit_trace_recipe_sha256": "d4feb6e3c6cfe4e3459f07ebb68e0f38984fba44d38acb80a0a835de5fe1d9f0",
+  "followup": "Verify frozen shipped BF16 weights under the public replay trainer against every recorded corrected probability, with matching reset rhythm and no optimizer updates, before designing a separate training protocol."
+}

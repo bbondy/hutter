@@ -57,6 +57,20 @@ verifies its published hash, geometry, finite values, zero padding and exact
 embedded bytes. The exported file and compiled array have the same SHA-256: `c72957f4…08a8e7d`. It does not regenerate the missing trace or
 reproduce the original training.
 
+## Reconstructing a trace writer
+
+A [frozen fixture protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-trace-protocol-v1)
+now defines a diagnostic writer against the current runtime. It copies raw
+mixer inputs and the projections the model already calculated, records each
+observed bit and saves the corrected integer probability for replay comparison.
+Channels follow the count of executed model bits, not raw byte boundaries.
+Files use exclusive creation; a 16-million-model-bit cap fails explicitly if
+exceeded. The upstream source remains unchanged in Git.
+
+The writer must leave the complete fixture archive unchanged, and encoder and
+decoder must produce identical trace hashes. A matching file format alone does
+not establish faithful replay or reproduce the historical training dataset.
+
 ## A staged experiment
 
 1. Verify the unchanged checkpoint export and preserve its hashes.

@@ -16,12 +16,13 @@ from cmix_variants import model_identity, recipe
 import cmix_retrieval_support as retrieval
 import cmix_alias_support as alias
 import cmix_activity_support as activity
+import cmix_bit_trace_support as bit_trace
 from make_samples import digest
 from order_history import checked_restoration
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_RECIPES = {"retrieval_variant": (retrieval, "retrieval-"), "alias_variant": (alias, "alias-"),
-                  "activity_variant": (activity, "activity-")}
+                  "activity_variant": (activity, "activity-"), "bit_trace_variant": (bit_trace, "bit-trace-")}
 
 
 def source_recipe(build):
@@ -124,6 +125,9 @@ def summarize(args):
     if protocol.get("activity_recipe_sha256"):
         if protocol["activity_recipe_sha256"] != digest(Path(activity.__file__)):
             raise ValueError("activity recipe differs from frozen experiment")
+    if protocol.get("bit_trace_recipe_sha256"):
+        if protocol["bit_trace_recipe_sha256"] != digest(Path(bit_trace.__file__)):
+            raise ValueError("bit trace recipe differs from frozen experiment")
     base = metadata[names.index("baseline")]
     records, logs = {}, []
     with tempfile.TemporaryDirectory(prefix="hutter-model-verify-") as tmp:
@@ -176,7 +180,8 @@ def summarize(args):
             records[name] = {"payload_bytes": row["archive_bytes"], "archive_sha256": row["archive_sha256"],
                              "binary_sha256": meta["binary_sha256"], "binary_bytes": meta["binary_bytes"],
                              "model": (meta["build"].get("retrieval_variant") or meta["build"].get("alias_variant")
-                                       or meta["build"].get("activity_variant") or model_identity(meta["build"])[1]), "context": context,
+                                       or meta["build"].get("activity_variant") or meta["build"].get("bit_trace_variant")
+                                       or model_identity(meta["build"])[1]), "context": context,
                              "original_bytes_roundtrip": True, "restored_raw_sha256": final_sha,
                              "compress_seconds": row["compress"]["wall_seconds"],
                              "decompress_seconds": row["decompress"]["wall_seconds"],
@@ -198,6 +203,20 @@ def summarize(args):
             raise ValueError("encoder and decoder activation counts differ")
         probe["activity"] = phases["compress"]
         probe["activity_encoder_decoder_match"] = True
+        probe["unchanged_archive"] = True
+    if "bit-trace-fixture" in records:
+        probe = records["bit-trace-fixture"]
+        if (probe["archive_sha256"] != records["baseline"]["archive_sha256"]
+                or probe["context"] != records["baseline"]["context"]):
+            raise ValueError("bit trace recording changed archive or context")
+        run = args.runs[names.index("bit-trace-fixture")]
+        directory = run / "trial-0-0"
+        phases = {p: bit_trace.inspect_log(directory / (p + ".log"), directory)
+                  for p in ("compress", "decompress")}
+        if phases["compress"] != phases["decompress"]:
+            raise ValueError("encoder and decoder bit traces differ")
+        probe["bit_trace"] = phases["compress"]
+        probe["trace_encoder_decoder_match"] = True
         probe["unchanged_archive"] = True
     report = {"version": 1, "kind": "fixed-input-model-ablation", "role": args.role,
               "date_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

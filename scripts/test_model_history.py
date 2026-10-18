@@ -12,6 +12,7 @@ from model_history import compatible_builds
 import cmix_retrieval_support as retrieval
 import cmix_alias_support as alias
 import cmix_activity_support as activity
+import cmix_bit_trace_support as bit_trace
 
 
 class ModelComparisonTests(unittest.TestCase):
@@ -58,6 +59,9 @@ class ModelComparisonTests(unittest.TestCase):
 
     def test_activity_requires_exact_source_transformation(self):
         self.check_source_transformation(activity, "activity_variant", "activity-mlp")
+
+    def test_bit_trace_requires_exact_source_transformation(self):
+        self.check_source_transformation(bit_trace, "bit_trace_variant", "bit-trace-fixture")
 
     def check_source_transformation(self, module, field, model_name):
         with tempfile.TemporaryDirectory() as directory:
