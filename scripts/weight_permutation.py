@@ -20,6 +20,8 @@ from make_samples import digest
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPORT = ENGINE / "training/tf/4_export"
+# Import the pinned reader without generating files inside the upstream tree.
+sys.dont_write_bytecode = True
 sys.path.insert(0, str(EXPORT))
 import prune_dead_neurons as upstream
 
