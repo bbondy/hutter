@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "hypothesis": "The public trainer with the compressor deterministic math exactly replays every live integer probability on the separate four-megabyte trace before any training on it.",
+  "script_sha256": "4c81091bf21f4f7acc6f64f2eb62a9b8d2bfc8e9e214c445c8952db9ce1c4dd4",
+  "trace_support_sha256": "efa7401e9173d542061045bcd138b8450477529f35a29fa0d819b586161ec802",
+  "trace_protocol_sha256": "f1791ff45c7e662f7484ebc5811dd1b81863358cdf9c70432789818433728093",
+  "fixture_input_sha256": [
+    "5b7be7d26bc39e49321d45f896fb4c15a5f6c5092eed029bd8a0c9c0cd35d66a"
+  ],
+  "weights_sha256": "c72957f48c2ec81afa3aed2baae7acd964c17f96bb0406b8195818fc708a8e7d",
+  "math_mode": "runtime",
+  "method": "Use the already source-verified public replay binary with exact compressor detmath linkage. Load shipped BF16 model, freeze before online updates, compare every live corrected integer probability and reject a deliberately wrong first probability.",
+  "acceptance": [
+    "Complete accepted baseline/trace archive comparison with exact source restoration and encoder/decoder trace identity",
+    "Every frozen replay probability matches live integer output over all recorded bits",
+    "Wrong first probability is rejected at bit zero",
+    "Preserve outcome and logs before training"
+  ],
+  "limitations": [
+    "Frozen inference only, not online post-thaw learning equivalence",
+    "This range is for broader training; subsequent model selection must use separate screen and disjoint fixtures",
+    "No changed archive or prize score is measured here"
+  ],
+  "storage": "Raw traces remain local; commit bounded report, logs, hashes and source provenance."
+}
