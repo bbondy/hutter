@@ -71,6 +71,15 @@ The writer must leave the complete fixture archive unchanged, and encoder and
 decoder must produce identical trace hashes. A matching file format alone does
 not establish faithful replay or reproduce the historical training dataset.
 
+The [replay protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-replay-protocol-v1)
+uses the public trainer with the exact shipped bfloat16 file. A diagnostic
+freeze after its first observed bit prevents any complete backward window or
+optimizer update. The driver compares every corrected integer probability,
+then deliberately changes the first reference probability and requires a
+mismatch at bit zero. Passing this checks frozen inference, not the later
+online-training arithmetic or a new model's compression performance.
+
+
 ## A staged experiment
 
 1. Verify the unchanged checkpoint export and preserve its hashes.
