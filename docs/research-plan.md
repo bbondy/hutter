@@ -24,7 +24,10 @@ Priorities:
 
 1. Finish the active paired experiments and preserve every outcome. The
    [real release prefix protocol](../benchmarks/weights/20261017-release-prefix-protocol-v1)
-   compares the first 1 MiB emitted after full enwik9 preprocessing. It is a
+   initially matched the first 1 MiB emitted after full enwik9 preprocessing,
+   but stopped in metadata with the transformer disabled. The
+   [longer protocol](../benchmarks/weights/20261017-release-prefix-protocol-v2)
+   requires main-text coverage before accepting a 4 MiB prefix. It remains a
    bounded invariance check, not a complete archive, round trip or score.
 2. Move only surviving hypotheses to larger probes. The exact-target candidate
    has activated the [reserved confirmation range](../benchmarks/model-variants/20261017-retrieval-confirmation-protocol-v1):

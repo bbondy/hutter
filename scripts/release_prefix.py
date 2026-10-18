@@ -39,7 +39,7 @@ def rss_tree(pid):
     return total
 
 
-def capture_prefix(command, work, target, count, timeout):
+def capture_prefix(command, work, target, count, timeout, required_marker=None, post_marker_margin=0):
     """Run one owned process group, snapshot its prefix, always terminate it."""
     started = time.monotonic()
     result = {"command": command, "complete_archive": False,
@@ -51,10 +51,21 @@ def capture_prefix(command, work, target, count, timeout):
             while True:
                 result["sampled_process_tree_peak_rss_bytes"] = max(
                     result["sampled_process_tree_peak_rss_bytes"], rss_tree(process.pid))
+                if required_marker and "required_phase_observed" not in result:
+                    if required_marker in (work / "run.log").read_text(errors="replace"):
+                        result["required_phase_observed"] = {
+                            "marker": required_marker,
+                            "output_bytes_when_observed": target.stat().st_size if target.exists() else 0,
+                            "wall_seconds": time.monotonic() - started}
                 if process.poll() is not None:
                     result["status"] = "exited_before_capture"
                     break
                 if target.exists() and target.stat().st_size >= count:
+                    if required_marker:
+                        phase = result.get("required_phase_observed")
+                        if phase is None or count <= phase["output_bytes_when_observed"] + post_marker_margin:
+                            result["status"] = "insufficient_phase_coverage"
+                            break
                     # Upstream appends its emitted bytes; its final SFX rewrite
                     # has not happened. Freeze the owned group before reading.
                     os.killpg(process.pid, signal.SIGSTOP)
@@ -128,7 +139,8 @@ def main():
         command = ["./comp9", "-e", "enwik9", "archive9"]
         print(role, "starting the frozen release binary on full enwik9", flush=True)
         result = capture_prefix(command, work, work / "archive9", protocol["prefix_bytes"],
-                                protocol["timeout_per_run_seconds"])
+                                protocol["timeout_per_run_seconds"], protocol.get("required_log_marker"),
+                                protocol.get("post_marker_output_margin_bytes", 0))
         result["compressor_sha256"] = digest(binary)
         result["package_report_sha256"] = digest(package_dir / "report.json")
         result["stages"] = {}

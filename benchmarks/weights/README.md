@@ -154,6 +154,14 @@ eligibility. The complete encoder run and independent SFX decode remain required
 The artifact source expires after seven days; retain the downloaded release pair
 locally and rebuild it with the frozen recipe for later repeats.
 
+[The first result](20261017-release-prefix-v1/README.md) passes the frozen v1
+checks, but both captures stop in metadata at 0.60%, where the transformer is
+gated off. It does not test the changed MLP weights on main text. The
+[v2 protocol](20261017-release-prefix-protocol-v2/protocol.json) keeps the same
+binaries, increases the fixed prefix to 4 MiB, and requires a main-text marker
+plus more than 2 MiB of later emitted bytes within that prefix. Missing or
+insufficient phase coverage is a failure, even if prefix hashes match.
+
 ## Structured pruning tradeoff
 
 The [pruning protocol](20261017-pruning-protocol-v1/protocol.json) separately

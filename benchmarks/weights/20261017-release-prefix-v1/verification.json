@@ -1,0 +1,24 @@
+{
+  "workflow_url": "https://github.com/bbondy/hutter/actions/runs/39084877868",
+  "checks": {
+    "baseline": {
+      "prefix_and_log_hashes_verified": true,
+      "package_and_source_binding_verified": true,
+      "reported_stages_equal_frozen_protocol": true,
+      "metadata_marker_seen": true,
+      "redirect_marker_seen": false,
+      "main_text_marker_seen": false
+    },
+    "candidate": {
+      "prefix_and_log_hashes_verified": true,
+      "package_and_source_binding_verified": true,
+      "reported_stages_equal_frozen_protocol": true,
+      "metadata_marker_seen": true,
+      "redirect_marker_seen": false,
+      "main_text_marker_seen": false
+    }
+  },
+  "prefixes_independently_compared": true,
+  "prefixes_retained_locally": "build/ci-release-prefix-v1/{baseline,candidate}/coder-prefix.bin",
+  "limitation": "Both captures stop in the metadata block, where the transformer is gated off. This does not exercise the modified MLP weights on ordinary text. Full prepared streams and compressed dictionary are CI-reported hashes; large files are not in this downloaded artifact."
+}

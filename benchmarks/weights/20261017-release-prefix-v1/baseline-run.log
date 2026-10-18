@@ -1,0 +1,15 @@
+decoding article order: 43780 bytes -> 115870 bytes in 12.41 s.
+decoding dictionary hints: 57504 bytes -> 205067 bytes in 19.13 s.
+deriving the dictionary from enwik9 ... 56.50 s.
+encoding dictionary: 520804 bytes -> 134912 bytes in 44.08 s.
+preprocessing enwik9 ... 66.73 s.
+dictionary: Loaded 54857 words
+pretraining the model on the dictionary ... 19.37 s.
+progress 0.00 %
+entering metadata block at 0.00 %
+progress 0.10 %
+progress 0.20 %
+progress 0.30 %
+progress 0.40 %
+progress 0.50 %
+progress 0.60 %

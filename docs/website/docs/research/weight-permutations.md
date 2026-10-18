@@ -134,12 +134,22 @@ permutation improvement while testing those higher-impact hypotheses.
 
 ## A bounded test of the real release pair
 
-The next [frozen protocol](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-release-prefix-protocol-v1/protocol.json)
-runs both actual release binaries on full enwik9 and intentionally stops each
-after one MiB of emitted coder output. It checks the complete preprocessing
-hashes, derived dictionary and equality of the emitted prefix. This can catch a
-release-only difference that a development fixture misses.
+The first [frozen protocol](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-release-prefix-protocol-v1/protocol.json)
+ran both actual release binaries on full enwik9 and intentionally stopped each
+after one MiB of emitted coder output. Both complete preparation pipelines match
+the canonical hashes; the 134,912-byte compressed dictionaries and captured
+prefixes match as well. The
+[saved run](https://github.com/bbondy/hutter/tree/main/benchmarks/weights/20261017-release-prefix-v1)
+includes independent local verification of downloaded prefix bytes and hashes.
+
+The logs reveal a coverage problem: both captures stop at 0.60% in metadata,
+where the transformer is gated off. Matching these prefixes therefore does not
+test the modified MLPs on ordinary text. A longer
+[v2 check](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-release-prefix-protocol-v2/protocol.json)
+now fixes the capture at four MiB and requires the main-text marker, followed
+by more than two MiB of emitted output within that prefix. This margin exceeds
+the encoder's one-MiB output buffer. The release pair stays unchanged.
 
 An intentionally stopped prefix is not a complete archive and cannot establish
 an independent decode or a full prize score. Even a matching prefix leaves the
-rest of the stream unverified. No result from this check is claimed yet.
+rest of the stream unverified. The longer check has no result yet.
