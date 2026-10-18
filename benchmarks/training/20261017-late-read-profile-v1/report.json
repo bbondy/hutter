@@ -1,0 +1,26 @@
+{
+  "kind": "diagnostic-process-point-profile",
+  "version": 1,
+  "source_commit": "a07e77015fd5b5528e51dca9eb3c9407d928df78",
+  "binary_sha256": "e724c48cbb5387e964c0e4fe4b996f082e1653a264420326d7494ebfeaebf89d",
+  "dump_protocol_sha256": "07c01e3369d59ffaa7d6d0017e76fe7e4a893d81810d1d20f2fb1cd622a993c2",
+  "command": [
+    "sample",
+    "37261",
+    "3",
+    "10",
+    "-file",
+    "late-profile.txt"
+  ],
+  "sample_sha256": "dc8ac665988cb35624a0baddc4f2ff1ef46e095c9f22fce2443e4845eb3d56cd",
+  "samples": 252,
+  "build_prefix_history_read_samples": 238,
+  "progress_near_percent": 97.3,
+  "scope": "A 3-second sample of the running Mac TRAIN_MODE=2 diagnostic near its tail. No complete dump, global runtime attribution, speedup or prize result is established.",
+  "second_sample": {
+    "samples": 252,
+    "build_prefix_history_read_samples": 241,
+    "sha256": "b44eac70f78429dc5ee8ddf25bb687aea9d0c536385f3e4578bde5f7cb802f7f",
+    "note": "Separate three-second point sample; see its embedded timestamp. Same running process, not an independent benchmark."
+  }
+}

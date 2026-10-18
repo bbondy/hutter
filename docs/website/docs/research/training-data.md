@@ -37,6 +37,25 @@ an alias row that predicts a real byte can still be unhelpful to the final
 mixture. The [link experiments](link-context.md) measure actual archives after
 changing those mechanisms. A row count alone cannot replace that comparison.
 
+## A bottleneck that tiny fixtures missed
+
+The original diagnostic slowed sharply near 97% of the full stream. A
+[three-second Mac profile](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-late-read-profile-v1)
+found 238 of 252 sampled stacks in link-context history reads, mostly libc
+seeks and reads. This is evidence about that short interval, not a measurement
+of the whole run. Skipping transformer inference does not make every other
+part of the pipeline cheap, and early progress cannot predict completion time.
+
+A separate
+[frozen diagnostic experiment](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-read-cache-protocol-v1)
+uses a shared memory mapping for those history reads. It flushes pending writes,
+checks that every requested byte is already observed, grows the mapping in
+64 MiB steps and caps it at 1 GiB, with the original file-reader fallback above
+that. The complete row dump must still match the published reference. This
+adds possible resident memory and changes only the diagnostic build. It is not
+a production speed improvement or prize-memory claim; the original run and
+its outcome are retained separately.
+
 ## What a later training experiment would need
 
 The first [pruning experiment](weight-pruning.md) removed neurons without

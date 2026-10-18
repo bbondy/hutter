@@ -22,3 +22,12 @@ On native Linux use a matching successful Linux `native_stream.py` preparation
 build as the parent. No fixture phases or altered retrieval rule are added.
 The tool does not produce the roughly 228 GB PPMd-prior dataset and does not
 launch training. Those are separate decisions and experiments.
+
+
+The original run exposed a late-stream history-read bottleneck, captured in
+[this point profile](20261017-late-read-profile-v1/report.json). The separately
+[frozen read-cache diagnostic](20261017-read-cache-protocol-v1/protocol.json)
+adds `--read-cache` and a different output directory. It must reproduce the same
+published dump, and does not modify the pinned source or release binaries.
+Mapping growth/cap/fallback and causal reads have compiled tests. Concurrent
+single runs do not establish a production speedup.
