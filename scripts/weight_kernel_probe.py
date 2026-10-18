@@ -63,7 +63,8 @@ def main():
         commands.append(command + ["-c", path, "-o", str(obj)])
         objects.append(str(obj))
     binary = output / "probe"
-    commands.append(compiler + flags + ["-I" + str(source / "src"), str(PROBE), *objects,
+    link_flags = ["-no-pie"] if "-fno-pie" in flags else []
+    commands.append(compiler + flags + link_flags + ["-I" + str(source / "src"), str(PROBE), *objects,
                                         "-o", str(binary)])
     report = {"kind": "weight-permutation-kernel-check", "version": 1,
               "date_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

@@ -1,0 +1,43 @@
+name: Native Linux weight permutations
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-linux-weight-permutations
+  cancel-in-progress: false
+
+jobs:
+  weights:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 210
+    strategy:
+      fail-fast: false
+      matrix:
+        role: [screen, holdout]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install native compiler and isolated export dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y clang-18 lld-18 llvm-18 libclang-rt-18-dev make time python3-venv
+          python3 -m venv build/weight-env
+          build/weight-env/bin/python -m pip install numpy==2.5.4
+      - name: Verify pinned source and corpus
+        run: |
+          python3 scripts/competitive.py verify
+          python3 -m unittest discover -s scripts -p 'test_*.py'
+          make enwik8 ENWIK8_URL=https://mattmahoney.net/dc/enwik8.zip
+      - name: Recreate containers and verify native kernels and archives
+        run: build/weight-env/bin/python scripts/ci_weights.py --role "${{ matrix.role }}" --enwik8 data/enwik8
+      - name: Preserve completed and failed comparisons
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-weights-${{ matrix.role }}-${{ github.run_id }}
+          path: build/weight-evidence/
+          if-no-files-found: warn
+          retention-days: 7

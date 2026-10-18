@@ -51,3 +51,33 @@ It checks 1,024 synthetic activation vectors per layer, including range extremes
 and forces both sparse and dense down-projection paths. All output float bits
 and nonzero counts must agree. This is a bounded kernel test; complete coder
 traces and package accounting remain separate checks.
+
+## Complete archive equivalence
+
+[The archive protocol](20261017-archive-protocol-v1/protocol.json) selects the
+smallest container above (`mlp-scale`) before looking at any coder result. Both
+canonical fixtures must produce archives identical to their original-container
+baselines and restore the exact raw XML. Development builds accept an explicit
+`--weight-container`; they stamp its fingerprint and keep the runtime check.
+
+```sh
+python3 scripts/native_cmix.py build \
+  --weight-container build/weight-permutations-v1/mlp-scale.c4 \
+  --output build/native-weight-scale-v1
+```
+
+Run `native_cmix.py bench` with this build on each frozen input, then verify with
+`weight_equivalence.py`. The verifier permits only the container file and the
+exact fingerprint constant to differ, checks all assets and logs, and reverses
+preprocessing and page order before saving a result. It preserves valid round
+trips whose archives differ as failed equivalence checks.
+
+The [manual Linux workflow](../../.github/workflows/weight-comparisons.yml)
+recreates all three containers, checks their actual x86 kernels and runs the
+baseline/candidate pair serially on each fixture host. It saves failure evidence
+as well as completed comparisons; download and commit the reports within the
+seven-day artifact lifetime.
+
+```sh
+gh workflow run weight-comparisons.yml --ref main
+```
