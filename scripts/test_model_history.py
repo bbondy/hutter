@@ -15,6 +15,7 @@ import cmix_alias_support as alias
 import cmix_activity_support as activity
 import cmix_bit_trace_support as bit_trace
 import cmix_bit_weight_support as bit_weight
+import cmix_metadata_support as metadata
 
 
 class ModelComparisonTests(unittest.TestCase):
@@ -88,6 +89,35 @@ class ModelComparisonTests(unittest.TestCase):
 
     def test_bit_weights_require_exact_frozen_array_transformation(self):
         self.check_source_transformation(bit_weight, "bit_weight_variant", "bit-weight-" + bit_weight.VARIANT)
+
+    def test_metadata_requires_exact_multi_file_patch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            original, candidate_dir = (Path(directory) / name for name in ("original", "candidate"))
+            for folder in (original, candidate_dir):
+                (folder / "src").mkdir(parents=True)
+                for name in metadata.BEFORE:
+                    path = folder / name
+                    text = (ENGINE / name).read_text()
+                    if name != "src/id_exclude.h":
+                        text = '#include "native_corpus.h"\n' + text.replace("243425", "native_corpus::PageCount()")
+                    path.write_text(text)
+                    self.assertEqual(digest(path), metadata.BEFORE[name])
+            baseline, candidate = self.build("baseline"), self.build("baseline")
+            for name in metadata.BEFORE:
+                baseline["source_files"][name] = {"sha256": digest(original / name)}
+            info = metadata.apply(candidate_dir, metadata.VARIANT)
+            candidate["metadata_variant"] = info
+            for name in (*metadata.BEFORE, "src/b1_interp.h", "src/neif_levers.h"):
+                candidate["source_files"][name] = {"sha256": digest(candidate_dir / name)}
+            self.assertEqual(compatible_builds(baseline, candidate, original), "metadata-" + metadata.VARIANT)
+            bad = copy.deepcopy(candidate)
+            bad["source_files"]["src/neif_levers.h"]["sha256"] = "forged"
+            with self.assertRaisesRegex(ValueError, "candidate metadata source differs"):
+                compatible_builds(baseline, bad, original)
+            bad = copy.deepcopy(candidate)
+            bad["source_files"]["model.cpp"]["sha256"] = "forged"
+            with self.assertRaisesRegex(ValueError, "beyond declared"):
+                compatible_builds(baseline, bad, original)
 
     def check_source_transformation(self, module, field, model_name):
         with tempfile.TemporaryDirectory() as directory:

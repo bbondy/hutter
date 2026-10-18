@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "hypothesis": "An isolated reversible B1 page-ID/revision-ID forecast from pinned Ex-Girlfriend 1.0 will reduce actual cmix-neif payload without changing transformer, bit model, timestamp forecast or weights.",
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/screen.json",
+      "manifest_sha256": "fd9b852429f18cecc15ecefa0eb0378d919ac9be348fc6c24d8608fc35439731",
+      "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f"
+    },
+    "holdout": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/holdout.json",
+      "manifest_sha256": "880ad288323503c874b18d8d3aadaebde268f6960f546352d0efb0d08e84d47b",
+      "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "changes": "Build-only metadata flag; fixed native roundtrip/context benchmark procedure."
+  },
+  "input_variant": "upstream",
+  "variants": ["baseline", "metadata-page-id-revid-e1"],
+  "metadata_recipe_sha256": "1462fa175df4464bc1f0775ee334b484aaeeec4aa6f315e40a078d781c266924",
+  "origin_commit": "e923faec085a93d24bf519986ee2881497e97934",
+  "e3b_enabled": false,
+  "selection_rule": "Keep E1 only if both complete Mac fixtures save payload bytes with exact original XML restoration and synchronized metadata/context checks. Retain failures and regressions. Mac timings are exploratory; confirm on native Linux and account for package bytes before promotion.",
+  "scope": "One independent GPL-3.0-only metadata forecast on pinned cmix-neif. Development fixture payloads are not full prize archives."
+}

@@ -18,13 +18,15 @@ import cmix_alias_support as alias
 import cmix_activity_support as activity
 import cmix_bit_trace_support as bit_trace
 import cmix_bit_weight_support as bit_weight
+import cmix_metadata_support as metadata
 from make_samples import digest
 from order_history import checked_restoration
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_RECIPES = {"retrieval_variant": (retrieval, "retrieval-"), "alias_variant": (alias, "alias-"),
                   "activity_variant": (activity, "activity-"), "bit_trace_variant": (bit_trace, "bit-trace-"),
-                  "bit_weight_variant": (bit_weight, "bit-weight-")}
+                  "bit_weight_variant": (bit_weight, "bit-weight-"),
+                  "metadata_variant": (metadata, "metadata-")}
 
 
 def source_recipe(build):
@@ -56,22 +58,44 @@ def compatible_builds(baseline, candidate, baseline_source=None):
             raise ValueError("source-code comparison requires original weights")
         if model_identity({**candidate, key: None})[0] != "baseline":
             raise ValueError("source-code comparison changes model parameters")
-        path = baseline_source / module.SOURCE
-        if change["source_file"] != module.SOURCE or digest(path) != change["before_sha256"]:
-            raise ValueError("source recipe or baseline source differs")
-        if change["recipe_sha256"] != digest(Path(module.__file__)):
-            # A reader/diagnostic correction need not rebuild identical C++.
-            # Authenticate the historical recipe, then independently require
-            # today's source rewrite to reproduce the exact compiled bytes.
-            if not candidate.get("commit"):
-                raise ValueError("historical source recipe lacks a revision")
-            recipe_path = str(Path(module.__file__).resolve().relative_to(ROOT))
-            historical = subprocess.check_output(["git", "show", candidate["commit"] + ":" + recipe_path], cwd=ROOT)
-            if hashlib.sha256(historical).hexdigest() != change["recipe_sha256"]:
-                raise ValueError("historical source recipe differs from its revision")
-        expected = hashlib.sha256(module.rewrite(path.read_text(), change["name"]).encode()).hexdigest()
-        if expected != change["after_sha256"] or candidate["source_files"][module.SOURCE]["sha256"] != expected:
-            raise ValueError("candidate changes more than the declared source rule")
+        if key == "metadata_variant":
+            if change["recipe_sha256"] != digest(Path(module.__file__)):
+                raise ValueError("metadata recipe differs from built source")
+            if change["origin_commit"] != module.UPSTREAM_COMMIT or change["before_sha256"] != module.BEFORE:
+                raise ValueError("metadata origin or frozen patch base differs")
+            with tempfile.TemporaryDirectory(prefix="hutter-metadata-verify-") as tmp:
+                target = Path(tmp) / "src"
+                target.mkdir()
+                for source_file in module.BEFORE:
+                    shutil.copyfile(baseline_source / source_file, Path(tmp) / source_file)
+                expected_change = module.apply(Path(tmp), change["name"])
+                for field in ("patch_sha256", "original_upstream_patch_sha256", "after_sha256", "new_headers_sha256"):
+                    if expected_change[field] != change[field]:
+                        raise ValueError("metadata patch differs from measured candidate")
+                changed = set(module.BEFORE) | {"src/b1_interp.h", "src/neif_levers.h"}
+                for source_file in changed:
+                    if candidate["source_files"][source_file]["sha256"] != digest(Path(tmp) / source_file):
+                        raise ValueError("candidate metadata source differs from frozen patch")
+            if any(baseline["source_files"][source_file]["sha256"] != module.BEFORE[source_file]
+                   for source_file in module.BEFORE):
+                raise ValueError("metadata baseline headers changed")
+        else:
+            path = baseline_source / module.SOURCE
+            if change["source_file"] != module.SOURCE or digest(path) != change["before_sha256"]:
+                raise ValueError("source recipe or baseline source differs")
+            if change["recipe_sha256"] != digest(Path(module.__file__)):
+                # A reader/diagnostic correction need not rebuild identical C++.
+                # Authenticate the historical recipe, then independently require
+                # today's source rewrite to reproduce the exact compiled bytes.
+                if not candidate.get("commit"):
+                    raise ValueError("historical source recipe lacks a revision")
+                recipe_path = str(Path(module.__file__).resolve().relative_to(ROOT))
+                historical = subprocess.check_output(["git", "show", candidate["commit"] + ":" + recipe_path], cwd=ROOT)
+                if hashlib.sha256(historical).hexdigest() != change["recipe_sha256"]:
+                    raise ValueError("historical source recipe differs from its revision")
+            expected = hashlib.sha256(module.rewrite(path.read_text(), change["name"]).encode()).hexdigest()
+            if expected != change["after_sha256"] or candidate["source_files"][module.SOURCE]["sha256"] != expected:
+                raise ValueError("candidate changes more than the declared source rule")
     else:
         _, change = recipe(name)
     for key in ("upstream_commit", "simde_commit", "compiler",
@@ -84,9 +108,11 @@ def compatible_builds(baseline, candidate, baseline_source=None):
         raise ValueError("uncontrolled compiler command difference")
     # Compare the actual generated sources; port/support inventories also include
     # research documentation that can change without changing compiled code.
-    if baseline["source_files"][change["source_file"]]["sha256"] != change["before_sha256"]:
+    key = source_recipe(candidate)
+    changed_files = set(module.BEFORE) | {"src/b1_interp.h", "src/neif_levers.h"} if key == "metadata_variant" else {change["source_file"]}
+    if key != "metadata_variant" and baseline["source_files"][change["source_file"]]["sha256"] != change["before_sha256"]:
         raise ValueError("baseline parameter source differs from upstream")
-    files = [{k: v for k, v in b["source_files"].items() if k != change["source_file"]} for b in (baseline, candidate)]
+    files = [{k: v for k, v in b["source_files"].items() if k not in changed_files} for b in (baseline, candidate)]
     if files[0] != files[1]:
         raise ValueError("model source differs beyond declared parameter file")
     return name
@@ -142,6 +168,9 @@ def summarize(args):
     if protocol.get("bit_weight_recipe_sha256"):
         if protocol["bit_weight_recipe_sha256"] != digest(Path(bit_weight.__file__)):
             raise ValueError("bit-weight recipe differs from frozen experiment")
+    if protocol.get("metadata_recipe_sha256"):
+        if protocol["metadata_recipe_sha256"] != digest(Path(metadata.__file__)):
+            raise ValueError("metadata recipe differs from frozen experiment")
     base = metadata[names.index("baseline")]
     records, logs = {}, []
     with tempfile.TemporaryDirectory(prefix="hutter-model-verify-") as tmp:
@@ -195,6 +224,7 @@ def summarize(args):
                              "binary_sha256": meta["binary_sha256"], "binary_bytes": meta["binary_bytes"],
                              "model": (meta["build"].get("retrieval_variant") or meta["build"].get("alias_variant")
                                        or meta["build"].get("activity_variant") or meta["build"].get("bit_trace_variant") or meta["build"].get("bit_weight_variant")
+                                       or meta["build"].get("metadata_variant")
                                        or model_identity(meta["build"])[1]), "context": context,
                              "original_bytes_roundtrip": True, "restored_raw_sha256": final_sha,
                              "compress_seconds": row["compress"]["wall_seconds"],

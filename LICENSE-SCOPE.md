@@ -18,6 +18,12 @@ Python build/benchmark orchestration remains under the root MIT license. SIMDe
 is fetched at a pinned revision for native builds and retains its MIT license
 and notices in the build directory.
 
+`engines/ports/cmix-neif-metadata-e1/` contains an experimental GPL-3.0-only
+patch and headers from Ryan Landay's Ex-Girlfriend 1.0 derivative. Its
+[port notice](engines/ports/cmix-neif-metadata-e1/README.md) pins the source and
+describes the fixture adaptation. This does not resolve the inherited
+provenance questions below.
+
 Read the open points in `engines/cmix-neif/training/ATTRIBUTION.md`, section 7.
 Importing the published source does not resolve the upstream authors' stated
 provenance/licensing questions. This repository does not claim those questions
