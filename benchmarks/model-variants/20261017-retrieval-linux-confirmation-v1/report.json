@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "kind": "fixed-input-model-ablation",
+  "role": "confirmation",
+  "date_utc": "2026-10-18T01:47:52.167902+00:00",
+  "protocol_sha256": "4268cde7ac7b3d433e68e2ea9d702ef21827bbd83c9eed20c82cdacee4811ef1",
+  "manifest_sha256": "28af3c34834e2b04df0fd5094c59d0e569fb42e1e5efd2f79417e964bf261993",
+  "input_sha256": "60436c2ca5b650bd1e8e7894447ce14de1499c19d45d79a0764d6186830cc2c9",
+  "input_bytes": 924454,
+  "raw_sha256": "045ffc2760edf5e56b1304ec82053f1876a4731addde8aa2ddf4568de5f8908c",
+  "raw_bytes": 1000794,
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "native_arguments": [
+    "--native-corpus",
+    "150",
+    "52"
+  ],
+  "verifier_sha256": "6880450a100c994fe594efbda0a6d9e578e9da32e8a4ca50f55e337c4a20d1e1",
+  "scope": "Native Linux x86-64, all models serial on one CI host; not a full prize run",
+  "variants": {
+    "baseline": {
+      "payload_bytes": 126001,
+      "archive_sha256": "f12ad5938b457f6343a5609bbf95f23ece1693eb66f5824faeb5d7dd1b63ba45",
+      "binary_sha256": "146bf187158a9fb5fdc7c486356c692f9efc7de239f219dd082b8032fa4638b0",
+      "binary_bytes": 577272,
+      "model": {
+        "budget": 256,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 150,
+            "titles": 149,
+            "blocks": 1,
+            "bytes": 7,
+            "links": 9354,
+            "links_piped": 1794,
+            "links_dropped": 0,
+            "redirects": 50,
+            "from_redirect": 10,
+            "from_linktext": 1
+          },
+          "z3": {
+            "articles": 100,
+            "usable_titles": 99,
+            "articles_with_mentions": 13,
+            "articles_with_prefix": 13,
+            "mentions_total": 16,
+            "prefix_tokens_total": 702,
+            "chunks_total": 16,
+            "anchors": 10292,
+            "fed_tokens": 702
+          },
+          "prompt": {
+            "articles": 150,
+            "redirect_prompt_pages": 51,
+            "redirect_prompt_tokens": 204,
+            "redirect_pages": 50,
+            "meta_pages": 150,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 15138
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 150,
+            "titles": 149,
+            "blocks": 1,
+            "bytes": 7,
+            "links": 9354,
+            "links_piped": 1794,
+            "links_dropped": 0,
+            "redirects": 50,
+            "from_redirect": 10,
+            "from_linktext": 1
+          },
+          "z3": {
+            "articles": 100,
+            "usable_titles": 99,
+            "articles_with_mentions": 13,
+            "articles_with_prefix": 13,
+            "mentions_total": 16,
+            "prefix_tokens_total": 702,
+            "chunks_total": 16,
+            "anchors": 10292,
+            "fed_tokens": 702
+          },
+          "prompt": {
+            "articles": 150,
+            "redirect_prompt_pages": 51,
+            "redirect_prompt_tokens": 204,
+            "redirect_pages": 50,
+            "meta_pages": 150,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 15138
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "045ffc2760edf5e56b1304ec82053f1876a4731addde8aa2ddf4568de5f8908c",
+      "compress_seconds": 224.485890752,
+      "decompress_seconds": 223.42505797,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-exact-target-confirmation-confirmation/run-baseline",
+      "metadata_sha256": "583735c33f96c24888471d8530bd2d3e47301c92bc7bab966e70c077617ee05c",
+      "results_sha256": "b9fa39ffde0ff56bb170d108612b537c96f0d0ebc7d82b821060ab679188b1f0",
+      "log_sha256": {
+        "compress": "50e2ff2a9387c5e398ba0b0ffc6390f4c1463b9d0d8e76d87064f9e2349e39cd",
+        "decompress": "21ac2ca76fd27305ecc33dfa94dd28c96e8b36141bad0aaab3982d39b6b7d274"
+      },
+      "delta_bytes_vs_baseline": 0
+    },
+    "retrieval-exact-target": {
+      "payload_bytes": 125999,
+      "archive_sha256": "bbf928abfafe5c0a73262a2c10964c926c14ea1ea8427647f571990d9ab5a954",
+      "binary_sha256": "469650d04a4e779289f27ddd12d7417c92ca9d8bb80440137b01d94c5e762e4a",
+      "binary_bytes": 577272,
+      "model": {
+        "name": "exact-target",
+        "source_file": "src/tf1/tf1_z3.cpp",
+        "before_sha256": "5cf6835f3eafadb53810c9d69b7bf662d1589dd44ebcb52cf8960650d5f79337",
+        "after_sha256": "57c5a05cf75442b88b8507b8f57277b88c9490f63a8781043a4bccb3db4d3916",
+        "recipe_sha256": "f1ddb65bf16baf7f7fcc286fcc04851ae7548f4d93521ad130929cb0a11241ad",
+        "scope": "Require an already-decoded ], WRT pipe, or section marker after the exact title; case and underscore handling unchanged."
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 150,
+            "titles": 149,
+            "blocks": 1,
+            "bytes": 7,
+            "links": 9354,
+            "links_piped": 1794,
+            "links_dropped": 0,
+            "redirects": 50,
+            "from_redirect": 10,
+            "from_linktext": 1
+          },
+          "z3": {
+            "articles": 100,
+            "usable_titles": 99,
+            "articles_with_mentions": 11,
+            "articles_with_prefix": 11,
+            "mentions_total": 14,
+            "prefix_tokens_total": 626,
+            "chunks_total": 14,
+            "anchors": 10292,
+            "fed_tokens": 626
+          },
+          "prompt": {
+            "articles": 150,
+            "redirect_prompt_pages": 51,
+            "redirect_prompt_tokens": 204,
+            "redirect_pages": 50,
+            "meta_pages": 150,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 15138
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 150,
+            "titles": 149,
+            "blocks": 1,
+            "bytes": 7,
+            "links": 9354,
+            "links_piped": 1794,
+            "links_dropped": 0,
+            "redirects": 50,
+            "from_redirect": 10,
+            "from_linktext": 1
+          },
+          "z3": {
+            "articles": 100,
+            "usable_titles": 99,
+            "articles_with_mentions": 11,
+            "articles_with_prefix": 11,
+            "mentions_total": 14,
+            "prefix_tokens_total": 626,
+            "chunks_total": 14,
+            "anchors": 10292,
+            "fed_tokens": 626
+          },
+          "prompt": {
+            "articles": 150,
+            "redirect_prompt_pages": 51,
+            "redirect_prompt_tokens": 204,
+            "redirect_pages": 50,
+            "meta_pages": 150,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 15138
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "045ffc2760edf5e56b1304ec82053f1876a4731addde8aa2ddf4568de5f8908c",
+      "compress_seconds": 231.8380058150001,
+      "decompress_seconds": 228.39341232200002,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-exact-target-confirmation-confirmation/run-retrieval-exact-target",
+      "metadata_sha256": "1a7b26396c9d33e3b034b71d87485ea197aef8df85a7335d0e87cf50bb1ad45f",
+      "results_sha256": "b4588a14aeefd005c5818bf9f52db744214e7c375b89c00b925210e58fcdd0fd",
+      "log_sha256": {
+        "compress": "4696f6bd84ec7c1ffca9dc0215195046b38e0227b37c04f6f47cfd69e554c749",
+        "decompress": "828dfd2610ee3920418e7f5faec2f7616b3e3e43e7f48f8ccb424fe08a612023"
+      },
+      "delta_bytes_vs_baseline": -2
+    }
+  }
+}

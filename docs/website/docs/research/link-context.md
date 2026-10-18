@@ -161,12 +161,12 @@ the baseline Linux source inventory was reconstructed and the exact candidate
 rewrite verified. Saved evidence:
 [Linux screen](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-retrieval-linux-screen-v1/report.json)
 and [Linux disjoint](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-retrieval-linux-holdout-v1/report.json).
-The candidate **does not improve both Linux fixtures** and currently fails
-promotion. The already-started reserved-range trials will be retained without
-retuning; a good third result would not erase this regression.
+The candidate **does not improve both Linux fixtures** and fails
+promotion. The already-started reserved-range trials were completed without
+retuning; a good third result does not erase this regression.
 
 The [reserved-range protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/model-variants/20261017-retrieval-confirmation-protocol-v1)
-now freezes a third input before measuring it: 150 complete articles beginning
+froze a third input before measuring it: 150 complete articles beginning
 at raw byte 80,020,050, selected by the previously declared 80,000,000-byte
 start and one-million-byte target. It preserves upstream projected order and
 all existing model settings. After this test, that range is examined evidence
@@ -177,8 +177,13 @@ also loses: 125,996 bytes against the baseline's 125,991, a **5-byte increase**.
 Both restore all 1,000,794 original XML bytes. The filter removes two retrieved
 mentions (16 → 14) and reduces prefix tokens from 702 to 626; it changes actual
 context rather than acting as a no-op. This previously reserved check therefore
-supports keeping the original rule. Native Linux confirmation of this same
-range is still running.
+supports keeping the original rule. The
+[Linux third-range result](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-retrieval-linux-confirmation-v1/report.json)
+saves **2 bytes**: 125,999 against 126,001. Both Linux models also restore the
+original XML, with matching context counters and independently checked artifact
+hashes. All six comparisons are now recorded. The Linux third-range gain does
+not override the Linux disjoint loss or the Mac third-range loss: **keep the
+original retrieval rule under this protocol**.
 
 ## Separate follow-up: refresh the prediction after alias text
 

@@ -1,0 +1,7 @@
+{
+  "workflow_run": "https://github.com/bbondy/hutter/actions/runs/39085817590",
+  "artifact": "linux-exact-target-confirmation-confirmation-39085817590",
+  "source_commit": "e3045ed9e09ac053f927df6ac2a259eda1474455",
+  "verification": "Reconstructed and matched every baseline Linux source file; checked the frozen exact-target rewrite, compiler/runner/asset controls, all downloaded binary/archive/restored/log/metadata hashes, context counters and original raw XML using the canonical Mac inverse helper. Both models ran serially on the fixture host.",
+  "scope": "Canonical fixture payloads; no full score or cross-platform speed claim."
+}
