@@ -63,5 +63,21 @@ the full stream.
 The [screen](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-depth-screen-v1/report.json)
 and [disjoint record](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-depth-holdout-v1/report.json)
 retain all outcomes. Jobs overlapped with other experiments, so their timings
-are exploratory. The separately predeclared native Linux comparison is still
-running; the upstream threshold remains the default.
+are exploratory. The separately predeclared native Linux comparison has now
+finished too; the upstream threshold remains the default.
+
+## Native Linux confirms the rejection
+
+| Model | Screen payload | Change | Disjoint payload | Change |
+| --- | ---: | ---: | ---: | ---: |
+| Upstream threshold 8 | 119,067 | — | 117,426 | — |
+| Threshold 9 | 119,069 | +2 | 117,430 | +4 |
+| Adaptive skips disabled | 119,083 | +16 | 117,442 | +16 |
+
+The [Linux screen](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-depth-linux-screen-v1/report.json)
+and [Linux disjoint record](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-depth-linux-holdout-v1/report.json)
+retain native serial trials and exact original XML restoration. Both candidates
+lose on both fixtures. The tiny Mac disjoint improvement at threshold 9 changes
+sign on Linux, another reason to avoid choosing a model from a few Mac bytes.
+No candidate advances and the reserved third range remains untouched. This
+rejects these settings on these fixtures, not all possible depth strategies.

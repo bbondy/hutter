@@ -1,0 +1,7 @@
+{
+  "workflow_run": "https://github.com/bbondy/hutter/actions/runs/39081565603",
+  "artifact": "linux-adaptive-depth-holdout-39081565603",
+  "source_commit": "dfc4c61892c683bd2e96cccbc81adfbeb4f7501d",
+  "verification": "Downloaded model binaries, archives, restored streams, metadata and logs match saved hashes. Source differences and the frozen benchmark procedure were rechecked. The canonical Mac inverse helper independently restores the original raw XML. All models ran serially on each Linux fixture host.",
+  "scope": "Fixed canonical fixture payloads; no full-corpus prize score or cross-platform speed claim."
+}

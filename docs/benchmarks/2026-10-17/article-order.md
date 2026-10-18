@@ -423,3 +423,13 @@ pass original-byte restoration and context checks. Neither candidate advances;
 no reserved-range scores were read. More cascade computation changes online
 learning state too, so a size gain was not guaranteed. Native Linux comparisons
 were launched separately before these results. Timing remains exploratory.
+
+Native Linux subsequently confirms rejection. Its baseline / threshold-9 /
+no-skip payloads are **119,067 / 119,069 / 119,083** bytes on the screen and
+**117,426 / 117,430 / 117,442** on the disjoint fixture. All six original-byte
+round trips pass. The tiny native Mac threshold-9 follow-up gain reverses sign
+on Linux. See the [screen](../../../benchmarks/model-variants/20261017-depth-linux-screen-v1/report.json)
+and [disjoint](../../../benchmarks/model-variants/20261017-depth-linux-holdout-v1/report.json)
+records, with downloaded artifact verification and independent inverse checks.
+The source-filter experiment now tests exact link targets separately, without
+combining a rejected depth or budget change.

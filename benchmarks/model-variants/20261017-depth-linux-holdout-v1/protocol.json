@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "experiment": "adaptive-depth",
+  "hypothesis": "Spending more work in the mixer cascade may reduce payload size. Raise the skip confidence threshold from 8 to 9, or disable adaptive skips with threshold 31 (the predictor logit is clamped to +/-30).",
+  "variants": {
+    "baseline": {
+      "tau_per_mille": 8000
+    },
+    "depth-tau9": {
+      "tau_per_mille": 9000
+    },
+    "depth-no-skip": {
+      "tau_per_mille": 31000
+    }
+  },
+  "variant_recipes": {
+    "baseline": {
+      "name": "baseline",
+      "z3_parameters": {
+        "budget": 256,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "source_file": "src/tf1/tf1_z3.h",
+      "before_sha256": "f2b66bddb2e1419a303cead4333cc3fc6c0dd84dde33be8eecb2d2e696e8ef5d",
+      "after_sha256": "f2b66bddb2e1419a303cead4333cc3fc6c0dd84dde33be8eecb2d2e696e8ef5d"
+    },
+    "depth-tau9": {
+      "name": "depth-tau9",
+      "z3_parameters": {
+        "budget": 256,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "adaptive_depth_parameters": {
+        "tau_per_mille": 9000
+      },
+      "source_file": "src/adaptive_depth.h",
+      "before_sha256": "9d6129ceb9f54ae1e47f1966606b114634e1cd45f951f6718cd53eb13feec21c",
+      "after_sha256": "d118af66a91fe26104d9a4c95d640ce2bc01f83c8d3806c78f771c09252c143c"
+    },
+    "depth-no-skip": {
+      "name": "depth-no-skip",
+      "z3_parameters": {
+        "budget": 256,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "adaptive_depth_parameters": {
+        "tau_per_mille": 31000
+      },
+      "source_file": "src/adaptive_depth.h",
+      "before_sha256": "9d6129ceb9f54ae1e47f1966606b114634e1cd45f951f6718cd53eb13feec21c",
+      "after_sha256": "8856bd5c63b441f4aee99ad0c8ac9a1f9e5e9178d2240caccf78fcd2baf5cc04"
+    }
+  },
+  "unchanged": "Same upstream-projected canonical inputs, model weights, dictionary, default link context, online learning rules, fixture phases and compiler settings. One constant in src/adaptive_depth.h changes per candidate.",
+  "input_variant": "upstream",
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/screen.json",
+      "manifest_sha256": "fd9b852429f18cecc15ecefa0eb0378d919ac9be348fc6c24d8608fc35439731",
+      "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f"
+    },
+    "holdout": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/holdout.json",
+      "manifest_sha256": "971a9ccb5f886554bd07765a67197215ddab763ee491f8f129c80b790b130636",
+      "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "commit": "dfc4c61892c683bd2e96cccbc81adfbeb4f7501d",
+    "changes": "Shared benchmark now records Linux CPU identity; same round-trip procedure."
+  },
+  "preprocessing": "phda9-entities-u32-v1",
+  "acceptance": [
+    "Prepared stream and original XML restored exactly",
+    "Matching encoder/decoder context counters",
+    "Only declared threshold source difference against baseline",
+    "Retain every result on both reused fixtures, including losses"
+  ],
+  "promotion": "Only candidates improving both reused fixtures proceed to the predeclared 80,000,000-byte-offset confirmation range; Linux ranking and full package accounting are still required.",
+  "timing": "Concurrent native screen times are exploratory. Any candidate needs serial paired Linux timing and full-run eligibility before claiming a useful size/time tradeoff.",
+  "limitations": [
+    "The disabled control still computes and trains the small gate; it measures routing through the full mixer, not removal of gate overhead.",
+    "The existing character-rate shortcut remains active; no adaptive skip does not mean every bit executes all models.",
+    "Changing which bits train the mixer and BITLSTM changes future model state; more computation need not improve size.",
+    "Upstream reports only about 18 KB estimated full-stream cost for adaptive skipping; this alone is not a plausible prize-winning margin.",
+    "Small reused fixture results can differ from a full stream; the third range at offset 80,000,000 remains untouched unless both fixtures improve."
+  ],
+  "source_rationale": "Pinned engines/cmix-neif/README.md section 3.4 reports ~2.7 KB cost on an 80 MB window and ~5.1% fewer instructions. These are upstream claims, not locally reproduced performance results.",
+  "parent_protocol_sha256": "9d38dee96cac1b32e60aa6b8f293e9b495ea89d9bce2ddf06429b43967adff20",
+  "platform_scope": "Native Linux x86-64, all models serial on one CI host; not a full prize run"
+}
