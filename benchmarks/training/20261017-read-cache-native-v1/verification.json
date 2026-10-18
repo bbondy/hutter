@@ -1,0 +1,20 @@
+{
+  "kind": "full-training-read-cache-verification",
+  "passed": true,
+  "source_commit": "9dad08c1bb04c5e7c749750d34f44754f2fca017",
+  "cached_report_sha256": "f6461f4cf506a5709e65a4ae2b69889539d1e7d7919541f6f50293c699944113",
+  "original_report_sha256": "33f0d3cb8f0b3f60a27c9e75e0f423df9c11e9f4917181c2b7942e1bbbc32971",
+  "all_four_output_hashes_equal_original": true,
+  "source_inventory_matches_parent_with_only_declared_cache_rewrite": true,
+  "source_files_checked": 567,
+  "build_log_sha256": "1f4094120ad38324edde22fe65038f49ed32f857b022b55f6a84be705de8ac0f",
+  "wall_seconds": {
+    "original": 2405.794807500002,
+    "cached": 810.7462134160014
+  },
+  "peak_rss_bytes": {
+    "original": 4636557312,
+    "cached": 5145264128
+  },
+  "scope": "Concurrent diagnostic runs, not a controlled speedup or release memory claim. No transformer inference or decodable archive."
+}

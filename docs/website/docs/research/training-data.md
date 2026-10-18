@@ -83,10 +83,21 @@ A separate
 uses a shared memory mapping for those history reads. It flushes pending writes,
 checks that every requested byte is already observed, grows the mapping in
 64 MiB steps and caps it at 1 GiB, with the original file-reader fallback above
-that. The complete row dump must still match the published reference. This
-adds possible resident memory and changes only the diagnostic build. It is not
-a production speed improvement or prize-memory claim; the original run and
-its outcome are retained separately.
+that. The [completed cached run](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-read-cache-native-v1)
+reproduces the published row dump and **all three original raster hashes**.
+Independent verification checked the actual output files, binary, logs and
+source inventory; only the two declared history-reader files changed.
+
+| Diagnostic run | Wall time | Peak resident bytes |
+| --- | ---: | ---: |
+| Original file reader | 2,405.79 s | 4,636,557,312 |
+| Mapped history reader | 810.75 s | 5,145,264,128 |
+
+These concurrent single runs suggest a useful iteration improvement, but are
+not a controlled speed comparison. The observed memory increase was about
+509 MB. The patch changes only the training diagnostic: production archive
+identity, release performance and prize-resource eligibility remain untested.
+The original run and its evidence are retained separately.
 
 ## What a later training experiment would need
 

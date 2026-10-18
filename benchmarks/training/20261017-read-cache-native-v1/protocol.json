@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "hypothesis": "Reproduce the upstream training-row sequence without transformer inference, establishing diagnostic data and prompt coverage before changing training or allocating training compute.",
+  "mode": "TRAIN_MODE=2",
+  "training_patch_sha256": "5dc9dbeed312fc521ea44621575b3ab87c878764e7c0d2c2eb9c8ba234e9be2c",
+  "input_before_metadata_pack": {
+    "bytes": 555771398,
+    "sha256": "e556d3f837c66c69e0a4f3a1e972b05bdb034633f6a8cadd6d91ef9c34135111"
+  },
+  "expected_dump": {
+    "bytes": 7117383324,
+    "sha256": "58fc6c74c09400192c28cf3608e6eeb0387ba4f40b4255d39dbc8ac5e0bf66a0"
+  },
+  "expected_coded_stream_bytes": 552750204,
+  "acceptance": [
+    "Source copies and training patch match the previously verified preparation build",
+    "Full row dump exactly matches the published upstream bytes and SHA-256",
+    "Zone and match rasters each have 552750204 bytes",
+    "Successful execution reports the complete coded stream byte count"
+  ],
+  "output_policy": "Keep large raw diagnostic files local; commit protocols, source/binary/input/output hashes, logs and summaries, including failures.",
+  "scope": "Training and prompt diagnostics only. Constant-prediction output is intentionally not a usable compressed archive. No GPU training, new model or prize-score claim.",
+  "limitations": [
+    "The no-inference dump cannot evaluate model likelihood or the effect of a prompt change on compression.",
+    "The full dump contains target-corpus data and does not create an untouched validation set.",
+    "A subsequent training experiment needs its own frozen objective, data, exported model-cost accounting and complete coder comparisons."
+  ],
+  "read_cache_recipe_sha256": "e3b706fd924ce60733cbb317878656c8e1f36eae77bb15a55ead03257c6e1664",
+  "read_cache_rule": "Use a shared read-only mmap of the causal link-context history, grown in 64 MiB extents and capped at 1 GiB virtual extent. Flush both append and libc buffers before access; reject reads beyond observed position; use original stdio above the cap. Only diagnostic TRAIN_MODE=2 builds change.",
+  "cache_acceptance": [
+    "Complete dump must still equal the published 7,117,383,324-byte SHA-256 reference",
+    "All match/zone rasters must have original expected lengths; when the original run completes, compare all raster hashes as well",
+    "Retain the original in-progress run and every failure; do not replace its evidence",
+    "No production/release patch or speed claim from concurrent single runs; measure cost separately after correctness"
+  ],
+  "motivation": "A short profile late in the original diagnostic saw 238/252 samples in CoderZ3::BuildPrefixNow history reads; the full run had slowed near 97 percent. This is point-in-time bottleneck evidence, not a whole-run profile."
+}

@@ -10,8 +10,9 @@ rule and upstream TRAIN_MODE=2 diagnostic. It does not run transformer inference
 The completed diagnostic took about 2,406 seconds with 4,636,557,312 bytes peak
 RSS in this concurrent local run. These numbers describe this diagnostic only,
 not compression speed or prize eligibility. Near 97%, two point profiles showed
-heavy history-file seek/read work; the separate read-cache experiment must
-reproduce this same dump and raster hashes before its results are accepted.
+heavy history-file seek/read work. The later read-cache experiment reproduced
+this same dump and every raster hash; see `../20261017-read-cache-native-v1`.
+This original run and its evidence remain unchanged.
 
 Report, protocol, compile log and complete dump log are retained. The source
 revision/script, binary, protocol and log hashes were checked again before
