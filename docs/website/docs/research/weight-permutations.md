@@ -79,6 +79,14 @@ include kernel reports, container hashes and CI provenance. Downloaded artifacts
 were checked again locally, including inverse preparation to original XML.
 These fixtures and bounded kernel cases do not prove equivalence on every input.
 
+The corresponding Mac trials also pass complete archive identity and exact XML
+restoration: 119,065 bytes on the screen and 117,438 on the disjoint set, with
+each candidate compared to its own Mac baseline. The
+[Mac screen](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-native-screen-v1/report.json)
+and [Mac disjoint record](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-native-holdout-v1/report.json)
+complete the two-platform fixture check. This does not assert that Mac and Linux
+produce the same archives as each other.
+
 A separate native Linux job rebuilt both real release packages with upstream's
 unchanged build script, PGO/LTO, section guards and actual unpacking checks:
 

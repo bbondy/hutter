@@ -124,3 +124,8 @@ The [unchanged-container audit](20261017-container-audit-v1/README.md) attribute
 all bytes to tensor families and separates fitted entropy diagnostics from
 achievable coding gains. Its observer must reproduce the original container
 byte for byte before publishing any accounting.
+
+The [Mac screen](20261017-native-screen-v1/report.json) and
+[Mac disjoint](20261017-native-holdout-v1/report.json) also pass exact archive
+identity against their own baselines (119,065 and 117,438 bytes) and original XML
+restoration. Full-corpus inference equivalence is still a separate gate.
