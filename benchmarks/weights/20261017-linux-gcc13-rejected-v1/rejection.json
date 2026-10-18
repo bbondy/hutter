@@ -1,0 +1,9 @@
+{
+  "workflow_run": "https://github.com/bbondy/hutter/actions/runs/39083849153",
+  "source_commit": "02dac42",
+  "stage": "Compiler selection guard before any package build",
+  "outcome": "False rejection: Clang selected GCC 13 as intended, but printed /usr/bin/../lib/gcc/x86_64-linux-gnu/13 instead of the guard literal /usr/lib/gcc/x86_64-linux-gnu/13.",
+  "fix": "Resolve the selected path before comparing it with the required GCC 13 directory.",
+  "compiler_selection_sha256": "ebcca823475f8fef5094e548a5dc7662221dcf2612e2d652b090582ab2ce7b93",
+  "compression_measurement": false
+}

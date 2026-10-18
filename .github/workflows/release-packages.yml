@@ -35,7 +35,14 @@ jobs:
         run: |
           sudo apt-get remove -y gcc-14 g++-14 gcc-14-x86-64-linux-gnu g++-14-x86-64-linux-gnu libgcc-14-dev libstdc++-14-dev
           clang++-18 -v -E -x c++ /dev/null > /dev/null 2> build/compiler-selection.log
-          grep -F 'Selected GCC installation: /usr/lib/gcc/x86_64-linux-gnu/13' build/compiler-selection.log
+          python3 - <<'PY'
+          from pathlib import Path
+          lines = Path('build/compiler-selection.log').read_text().splitlines()
+          selected = [line.split(': ', 1)[1] for line in lines if line.startswith('Selected GCC installation: ')]
+          if len(selected) != 1 or Path(selected[0]).resolve() != Path('/usr/lib/gcc/x86_64-linux-gnu/13').resolve():
+              raise SystemExit('Clang did not select the reference GCC 13 installation')
+          print('Selected GCC 13:', selected[0])
+          PY
       - name: Verify sources and recreate frozen containers
         run: |
           python3 scripts/competitive.py verify
