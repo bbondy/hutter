@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "hypothesis": "Structured pruning saves model bytes at a possible payload cost; measure both using a predeclared gross break-even budget.",
+  "candidate": "mlp-prune10",
+  "selection": "Fixed percentage per layer and fixed contribution heuristic before any coder results; all three candidates retained.",
+  "original_container_sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719",
+  "candidate_container_sha256": "d7fd31d2c02507887fd0b911f73a66c95f18230442ae4b92c5539dfc4fca36a4",
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/screen.json",
+      "manifest_sha256": "fd9b852429f18cecc15ecefa0eb0378d919ac9be348fc6c24d8608fc35439731",
+      "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f"
+    },
+    "holdout": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/holdout.json",
+      "manifest_sha256": "880ad288323503c874b18d8d3aadaebde268f6960f546352d0efb0d08e84d47b",
+      "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "changes": "CPU identity display supports Linux; round-trip/context checks are unchanged."
+  },
+  "preprocessing": "phda9-entities-u32-v1",
+  "acceptance": [
+    "Same canonical inputs, original dictionary, order, compiler and model parameter settings",
+    "Only the candidate container and its fingerprint change in model sources",
+    "Prepared input and original XML restored exactly on both sides",
+    "Identical input-driven context counters; archive identity is not required"
+  ],
+  "promotion": "Require the added payload bytes per raw fixture byte to fit gross two-container savings per 1,000,000,000 bytes on both reused fixtures. Only then test native Linux and larger data, and the reserved third fixture without retuning. This proportional screen omits executable changes and full-stream state; only a complete package run can establish a win.",
+  "scope": "Changed predictor with exact lossless corpus restoration. Gross weight savings and proportional payload extrapolation are screening diagnostics, not full prize scores.",
+  "acceptance_mode": "payload-tradeoff",
+  "corpus_raw_bytes": 1000000000,
+  "pruning_protocol_sha256": "374abdf63de5afaefde8e17668c376637ea4bb08e07e2d5620072f4e77a0edc9",
+  "container_report_sha256": "38a204a43f1ea08963dac0a622f2e6765f08cf508fdf85091e50f6e2741d50b9"
+}

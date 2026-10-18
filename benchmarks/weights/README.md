@@ -176,3 +176,11 @@ restoration and matching context counters, but does not require archive identity
 It reports added payload bytes and a proportional gross break-even screen on
 both reused fixtures. This estimate excludes executable changes and full-stream
 state effects; it is not a measured full-corpus score. All outcomes are retained.
+
+[All six canonical Mac trials](20261017-pruning-screen-summary-v1/decision.json)
+pass exact raw restoration but fail the size screen. Screen/disjoint penalties
+are +16,771/+16,534 bytes at 5%, +30,657/+30,118 at 10%, and +54,912/+54,501 at
+25%. These exceed their proportional gross budgets by roughly 49–76 times.
+No unchanged candidate is promoted. `passed` in each trial records valid
+round-trip/comparison checks; `within_gross_budget: false` is the size decision.
+This rejects these unretrained removals, not all possible smaller trained models.

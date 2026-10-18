@@ -55,4 +55,33 @@ fresh model state and sparse projected article order; they do not predict the
 full stream without error. The screen also excludes executable-size changes.
 A candidate must fit its budget on both reused fixtures before larger/native
 Linux confirmation, and eventually needs a complete packaged round trip.
-No coder or full-score improvement is claimed yet.
+
+## Measured outcome: reject all three unretrained candidates
+
+All six Mac trials restore the original XML exactly and match their encoder
+and decoder context counters. Each comparison also preserves the baseline's
+input, order, dictionary, compiled sources and model settings except for the
+declared weight container and its fingerprint. The predictions change, as
+intended, and the payload penalty overwhelms the saved model bytes:
+
+| Removed | Screen payload | Added bytes | Screen allowance | Disjoint payload | Added bytes | Disjoint allowance |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| None | 119,065 | — | — | 117,438 | — | — |
+| 5% | 135,836 | +16,771 | 224.2 | 133,972 | +16,534 | 218.2 |
+| 10% | 149,722 | +30,657 | 449.1 | 147,556 | +30,118 | 437.1 |
+| 25% | 173,977 | +54,912 | 1,129.3 | 171,939 | +54,501 | 1,099.1 |
+
+Allowances use each fixture's exact raw size, rather than rounding to one MB.
+The penalties are roughly 49–76 times the allowed increases. **None advances
+to native Linux, a larger sample or the reserved range under this protocol.**
+The [saved decision](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-pruning-screen-summary-v1/decision.json)
+links and hashes all six complete records. Their `passed` field means the
+round-trip and comparison checks passed; `within_gross_budget: false` records
+the failed size screen. Concurrent timings are not speed measurements.
+
+This rejects these fixed removals without retraining. It does not establish
+that every smaller model loses. A later approach would need activation-aware
+selection, compensation or retraining and a fresh exported-model comparison.
+The immediate preparation step is to reproduce the upstream training-row dump
+without transformer inference, so prompt coverage and any future training data
+can be inspected. Generating that data is not itself a compression improvement.

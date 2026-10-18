@@ -18,7 +18,7 @@ has since established a stronger reference and a repeatable research loop:
 | [Order](../benchmarks/article-order/20261017-projected-screen-v2), [context](../benchmarks/model-variants/20261017-linux-screen-v2), [depth](../benchmarks/model-variants/20261017-depth-linux-screen-v1) | No proposed ordering wins both Mac fixtures; reduced context and tested depth settings lose both native Linux fixtures. | Keep upstream settings. More graph edges or computation alone do not establish better compression. |
 | [Neuron permutation](../benchmarks/weights/20261017-linux-packages-gcc13-v1) | Both platform fixture archives stay identical; measured release components shrink 8,563 bytes. | Check the real release encoder on full input, then complete package equivalence. This saving alone is far short of the next 1% improvement. |
 | [Exact link target](../benchmarks/model-variants/20261017-retrieval-screen-v1) | Mac fixture payloads improve by 5 and 2 bytes, with exact restoration. | Freeze the candidate and test native Linux plus the previously reserved third range. |
-| [Structured pruning](../benchmarks/weights/20261017-pruning-containers-v1) | Removing 5%, 10% or 25% of MLP neurons saves 216,942, 434,500 or 1,092,566 bytes across the two weight copies. | Measure added payload before promotion. These are gross model savings; coder results are pending. |
+| [Structured pruning](../benchmarks/weights/20261017-pruning-screen-summary-v1) | All six round trips pass, but 5%, 10% and 25% removals add roughly 16–17 KB, 30–31 KB and 54–55 KB per fixture, about 49–76 times their gross model-saving budgets. | Reject all three unretrained candidates; do not spend Linux or reserved-range runs on them. |
 
 Priorities:
 
@@ -42,8 +42,11 @@ Priorities:
    The [weight audit](../benchmarks/weights/20261017-container-audit-v1) finds only
    about 2.2 KB between current int4 coding cost and independent per-tensor
    empirical entropy. This limits simple frequency-table tuning, not more
-   expressive models of correlations. Weight pruning can save much more, but
-   its prediction penalty is the deciding cost.
+   expressive models of correlations. The first unretrained pruning choices
+   fail by a large margin. Reproduce the
+   [upstream training-row dump](../benchmarks/training) before a separate
+   activation-aware, compensated or retrained-model experiment; its data
+   reproduction does not itself establish a better model.
 
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)

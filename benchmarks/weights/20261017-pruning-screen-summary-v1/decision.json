@@ -1,0 +1,69 @@
+{
+  "kind": "pruning-screen-decision",
+  "version": 1,
+  "trials": [
+    {
+      "removed_percent": 5,
+      "role": "screen",
+      "report": "benchmarks/weights/20261017-prune5-native-screen-v1/report.json",
+      "report_sha256": "1d3f4afd976b6ac972134bbad1826cf9fbac3a095c77f7f67c3fde15489e9dfa",
+      "valid_roundtrip": true,
+      "payload_delta_bytes": 16771,
+      "fixture_gross_budget_bytes": 224.230600374,
+      "within_gross_budget": false
+    },
+    {
+      "removed_percent": 5,
+      "role": "holdout",
+      "report": "benchmarks/weights/20261017-prune5-native-holdout-v1/report.json",
+      "report_sha256": "19df52b151bc2ec47cea6f79e95d0d0e6a1857c2dd81826338aae3b330156ee9",
+      "valid_roundtrip": true,
+      "payload_delta_bytes": 16534,
+      "fixture_gross_budget_bytes": 218.238662334,
+      "within_gross_budget": false
+    },
+    {
+      "removed_percent": 10,
+      "role": "screen",
+      "report": "benchmarks/weights/20261017-prune10-native-screen-v1/report.json",
+      "report_sha256": "e35965e8ef51302bfab5a33c3fd8abe216bc292631e5ca81dd948dfe074bcc3b",
+      "valid_roundtrip": true,
+      "payload_delta_bytes": 30657,
+      "fixture_gross_budget_bytes": 449.0978965,
+      "within_gross_budget": false
+    },
+    {
+      "removed_percent": 10,
+      "role": "holdout",
+      "report": "benchmarks/weights/20261017-prune10-native-holdout-v1/report.json",
+      "report_sha256": "ac13b41eb0a5264a0749ce308051d4204262f8115ddda2b6f21b8f7f82100838",
+      "valid_roundtrip": true,
+      "payload_delta_bytes": 30118,
+      "fixture_gross_budget_bytes": 437.0970065,
+      "within_gross_budget": false
+    },
+    {
+      "removed_percent": 25,
+      "role": "screen",
+      "report": "benchmarks/weights/20261017-prune25-native-screen-v1/report.json",
+      "report_sha256": "6153e2ba6802adccea0135ddeae818769f7207e1327503541facd15f4f52ad81",
+      "valid_roundtrip": true,
+      "payload_delta_bytes": 54912,
+      "fixture_gross_budget_bytes": 1129.272939902,
+      "within_gross_budget": false
+    },
+    {
+      "removed_percent": 25,
+      "role": "holdout",
+      "report": "benchmarks/weights/20261017-prune25-native-holdout-v1/report.json",
+      "report_sha256": "baddaac988973c9add568510bd486c71aac60506652525a6ea3c5a0526a12e38",
+      "valid_roundtrip": true,
+      "payload_delta_bytes": 54501,
+      "fixture_gross_budget_bytes": 1099.096266982,
+      "within_gross_budget": false
+    }
+  ],
+  "promoted_candidates": [],
+  "decision": "All three fixed magnitude/contribution-ranked pruning levels fail the gross model-byte budget on both reused canonical Mac fixtures. Preserve these six valid round trips as losses; do not advance them to Linux, larger or reserved-range trials.",
+  "limitation": "This rejects these unretrained structured removals and ranking, not every pruned or retrained model. The budget uses proportional scaling as a screening heuristic and is not a measured enwik9 score."
+}
