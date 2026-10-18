@@ -70,7 +70,9 @@ Priorities:
    lowers screen probability cost by another 282.3 bytes at 16 passes but
    worsens disjoint cost by 90.6 bytes against the one-pass model. Reject that
    checkpoint and expand training coverage rather than fitting this trace
-   longer.
+   longer. A [separate 4,002,523-byte range](../benchmarks/training/20261018-broad-trace-protocol-v1)
+   at enwik8 offset 20,013,121 is now prepared with exact source restoration;
+   baseline/trace archive checks are running before any training from it.
 
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)

@@ -201,6 +201,15 @@ alternative checkpoint was tried on the disjoint fixture. This is direct
 evidence of small-trace overfitting. Broader training data is a better next
 step than more epochs on this fixture.
 
+The next input is a [separate four-megabyte training range](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-broad-trace-protocol-v1):
+416 complete pages from enwik8 bytes 20,013,121–24,015,644. Its preparation
+and original-XML restoration are verified, and a baseline-versus-trace archive
+comparison is underway. The manifest and hashes are versioned; the raw and
+prepared files remain locally reproducible. Any trained model will still need
+frozen screen selection, one disjoint check, real archives and native Linux
+verification. This range broadens training coverage without making the old
+evaluation fixtures into new training data.
+
 The [training-row dump](training-data.md) is a different dataset: it cannot
 replace the final mixer's bit-level inputs. A changed transformer also
 requires a new bit-model trace, because its features and upstream predictions
