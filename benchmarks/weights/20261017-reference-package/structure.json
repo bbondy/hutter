@@ -1,0 +1,23 @@
+{
+  "compressor_bytes": 4000689,
+  "compressor_sha256": "8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7",
+  "packed_program_bytes": 182722,
+  "decoder_prefix_bytes": 165545,
+  "decoder_prefix_sha256": "7a4020aeecff28623891e038e3c262c3a2beed3ce93afd06008db6fbf8789631",
+  "blocks": {
+    "hints": {
+      "bytes": 57504,
+      "sha256": "1aac80c7810acf6a808d11000b25438f187f724892587b458af4f237b735bda1"
+    },
+    "order": {
+      "bytes": 43780,
+      "sha256": "f4fd097c6d28cf2bce0c350fdbd30195e29b4e3d84ba663db44bc3cd9af7d7a2"
+    },
+    "weights": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    }
+  },
+  "component_bytes_excluding_dictionary_payload_footer_args": 7882901,
+  "agrees_with_upstream_cut_tool": true
+}

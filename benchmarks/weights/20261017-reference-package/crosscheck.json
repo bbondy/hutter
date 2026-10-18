@@ -1,0 +1,24 @@
+{
+  "method": "Parse the published comp9 and compare reconstructed decoder bytes with the unmodified upstream cut tool",
+  "commands": [
+    [
+      "clang",
+      "-O2",
+      "-w",
+      "engines/cmix-neif/tools_src/packer/pack_tool.c",
+      "-o",
+      "build/package-cut-reference"
+    ],
+    [
+      "build/package-cut-reference",
+      "cut",
+      "build/reference-package/comp9",
+      "build/reference-package/decoder-prefix"
+    ]
+  ],
+  "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)\nTarget: arm64-apple-darwin24.3.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "cut_tool_sha256": "b82f6f7f2c13694cd86b90b5c9539fd760abb48fbc52b831347b88a517c35eac",
+  "source_sha256": "b1065085f4a59acc7d2786e907240c90ce3c6202459ada41f3b5d13ba40f89c8",
+  "parser_sha256": "520f018c69d1cf2e31617c90eac74cfa2e8829e3337b67f8421752e4c9dae05f",
+  "bytes_identical": true
+}

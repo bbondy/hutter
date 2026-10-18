@@ -81,3 +81,26 @@ seven-day artifact lifetime.
 ```sh
 gh workflow run weight-comparisons.yml --ref main
 ```
+
+## Real release packaging
+
+The separate `release-packages.yml` workflow builds the untouched upstream
+release package and the weight-bound candidate with the original `build.sh`.
+It keeps the original PGO/LTO, section-cut guards, packer, and both real-stub
+unpacking checks. It uses neither development fixture phases nor a Docker build.
+
+`package_structure.py` partitions the actual compressor, constructs its decoder
+prefix exactly as upstream does, and counts compressor + decoder prefix + the
+archive's weight copy. Its decoder-prefix bytes have been checked against the
+upstream C cut tool on the published binary. `package_compare.py` verifies both
+actual binaries again before reporting component deltas.
+
+These counts deliberately exclude the compressed dictionary, full enwik9 payload,
+archive footer and invocation arguments. They establish a measured packaging
+component delta; a full corpus run still decides the complete score. The native
+Linux baseline report also checks whether the rebuilt compressor matches the
+published SHA-256, without assuming the hosted runner has the pinned package set.
+
+```sh
+gh workflow run release-packages.yml --ref main
+```

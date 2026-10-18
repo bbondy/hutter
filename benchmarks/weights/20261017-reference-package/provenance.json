@@ -1,0 +1,5 @@
+{
+  "image_id": "sha256:44ad527bda86b1a4dcfa3953c1b594a39b14b55e01df7969d598dc4b2ba80865",
+  "path_in_image": "/opt/cmix-build/comp9",
+  "scope": "Previously hash-verified published reference binary; not a new native Linux build"
+}

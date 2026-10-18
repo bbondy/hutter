@@ -1,0 +1,55 @@
+name: Native Linux release package comparison
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-linux-release-packages
+  cancel-in-progress: false
+
+jobs:
+  packages:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install release toolchain and isolated export dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y clang-18 lld-18 llvm-18 libclang-rt-18-dev make time gawk gcc binutils python3-venv
+          python3 -m venv build/weight-env
+          build/weight-env/bin/python -m pip install numpy==2.5.4
+      - name: Verify sources and recreate frozen containers
+        run: |
+          python3 scripts/competitive.py verify
+          python3 -m unittest discover -s scripts -p 'test_*.py'
+          build/weight-env/bin/python scripts/weight_permutation.py --protocol benchmarks/weights/20261017-permutation-protocol-v1/protocol.json --output build/release-containers
+      - name: Build untouched upstream release package
+        run: python3 scripts/release_package.py --output build/release-baseline --timeout 6600
+      - name: Build release package with the smaller bound container
+        run: python3 scripts/release_package.py --output build/release-candidate --weight-container build/release-containers/mlp-scale.c4 --timeout 6600
+      - name: Compare measured package components
+        run: python3 scripts/package_compare.py --baseline build/release-baseline/report.json --candidate build/release-candidate/report.json --protocol benchmarks/weights/20261017-archive-protocol-v1/protocol.json --output build/release-comparison.json
+      - name: Preserve package evidence including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-release-packages-${{ github.run_id }}
+          path: |
+            build/release-baseline/report.json
+            build/release-baseline/build.log
+            build/release-baseline/stderr.log
+            build/release-baseline/comp9
+            build/release-baseline/decoder-prefix
+            build/release-candidate/report.json
+            build/release-candidate/build.log
+            build/release-candidate/stderr.log
+            build/release-candidate/comp9
+            build/release-candidate/decoder-prefix
+            build/release-containers/report.json
+            build/release-comparison.json
+          if-no-files-found: warn
+          retention-days: 7
