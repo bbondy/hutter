@@ -1,0 +1,4 @@
+Upstream container rewrite is byte-identical
+mlp-scale 3712387 -4280 bytes per container
+mlp-zero-count 3714991 -1676 bytes per container
+mlp-row-mean 3715729 -938 bytes per container
