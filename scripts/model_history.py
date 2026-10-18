@@ -55,9 +55,18 @@ def compatible_builds(baseline, candidate, baseline_source=None):
         if model_identity({**candidate, key: None})[0] != "baseline":
             raise ValueError("source-code comparison changes model parameters")
         path = baseline_source / module.SOURCE
-        if (change["source_file"] != module.SOURCE or digest(path) != change["before_sha256"]
-                or change["recipe_sha256"] != digest(Path(module.__file__))):
+        if change["source_file"] != module.SOURCE or digest(path) != change["before_sha256"]:
             raise ValueError("source recipe or baseline source differs")
+        if change["recipe_sha256"] != digest(Path(module.__file__)):
+            # A reader/diagnostic correction need not rebuild identical C++.
+            # Authenticate the historical recipe, then independently require
+            # today's source rewrite to reproduce the exact compiled bytes.
+            if not candidate.get("commit"):
+                raise ValueError("historical source recipe lacks a revision")
+            recipe_path = str(Path(module.__file__).resolve().relative_to(ROOT))
+            historical = subprocess.check_output(["git", "show", candidate["commit"] + ":" + recipe_path], cwd=ROOT)
+            if hashlib.sha256(historical).hexdigest() != change["recipe_sha256"]:
+                raise ValueError("historical source recipe differs from its revision")
         expected = hashlib.sha256(module.rewrite(path.read_text(), change["name"]).encode()).hexdigest()
         if expected != change["after_sha256"] or candidate["source_files"][module.SOURCE]["sha256"] != expected:
             raise ValueError("candidate changes more than the declared source rule")

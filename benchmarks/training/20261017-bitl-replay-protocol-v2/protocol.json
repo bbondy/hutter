@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "hypothesis": "The public trainer can replay our reconstructed fixture trace with the shipped BF16 weights and reproduce every live corrected integer probability, without training.",
+  "script_sha256": "a02876202eff7ec151f3d03dfe2e33bd664377112de44bdefa161593d39ce308",
+  "trace_support_sha256": "efa7401e9173d542061045bcd138b8450477529f35a29fa0d819b586161ec802",
+  "trace_protocol_sha256": "af110c8ddf4337dad62b635339e3d303e1b262df9a67d08a50d7b2ce317eb7f4",
+  "fixture_input_sha256": [
+    "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f",
+    "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+  ],
+  "weights_sha256": "c72957f48c2ec81afa3aed2baae7acd964c17f96bb0406b8195818fc708a8e7d",
+  "method": "Build original public replay trainer with original precise floating-point policy; on Mac use the same pinned SIMDe compatibility header as the live model. Add only driver probability comparisons. Load shipped BF16 model, REPLAY_FREEZE_AT=1; first Observe precedes any full 1024-bit backward window, so no optimizer step occurs. Read all records and compare every integer output.",
+  "acceptance": [
+    "Accepted unchanged-archive trace comparison with exact original XML restoration and encoder/decoder trace identity",
+    "Complete source, compiler, binary, weights, trace and log provenance",
+    "Every corrected integer probability equals the live reference, exact full trace count and no extra probability/channel records",
+    "Deliberately wrong first probability is rejected at bit zero as a value mismatch",
+    "Both fixed fixtures must pass before proposing a training experiment; preserve any failure"
+  ],
+  "limitations": [
+    "Frozen fixture inference only. Does not check post-thaw online gradient updates or optimizer equivalence.",
+    "No original historical trace is available for comparison.",
+    "A passing Mac comparison does not establish Linux numerical parity.",
+    "Replay loss is not an archive size; no changed weights, improvement or prize score is established."
+  ],
+  "storage": "Raw traces and replay binaries stay local; commit small provenance reports and logs.",
+  "supersedes_sha256": "e5c9541c4d9e93d9a061edbb832d3c927a7256eee4aca37de235718484ed9cb4",
+  "reader_correction": "Before completion, a source audit found gate zones 0..5 in tf1_gate.h. The first reader wrongly allowed only 0..3. Accept all six declared zones; emitted C++ and recording format are unchanged. Historical recipe revision and exact generated source remain verified."
+}

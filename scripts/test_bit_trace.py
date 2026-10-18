@@ -16,6 +16,7 @@ class BitTraceTests(unittest.TestCase):
 int main() {
   float stage[28], hid[32], lhid[32], tf[4]; unsigned int zone = 1;
   for (int i=0;i<17;++i) {
+    zone = i < 8 ? 4 : 5;
     for (int j=0;j<28;++j) stage[j] = 100*i+j;
     for (int j=0;j<32;++j) { hid[j] = i+j*0.25f; lhid[j] = -hid[j]; }
     for (int j=0;j<4;++j) tf[j] = i+j;
@@ -48,7 +49,7 @@ int main() {
                 self.assertEqual(row[:4], tuple(i+j for j in range(4)))
                 self.assertEqual(row[4:36], tuple(i+j*0.25 for j in range(32)))
                 self.assertEqual(row[36:68], tuple(-(i+j*0.25) for j in range(32)))
-                self.assertEqual(row[68], 1)
+                self.assertEqual(row[68], 4 if i < 8 else 5)
             original = trace.read_bytes()
             corrupted = bytearray(original)
             corrupted[31] = 1  # reserved byte of first record

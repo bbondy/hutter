@@ -59,19 +59,25 @@ reproduce the original training.
 
 ## Reconstructing a trace writer
 
-A [frozen fixture protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-trace-protocol-v1)
+A [frozen fixture protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-trace-protocol-v2)
 now defines a diagnostic writer against the current runtime. It copies raw
 mixer inputs and the projections the model already calculated, records each
 observed bit and saves the corrected integer probability for replay comparison.
 Channels follow the count of executed model bits, not raw byte boundaries.
 Files use exclusive creation; a 16-million-model-bit cap fails explicitly if
 exceeded. The upstream source remains unchanged in Git.
+A preflight reader review corrected a mistaken four-zone validation limit: the
+upstream enum defines six zones, including dictionary and title-mask zones.
+The v2 protocols retain this correction and the original protocol hashes. The
+compiled writer bytes are unchanged and are verified against their recorded
+recipe revision; no recording run was replaced to make this correction.
+
 
 The writer must leave the complete fixture archive unchanged, and encoder and
 decoder must produce identical trace hashes. A matching file format alone does
 not establish faithful replay or reproduce the historical training dataset.
 
-The [replay protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-replay-protocol-v1)
+The [replay protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-replay-protocol-v2)
 uses the public trainer with the exact shipped bfloat16 file. A diagnostic
 freeze after its first observed bit prevents any complete backward window or
 optimizer update. The driver compares every corrected integer probability,

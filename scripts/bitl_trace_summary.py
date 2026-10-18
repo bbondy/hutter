@@ -63,7 +63,7 @@ def summarize(args):
     probability = np.memmap(directory / names["probability"], dtype="<u2", mode="r", shape=(n,))
     channel = np.memmap(directory / names["channel"], dtype="<f4", mode="r", offset=28, shape=(info["channels"], 69))
     cells = {"all": cell(), **{f"decile-{i}": cell() for i in range(10)},
-             **{f"gate-{i}": cell() for i in range(2)}, **{f"zone-{i}": cell() for i in range(4)}}
+             **{f"gate-{i}": cell() for i in range(2)}, **{f"zone-{i}": cell() for i in range(6)}}
     for start in range(0, n, 65536):
         end = min(start + 65536, n)
         rows = trace[start:end]

@@ -181,7 +181,7 @@ def inspect_log(log, directory):
         while chunk := stream.read(276 * 8192):
             for values in struct.iter_unpack("<69f", chunk):
                 zone = values[-1]
-                if not all(map(math.isfinite, values)) or not zone.is_integer() or not 0 <= zone <= 3:
+                if not all(map(math.isfinite, values)) or not zone.is_integer() or not 0 <= zone <= 5:
                     raise ValueError("invalid bit channel values")
                 zones[str(int(zone))] = zones.get(str(int(zone)), 0) + 1
     return {"bits": bits, "channels": channels, "overrides": overrides, "one_bits": ones,

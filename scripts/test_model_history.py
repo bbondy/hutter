@@ -4,6 +4,7 @@ import tempfile
 from pathlib import Path
 import shutil
 import hashlib
+from unittest.mock import patch
 
 from cmix_variants import HEADER, DEPTH_HEADER, recipe
 from competitive import ENGINE
@@ -62,6 +63,27 @@ class ModelComparisonTests(unittest.TestCase):
 
     def test_bit_trace_requires_exact_source_transformation(self):
         self.check_source_transformation(bit_trace, "bit_trace_variant", "bit-trace-fixture")
+
+    def test_historical_reader_correction_still_requires_identical_generated_cpp(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            path = source / bit_trace.SOURCE
+            path.parent.mkdir(parents=True)
+            shutil.copy2(ENGINE / bit_trace.SOURCE, path)
+            baseline, candidate = self.build("baseline"), self.build("baseline")
+            baseline["source_files"][bit_trace.SOURCE] = {"sha256": digest(path)}
+            info = bit_trace.apply(source, bit_trace.VARIANT)
+            candidate["commit"] = "9ad3a7d3000d1b0f113049cd622c23e94b7eb300"
+            historical = b"historical recipe with unchanged generated C++ and an older reader"
+            info["recipe_sha256"] = hashlib.sha256(historical).hexdigest()
+            candidate["bit_trace_variant"] = info
+            candidate["source_files"][bit_trace.SOURCE] = {"sha256": info["after_sha256"]}
+            shutil.copy2(ENGINE / bit_trace.SOURCE, path)
+            with patch("model_history.subprocess.check_output", return_value=historical):
+                self.assertEqual(compatible_builds(baseline, candidate, source), "bit-trace-fixture")
+                info["recipe_sha256"] = "forged historical recipe"
+                with self.assertRaisesRegex(ValueError, "historical source recipe differs"):
+                    compatible_builds(baseline, candidate, source)
 
     def check_source_transformation(self, module, field, model_name):
         with tempfile.TemporaryDirectory() as directory:
