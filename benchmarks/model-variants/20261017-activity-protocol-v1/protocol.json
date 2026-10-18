@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/screen.json",
+      "manifest_sha256": "fd9b852429f18cecc15ecefa0eb0378d919ac9be348fc6c24d8608fc35439731",
+      "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f"
+    },
+    "holdout": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/holdout.json",
+      "manifest_sha256": "880ad288323503c874b18d8d3aadaebde268f6960f546352d0efb0d08e84d47b",
+      "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "changes": "CPU identity display supports Linux; round-trip/context checks are unchanged."
+  },
+  "input_variant": "upstream",
+  "hypothesis": "Measure actual quantized MLP activation frequencies and first/second moments as preparation for a future activation-aware model experiment. This telemetry must preserve the baseline archive.",
+  "variants": [
+    "baseline",
+    "activity-mlp"
+  ],
+  "activity_recipe_sha256": "3e8302c071482f97f28155422dbc5a1df097baf79a695af1207f18a70dc23ea7",
+  "rule": "Instrument only the result of qgemv_relu2q in model_opt.cpp. Count executed calls per layer, and per-neuron nonzero occurrences, sum(q), sum(q*q), using integers. Keep weights, depth, retrieval, priors, context, order and compiler flags unchanged.",
+  "acceptance": [
+    "Exact prepared and original XML restoration",
+    "Archive bytes and SHA-256 identical to the saved uninstrumented baseline",
+    "Context counts unchanged; activation reports exactly equal for encoder and decoder",
+    "All 16 layers present, vector widths and integer moments consistent, source rewrite verified",
+    "Record failures; reject telemetry if it perturbs the archive"
+  ],
+  "limitations": [
+    "Counts include every executed MLP call across ordinary text and inserted prompts; they do not separate token roles.",
+    "Adaptive-depth skips mean different layers can have different call totals.",
+    "Observed inactivity is not universal deadness, and activation magnitude is not causal importance.",
+    "Both fixtures are reused research data, not unseen validation. No pruning candidate or size improvement is claimed."
+  ],
+  "followup": "Summarize coverage and the activity of the already rejected weight-norm removals. Any new selection formula, budget and container hashes need a separate frozen experiment before reading its coder results.",
+  "scope": "Read-only native fixture diagnostics; no trained-model change, performance claim or prize score."
+}

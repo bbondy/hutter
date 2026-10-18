@@ -11,6 +11,7 @@ from make_samples import digest
 from model_history import compatible_builds
 import cmix_retrieval_support as retrieval
 import cmix_alias_support as alias
+import cmix_activity_support as activity
 
 
 class ModelComparisonTests(unittest.TestCase):
@@ -54,6 +55,9 @@ class ModelComparisonTests(unittest.TestCase):
 
     def test_alias_refresh_requires_exact_source_transformation(self):
         self.check_source_transformation(alias, "alias_variant", "alias-refresh")
+
+    def test_activity_requires_exact_source_transformation(self):
+        self.check_source_transformation(activity, "activity_variant", "activity-mlp")
 
     def check_source_transformation(self, module, field, model_name):
         with tempfile.TemporaryDirectory() as directory:

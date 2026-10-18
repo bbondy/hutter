@@ -104,3 +104,21 @@ inputs; it is not an all-input proof or a full-transformer comparison.
 The result makes a simple width-handling bug less likely. It leaves the measured
 size rejection intact and strengthens the case for studying actual activations
 or retraining before removing more neurons.
+
+## Two cheaper checks before another pruning run
+
+An [RMS-aware bound audit](https://github.com/bbondy/hutter/tree/main/benchmarks/weights/20261017-norm-bound-audit-v1)
+uses the normalization constraint to tighten the upstream independent-coordinate
+estimate of a neuron's maximum activation. Even this idealized calculation finds
+zero extra candidates: its smallest upper bound is 26.51 times the zero-activation
+threshold. It does not certify floating-point behavior, and no weights change.
+There is no current candidate to justify developing that pruning rule further.
+
+The next [frozen diagnostic](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-activity-protocol-v1/protocol.json)
+records actual quantized MLP activity during fixture compression: executed calls,
+nonzero counts, sums and squared sums for each neuron. Integer counters must
+leave the archive identical and agree between encoding and decoding before we
+use their results. This will include prompt rows and ordinary text, with fewer
+calls in layers skipped by adaptive depth. Observed inactivity is not a proof
+that a neuron can be removed everywhere, and magnitude alone is not its value
+to the final predictor. No result from this diagnostic is claimed yet.

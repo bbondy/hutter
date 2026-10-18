@@ -14,6 +14,7 @@ from cmix_parity_support import SUPPORT, instrument
 from cmix_variants import VARIANTS, apply_variant
 from cmix_retrieval_support import VARIANT as RETRIEVAL_VARIANT, apply as apply_retrieval
 from cmix_alias_support import VARIANT as ALIAS_VARIANT, apply as apply_alias
+from cmix_activity_support import VARIANT as ACTIVITY_VARIANT, apply as apply_activity
 from cmix_preprocess_support import apply_portable_preprocessing
 from cmix_weight_support import apply_container
 from competitive import ENGINE, MANIFEST, differences, inventory
@@ -30,6 +31,8 @@ def build(args):
         raise ValueError("retrieval experiments require baseline parameters and weights")
     if args.alias_variant and (args.retrieval_variant or args.weight_container or args.variant != "baseline"):
         raise ValueError("alias experiments require baseline retrieval, parameters and weights")
+    if args.activity_variant and (args.alias_variant or args.retrieval_variant or args.weight_container or args.variant != "baseline"):
+        raise ValueError("activity telemetry requires the unchanged baseline model")
     upstream = json.loads(MANIFEST.read_text())
     if any(differences(upstream["files"], inventory(ENGINE)).values()):
         raise ValueError("pinned upstream source differs")
@@ -49,6 +52,7 @@ def build(args):
     weight_binding = apply_container(source, args.weight_container) if args.weight_container else None
     retrieval_variant = apply_retrieval(source, args.retrieval_variant) if args.retrieval_variant else None
     alias_variant = apply_alias(source, args.alias_variant) if args.alias_variant else None
+    activity_variant = apply_activity(source, args.activity_variant) if args.activity_variant else None
     command = ["make", f"-j{args.jobs}", "CC=clang++-18", "prof_use"]
     metadata = {
         "kind": "native-linux-development-build", "commit": capture("git", "-C", str(ROOT), "rev-parse", "HEAD"),
@@ -60,6 +64,7 @@ def build(args):
         "fixture_support": provenance(), "model_variant": variant,
         "retrieval_variant": retrieval_variant,
         "alias_variant": alias_variant,
+        "activity_variant": activity_variant,
         "weight_binding": weight_binding,
         "preprocessing_support": preprocessing_support,
         "initialization": "original Linux libc generator", "source_files": inventory(source),
@@ -92,6 +97,7 @@ def main():
     compile_parser.add_argument("--weight-container", type=Path)
     compile_parser.add_argument("--retrieval-variant", choices=(RETRIEVAL_VARIANT,))
     compile_parser.add_argument("--alias-variant", choices=(ALIAS_VARIANT,))
+    compile_parser.add_argument("--activity-variant", choices=(ACTIVITY_VARIANT,))
     bench = sub.add_parser("bench")
     bench.add_argument("inputs", type=Path, nargs="+")
     for name in ("build", "manifest", "output"):
