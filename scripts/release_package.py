@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import platform
 import shutil
+import subprocess
 
 from benchmark import capture, measured
 from cmix_weight_support import WEIGHTS, apply_container
@@ -40,6 +41,10 @@ def main():
     expected = ["src/transformer.h", WEIGHTS] if binding else []
     if delta != {"changed": sorted(expected), "missing": [], "added": []}:
         raise ValueError("release copy has uncontrolled changes")
+    # A hosted image can contain additional GCC versions. Clang selects their
+    # headers even when the clang package itself matches the reference version.
+    driver = subprocess.run(["clang++-18", "-v", "-E", "-x", "c++", "/dev/null"],
+                            capture_output=True, text=True, check=True).stderr
     report = {"kind": "native-linux-release-package", "version": 1,
               "date_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
               "commit": capture("git", "-C", str(ROOT), "rev-parse", "HEAD"),
@@ -49,6 +54,7 @@ def main():
               "source_changes": delta, "weight_binding": binding,
               "platform": platform.platform(), "cpu": capture("lscpu"),
               "compiler": capture("clang++-18", "--version"), "linker": capture("ld.lld-18", "--version"),
+              "compiler_driver": driver,
               "packages": capture("dpkg-query", "-W", "-f=${Package}=${Version}\n"),
               "scope": "Unmodified upstream release build/packer and guards; optional explicit weight binding. Executable components only, no full enwik9 score or resource eligibility."}
 

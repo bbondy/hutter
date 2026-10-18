@@ -2,6 +2,14 @@ name: Native Linux release package comparison
 
 on:
   workflow_dispatch:
+    inputs:
+      toolchain:
+        description: Keep hosted defaults or isolate reference GCC 13 headers
+        type: choice
+        default: hosted
+        options:
+          - hosted
+          - gcc13
 
 permissions:
   contents: read
@@ -22,6 +30,12 @@ jobs:
           sudo apt-get install -y clang-18 lld-18 llvm-18 libclang-rt-18-dev make time gawk gcc binutils python3-venv
           python3 -m venv build/weight-env
           build/weight-env/bin/python -m pip install numpy==2.5.4
+      - name: Isolate GCC 13 on this disposable runner
+        if: inputs.toolchain == 'gcc13'
+        run: |
+          sudo apt-get remove -y gcc-14 g++-14 gcc-14-x86-64-linux-gnu g++-14-x86-64-linux-gnu libgcc-14-dev libstdc++-14-dev
+          clang++-18 -v -E -x c++ /dev/null > /dev/null 2> build/compiler-selection.log
+          grep -F 'Selected GCC installation: /usr/lib/gcc/x86_64-linux-gnu/13' build/compiler-selection.log
       - name: Verify sources and recreate frozen containers
         run: |
           python3 scripts/competitive.py verify
@@ -51,5 +65,6 @@ jobs:
             build/release-candidate/decoder-prefix
             build/release-containers/report.json
             build/release-comparison.json
+            build/compiler-selection.log
           if-no-files-found: warn
           retention-days: 7

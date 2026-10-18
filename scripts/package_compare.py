@@ -20,6 +20,8 @@ def main():
     for key in ("upstream_commit", "compiler", "linker", "packages", "platform", "cpu"):
         if base[key] != cand[key]:
             raise ValueError("uncontrolled package environment difference: " + key)
+    if base.get("compiler_driver") != cand.get("compiler_driver"):
+        raise ValueError("compiler header/toolchain selection differs")
     for record in (base, cand):
         package = record["package"]
         folder = args.baseline.parent if record is base else args.candidate.parent
