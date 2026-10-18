@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify bound weight experiments against exact baseline archives and raw XML."""
+"""Verify bound weight experiments, with explicit identity or tradeoff protocols."""
 import argparse
 import datetime
 import hashlib
@@ -18,8 +18,27 @@ from model_history import validate_runner
 from order_history import checked_restoration
 
 
+def tradeoff(base, candidate, raw_bytes):
+    if raw_bytes <= 0:
+        raise ValueError("tradeoff requires a nonempty raw fixture")
+    payload = candidate["payload_bytes"] - base["payload_bytes"]
+    containers = 2 * (candidate["weight_bytes"] - base["weight_bytes"])
+    numerator = payload * 1_000_000_000 + containers * raw_bytes
+    return {"payload_delta_bytes": payload, "gross_two_container_delta_bytes": containers,
+            "break_even_fixture_payload_delta_bytes": -containers * raw_bytes / 1_000_000_000,
+            "projected_full_payload_delta_bytes": payload * 1_000_000_000 / raw_bytes,
+            "projected_payload_plus_containers_delta_bytes": numerator / raw_bytes,
+            "within_gross_budget": numerator < 0,
+            "scope": "Proportional raw-byte screening heuristic; excludes executable changes, model-state differences and sampling error. Not a full-corpus score."}
+
+
 def verify(args):
     protocol = json.loads(args.protocol.read_text())
+    mode = protocol.get("acceptance_mode", "archive-identity")
+    if mode not in ("archive-identity", "payload-tradeoff"):
+        raise ValueError("unknown weight acceptance mode")
+    if mode == "payload-tradeoff" and protocol.get("corpus_raw_bytes") != 1_000_000_000:
+        raise ValueError("tradeoff protocol must explicitly declare full enwik9 size")
     manifest = json.loads(args.manifest.read_text())
     fixture = protocol["fixtures"][args.role]
     if digest(args.manifest) != fixture["manifest_sha256"]:
@@ -119,6 +138,11 @@ def verify(args):
               "archives_identical": same_archive, "context_identical": same_context,
               "passed": same_archive and same_context, "variants": records,
               "scope": "Fixture archives and exact original restoration; full prize package savings remain unverified."}
+    if mode == "payload-tradeoff":
+        report.update(kind="weight-payload-tradeoff", passed=same_context,
+                      acceptance_mode=mode,
+                      tradeoff=tradeoff(records["baseline"], records["candidate"], manifest["raw_bytes"]),
+                      scope="Intentional model change: exact original restoration and fixed context; payload versus model-size screening, not archive identity or a prize score.")
     args.output.mkdir(parents=True, exist_ok=False)
     for name, run in runs.items():
         (args.output / name).mkdir()
@@ -129,7 +153,9 @@ def verify(args):
     for path, name in ((args.manifest, "manifest.json"), (args.protocol, "protocol.json")):
         shutil.copyfile(path, args.output / name)
     (args.output / "report.json").write_text(json.dumps(report, indent=2) + "\n")
-    print(args.role, "PASS" if report["passed"] else "FAIL", "archive identity; raw XML restored")
+    print(args.role, "PASS" if report["passed"] else "FAIL", mode, "; raw XML restored")
+    if mode == "payload-tradeoff":
+        print(json.dumps(report["tradeoff"], indent=2))
     return int(not report["passed"])
 
 

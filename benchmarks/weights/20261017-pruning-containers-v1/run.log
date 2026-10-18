@@ -1,0 +1,3 @@
+mlp-prune5: 3,608,196 bytes, -108,471 per copy; 606 neurons removed
+mlp-prune10: 3,499,417 bytes, -217,250 per copy; 1214 neurons removed
+mlp-prune25: 3,170,384 bytes, -546,283 per copy; 3050 neurons removed

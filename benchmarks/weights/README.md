@@ -153,3 +153,18 @@ there is no full compression ratio, and sampled prefix resources do not establis
 eligibility. The complete encoder run and independent SFX decode remain required.
 The artifact source expires after seven days; retain the downloaded release pair
 locally and rebuild it with the frozen recipe for later repeats.
+
+## Structured pruning tradeoff
+
+The [pruning protocol](20261017-pruning-protocol-v1/protocol.json) separately
+removes 5%, 10% or 25% of MLP neurons per layer using a fixed contribution
+heuristic. [Container results](20261017-pruning-containers-v1/report.json) save
+216,942 / 434,500 / 1,092,566 bytes across two copies before payload costs.
+These are changed models, not further provably dead neurons.
+
+Each [archive protocol](20261017-pruning-archive-protocol-v1) explicitly selects
+`payload-tradeoff` acceptance. The verifier still requires exact original XML
+restoration and matching context counters, but does not require archive identity.
+It reports added payload bytes and a proportional gross break-even screen on
+both reused fixtures. This estimate excludes executable changes and full-stream
+state effects; it is not a measured full-corpus score. All outcomes are retained.

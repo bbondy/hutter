@@ -66,6 +66,7 @@ const sidebars = {
         'research/link-context',
         'research/adaptive-depth',
         'research/weight-permutations',
+        'research/weight-pruning',
       ],
     },
     {
