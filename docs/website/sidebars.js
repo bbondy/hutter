@@ -67,6 +67,7 @@ const sidebars = {
         'research/adaptive-depth',
         'research/weight-permutations',
         'research/weight-pruning',
+        'research/training-data',
       ],
     },
     {
