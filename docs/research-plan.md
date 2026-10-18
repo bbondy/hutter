@@ -66,8 +66,10 @@ Priorities:
    in actual Mac archives; both restore exact original XML and retain matching
    context counts. Native Linux saves [136 bytes on the screen](../benchmarks/training/20261018-bit-weight-linux-screen-v1)
    and [93 on the disjoint fixture](../benchmarks/training/20261018-bit-weight-linux-holdout-v1),
-   both with exact restoration and matching context counters. Measure packed
-   release size and longer streams. These reused fixtures are not a
+   both with exact restoration and matching context counters. The [Linux release package](../benchmarks/training/20261018-bit-release-v1)
+   reproduces the published baseline and saves 16 bytes in the compressor and
+   16 bytes in the independent decoder prefix, a 32-byte component reduction.
+   Measure longer streams and the complete prize archive. These reused fixtures are not a
    full-corpus or prize score. A separate frozen [extra-pass trial](../benchmarks/training/20261017-bitl-multi-pass-v1)
    lowers screen probability cost by another 282.3 bytes at 16 passes but
    worsens disjoint cost by 90.6 bytes against the one-pass model. Reject that

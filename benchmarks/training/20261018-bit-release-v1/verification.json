@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "run_id": 39096150448,
+  "head_sha": "b4409f7726fd97893bb3a4800a80937e51d3d175",
+  "checks": {
+    "protocol": true,
+    "published baseline": true,
+    "model component savings": true,
+    "local independent comparison": true,
+    "bit-release-baseline source": true,
+    "bit-release-baseline packer": true,
+    "bit-release-baseline report": true,
+    "bit-release-baseline comp9": true,
+    "bit-release-baseline decoder-prefix": true,
+    "bit-release-baseline build.log": true,
+    "bit-release-baseline stderr.log": true,
+    "bit-release-candidate source": true,
+    "bit-release-candidate packer": true,
+    "bit-release-candidate report": true,
+    "bit-release-candidate comp9": true,
+    "bit-release-candidate decoder-prefix": true,
+    "bit-release-candidate build.log": true,
+    "bit-release-candidate stderr.log": true
+  },
+  "local_package_files": {
+    "bit-release-baseline/comp9": {
+      "bytes": 4000689,
+      "sha256": "8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7"
+    },
+    "bit-release-baseline/decoder-prefix": {
+      "bytes": 165545,
+      "sha256": "7a4020aeecff28623891e038e3c262c3a2beed3ce93afd06008db6fbf8789631"
+    },
+    "bit-release-candidate/comp9": {
+      "bytes": 4000673,
+      "sha256": "5851ec70fb399dfda9d33082ccc1d6e52a0260fea0743609b7122e1b17c45a89"
+    },
+    "bit-release-candidate/decoder-prefix": {
+      "bytes": 165529,
+      "sha256": "0ec9b2df1aa72e05b48f7f6d1445be16ed12803e853b59cf18352cf8bd893db5"
+    }
+  },
+  "retained_sha256": {
+    "bit-release-baseline/build.log": "600156827ba3fe1386d6b3fe09d0ead0311a7da3262fb86d4bf47cf00afcb62a",
+    "bit-release-baseline/report.json": "d0d6f3bc2973a4265231e29397170ce68a3be49692058644ae8ef44829cc0025",
+    "bit-release-baseline/stderr.log": "a0e6ab017b4e9bb39e1e408a22bcc58d403993aa43d34f55648790c2d8205a6b",
+    "bit-release-candidate/build.log": "2940e8374b420836fe91fded370cee46f620185517ec6d4878654624bc538b4e",
+    "bit-release-candidate/report.json": "264a0e19dc2153d3e45e265a77f862da2f0f1e12cfbe3338791f144a3cbe6f2e",
+    "bit-release-candidate/stderr.log": "ce4b85f6a76e66ec2c2de384c647be94fc2058487947093e6aa3e53a2ed8fd89",
+    "bit-release-comparison.json": "24d8428ea123f661c7bff14979ed4715444f1894dd7415decbe800d32c8e8fcd",
+    "compiler-selection.log": "ebcca823475f8fef5094e548a5dc7662221dcf2612e2d652b090582ab2ce7b93"
+  }
+}

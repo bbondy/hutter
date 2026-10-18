@@ -192,13 +192,18 @@ and run serially on one Ubuntu x86-64 host; both restore the original XML and
 match the baseline's context counters. Mac and Linux baselines differ by a few
 bytes, so only same-platform pairs are compared.
 
-All context counters match their baselines. Both development binaries are
-873,096 bytes, though packed release package cost remains unmeasured. The
+All context counters match their baselines. Both Mac development binaries are
+873,096 bytes. The
 model was selected on the screen before the disjoint archive was tested.
 That second fixture has been used in earlier research, so it is a useful
 generalization check rather than untouched validation. Both native Linux
-fixture gates now pass. Packed release accounting and a longer stream are the
-next gates; these savings are far below a demonstrated full-corpus prize margin.
+fixture gates now pass. The [packed Linux release comparison](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-release-v1)
+also reproduces the published baseline exactly and finds a 16-byte smaller
+`comp9` compressor plus a 16-byte smaller independent decoder prefix. The
+external transformer-weight, hint and order blocks are identical, so measured
+release components shrink **32 bytes**. A longer stream and the complete
+`enwik9` archive remain the next gates; these savings are far below a
+demonstrated full-corpus prize margin.
 
 A frozen [extra-pass experiment](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-multi-pass-v1)
 continued the one-pass checkpoint on the same screen trace. At 16 passes the
