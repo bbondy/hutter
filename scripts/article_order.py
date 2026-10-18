@@ -251,7 +251,7 @@ def main():
     prep.add_argument("--start-offset", type=int, default=0)
     prep.add_argument("--phase-mode", choices=("corrected", "legacy"), default="corrected")
     prep.add_argument("--seed", type=int, default=20261017)
-    prep.add_argument("--role", choices=("screen", "holdout"), default="screen")
+    prep.add_argument("--role", choices=("screen", "holdout", "confirmation"), default="screen")
     args = parser.parse_args()
     if not 0 <= args.start_offset < 100_000_000 or not 0 < args.target_bytes < 99_000_000:
         parser.error("offset and size must fit enwik8")

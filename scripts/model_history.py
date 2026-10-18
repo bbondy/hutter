@@ -191,7 +191,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for option in ("manifest", "protocol", "build", "output"):
         parser.add_argument("--" + option, type=Path, required=True)
-    parser.add_argument("--role", choices=("screen", "holdout"), required=True)
+    parser.add_argument("--role", choices=("screen", "holdout", "confirmation"), required=True)
     parser.add_argument("--runs", type=Path, nargs="+", required=True)
     args = parser.parse_args()
     try:

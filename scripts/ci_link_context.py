@@ -20,17 +20,20 @@ EXPERIMENTS = {
     "link-context": "20261017-protocol-v2",
     "adaptive-depth": "20261017-depth-protocol-v1",
     "exact-target": "20261017-retrieval-protocol-v1",
+    "exact-target-confirmation": "20261017-retrieval-confirmation-protocol-v1",
 }
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--role", choices=("screen", "holdout"), required=True)
+    parser.add_argument("--role", choices=("screen", "holdout", "confirmation"), required=True)
     parser.add_argument("--enwik8", type=Path, required=True)
     parser.add_argument("--experiment", choices=EXPERIMENTS, default="link-context")
     args = parser.parse_args()
     original_protocol = ROOT / "benchmarks/model-variants" / EXPERIMENTS[args.experiment] / "protocol.json"
     frozen_protocol = json.loads(original_protocol.read_text())
+    if args.role not in frozen_protocol["fixtures"]:
+        raise ValueError("fixture role is not declared by this experiment")
     models = tuple(frozen_protocol["variants"])
     if not models or models[0] != "baseline":
         raise ValueError("frozen experiment must start with its baseline")

@@ -147,3 +147,10 @@ the reserved third range. They do not establish a full-stream gain, and a
 different platform has already reversed similarly small gains in the
 [depth experiment](adaptive-depth.md). Concurrent timings do not establish a
 speed improvement.
+
+The [reserved-range protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/model-variants/20261017-retrieval-confirmation-protocol-v1)
+now freezes a third input before measuring it: 150 complete articles beginning
+at raw byte 80,020,050, selected by the previously declared 80,000,000-byte
+start and one-million-byte target. It preserves upstream projected order and
+all existing model settings. After this test, that range is examined evidence
+and cannot serve as untouched validation for further tuning.

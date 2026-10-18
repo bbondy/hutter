@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "hypothesis": "Filtering links that only share the beginning of an article title can improve retrieved context without shrinking its budget. This follows an explicitly listed upstream optimization opportunity.",
+  "variants": [
+    "baseline",
+    "retrieval-exact-target"
+  ],
+  "input_variant": "upstream",
+  "fixtures": {
+    "confirmation": {
+      "manifest_path": "benchmarks/model-variants/20261017-retrieval-confirmation-protocol-v1/confirmation.json",
+      "manifest_sha256": "7a2d790580709ac043ec19b4487d3cea325f3285b1d46682b2ee69ccbf917b0d",
+      "input_sha256": "60436c2ca5b650bd1e8e7894447ce14de1499c19d45d79a0764d6186830cc2c9"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "changes": "CPU identity display supports Linux; round-trip/context checks are unchanged."
+  },
+  "retrieval_recipe_sha256": "f1ddb65bf16baf7f7fcc286fcc04851ae7548f4d93521ad130929cb0a11241ad",
+  "rule": "Match the existing exact title bytes and require the next already-decoded token to be a closing bracket, WRT pipe, or section marker. Do not change case folding, underscore handling, budgets, chunk selection, weights, order or other model parameters.",
+  "acceptance": [
+    "Restore prepared input and original XML exactly",
+    "Encoder and decoder context counters match",
+    "Only the declared tf1_z3.cpp transformation differs from the saved baseline sources",
+    "Record all outcomes, including no-ops and losses"
+  ],
+  "promotion": "Measure the frozen candidate and baseline once on this reserved range on Mac and native Linux, without tuning. A regression blocks promotion under this screen; larger/full-stream investigation would require an explicitly different hypothesis and protocol. Preserve every outcome.",
+  "scope": "Previously reserved third-range fixture confirmation; same weights, exact-target recipe and model settings; not a full-stream score.",
+  "parent_protocol_sha256": "9c5d325d6fc23e1c744f79581089123ee13ca616d4f98c5acc8b180cb3edd9eb",
+  "confirmation_selection": {
+    "parent_selection_protocol": "benchmarks/article-order/20261017-projection-protocol-v2/protocol.json",
+    "parent_selection_sha256": "a8a47706e2ab93212efe2aada89b7307f319af008ed4fa9cf27cc8c03325dfc5",
+    "requested_offset": 80000000,
+    "target_bytes": 1000000,
+    "reason": "Unchanged exact-target candidate improved both reused Mac fixtures by 5 and 2 bytes. This range was reserved before those measurements. No coder output on this range was observed before freezing this protocol."
+  }
+}
