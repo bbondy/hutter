@@ -360,3 +360,48 @@ Projection protocol v2 regenerates the prepared bytes after this fix, retaining
 identical raw pages, permutations, local-swap parameters and model weights. It
 establishes new baselines; any size change from the representation correction is
 not an ordering improvement. The fixed-input model tests have the same reset.
+
+## Canonical projection and context outcomes
+
+After the unsigned entity fix, all six canonical order trials restore the exact
+original XML and pass encoder/decoder context checks:
+
+| Order | Screen payload | Delta | Disjoint payload | Delta |
+| --- | ---: | ---: | ---: | ---: |
+| Upstream projection | 119,065 | — | 117,438 | — |
+| Local swaps | 119,073 | +8 | 117,427 | −11 |
+| Graph within regions | 119,096 | +31 | 117,476 | +38 |
+
+The [screen](../../../benchmarks/article-order/20261017-projected-screen-v2/report.json)
+and [disjoint](../../../benchmarks/article-order/20261017-projected-holdout-v2/report.json)
+records use protocol v2. Neither candidate improves both, so neither advances.
+The reserved range at byte 80,000,000 remains untouched.
+
+The fixed-input link-context changes also fail promotion:
+
+| Model | Mac screen | Mac disjoint | Linux screen | Linux disjoint |
+| --- | ---: | ---: | ---: | ---: |
+| Upstream | 119,065 | 117,438 | 119,067 | 117,426 |
+| Budget 128 | 119,077 (+12) | 117,448 (+10) | 119,070 (+3) | 117,436 (+10) |
+| Chunk 32 | 119,077 (+12) | 117,442 (+4) | 119,076 (+9) | 117,433 (+7) |
+| Prefix disabled | 119,084 (+19) | 117,454 (+16) | 119,086 (+19) | 117,456 (+30) |
+
+All sixteen pairs restore original XML, with identical context counters and zero
+prefix tokens for the disabled control. The canonical prepared bytes match across
+platforms. Source/asset/compiler checks permit only each declared model change.
+The [native records](../../../benchmarks/model-variants/20261017-screen-v2/report.json)
+and [native disjoint](../../../benchmarks/model-variants/20261017-holdout-v2/report.json)
+preserve concurrent exploratory timings. The
+[Linux screen](../../../benchmarks/model-variants/20261017-linux-screen-v2/report.json)
+and [Linux disjoint](../../../benchmarks/model-variants/20261017-linux-holdout-v2/report.json)
+come from [workflow 39080868994](https://github.com/bbondy/hutter/actions/runs/39080868994),
+which ran each host's models serially. Downloaded binaries, archives, decoded
+streams, metadata and logs match their recorded hashes; an independent Mac
+inverse helper also restored all original raw bytes. Supplemental CI provenance
+corrects the original report's generic concurrent-timing wording.
+
+Keep the upstream context settings. Sparse reused fixtures do not establish a
+full-corpus cost for this channel. Remaining platform numerical differences
+change byte deltas but not these rejection decisions. Subsequent frozen tests
+investigate adaptive depth and model-neuron permutation separately; do not
+combine them with these rejected changes.

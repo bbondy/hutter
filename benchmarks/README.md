@@ -11,6 +11,11 @@ assets and compiler settings, only declared source edits, matching context
 counters and exact original-article restoration. They preserve every candidate's
 results, including regressions, separately from experiments that change order.
 
+Weight-container experiments live under `weights/<id>/`. Their [protocols and
+checks](weights/README.md) separate container savings, exact kernel behavior,
+complete archive equivalence and measured release-package components. A smaller
+container alone is not a full prize improvement.
+
 `python3 scripts/parity_history.py list` shows completed paired fixture encodings.
 `python3 scripts/parity_history.py decoders` shows the separate same-platform
 restoration and probability-trace checks.

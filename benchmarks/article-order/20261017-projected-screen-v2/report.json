@@ -1,0 +1,353 @@
+{
+  "version": 1,
+  "kind": "article-order-comparison",
+  "role": "screen",
+  "date_utc": "2026-10-18T00:30:39.479068+00:00",
+  "manifest_sha256": "fd9b852429f18cecc15ecefa0eb0378d919ac9be348fc6c24d8608fc35439731",
+  "page_set_sha256": "ab2aa99fa5551386e0680180ca6caba995615ca7c3a0b9661209c868113cffd3",
+  "raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+  "raw_bytes": 1033597,
+  "page_count": 172,
+  "binary_sha256": "36211d75b46f4c4e6df4a428e1415039644b6d697f23b7aff9acab16591b9713",
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "verifier_sha256": "3fab565479fa6332489de3abc19e81d01baf4d303ba382e1baed04d5c36650c4",
+  "restoration_code_sha256": "9c78d6edd9c4aa73a773a654f3ffb75ae04c105b511efdae6c2494760b362570",
+  "size_scope": "Payload plus explicit order side data only. Decoder/encoder code and assets must be packaged and charged for a prize score.",
+  "baseline": "Projection of exact upstream full-corpus order; surrounding pages/context omitted",
+  "timing_scope": "single trials, potentially concurrent; not a performance benchmark",
+  "baseline_variant": "upstream",
+  "variant_names": [
+    "upstream",
+    "local",
+    "graph"
+  ],
+  "native_arguments": [
+    "--native-corpus",
+    "172",
+    "127"
+  ],
+  "development_header_bytes": 16,
+  "variants": {
+    "upstream": {
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "payload_bytes": 119065,
+      "archive_sha256": "253ee258aac75a9eea480b316b8315c84e48c18ee420c51583e311cee02d096d",
+      "prepared_bytes": 947424,
+      "prepared_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f",
+      "order_side_information_bytes": 0,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "original_bytes_roundtrip": true,
+      "compress_seconds": 789.0174053749979,
+      "decompress_seconds": 912.623277499999,
+      "peak_rss_bytes": 6008848384,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/project-screen-upstream-v2",
+      "source_metadata_sha256": "4b80e3f172d27059879ee03014cac4856c104fc70131c4217f6bc179381b71c6",
+      "source_results_sha256": "1ddeee2d60bc9b89249f748518b4f5c2740e4e2a192d85ef8371568dd6a46db3",
+      "log_sha256": {
+        "compress": "9146314f698cca59ec53d5b4585856b240b82ca8f5fe6d15903a5a2d4c52de7b",
+        "decompress": "314bdd78512172a568f7035df176ccb814755785926f0e0fa064e14d2fe8c8ee"
+      },
+      "graph": {
+        "forward_edges": 45,
+        "pages_with_prior_incoming_link": 23,
+        "displaced_pages_vs_upstream": 0
+      },
+      "delta_bytes_vs_baseline": 0,
+      "delta_percent_vs_baseline": 0.0
+    },
+    "local": {
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 24,
+            "articles_with_prefix": 24,
+            "mentions_total": 94,
+            "prefix_tokens_total": 2183,
+            "chunks_total": 50,
+            "anchors": 10472,
+            "fed_tokens": 2183
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 24,
+            "articles_with_prefix": 24,
+            "mentions_total": 94,
+            "prefix_tokens_total": 2183,
+            "chunks_total": 50,
+            "anchors": 10472,
+            "fed_tokens": 2183
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "payload_bytes": 119073,
+      "archive_sha256": "e9cc7300cb72e119b4f46f026079bfebb8b64c9cf2f88c1a6162d5340d362e80",
+      "prepared_bytes": 947422,
+      "prepared_sha256": "b8d861b1190da45e192d7ef4ddad6970d97045e38df397b2a102d9b9ed55fc46",
+      "order_side_information_bytes": 0,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "original_bytes_roundtrip": true,
+      "compress_seconds": 788.0369197500004,
+      "decompress_seconds": 913.2527811670006,
+      "peak_rss_bytes": 6008946688,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/project-screen-local-v2",
+      "source_metadata_sha256": "15d324415750e6c5d6b09b6cdd7e88a9f45bd199d6fad13f0e5e554fe584310e",
+      "source_results_sha256": "ecd11c3dbe368c3c6227ee1e0a9f193752439ddbac35eba9cd6abe95e12ca71d",
+      "log_sha256": {
+        "compress": "89a3b23408c45d8308df9795ddb98bd9b250cbf757f14302430f0455a2fcc919",
+        "decompress": "f1ab3fb82a455e036236166c0171e978251f0d594cfb41a390e0426435cafa4c"
+      },
+      "graph": {
+        "forward_edges": 47,
+        "pages_with_prior_incoming_link": 24,
+        "displaced_pages_vs_upstream": 4
+      },
+      "delta_bytes_vs_baseline": 8,
+      "delta_percent_vs_baseline": 0.006719019023222609
+    },
+    "graph": {
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 7,
+            "bytes": 171,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 37
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 109,
+            "prefix_tokens_total": 2733,
+            "chunks_total": 57,
+            "anchors": 10472,
+            "fed_tokens": 2733
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 7,
+            "bytes": 171,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 37
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 109,
+            "prefix_tokens_total": 2733,
+            "chunks_total": 57,
+            "anchors": 10472,
+            "fed_tokens": 2733
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "payload_bytes": 119096,
+      "archive_sha256": "a0ef55f7181d21cbb9eb558dfc12a46babb1977c7becb6f60f2ab4f3e792ecda",
+      "prepared_bytes": 947422,
+      "prepared_sha256": "dcde94cb74e662aa4047049b574cfc9e6908f2407279e7f9bbeb6d80b64a763d",
+      "order_side_information_bytes": 0,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "original_bytes_roundtrip": true,
+      "compress_seconds": 788.2490941250035,
+      "decompress_seconds": 913.2983922919993,
+      "peak_rss_bytes": 6004572160,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/project-screen-graph-v2",
+      "source_metadata_sha256": "41f5944d6a95bf372bae00cfd8a65610c2ac380c8cbc3e9d8c4495bd8ba5ec4e",
+      "source_results_sha256": "755d8d5effae4da43fde22eaca0d98d7528d48d1a73c544d75fbb8878182d444",
+      "log_sha256": {
+        "compress": "31ccec5d5b8934e3eb5b31980bf105f300137cdb20375585d5e0c03f192a0324",
+        "decompress": "e700819befbed00da1995de401cc81d8c931e7316e98879871374685e08b91e5"
+      },
+      "graph": {
+        "forward_edges": 54,
+        "pages_with_prior_incoming_link": 24,
+        "displaced_pages_vs_upstream": 27
+      },
+      "delta_bytes_vs_baseline": 31,
+      "delta_percent_vs_baseline": 0.02603619871498761
+    }
+  }
+}

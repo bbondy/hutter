@@ -1,0 +1,7 @@
+{
+  "workflow_run": "https://github.com/bbondy/hutter/actions/runs/39080868994",
+  "artifact": "linux-link-context-holdout-39080868994",
+  "source_commit": "e2d4ea186277b0a9f78be0fc64f37f4714c4b4f5",
+  "verification": "Downloaded binary, archive, restored stream, metadata, results and both logs agree with report hashes. Rechecked declared build differences and committed benchmark procedure. Mac canonical inverse helper independently reconstructs all original raw XML bytes. Linux CI already performed its own native original-byte check.",
+  "timing_note": "All four models were run serially on one hosted Linux VM. Original report scope has generic concurrent wording; protocol platform_scope records the serial procedure. These are single trials, not a hardware speed comparison."
+}

@@ -223,10 +223,29 @@ retain the evidence. Neither candidate improves both fixtures. The subsequent
 entity correction requires fresh baselines, with exactly the same permutations;
 it is not a newly tuned ordering candidate.
 
+## Results with canonical entity preprocessing
+
+The same frozen permutations have now been rerun after the portability fix:
+
+| Order | Screen payload | Change | Disjoint payload | Change |
+| --- | ---: | ---: | ---: | ---: |
+| Upstream projection | 119,065 bytes | — | 117,438 bytes | — |
+| Local swaps | 119,073 bytes | +8 bytes | 117,427 bytes | −11 bytes |
+| Graph within regions | 119,096 bytes | +31 bytes | 117,476 bytes | +38 bytes |
+
+All six restore the original articles and pass actual context-counter checks.
+The [canonical screen](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-projected-screen-v2/report.json)
+and [canonical disjoint comparison](https://github.com/bbondy/hutter/blob/main/benchmarks/article-order/20261017-projected-holdout-v2/report.json)
+retain the evidence. Neither candidate improves both fixtures, so neither
+advances to the reserved third range or a Linux ordering comparison. These are
+Mac fixture payloads, not estimates of a full-corpus ordering gain. More forward
+links alone is not a sufficient objective for the frozen model.
+
 ## Limits that matter before promotion
 
-The completed tables compare against **source order**. The separate competitive
-order projection is needed to test improvements against upstream's ordering.
+The earlier source-order tables and the competitive-order projections answer
+different questions. The canonical projection above is the relevant baseline
+for these proposed changes to upstream ordering.
 
 Code inspection found that the legacy development runner retained the full corpus's
 fixed **71,148-page redirect-block boundary**. Every legacy small fixture remained inside
@@ -257,9 +276,11 @@ to the common original byte stream. It refuses different models or article sets.
 python3 scripts/order_history.py list
 ```
 
-The next gates are the upstream-order comparison, controlled changes to retrieved
-context, independent confirmation of a promising candidate, then Linux ranking
-and, if justified, matched retraining. A third enwik8 range starting at byte
+The canonical upstream-order comparison rejects both ordering candidates.
+The separate [controlled link-context tests](link-context.md) also reject all
+three reduced-context settings on Mac and Linux. Continue with a different
+predeclared model hypothesis; any promising candidate still needs independent
+confirmation, Linux ranking and, if justified, matched retraining. A third enwik8 range starting at byte
 80,000,000 is reserved before selection; the repeatedly used disjoint set is
 not untouched validation.
 Only a full enwik9 round trip with packaged size and resource measurements can

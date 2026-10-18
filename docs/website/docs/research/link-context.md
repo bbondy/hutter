@@ -55,6 +55,41 @@ re-establishes baselines on matching Mac/Linux inputs. Raw pages, permutations,
 weights and model settings stay fixed; the third confirmation range remains
 untouched. Earlier fixture losses are not full-corpus ablation estimates.
 
+## Canonical-input results on Mac and native Linux
+
+The corrected inputs now match byte for byte across platforms. All sixteen
+model/input/platform trials restore the original XML and match encoder/decoder
+context counters. Each table compares against its own platform baseline.
+
+| Model | Mac screen | Change | Mac disjoint | Change |
+| --- | ---: | ---: | ---: | ---: |
+| Upstream settings | 119,065 | — | 117,438 | — |
+| Half total budget | 119,077 | +12 | 117,448 | +10 |
+| Shorter chunks | 119,077 | +12 | 117,442 | +4 |
+| Link prefixes disabled | 119,084 | +19 | 117,454 | +16 |
+
+| Model | Linux screen | Change | Linux disjoint | Change |
+| --- | ---: | ---: | ---: | ---: |
+| Upstream settings | 119,067 | — | 117,426 | — |
+| Half total budget | 119,070 | +3 | 117,436 | +10 |
+| Shorter chunks | 119,076 | +9 | 117,433 | +7 |
+| Link prefixes disabled | 119,086 | +19 | 117,456 | +30 |
+
+All sizes are fixture payload bytes, including the common 16-byte development
+frame. **Every candidate loses on both fixtures and both platforms.** Keep the
+upstream settings for the next experiments. The remaining Mac/Linux numerical
+differences change small byte deltas, but they do not change this decision.
+These sparse fixtures do not estimate the full-corpus value of link retrieval.
+
+Saved evidence: [Mac screen](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-screen-v2/report.json),
+[Mac disjoint](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-holdout-v2/report.json),
+[Linux screen](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-linux-screen-v2/report.json)
+and [Linux disjoint](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-linux-holdout-v2/report.json).
+The Linux workflow runs all four models serially on each fixture's host. Its
+single-trial timings are useful for planning; the concurrent Mac trials do not
+support a hardware speed comparison. Downloaded artifact hashes and independent
+Mac inverse preparation also verify the Linux results.
+
 The disabled control keeps the mention index and other context channels. It
 measures removing link prefixes from this trained model, not the best possible
 model trained without them, and does not establish a memory optimization.

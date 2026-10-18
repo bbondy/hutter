@@ -1,0 +1,60 @@
+{
+  "version": 2,
+  "hypothesis": "Test whether fixed-weight link-context selection benefits these sparse projected-order fixtures. Change one parameter at a time.",
+  "variants": {
+    "baseline": {
+      "budget": 256,
+      "chunk": 64
+    },
+    "z3-budget128": {
+      "budget": 128,
+      "chunk": 64
+    },
+    "z3-chunk32": {
+      "budget": 256,
+      "chunk": 32
+    },
+    "z3-off": {
+      "budget": 0,
+      "chunk": 64
+    }
+  },
+  "unchanged": "Frozen transformer weights, dictionary, all other model parameters, corrected fixture phases, and exact upstream-projected input order.",
+  "input_variant": "upstream",
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/screen.json",
+      "manifest_sha256": "4768fc68fca609608f41fc885a7b180c2b08b68623f7f37767ce96d38babe9f6",
+      "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f"
+    },
+    "holdout": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/holdout.json",
+      "manifest_sha256": "880ad288323503c874b18d8d3aadaebde268f6960f546352d0efb0d08e84d47b",
+      "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "commit": "e2d4ea186277b0a9f78be0fc64f37f4714c4b4f5",
+    "changes": "Shared benchmark now records Linux CPU identity; same round-trip procedure."
+  },
+  "acceptance": [
+    "Prepared and exact original raw bytes restored",
+    "Encoder and decoder context counters agree",
+    "z3-off feeds zero link-prefix tokens",
+    "Same platform/assets/input/phase arguments; source changes confined to declared header parameters",
+    "Report all three candidates on both reused fixtures, including regressions"
+  ],
+  "promotion": "Only candidates improving both reused fixtures proceed to the predeclared 80,000,000-byte-offset confirmation range; Linux ranking and full package accounting are still required.",
+  "limitations": [
+    "Fixed weights were trained with upstream defaults; this is inference-time ablation, not retraining.",
+    "Small sparse projections may misrank behavior on dense full-corpus context.",
+    "Single concurrent trials measure payload size; time is exploratory.",
+    "Disabling link prefixes does not remove the mention index or establish a RAM optimization."
+  ],
+  "preprocessing": "phda9-entities-u32-v1",
+  "previous_protocol_sha256": "53389ee7285088069a792bb8df7b9a1ed53dd1b21af3c49ba1bff29c7efdc137",
+  "reason": "Re-establish baselines after an inherited signed-overflow portability defect changed Mac entity preprocessing. No model parameters, raw page selections, or permutations were retuned.",
+  "parent_protocol_sha256": "283934327f10da29e75e970382f36a35e65e89af125f8971569e74e94177d3e0",
+  "platform_scope": "Native Linux x86-64, all models serial on one CI host; not a full prize run"
+}

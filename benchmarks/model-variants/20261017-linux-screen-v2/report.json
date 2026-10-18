@@ -1,0 +1,443 @@
+{
+  "version": 1,
+  "kind": "fixed-input-model-ablation",
+  "role": "screen",
+  "date_utc": "2026-10-18T00:19:22.565073+00:00",
+  "protocol_sha256": "f9a456cefb766655471472978183b7754716aba27088dd2aa5998d7d3cc3d9aa",
+  "manifest_sha256": "4768fc68fca609608f41fc885a7b180c2b08b68623f7f37767ce96d38babe9f6",
+  "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f",
+  "input_bytes": 947424,
+  "raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+  "raw_bytes": 1033597,
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "native_arguments": [
+    "--native-corpus",
+    "172",
+    "127"
+  ],
+  "verifier_sha256": "918262fd0610f85c23d4341e653e8713159e2298e15bb2bd32f4f9d99c6d0323",
+  "scope": "Native fixture payloads; fixed weights; concurrent exploratory times; not prize scores",
+  "variants": {
+    "baseline": {
+      "payload_bytes": 119067,
+      "archive_sha256": "b0de62fe5e54a45802e6cf7b7738051e2e0678d2d78fa3af9657f46908ee8580",
+      "binary_sha256": "146bf187158a9fb5fdc7c486356c692f9efc7de239f219dd082b8032fa4638b0",
+      "binary_bytes": 577272,
+      "model": {
+        "budget": 256,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "compress_seconds": 179.586526318,
+      "decompress_seconds": 182.871332977,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-screen/run-baseline",
+      "metadata_sha256": "8050201940d6593d8dcc73183983f7240ccf561f5a279804988572fdaec35e0c",
+      "results_sha256": "8e522ebff0cf2a137c2aadfa6ac09039b0204fab71ae6c8bb267282c4d445045",
+      "log_sha256": {
+        "compress": "f89c8b7af86f102d85f556e13cdd85fbe32894bb16bcc9f5b44683fae0b1b5ef",
+        "decompress": "65068c5d7d5ff6f680c0691e8dc23b2e5b66a9bad141d4d3ba22819bfebf389c"
+      },
+      "delta_bytes_vs_baseline": 0
+    },
+    "z3-budget128": {
+      "payload_bytes": 119070,
+      "archive_sha256": "7ba314f4e3602abe92307ac4eb8ba5f6bec25bc1eb8fd71e84af3173059f5767",
+      "binary_sha256": "0bd207850fd60fba382b88ee70cebf57e60c2c8da48120cd07248cd19b80ec94",
+      "binary_bytes": 577272,
+      "model": {
+        "budget": 128,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1340,
+            "chunks_total": 35,
+            "anchors": 10472,
+            "fed_tokens": 1340
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1340,
+            "chunks_total": 35,
+            "anchors": 10472,
+            "fed_tokens": 1340
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "compress_seconds": 169.40486516599998,
+      "decompress_seconds": 156.94869093399996,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-screen/run-z3-budget128",
+      "metadata_sha256": "ef8c84b551bca97afc383aefbe490e5c7d8d1a21e3b73054bdbe6d294d0299f8",
+      "results_sha256": "ce69756ce4f201b4df337abb3316e0faf562646f89f242d2e78739deef9589d0",
+      "log_sha256": {
+        "compress": "c094ed29e5c84662b98e9f6efe927e9b2ff27dfcd6c60fcc76cc9559a50e81f9",
+        "decompress": "1e13abcabe80b111d40e3ccf02e7c6e4513b93501e8deefe7e90c95d8fe1e19c"
+      },
+      "delta_bytes_vs_baseline": 3
+    },
+    "z3-chunk32": {
+      "payload_bytes": 119076,
+      "archive_sha256": "a3d5ff425702abc41b8a9199897c5c7869cbeb3581da0c566de5c01e7e335f80",
+      "binary_sha256": "a08d219fd317ca72d22b91ef297d056c659c1474764f1c1995f86619d70a1bfc",
+      "binary_bytes": 577272,
+      "model": {
+        "budget": 256,
+        "chunk": 32,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1622,
+            "chunks_total": 55,
+            "anchors": 10472,
+            "fed_tokens": 1622
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1622,
+            "chunks_total": 55,
+            "anchors": 10472,
+            "fed_tokens": 1622
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "compress_seconds": 166.43081772799997,
+      "decompress_seconds": 158.01452943399988,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-screen/run-z3-chunk32",
+      "metadata_sha256": "14c72eebd050cb5fa548614cf74df9d4e21280dc85453ea8bdcbfcb364b4937d",
+      "results_sha256": "aaa51c6605cb66a04bb5a9ed0c3328b5b5690c1b14a34b40631402a78835c774",
+      "log_sha256": {
+        "compress": "bf30502c11da53ad82a7145e86f31d101ab5f87f3fc338cca8f55406845ddab1",
+        "decompress": "b595296074ab19d32c36ce772b58ca9f015d72f5199a9ce733907607771c1eb8"
+      },
+      "delta_bytes_vs_baseline": 9
+    },
+    "z3-off": {
+      "payload_bytes": 119086,
+      "archive_sha256": "7d0c12de2f0ba4729c1f79e1fe30715a3ec9669dee8891c3f1dde404b9ec475d",
+      "binary_sha256": "8da2950a0895a577d9232f7dabb09773f3f5f4cb87782ee38cad2fddce2d26f8",
+      "binary_bytes": 577272,
+      "model": {
+        "budget": 0,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 0,
+            "mentions_total": 88,
+            "prefix_tokens_total": 0,
+            "chunks_total": 0,
+            "anchors": 10472,
+            "fed_tokens": 0
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 0,
+            "mentions_total": 88,
+            "prefix_tokens_total": 0,
+            "chunks_total": 0,
+            "anchors": 10472,
+            "fed_tokens": 0
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "compress_seconds": 159.184431507,
+      "decompress_seconds": 153.21741349800004,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-screen/run-z3-off",
+      "metadata_sha256": "5352387c8c8a593a9216c8b5d317a4fea5ea0aff96742e88bdd098e0c46186b4",
+      "results_sha256": "783a131b89b02641b9dbacac3c08944c2d70bef410c6617caf4e1794e50d11ab",
+      "log_sha256": {
+        "compress": "e66d94a08f8f8163ba8dc0c5558cfad7879824978fd6ad1a60aef94bc3247d68",
+        "decompress": "1d57bec50f97a13f65e3363517050b313f038e79551f1e35eff9b1026a047e88"
+      },
+      "delta_bytes_vs_baseline": 19
+    }
+  }
+}
