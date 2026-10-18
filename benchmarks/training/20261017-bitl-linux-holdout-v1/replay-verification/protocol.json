@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "hypothesis": "The public trainer can replay our reconstructed fixture trace with the shipped BF16 weights and reproduce every live corrected integer probability, without training.",
+  "script_sha256": "4c81091bf21f4f7acc6f64f2eb62a9b8d2bfc8e9e214c445c8952db9ce1c4dd4",
+  "trace_support_sha256": "efa7401e9173d542061045bcd138b8450477529f35a29fa0d819b586161ec802",
+  "trace_protocol_sha256": "3f96bd10f8f19c0c835b2a321ecac841ea9744ea6cf960abe47d0198dfbf7917",
+  "fixture_input_sha256": [
+    "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f",
+    "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+  ],
+  "weights_sha256": "c72957f48c2ec81afa3aed2baae7acd964c17f96bb0406b8195818fc708a8e7d",
+  "method": "Build public replay trainer with original precise floating-point policy and the live compiler/SIMD support. Separately compile the compressor deterministic-math source with its recorded DETNUM_CXXFLAGS and link it into replay. Model code and input traces stay unchanged. Load shipped BF16 model, REPLAY_FREEZE_AT=1; no full backward window or optimizer step occurs. Compare every integer output and a wrong-first-probability control.",
+  "acceptance": [
+    "Accepted unchanged-archive trace comparison with exact original XML restoration and encoder/decoder trace identity",
+    "Complete source, compiler, binary, weights, trace and log provenance",
+    "Every corrected integer probability equals the live reference, exact full trace count and no extra probability/channel records",
+    "Deliberately wrong first probability is rejected at bit zero as a value mismatch",
+    "Both fixed fixtures must pass before proposing a training experiment; preserve any failure"
+  ],
+  "limitations": [
+    "Frozen fixture inference only. Does not check post-thaw online gradient updates or optimizer equivalence.",
+    "No original historical trace is available for comparison.",
+    "A passing Mac comparison does not establish Linux numerical parity.",
+    "Replay loss is not an archive size; no changed weights, improvement or prize score is established."
+  ],
+  "storage": "Raw traces and replay binaries stay local; commit small provenance reports and logs.",
+  "supersedes_sha256": "d63ae05e81f3b29301b11aec0061ab1cacf911b83bbe0bc290e5dd80b071e233",
+  "reader_correction": "Before completion, a source audit found gate zones 0..5 in tf1_gate.h. The first reader wrongly allowed only 0..3. Accept all six declared zones; emitted C++ and recording format are unchanged. Historical recipe revision and exact generated source remain verified.",
+  "math_mode": "runtime",
+  "math_correction": "The standalone trainer used system exp/log, while the compressor links src/detmath.cpp. Controlled diagnosis reproduced both first mismatches with the runtime head plus system math; linking the exact runtime math source makes every probability match on both fixtures with either runtime head or public trainer. Preserve old failures, link exact detmath.cpp with recorded DETNUM_CXXFLAGS, and repeat positive/negative checks.",
+  "parent_protocol_sha256": "585f13e5007099311f2be8b5c9ef16c157568aad63bd01d9bc8681d33559d7a1",
+  "platform_scope": "Native Linux fixture tracing and frozen replay; not a full release result."
+}

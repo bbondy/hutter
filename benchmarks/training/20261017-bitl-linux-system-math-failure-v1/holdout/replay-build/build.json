@@ -1,0 +1,86 @@
+{
+  "kind": "bitl-frozen-replay-build",
+  "version": 1,
+  "date_utc": "2026-10-18T02:57:48.907292+00:00",
+  "commit": "f1377263e5b4b7dc72cbec3b2f35c1126a7181f1",
+  "script_sha256": "a02876202eff7ec151f3d03dfe2e33bd664377112de44bdefa161593d39ce308",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "passed": true,
+  "upstream_commit": "1c9ea5ed57ec9718bcb681d20b79e81a60b7a728",
+  "compiler": "Ubuntu clang version 18.1.3 (1ubuntu1)\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin",
+  "command": [
+    "clang++-18",
+    "-O3",
+    "-std=c++17",
+    "-ffp-model=precise",
+    "-ffp-contract=off",
+    "-fno-math-errno",
+    "-fno-builtin",
+    "-fno-exceptions",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-Wall",
+    "-Wno-unused-variable",
+    "-m64",
+    "-march=x86-64-v3",
+    "-mtune=znver2",
+    "-fno-pie",
+    "/home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-holdout/replay-build/source/bit_head.cpp",
+    "/home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-holdout/replay-build/source/replay_trainer.cpp",
+    "-no-pie",
+    "-o",
+    "/home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-holdout/replay-build/replay"
+  ],
+  "original_sources": {
+    "bit_head.cpp": {
+      "sha256": "536dd3eb8744fa39f05f65a8a6c33006e3e0f9e91778a30d8685229ff19b962f",
+      "executable": false
+    },
+    "bit_head.h": {
+      "sha256": "905dd4d0148ae1ba627633075bcc457f977ebe4bffc20c474321154cbc414b30",
+      "executable": false
+    },
+    "build.sh": {
+      "sha256": "409a9071f784b436dad9c572f9e15a43d485d9989895ecec21f3854b5a0981f6",
+      "executable": true
+    },
+    "isa_floor.h": {
+      "sha256": "0063ae6aec169f850069e0b520312cee3c3386c0723e3019df3b3696ec55d226",
+      "executable": false
+    },
+    "replay_trainer.cpp": {
+      "sha256": "06ded2dc28e52c578295040460b9ed564c01af92f9ad7115562608e610519b24",
+      "executable": false
+    }
+  },
+  "source_files": {
+    "bit_head.cpp": {
+      "sha256": "536dd3eb8744fa39f05f65a8a6c33006e3e0f9e91778a30d8685229ff19b962f",
+      "executable": false
+    },
+    "bit_head.h": {
+      "sha256": "905dd4d0148ae1ba627633075bcc457f977ebe4bffc20c474321154cbc414b30",
+      "executable": false
+    },
+    "build.sh": {
+      "sha256": "409a9071f784b436dad9c572f9e15a43d485d9989895ecec21f3854b5a0981f6",
+      "executable": true
+    },
+    "isa_floor.h": {
+      "sha256": "0063ae6aec169f850069e0b520312cee3c3386c0723e3019df3b3696ec55d226",
+      "executable": false
+    },
+    "replay_trainer.cpp": {
+      "sha256": "eb3b04fd26f826998a8e14d5e0aa1bdf1ba9296b396078e59ca0e7cfc8e35175",
+      "executable": false
+    }
+  },
+  "live_build_sha256": "0ab4d50f56ddcf8cffa2aee9a84f545793dfc4a07d80ba2b44bb4ce478eae8b5",
+  "simde_commit": null,
+  "scope": "Original public trainer arithmetic; Mac uses the live port SIMD header. Added driver checks compare each integer probability, without changing model arithmetic.",
+  "exit_code": 0,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "binary_sha256": "628b8823009ff109cf734ea3a4ec39aadb4d3f7f59a364b5b695f27601df45b0"
+}

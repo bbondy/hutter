@@ -1,0 +1,263 @@
+{
+  "version": 1,
+  "kind": "fixed-input-model-ablation",
+  "role": "screen",
+  "date_utc": "2026-10-18T03:01:49.118645+00:00",
+  "protocol_sha256": "f3d7ec517d1370022004f3882318e75f1e3a40a5313ad855ebc8a88b401f47c7",
+  "manifest_sha256": "9eb0f5b452945ae2d28b6e768f89e63da5ff23459b780a93589444fdea012f94",
+  "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f",
+  "input_bytes": 947424,
+  "raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+  "raw_bytes": 1033597,
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "native_arguments": [
+    "--native-corpus",
+    "172",
+    "127"
+  ],
+  "verifier_sha256": "7921283848975934fdd3c8f0d9b4f6c13e3eab888b38867c894305fd41495bf0",
+  "scope": "Native Linux x86-64, all models serial on one CI host; not a full prize run",
+  "variants": {
+    "baseline": {
+      "payload_bytes": 119067,
+      "archive_sha256": "b0de62fe5e54a45802e6cf7b7738051e2e0678d2d78fa3af9657f46908ee8580",
+      "binary_sha256": "146bf187158a9fb5fdc7c486356c692f9efc7de239f219dd082b8032fa4638b0",
+      "binary_bytes": 577272,
+      "model": {
+        "budget": 256,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "compress_seconds": 253.527042349,
+      "decompress_seconds": 249.70176256399998,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-screen/run-baseline",
+      "metadata_sha256": "7e2f39bdde61dea22287d6ee12803fdfbc5bc82ca313f4dd6ef2bb27002c247e",
+      "results_sha256": "2c0a6a812299a30c0cbbcba4049ce122bbb859076aaad6246cae7d239931e251",
+      "log_sha256": {
+        "compress": "a92da67db0dcef82472ba7ed747093a629e82501294740de1e9366b28c5bbe4a",
+        "decompress": "7656ebdcfe2dd02307b0ab60f143dd1f02c0afdb9295a3403bbc4671a5451447"
+      },
+      "delta_bytes_vs_baseline": 0
+    },
+    "bit-trace-fixture": {
+      "payload_bytes": 119067,
+      "archive_sha256": "b0de62fe5e54a45802e6cf7b7738051e2e0678d2d78fa3af9657f46908ee8580",
+      "binary_sha256": "3185faee9d3f5c3be4f98baca35a9faa63602ed683cdad8e6bb35c73f71e6413",
+      "binary_bytes": 579576,
+      "model": {
+        "name": "fixture",
+        "source_file": "src/bit_head.cpp",
+        "before_sha256": "9146df6701cead0f1bf479a2128c858f6319bc9aa7025c5d1fff2d7ad5b15a2d",
+        "after_sha256": "35cb6dc19905e7c11d48a4e7a6be617f8c1c427477310885ecc7b2f47b149030",
+        "recipe_sha256": "efa7401e9173d542061045bcd138b8450477529f35a29fa0d819b586161ec802",
+        "scope": "Read-only live BITLSTM inputs and integer predictions, bounded to 16000000 model bits. No parameter or training changes; archive identity must be checked separately."
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 172,
+            "titles": 170,
+            "blocks": 8,
+            "bytes": 180,
+            "links": 9460,
+            "links_piped": 2193,
+            "links_dropped": 0,
+            "redirects": 126,
+            "from_redirect": 19,
+            "from_linktext": 47
+          },
+          "z3": {
+            "articles": 46,
+            "usable_titles": 44,
+            "articles_with_mentions": 23,
+            "articles_with_prefix": 23,
+            "mentions_total": 88,
+            "prefix_tokens_total": 1893,
+            "chunks_total": 45,
+            "anchors": 10472,
+            "fed_tokens": 1893
+          },
+          "prompt": {
+            "articles": 172,
+            "redirect_prompt_pages": 126,
+            "redirect_prompt_tokens": 504,
+            "redirect_pages": 126,
+            "meta_pages": 172,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 16653
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "0c790f54f5aa5ad31d9c37fa084694607e91c3d0bafbbcc2df7fae1b21858a4e",
+      "compress_seconds": 248.196126832,
+      "decompress_seconds": 250.24589314500008,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-screen/run-bit-trace-fixture",
+      "metadata_sha256": "2360b09608d4232a1ea3b5dfd50136743d5a3645f4a89f41c5f937dc84f02d5a",
+      "results_sha256": "4c8344df9b42d51c25b28c49a9a113cbbfd46f65239706e702464bed16cc68a5",
+      "log_sha256": {
+        "compress": "9837975ffeba56674a83f25bf7f37896ad68b903425bee9522b0c29b3a4f5e54",
+        "decompress": "010dce5f462fdacd8daad8bbda78061ba57fc21e3ed4b27f19e8469baf24cf05"
+      },
+      "delta_bytes_vs_baseline": 0,
+      "bit_trace": {
+        "bits": 2418059,
+        "channels": 302258,
+        "overrides": 1,
+        "one_bits": 1144549,
+        "channel_zones": {
+          "0": 302258
+        },
+        "files": {
+          "trace": {
+            "bytes": 145083568,
+            "sha256": "beaf153fb6b085ab9a46353d2bd9dbfc7febf6890f332a11029be349f2310b83"
+          },
+          "channel": {
+            "bytes": 83423236,
+            "sha256": "3ddeb90b55bf896d3e16ca9d8058134eca70c939dc33904a47b149fce0dc2fab"
+          },
+          "probability": {
+            "bytes": 4836118,
+            "sha256": "77445cca79a63a2109aabe46dd270e33abf1417d4d789ebbc8435d7ba09cb595"
+          }
+        }
+      },
+      "trace_encoder_decoder_match": true,
+      "unchanged_archive": true
+    }
+  }
+}

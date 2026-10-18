@@ -1,0 +1,67 @@
+{
+  "kind": "bitl-frozen-replay-verification",
+  "version": 1,
+  "date_utc": "2026-10-18T03:01:53.823537+00:00",
+  "commit": "f1377263e5b4b7dc72cbec3b2f35c1126a7181f1",
+  "script_sha256": "a02876202eff7ec151f3d03dfe2e33bd664377112de44bdefa161593d39ce308",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "passed": false,
+  "comparison_sha256": "ef4ab747d561ddc1e72a9ccbae07755ac8e182a325d9fd50ec7601e8bad8aad9",
+  "protocol_sha256": "12f21ae027279c0d43450e5320e2ff36bdde6c8949652ce638803ff4ab65ee0c",
+  "build_sha256": "25d2b51c85e472d48a60df895b0e701889eb4edfa2fae89f9820a95fecf4a658",
+  "binary_sha256": "628b8823009ff109cf734ea3a4ec39aadb4d3f7f59a364b5b695f27601df45b0",
+  "weights_sha256": "c72957f48c2ec81afa3aed2baae7acd964c17f96bb0406b8195818fc708a8e7d",
+  "trace": {
+    "bits": 2418059,
+    "channels": 302258,
+    "overrides": 1,
+    "one_bits": 1144549,
+    "channel_zones": {
+      "0": 302258
+    },
+    "files": {
+      "trace": {
+        "bytes": 145083568,
+        "sha256": "beaf153fb6b085ab9a46353d2bd9dbfc7febf6890f332a11029be349f2310b83"
+      },
+      "channel": {
+        "bytes": 83423236,
+        "sha256": "3ddeb90b55bf896d3e16ca9d8058134eca70c939dc33904a47b149fce0dc2fab"
+      },
+      "probability": {
+        "bytes": 4836118,
+        "sha256": "77445cca79a63a2109aabe46dd270e33abf1417d4d789ebbc8435d7ba09cb595"
+      }
+    }
+  },
+  "command": [
+    "/home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-screen/replay-build/replay",
+    "/home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-screen/run-bit-trace-fixture/trial-0-0/bitl-trace-3094.bin",
+    "0",
+    "0"
+  ],
+  "environment": {
+    "REPLAY_CHANNEL": "/home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-screen/run-bit-trace-fixture/trial-0-0/bitl-channel-3094.bin",
+    "REPLAY_LOAD": "/home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-screen/weight-audit/F2L.nblb",
+    "REPLAY_FREEZE_AT": "1",
+    "HUTTER_EXPECT_PROBABILITIES": "/home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-screen/run-bit-trace-fixture/trial-0-0/bitl-probability-3094.bin"
+  },
+  "scope": "Fixture replay of shipped weights. Freeze after first Observe, before any complete 1024-bit backward window; no optimizer update. No training, archive improvement or full-stream online-learning equivalence claim.",
+  "replay": {
+    "exit_code": 6,
+    "status": "completed",
+    "wall_seconds": 0.007672249999814085,
+    "log_sha256": "ad5f3492dfd1f80beb3cd08c94e6fbcfea53a2db3644c09ed7230cde9b255487"
+  },
+  "probabilities_match": false,
+  "negative_control": {
+    "exit_code": 6,
+    "status": "completed",
+    "wall_seconds": 0.007837812999923699,
+    "log_sha256": "f4fbefa3ecc49d3f268b3bb58732cc3969816fd4fc98496dd9ba13713151f2cd",
+    "original_probability": 1,
+    "changed_probability": 2,
+    "input_sha256": "99be5efb88ca2013bd8e4eb035fd42d5245468fe9afa70d8ba9c1c419a48c4e8"
+  },
+  "negative_control_rejected": true
+}

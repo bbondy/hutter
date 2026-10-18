@@ -1,0 +1,34 @@
+native development corpus: 172 articles, 127 redirect prefix, frame=1
+ip pack: compiled 35618 addresses / 143576 B, counted 13 / 59
+pretraining the model on the dictionary ... 15.04 s.
+progress 0.00 %
+entering metadata block at 0.01 %
+entering redirect block at 0.77 %
+entering main text block at 1.82 %
+progress 90.54 %
+CMIX_CONTEXT {"kind":"alias","articles":172,"titles":170,"blocks":8,"bytes":180,"links":9460,"links_piped":2193,"links_dropped":0,"redirects":126,"from_redirect":19,"from_linktext":47}
+CMIX_CONTEXT {"kind":"z3","articles":46,"usable_titles":44,"articles_with_mentions":23,"articles_with_prefix":23,"mentions_total":88,"prefix_tokens_total":1893,"chunks_total":45,"anchors":10472,"fed_tokens":1893}
+CMIX_CONTEXT {"kind":"prompt","articles":172,"redirect_prompt_pages":126,"redirect_prompt_tokens":504,"redirect_pages":126,"meta_pages":172,"alias_tokens":0,"alias_articles":0,"links":0,"links_piped":0,"redirects":0,"fed_tokens":16653}
+	Command being timed: "/home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-screen/run-baseline/cmix --native-corpus 172 127 -c dictionary.dic /home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-screen/fixture/upstream.ready /home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-screen/run-baseline/trial-0-0/payload.cmix"
+	User time (seconds): 131.83
+	System time (seconds): 1.78
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:13.63
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 7355664
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 628303
+	Voluntary context switches: 9
+	Involuntary context switches: 938
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 6752
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

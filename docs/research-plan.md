@@ -59,7 +59,8 @@ Priorities:
    as a CPU training route. Upstream trained its 7,386-byte model on only the
    first 20% of model bits. The original large trace is absent, but the new
    bounded writer and public replay verifier match every live integer
-   probability on both Mac fixtures with the compressor's deterministic math.
+   probability on both Mac and native Linux fixtures with the compressor's
+   deterministic math. The earlier Linux system-math mismatch is retained.
    A one-pass screen-selected BF16 update saves [148 bytes on the screen](../benchmarks/training/20261017-bitl-archive-screen-v1)
    and [91 bytes on the disjoint fixture](../benchmarks/training/20261017-bitl-archive-holdout-v1)
    in actual Mac archives; both restore exact original XML and retain matching

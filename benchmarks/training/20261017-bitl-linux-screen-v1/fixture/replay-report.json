@@ -1,0 +1,35 @@
+{
+  "source_manifest_sha256": "fd9b852429f18cecc15ecefa0eb0378d919ac9be348fc6c24d8608fc35439731",
+  "helper_sha256": "8c3f26408a1426886a40f4553ff29d1c203ed58fba341591e238e3db2334e2cb",
+  "helper_arguments": [
+    "--native-corpus",
+    "172",
+    "127"
+  ],
+  "samples": {
+    "upstream": {
+      "bytes": 947424,
+      "sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f",
+      "expected_bytes": 947424,
+      "expected_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f",
+      "original_bytes_roundtrip": true,
+      "matches_expected": true
+    },
+    "local": {
+      "bytes": 947422,
+      "sha256": "b8d861b1190da45e192d7ef4ddad6970d97045e38df397b2a102d9b9ed55fc46",
+      "expected_bytes": 947422,
+      "expected_sha256": "b8d861b1190da45e192d7ef4ddad6970d97045e38df397b2a102d9b9ed55fc46",
+      "original_bytes_roundtrip": true,
+      "matches_expected": true
+    },
+    "graph": {
+      "bytes": 947422,
+      "sha256": "dcde94cb74e662aa4047049b574cfc9e6908f2407279e7f9bbeb6d80b64a763d",
+      "expected_bytes": 947422,
+      "expected_sha256": "dcde94cb74e662aa4047049b574cfc9e6908f2407279e7f9bbeb6d80b64a763d",
+      "original_bytes_roundtrip": true,
+      "matches_expected": true
+    }
+  }
+}

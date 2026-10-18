@@ -1,0 +1,41 @@
+{
+  "kind": "bitl-checkpoint-export-audit",
+  "version": 1,
+  "date_utc": "2026-10-18T02:57:48.799188+00:00",
+  "commit": "f1377263e5b4b7dc72cbec3b2f35c1126a7181f1",
+  "script_sha256": "769a5eafd996d202b29550874ebec2c8a0e9e6827b98c3fb82ffec93b67ddd18",
+  "export_command": [
+    "/usr/bin/python3",
+    "/home/runner/work/hutter/hutter/engines/cmix-neif/training/bitl/tools/nblb.py",
+    "v2",
+    "/home/runner/work/hutter/hutter/engines/cmix-neif/training/bitl/record/F2L_fp32.nblb",
+    "/home/runner/work/hutter/hutter/build/linux-ci-bitl-trace-holdout/weight-audit/F2L.nblb"
+  ],
+  "checkpoint_bytes": 14748,
+  "checkpoint_sha256": "5447ed151f0503d7019ee23467d954842d128cf7e1cd4a3464c883155a022eb6",
+  "converter_sha256": "b3030300e2558ef8a5acef531ed97afa13f7fadb7ba6283902eb7637a17de72a",
+  "header_sha256": "c5977bd52281d05d02825c7a6a79dd9731e7ec239bc70755704e4baf8132010a",
+  "bf16_bytes": 7386,
+  "bf16_sha256": "c72957f48c2ec81afa3aed2baae7acd964c17f96bb0406b8195818fc708a8e7d",
+  "embedded_matches_export": true,
+  "finite_parameters": true,
+  "padding_zero": true,
+  "stored_values": 3681,
+  "active_parameters": 3585,
+  "geometry": {
+    "cells": 16,
+    "inputs_without_previous_bit": 89,
+    "padded_width": 96,
+    "stage1_width": 28
+  },
+  "published_training_bits": 418837176,
+  "published_trace_prefix_bytes": 25130230588,
+  "published_channel_prefix_bytes": 14449882600,
+  "trace_mark_sha256": "dde432adecaa9ec258b5725df8334d302115427c7f87678d7b2e59804fb712af",
+  "missing": [
+    "original trace and channel",
+    "development tree containing the original trace writer"
+  ],
+  "passed": true,
+  "scope": "Exact checkpoint-to-bf16 export and embedded-byte audit. No training replay, regenerated trace, changed model or compression improvement is established."
+}

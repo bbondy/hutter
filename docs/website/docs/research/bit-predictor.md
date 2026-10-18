@@ -87,8 +87,8 @@ online-training arithmetic or a new model's compression performance.
 
 [Native Linux diagnostic checks](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-diagnostic-linux-checks-v1)
 pass the compiled writer/driver controls and source-change guards. These are
-synthetic checks; real model traces still need their own archive and replay
-comparisons. A separate summary reports the current head's discrete-probability
+synthetic checks; the real model trace and replay results are below. A separate
+summary reports the current head's discrete-probability
 cost by model-bit decile and recorded channel state. This can guide a later
 experiment, but does not measure an archive with the head removed.
 
@@ -124,7 +124,15 @@ now pass on both fixtures, including deliberately wrong first probabilities.
 They explicitly bind the math source and its compile flags, enabling the
 separately frozen CPU experiment. The earlier failures remain evidence: matching source formulas
 and floating-point flags alone did not identify the linked math implementation.
-Native Linux checks are separate from this Mac result.
+The [native Linux screen](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-linux-screen-v1)
+and [disjoint replay](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-linux-holdout-v1)
+also pass complete archive identity, exact source restoration, matching
+encoder/decoder traces and every frozen integer probability (2,418,059 and
+2,399,837 bits respectively). The deliberately wrong first probability is
+rejected on both. An earlier [Linux system-math run](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-linux-system-math-failure-v1)
+failed much earlier, at bit 910 on the screen and 230 on the disjoint fixture.
+These Linux results independently support the need to link the runtime math;
+they do not yet test updated weights or long-stream online training.
 
 ## A staged experiment
 
