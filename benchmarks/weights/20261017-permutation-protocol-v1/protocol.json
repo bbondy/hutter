@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "hypothesis": "Exploit MLP hidden-neuron permutation symmetry to improve the existing adaptive weight-container coder without retraining or selecting on corpus scores.",
+  "weights_file": "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4",
+  "weights_sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719",
+  "variants": [
+    "mlp-scale",
+    "mlp-zero-count",
+    "mlp-row-mean"
+  ],
+  "recipes": {
+    "mlp-scale": "Stable ascending absolute bfloat16 up-projection row scale",
+    "mlp-zero-count": "Stable ascending count of zero values in each up-projection row",
+    "mlp-row-mean": "Stable ascending signed integer sum of each up-projection row (all rows have width 192)"
+  },
+  "transformation": "For each of 16 MLP layers, reorder up.weight.q rows, up.weight.scale entries, and down.weight.q columns with the same permutation. All other tensors and container coding remain unchanged.",
+  "acceptance": [
+    "The unchanged tensor set rewrites to the byte-identical upstream container",
+    "Inverse permutations restore all original tensor bytes",
+    "Each generated container reads back to its exact intended tensor set",
+    "Retain all three outcomes, including losses"
+  ],
+  "promotion": [
+    "Any size winner needs bit-exact tests of the actual up/down kernels including sparse/dense paths",
+    "Then compare identical input coder traces and archives on Mac and native Linux",
+    "Rebuild bound submission binaries and measure complete package size before claiming prize savings"
+  ],
+  "scope": "Container-only screening. Doubling a container delta is a gross estimate, not a prize score. Kernel equivalence and full-corpus predictions are initially unverified."
+}
