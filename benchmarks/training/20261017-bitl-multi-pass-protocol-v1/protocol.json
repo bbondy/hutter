@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "hypothesis": "Additional full CPU passes over only the screening trace may lower frozen BF16 bit-predictor cost beyond the selected one-pass model, without changing architecture or coder runtime.",
+  "script_sha256": "9c20163ac05304a60f34de9da1512407e4e3391e2e4ed0c4301b1880238b363d",
+  "prior_report_sha256": "4f36397fbc7b4a961158bab842f41feb9923ec2ad659f9467751cabea8b77f35",
+  "prior_model_sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0",
+  "training_build_sha256": "e995675e23ce531422bb5b944d7057cca58bacf052094945f291a3d359ac814e",
+  "trace_sha256": {
+    "screen": "a00fdc8d14fce2276fea518c3caa63babae64ec3e1031639bf8e8d5ffc6a2d9c",
+    "holdout": "1d31b257f6348ab9e50304757270022cc7e5f33ed0e15b8582200ea426b157a9"
+  },
+  "learning_rate_1e6": 3000,
+  "checkpoints": [
+    2,
+    4,
+    8,
+    16
+  ],
+  "training": "Start from the previous selected one-pass FP32 checkpoint. Repeat the complete screen trace through the unchanged public trainer; each invocation reloads weights and resets Adam moments. No shuffling or holdout training. Save FP32 after each pass and export frozen BF16 at declared checkpoints.",
+  "selection": "Evaluate all four declared BF16 checkpoints on screen. Select the lowest frozen screen cost; ties prefer fewer passes. Save the selected model hash before any holdout evaluation. Require >=1.0 byte gain against the prior one-pass BF16 on both screen and holdout; do not switch after holdout failure.",
+  "acceptance": [
+    "All four checkpoints, intermediate FP32 weights, logs and failed outcomes retained",
+    "Only a both-fixture probability-cost survivor may proceed to a real archive comparison",
+    "Do not claim payload or prize gain from replay cost alone"
+  ],
+  "limitations": [
+    "Both fixtures have appeared in previous research and upstream model was trained on target corpus",
+    "Repeated passes on a small trace can overfit; a disjoint fixture is only a limited check",
+    "Each pass resets optimizer moments, so this is not continuous multi-epoch Adam",
+    "The full-stream online-learning threshold and package size are not evaluated here"
+  ]
+}
