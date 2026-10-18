@@ -6,6 +6,22 @@ into this repo. See [engine setup and reproduction](../engines/README.md).
 The original analysis below remains useful context, but reproducing the upstream
 baseline now takes priority over making the Rust implementation competitive.
 
+The [October 14 LTCB listing](https://www.mattmahoney.net/dc/text.html) now ranks
+[Ex-Girlfriend 1.0](https://github.com/rlanday/ex-girlfriend/tree/v1.0) above
+cmix-neif by 135,106 self-extracting-archive bytes, but labels it **not
+eligible** for the Hutter Prize. Its GPL-3.0 source is pinned at
+`e923faec085a93d24bf519986ee2881497e97934` for read-only local audit.
+The release reports about 61/67 hours to encode/decode and nearly 10 GiB RSS
+on its measured host. Keep cmix-neif as the exactly reproduced control; test
+the derivative's page-id and timestamp forecasts as separate low-overhead
+hypotheses before considering its more costly online predictor or larger maps.
+The [official prize page](https://prize.hutter1.net/) still displays its
+accepted 100,424,672-byte record, distinct from newer benchmark listings and
+pending submissions. Full eligibility remains a measured, judged question.
+If the pending 95,914,051-byte cmix-neif package becomes the accepted record
+with no intervening award, the next 1% prize threshold would be at most
+94,954,910 bytes. Our small fixture gains do not demonstrate that margin.
+
 ## Current evidence and next moves
 
 The initial Rust assessment below is historical context. The competitive track
