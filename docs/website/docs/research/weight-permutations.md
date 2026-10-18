@@ -39,8 +39,8 @@ reads back to exactly its intended tensors, and inverse permutations recover
 the original tensors. No corpus scores selected these orderings.
 
 The submission carries two copies of this container. The initial gross estimate
-was an 8,560-byte saving. Real native Linux release builds now confirm that
-component delta below. It is a small improvement, far from a complete
+was an 8,560-byte saving. A native Linux build matching the published baseline
+now measures an 8,563-byte component reduction below. It is a small improvement, far from a complete
 prize-winning margin, and is not a full-corpus score.
 
 ## Mathematical symmetry needs implementation checks
@@ -92,23 +92,29 @@ unchanged build script, PGO/LTO, section guards and actual unpacking checks:
 
 | Component | Baseline | Reordered weights | Change |
 | --- | ---: | ---: | ---: |
-| Compressor executable | 3,999,867 bytes | 3,995,587 bytes | −4,280 bytes |
-| Decoder prefix | 165,104 bytes | 165,104 bytes | 0 |
+| Compressor executable | 4,000,689 bytes | 3,996,407 bytes | −4,282 bytes |
+| Decoder prefix | 165,545 bytes | 165,544 bytes | −1 byte |
 | Archive-side weight copy | 3,716,667 bytes | 3,712,387 bytes | −4,280 bytes |
-| Sum of these components | 7,881,638 bytes | 7,873,078 bytes | **−8,560 bytes** |
+| Sum of these components | 7,882,901 bytes | 7,874,338 bytes | **−8,563 bytes** |
 
-The [package comparison](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-linux-packages-v1/comparison.json)
+The [package comparison](https://github.com/bbondy/hutter/blob/main/benchmarks/weights/20261017-linux-packages-gcc13-v1/comparison.json)
 rechecks actual binaries and decoder-prefix bytes. It excludes the compressed
 dictionary, full corpus payload, archive footer and invocation arguments.
 A full score still requires the complete archive and resource measurements.
 This was a native Linux build without Docker.
 
-The rebuilt baseline is 822 bytes smaller than the published compressor and
-has a different hash. This is a toolchain reproducibility question, not a gain
-credited to our weight permutation. Nearly all listed reference packages match,
-but the hosted image also has GCC 14 development files that Clang may select
-instead of GCC 13. A separate controlled rebuild tests that explanation. Keep
-same-host candidate deltas separate from published-binary reproduction.
+The baseline now matches the published executable **byte for byte**, SHA-256
+`8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7`.
+The first hosted build had extra GCC 14 development files and produced a smaller,
+different binary; its paired component reduction was 8,560 bytes. Removing those
+development packages made Clang select GCC 13 and recovered the exact published
+baseline. The [earlier host evidence](https://github.com/bbondy/hutter/tree/main/benchmarks/weights/20261017-linux-packages-v1)
+remains separate. A path-format guard initially rejected the correct GCC 13
+selection; that diagnostic and its correction are also saved.
+
+The fixture archive checks used development binaries. The exact release pair
+still needs full-pipeline payload checks, independent self-extractor restoration
+and resource measurements before claiming a complete prize improvement.
 
 ## Where further weight savings could come from
 

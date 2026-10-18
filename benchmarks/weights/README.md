@@ -129,3 +129,11 @@ The [Mac screen](20261017-native-screen-v1/report.json) and
 [Mac disjoint](20261017-native-holdout-v1/report.json) also pass exact archive
 identity against their own baselines (119,065 and 117,438 bytes) and original XML
 restoration. Full-corpus inference equivalence is still a separate gate.
+
+The [GCC 13 release comparison](20261017-linux-packages-gcc13-v1/comparison.json)
+now reproduces the published baseline executable exactly. Removing the hosted
+image's GCC 14 development packages changes Clang's selected C++ toolchain to
+GCC 13. Against this baseline the candidate saves **8,563 component bytes**:
+4,282 in the compressor, one in the decoder prefix, and 4,280 in archive weights.
+The earlier GCC 14 paired result stays separate. Full release payload equivalence
+and complete resource eligibility have not yet been established.

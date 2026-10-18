@@ -1,0 +1,8 @@
+{
+  "workflow_run": "https://github.com/bbondy/hutter/actions/runs/39083970011",
+  "artifact": "linux-release-packages-39083970011",
+  "source_commit": "d8163d2bd3aa3597e18492ab0dd7ff532739f423",
+  "verification": "Downloaded binaries, decoder prefixes and logs rechecked locally; package_compare reproduced the byte-identical report. Untouched baseline compressor exactly matches published SHA-256. Source inventory remains unchanged except the candidate container/fingerprint.",
+  "toolchain_control": "Removed GCC 14 development packages from the disposable Ubuntu runner; Clang selects GCC 13. Remaining linux-libc-dev package version difference did not prevent exact published-binary reproduction.",
+  "scope": "Native build and measured package components; full compression, independent SFX decoding and full-run resource eligibility remain unverified."
+}

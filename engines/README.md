@@ -67,7 +67,14 @@ container is now available for development comparisons; its reference image
 contains `comp9` with the expected published SHA-256. The
 [parity harness](ports/cmix-neif-parity/README.md) runs article-aware fixtures
 against it. Emulated times do not establish prize eligibility, and no native
-Linux x86-64 runner has been provisioned for the full measured submission.
+persistent Linux x86-64 runner has been provisioned for the full measured submission.
+
+Hosted native Ubuntu jobs now reproduce the exact published `comp9` without
+Docker. Clang 18 must select the reference GCC 13 development files: extra GCC
+14 packages on the hosted image otherwise change the output. The
+[controlled build record](../benchmarks/weights/20261017-linux-packages-gcc13-v1/ci-provenance.json)
+saves the compiler selection and binary/package checks. Hosted jobs also run
+canonical article fixtures; their time limit cannot cover the full long run.
 
 On a suitable Linux x86-64 host, preferably the upstream Ubuntu 24.04 environment:
 
@@ -91,17 +98,19 @@ On a suitable Linux x86-64 host, preferably the upstream Ubuntu 24.04 environmen
    enwik9. Record process-tree resource use, disk peak, environment and packaged
    sizes. Use the upstream README's timing and judging instructions.
 
-The build wrapper is ready; full-run execution and a competitive benchmark adapter
-are the next integration step on the Linux runner. The existing Rust CLI adapter
+The build wrapper and native Mac/Linux article-fixture adapters are ready.
+Full-run execution and independent SFX validation remain the next integration
+step on a persistent Linux runner. The existing Rust CLI adapter
 does not understand SFX packaging or upstream specialized preprocessing. Do not
 pass it `comp9` and treat the result as comparable. Keep upstream published
 numbers separate from locally measured records in `benchmarks/runs/`.
 
 ## First experiments after reproduction
 
-Freeze a reference build and its full-corpus result. Add a small-input or
-checkpointed adapter that preserves this engine's preprocessing and model state
-before using the Rust sample funnel for its experiments. The shipped weights
+The release executable and canonical preprocessing now match the reference.
+Preserve these identities while measuring the full-corpus result. The existing
+article-fixture adapters preserve model phase boundaries and restore original
+XML; their small payloads remain separate from a full prize result. The shipped weights
 expect the upstream transformed stream, so changing that representation can
 require retraining; not all raw samples are supported by the submitted frontend.
 

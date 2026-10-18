@@ -1,0 +1,60 @@
+{
+  "kind": "release-component-comparison",
+  "version": 1,
+  "baseline_report_sha256": "e5bb500ee8ff2c058bba26e24e245b033dc439ee8790be3b0b2f42942de3e903",
+  "candidate_report_sha256": "1099eba21b64eeef606413f493bedd86d5b56184a079a819a0cda8543cc07414",
+  "protocol_sha256": "501932dc4f332a0912c4b2ef1d804ce084c9168df0b9e3de88040f47fc903c99",
+  "baseline_matches_published_binary": true,
+  "baseline": {
+    "compressor_bytes": 4000689,
+    "compressor_sha256": "8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7",
+    "packed_program_bytes": 182722,
+    "decoder_prefix_bytes": 165545,
+    "decoder_prefix_sha256": "7a4020aeecff28623891e038e3c262c3a2beed3ce93afd06008db6fbf8789631",
+    "blocks": {
+      "hints": {
+        "bytes": 57504,
+        "sha256": "1aac80c7810acf6a808d11000b25438f187f724892587b458af4f237b735bda1"
+      },
+      "order": {
+        "bytes": 43780,
+        "sha256": "f4fd097c6d28cf2bce0c350fdbd30195e29b4e3d84ba663db44bc3cd9af7d7a2"
+      },
+      "weights": {
+        "bytes": 3716667,
+        "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+      }
+    },
+    "component_bytes_excluding_dictionary_payload_footer_args": 7882901
+  },
+  "candidate": {
+    "compressor_bytes": 3996407,
+    "compressor_sha256": "35354c2b0a5cb49c04ab1514509dd2ec00af38c3965471692acf392992344e35",
+    "packed_program_bytes": 182720,
+    "decoder_prefix_bytes": 165544,
+    "decoder_prefix_sha256": "b18e7f8c5aa1c3dd8ea20fd3b49735508667c4dcdbe87b2ff3d594fa4bf2fa49",
+    "blocks": {
+      "hints": {
+        "bytes": 57504,
+        "sha256": "1aac80c7810acf6a808d11000b25438f187f724892587b458af4f237b735bda1"
+      },
+      "order": {
+        "bytes": 43780,
+        "sha256": "f4fd097c6d28cf2bce0c350fdbd30195e29b4e3d84ba663db44bc3cd9af7d7a2"
+      },
+      "weights": {
+        "bytes": 3712387,
+        "sha256": "52ade19bd0fc51c22b4811f603cda2308223ef49f23ab1abd98d593c77714076"
+      }
+    },
+    "component_bytes_excluding_dictionary_payload_footer_args": 7874338
+  },
+  "deltas": {
+    "compressor_bytes": -4282,
+    "packed_program_bytes": -2,
+    "decoder_prefix_bytes": -1,
+    "component_bytes_excluding_dictionary_payload_footer_args": -8563
+  },
+  "weight_copy_delta_bytes": -4280,
+  "scope": "Measured compressor plus decoder prefix plus archive-side weights. Full payload, compressed dictionary, archive footer and invocation arguments are excluded; no full prize score or runtime claim."
+}

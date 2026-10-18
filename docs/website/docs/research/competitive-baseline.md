@@ -13,15 +13,17 @@ The upstream implementation is a **candidate baseline**. Its reported score has 
 
 The prize uses the one billion byte `enwik9` corpus. A valid decoder must restore it exactly. The score includes the compressed archive **and** the executable and invocation material required by the rules; resource limits also matter. A 15 KB payload from a small fixture is useful research data, but it is not a prize score. A smaller development archive can lose overall if its executable grows more.
 
-Our [selected upstream report](https://github.com/bbondy/hutter/blob/main/engines/cmix-neif/README.md) lists a 91,913,343-byte archive and a 4,000,689-byte executable, plus 19 bytes of invocation arguments: 95,914,051 bytes in that report. As checked October 17, 2026, the [official accepted record](https://prize.hutter1.net/) is 100,424,672 bytes. The reported candidate would be 4,510,621 bytes smaller **if** its full package and resource use qualify; it remains pending, not an awarded prize result. Those are upstream numbers, not a local full-corpus measurement. The project verified that its Linux reference image contains the expected `comp9` binary hash, but still needs a measured full `enwik9` run and exact restoration on a suitable native Linux x86-64 machine.
+Our [selected upstream report](https://github.com/bbondy/hutter/blob/main/engines/cmix-neif/README.md) lists a 91,913,343-byte archive and a 4,000,689-byte executable, plus 19 bytes of invocation arguments: 95,914,051 bytes in that report. As checked October 17, 2026, the [official accepted record](https://prize.hutter1.net/) is 100,424,672 bytes. The reported candidate would be 4,510,621 bytes smaller **if** its full package and resource use qualify; it remains pending, not an awarded prize result. Those are upstream numbers, not a local full-corpus measurement. The project now reproduces the expected `comp9` binary hash with a native Ubuntu build, but still needs a measured full `enwik9` run and exact restoration on a persistent native Linux x86-64 machine.
 
-A native Ubuntu hosted runner now builds the actual upstream release package
-without Docker and passes its packer/unpacker guards. That baseline is
-3,999,867 bytes and differs from the published binary; additional GCC 14
-headers on the host are under investigation. The
-[saved release evidence](https://github.com/bbondy/hutter/tree/main/benchmarks/weights/20261017-linux-packages-v1)
-separates this environment difference from the same-host weight experiment's
-8,560-byte component saving. Neither result replaces the full enwik9 round trip.
+A native Ubuntu hosted runner now reproduces the **exact published executable**
+without Docker and passes the upstream packer/unpacker guards. The default host
+had extra GCC 14 development files; after removing them, Clang selected GCC 13
+and produced the original 4,000,689-byte compressor and its published SHA-256.
+The [saved release evidence](https://github.com/bbondy/hutter/tree/main/benchmarks/weights/20261017-linux-packages-gcc13-v1)
+records this control. Against that baseline, a weight permutation saves 8,563
+bytes in measured release components while preserving both platforms' development
+fixture archives. The complete release payload and full resource use remain
+separate checks.
 
 Why not automatically adopt the smallest entry on a compression leaderboard? The [Large Text Compression Benchmark](https://mattmahoney.net/dc/text.html) ranks compressed size and lists `ex-girlfriend 1.0` ahead of cmix-neif as of its October 14, 2026 update. That benchmark does **not** award the Hutter Prize, and its timing and memory figures are approximate and may come from different machines. It reports about 10,204 MB and 220,071 ns per input byte for `ex-girlfriend`, versus 9,750 MB and 175,392 ns per byte for cmix-neif. The [prize task](https://prize.hutter1.net/) has roughly 10 GB and 50-hour limits on its own test machine. These numbers flag a real resource risk for either candidate; they cannot certify eligibility. The prize score also counts the submitted compressor, which the leaderboard's self-extracting archive column does not show as a separate cost. Measure the actual packaged submission on the target class of hardware before selecting a winner.
 
