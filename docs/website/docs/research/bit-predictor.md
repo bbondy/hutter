@@ -184,13 +184,21 @@ native Mac archive comparisons pass the predeclared promotion gate:
 | [Screen](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-archive-screen-v1) | 119,065 B | 118,917 B | −148 B | Exact restoration |
 | [Disjoint](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-archive-holdout-v1) | 117,438 B | 117,347 B | −91 B | Exact restoration |
 
+The [native Linux screen](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-weight-linux-screen-v1)
+also improves from 119,067 to 118,931 bytes (**−136 B**), and the
+[native Linux disjoint fixture](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-weight-linux-holdout-v1)
+improves from 117,426 to 117,333 bytes (**−93 B**). Each Linux pair was built
+and run serially on one Ubuntu x86-64 host; both restore the original XML and
+match the baseline's context counters. Mac and Linux baselines differ by a few
+bytes, so only same-platform pairs are compared.
+
 All context counters match their baselines. Both development binaries are
 873,096 bytes, though packed release package cost remains unmeasured. The
 model was selected on the screen before the disjoint archive was tested.
 That second fixture has been used in earlier research, so it is a useful
-generalization check rather than untouched validation. Native Linux and a
-longer stream are the next gates; these savings are far below a demonstrated
-full-corpus prize margin.
+generalization check rather than untouched validation. Both native Linux
+fixture gates now pass. Packed release accounting and a longer stream are the
+next gates; these savings are far below a demonstrated full-corpus prize margin.
 
 A frozen [extra-pass experiment](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-multi-pass-v1)
 continued the one-pass checkpoint on the same screen trace. At 16 passes the

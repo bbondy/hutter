@@ -1,0 +1,224 @@
+rm -f *.o
+clang++-18 -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG -m64 -Wall -std=c++17 -ffp-model=fast -mrecip=none -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format -march=x86-64-v3 -mtune=znver2 -O3 -fdata-sections -ffunction-sections -fno-unroll-loops -fno-pie -fmerge-all-constants -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -fprofile-use=/home/runner/work/hutter/hutter/build/linux-ci-bitl-warm-start-screen/build-bit-weight-warm-start-lr3000-v1/source/pgo_data -flto src/coder/decoder.cpp src/coder/encoder.cpp src/context-manager.cpp src/contexts/bit-context.cpp src/contexts/bracket-context.cpp src/contexts/combined-context.cpp src/contexts/context-hash.cpp src/contexts/indirect-hash.cpp src/contexts/interval-hash.cpp src/contexts/interval.cpp src/contexts/sparse.cpp src/models/bracket.cpp src/models/byte-model.cpp src/models/direct-hash.cpp src/models/direct.cpp src/models/indirect.cpp src/models/match.cpp src/models/grammar-match.cpp src/models/fxcmv1.cpp src/models/ppmd.cpp src/states/nonstationary.cpp src/states/run-map.cpp src/mixer/byte-mixer.cpp src/mixer/mixer-input.cpp src/mixer/mixer.cpp src/mixer/sigmoid.cpp src/mixer/sse.cpp -c src/predictor.cpp
+rm -f cmix
+rm -f tf1_dump
+rm -f tf1_z3
+rm -f remap
+rm -f sstrip
+clang++-18 -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG -m64 -Wall -std=c++17 -ffp-model=fast -mrecip=none -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format -march=x86-64-v3 -mtune=znver2 -Os -fdata-sections -ffunction-sections -fno-unroll-loops -fno-pie -fmerge-all-constants -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -Oz -fprofile-use=/home/runner/work/hutter/hutter/build/linux-ci-bitl-warm-start-screen/build-bit-weight-warm-start-lr3000-v1/source/pgo_data src/preprocess/preprocessor.cpp src/preprocess/dictionary.cpp -c 
+In file included from src/coder/decoder.cpp:1:
+In file included from src/coder/decoder.h:6:
+In file included from src/coder/../predictor.h:8:
+In file included from src/coder/../mixer/byte-mixer.h:9:
+In file included from src/coder/../mixer/../transformer.h:5:
+In file included from src/coder/../mixer/../author_block.h:10:
+src/coder/../mixer/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/coder/decoder.cpp:1:
+In file included from src/coder/decoder.h:6:
+In file included from src/coder/../predictor.h:8:
+In file included from src/coder/../mixer/byte-mixer.h:9:
+In file included from src/coder/../mixer/../transformer.h:5:
+src/coder/../mixer/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+In file included from src/preprocess/preprocessor.cpp:7:
+In file included from src/preprocess/preprocessor.h:7:
+In file included from src/preprocess/../predictor.h:8:
+In file included from src/preprocess/../mixer/byte-mixer.h:9:
+In file included from src/preprocess/../mixer/../transformer.h:5:
+In file included from src/preprocess/../mixer/../author_block.h:10:
+src/preprocess/../mixer/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/preprocess/preprocessor.cpp:7:
+In file included from src/preprocess/preprocessor.h:7:
+In file included from src/preprocess/../predictor.h:8:
+In file included from src/preprocess/../mixer/byte-mixer.h:9:
+In file included from src/preprocess/../mixer/../transformer.h:5:
+src/preprocess/../mixer/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+2 warnings generated.
+2 warnings generated.
+clang++-18 -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG -m64 -Wall -std=c++17 -ffp-model=fast -mrecip=none -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format -Oz -fdata-sections -ffunction-sections -march=x86-64-v3 -mtune=znver2 -fno-unroll-loops -fno-pie -fmerge-all-constants -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -fprofile-use=/home/runner/work/hutter/hutter/build/linux-ci-bitl-warm-start-screen/build-bit-weight-warm-start-lr3000-v1/source/pgo_data src/r1_reorder_transform.cpp src/runner.cpp -c
+In file included from src/coder/encoder.cpp:1:
+In file included from src/coder/encoder.h:7:
+In file included from src/coder/../predictor.h:8:
+In file included from src/coder/../mixer/byte-mixer.h:9:
+In file included from src/coder/../mixer/../transformer.h:5:
+In file included from src/coder/../mixer/../author_block.h:10:
+src/coder/../mixer/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/coder/encoder.cpp:1:
+In file included from src/coder/encoder.h:7:
+In file included from src/coder/../predictor.h:8:
+In file included from src/coder/../mixer/byte-mixer.h:9:
+In file included from src/coder/../mixer/../transformer.h:5:
+src/coder/../mixer/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+2 warnings generated.
+In file included from src/context-manager.cpp:1:
+In file included from src/context-manager.h:20:
+In file included from src/transformer.h:5:
+In file included from src/author_block.h:10:
+src/ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/context-manager.cpp:1:
+In file included from src/context-manager.h:20:
+In file included from src/transformer.h:5:
+src/author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+2 warnings generated.
+In file included from src/runner.cpp:15:
+In file included from src/readalike_prepr/article_reorder.h:17:
+src/readalike_prepr/order_codec.h:443:13: warning: unused function 'DecodeOrder' [-Wunused-function]
+  443 | static bool DecodeOrder(const char* residual_path, const char* main_path,
+      |             ^~~~~~~~~~~
+src/readalike_prepr/order_codec.h:561:13: warning: unused function 'DecodeOrderV2' [-Wunused-function]
+  561 | static bool DecodeOrderV2(const char* residual_path, const char* main_path,
+      |             ^~~~~~~~~~~~~
+In file included from src/runner.cpp:17:
+src/readalike_prepr/phda9_preprocess.h:436:15: warning: unused function 'revid_apply' [-Wunused-function]
+  436 | static size_t revid_apply(const char *in, size_t n, char *out, int enc) {
+      |               ^~~~~~~~~~~
+In file included from src/runner.cpp:17:
+In file included from src/readalike_prepr/phda9_preprocess.h:603:
+src/readalike_prepr/header_sort.h:51:13: warning: unused function 'idnum_guard' [-Wunused-function]
+   51 | static void idnum_guard(long long v, long long lo, long long hi,
+      |             ^~~~~~~~~~~
+src/readalike_prepr/header_sort.h:61:13: warning: unused function 'idnum_pad' [-Wunused-function]
+   61 | static void idnum_pad(char *out, size_t *o, long long v, int dig) {
+      |             ^~~~~~~~~
+src/readalike_prepr/header_sort.h:67:13: warning: unused function 'idnum_dec' [-Wunused-function]
+   67 | static void idnum_dec(char *out, size_t *o, long long v) {
+      |             ^~~~~~~~~
+src/readalike_prepr/header_sort.h:74:18: warning: unused function 'idnum_num' [-Wunused-function]
+   74 | static long long idnum_num(const char *p, int len) {
+      |                  ^~~~~~~~~
+In file included from src/runner.cpp:10:
+In file included from src/preprocess/preprocessor.h:7:
+In file included from src/preprocess/../predictor.h:8:
+In file included from src/preprocess/../mixer/byte-mixer.h:9:
+In file included from src/preprocess/../mixer/../transformer.h:5:
+In file included from src/preprocess/../mixer/../author_block.h:10:
+src/preprocess/../mixer/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/runner.cpp:10:
+In file included from src/preprocess/preprocessor.h:7:
+In file included from src/preprocess/../predictor.h:8:
+In file included from src/preprocess/../mixer/byte-mixer.h:9:
+In file included from src/preprocess/../mixer/../transformer.h:5:
+src/preprocess/../mixer/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+warning: src/runner.cpp: function control flow change detected (hash mismatch) _Z8loadFilePKc Hash = 605141909343444361 up to 0 count discarded [-Wbackend-plugin]
+warning: src/runner.cpp: function control flow change detected (hash mismatch) _Z7reorderv Hash = 335424828432755918 up to 0 count discarded [-Wbackend-plugin]
+warning: src/runner.cpp: function control flow change detected (hash mismatch) _Z4sortv Hash = 798733565090940266 up to 0 count discarded [-Wbackend-plugin]
+warning: src/runner.cpp: function control flow change detected (hash mismatch) _Z14decode_txt_witP8_IO_FILES0_m Hash = 105495505805042353 up to 0 count discarded [-Wbackend-plugin]
+warning: src/runner.cpp: function control flow change detected (hash mismatch) _Z14encode_txt_witP8_IO_FILES0_ Hash = 529160954298146104 up to 0 count discarded [-Wbackend-plugin]
+warning: src/runner.cpp: function control flow change detected (hash mismatch) _Z8CompressyPSt14basic_ifstreamIcSt11char_traitsIcEEPSt14basic_ofstreamIcS1_EPyP9Predictor Hash = 439547057030793761 up to 1267185167 count discarded [-Wbackend-plugin]
+warning: src/runner.cpp: function control flow change detected (hash mismatch) _Z10DecompressyPSt14basic_ifstreamIcSt11char_traitsIcEEPSt14basic_ofstreamIcS1_EP9Predictor Hash = 244149733923392279 up to 1260925486 count discarded [-Wbackend-plugin]
+warning: src/runner.cpp: function control flow change detected (hash mismatch) _Z14RunCompressionbRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES6_S6_P8_IO_FILEPyS9_PKc Hash = 796536981270305851 up to 16 count discarded [-Wbackend-plugin]
+warning: src/runner.cpp: function control flow change detected (hash mismatch) _Z16RunDecompressionRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES6_S6_P8_IO_FILEPyS9_PKc Hash = 661518733903161332 up to 9 count discarded [-Wbackend-plugin]
+warning: src/runner.cpp: function control flow change detected (hash mismatch) main Hash = 989734342056358649 up to 59 count discarded [-Wbackend-plugin]
+warning: src/runner.cpp: function control flow change detected (hash mismatch) _ZN14metablock_formL6ZeilenERKSt6vectorIhSaIhEEmmPS0_ImSaImEE Hash = 650973721548467368 up to 973702 count discarded [-Wbackend-plugin]
+In file included from src/models/match.cpp:1:
+In file included from src/models/match.h:6:
+In file included from src/models/../transformer.h:5:
+In file included from src/models/../author_block.h:10:
+src/models/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/models/match.cpp:1:
+In file included from src/models/match.h:6:
+In file included from src/models/../transformer.h:5:
+src/models/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+2 warnings generated.
+20 warnings generated.
+clang++-18 -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG -m64 -Wall -std=c++17 -ffp-model=fast -mrecip=none -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format -Oz -fdata-sections -ffunction-sections -march=x86-64-v3 -mtune=znver2 -fno-unroll-loops -fno-pie -fmerge-all-constants -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -fprofile-use=/home/runner/work/hutter/hutter/build/linux-ci-bitl-warm-start-screen/build-bit-weight-warm-start-lr3000-v1/source/pgo_data -c src/glibc_compat.cpp -o glibc_compat.o
+clang++-18 -O2 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -c src/detmath.cpp -o detmath.o
+clang++-18 -O3 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -c src/fast_math_vec.cpp -o fast_math_vec.o
+clang++-18 -O3 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -c src/optimizer_vec.cpp -o optimizer_vec.o
+clang++-18 -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG -m64 -Wall -std=c++17 -ffp-model=fast -mrecip=none -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-threadsafe-statics -Wno-unknown-escape-sequence -Wno-unused-variable -Wno-unneeded-internal-declaration -Wno-unused-but-set-variable -Wno-format -Oz -fdata-sections -ffunction-sections -march=x86-64-v3 -mtune=znver2 -fno-unroll-loops -fno-pie -fmerge-all-constants -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -fprofile-use=/home/runner/work/hutter/hutter/build/linux-ci-bitl-warm-start-screen/build-bit-weight-warm-start-lr3000-v1/source/pgo_data src/preprocess/dict_derive.cpp -c
+warning: src/models/fxcmv1.cpp: function control flow change detected (hash mismatch) _ZN6fxcmv115modelPredictionEv Hash = 922478550404043901 up to 78111209960 count discarded [-Wbackend-plugin]
+clang++-18 -O3 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wall -Wno-unused-variable -c src/bit_head.cpp -o bit_head.o
+1 warning generated.
+clang++-18 -O3 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -mrecip=none -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wno-unused-variable -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG -c src/tf1/tf1_engine.cpp src/tf1/kernels.cpp src/tf1/model.cpp src/tf1/opt/attn.cpp src/tf1/opt/glue.cpp src/tf1/opt/kda.cpp src/tf1/opt/qmat_dense.cpp src/tf1/opt/qmat_sparse.cpp src/tf1/opt/model_opt.cpp src/tf1/tf1_z3.cpp src/tf1/tf1_prompt.cpp src/tf1/tf1_gate.cpp
+src/models/ppmd.cpp:992:29: warning: use of bitwise '&' with boolean operands [-Wbitwise-instead-of-logical]
+  992 |       PAGE_WI(p,0).Freq += (!suff(pc)->NumStats & (p[0].Freq<16));
+      |                            ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                 &&
+src/models/ppmd.cpp:992:29: note: cast one or both operands to int to silence this warning
+src/models/ppmd.cpp:1106:29: warning: use of bitwise '&' with boolean operands [-Wbitwise-instead-of-logical]
+ 1106 |       PAGE_WI(p,0).Freq += (!suff(pc)->NumStats & (p[0].Freq<16));
+      |                            ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                 &&
+src/models/ppmd.cpp:1106:29: note: cast one or both operands to int to silence this warning
+2 warnings generated.
+In file included from src/mixer/byte-mixer.cpp:1:
+In file included from src/mixer/byte-mixer.h:9:
+In file included from src/mixer/../transformer.h:5:
+In file included from src/mixer/../author_block.h:10:
+src/mixer/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/mixer/byte-mixer.cpp:1:
+In file included from src/mixer/byte-mixer.h:9:
+In file included from src/mixer/../transformer.h:5:
+src/mixer/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+2 warnings generated.
+In file included from src/predictor.cpp:1:
+In file included from src/predictor.h:8:
+In file included from src/mixer/byte-mixer.h:9:
+In file included from src/mixer/../transformer.h:5:
+In file included from src/mixer/../author_block.h:10:
+src/mixer/../ts_progress.h:195:31: warning: private field 'line_has_tab_' is not used [-Wunused-private-field]
+  195 |   bool block_opened_ = false, line_has_tab_ = false, part_b_done_ = false, have_block_ = false;
+      |                               ^
+In file included from src/predictor.cpp:1:
+In file included from src/predictor.h:8:
+In file included from src/mixer/byte-mixer.h:9:
+In file included from src/mixer/../transformer.h:5:
+src/mixer/../author_block.h:158:8: warning: private field 'block_opened_' is not used [-Wunused-private-field]
+  158 |   bool block_opened_ = false;
+      |        ^
+warning: src/predictor.cpp: function control flow change detected (hash mismatch) _ZN9PredictorC2ERKSt6vectorIbSaIbEE Hash = 1021331953378253104 up to 63000 count discarded [-Wbackend-plugin]
+warning: src/predictor.cpp: function control flow change detected (hash mismatch) _ZN9Predictor7PredictEv Hash = 162090493578939056 up to 414119022894 count discarded [-Wbackend-plugin]
+4 warnings generated.
+clang++-18 -Os -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wall -Wno-unused-variable -c src/word_label.cpp -o word_label.o
+clang++-18 -O2 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-builtin -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wall -Wno-unused-variable -c src/adaptive_depth.cpp -o adaptive_depth.o
+src/tf1/opt/model_opt.cpp:455:19: warning: use of logical '&&' with constant operand [-Wconstant-logical-operand]
+  455 |     if (!((3 & 2) && 1) && kind == AttnKind::KVF32) {
+      |                   ^  ~
+src/tf1/opt/model_opt.cpp:455:19: note: use '&' for a bitwise operation
+  455 |     if (!((3 & 2) && 1) && kind == AttnKind::KVF32) {
+      |                   ^~
+      |                   &
+src/tf1/opt/model_opt.cpp:455:19: note: remove constant to silence this warning
+  455 |     if (!((3 & 2) && 1) && kind == AttnKind::KVF32) {
+      |                   ^~~~
+src/tf1/opt/model_opt.cpp:544:21: warning: use of logical '&&' with constant operand [-Wconstant-logical-operand]
+  544 |       if (!((3 & 2) && 1) &&
+      |                     ^  ~
+src/tf1/opt/model_opt.cpp:544:21: note: use '&' for a bitwise operation
+  544 |       if (!((3 & 2) && 1) &&
+      |                     ^~
+      |                     &
+src/tf1/opt/model_opt.cpp:544:21: note: remove constant to silence this warning
+  544 |       if (!((3 & 2) && 1) &&
+      |                     ^~~~
+2 warnings generated.
+clang++-18 -O3 -m64 -std=c++17 -march=x86-64-v3 -mtune=znver2 -mrecip=none -fno-pie -fno-direct-access-external-data -fno-rtti -fvisibility=hidden -ffp-model=precise -ffp-contract=off -fno-math-errno -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -fdata-sections -ffunction-sections -Wno-unused-variable -DSEED=923 -DUPDATE_LIMIT=3000 -DNDEBUG -Oz -c src/tf1/weights_io.cpp src/tf1/weights_io_compressed.cpp src/tf1/opt/arena_build.cpp
+clang++-18 -m64 -fuse-ld=lld-18 -Wl,--gc-sections -std=c++17 -no-pie -Wl,--icf=all -Wl,-z,norelro -Wl,--version-script=runtime_exports.map -Wl,--as-needed -Wl,--build-id=none -Wl,-T,/home/runner/work/hutter/hutter/build/linux-ci-bitl-warm-start-screen/build-bit-weight-warm-start-lr3000-v1/source/encoder_split.lds -fprofile-use=/home/runner/work/hutter/hutter/build/linux-ci-bitl-warm-start-screen/build-bit-weight-warm-start-lr3000-v1/source/pgo_data -flto -Wl,-Map=cmix.map bit-context.o bracket-context.o bracket.o byte-mixer.o byte-model.o combined-context.o context-hash.o context-manager.o decoder.o dictionary.o direct-hash.o direct.o encoder.o indirect-hash.o indirect.o interval-hash.o interval.o match.o grammar-match.o mixer-input.o mixer.o nonstationary.o fxcmv1.o ppmd.o predictor.o preprocessor.o r1_reorder_transform.o run-map.o runner.o sigmoid.o sparse.o sse.o glibc_compat.o detmath.o fast_math_vec.o optimizer_vec.o dict_derive.o bit_head.o tf1_engine.o weights_io.o weights_io_compressed.o kernels.o model.o arena_build.o attn.o glue.o kda.o qmat_dense.o qmat_sparse.o model_opt.o tf1_z3.o tf1_prompt.o tf1_gate.o word_label.o adaptive_depth.o  -s -o cmix
+rm -f *.o

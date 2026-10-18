@@ -64,8 +64,10 @@ Priorities:
    A one-pass screen-selected BF16 update saves [148 bytes on the screen](../benchmarks/training/20261017-bitl-archive-screen-v1)
    and [91 bytes on the disjoint fixture](../benchmarks/training/20261017-bitl-archive-holdout-v1)
    in actual Mac archives; both restore exact original XML and retain matching
-   context counts. Promote this fixed model to native Linux, then measure
-   packed release size and longer streams. These reused fixtures are not a
+   context counts. Native Linux saves [136 bytes on the screen](../benchmarks/training/20261018-bit-weight-linux-screen-v1)
+   and [93 on the disjoint fixture](../benchmarks/training/20261018-bit-weight-linux-holdout-v1),
+   both with exact restoration and matching context counters. Measure packed
+   release size and longer streams. These reused fixtures are not a
    full-corpus or prize score. A separate frozen [extra-pass trial](../benchmarks/training/20261017-bitl-multi-pass-v1)
    lowers screen probability cost by another 282.3 bytes at 16 passes but
    worsens disjoint cost by 90.6 bytes against the one-pass model. Reject that
