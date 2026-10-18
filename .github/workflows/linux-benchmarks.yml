@@ -14,6 +14,7 @@ on:
           - exact-target-confirmation
           - bitl-trace
           - bitl-warm-start
+          - bitl-broad
 
 permissions:
   contents: read
@@ -30,7 +31,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        role: ${{ fromJSON(inputs.experiment == 'exact-target-confirmation' && '["confirmation"]' || '["screen", "holdout"]') }}
+        role: ${{ fromJSON(inputs.experiment == 'exact-target-confirmation' && '["confirmation"]' || inputs.experiment == 'bitl-broad' && '["screen"]' || '["screen", "holdout"]') }}
     steps:
       - uses: actions/checkout@v4
       - name: Install native compiler and measurement tools
