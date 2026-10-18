@@ -85,3 +85,22 @@ selection, compensation or retraining and a fresh exported-model comparison.
 The immediate preparation step is to reproduce the upstream training-row dump
 without transformer inference, so prompt coverage and any future training data
 can be inspected. Generating that data is not itself a compression improvement.
+
+## Check the implementation before blaming the model
+
+A wrong kernel for narrower layers could also produce poor predictions while
+still restoring losslessly. A separate
+[frozen control](https://github.com/bbondy/hutter/tree/main/benchmarks/weights/20261017-pruning-control-native-v1)
+compares each pruned model with a full-width model whose corresponding incoming
+rows are zero. The latter retains all tensor shapes, scales and outgoing weights.
+Both should compute the same MLP function for the same input.
+
+All three pass 16,384 synthetic block cases each on the actual Mac kernels.
+Retained quantized activations match after remapping, and the sparse and dense
+routes produce identical residual float bits. The unmasked original fails the
+comparison, as expected. This checks width packing and tail handling on those
+inputs; it is not an all-input proof or a full-transformer comparison.
+
+The result makes a simple width-handling bug less likely. It leaves the measured
+size rejection intact and strengthens the case for studying actual activations
+or retraining before removing more neurons.

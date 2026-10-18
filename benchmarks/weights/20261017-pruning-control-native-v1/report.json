@@ -1,0 +1,383 @@
+{
+  "kind": "pruning-masked-width-control",
+  "version": 1,
+  "date_utc": "2026-10-18T01:48:54.422568+00:00",
+  "commit": "fda8926427c7b23775b5ccd762158f27c2f09d6d",
+  "script_sha256": "de6581195a37330ee9400177df1f6ce79ddde594c16e312f20edb21431659595",
+  "probe_source_sha256": "e382582ecfbcb8d8307ac9311f9ce6611901ae27b2652006615cf5c3ea78d148",
+  "protocol_sha256": "a9902187916754c116303cf49a56955646a5e696f4a54b4eff5b9ab238d8d84e",
+  "container_report_sha256": "38a204a43f1ea08963dac0a622f2e6765f08cf508fdf85091e50f6e2741d50b9",
+  "build_metadata_sha256": "876f6158e3a67dab303fd38a9c7c31798aa608a8333e676938672ce8a7d573ea",
+  "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)\nTarget: arm64-apple-darwin24.3.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "commands": [
+    [
+      "clang++",
+      "-Isrc",
+      "-I../simde",
+      "-O3",
+      "-std=c++17",
+      "-fno-rtti",
+      "-fvisibility=hidden",
+      "-ffp-model=precise",
+      "-ffp-contract=off",
+      "-fno-math-errno",
+      "-fno-exceptions",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-Wno-unused-variable",
+      "-DSEED=923",
+      "-DUPDATE_LIMIT=3000",
+      "-DNDEBUG",
+      "-Oz",
+      "-c",
+      "src/tf1/weights_io.cpp",
+      "-o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/weights_io.o"
+    ],
+    [
+      "clang++",
+      "-Isrc",
+      "-I../simde",
+      "-O3",
+      "-std=c++17",
+      "-fno-rtti",
+      "-fvisibility=hidden",
+      "-ffp-model=precise",
+      "-ffp-contract=off",
+      "-fno-math-errno",
+      "-fno-exceptions",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-Wno-unused-variable",
+      "-DSEED=923",
+      "-DUPDATE_LIMIT=3000",
+      "-DNDEBUG",
+      "-Oz",
+      "-c",
+      "src/tf1/weights_io_compressed.cpp",
+      "-o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/weights_io_compressed.o"
+    ],
+    [
+      "clang++",
+      "-Isrc",
+      "-I../simde",
+      "-O3",
+      "-std=c++17",
+      "-fno-rtti",
+      "-fvisibility=hidden",
+      "-ffp-model=precise",
+      "-ffp-contract=off",
+      "-fno-math-errno",
+      "-fno-exceptions",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-Wno-unused-variable",
+      "-DSEED=923",
+      "-DUPDATE_LIMIT=3000",
+      "-DNDEBUG",
+      "-c",
+      "src/tf1/kernels.cpp",
+      "-o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/kernels.o"
+    ],
+    [
+      "clang++",
+      "-Isrc",
+      "-I../simde",
+      "-O3",
+      "-std=c++17",
+      "-fno-rtti",
+      "-fvisibility=hidden",
+      "-ffp-model=precise",
+      "-ffp-contract=off",
+      "-fno-math-errno",
+      "-fno-exceptions",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-Wno-unused-variable",
+      "-DSEED=923",
+      "-DUPDATE_LIMIT=3000",
+      "-DNDEBUG",
+      "-Oz",
+      "-c",
+      "src/tf1/opt/arena_build.cpp",
+      "-o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/arena_build.o"
+    ],
+    [
+      "clang++",
+      "-Isrc",
+      "-I../simde",
+      "-O3",
+      "-std=c++17",
+      "-fno-rtti",
+      "-fvisibility=hidden",
+      "-ffp-model=precise",
+      "-ffp-contract=off",
+      "-fno-math-errno",
+      "-fno-exceptions",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-Wno-unused-variable",
+      "-DSEED=923",
+      "-DUPDATE_LIMIT=3000",
+      "-DNDEBUG",
+      "-c",
+      "src/tf1/opt/glue.cpp",
+      "-o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/glue.o"
+    ],
+    [
+      "clang++",
+      "-Isrc",
+      "-I../simde",
+      "-O3",
+      "-std=c++17",
+      "-fno-rtti",
+      "-fvisibility=hidden",
+      "-ffp-model=precise",
+      "-ffp-contract=off",
+      "-fno-math-errno",
+      "-fno-exceptions",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-Wno-unused-variable",
+      "-DSEED=923",
+      "-DUPDATE_LIMIT=3000",
+      "-DNDEBUG",
+      "-c",
+      "src/tf1/opt/qmat_dense.cpp",
+      "-o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/qmat_dense.o"
+    ],
+    [
+      "clang++",
+      "-Isrc",
+      "-I../simde",
+      "-O3",
+      "-std=c++17",
+      "-fno-rtti",
+      "-fvisibility=hidden",
+      "-ffp-model=precise",
+      "-ffp-contract=off",
+      "-fno-math-errno",
+      "-fno-exceptions",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-Wno-unused-variable",
+      "-DSEED=923",
+      "-DUPDATE_LIMIT=3000",
+      "-DNDEBUG",
+      "-c",
+      "src/tf1/opt/qmat_sparse.cpp",
+      "-o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/qmat_sparse.o"
+    ],
+    [
+      "clang++",
+      "-Isrc",
+      "-I../simde",
+      "-O3",
+      "-std=c++17",
+      "-fno-rtti",
+      "-fvisibility=hidden",
+      "-ffp-model=precise",
+      "-ffp-contract=off",
+      "-fno-math-errno",
+      "-fno-exceptions",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-Wno-unused-variable",
+      "-DSEED=923",
+      "-DUPDATE_LIMIT=3000",
+      "-DNDEBUG",
+      "-I/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/native-fixture-v4/source/src",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/scripts/probes/weight_pruning_control.cpp",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/weights_io.o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/weights_io_compressed.o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/kernels.o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/arena_build.o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/glue.o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/qmat_dense.o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/qmat_sparse.o",
+      "-o",
+      "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/probe"
+    ]
+  ],
+  "results": {
+    "mlp-prune5": {
+      "masked_sha256": "f5eb5c62d757a1e040a5b61789cb63e98f789634733811ebc63c8b75361efe15",
+      "candidate_sha256": "2d3070f7168b863a8ca427807c27e93d3460782a2292324131de0a7c5f7495ec",
+      "map_sha256": "43e86bffa266b0a48c6743e13d4549614fd58ad49b74f6805075d3ea745ac11e",
+      "checks": {
+        "masked": {
+          "execution": {
+            "command": [
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/probe",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune5-masked.c4",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-v1/mlp-prune5.c4",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune5-keep.txt"
+            ],
+            "status": "ok",
+            "exit_code": 0,
+            "wall_seconds": 1.1000481660012156,
+            "peak_rss_bytes": 170262528,
+            "log": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune5-masked.log"
+          },
+          "log_sha256": "c192ff6eef1035140e3e1191c5a1fd131b6791eced50626171c8908bdb6c217c",
+          "summary": {
+            "passed": true,
+            "layers": 16,
+            "cases_per_layer": 1024,
+            "block_cases": 16384,
+            "retained_activations_exact": true,
+            "sparse_and_dense_checked": true
+          },
+          "expected_outcome": true
+        },
+        "negative_unmasked": {
+          "execution": {
+            "command": [
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/probe",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/engines/cmix-neif/weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-v1/mlp-prune5.c4",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune5-keep.txt"
+            ],
+            "status": "failed",
+            "exit_code": 4,
+            "wall_seconds": 0.5553552089986624,
+            "peak_rss_bytes": 170754048,
+            "log": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune5-negative_unmasked.log"
+          },
+          "log_sha256": "5d29b94c2d7b66d2f3ea88d5e2c0275c44676d8db430e16d361d8c13e9aa1eec",
+          "summary": null,
+          "expected_outcome": true
+        }
+      },
+      "passed": true
+    },
+    "mlp-prune10": {
+      "masked_sha256": "3b352f52751c9a15e54e42fee6e685402c8626caf2908c894e85e01b52bceef4",
+      "candidate_sha256": "d7fd31d2c02507887fd0b911f73a66c95f18230442ae4b92c5539dfc4fca36a4",
+      "map_sha256": "a342a05f5457923901279db899c019d6c28a32d52db442f363fec561017cd215",
+      "checks": {
+        "masked": {
+          "execution": {
+            "command": [
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/probe",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune10-masked.c4",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-v1/mlp-prune10.c4",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune10-keep.txt"
+            ],
+            "status": "ok",
+            "exit_code": 0,
+            "wall_seconds": 0.963871708001534,
+            "peak_rss_bytes": 170180608,
+            "log": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune10-masked.log"
+          },
+          "log_sha256": "4f73a7f9e12714357c91a326a0e1447ec546f36de676a473e6d18046d903278a",
+          "summary": {
+            "passed": true,
+            "layers": 16,
+            "cases_per_layer": 1024,
+            "block_cases": 16384,
+            "retained_activations_exact": true,
+            "sparse_and_dense_checked": true
+          },
+          "expected_outcome": true
+        },
+        "negative_unmasked": {
+          "execution": {
+            "command": [
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/probe",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/engines/cmix-neif/weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-v1/mlp-prune10.c4",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune10-keep.txt"
+            ],
+            "status": "failed",
+            "exit_code": 4,
+            "wall_seconds": 0.5515999589988496,
+            "peak_rss_bytes": 171851776,
+            "log": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune10-negative_unmasked.log"
+          },
+          "log_sha256": "eda982535b6786eaa4abdd3afb593f873e77e9a319aa67e386658e2505e1e38e",
+          "summary": null,
+          "expected_outcome": true
+        }
+      },
+      "passed": true
+    },
+    "mlp-prune25": {
+      "masked_sha256": "0ae04d3943dc4cfbd8b9c34f98bf61709e69242095dcd7ca85d0f19a02502de0",
+      "candidate_sha256": "cc6235101e6370957d86e20a86d23423ac01f725502d0b6d771b93a3ed4d1070",
+      "map_sha256": "d8db3627d8f9d486f92a8b6727898392256c1089b2de8679dabed4785b39ee6a",
+      "checks": {
+        "masked": {
+          "execution": {
+            "command": [
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/probe",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune25-masked.c4",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-v1/mlp-prune25.c4",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune25-keep.txt"
+            ],
+            "status": "ok",
+            "exit_code": 0,
+            "wall_seconds": 0.8891435410041595,
+            "peak_rss_bytes": 171835392,
+            "log": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune25-masked.log"
+          },
+          "log_sha256": "d61e12e2d121de2ce2d85ad088906f0f71a7ff579eb167c738c800e863571501",
+          "summary": {
+            "passed": true,
+            "layers": 16,
+            "cases_per_layer": 1024,
+            "block_cases": 16384,
+            "retained_activations_exact": true,
+            "sparse_and_dense_checked": true
+          },
+          "expected_outcome": true
+        },
+        "negative_unmasked": {
+          "execution": {
+            "command": [
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/probe",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/engines/cmix-neif/weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-v1/mlp-prune25.c4",
+              "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune25-keep.txt"
+            ],
+            "status": "failed",
+            "exit_code": 4,
+            "wall_seconds": 0.505881541997951,
+            "peak_rss_bytes": 165396480,
+            "log": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/weight-pruning-control-v1/mlp-prune25-negative_unmasked.log"
+          },
+          "log_sha256": "f4b5d80d684d4544b7d532ecfbc3248898397410ac1e1cdf7171c114bd411ce0",
+          "summary": null,
+          "expected_outcome": true
+        }
+      },
+      "passed": true
+    }
+  },
+  "passed": true,
+  "scope": "Synthetic kernel checks of zeroed versus removed neurons. No equivalence to the original unmasked model, full-transformer check, Linux result or prize score is implied.",
+  "binary_sha256": "5c19119b833ce8f19f122f9c3f9eccbcb9d40e273883f13adbd3cc397a31543e"
+}
