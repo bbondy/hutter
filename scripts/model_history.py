@@ -14,16 +14,26 @@ import tempfile
 from cmix_fixture_support import context_report, corpus_arguments, validate_context
 from cmix_variants import model_identity, recipe
 import cmix_retrieval_support as retrieval
+import cmix_alias_support as alias
 from make_samples import digest
 from order_history import checked_restoration
 
 ROOT = Path(__file__).resolve().parents[1]
+SOURCE_RECIPES = {"retrieval_variant": (retrieval, "retrieval-"), "alias_variant": (alias, "alias-")}
+
+
+def source_recipe(build):
+    selected = [key for key in SOURCE_RECIPES if build.get(key)]
+    if len(selected) > 1:
+        raise ValueError("only one source-code recipe may change per experiment")
+    return selected[0] if selected else None
 
 
 def model_name(build):
-    if build.get("retrieval_variant"):
-        model_identity({**build, "retrieval_variant": None})
-        return "retrieval-" + build["retrieval_variant"]["name"]
+    key = source_recipe(build)
+    if key:
+        model_identity({**build, key: None})
+        return SOURCE_RECIPES[key][1] + build[key]["name"]
     return model_identity(build)[0]
 
 
@@ -31,21 +41,23 @@ def compatible_builds(baseline, candidate, baseline_source=None):
     if model_identity(baseline)[0] != "baseline":
         raise ValueError("comparison requires the unchanged baseline model")
     name = model_name(candidate)
-    if candidate.get("retrieval_variant"):
-        change = candidate["retrieval_variant"]
+    key = source_recipe(candidate)
+    if key:
+        module, _ = SOURCE_RECIPES[key]
+        change = candidate[key]
         if baseline_source is None:
-            raise ValueError("retrieval comparison requires the baseline source file")
+            raise ValueError("source-code comparison requires the baseline source file")
         if baseline.get("weight_binding") or candidate.get("weight_binding"):
-            raise ValueError("retrieval comparison requires original weights")
-        if model_identity({**candidate, "retrieval_variant": None})[0] != "baseline":
-            raise ValueError("retrieval comparison changes model parameters")
-        path = baseline_source / retrieval.SOURCE
-        if (change["source_file"] != retrieval.SOURCE or digest(path) != change["before_sha256"]
-                or change["recipe_sha256"] != digest(Path(retrieval.__file__))):
-            raise ValueError("retrieval recipe or baseline source differs")
-        expected = hashlib.sha256(retrieval.rewrite(path.read_text(), change["name"]).encode()).hexdigest()
-        if expected != change["after_sha256"] or candidate["source_files"][retrieval.SOURCE]["sha256"] != expected:
-            raise ValueError("candidate changes more than the declared retrieval rule")
+            raise ValueError("source-code comparison requires original weights")
+        if model_identity({**candidate, key: None})[0] != "baseline":
+            raise ValueError("source-code comparison changes model parameters")
+        path = baseline_source / module.SOURCE
+        if (change["source_file"] != module.SOURCE or digest(path) != change["before_sha256"]
+                or change["recipe_sha256"] != digest(Path(module.__file__))):
+            raise ValueError("source recipe or baseline source differs")
+        expected = hashlib.sha256(module.rewrite(path.read_text(), change["name"]).encode()).hexdigest()
+        if expected != change["after_sha256"] or candidate["source_files"][module.SOURCE]["sha256"] != expected:
+            raise ValueError("candidate changes more than the declared source rule")
     else:
         _, change = recipe(name)
     for key in ("upstream_commit", "simde_commit", "compiler",
@@ -104,6 +116,9 @@ def summarize(args):
     if protocol.get("retrieval_recipe_sha256"):
         if protocol["retrieval_recipe_sha256"] != digest(Path(retrieval.__file__)):
             raise ValueError("retrieval recipe differs from frozen experiment")
+    if protocol.get("alias_recipe_sha256"):
+        if protocol["alias_recipe_sha256"] != digest(Path(alias.__file__)):
+            raise ValueError("alias recipe differs from frozen experiment")
     base = metadata[names.index("baseline")]
     records, logs = {}, []
     with tempfile.TemporaryDirectory(prefix="hutter-model-verify-") as tmp:
@@ -155,7 +170,8 @@ def summarize(args):
                 logs.append((log, name + "-" + phase + ".log"))
             records[name] = {"payload_bytes": row["archive_bytes"], "archive_sha256": row["archive_sha256"],
                              "binary_sha256": meta["binary_sha256"], "binary_bytes": meta["binary_bytes"],
-                             "model": meta["build"].get("retrieval_variant") or model_identity(meta["build"])[1], "context": context,
+                             "model": (meta["build"].get("retrieval_variant") or meta["build"].get("alias_variant")
+                                       or model_identity(meta["build"])[1]), "context": context,
                              "original_bytes_roundtrip": True, "restored_raw_sha256": final_sha,
                              "compress_seconds": row["compress"]["wall_seconds"],
                              "decompress_seconds": row["decompress"]["wall_seconds"],
@@ -163,6 +179,8 @@ def summarize(args):
                              "results_sha256": digest(run / "results.jsonl"), "log_sha256": log_hashes}
     for row in records.values():
         row["delta_bytes_vs_baseline"] = row["payload_bytes"] - records["baseline"]["payload_bytes"]
+    if "alias-refresh" in records and records["alias-refresh"]["context"] != records["baseline"]["context"]:
+        raise ValueError("alias prediction refresh changed context feed counts")
     report = {"version": 1, "kind": "fixed-input-model-ablation", "role": args.role,
               "date_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
               "protocol_sha256": digest(args.protocol), "manifest_sha256": digest(args.manifest),

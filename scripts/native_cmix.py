@@ -18,6 +18,7 @@ from cmix_parity_support import instrument, SUPPORT
 from cmix_fixture_support import instrument_fixture, provenance as fixture_provenance, corpus_arguments, context_report, validate_context
 from cmix_variants import VARIANTS, apply_variant
 from cmix_retrieval_support import VARIANT as RETRIEVAL_VARIANT, apply as apply_retrieval
+from cmix_alias_support import VARIANT as ALIAS_VARIANT, apply as apply_alias
 from cmix_preprocess_support import apply_portable_preprocessing
 from cmix_weight_support import apply_container
 
@@ -47,6 +48,8 @@ def build(args):
         raise ValueError("change weights or model parameters in one experiment, not both")
     if args.retrieval_variant and (args.weight_container or args.variant != "baseline"):
         raise ValueError("retrieval experiments require baseline parameters and weights")
+    if args.alias_variant and (args.retrieval_variant or args.weight_container or args.variant != "baseline"):
+        raise ValueError("alias experiments require baseline retrieval, parameters and weights")
     upstream = json.loads(MANIFEST.read_text())
     delta = differences(upstream["files"], inventory(ENGINE))
     if any(delta.values()):
@@ -81,6 +84,7 @@ def build(args):
         subprocess.run([str(check)], check=True)
     command = ["make", f"-j{args.jobs}", "CC=clang++ -Isrc -I../simde", "cmix"]
     retrieval_variant = apply_retrieval(source, args.retrieval_variant) if args.retrieval_variant else None
+    alias_variant = apply_alias(source, args.alias_variant) if args.alias_variant else None
     metadata = {
         "kind": "experimental-native-build", "commit": capture("git", "-C", str(ROOT), "rev-parse", "HEAD"),
         "date_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
@@ -91,6 +95,7 @@ def build(args):
         "fixture_support": fixture_provenance(),
         "model_variant": model_variant,
         "retrieval_variant": retrieval_variant,
+        "alias_variant": alias_variant,
         "weight_binding": weight_binding,
         "preprocessing_support": preprocessing_support,
         "initialization": "explicit glibc-compatible generator", "source_files": inventory(source),
@@ -259,6 +264,7 @@ def main():
     compile_parser.add_argument("--variant", choices=VARIANTS, default="baseline")
     compile_parser.add_argument("--weight-container", type=Path)
     compile_parser.add_argument("--retrieval-variant", choices=(RETRIEVAL_VARIANT,))
+    compile_parser.add_argument("--alias-variant", choices=(ALIAS_VARIANT,))
     sample = sub.add_parser("samples")
     sample.add_argument("--enwik8", type=Path, default=ROOT / "data/enwik8")
     sample.add_argument("--build", type=Path, default=ROOT / "build/native-cmix")

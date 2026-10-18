@@ -171,3 +171,18 @@ at raw byte 80,020,050, selected by the previously declared 80,000,000-byte
 start and one-million-byte target. It preserves upstream projected order and
 all existing model settings. After this test, that range is examined evidence
 and cannot serve as untouched validation for further tuning.
+
+## Separate follow-up: refresh the prediction after alias text
+
+The upstream notes identify another mismatch. The compressor feeds some alias
+text only to the transformer. After the last alias byte, its mixer still uses
+the transformer prediction from before that block for the next real byte,
+although training targets that byte with the last alias row.
+
+The [alias-refresh protocol](https://github.com/bbondy/hutter/blob/main/benchmarks/model-variants/20261017-alias-protocol-v1/protocol.json)
+tests that one callback: update the transformer's mixer slot and its cached
+first-bit probability after the final eligible alias row. It preserves the
+other predictors, priors, weights, retrieval rule and input. A small compiled
+callback probe checks final-row handling and gates; actual compression results
+are still required. This is separate from exact-target filtering and will use
+the original model as its control.

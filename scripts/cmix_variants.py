@@ -58,8 +58,8 @@ def apply_variant(source, name):
 
 def model_identity(build):
     """Accept historical baseline builds only with their saved default header hash."""
-    if build.get("retrieval_variant"):
-        raise ValueError("retrieval experiment requires its source comparison checks")
+    if build.get("retrieval_variant") or build.get("alias_variant"):
+        raise ValueError("source-code experiment requires its source comparison checks")
     saved = build.get("model_variant")
     _, expected = recipe(saved["name"] if saved else "baseline")
     if saved and any(saved.get(key) != expected.get(key) for key in

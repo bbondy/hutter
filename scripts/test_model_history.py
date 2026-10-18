@@ -10,6 +10,7 @@ from competitive import ENGINE
 from make_samples import digest
 from model_history import compatible_builds
 import cmix_retrieval_support as retrieval
+import cmix_alias_support as alias
 
 
 class ModelComparisonTests(unittest.TestCase):
@@ -49,31 +50,37 @@ class ModelComparisonTests(unittest.TestCase):
             compatible_builds(candidate, self.build("depth-no-skip"))
 
     def test_retrieval_requires_exact_source_transformation(self):
+        self.check_source_transformation(retrieval, "retrieval_variant", "retrieval-exact-target")
+
+    def test_alias_refresh_requires_exact_source_transformation(self):
+        self.check_source_transformation(alias, "alias_variant", "alias-refresh")
+
+    def check_source_transformation(self, module, field, model_name):
         with tempfile.TemporaryDirectory() as directory:
             original = Path(directory) / "original"
             candidate_dir = Path(directory) / "candidate"
             for folder in (original, candidate_dir):
-                path = folder / retrieval.SOURCE
+                path = folder / module.SOURCE
                 path.parent.mkdir(parents=True)
-                shutil.copyfile(ENGINE / retrieval.SOURCE, path)
+                shutil.copyfile(ENGINE / module.SOURCE, path)
             baseline, candidate = self.build("baseline"), self.build("baseline")
-            baseline["source_files"][retrieval.SOURCE] = {"sha256": digest(original / retrieval.SOURCE)}
-            info = retrieval.apply(candidate_dir, retrieval.VARIANT)
-            candidate["retrieval_variant"] = info
-            candidate["source_files"][retrieval.SOURCE] = {"sha256": info["after_sha256"]}
-            self.assertEqual(compatible_builds(baseline, candidate, original), "retrieval-exact-target")
+            baseline["source_files"][module.SOURCE] = {"sha256": digest(original / module.SOURCE)}
+            info = module.apply(candidate_dir, module.VARIANT)
+            candidate[field] = info
+            candidate["source_files"][module.SOURCE] = {"sha256": info["after_sha256"]}
+            self.assertEqual(compatible_builds(baseline, candidate, original), model_name)
             with self.assertRaisesRegex(ValueError, "baseline source file"):
                 compatible_builds(baseline, candidate)
             bad = copy.deepcopy(candidate)
-            forged = hashlib.sha256((candidate_dir / retrieval.SOURCE).read_bytes() + b"\nint undeclared;\n").hexdigest()
-            bad["retrieval_variant"]["after_sha256"] = forged
-            bad["source_files"][retrieval.SOURCE]["sha256"] = forged
+            forged = hashlib.sha256((candidate_dir / module.SOURCE).read_bytes() + b"\nint undeclared;\n").hexdigest()
+            bad[field]["after_sha256"] = forged
+            bad["source_files"][module.SOURCE]["sha256"] = forged
             with self.assertRaisesRegex(ValueError, "more than the declared"):
                 compatible_builds(baseline, bad, original)
             with self.assertRaisesRegex(ValueError, "anchor changed"):
-                retrieval.apply(candidate_dir, retrieval.VARIANT)
+                module.apply(candidate_dir, module.VARIANT)
             with self.assertRaisesRegex(ValueError, "pinned upstream"):
-                retrieval.apply(ENGINE, retrieval.VARIANT)
+                module.apply(ENGINE, module.VARIANT)
 
 
 if __name__ == "__main__":

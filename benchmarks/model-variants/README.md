@@ -127,3 +127,13 @@ respectively. Both restore exactly, and downloaded evidence has been verified
 again locally. The candidate fails the Linux promotion gate. The already-started
 reserved-range runs will be retained without changing the recipe or using a
 third result to erase this regression.
+
+## Alias prediction refresh
+
+The [alias protocol](20261017-alias-protocol-v1/protocol.json) changes only
+`Predictor::ObserveTfOnlyByte`: after the final alias row, refresh the transformer
+slot and its cached first-bit probability. Other model state and the PPMd prior
+stay unchanged. Build with `--alias-variant refresh`; the same source guard
+checks the exact rewrite and rejects combining it with weights, retrieval or
+parameter changes. A compiled callback probe tests final-row and gate behavior.
+The experiment needs full fixture round trips and measured sizes before promotion.

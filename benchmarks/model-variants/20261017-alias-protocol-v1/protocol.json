@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "hypothesis": "After an injected alias block, using the last transformer row for the next real byte may improve compression. Upstream README section 6 lists this unmeasured training/coder mismatch.",
+  "variants": [
+    "baseline",
+    "alias-refresh"
+  ],
+  "input_variant": "upstream",
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/screen.json",
+      "manifest_sha256": "fd9b852429f18cecc15ecefa0eb0378d919ac9be348fc6c24d8608fc35439731",
+      "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f"
+    },
+    "holdout": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/holdout.json",
+      "manifest_sha256": "880ad288323503c874b18d8d3aadaebde268f6960f546352d0efb0d08e84d47b",
+      "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "changes": "CPU identity display supports Linux; round-trip/context checks are unchanged."
+  },
+  "alias_recipe_sha256": "da8ca7d60c83dec2b4ce0512f2136b4d0cf4a9660d20376e1300b2fb99d271cc",
+  "rule": "Change only Predictor::ObserveTfOnlyByte in disposable sources: after Step consumes the final alias row, update the transformer slot and its cached first-bit prediction if the transformer is active and gates permit it. Do not advance other models, change priors, reorder data, change retrieval, weights, parameters, or online learning rules.",
+  "acceptance": [
+    "Exact prepared and original XML restoration",
+    "Matching encoder/decoder context counters; unchanged alias feed counts",
+    "Only the frozen predictor.cpp rewrite differs from the baseline compiled sources",
+    "Retain gains, no-ops and losses; a successful callback unit probe is not a compression result"
+  ],
+  "promotion": "Advance only if both reused canonical fixtures improve without retuning, then require native Linux ranking and a larger predeclared probe. The 80 MB third range has already been examined by another experiment and is no longer untouched validation.",
+  "scope": "Fixture screening of prediction refresh, with unchanged frozen weights. No training or full-score claim."
+}
