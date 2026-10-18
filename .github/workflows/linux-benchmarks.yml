@@ -2,6 +2,14 @@ name: Native Linux fixture comparisons
 
 on:
   workflow_dispatch:
+    inputs:
+      experiment:
+        description: Frozen model experiment to run on both fixtures
+        type: choice
+        default: link-context
+        options:
+          - link-context
+          - adaptive-depth
 
 permissions:
   contents: read
@@ -11,7 +19,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  link-context:
+  model-comparison:
     runs-on: ubuntu-24.04
     timeout-minutes: 330
     strategy:
@@ -31,17 +39,18 @@ jobs:
           python3 -m unittest discover -s scripts -p 'test_*.py'
           make enwik8 ENWIK8_URL=https://mattmahoney.net/dc/enwik8.zip
       - name: Compare all frozen model variants on one host
-        run: python3 scripts/ci_link_context.py --role "${{ matrix.role }}" --enwik8 data/enwik8
+        run: python3 scripts/ci_link_context.py --role "${{ matrix.role }}" --experiment "${{ inputs.experiment }}" --enwik8 data/enwik8
       - name: Preserve completed and failed trials
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: linux-link-context-${{ matrix.role }}-${{ github.run_id }}
+          name: linux-${{ inputs.experiment }}-${{ matrix.role }}-${{ github.run_id }}
           path: build/linux-evidence/
           if-no-files-found: warn
           retention-days: 7
 
   coder-stream:
+    if: inputs.experiment == 'link-context'
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:

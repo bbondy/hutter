@@ -77,3 +77,28 @@ to six hours ([runner specifications](https://docs.github.com/en/actions/referen
 for bounded fixture experiments, not the published full-run time requirement.
 Compiler/libc versions are recorded; the runner's package set is not asserted to
 match the upstream submission's pinned Ubuntu snapshot.
+
+## Adaptive-depth experiment
+
+[The depth protocol](20261017-depth-protocol-v1/protocol.json) tests threshold 9
+and disabling adaptive skips (threshold 31, above the clamped logit range) against
+the default 8. Both reuse the exact canonical inputs and default link context.
+The recipe changes only `src/adaptive_depth.h`; the verifier checks its original
+baseline hash and rejects any other source change. Model weights and learning
+rules remain fixed, but mixer training receives a different set of bits.
+
+Build with `--variant depth-tau9` or `--variant depth-no-skip`. Use the same
+`model_history.py` command with this protocol and exactly three run directories:
+baseline, threshold 9, and no adaptive skip. Preserve all outcomes, not just gains.
+The no-skip control retains the small gate's computation and the independent
+character-rate shortcut. Neither fixture size nor concurrent timing establishes
+full-run value; upstream's estimated size tradeoff is small.
+
+The Linux workflow accepts an explicit experiment:
+
+```sh
+gh workflow run linux-benchmarks.yml --ref main -f experiment=adaptive-depth
+```
+
+It runs the three models serially per fixture and omits the unrelated full-stream
+preparation job. Both experiment families remain manual dispatches.

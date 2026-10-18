@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one frozen fixture's model comparisons on a single Linux CI host."""
+"""Run a declared model experiment on one frozen fixture and Linux CI host."""
 import argparse
 import ast
 import hashlib
@@ -16,15 +16,24 @@ from model_history import summarize
 from replay_fixture import replay
 
 ROOT = Path(__file__).resolve().parents[1]
-MODELS = ("baseline", "z3-budget128", "z3-chunk32", "z3-off")
+EXPERIMENTS = {
+    "link-context": "20261017-protocol-v2",
+    "adaptive-depth": "20261017-depth-protocol-v1",
+}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--role", choices=("screen", "holdout"), required=True)
     parser.add_argument("--enwik8", type=Path, required=True)
+    parser.add_argument("--experiment", choices=EXPERIMENTS, default="link-context")
     args = parser.parse_args()
-    work = ROOT / "build" / ("linux-ci-" + args.role)
+    original_protocol = ROOT / "benchmarks/model-variants" / EXPERIMENTS[args.experiment] / "protocol.json"
+    frozen_protocol = json.loads(original_protocol.read_text())
+    models = tuple(frozen_protocol["variants"])
+    if not models or models[0] != "baseline":
+        raise ValueError("frozen experiment must start with its baseline")
+    work = ROOT / "build" / ("linux-ci-" + args.experiment + "-" + args.role)
     evidence = ROOT / "build/linux-evidence" / args.role
     work.mkdir(parents=True, exist_ok=False)
     evidence.mkdir(parents=True, exist_ok=False)
@@ -35,7 +44,7 @@ def main():
     builds, runs = [], []
     manifest = protocol_path = None
     try:
-        for name in MODELS:
+        for name in models:
             build = work / ("build-" + name)
             builds.append(build)
             subprocess.run([sys.executable, "scripts/linux_cmix.py", "build", "--variant", name,
@@ -43,8 +52,7 @@ def main():
             if manifest is None:
                 source_manifest = ROOT / "benchmarks/article-order/20261017-projection-protocol-v2" / (args.role + ".json")
                 manifest = replay(source_manifest, args.enwik8, build, work / "fixture")
-                original_protocol = ROOT / "benchmarks/model-variants/20261017-protocol-v2/protocol.json"
-                protocol = json.loads(original_protocol.read_text())
+                protocol = frozen_protocol
                 protocol["parent_protocol_sha256"] = digest(original_protocol)
                 protocol["platform_scope"] = "Native Linux x86-64, all models serial on one CI host; not a full prize run"
                 protocol["fixtures"][args.role]["manifest_sha256"] = digest(manifest)

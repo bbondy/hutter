@@ -12,7 +12,7 @@ import subprocess
 import tempfile
 
 from cmix_fixture_support import context_report, corpus_arguments, validate_context
-from cmix_variants import HEADER, model_identity
+from cmix_variants import model_identity, recipe
 from make_samples import digest
 from order_history import checked_restoration
 
@@ -20,6 +20,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def compatible_builds(baseline, candidate):
+    if model_identity(baseline)[0] != "baseline":
+        raise ValueError("comparison requires the unchanged baseline model")
+    name = model_identity(candidate)[0]
+    _, change = recipe(name)
     for key in ("upstream_commit", "simde_commit", "compiler",
                 "fixture_support", "initialization", "platform", "machine"):
         if key not in baseline or baseline[key] != candidate.get(key):
@@ -30,10 +34,12 @@ def compatible_builds(baseline, candidate):
         raise ValueError("uncontrolled compiler command difference")
     # Compare the actual generated sources; port/support inventories also include
     # research documentation that can change without changing compiled code.
-    files = [{k: v for k, v in b["source_files"].items() if k != HEADER} for b in (baseline, candidate)]
+    if baseline["source_files"][change["source_file"]]["sha256"] != change["before_sha256"]:
+        raise ValueError("baseline parameter source differs from upstream")
+    files = [{k: v for k, v in b["source_files"].items() if k != change["source_file"]} for b in (baseline, candidate)]
     if files[0] != files[1]:
-        raise ValueError("model source differs beyond declared link-context parameters")
-    return model_identity(candidate)[0]
+        raise ValueError("model source differs beyond declared parameter file")
+    return name
 
 
 def validate_runner(meta, protocol):
@@ -65,6 +71,12 @@ def summarize(args):
     names = [model_identity(meta["build"])[0] for meta in metadata]
     if len(names) != len(set(names)) or set(names) != set(protocol["variants"]):
         raise ValueError("requires exactly one run per declared model, including baseline")
+    for name, frozen in protocol.get("variant_recipes", {}).items():
+        if name not in names:
+            raise ValueError("frozen recipe is absent from the trial set")
+        current = recipe(name)[1]
+        if any(current.get(key) != value for key, value in frozen.items()):
+            raise ValueError("model recipe differs from the frozen experiment")
     base = metadata[names.index("baseline")]
     records, logs = {}, []
     with tempfile.TemporaryDirectory(prefix="hutter-model-verify-") as tmp:
@@ -131,7 +143,7 @@ def summarize(args):
               "raw_sha256": manifest["raw_sha256"], "raw_bytes": manifest["raw_bytes"],
               "side_data": base["side_data"], "native_arguments": base["native_arguments"],
               "verifier_sha256": digest(Path(__file__)),
-              "scope": "Native fixture payloads; fixed weights; concurrent exploratory times; not prize scores",
+              "scope": protocol.get("platform_scope", "Native fixture payloads; fixed weights; concurrent exploratory times; not prize scores"),
               "variants": records}
     args.output.mkdir(parents=True, exist_ok=False)
     shutil.copyfile(args.manifest, args.output / "manifest.json")
