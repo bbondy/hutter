@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "purpose": "Expand training coverage beyond the reused one-megabyte screen without spending time repeatedly fitting it. Collect one 4 MB article-aware trace from a separate enwik8 range, then measure frozen BF16 candidates on the original screen and disjoint fixtures.",
+  "source_corpus": "verified official enwik8",
+  "source_sha256": "2b49720ec4d78c3c9fabaee6e4179a5e997302b3a70029f30f2d582218c024a8",
+  "requested_offset": 20000000,
+  "target_raw_bytes": 4000000,
+  "selection": "First complete page at or after the requested offset through the first complete page end after target bytes; no hand-picked pages.",
+  "source_role": "training only, disjoint from existing screen [1404,1035001), disjoint [49000139,50006116) and reserved confirmation near 89 MB",
+  "preparation": "Corrected article-aware preprocessing; upstream projected order and --native-corpus phase counts, same helper and runtime trace writer as established fixtures.",
+  "preparation_script_sha256": "005b00a010ecc2eb7f201f0f2d569aadd312854b1827fdd728a56461cfe3aefb",
+  "projection_script_sha256": "c431ad3d2c3486a69588e063c36157bcf4f25b94069461c13429e94dc4b836b8",
+  "trace_support_sha256": "efa7401e9173d542061045bcd138b8450477529f35a29fa0d819b586161ec802",
+  "source_order_validation_sha256": "a4d0ca9706b8eb514446f27d866bc3a60d9379128ed60e440c465ab847912e4b",
+  "source_order_index_sha256": "2a445b5bb10e65667fe603d7e421baa5888251b99fb42d658000902a1de9fab0",
+  "trace_build_sha256": "abf4575951dd1b32c6fa7a8ac803d8cc0341a01cc50a732c9862160d8936f1d5",
+  "scope": "Trace collection and training input only; no result selected or score claimed. Raw XML, prepared stream and large traces local; commit manifest, hashes and bounded logs.",
+  "gates": [
+    "Verify official enwik8 and every source page/ordered-prepared restoration",
+    "Complete trace archive equals uninstrumented baseline and restores original XML",
+    "Encoder and decoder bit/channel/probability traces agree before training",
+    "Freeze any later training recipe and only then evaluate screen and disjoint fixtures"
+  ]
+}
