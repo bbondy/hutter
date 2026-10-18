@@ -50,6 +50,14 @@ Priorities:
    activation-aware, compensated or retrained-model experiment; its data
    reproduction does not itself establish a better model.
 
+5. Investigate the [small final bit predictor](website/docs/research/bit-predictor.md)
+   as a CPU training route. Upstream trained its 7,386-byte model on only the
+   first 20% of model bits. Its replay trainer and float32 checkpoint are
+   present, but the original trace writer and roughly 40 GB trace are absent.
+   Reconstruct and verify fixture tracing/replay before considering a broader
+   training run. This is a separate dataset from the transformer row dump;
+   no training gain or runtime estimate has been measured here.
+
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)
 in sync. The full prize score, resource eligibility and eventual submission

@@ -68,6 +68,7 @@ const sidebars = {
         'research/weight-permutations',
         'research/weight-pruning',
         'research/training-data',
+        'research/bit-predictor',
       ],
     },
     {
