@@ -1,0 +1,25 @@
+{
+  "parent_live_build_sha256": "876f6158e3a67dab303fd38a9c7c31798aa608a8333e676938672ce8a7d573ea",
+  "native_source_hashes_checked": [
+    "src/bit_head.cpp",
+    "src/detmath.cpp",
+    "makefile"
+  ],
+  "controls": {
+    "runtime-system-math": {
+      "report_sha256": "c118207e8c52703d657e6610118b46ef29f56f24f256d5368690fc65a7e6aa48",
+      "binary_sha256": "8637ef1c6a20aef07f21009fedcf9774947d8dc561529d07eb51743efe8ca5c2",
+      "both_expected_exit_codes": 6
+    },
+    "runtime-own-math": {
+      "report_sha256": "c9a5d524f4fdef88e9f7f5654a9b5d2dfd8fbc2636fdb19f1c761324f9762ca5",
+      "binary_sha256": "7964b1e6f603fe0a87fabdf09297a115ace2321fb5d30942e471e6c3916787df",
+      "both_expected_exit_codes": 0
+    },
+    "public-own-math": {
+      "report_sha256": "0b8a1cb9d8052b1fde9efcd05a98cee9d1f677bc3cbad8b553840e62f7927f1e",
+      "binary_sha256": "7964bec2294261f4dbcf4a9469acb28fa1f6524301b473eb910479aa896ce159",
+      "both_expected_exit_codes": 0
+    }
+  }
+}

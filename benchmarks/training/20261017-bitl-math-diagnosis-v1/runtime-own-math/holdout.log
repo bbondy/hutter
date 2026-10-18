@@ -1,0 +1,5 @@
+CMIX_BITL_REPLAY {"bits":2399939,"integer_probabilities_equal":true}
+trace: v3, recorded columns 13 of 28, mask=132120703
+channel: n_tf=4 n_hid=32 (projected=1) n_lhid=32 (projected=1) zone=1
+bits=2399939 cells=16 inputs=90 params=3585 base_B=115525.6 head_B=115303.2 delta_B=-222.4 rel=-0.192503% tailbits=2399939 tail_delta_B=-222.4
+  zone 0 tailbits=2399939 tail_delta_B=-222.4

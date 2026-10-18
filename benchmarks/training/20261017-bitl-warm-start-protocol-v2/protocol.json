@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "hypothesis": "A single gentle CPU warm-start pass over the screening fixture may adapt the compact shipped bit predictor enough to reduce frozen BF16 coding loss on both fixed fixtures; this is a pipeline/screening experiment, not a full-corpus training claim.",
+  "script_sha256": "94a629df8bf1ac691d73b6d49d59956e4e0200058078be1457d597e0e6ad968a",
+  "replay_protocol_sha256": "585f13e5007099311f2be8b5c9ef16c157568aad63bd01d9bc8681d33559d7a1",
+  "fixture_input_sha256": {
+    "screen": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f",
+    "holdout": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+  },
+  "learning_rates_1e6": [
+    30,
+    300,
+    3000
+  ],
+  "passes_per_candidate": 1,
+  "initial_model": "Original shipped 7386-byte BF16 weights, reloaded independently for each candidate. Fresh optimizer moments.",
+  "seed": 1112363057,
+  "training_data": "Screen trace only, all records in original order. No concatenation or shuffling. Model resets every 1024 model bits; 16 windows per Adam step, original trainer mean-gradient and clipping. Incomplete final accumulation follows the original trainer behavior.",
+  "evaluation": "Round each FP32 checkpoint to BF16 with the upstream converter; reload and freeze after first Observe, before a backward window. Evaluate each on screen. The upstream cost output is rounded to 0.1 byte. It is a probability cost, not an archive.",
+  "selection": "Lowest frozen BF16 screen cost, ties prefer lower learning rate. Save selection.json with weight hash before any candidate holdout evaluation. Require at least 1.0 byte screen gain, then evaluate only that winner on holdout and require at least 1.0 byte gain there. Do not switch to a runner-up after holdout failure.",
+  "prerequisites": [
+    "Both unchanged-archive fixture trace checks pass, with exact raw restoration and encoder/decoder trace identity",
+    "Both frozen shipped-weight replay checks match every live integer probability and reject wrong probability controls",
+    "Verified original public trainer arithmetic and driver, identical compiler and precise FP policy",
+    "Trainer and replay must link the exact runtime deterministic-math implementation; no training using the mismatching system-math baseline."
+  ],
+  "acceptance": [
+    "All three declared training/evaluation outcomes and failures retained",
+    "Exported shapes remain 16/89/96/28 and 7386 bytes; finite values and zero padding",
+    "Only a both-fixture probability-cost survivor is eligible for a subsequent real archive experiment",
+    "A later embedded model trial must preserve the existing runtime and online-learning threshold for this fixture experiment, measure both restored archives and then Linux, executable size and full-corpus effects separately"
+  ],
+  "limitations": [
+    "Both fixtures have been used in earlier research; holdout here means not supplied as training targets for this experiment. It is not globally unseen data.",
+    "The shipped model was already trained on target-corpus data. Small fixture adaptation can overfit or hurt other regions.",
+    "Same raw weight size does not guarantee same packed executable size.",
+    "No claim about full-stream online adaptation, Linux training equivalence or winning size. No paid compute or GPU is used."
+  ],
+  "supersedes_sha256": "a581b1d2d1fbe45ce2e3083722b0c0997114129d525784263bbc6c38c2aca5c7",
+  "math_mode": "runtime",
+  "math_correction": "The standalone trainer used system exp/log, while the compressor links src/detmath.cpp. Controlled diagnosis reproduced both first mismatches with the runtime head plus system math; linking the exact runtime math source makes every probability match on both fixtures with either runtime head or public trainer. Preserve old failures, link exact detmath.cpp with recorded DETNUM_CXXFLAGS, and repeat positive/negative checks."
+}

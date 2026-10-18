@@ -1,0 +1,3 @@
+replay probability mismatch at bit 665047: live=47768 replay=47767
+trace: v3, recorded columns 13 of 28, mask=132120703
+channel: n_tf=4 n_hid=32 (projected=1) n_lhid=32 (projected=1) zone=1

@@ -58,11 +58,16 @@ def build(args):
     driver = ENGINE / "training/bitl/trainer/replay_trainer.cpp"
     shutil.copy2(driver, out / "source/replay_trainer.cpp")
     command = [a.replace(str(parent), str(out)) for a in previous["command"]]
+    math_command = [a.replace(str(parent), str(out)) for a in previous["math_command"]] if previous.get("math_command") else None
     info = {**provenance("bitl-public-training-build"), "parent_build_sha256": digest(parent / "build.json"),
             "compiler": previous["compiler"], "command": command, "source_files": inventory(out / "source"),
+            "math_mode": previous.get("math_mode", "system"), "math_command": math_command,
             "driver_sha256": digest(driver), "converter_sha256": digest(ENGINE / "training/bitl/tools/nblb.py")}
     save(out / "build.json", info)
     with (out / "build.log").open("wb") as log:
+        if math_command:
+            subprocess.run(math_command, check=True, stdout=log, stderr=subprocess.STDOUT)
+            info["math_object_sha256"] = digest(out / "detmath.o")
         result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT)
     info.update(exit_code=result.returncode, log_sha256=digest(out / "build.log"))
     if result.returncode == 0:
@@ -95,6 +100,8 @@ def run(args):
     build_info = check_build(build_dir)
     if build_info["kind"] != "bitl-public-training-build":
         raise ValueError("requires the unchanged public training driver")
+    if build_info.get("math_mode") != protocol["math_mode"]:
+        raise ValueError("trainer math provider differs from frozen protocol")
     converter = ENGINE / "training/bitl/tools/nblb.py"
     if digest(converter) != build_info["converter_sha256"]:
         raise ValueError("weight converter changed")

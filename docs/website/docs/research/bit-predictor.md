@@ -77,7 +77,7 @@ The writer must leave the complete fixture archive unchanged, and encoder and
 decoder must produce identical trace hashes. A matching file format alone does
 not establish faithful replay or reproduce the historical training dataset.
 
-The [replay protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-replay-protocol-v2)
+The [replay protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-replay-protocol-v3)
 uses the public trainer with the exact shipped bfloat16 file. A diagnostic
 freeze after its first observed bit prevents any complete backward window or
 optimizer update. The driver compares every corrected integer probability,
@@ -112,10 +112,18 @@ wrong-probability controls also fail as intended. The probability-cost column
 sums the current head's actual discretized predictions only where it executes;
 it is not the size of an archive produced without that head.
 
-**Training remains gated off.** A one-unit probability difference is enough to
-fail the exact replay requirement. Its cause is under investigation; successful
-live encoder/decoder agreement does not prove that a separate trainer uses
-identical arithmetic. Real native Linux trace/replay checks are also running.
+**The math provider explains these Mac mismatches.** The compressor links its
+own `exp`/`log` implementations from `detmath.cpp`; the standalone trainer used
+system math. A [controlled diagnosis](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-math-diagnosis-v1)
+reproduces the same first mismatches even with the runtime head, then matches
+all 4,817,984 probabilities after linking the compressor's math code. The public
+trainer also matches with that change. Inputs and weights remain unchanged.
+
+The v3 replay protocol explicitly binds that math source and its compile flags
+and repeats the positive and negative controls. Training stays gated on those
+formal checks. The earlier failures remain evidence: matching source formulas
+and floating-point flags alone did not identify the linked math implementation.
+Native Linux checks are separate from this Mac result.
 
 ## A staged experiment
 
@@ -133,7 +141,7 @@ identical arithmetic. Real native Linux trace/replay checks are also running.
    claiming a competitive improvement. Record any revised point where online
    learning starts, total package cost, full restoration and runtime limits.
 
-A [small warm-start protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-warm-start-protocol-v1)
+A [small warm-start protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261017-bitl-warm-start-protocol-v2)
 is prepared, gated on both fixture replay checks. It tries one screening-only
 pass at learning rates 0.00003, 0.0003 and 0.003, each starting from the shipped
 bfloat16 weights with fresh optimizer state. Selection uses frozen, exported

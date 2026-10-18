@@ -1,0 +1,52 @@
+{
+  "kind": "public-trainer-runtime-math-diagnosis",
+  "parent_build_sha256": "bddca27fae008cb0d593c6c9aba2f79d84a25f584fc7a052e634c19b35e1929b",
+  "command": [
+    "clang++",
+    "-O3",
+    "-std=c++17",
+    "-ffp-model=precise",
+    "-ffp-contract=off",
+    "-fno-math-errno",
+    "-fno-builtin",
+    "-fno-exceptions",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-Wall",
+    "-Wno-unused-variable",
+    "-I/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/native-bit-trace-v1/simde",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-replay-v1/source/bit_head.cpp",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-replay-v1/source/replay_trainer.cpp",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v3/detmath.o",
+    "-o",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-public-math-diagnosis-v1/public-replay"
+  ],
+  "detmath_object_sha256": "7e46a9c2707a967e78225fd15ea85fb275b6206faf4e10ceb148fb1f1e7aa0bd",
+  "binary_sha256": "7964bec2294261f4dbcf4a9469acb28fa1f6524301b473eb910479aa896ce159",
+  "results": {
+    "screen": {
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-public-math-diagnosis-v1/public-replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-trace-40371.bin",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "seconds": 1.0257467499977793,
+      "log_sha256": "bfdbfe7429c97709d83c18ea45012cbf505af5f52abb30e7dbc3530321938a60"
+    },
+    "holdout": {
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-public-math-diagnosis-v1/public-replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-holdout-bit-trace-v1/trial-0-0/bitl-trace-40370.bin",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "seconds": 0.8961915420004516,
+      "log_sha256": "fdd36c4ecdaddd8afc7712a603813f83f31067dd7cbb88fff70d31fb2aaa5854"
+    }
+  }
+}

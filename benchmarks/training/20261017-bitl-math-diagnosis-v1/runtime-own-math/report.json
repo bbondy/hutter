@@ -1,0 +1,102 @@
+{
+  "kind": "runtime-object-replay-diagnosis",
+  "command": [
+    "clang++",
+    "-O3",
+    "-std=c++17",
+    "-ffp-model=precise",
+    "-ffp-contract=off",
+    "-fno-math-errno",
+    "-fno-builtin",
+    "-fno-exceptions",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-Wall",
+    "-Wno-unused-variable",
+    "-I/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/native-bit-trace-v1/simde",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-replay-v1/source/replay_trainer.cpp",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v3/bit_head.o",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v3/bridge.cpp",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v3/detmath.o",
+    "-o",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v3/runtime-replay"
+  ],
+  "detmath_command": [
+    "clang++",
+    "-O2",
+    "-std=c++17",
+    "-fno-rtti",
+    "-fvisibility=hidden",
+    "-ffp-model=precise",
+    "-ffp-contract=off",
+    "-fno-math-errno",
+    "-fno-builtin",
+    "-fno-exceptions",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-c",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/native-fixture-v4/source/src/detmath.cpp",
+    "-o",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v3/detmath.o"
+  ],
+  "detmath_source_sha256": "2451e89378661dfa0aa66542ab3f22a7140ac6fb32f7fb5cfb5fc33cba2f4579",
+  "detmath_object_sha256": "7e46a9c2707a967e78225fd15ea85fb275b6206faf4e10ceb148fb1f1e7aa0bd",
+  "model_command": [
+    "clang++",
+    "-I/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/native-fixture-v4/source/src",
+    "-I/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/native-fixture-v4/simde",
+    "-O3",
+    "-std=c++17",
+    "-fno-rtti",
+    "-fvisibility=hidden",
+    "-ffp-model=precise",
+    "-ffp-contract=off",
+    "-fno-math-errno",
+    "-fno-builtin",
+    "-fno-exceptions",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-Wall",
+    "-Wno-unused-variable",
+    "-c",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/native-fixture-v4/source/src/bit_head.cpp",
+    "-o",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v3/bit_head.o"
+  ],
+  "runtime_object_sha256": "3f8cce81342b39341b0b1be72145d14f296de071294ba1f93f4dd432244c5aa2",
+  "runtime_source_sha256": "7e668ad701ca801e5b9984dadcc06858a7e3f31a7aa694007667257877cd1a77",
+  "driver_sha256": "eb3b04fd26f826998a8e14d5e0aa1bdf1ba9296b396078e59ca0e7cfc8e35175",
+  "bridge_sha256": "1ab1b4090bff66e0e5a7eac67c6cfb36a6203a7fd3eb43a82583b494a126c5c2",
+  "binary_sha256": "7964b1e6f603fe0a87fabdf09297a115ace2321fb5d30942e471e6c3916787df",
+  "results": {
+    "screen": {
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v3/runtime-replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-trace-40371.bin",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "seconds": 1.0349286250057048,
+      "log_sha256": "961b5be2a7e5ac2b7da8a0003b30ad991155b07c11af3a539ef6f429d36c81da"
+    },
+    "holdout": {
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v3/runtime-replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-holdout-bit-trace-v1/trial-0-0/bitl-trace-40370.bin",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "seconds": 0.9049828749994049,
+      "log_sha256": "3c0dbafdca8228fe1f43b2e0e8092fe7ded105a46b2f89694ac95a6dac4c7245"
+    }
+  },
+  "scope": "Diagnostic replay using the recompiled baseline runtime head object under its recorded makefile flags with a geometry-only bridge and the checked public driver. Does not establish trainer equivalence or authorize training."
+}

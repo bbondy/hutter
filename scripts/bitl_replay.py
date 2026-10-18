@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import platform
 import re
+import shlex
 import shutil
 import struct
 import subprocess
@@ -118,15 +119,38 @@ def build(args):
         flags += ["-I" + str(simde)]
     else:
         flags += ["-m64", "-march=x86-64-v3", "-mtune=znver2", "-fno-pie"]
+    math_command = None
+    math_object = out / "detmath.o"
+    if args.math_mode == "runtime":
+        for name in ("src/detmath.cpp", "makefile"):
+            if digest(native / "source" / name) != native_info["source_files"][name]["sha256"]:
+                raise ValueError("runtime math source or compile flags changed")
+        shutil.copy2(native / "source/src/detmath.cpp", source / "detmath.cpp")
+        definitions = [line.split(":=", 1)[1] for line in (native / "source/makefile").read_text().splitlines()
+                       if line.startswith("DETNUM_CXXFLAGS :=")]
+        if len(definitions) != 1:
+            raise ValueError("runtime deterministic-math flags unavailable")
+        math_flags = shlex.split(definitions[0])
+        if "-ffp-model=precise" not in math_flags or "-ffp-contract=off" not in math_flags:
+            raise ValueError("runtime deterministic-math FP policy changed")
+        math_command = [compiler, *math_flags, "-c", str(source / "detmath.cpp"), "-o", str(math_object)]
     command = [compiler, *flags, str(source / "bit_head.cpp"), str(driver),
+               *([str(math_object)] if math_command else []),
                *([] if darwin else ["-no-pie"]), "-o", str(out / "replay")]
     report = {**provenance("bitl-frozen-replay-build"), "upstream_commit": upstream["commit"],
               "compiler": compiler_info, "command": command, "original_sources": before,
               "source_files": inventory(source), "live_build_sha256": digest(native / "build.json"),
               "simde_commit": SIMDE_COMMIT if darwin else None,
-              "scope": "Original public trainer arithmetic; Mac uses the live port SIMD header. Added driver checks compare each integer probability, without changing model arithmetic."}
+              "math_mode": args.math_mode, "math_command": math_command,
+              "scope": "Public trainer model code; Mac uses the live port SIMD header. Runtime math mode links the compressor's exact deterministic-math source with its own recorded flags. Driver checks compare every integer probability; no training occurs."}
     save(out / "build.json", report)
     with (out / "build.log").open("wb") as log:
+        if math_command:
+            math_result = subprocess.run(math_command, stdout=log, stderr=subprocess.STDOUT)
+            report["math_exit_code"] = math_result.returncode
+            save(out / "build.json", report)
+            math_result.check_returncode()
+            report["math_object_sha256"] = digest(math_object)
         result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT)
     report.update(exit_code=result.returncode, log_sha256=digest(out / "build.log"))
     if result.returncode == 0:
@@ -147,6 +171,8 @@ def verify(args):
         raise ValueError("replay script differs from frozen protocol")
     if protocol["trace_support_sha256"] != digest(Path(trace_support.__file__)):
         raise ValueError("trace validation differs from frozen protocol")
+    if build_info.get("math_mode") != protocol["math_mode"]:
+        raise ValueError("replay math provider differs from frozen protocol")
     weights = args.weights.resolve()
     if digest(weights) != BF16_SHA or weights.stat().st_size != 7386:
         raise ValueError("requires exact shipped BF16 weights")
@@ -178,6 +204,7 @@ def verify(args):
     report = {**provenance("bitl-frozen-replay-verification"), "comparison_sha256": digest(args.comparison / "report.json"),
               "protocol_sha256": digest(args.protocol), "build_sha256": digest(build_dir / "build.json"),
               "binary_sha256": build_info["binary_sha256"], "weights_sha256": digest(weights), "trace": trace,
+              "math_mode": build_info["math_mode"],
               "command": command, "environment": env_values,
               "scope": "Fixture replay of shipped weights. Freeze after first Observe, before any complete 1024-bit backward window; no optimizer update. No training, archive improvement or full-stream online-learning equivalence claim."}
     shutil.copy2(args.protocol, out / "protocol.json")
@@ -225,6 +252,7 @@ def main():
     compiler = sub.add_parser("build")
     compiler.add_argument("--native-build", type=Path, required=True)
     compiler.add_argument("--output", type=Path, required=True)
+    compiler.add_argument("--math-mode", choices=("runtime", "system"), default="runtime")
     check = sub.add_parser("verify")
     for key in ("build", "run", "comparison", "weights", "protocol", "output"):
         check.add_argument("--" + key, type=Path, required=True)

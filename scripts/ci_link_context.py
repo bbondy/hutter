@@ -85,7 +85,7 @@ def main():
                                   build=builds[0], runs=runs, output=evidence / "comparison"))
         if args.experiment == "bitl-trace":
             audit, replay_build, verification = work / "weight-audit", work / "replay-build", work / "replay-verification"
-            replay_protocol = ROOT / "benchmarks/training/20261017-bitl-replay-protocol-v2/protocol.json"
+            replay_protocol = ROOT / "benchmarks/training/20261017-bitl-replay-protocol-v3/protocol.json"
             adapted = json.loads(replay_protocol.read_text())
             adapted["parent_protocol_sha256"] = digest(replay_protocol)
             adapted["trace_protocol_sha256"] = digest(protocol_path)

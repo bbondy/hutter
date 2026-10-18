@@ -1,0 +1,79 @@
+{
+  "kind": "runtime-object-replay-diagnosis",
+  "command": [
+    "clang++",
+    "-O3",
+    "-std=c++17",
+    "-ffp-model=precise",
+    "-ffp-contract=off",
+    "-fno-math-errno",
+    "-fno-builtin",
+    "-fno-exceptions",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-Wall",
+    "-Wno-unused-variable",
+    "-I/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/native-bit-trace-v1/simde",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-replay-v1/source/replay_trainer.cpp",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v2/bit_head.o",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v2/bridge.cpp",
+    "-o",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v2/runtime-replay"
+  ],
+  "model_command": [
+    "clang++",
+    "-I/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/native-fixture-v4/source/src",
+    "-I/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/native-fixture-v4/simde",
+    "-O3",
+    "-std=c++17",
+    "-fno-rtti",
+    "-fvisibility=hidden",
+    "-ffp-model=precise",
+    "-ffp-contract=off",
+    "-fno-math-errno",
+    "-fno-builtin",
+    "-fno-exceptions",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-fdata-sections",
+    "-ffunction-sections",
+    "-Wall",
+    "-Wno-unused-variable",
+    "-c",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/native-fixture-v4/source/src/bit_head.cpp",
+    "-o",
+    "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v2/bit_head.o"
+  ],
+  "runtime_object_sha256": "3f8cce81342b39341b0b1be72145d14f296de071294ba1f93f4dd432244c5aa2",
+  "runtime_source_sha256": "7e668ad701ca801e5b9984dadcc06858a7e3f31a7aa694007667257877cd1a77",
+  "driver_sha256": "eb3b04fd26f826998a8e14d5e0aa1bdf1ba9296b396078e59ca0e7cfc8e35175",
+  "bridge_sha256": "1ab1b4090bff66e0e5a7eac67c6cfb36a6203a7fd3eb43a82583b494a126c5c2",
+  "binary_sha256": "8637ef1c6a20aef07f21009fedcf9774947d8dc561529d07eb51743efe8ca5c2",
+  "results": {
+    "screen": {
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v2/runtime-replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-trace-40371.bin",
+        "0",
+        "0"
+      ],
+      "returncode": 6,
+      "seconds": 0.36885737500415416,
+      "log_sha256": "bd4e9edb56b5bab6f4b7d9daf42d11f7e3ebf7d5d31c26dba4437b236a9b8932"
+    },
+    "holdout": {
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-runtime-diagnosis-v2/runtime-replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-holdout-bit-trace-v1/trial-0-0/bitl-trace-40370.bin",
+        "0",
+        "0"
+      ],
+      "returncode": 6,
+      "seconds": 0.10761787500086939,
+      "log_sha256": "144712bd08d8c42d5df395f56d5c38fe59291ce76301ea8f45bb9775ecb31e6d"
+    }
+  },
+  "scope": "Diagnostic replay using the recompiled baseline runtime head object under its recorded makefile flags with a geometry-only bridge and the checked public driver. Does not establish trainer equivalence or authorize training."
+}
