@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "parent_protocol_sha256": "313952fb78eaad643e930141c4707806987319b17fd16a5d3739fdff1c9fbd5d",
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/training/20261018-broad-trace-protocol-v1/projected-manifest.json",
+      "manifest_sha256": "c0dcf4ed23a7637ada8d586a34182fc5bad3f94430a8112eaa17384168f58f05",
+      "input_sha256": "5b7be7d26bc39e49321d45f896fb4c15a5f6c5092eed029bd8a0c9c0cd35d66a"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "changes": "Shared native benchmark records CPU identity; exact roundtrip/context checks."
+  },
+  "input_variant": "upstream",
+  "hypothesis": "The read-only bit-trace writer preserves the baseline archive on a separate four-megabyte, article-aware training range and produces identical encoder/decoder traces below its 16-million-model-bit bound.",
+  "variants": [
+    "baseline",
+    "bit-trace-fixture"
+  ],
+  "baseline_build_sha256": "876f6158e3a67dab303fd38a9c7c31798aa608a8333e676938672ce8a7d573ea",
+  "trace_build_sha256": "abf4575951dd1b32c6fa7a8ac803d8cc0341a01cc50a732c9862160d8936f1d5",
+  "rule": "Only the declared src/bit_head.cpp trace instrumentation may differ from the uninstrumented baseline. Same corpus/order, phase flags, assets and runtime prediction.",
+  "acceptance": [
+    "Both restore prepared and original XML exactly",
+    "Complete archives match in bytes and SHA-256; context counters match",
+    "Encoder and decoder trace, channel and integer-probability hashes match",
+    "Trace stays below its 16 million model-bit bound",
+    "Preserve all failures and logs"
+  ],
+  "scope": "Read-only larger training trace validation; no new model or prize gain."
+}

@@ -18,7 +18,7 @@ import cmix_alias_support as alias
 import cmix_activity_support as activity
 import cmix_bit_trace_support as bit_trace
 import cmix_bit_weight_support as bit_weight
-import cmix_metadata_support as metadata
+import cmix_metadata_support as metadata_support
 from make_samples import digest
 from order_history import checked_restoration
 
@@ -26,7 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE_RECIPES = {"retrieval_variant": (retrieval, "retrieval-"), "alias_variant": (alias, "alias-"),
                   "activity_variant": (activity, "activity-"), "bit_trace_variant": (bit_trace, "bit-trace-"),
                   "bit_weight_variant": (bit_weight, "bit-weight-"),
-                  "metadata_variant": (metadata, "metadata-")}
+                  "metadata_variant": (metadata_support, "metadata-")}
 
 
 def source_recipe(build):
@@ -169,7 +169,7 @@ def summarize(args):
         if protocol["bit_weight_recipe_sha256"] != digest(Path(bit_weight.__file__)):
             raise ValueError("bit-weight recipe differs from frozen experiment")
     if protocol.get("metadata_recipe_sha256"):
-        if protocol["metadata_recipe_sha256"] != digest(Path(metadata.__file__)):
+        if protocol["metadata_recipe_sha256"] != digest(Path(metadata_support.__file__)):
             raise ValueError("metadata recipe differs from frozen experiment")
     base = metadata[names.index("baseline")]
     records, logs = {}, []

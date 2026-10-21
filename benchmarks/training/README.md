@@ -83,5 +83,11 @@ The [extra-pass screen experiment](20261017-bitl-multi-pass-v1) is a recorded
 rejection: its 16-pass checkpoint gains 282.3 further probability-cost bytes
 on screen but loses 90.6 bytes on disjoint versus the one-pass model. A
 [separate four-megabyte range](20261018-broad-trace-protocol-v1) is prepared
-and being traced for broader training. It remains disjoint from the earlier
-screen and disjoint fixtures; its raw files are reproducible and stay local.
+and its [Mac trace](20261021-broad-trace-v1) is now complete. Baseline and
+tracer archives are identical at 476,220 bytes; both restore original XML,
+and the 9,746,875 model-bit records match between encoder and decoder. It
+remains disjoint from the earlier screen and disjoint fixtures; its raw files
+are reproducible and stay local. The [frozen replay](20261021-broad-replay-v1)
+matches all 9,746,875 live integer probabilities and rejects the wrong-first
+control. A [one-pass, three-rate training protocol](20261021-broad-train-protocol-v1/protocol.json)
+is frozen before any candidate is trained.

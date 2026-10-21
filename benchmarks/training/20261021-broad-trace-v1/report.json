@@ -1,0 +1,263 @@
+{
+  "version": 1,
+  "kind": "fixed-input-model-ablation",
+  "role": "screen",
+  "date_utc": "2026-10-21T11:33:51.660406+00:00",
+  "protocol_sha256": "f1791ff45c7e662f7484ebc5811dd1b81863358cdf9c70432789818433728093",
+  "manifest_sha256": "c0dcf4ed23a7637ada8d586a34182fc5bad3f94430a8112eaa17384168f58f05",
+  "input_sha256": "5b7be7d26bc39e49321d45f896fb4c15a5f6c5092eed029bd8a0c9c0cd35d66a",
+  "input_bytes": 3728154,
+  "raw_sha256": "a5c7c03549450aaadbf317b3f712af2cad18ae293f113f418b86d5c86ad4a1fa",
+  "raw_bytes": 4002523,
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "native_arguments": [
+    "--native-corpus",
+    "416",
+    "83"
+  ],
+  "verifier_sha256": "a3305e1fe0b33c8d100386a375c0469e7c659d597b5c46d39d630962cb8e51f1",
+  "scope": "Native fixture payloads; fixed weights; concurrent exploratory times; not prize scores",
+  "variants": {
+    "baseline": {
+      "payload_bytes": 476220,
+      "archive_sha256": "d0ee1a9c824dedf218cc260d99a761de056bfad3b9d02491c03974dec493dea3",
+      "binary_sha256": "36211d75b46f4c4e6df4a428e1415039644b6d697f23b7aff9acab16591b9713",
+      "binary_bytes": 873096,
+      "model": {
+        "budget": 256,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 416,
+            "titles": 414,
+            "blocks": 8,
+            "bytes": 52,
+            "links": 36999,
+            "links_piped": 8837,
+            "links_dropped": 0,
+            "redirects": 82,
+            "from_redirect": 18,
+            "from_linktext": 13
+          },
+          "z3": {
+            "articles": 334,
+            "usable_titles": 332,
+            "articles_with_mentions": 72,
+            "articles_with_prefix": 72,
+            "mentions_total": 283,
+            "prefix_tokens_total": 6831,
+            "chunks_total": 146,
+            "anchors": 41281,
+            "fed_tokens": 6831
+          },
+          "prompt": {
+            "articles": 416,
+            "redirect_prompt_pages": 82,
+            "redirect_prompt_tokens": 328,
+            "redirect_pages": 82,
+            "meta_pages": 416,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 55894
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 416,
+            "titles": 414,
+            "blocks": 8,
+            "bytes": 52,
+            "links": 36999,
+            "links_piped": 8837,
+            "links_dropped": 0,
+            "redirects": 82,
+            "from_redirect": 18,
+            "from_linktext": 13
+          },
+          "z3": {
+            "articles": 334,
+            "usable_titles": 332,
+            "articles_with_mentions": 72,
+            "articles_with_prefix": 72,
+            "mentions_total": 283,
+            "prefix_tokens_total": 6831,
+            "chunks_total": 146,
+            "anchors": 41281,
+            "fed_tokens": 6831
+          },
+          "prompt": {
+            "articles": 416,
+            "redirect_prompt_pages": 82,
+            "redirect_prompt_tokens": 328,
+            "redirect_pages": 82,
+            "meta_pages": 416,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 55894
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "a5c7c03549450aaadbf317b3f712af2cad18ae293f113f418b86d5c86ad4a1fa",
+      "compress_seconds": 1924.7118517920026,
+      "decompress_seconds": 2279.4456040829973,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/broad-baseline-run-v1",
+      "metadata_sha256": "0c782450bddc24d7ad0d45d37adf453e3b9f0f468a90243a26926a3fb27147c1",
+      "results_sha256": "75c1fe7e7f358a3cb3990c56a868f461732df37eafd169a90722c079598d6e7b",
+      "log_sha256": {
+        "compress": "9588bded659039fecee6beb9a2c5504d3903fa578ad978061a49510eb44f1065",
+        "decompress": "da492f3dfca053211204f2f20157917c57f7420aa5abf3c9e1e7ead83814ddd9"
+      },
+      "delta_bytes_vs_baseline": 0
+    },
+    "bit-trace-fixture": {
+      "payload_bytes": 476220,
+      "archive_sha256": "d0ee1a9c824dedf218cc260d99a761de056bfad3b9d02491c03974dec493dea3",
+      "binary_sha256": "4c17b0721540f2ada345ed66853c849119524e4424fa8cd36f50db9b12016cc5",
+      "binary_bytes": 873656,
+      "model": {
+        "name": "fixture",
+        "source_file": "src/bit_head.cpp",
+        "before_sha256": "7e668ad701ca801e5b9984dadcc06858a7e3f31a7aa694007667257877cd1a77",
+        "after_sha256": "7bbf810a71542a8a2b6541cb6bfa022533a175ad4b3fa79eca42c272967afa9f",
+        "recipe_sha256": "d4feb6e3c6cfe4e3459f07ebb68e0f38984fba44d38acb80a0a835de5fe1d9f0",
+        "scope": "Read-only live BITLSTM inputs and integer predictions, bounded to 16000000 model bits. No parameter or training changes; archive identity must be checked separately."
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 416,
+            "titles": 414,
+            "blocks": 8,
+            "bytes": 52,
+            "links": 36999,
+            "links_piped": 8837,
+            "links_dropped": 0,
+            "redirects": 82,
+            "from_redirect": 18,
+            "from_linktext": 13
+          },
+          "z3": {
+            "articles": 334,
+            "usable_titles": 332,
+            "articles_with_mentions": 72,
+            "articles_with_prefix": 72,
+            "mentions_total": 283,
+            "prefix_tokens_total": 6831,
+            "chunks_total": 146,
+            "anchors": 41281,
+            "fed_tokens": 6831
+          },
+          "prompt": {
+            "articles": 416,
+            "redirect_prompt_pages": 82,
+            "redirect_prompt_tokens": 328,
+            "redirect_pages": 82,
+            "meta_pages": 416,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 55894
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 416,
+            "titles": 414,
+            "blocks": 8,
+            "bytes": 52,
+            "links": 36999,
+            "links_piped": 8837,
+            "links_dropped": 0,
+            "redirects": 82,
+            "from_redirect": 18,
+            "from_linktext": 13
+          },
+          "z3": {
+            "articles": 334,
+            "usable_titles": 332,
+            "articles_with_mentions": 72,
+            "articles_with_prefix": 72,
+            "mentions_total": 283,
+            "prefix_tokens_total": 6831,
+            "chunks_total": 146,
+            "anchors": 41281,
+            "fed_tokens": 6831
+          },
+          "prompt": {
+            "articles": 416,
+            "redirect_prompt_pages": 82,
+            "redirect_prompt_tokens": 328,
+            "redirect_pages": 82,
+            "meta_pages": 416,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 55894
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "a5c7c03549450aaadbf317b3f712af2cad18ae293f113f418b86d5c86ad4a1fa",
+      "compress_seconds": 1946.333027958004,
+      "decompress_seconds": 2284.405898833,
+      "source_run": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/broad-trace-run-v1",
+      "metadata_sha256": "b24b483941a589e439f6399a438671b17a1e34fecf26cca0f1a359e64965ccf8",
+      "results_sha256": "2c4b7c0f75526e064b49f34372758c576e1fb1c01c9fb5803dceb11c86c9ea04",
+      "log_sha256": {
+        "compress": "93839de7db1163bb9239dbc677dbf9efc63e4d297c9f2610cad201789a5d4f63",
+        "decompress": "75a811f90d213169190c6a4893ce439bafa7f81e76927cb53e366be2c8406f50"
+      },
+      "delta_bytes_vs_baseline": 0,
+      "bit_trace": {
+        "bits": 9746875,
+        "channels": 1218360,
+        "overrides": 2,
+        "one_bits": 4618607,
+        "channel_zones": {
+          "0": 1218360
+        },
+        "files": {
+          "trace": {
+            "bytes": 584812528,
+            "sha256": "bcee7180d5d95700d727d5343edb688ebebf215db8fff39aa632f843cf9633c7"
+          },
+          "channel": {
+            "bytes": 336267388,
+            "sha256": "29ba15c276510061b95b3c7fe348401d74aa299d9cf2d38164993e52e33b65a0"
+          },
+          "probability": {
+            "bytes": 19493750,
+            "sha256": "b68548f908aca699c92fbd110896cc99fc1d432373b71cb218b0e004969bcc93"
+          }
+        }
+      },
+      "trace_encoder_decoder_match": true,
+      "unchanged_archive": true
+    }
+  }
+}

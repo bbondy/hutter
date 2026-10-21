@@ -21,6 +21,12 @@ pending submissions. Full eligibility remains a measured, judged question.
 If the pending 95,914,051-byte cmix-neif package becomes the accepted record
 with no intervening award, the next 1% prize threshold would be at most
 94,954,910 bytes. Our small fixture gains do not demonstrate that margin.
+An [isolated E1 comparison](../benchmarks/metadata) restores exactly and
+saves 13 and 16 payload bytes on the screen and disjoint Mac fixtures, while
+its unpacked development executable grows 4,112 bytes. Release accounting
+is needed before treating that as a useful prize candidate;
+[issue #18](https://github.com/bbondy/hutter/issues/18) tracks the focused
+metadata work.
 
 ## Current evidence and next moves
 
@@ -101,7 +107,13 @@ Priorities:
    checkpoint and expand training coverage rather than fitting this trace
    longer. A [separate 4,002,523-byte range](../benchmarks/training/20261018-broad-trace-protocol-v1)
    at enwik8 offset 20,013,121 is now prepared with exact source restoration;
-   baseline/trace archive checks are running before any training from it.
+   [baseline/trace archive checks](../benchmarks/training/20261021-broad-trace-v1)
+   now pass: identical 476,220-byte archives, exact original XML restoration
+   and matching encoder/decoder records for 9,746,875 model bits. The
+   [frozen replay](../benchmarks/training/20261021-broad-replay-v1) matches
+   every live integer probability and rejects a wrong-first control. A
+   [one-pass CPU training protocol](../benchmarks/training/20261021-broad-train-protocol-v1/protocol.json)
+   is frozen before training from it.
 
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)

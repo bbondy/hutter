@@ -216,8 +216,13 @@ step than more epochs on this fixture.
 
 The next input is a [separate four-megabyte training range](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-broad-trace-protocol-v1):
 416 complete pages from enwik8 bytes 20,013,121–24,015,644. Its preparation
-and original-XML restoration are verified, and a baseline-versus-trace archive
-comparison is underway. The manifest and hashes are versioned; the raw and
+and original-XML restoration are verified. The [completed paired trace](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261021-broad-trace-v1)
+preserves the unchanged 476,220-byte archive, restores exact source XML and
+matches the encoder and decoder records for 9,746,875 model bits. Frozen
+replay now [matches every live integer probability](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261021-broad-replay-v1)
+and rejects a deliberately wrong first probability. A [one-pass CPU training
+protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261021-broad-train-protocol-v1)
+was frozen before candidate training. The manifest and hashes are versioned; the raw and
 prepared files remain locally reproducible. Any trained model will still need
 frozen screen selection, one disjoint check, real archives and native Linux
 verification. This range broadens training coverage without making the old

@@ -1,0 +1,6 @@
+BITLSTM: loaded /Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-weight-audit-v1/F2L.nblb (C=16 nin=89 inw=96 n1=28)
+CMIX_BITL_REPLAY {"bits":9746875,"integer_probabilities_equal":true}
+trace: v3, recorded columns 13 of 28, mask=132120703
+channel: n_tf=4 n_hid=32 (projected=1) n_lhid=32 (projected=1) zone=1
+bits=9746875 cells=16 inputs=90 params=3585 base_B=471206.4 head_B=470532.0 delta_B=-674.4 rel=-0.143123% tailbits=9746875 tail_delta_B=-674.4
+  zone 0 tailbits=9746875 tail_delta_B=-674.4

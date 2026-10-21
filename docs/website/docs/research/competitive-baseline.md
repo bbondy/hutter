@@ -38,6 +38,15 @@ Why not automatically adopt the smallest entry on a compression leaderboard? The
 
 As checked October 18, the benchmark [explicitly labels Ex-Girlfriend 1.0 “not eligible”](https://www.mattmahoney.net/dc/text.html#ex-girlfriend), although it reports a verified 91,778,237-byte self-extracting archive, 135,106 bytes below cmix-neif's archive. Its [GPL-3.0 release source](https://github.com/rlanday/ex-girlfriend/tree/v1.0) is a derivative of the same cmix-neif revision. The author's [full-run record](https://github.com/rlanday/ex-girlfriend/blob/v1.0/README.md) reports about 61 hours to encode and 67 hours to decode on the measured host, with peak RSS close to 10 GiB. Those numbers do not establish that it can satisfy the [prize's machine-adjusted time and RAM rules](https://prize.hutter1.net/hrules.htm). We are keeping the exactly reproduced cmix-neif package as the control while assessing separately measured, low-overhead ideas from that GPL-3.0 derivative. Its page-id and timestamp forecasts deserve an isolated size, time and memory trial before its heavier online predictor or enlarged tables.
 
+The [isolated E1 trial](https://github.com/bbondy/hutter/tree/main/benchmarks/metadata)
+on native Mac fixtures saves **13 and 16 payload bytes** respectively; both
+restore the original XML and keep baseline-identical context counters. Its
+development executable grows 4,112 bytes before release packing. The two
+payload gains do not establish a smaller scored package; compressed code
+cost and full-stream behavior remain to be measured.
+The [focused issue](https://github.com/bbondy/hutter/issues/18) tracks both
+E1 and the separate timestamp forecast.
+
 ## Why keep two tracks?
 
 The Rust lab gives a clear place to learn and test Huffman, LZ77, PPM and model mixing. The competitive candidate brings a larger predictor, transformer weights, text preprocessing, a dictionary and a self-extracting archive. Replacing the candidate with an educational Rust codec would require closing a very large measured gap before it could be a plausible prize entry.
