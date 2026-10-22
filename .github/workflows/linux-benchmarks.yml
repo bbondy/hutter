@@ -15,6 +15,7 @@ on:
           - bitl-trace
           - bitl-warm-start
           - bitl-broad
+          - bitl-blend
 
 permissions:
   contents: read

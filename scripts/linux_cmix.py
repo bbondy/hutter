@@ -17,6 +17,7 @@ from cmix_alias_support import VARIANT as ALIAS_VARIANT, apply as apply_alias
 from cmix_activity_support import VARIANT as ACTIVITY_VARIANT, apply as apply_activity
 from cmix_bit_trace_support import VARIANT as BIT_TRACE_VARIANT, apply as apply_bit_trace
 from cmix_bit_weight_support import VARIANT as BIT_WEIGHT_VARIANT, apply as apply_bit_weight
+from cmix_bit_blend_support import VARIANT as BIT_BLEND_VARIANT, apply as apply_bit_blend
 from cmix_preprocess_support import apply_portable_preprocessing
 from cmix_weight_support import apply_container
 from competitive import ENGINE, MANIFEST, differences, inventory
@@ -41,6 +42,10 @@ def build(args):
     if args.bit_weight_variant and (args.bit_trace_variant or args.activity_variant or args.alias_variant
                                     or args.retrieval_variant or args.weight_container or args.variant != "baseline"):
         raise ValueError("bit-weight experiments require unchanged model code and transformer weights")
+    if args.bit_blend_variant and (args.bit_weight_variant or args.bit_trace_variant or args.activity_variant
+                                   or args.alias_variant or args.retrieval_variant or args.weight_container
+                                   or args.variant != "baseline"):
+        raise ValueError("blended bit-weight experiments require unchanged model code and transformer weights")
     upstream = json.loads(MANIFEST.read_text())
     if any(differences(upstream["files"], inventory(ENGINE)).values()):
         raise ValueError("pinned upstream source differs")
@@ -63,6 +68,7 @@ def build(args):
     activity_variant = apply_activity(source, args.activity_variant) if args.activity_variant else None
     bit_trace_variant = apply_bit_trace(source, args.bit_trace_variant) if args.bit_trace_variant else None
     bit_weight_variant = apply_bit_weight(source, args.bit_weight_variant) if args.bit_weight_variant else None
+    bit_blend_variant = apply_bit_blend(source, args.bit_blend_variant) if args.bit_blend_variant else None
     command = ["make", f"-j{args.jobs}", "CC=clang++-18", "prof_use"]
     metadata = {
         "kind": "native-linux-development-build", "commit": capture("git", "-C", str(ROOT), "rev-parse", "HEAD"),
@@ -77,6 +83,7 @@ def build(args):
         "activity_variant": activity_variant,
         "bit_trace_variant": bit_trace_variant,
         "bit_weight_variant": bit_weight_variant,
+        "bit_blend_variant": bit_blend_variant,
         "weight_binding": weight_binding,
         "preprocessing_support": preprocessing_support,
         "initialization": "original Linux libc generator", "source_files": inventory(source),
@@ -112,6 +119,7 @@ def main():
     compile_parser.add_argument("--activity-variant", choices=(ACTIVITY_VARIANT,))
     compile_parser.add_argument("--bit-trace-variant", choices=(BIT_TRACE_VARIANT,))
     compile_parser.add_argument("--bit-weight-variant", choices=(BIT_WEIGHT_VARIANT,))
+    compile_parser.add_argument("--bit-blend-variant", choices=(BIT_BLEND_VARIANT,))
     bench = sub.add_parser("bench")
     bench.add_argument("inputs", type=Path, nargs="+")
     for name in ("build", "manifest", "output"):
