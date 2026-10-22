@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "hypothesis": "The prior screen-trained and separate-range-trained BF16 BITLSTM checkpoints began from the same shipped model and may capture complementary corrections. Fixed arithmetic interpolation might beat the prior checkpoint without adding model bytes or runtime work.",
+  "script_sha256": "8905efc35e48d638b18f3525328b35468759b4a50d87ff9ccfb7d5e16abd1973",
+  "training_build_sha256": "e995675e23ce531422bb5b944d7057cca58bacf052094945f291a3d359ac814e",
+  "broad_report_sha256": "2f1e94b430efe1866897aabe086a0cbaedca40642439440f5b372f576b34c413",
+  "prior_model_sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0",
+  "broad_model_sha256": "db07ff9144f8196bee8fc36900e4ec24cb57c5ec0292367863933dce36fcded3",
+  "replay_report_sha256": {
+    "screen": "fdf304b24bacbecd1bea30d248bb8265eaa1b32497e48795b420cf1d698a8b8f",
+    "holdout": "c840e9bbfa93aca9e3eb2950fa53b5ddf6581c74bdd210fbe6f604571b6b2bce"
+  },
+  "blend_numerators": [1, 2, 3],
+  "denominator": 4,
+  "selection": "Read both exact 7,386-byte BF16 endpoints, check re-export identity, interpolate each tensor element with broad weight 1/4, 1/2 or 3/4, and round to BF16 using the pinned converter. Select one lowest frozen screen probability cost, breaking ties toward the prior checkpoint. Require at least one byte gain over prior, then test only that selection once on disjoint with the same one-byte gate.",
+  "promotion": "Only a checkpoint passing both replay-cost gates can enter actual archive tests. No alpha retuning after disjoint; preserve any rejection. The screen is in-sample for the prior checkpoint, so a screen gain alone has no independent validation value.",
+  "scope": "Three fixed 7,386-byte BF16 blends, no extra model or runtime code. Fixture probability cost only until a real archive test."
+}
