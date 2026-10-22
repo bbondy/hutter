@@ -1,0 +1,274 @@
+{
+  "kind": "bitl-separate-range-training",
+  "version": 1,
+  "commit": "95d2504ed33b4062a492cd368247167e4dfd37a8",
+  "date_utc": "2026-10-21T12:11:40.546024+00:00",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "script_sha256": "be328ef6bd1c9aced25eb639f8fba83c65574394870d083094bc04661d7034d4",
+  "protocol_sha256": "b52a207ac126f9dcf4a7be63d1027b725cf1360360ceb3d36ec212615cb3cb51",
+  "training_build_sha256": "e995675e23ce531422bb5b944d7057cca58bacf052094945f291a3d359ac814e",
+  "binary_sha256": "853939f9f368fbdddf67ece2c2810870e48cf0ba1952404f51f1860b9ec1cf5a",
+  "traces": {
+    "training": {
+      "bits": 9746875,
+      "verification_sha256": "616c751c2a31891d8342354b0ab02219c55e73bcca42808aac57eafb4aa5eea6"
+    },
+    "screen": {
+      "bits": 2418045,
+      "verification_sha256": "fdf304b24bacbecd1bea30d248bb8265eaa1b32497e48795b420cf1d698a8b8f"
+    },
+    "holdout": {
+      "bits": 2399939,
+      "verification_sha256": "c840e9bbfa93aca9e3eb2950fa53b5ddf6581c74bdd210fbe6f604571b6b2bce"
+    }
+  },
+  "runs": [
+    {
+      "label": "shipped-screen",
+      "role": "screen",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-trace-40371.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-channel-40371.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-weight-audit-v1/F2L.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_FREEZE_AT": "1"
+      },
+      "wall_seconds": 0.8629555000006803,
+      "exit_code": 0,
+      "log_sha256": "673172f84b28d1ecfd5a60d1ea0571c7f31be050368aafef19548baa9efb869b",
+      "bits": 2418045,
+      "base_cost_bytes": 117453.4,
+      "head_cost_bytes": 117263.1
+    },
+    {
+      "label": "prior-screen",
+      "role": "screen",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-trace-40371.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-channel-40371.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-warm-start-v1/lr3000.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_FREEZE_AT": "1"
+      },
+      "wall_seconds": 0.8497064580005826,
+      "exit_code": 0,
+      "log_sha256": "967bae79e0c050d63ff41b5d55f241b2c64a6310f05305d24808df07e244c08c",
+      "bits": 2418045,
+      "base_cost_bytes": 117453.4,
+      "head_cost_bytes": 117115.4
+    },
+    {
+      "label": "train-lr300",
+      "role": "training",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/broad-trace-run-v1/trial-0-0/bitl-trace-43023.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/broad-trace-run-v1/trial-0-0/bitl-channel-43023.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-weight-audit-v1/F2L.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_LR1E6": "300",
+        "REPLAY_DUMP": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-broad-train-v1/lr300-fp32.nblb"
+      },
+      "wall_seconds": 7.05794354200043,
+      "exit_code": 0,
+      "log_sha256": "c162660461e66a9ab889c3e1b7c9341349c30752a071cfb32c0ff44b0660d7ae",
+      "bits": 9746875,
+      "base_cost_bytes": 471206.4,
+      "head_cost_bytes": 470269.3
+    },
+    {
+      "label": "evaluate-lr300-screen",
+      "role": "screen",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-trace-40371.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-channel-40371.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-broad-train-v1/lr300.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_FREEZE_AT": "1"
+      },
+      "wall_seconds": 0.8596273340008338,
+      "exit_code": 0,
+      "log_sha256": "5226a6d180da5a2b6bedb6aae66a3206d1a68d6e1660682273adc15937280e43",
+      "bits": 2418045,
+      "base_cost_bytes": 117453.4,
+      "head_cost_bytes": 117186.9
+    },
+    {
+      "label": "train-lr1000",
+      "role": "training",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/broad-trace-run-v1/trial-0-0/bitl-trace-43023.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/broad-trace-run-v1/trial-0-0/bitl-channel-43023.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-weight-audit-v1/F2L.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_LR1E6": "1000",
+        "REPLAY_DUMP": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-broad-train-v1/lr1000-fp32.nblb"
+      },
+      "wall_seconds": 7.080472292000195,
+      "exit_code": 0,
+      "log_sha256": "685218a0ea0638426e28e4c1986f2bb842a06a6d1377659a6c971ebd34a7b2d7",
+      "bits": 9746875,
+      "base_cost_bytes": 471206.4,
+      "head_cost_bytes": 470171.3
+    },
+    {
+      "label": "evaluate-lr1000-screen",
+      "role": "screen",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-trace-40371.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-channel-40371.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-broad-train-v1/lr1000.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_FREEZE_AT": "1"
+      },
+      "wall_seconds": 0.983250584002235,
+      "exit_code": 0,
+      "log_sha256": "67268246bed2d23c475fea9ed99a8209e41f2ee402f9f4f25e3557d1f720824f",
+      "bits": 2418045,
+      "base_cost_bytes": 117453.4,
+      "head_cost_bytes": 117165.0
+    },
+    {
+      "label": "train-lr3000",
+      "role": "training",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/broad-trace-run-v1/trial-0-0/bitl-trace-43023.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/broad-trace-run-v1/trial-0-0/bitl-channel-43023.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-weight-audit-v1/F2L.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_LR1E6": "3000",
+        "REPLAY_DUMP": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-broad-train-v1/lr3000-fp32.nblb"
+      },
+      "wall_seconds": 7.052981125001679,
+      "exit_code": 0,
+      "log_sha256": "c4575dd321aa4b1175bc577b38b2f4687baa5db7495ad08c6ecda122702fe623",
+      "bits": 9746875,
+      "base_cost_bytes": 471206.4,
+      "head_cost_bytes": 470182.7
+    },
+    {
+      "label": "evaluate-lr3000-screen",
+      "role": "screen",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-trace-40371.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-channel-40371.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-broad-train-v1/lr3000.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_FREEZE_AT": "1"
+      },
+      "wall_seconds": 0.861771541996859,
+      "exit_code": 0,
+      "log_sha256": "fe68984898a4351b3ae1f0cc64c3b1fa5eea8e1fc78da8d099da2b77468a13d8",
+      "bits": 2418045,
+      "base_cost_bytes": 117453.4,
+      "head_cost_bytes": 117138.3
+    }
+  ],
+  "candidates": [
+    {
+      "learning_rate_1e6": 300,
+      "fp32": {
+        "bytes": 14748,
+        "sha256": "b4bb5764c2e4dec8efe153cff272d2904b3173ce702fab92edf7439e25895c9c"
+      },
+      "bf16": {
+        "bytes": 7386,
+        "sha256": "1f8dd0df476bfcaefc7f1f447b8f0dc7b904c3057081e986d44886aabbd27d74"
+      },
+      "export_log_sha256": "97c83d07ee9a5ad069707286986e99cebb55992bf21d6418a88ca3cd109549bb",
+      "screen_cost_bytes": 117186.9,
+      "screen_delta_vs_shipped_bytes": -76.20000000001164,
+      "screen_delta_vs_prior_bytes": 71.5
+    },
+    {
+      "learning_rate_1e6": 1000,
+      "fp32": {
+        "bytes": 14748,
+        "sha256": "6e62a3ff712320120e96d5a1d7d66fe9c9275fc20093373befeb47fafec73744"
+      },
+      "bf16": {
+        "bytes": 7386,
+        "sha256": "8e3608068d0b3183ab654a259315e7776eaaf9fe41817516580b5bac66d59e0a"
+      },
+      "export_log_sha256": "72b6643d923623efd4d1c92e4c7db616ff2f9c5ad31af977f6a6448128fff491",
+      "screen_cost_bytes": 117165.0,
+      "screen_delta_vs_shipped_bytes": -98.10000000000582,
+      "screen_delta_vs_prior_bytes": 49.60000000000582
+    },
+    {
+      "learning_rate_1e6": 3000,
+      "fp32": {
+        "bytes": 14748,
+        "sha256": "a5432a7da3daa8c0254c369f769890f09643f72dc0ff45e112371a924057c4d1"
+      },
+      "bf16": {
+        "bytes": 7386,
+        "sha256": "db07ff9144f8196bee8fc36900e4ec24cb57c5ec0292367863933dce36fcded3"
+      },
+      "export_log_sha256": "171ea589a8b6c833035dd7ed521f75f64294b25767ab134a380779f6b485ef44",
+      "screen_cost_bytes": 117138.3,
+      "screen_delta_vs_shipped_bytes": -124.80000000000291,
+      "screen_delta_vs_prior_bytes": 22.90000000000873
+    }
+  ],
+  "passed": true,
+  "scope": "One CPU pass per fixed rate on separate four-megabyte training range. Frozen BF16 screen selection, then one disjoint check. Probability costs only, not archive or prize bytes.",
+  "selected_before_holdout": {
+    "learning_rate_1e6": 3000,
+    "fp32": {
+      "bytes": 14748,
+      "sha256": "a5432a7da3daa8c0254c369f769890f09643f72dc0ff45e112371a924057c4d1"
+    },
+    "bf16": {
+      "bytes": 7386,
+      "sha256": "db07ff9144f8196bee8fc36900e4ec24cb57c5ec0292367863933dce36fcded3"
+    },
+    "export_log_sha256": "171ea589a8b6c833035dd7ed521f75f64294b25767ab134a380779f6b485ef44",
+    "screen_cost_bytes": 117138.3,
+    "screen_delta_vs_shipped_bytes": -124.80000000000291,
+    "screen_delta_vs_prior_bytes": 22.90000000000873
+  },
+  "selection_sha256": "7eee10674527665c613f609a4620fac31a3566a6bb5cc58b97fdc0aef46d335d",
+  "screen_gate_passed": false,
+  "holdout_gate_passed": false,
+  "eligible_for_archive_trial": false
+}

@@ -1,0 +1,5 @@
+BITLSTM: loaded /Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-broad-train-v1/lr1000.nblb (C=16 nin=89 inw=96 n1=28)
+trace: v3, recorded columns 13 of 28, mask=132120703
+channel: n_tf=4 n_hid=32 (projected=1) n_lhid=32 (projected=1) zone=1
+bits=2418045 cells=16 inputs=90 params=3585 base_B=117453.4 head_B=117165.0 delta_B=-288.3 rel=-0.245481% tailbits=2418045 tail_delta_B=-288.3
+  zone 0 tailbits=2418045 tail_delta_B=-288.3

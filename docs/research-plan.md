@@ -113,7 +113,11 @@ Priorities:
    [frozen replay](../benchmarks/training/20261021-broad-replay-v1) matches
    every live integer probability and rejects a wrong-first control. A
    [one-pass CPU training protocol](../benchmarks/training/20261021-broad-train-protocol-v1/protocol.json)
-   is frozen before training from it.
+   was frozen before training from it. The [result](../benchmarks/training/20261021-broad-train-v1)
+   fails the screen gate: the best broad-trained BF16 model is 22.9
+   probability-cost bytes worse than the prior screen-trained checkpoint.
+   No holdout or archive trial followed. This suggests testing transfer or
+   a complementary update, not longer fitting of this range by default.
 
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)

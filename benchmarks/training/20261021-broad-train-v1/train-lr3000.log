@@ -1,0 +1,6 @@
+BITLSTM: loaded /Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-weight-audit-v1/F2L.nblb (C=16 nin=89 inw=96 n1=28)
+BITLSTM: wrote /Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-broad-train-v1/lr3000-fp32.nblb (version 1, 3585 params)
+trace: v3, recorded columns 13 of 28, mask=132120703
+channel: n_tf=4 n_hid=32 (projected=1) n_lhid=32 (projected=1) zone=1
+bits=9746875 cells=16 inputs=90 params=3585 base_B=471206.4 head_B=470182.7 delta_B=-1023.7 rel=-0.217257% tailbits=9746875 tail_delta_B=-1023.7
+  zone 0 tailbits=9746875 tail_delta_B=-1023.7

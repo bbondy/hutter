@@ -91,3 +91,9 @@ are reproducible and stay local. The [frozen replay](20261021-broad-replay-v1)
 matches all 9,746,875 live integer probabilities and rejects the wrong-first
 control. A [one-pass, three-rate training protocol](20261021-broad-train-protocol-v1/protocol.json)
 is frozen before any candidate is trained.
+
+The [first broad-training pass](20261021-broad-train-v1) was rejected by
+that protocol: all three BF16 exports improve on the shipped checkpoint's
+screen probability cost, but the best is 22.9 bytes **worse** than the prior
+screen-trained checkpoint. The holdout was not opened and no archive trial
+was run. These weights remain recorded experimental outputs, not successors.

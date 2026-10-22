@@ -1,0 +1,15 @@
+{
+  "learning_rate_1e6": 3000,
+  "fp32": {
+    "bytes": 14748,
+    "sha256": "a5432a7da3daa8c0254c369f769890f09643f72dc0ff45e112371a924057c4d1"
+  },
+  "bf16": {
+    "bytes": 7386,
+    "sha256": "db07ff9144f8196bee8fc36900e4ec24cb57c5ec0292367863933dce36fcded3"
+  },
+  "export_log_sha256": "171ea589a8b6c833035dd7ed521f75f64294b25767ab134a380779f6b485ef44",
+  "screen_cost_bytes": 117138.3,
+  "screen_delta_vs_shipped_bytes": -124.80000000000291,
+  "screen_delta_vs_prior_bytes": 22.90000000000873
+}

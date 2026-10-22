@@ -228,6 +228,14 @@ frozen screen selection, one disjoint check, real archives and native Linux
 verification. This range broadens training coverage without making the old
 evaluation fixtures into new training data.
 
+The [first broader-training result](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261021-broad-train-v1)
+did not pass that selection gate. Three one-pass BF16 models trained from the
+shipped weights all beat those weights on the old screen, but the best still
+costs **22.9 more bytes** than the prior screen-trained checkpoint. The
+protocol therefore stopped before the disjoint fixture or a changed archive.
+The prior checkpoint was trained on that screen, which favors it in this
+comparison; a later transfer experiment needs an independent disjoint win.
+
 Before training on that range, a [frozen native Linux comparison](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-weight-linux-broad-v1)
 tested the *existing* one-pass checkpoint there. It reduced the 4 MB range's
 payload from 476,220 to 475,970 bytes (**250 bytes saved**); both variants

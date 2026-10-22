@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "hypothesis": "One CPU pass over a separate 9,746,875-bit training trace may produce a better compact final bit predictor than the prior screen-trained one-pass checkpoint, without fitting the screen repeatedly.",
+  "script_sha256": "be328ef6bd1c9aced25eb639f8fba83c65574394870d083094bc04661d7034d4",
+  "training_build_sha256": "e995675e23ce531422bb5b944d7057cca58bacf052094945f291a3d359ac814e",
+  "replay_report_sha256": {
+    "training": "616c751c2a31891d8342354b0ab02219c55e73bcca42808aac57eafb4aa5eea6",
+    "screen": "fdf304b24bacbecd1bea30d248bb8265eaa1b32497e48795b420cf1d698a8b8f",
+    "holdout": "c840e9bbfa93aca9e3eb2950fa53b5ddf6581c74bdd210fbe6f604571b6b2bce"
+  },
+  "prior_model_sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0",
+  "shipped_model_sha256": "c72957f48c2ec81afa3aed2baae7acd964c17f96bb0406b8195818fc708a8e7d",
+  "learning_rates_1e6": [300, 1000, 3000],
+  "selection": "Train each rate once from the original shipped BF16 checkpoint on the separate four-megabyte range. Export each to the same 7,386-byte BF16 format. Select the lowest frozen screen probability cost, breaking ties by lower rate. Require at least one byte improvement against the prior screen-trained checkpoint, then check that one selected model once on the disjoint fixture with the same one-byte gate.",
+  "promotion": "Only a model passing both frozen replay-cost gates may enter real archive trials. Reused fixtures and probability costs are not full release or prize scores. Preserve all failures and do not retune after the holdout result.",
+  "raw_trace_storage": "Approximately 940 MB of original trace/channel/probability data stay local; commit bounded reports, logs, hashes and selected compact weights only."
+}
