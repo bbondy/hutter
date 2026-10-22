@@ -236,6 +236,14 @@ protocol therefore stopped before the disjoint fixture or a changed archive.
 The prior checkpoint was trained on that screen, which favors it in this
 comparison; a later transfer experiment needs an independent disjoint win.
 
+A small [predeclared interpolation experiment](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261022-bitl-blend-v1)
+then mixed those separate-range weights with the prior screen-trained weights
+without changing model size or runtime. The selected 25% blend improves frozen
+model-bit cost by **8.6 bytes on screen** and **31.3 bytes on disjoint**
+versus the prior checkpoint. Selection happened before the disjoint replay;
+only that one blend was tested there. The [real archive protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261022-bitl-blend-archive-protocol-v1)
+is the next gate, because replay cost is not compressed archive size.
+
 Before training on that range, a [frozen native Linux comparison](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-weight-linux-broad-v1)
 tested the *existing* one-pass checkpoint there. It reduced the 4 MB range's
 payload from 476,220 to 475,970 bytes (**250 bytes saved**); both variants

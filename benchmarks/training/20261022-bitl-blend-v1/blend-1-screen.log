@@ -1,0 +1,5 @@
+BITLSTM: loaded /Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-blend-v1/blend-1-of-4.nblb (C=16 nin=89 inw=96 n1=28)
+trace: v3, recorded columns 13 of 28, mask=132120703
+channel: n_tf=4 n_hid=32 (projected=1) n_lhid=32 (projected=1) zone=1
+bits=2418045 cells=16 inputs=90 params=3585 base_B=117453.4 head_B=117106.8 delta_B=-346.6 rel=-0.295098% tailbits=2418045 tail_delta_B=-346.6
+  zone 0 tailbits=2418045 tail_delta_B=-346.6

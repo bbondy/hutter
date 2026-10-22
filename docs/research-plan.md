@@ -118,6 +118,10 @@ Priorities:
    probability-cost bytes worse than the prior screen-trained checkpoint.
    No holdout or archive trial followed. This suggests testing transfer or
    a complementary update, not longer fitting of this range by default.
+   A frozen [25% weight blend](../benchmarks/training/20261022-bitl-blend-v1)
+   of prior and broad checkpoints passes both replay-cost gates (−8.6 B
+   screen, −31.3 B disjoint versus prior). Its [real archive trial](../benchmarks/training/20261022-bitl-blend-archive-protocol-v1/protocol.json)
+   is predeclared; do not promote a probability-only win.
 
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)

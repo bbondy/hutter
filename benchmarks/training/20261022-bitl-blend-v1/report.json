@@ -1,0 +1,212 @@
+{
+  "kind": "bitl-frozen-checkpoint-blend",
+  "version": 1,
+  "date_utc": "2026-10-22T05:09:43.425891+00:00",
+  "commit": "e4dd73b7ef0e02ca346612b006068fb8ab784847",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "script_sha256": "8905efc35e48d638b18f3525328b35468759b4a50d87ff9ccfb7d5e16abd1973",
+  "protocol_sha256": "882d09a403e98b3642e5a32a6cbca82d3af3cf828a9811ccc52fce75f614aa41",
+  "build_sha256": "e995675e23ce531422bb5b944d7057cca58bacf052094945f291a3d359ac814e",
+  "converter_sha256": "b3030300e2558ef8a5acef531ed97afa13f7fadb7ba6283902eb7637a17de72a",
+  "prior": {
+    "bytes": 7386,
+    "sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0"
+  },
+  "broad": {
+    "bytes": 7386,
+    "sha256": "db07ff9144f8196bee8fc36900e4ec24cb57c5ec0292367863933dce36fcded3"
+  },
+  "traces": {
+    "screen": {
+      "bits": 2418045,
+      "verification_sha256": "fdf304b24bacbecd1bea30d248bb8265eaa1b32497e48795b420cf1d698a8b8f"
+    },
+    "holdout": {
+      "bits": 2399939,
+      "verification_sha256": "c840e9bbfa93aca9e3eb2950fa53b5ddf6581c74bdd210fbe6f604571b6b2bce"
+    }
+  },
+  "runs": [
+    {
+      "label": "prior-screen",
+      "role": "screen",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-trace-40371.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-channel-40371.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-warm-start-v1/lr3000.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_FREEZE_AT": "1"
+      },
+      "wall_seconds": 1.038955709002039,
+      "exit_code": 0,
+      "log_sha256": "967bae79e0c050d63ff41b5d55f241b2c64a6310f05305d24808df07e244c08c",
+      "bits": 2418045,
+      "base_cost_bytes": 117453.4,
+      "head_cost_bytes": 117115.4
+    },
+    {
+      "label": "blend-1-screen",
+      "role": "screen",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-trace-40371.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-channel-40371.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-blend-v1/blend-1-of-4.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_FREEZE_AT": "1"
+      },
+      "wall_seconds": 0.8557495409986586,
+      "exit_code": 0,
+      "log_sha256": "a923816e604cdeff57ce5afbd9cca77ae0d2c44a38f0921a96bbda199bff602d",
+      "bits": 2418045,
+      "base_cost_bytes": 117453.4,
+      "head_cost_bytes": 117106.8
+    },
+    {
+      "label": "blend-2-screen",
+      "role": "screen",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-trace-40371.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-channel-40371.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-blend-v1/blend-2-of-4.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_FREEZE_AT": "1"
+      },
+      "wall_seconds": 0.8518880409974372,
+      "exit_code": 0,
+      "log_sha256": "33762646a65433c5d8d4f2eb2b89951daf2b39a93c1785c7a33b6d05a8098c0f",
+      "bits": 2418045,
+      "base_cost_bytes": 117453.4,
+      "head_cost_bytes": 117111.5
+    },
+    {
+      "label": "blend-3-screen",
+      "role": "screen",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-trace-40371.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-screen-bit-trace-v1/trial-0-0/bitl-channel-40371.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-blend-v1/blend-3-of-4.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_FREEZE_AT": "1"
+      },
+      "wall_seconds": 0.8367419999995036,
+      "exit_code": 0,
+      "log_sha256": "fc6add207554f05138cb030628c5808c1a02b6a89c72b4b3fd0aeee118df1d4a",
+      "bits": 2418045,
+      "base_cost_bytes": 117453.4,
+      "head_cost_bytes": 117121.3
+    },
+    {
+      "label": "prior-holdout",
+      "role": "holdout",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-holdout-bit-trace-v1/trial-0-0/bitl-trace-40370.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-holdout-bit-trace-v1/trial-0-0/bitl-channel-40370.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-warm-start-v1/lr3000.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_FREEZE_AT": "1"
+      },
+      "wall_seconds": 0.8561138750010286,
+      "exit_code": 0,
+      "log_sha256": "7189e65876ae9bc88f2d3728da501e1ad8952bfd708559251638c1ebd1c4c888",
+      "bits": 2399939,
+      "base_cost_bytes": 115525.6,
+      "head_cost_bytes": 115212.0
+    },
+    {
+      "label": "selected-holdout",
+      "role": "holdout",
+      "command": [
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-training-runtime-math-v1/replay",
+        "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-holdout-bit-trace-v1/trial-0-0/bitl-trace-40370.bin",
+        "0",
+        "0"
+      ],
+      "environment": {
+        "REPLAY_CHANNEL": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/model-holdout-bit-trace-v1/trial-0-0/bitl-channel-40370.bin",
+        "REPLAY_LOAD": "/Users/bbondy/projects/bbondy/hutter-fixture-phases/build/bitl-blend-v1/blend-1-of-4.nblb",
+        "REPLAY_SEED": "1112363057",
+        "REPLAY_FREEZE_AT": "1"
+      },
+      "wall_seconds": 0.8601182499987772,
+      "exit_code": 0,
+      "log_sha256": "ee468a602cac3c5ac46dbd89061bac5bfe528fc9bccccf7190d34a05ce4863b6",
+      "bits": 2399939,
+      "base_cost_bytes": 115525.6,
+      "head_cost_bytes": 115180.7
+    }
+  ],
+  "candidates": [
+    {
+      "numerator": 1,
+      "denominator": 4,
+      "bf16": {
+        "bytes": 7386,
+        "sha256": "4369bf1abd259a42b4463f519d7613bd9c78c138e72c8c7d03c1f6170af2c0f4"
+      },
+      "screen_cost_bytes": 117106.8,
+      "screen_delta_vs_prior_bytes": -8.599999999991269
+    },
+    {
+      "numerator": 2,
+      "denominator": 4,
+      "bf16": {
+        "bytes": 7386,
+        "sha256": "a93c40f3ca8a3d601d6100ffd99b7dc9a18ebb0aa93db526b2d50d466124060c"
+      },
+      "screen_cost_bytes": 117111.5,
+      "screen_delta_vs_prior_bytes": -3.8999999999941792
+    },
+    {
+      "numerator": 3,
+      "denominator": 4,
+      "bf16": {
+        "bytes": 7386,
+        "sha256": "ea52224c3034cfa31aeb63404b5f1c3e02bcc737a2206cac413c4c9eb35f7a7d"
+      },
+      "screen_cost_bytes": 117121.3,
+      "screen_delta_vs_prior_bytes": 5.900000000008731
+    }
+  ],
+  "passed": true,
+  "scope": "Three predeclared BF16 interpolations; frozen screen selects once, one disjoint replay if the screen gate passes. Probability costs only, no archive or prize bytes.",
+  "selected_before_holdout": {
+    "numerator": 1,
+    "denominator": 4,
+    "bf16": {
+      "bytes": 7386,
+      "sha256": "4369bf1abd259a42b4463f519d7613bd9c78c138e72c8c7d03c1f6170af2c0f4"
+    },
+    "screen_cost_bytes": 117106.8,
+    "screen_delta_vs_prior_bytes": -8.599999999991269
+  },
+  "selection_sha256": "0cb8507612d65290716bf191d7d486531500159787ec0bd7ae18922eddfe61d6",
+  "screen_gate_passed": true,
+  "holdout_delta_vs_prior_bytes": -31.30000000000291,
+  "holdout_gate_passed": true,
+  "eligible_for_archive_trial": true
+}

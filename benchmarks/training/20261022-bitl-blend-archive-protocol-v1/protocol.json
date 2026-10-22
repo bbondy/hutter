@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "hypothesis": "The frozen 25% separate-range BF16 blend that improved screen and disjoint replay costs will also reduce actual archives relative to the prior one-pass checkpoint without adding model bytes or changing upstream contexts.",
+  "fixtures": {
+    "screen": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/screen.json",
+      "manifest_sha256": "fd9b852429f18cecc15ecefa0eb0378d919ac9be348fc6c24d8608fc35439731",
+      "input_sha256": "63c4b9e2926402460bc36179622563abd0ac504de69fe56a9cbd832a0e17618f"
+    },
+    "holdout": {
+      "manifest_path": "benchmarks/article-order/20261017-projection-protocol-v2/holdout.json",
+      "manifest_sha256": "880ad288323503c874b18d8d3aadaebde268f6960f546352d0efb0d08e84d47b",
+      "input_sha256": "1b88fa377f2bf0102e07c3548b5e13cc53673e7e4c6df6f480272de36610d4c8"
+    }
+  },
+  "runner_control": {
+    "bench_function_ast_sha256": "9315cb470245bea8fb7b9a68afbc73ff8fa5f9afd9a1d0fdd2588c0dab482843",
+    "changes": "Build-only selected BF16 array embedding; shared roundtrip/context benchmark procedure unchanged."
+  },
+  "input_variant": "upstream",
+  "variants": ["baseline", "bit-weight-warm-start-lr3000-v1", "bit-blend-one-quarter-v1"],
+  "bit_weight_recipe_sha256": "91f2aa17e6ec986bb73edb9446d5487e964bd91161dad996b23dfe47ba25d470",
+  "bit_blend_recipe_sha256": "4a3cbd11c5e7c76025ed96a0aa32478d2b5bad28cfd6255ced254458b041fe64",
+  "blend_report_sha256": "88f2085fb02dc461498214635b6788c1ba5cc0b008bc9e5c8be228ac2fee4622",
+  "selection_sha256": "0cb8507612d65290716bf191d7d486531500159787ec0bd7ae18922eddfe61d6",
+  "model_sha256": "4369bf1abd259a42b4463f519d7613bd9c78c138e72c8c7d03c1f6170af2c0f4",
+  "model_bytes": 7386,
+  "rule": "Replace only src/bit_head_weights.h embedded BF16 array and hash; keep model code, online-learning threshold, dictionary, transformer, article order, contexts, initialization and compile flags unchanged. Prior one-pass checkpoint and untouched baseline are paired controls.",
+  "promotion_gate": "Require exact prepared/original XML restoration and encoder/decoder context identity for all variants; require the blend payload to be smaller than the prior one-pass checkpoint on both screen and disjoint Mac fixtures. Then confirm on native Linux and account for complete release-package bytes before considering full enwik9.",
+  "prospective_replay_delta_vs_prior_bytes": {"screen": -8.6, "holdout": -31.3},
+  "scope": "Fixed candidate selected before archive trials. Existing fixtures are reused; development payloads and contaminated Mac wall times are not prize scores."
+}

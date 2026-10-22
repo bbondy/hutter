@@ -16,6 +16,7 @@ import cmix_activity_support as activity
 import cmix_bit_trace_support as bit_trace
 import cmix_bit_weight_support as bit_weight
 import cmix_metadata_support as metadata
+import cmix_bit_blend_support as bit_blend
 
 
 class ModelComparisonTests(unittest.TestCase):
@@ -89,6 +90,9 @@ class ModelComparisonTests(unittest.TestCase):
 
     def test_bit_weights_require_exact_frozen_array_transformation(self):
         self.check_source_transformation(bit_weight, "bit_weight_variant", "bit-weight-" + bit_weight.VARIANT)
+
+    def test_bit_blend_requires_exact_frozen_array_transformation(self):
+        self.check_source_transformation(bit_blend, "bit_blend_variant", "bit-blend-" + bit_blend.VARIANT)
 
     def test_metadata_requires_exact_multi_file_patch(self):
         with tempfile.TemporaryDirectory() as directory:

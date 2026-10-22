@@ -1,0 +1,10 @@
+{
+  "numerator": 1,
+  "denominator": 4,
+  "bf16": {
+    "bytes": 7386,
+    "sha256": "4369bf1abd259a42b4463f519d7613bd9c78c138e72c8c7d03c1f6170af2c0f4"
+  },
+  "screen_cost_bytes": 117106.8,
+  "screen_delta_vs_prior_bytes": -8.599999999991269
+}

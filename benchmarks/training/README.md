@@ -97,3 +97,10 @@ that protocol: all three BF16 exports improve on the shipped checkpoint's
 screen probability cost, but the best is 22.9 bytes **worse** than the prior
 screen-trained checkpoint. The holdout was not opened and no archive trial
 was run. These weights remain recorded experimental outputs, not successors.
+
+The [frozen 25% blend](20261022-bitl-blend-v1) of the prior screen-trained
+and broad-trained checkpoints improves frozen probability cost by 8.6 bytes
+on screen and 31.3 bytes on disjoint against the prior model. Only one
+preselected blend was checked on disjoint. Its [archive protocol](20261022-bitl-blend-archive-protocol-v1/protocol.json)
+freezes that 7,386-byte model before any compression trial; replay costs do
+not themselves establish smaller archives.
