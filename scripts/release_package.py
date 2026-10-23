@@ -10,6 +10,7 @@ import subprocess
 
 from benchmark import capture, measured
 from cmix_bit_weight_support import VARIANT as BIT_WEIGHT_VARIANT, apply as apply_bit_weight
+from cmix_metadata_release_support import VARIANT as METADATA_E1_VARIANT, CHANGED as METADATA_CHANGED, ADDED as METADATA_ADDED, apply as apply_metadata_e1
 from cmix_weight_support import WEIGHTS, apply_container
 from competitive import ENGINE, MANIFEST, differences, inventory, problems
 from make_samples import digest
@@ -23,10 +24,11 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--weight-container", type=Path)
     parser.add_argument("--bit-weight-variant", choices=(BIT_WEIGHT_VARIANT,))
+    parser.add_argument("--metadata-e1-variant", choices=(METADATA_E1_VARIANT,))
     parser.add_argument("--timeout", type=float, default=7200)
     args = parser.parse_args()
-    if args.weight_container and args.bit_weight_variant:
-        parser.error("change only one model asset at a time")
+    if sum(bool(x) for x in (args.weight_container, args.bit_weight_variant, args.metadata_e1_variant)) > 1:
+        parser.error("change only one model or metadata component at a time")
     errors = problems()
     if errors:
         raise ValueError("; ".join(errors))
@@ -41,10 +43,12 @@ def main():
     shutil.copytree(ENGINE, source)
     binding = apply_container(source, args.weight_container) if args.weight_container else None
     bit_binding = apply_bit_weight(source, args.bit_weight_variant) if args.bit_weight_variant else None
+    metadata_binding = apply_metadata_e1(source, args.metadata_e1_variant) if args.metadata_e1_variant else None
     files = inventory(source)
     delta = differences(upstream["files"], files)
-    expected = ["src/transformer.h", WEIGHTS] if binding else (["src/bit_head_weights.h"] if bit_binding else [])
-    if delta != {"changed": sorted(expected), "missing": [], "added": []}:
+    expected = ["src/transformer.h", WEIGHTS] if binding else (["src/bit_head_weights.h"] if bit_binding else list(METADATA_CHANGED) if metadata_binding else [])
+    added = list(METADATA_ADDED) if metadata_binding else []
+    if delta != {"changed": sorted(expected), "missing": [], "added": sorted(added)}:
         raise ValueError("release copy has uncontrolled changes")
     # A hosted image can contain additional GCC versions. Clang selects their
     # headers even when the clang package itself matches the reference version.
@@ -57,6 +61,7 @@ def main():
               "structure_parser_sha256": digest(ROOT / "scripts/package_structure.py"),
               "upstream_commit": upstream["commit"], "source_files": files,
               "source_changes": delta, "weight_binding": binding, "bit_weight_binding": bit_binding,
+              "metadata_binding": metadata_binding,
               "platform": platform.platform(), "cpu": capture("lscpu"),
               "compiler": capture("clang++-18", "--version"), "linker": capture("ld.lld-18", "--version"),
               "compiler_driver": driver,

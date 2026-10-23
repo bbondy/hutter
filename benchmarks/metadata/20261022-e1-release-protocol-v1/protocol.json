@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "hypothesis": "The E1-only metadata forecast saves payload bytes on two Mac fixtures but adds code. Measure the exact Linux packed compressor and decoder-prefix cost before treating E1 as a net package improvement.",
+  "variant": "page-id-revid-e1",
+  "origin_commit": "e923faec085a93d24bf519986ee2881497e97934",
+  "recipe_sha256": "1d884cb27e09226652e18f42b5f85d9eb929cb1ef3a4a0e317df19abb76ea033",
+  "patch_sha256": "7c15bef4d71ce76cbb2bef59d6f95ca595f02fe39b7049a74115713645377265",
+  "baseline_comp9_sha256": "8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7",
+  "source_rule": "Copy the pinned unmodified cmix-neif release tree; apply only the three-header E1 patch and add b1_interp.h plus neif_levers.h with NEIF_E3B=0. Keep all other sources, transformer weights, dictionary, hint, article order, build.sh and packer unchanged.",
+  "toolchain": "Native Ubuntu x86-64, Clang 18 with isolated GCC 13 headers, same host for baseline and candidate; baseline must reproduce published comp9 SHA-256.",
+  "comparison": "Measure complete comp9 compressor, packed program, independent decoder prefix and required external blocks. Require identical weights, hints and order. Preserve outcome even if compressed code cost exceeds the small fixture payload wins.",
+  "acceptance": [
+    "Both original release packer self-check suites pass",
+    "Unchanged baseline comp9 matches published hash",
+    "Candidate source is exactly the frozen E1 patch, with E3b disabled",
+    "Save complete component deltas, hashes, build logs and binary artifacts regardless of sign"
+  ],
+  "limitations": [
+    "Package components plus fixture payload do not give a full enwik9 score",
+    "No full-corpus payload, runtime, memory or independent self-extracting decode is measured",
+    "The later Ex-Girlfriend entry's published 20,782-byte E1 screen gain is on a different larger range and implementation; do not project it from our fixtures"
+  ]
+}
