@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "run_id": 40009128933,
+  "head_sha": "b53e2d2ad7fa2f8b2c8e5afea72a93ac220ee5e0",
+  "checks": {
+    "baseline": {
+      "passed": true,
+      "comp9_sha256": "8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7",
+      "decoder_prefix_sha256": "7a4020aeecff28623891e038e3c262c3a2beed3ce93afd06008db6fbf8789631",
+      "report_sha256": "4d37a27959b42f406d2573c67a2b0481530eeac2e0ad2392afad69262743f126",
+      "matches_report": true
+    },
+    "candidate": {
+      "passed": true,
+      "comp9_sha256": "868497a85ad0196ad1efb4baf056afec331a446394fcd98dd2178c515955c7b7",
+      "decoder_prefix_sha256": "9b511bf82a2bc7d107661a93f595576316313e33c66f3aa49429cf13b384e310",
+      "report_sha256": "c1c2bd7052d6041ea3eb8adc286d4fa5242a308d8a440823a47f3cd9d62dce7f",
+      "matches_report": true
+    },
+    "comparison_identical": true
+  },
+  "retained_sha256": {
+    "baseline/build.log": "d0f5304f18f652a346c0585f28232909bf24b4e7ca562ef4cf538931643f1733",
+    "baseline/report.json": "4d37a27959b42f406d2573c67a2b0481530eeac2e0ad2392afad69262743f126",
+    "baseline/stderr.log": "baf110c144fe2d98e3d8da757c7ad74c52bada287bdba7cfab9fa1eed0a27587",
+    "candidate/build.log": "09c5bf4b545aac107c695f47df38d29e2160312bfc26f272a35a8985179fe5fb",
+    "candidate/report.json": "c1c2bd7052d6041ea3eb8adc286d4fa5242a308d8a440823a47f3cd9d62dce7f",
+    "candidate/stderr.log": "619f202aa32d89adddc913259ca4a45a8fd87e943daad5c778ad1adeb3d24e31",
+    "comparison.json": "22a493ef398a6f8744af19977c24972fadf18cadb0e00b6335fcb67debea9512",
+    "compiler-selection.log": "ebcca823475f8fef5094e548a5dc7662221dcf2612e2d652b090582ab2ce7b93"
+  }
+}

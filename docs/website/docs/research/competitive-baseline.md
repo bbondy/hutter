@@ -42,8 +42,11 @@ The [isolated E1 trial](https://github.com/bbondy/hutter/tree/main/benchmarks/me
 on native Mac fixtures saves **13 and 16 payload bytes** respectively; both
 restore the original XML and keep baseline-identical context counters. Its
 development executable grows 4,112 bytes before release packing. The two
-payload gains do not establish a smaller scored package; compressed code
-cost and full-stream behavior remain to be measured.
+payload gains do not establish a smaller scored package. The [native Linux
+release check](https://github.com/bbondy/hutter/tree/main/benchmarks/metadata/20261023-e1-release-v1)
+measures **2,094 additional bytes** across the packed compressor and
+independent decoder prefix. Full-stream payload behavior remains unknown;
+these small fixtures cannot pay for the measured package increase.
 The [focused issue](https://github.com/bbondy/hutter/issues/18) tracks both
 E1 and the separate timestamp forecast.
 

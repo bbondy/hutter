@@ -11,7 +11,9 @@ XML and have baseline-identical context counts:
 | [Screen](20261019-e1-screen-v1) | 119,065 → 119,052 B (−13 B) | +4,112 B |
 | [Disjoint](20261021-e1-holdout-v1) | 117,438 → 117,422 B (−16 B) | +4,112 B |
 
-The gains are payload-only and small; the compressed release-code cost and
-full-stream gain have not been measured. Treat E1 as an open package-level
-hypothesis, not a prize improvement. [Issue #18](https://github.com/bbondy/hutter/issues/18)
-tracks release accounting and the independent timestamp test.
+The gains are small. The [native Linux release comparison](20261023-e1-release-v1)
+finds **+2,094 bytes** of measured components (packed compressor plus
+independent decoder prefix). The small fixture savings cannot establish a
+net scored win against that cost. Treat E1 as an open full-stream hypothesis,
+not a prize improvement. [Issue #18](https://github.com/bbondy/hutter/issues/18)
+tracks the separate timestamp forecast and eventual full-stream accounting.

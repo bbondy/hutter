@@ -1,0 +1,58 @@
+{
+  "kind": "e1-metadata-release-component-comparison",
+  "version": 1,
+  "protocol_sha256": "0d98f14c9d3a80e541fd9187232ac9ee5fd4fea268c4d01a7168fe41a4836699",
+  "baseline_report_sha256": "4d37a27959b42f406d2573c67a2b0481530eeac2e0ad2392afad69262743f126",
+  "candidate_report_sha256": "c1c2bd7052d6041ea3eb8adc286d4fa5242a308d8a440823a47f3cd9d62dce7f",
+  "baseline": {
+    "compressor_bytes": 4000689,
+    "compressor_sha256": "8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7",
+    "packed_program_bytes": 182722,
+    "decoder_prefix_bytes": 165545,
+    "decoder_prefix_sha256": "7a4020aeecff28623891e038e3c262c3a2beed3ce93afd06008db6fbf8789631",
+    "blocks": {
+      "hints": {
+        "bytes": 57504,
+        "sha256": "1aac80c7810acf6a808d11000b25438f187f724892587b458af4f237b735bda1"
+      },
+      "order": {
+        "bytes": 43780,
+        "sha256": "f4fd097c6d28cf2bce0c350fdbd30195e29b4e3d84ba663db44bc3cd9af7d7a2"
+      },
+      "weights": {
+        "bytes": 3716667,
+        "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+      }
+    },
+    "component_bytes_excluding_dictionary_payload_footer_args": 7882901
+  },
+  "candidate": {
+    "compressor_bytes": 4001789,
+    "compressor_sha256": "868497a85ad0196ad1efb4baf056afec331a446394fcd98dd2178c515955c7b7",
+    "packed_program_bytes": 183822,
+    "decoder_prefix_bytes": 166539,
+    "decoder_prefix_sha256": "9b511bf82a2bc7d107661a93f595576316313e33c66f3aa49429cf13b384e310",
+    "blocks": {
+      "hints": {
+        "bytes": 57504,
+        "sha256": "1aac80c7810acf6a808d11000b25438f187f724892587b458af4f237b735bda1"
+      },
+      "order": {
+        "bytes": 43780,
+        "sha256": "f4fd097c6d28cf2bce0c350fdbd30195e29b4e3d84ba663db44bc3cd9af7d7a2"
+      },
+      "weights": {
+        "bytes": 3716667,
+        "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+      }
+    },
+    "component_bytes_excluding_dictionary_payload_footer_args": 7884995
+  },
+  "deltas": {
+    "compressor_bytes": 1100,
+    "packed_program_bytes": 1100,
+    "decoder_prefix_bytes": 994,
+    "component_bytes_excluding_dictionary_payload_footer_args": 2094
+  },
+  "scope": "Exact Linux release executable, decoder prefix and external blocks; payload, dictionary, footer and arguments excluded. This is package accounting, not a full prize score."
+}
