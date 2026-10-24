@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "hypothesis": "The selected 7,386-byte BITLSTM blend saves real fixture payload bytes on Mac and Linux without changing development-binary size; the packed Linux compressor and decoder may still change. Measure the complete release component delta against both prior and untouched controls.",
+  "prior_variant": "warm-start-lr3000-v1",
+  "blend_variant": "one-quarter-v1",
+  "prior_model_sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0",
+  "blend_model_sha256": "4369bf1abd259a42b4463f519d7613bd9c78c138e72c8c7d03c1f6170af2c0f4",
+  "prior_recipe_sha256": "91f2aa17e6ec986bb73edb9446d5487e964bd91161dad996b23dfe47ba25d470",
+  "blend_recipe_sha256": "4a3cbd11c5e7c76025ed96a0aa32478d2b5bad28cfd6255ced254458b041fe64",
+  "baseline_comp9_sha256": "8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7",
+  "prior_comp9_sha256": "5851ec70fb399dfda9d33082ccc1d6e52a0260fea0743609b7122e1b17c45a89",
+  "source_rule": "Copy pinned original Linux release source. Change only src/bit_head_weights.h embedded BF16 array and hash in each candidate, with identical 7,386-byte geometry, model code, online-learning threshold, transformer, dictionary, order, packer and build flags.",
+  "toolchain": "Build all three packages serially on native Ubuntu x86-64 using Clang 18 and isolated GCC 13 headers. Baseline and prior packages must reproduce previously saved exact SHA-256 values.",
+  "comparison": "Independently inspect saved comp9 and decoder-prefix bytes, compare complete release components and external blocks, and retain all positive or negative deltas. The payload gains do not authorize extrapolation to enwik9.",
+  "acceptance": [
+    "All three original release packer self-check suites pass",
+    "Untouched and prior release package hashes reproduce their pinned values",
+    "Only the two declared BF16 source bindings differ from baseline, with unchanged non-code blocks",
+    "Save complete component sizes, hashes, binary artifacts and logs even if the blend loses at package level"
+  ],
+  "limitations": [
+    "Complete package components plus fixture payloads are not the full prize score",
+    "No full enwik9 payload, independent self-extracting decode or official resource adjudication is measured",
+    "The small fixtures are reused evaluation ranges, not unseen final validation"
+  ]
+}

@@ -1,0 +1,72 @@
+name: Native Linux blended bit-model release accounting
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-linux-bit-blend-release
+  cancel-in-progress: false
+
+jobs:
+  packages:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install release toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y clang-18 lld-18 llvm-18 libclang-rt-18-dev make time gawk gcc binutils
+      - name: Select pinned GCC 13 headers
+        run: |
+          sudo apt-get remove -y gcc-14 g++-14 gcc-14-x86-64-linux-gnu g++-14-x86-64-linux-gnu libgcc-14-dev libstdc++-14-dev
+          mkdir -p build
+          clang++-18 -v -E -x c++ /dev/null > /dev/null 2> build/compiler-selection.log
+          python3 - <<'PY'
+          from pathlib import Path
+          lines = Path('build/compiler-selection.log').read_text().splitlines()
+          selected = [line.split(': ', 1)[1] for line in lines if line.startswith('Selected GCC installation: ')]
+          if len(selected) != 1 or Path(selected[0]).resolve() != Path('/usr/lib/gcc/x86_64-linux-gnu/13').resolve():
+              raise SystemExit('Clang did not select the reference GCC 13 installation')
+          print('Selected GCC 13:', selected[0])
+          PY
+      - name: Verify pinned sources and research scripts
+        run: |
+          python3 scripts/competitive.py verify
+          python3 -m unittest discover -s scripts -p 'test_*.py'
+      - name: Reproduce untouched published release package
+        run: python3 scripts/release_package.py --output build/blend-release-baseline --timeout 6600
+      - name: Reproduce prior one-pass release package
+        run: python3 scripts/release_package.py --output build/blend-release-prior --bit-weight-variant warm-start-lr3000-v1 --timeout 6600
+      - name: Build selected blended release package
+        run: python3 scripts/release_package.py --output build/blend-release-candidate --bit-blend-variant one-quarter-v1 --timeout 6600
+      - name: Compare complete release components
+        run: python3 scripts/bit_blend_package_compare.py --baseline build/blend-release-baseline/report.json --prior build/blend-release-prior/report.json --blend build/blend-release-candidate/report.json --protocol benchmarks/training/20261024-bit-blend-release-protocol-v1/protocol.json --output build/blend-release-comparison.json
+      - name: Preserve packages and failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-bit-blend-release-${{ github.run_id }}
+          path: |
+            build/blend-release-baseline/report.json
+            build/blend-release-baseline/build.log
+            build/blend-release-baseline/stderr.log
+            build/blend-release-baseline/comp9
+            build/blend-release-baseline/decoder-prefix
+            build/blend-release-prior/report.json
+            build/blend-release-prior/build.log
+            build/blend-release-prior/stderr.log
+            build/blend-release-prior/comp9
+            build/blend-release-prior/decoder-prefix
+            build/blend-release-candidate/report.json
+            build/blend-release-candidate/build.log
+            build/blend-release-candidate/stderr.log
+            build/blend-release-candidate/comp9
+            build/blend-release-candidate/decoder-prefix
+            build/blend-release-comparison.json
+            build/compiler-selection.log
+          if-no-files-found: warn
+          retention-days: 7
