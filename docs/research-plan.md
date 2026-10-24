@@ -23,8 +23,10 @@ with no intervening award, the next 1% prize threshold would be at most
 94,954,910 bytes. Our small fixture gains do not demonstrate that margin.
 An [isolated E1 comparison](../benchmarks/metadata) restores exactly and
 saves 13 and 16 payload bytes on the screen and disjoint Mac fixtures, while
-its unpacked development executable grows 4,112 bytes. Release accounting
-is needed before treating that as a useful prize candidate;
+its unpacked development executable grows 4,112 bytes. Native Linux
+[release accounting](../benchmarks/metadata/20261023-e1-release-v1) adds
+2,094 bytes of measured components. A full-stream payload gain would need
+to exceed that cost before treating E1 as a useful prize candidate;
 [issue #18](https://github.com/bbondy/hutter/issues/18) tracks the focused
 metadata work.
 
@@ -121,7 +123,10 @@ Priorities:
    A frozen [25% weight blend](../benchmarks/training/20261022-bitl-blend-v1)
    of prior and broad checkpoints passes both replay-cost gates (−8.6 B
    screen, −31.3 B disjoint versus prior). Its [real archive trial](../benchmarks/training/20261022-bitl-blend-archive-protocol-v1/protocol.json)
-   is predeclared; do not promote a probability-only win.
+   passes: versus prior it saves [9/32 bytes on Mac](../benchmarks/training/20261023-bit-blend-mac-screen-v1)
+   and [11/30 bytes on Linux](../benchmarks/training/20261023-bit-blend-linux-screen-v1)
+   across screen/disjoint, with exact restoration and matching contexts.
+   Complete package accounting and full enwik9 remain open.
 
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)

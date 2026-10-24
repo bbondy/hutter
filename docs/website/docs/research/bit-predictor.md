@@ -244,6 +244,13 @@ versus the prior checkpoint. Selection happened before the disjoint replay;
 only that one blend was tested there. The [real archive protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261022-bitl-blend-archive-protocol-v1)
 is the next gate, because replay cost is not compressed archive size.
 
+The frozen model then passed actual [native Mac screen/disjoint](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261023-bit-blend-mac-screen-v1)
+and [native Linux screen/disjoint](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261023-bit-blend-linux-screen-v1)
+archive trials. Relative to the prior checkpoint, it saves **9/32 bytes on
+Mac** and **11/30 bytes on Linux**. All variants restore exact XML and keep
+identical context counts; development executable sizes are unchanged.
+Packed release components and full enwik9 remain to be measured.
+
 Before training on that range, a [frozen native Linux comparison](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-weight-linux-broad-v1)
 tested the *existing* one-pass checkpoint there. It reduced the 4 MB range's
 payload from 476,220 to 475,970 bytes (**250 bytes saved**); both variants

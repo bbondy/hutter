@@ -104,3 +104,10 @@ on screen and 31.3 bytes on disjoint against the prior model. Only one
 preselected blend was checked on disjoint. Its [archive protocol](20261022-bitl-blend-archive-protocol-v1/protocol.json)
 freezes that 7,386-byte model before any compression trial; replay costs do
 not themselves establish smaller archives.
+
+The blend now passes real-archive comparisons on both [native Mac
+fixtures](20261023-bit-blend-mac-screen-v1) and [native Linux
+fixtures](20261023-bit-blend-linux-screen-v1). Relative to the prior
+one-pass checkpoint, it saves 9/32 bytes on Mac screen/disjoint and 11/30
+bytes on Linux screen/disjoint. Every variant restores the original XML and
+keeps identical context counts. Complete release accounting remains open.
