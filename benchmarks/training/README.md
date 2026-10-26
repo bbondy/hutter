@@ -110,4 +110,7 @@ fixtures](20261023-bit-blend-mac-screen-v1) and [native Linux
 fixtures](20261023-bit-blend-linux-screen-v1). Relative to the prior
 one-pass checkpoint, it saves 9/32 bytes on Mac screen/disjoint and 11/30
 bytes on Linux screen/disjoint. Every variant restores the original XML and
-keeps identical context counts. Complete release accounting remains open.
+keeps identical context counts. The [native Linux packed-release comparison](20261025-bit-blend-release-v1)
+reproduces the published baseline and prior packages exactly; the blend saves
+17 compressor and 20 decoder-prefix bytes versus prior, or 37 measured
+component bytes. Full enwik9 compression and submission scoring remain open.

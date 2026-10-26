@@ -249,7 +249,16 @@ and [native Linux screen/disjoint](https://github.com/bbondy/hutter/tree/main/be
 archive trials. Relative to the prior checkpoint, it saves **9/32 bytes on
 Mac** and **11/30 bytes on Linux**. All variants restore exact XML and keep
 identical context counts; development executable sizes are unchanged.
-Packed release components and full enwik9 remain to be measured.
+The [native Linux packed-release comparison](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261025-bit-blend-release-v1)
+then reproduced the exact published baseline and prior releases. The selected
+blend saves another **17 compressor bytes and 20 decoder-prefix bytes** versus
+prior, or **37 measured component bytes** including the unchanged duplicate
+transformer-weight block. Its `comp9` SHA-256 is
+`d448abd6ceb1c143aacc1793d119b01700e863fa86bcc081531790179eb96f39`.
+All four upstream packer checks passed for each build, and external weights, hints and order
+blocks are byte-identical. The source, model, package and log hashes are saved
+with the comparison. This is still a small fixture and release-component gain;
+full enwik9 payload, self-extracting decode and official scoring remain open.
 
 Before training on that range, a [frozen native Linux comparison](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-weight-linux-broad-v1)
 tested the *existing* one-pass checkpoint there. It reduced the 4 MB range's

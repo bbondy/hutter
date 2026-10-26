@@ -1,0 +1,2316 @@
+{
+  "kind": "native-linux-release-package",
+  "version": 1,
+  "date_utc": "2026-10-25T11:12:22.880776+00:00",
+  "commit": "c10edcf299e0bd60de203cf4e0af3c8322a2d22d",
+  "script_sha256": "8e27d7daf9f605a50bf07494d3202cc6a3b9272f58091b7d384228c2edfcf51d",
+  "structure_parser_sha256": "520f018c69d1cf2e31617c90eac74cfa2e8829e3337b67f8421752e4c9dae05f",
+  "upstream_commit": "1c9ea5ed57ec9718bcb681d20b79e81a60b7a728",
+  "source_files": {
+    "CHANGES.md": {
+      "sha256": "5b0b0b7465e5257ee869ea37defc332ef7662437e746a8463f43b3237a16cb75",
+      "executable": false
+    },
+    "LICENSE": {
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "executable": false
+    },
+    "NOTICE.md": {
+      "sha256": "72014da0ffbe1580ff72a8f660c150461bf05ed6774862a7b99ca223d8f7a97c",
+      "executable": false
+    },
+    "README.md": {
+      "sha256": "db40b20aad8048411ea8cbfee67c36febd5c8ec45b60e1560a745f5bd0a7197d",
+      "executable": false
+    },
+    "build.sh": {
+      "sha256": "83a6d4c92519e40c2e2e7ff77adb992abbb3ea5ad78e278fab862db19edcd245",
+      "executable": true
+    },
+    "build_and_construct_comp.sh": {
+      "sha256": "f44f2e2b3981a8fd225387fd8338f0468424b2d85dbce5254b2ba712a8ea1e67",
+      "executable": true
+    },
+    "comp9.args": {
+      "sha256": "67d0e2c61ec607bee22c7cc9f56368d6f57afba095e08f7e98bd57e2896f57b0",
+      "executable": false
+    },
+    "dictionary/english.dic": {
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535",
+      "executable": false
+    },
+    "dictionary/english.hints": {
+      "sha256": "7c16cf40569ad5907585ae79fff48ffdf4b534c9286a3e9f9d54f29f2ac4613c",
+      "executable": false
+    },
+    "doc/context_rows.svg": {
+      "sha256": "8f656410e8fe87f7e6a789e0b8bb1ea746f9b328ed90df0024182b35e50de32a",
+      "executable": false
+    },
+    "doc/metadata_block.svg": {
+      "sha256": "1a29dcd6798feb90c3f31fedc9c4ac9e82f3ce25b152275ff12791bb2cb40fd0",
+      "executable": false
+    },
+    "doc/prompt_rows.svg": {
+      "sha256": "3df4e336e068c39fd82be8afe9f470dc0473860c1ae8774171e7fc6bf0b7a7c9",
+      "executable": false
+    },
+    "doc/stream_layout.svg": {
+      "sha256": "f23174c9013edf43cceebbc41ea26d26e758d9bb62b301bb6bc6d35df663ec5d",
+      "executable": false
+    },
+    "doc/stream_rate.svg": {
+      "sha256": "b6e8342d4b2fbb8ed769995e8d419f7d5fa4cdfd56538a28022901e7597ce717",
+      "executable": false
+    },
+    "doc/stream_rate.tsv": {
+      "sha256": "88d93eca531acd545b276bbd2af193d2bdae9634891162a35f02ff7f3c42b1f0",
+      "executable": false
+    },
+    "doc/timestamp_forecast.svg": {
+      "sha256": "5d392a53835aac62e4cc5d76847bf81ccb21fba60f0928d039a6626bb13f2b38",
+      "executable": false
+    },
+    "encoder_split.lds": {
+      "sha256": "ae3ba99f133b491cfb47a3c90e930e4a974a035e8d0ba4f2c09036ccd747f10b",
+      "executable": false
+    },
+    "environment.txt": {
+      "sha256": "7f749fa7a7936264ecfd4027e7654cfceba7648cc3634d380a85bae6824add28",
+      "executable": false
+    },
+    "install.sh": {
+      "sha256": "70b4d3a4c9b74fa82518813e2cfd1b45ae69d683c21dabb2458fb0a06e01ec0f",
+      "executable": true
+    },
+    "makefile": {
+      "sha256": "a37fa37774b67a8a8de5e8d0101c04d8afab440fef71ef216a9cb35e27080229",
+      "executable": false
+    },
+    "pgo_data/default.profdata": {
+      "sha256": "cc5733f77664c3214773846ce1d3fc7808953ad355cfde984a3781c697931ac6",
+      "executable": false
+    },
+    "prof_input/input": {
+      "sha256": "890b3e1210a24a249768d86bd5a79a1775ce19b2d56984ce3069ee26359ef2e6",
+      "executable": false
+    },
+    "prof_input/input2": {
+      "sha256": "7dc711344aaa6e9b8fab85cd4b5b5e97c3be4d98c29b2c9f479ab774a3c7cbc2",
+      "executable": false
+    },
+    "runtime_exports.map": {
+      "sha256": "4380c834c5b56cbe4e00487038a319b662c256302b2d0fe181db642c9dbbc8e6",
+      "executable": false
+    },
+    "src/adaptive_depth.cpp": {
+      "sha256": "b617e18d4af28cee2bf28ce6b0df32e1878a5cd68f59d5fa00b68bbd8bd03713",
+      "executable": false
+    },
+    "src/adaptive_depth.h": {
+      "sha256": "9d6129ceb9f54ae1e47f1966606b114634e1cd45f951f6718cd53eb13feec21c",
+      "executable": false
+    },
+    "src/alias_context.h": {
+      "sha256": "fcc57994632e2defe947567ed455b9d6284cec633e350b1629129b60632678ca",
+      "executable": false
+    },
+    "src/alias_context_set.h": {
+      "sha256": "f1dc0f9bfef117b763225bce616a74bafda8f94ab05f38d24aaa87b65f037864",
+      "executable": false
+    },
+    "src/alias_substring_dedup.h": {
+      "sha256": "c05b9f78f5ddd2cb2c946569d11da0d3f5a04274f42cdba42234d85bdf5984fc",
+      "executable": false
+    },
+    "src/alias_table.h": {
+      "sha256": "56ae0e999a102210c6b576b91d225f5c2ba0f784904c034efcd934e25e1e86f8",
+      "executable": false
+    },
+    "src/alias_title_subst.h": {
+      "sha256": "cc2258c6fdba93063308a41791531fc0cf21a11dd0753d6497402685051e05e4",
+      "executable": false
+    },
+    "src/arena_alloc.h": {
+      "sha256": "a7db130284d36c822d36c5fc688aa81255b70240fa4415a6c0015174cc35c68d",
+      "executable": false
+    },
+    "src/attributes.h": {
+      "sha256": "7b299568724eb1e92340619c53ffebf99eeb520c6b348d4354bad16fd4e54064",
+      "executable": false
+    },
+    "src/author_block.h": {
+      "sha256": "d83fe81e521c3db5d711bc621b8b880a1b3d853be7beddda0d905defe98c214a",
+      "executable": false
+    },
+    "src/bit_head.cpp": {
+      "sha256": "9146df6701cead0f1bf479a2128c858f6319bc9aa7025c5d1fff2d7ad5b15a2d",
+      "executable": false
+    },
+    "src/bit_head.h": {
+      "sha256": "5daa1adeb145af8176d21247f68d02e65bbda1b1c593cf2e509f78122dbecf4d",
+      "executable": false
+    },
+    "src/bit_head_weights.h": {
+      "sha256": "c5977bd52281d05d02825c7a6a79dd9731e7ec239bc70755704e4baf8132010a",
+      "executable": false
+    },
+    "src/build_guards.h": {
+      "sha256": "3d9140dd21b0d34d492bcc9cb4b380cf557784b14aee9dc50a314efdbbb2b286",
+      "executable": false
+    },
+    "src/char_rate.h": {
+      "sha256": "090c7f11f90cd60410b02fcdd1dee9fbba32c37fe35c8b767d7b26cced5eeec5",
+      "executable": false
+    },
+    "src/coder/decoder.cpp": {
+      "sha256": "545ae6dec6db70a5efa86f18ead0604e7cd742048fc3670e36860e81fd7a10d3",
+      "executable": false
+    },
+    "src/coder/decoder.h": {
+      "sha256": "0d5cac1f1a5628601d923147e5d19e1502572bb981253ce607343268584f3ced",
+      "executable": false
+    },
+    "src/coder/encoder.cpp": {
+      "sha256": "c9ef5863ae0c0440e8ae61a42565ead86756db4163b10d6c794dc85789c17d29",
+      "executable": false
+    },
+    "src/coder/encoder.h": {
+      "sha256": "358de83980856a8f79088d2e23d51d3d4b9bb6c1720597c7ef3e6aad915c3687",
+      "executable": false
+    },
+    "src/cold_size.h": {
+      "sha256": "72e84285905b7dcde949e0bd2bf44db520d5e7042f0fd4a0b5b91a5f9915536e",
+      "executable": false
+    },
+    "src/console_progress.h": {
+      "sha256": "813a60dd54138b3a14a297cc05365a8ea772098a31844cb5199cb28d7d9e9b9f",
+      "executable": false
+    },
+    "src/context-manager.cpp": {
+      "sha256": "4cf7f9c8eeb81ab096ea9f493a4f4559fac6b45f5b5f4c0665d8070f4f678759",
+      "executable": false
+    },
+    "src/context-manager.h": {
+      "sha256": "22cafc09993498eec9d3f84b4c1f20dbb519fd2dc1271ac92f5330506aec7b43",
+      "executable": false
+    },
+    "src/context_map_compact.h": {
+      "sha256": "a0c00b56df8e1758a53cc3dc67981a38bf11c1964628922f2412b5641de11865",
+      "executable": false
+    },
+    "src/contexts/bit-context.cpp": {
+      "sha256": "0f2605156c1cd9e90b0b70169ba184ff72537f90020f18a74876a11577925506",
+      "executable": false
+    },
+    "src/contexts/bit-context.h": {
+      "sha256": "fa3a932d1b4ef0dc5f660a293ebe86afb318268da7c83485bbdd36880299a7eb",
+      "executable": false
+    },
+    "src/contexts/bracket-context.cpp": {
+      "sha256": "a0149abaaefb521e7bed8a7e4d9bf1919e1de5e6138bf355b2152ba83f8cd7c5",
+      "executable": false
+    },
+    "src/contexts/bracket-context.h": {
+      "sha256": "86913e49acbb6a77afe954108153e8b4fab00844aecd02192655c3c32ae5bdf3",
+      "executable": false
+    },
+    "src/contexts/combined-context.cpp": {
+      "sha256": "86d5adde1cf9eb8d02703d1d73a7e7e4d4b535ceb75373ad76655e6e92a3f4d7",
+      "executable": false
+    },
+    "src/contexts/combined-context.h": {
+      "sha256": "d377fb9b8515411ca77c72f5661ed52534e6f2834e97f32235e77314d39bb8db",
+      "executable": false
+    },
+    "src/contexts/context-hash.cpp": {
+      "sha256": "316938812b0f27a6bf59a9eb92085fdb6d53d47390580705b025577620f85d8d",
+      "executable": false
+    },
+    "src/contexts/context-hash.h": {
+      "sha256": "388a18b1d1fcf3948b12a8772addbca2e84f98931bca0734bfee5e3560f0243b",
+      "executable": false
+    },
+    "src/contexts/context.h": {
+      "sha256": "ebd3dddc43e9040ee838f3cd2dc8e5e29b2f00795264ff65b2d5170986383c72",
+      "executable": false
+    },
+    "src/contexts/indirect-hash.cpp": {
+      "sha256": "7256c1184a581084fdfe65edab0415c7c406c471c8cfa219c424feea38bae974",
+      "executable": false
+    },
+    "src/contexts/indirect-hash.h": {
+      "sha256": "813e8c0e9ae976477f865c352b54501748e68164ba0d22dd38dd0b15a21cd97a",
+      "executable": false
+    },
+    "src/contexts/interval-hash.cpp": {
+      "sha256": "ab856907e1da1764019a83b18fe3c53e674d4cb32708143ef381ee9304513bce",
+      "executable": false
+    },
+    "src/contexts/interval-hash.h": {
+      "sha256": "b279c3f28ef3f7f0e3a3df3a8b7e9343f71aa885fffd0e3d3fc574e6506cf2f3",
+      "executable": false
+    },
+    "src/contexts/interval.cpp": {
+      "sha256": "075af777c69ffea7efd26452b8ef17062d2f674de903191fbdbdfbfc29ee5afa",
+      "executable": false
+    },
+    "src/contexts/interval.h": {
+      "sha256": "50a1fa8a292160014bf75f9110f879679fb889e9a120090d47a3aa6680f3c7fb",
+      "executable": false
+    },
+    "src/contexts/sparse.cpp": {
+      "sha256": "ffb974d0db13fca9432f873807923b0f2b8360ae1336bce4bfc9a6657cb7059b",
+      "executable": false
+    },
+    "src/contexts/sparse.h": {
+      "sha256": "5e651e0f9532926ed8ac0387568c042bfa0f06b5f89d87854343c39f1860ddc1",
+      "executable": false
+    },
+    "src/dense_index.h": {
+      "sha256": "4013ff32d82b813abc388d182ea0ad86ba0d5fe422a51a111b0fff389660bb2a",
+      "executable": false
+    },
+    "src/detmath.cpp": {
+      "sha256": "2451e89378661dfa0aa66542ab3f22a7140ac6fb32f7fb5cfb5fc33cba2f4579",
+      "executable": false
+    },
+    "src/ds/AlignOf.h": {
+      "sha256": "7668044291e14bbb7b56b435819f2f5050cc16d8459b6c720fea4da56a796900",
+      "executable": false
+    },
+    "src/ds/SmallVector.h": {
+      "sha256": "51eee93424124c4b00319fe824563193e101a450f38f2bac7f2d588e49319c22",
+      "executable": false
+    },
+    "src/ds/SmallVector.hpp": {
+      "sha256": "3ec8c6bd7fcf2ac998afb362dda72a494f70c866a2cd3f392e61064958992bf2",
+      "executable": false
+    },
+    "src/ds/emhash_map.hpp": {
+      "sha256": "60d051d1533666a6e2213ac4cedce5c47f574f6a358dfbd714e3854b0cd49b19",
+      "executable": false
+    },
+    "src/ds/emhash_set.hpp": {
+      "sha256": "113baaf6f0efd4abe157443b137d08038fa1cd5a57502cd931a1518bb6715f73",
+      "executable": false
+    },
+    "src/fast_div.h": {
+      "sha256": "fa51e81ce56d8a2a4a6d50bd2aea6fc0e24123d5c3dbf74c85f1802ba6b71eaa",
+      "executable": false
+    },
+    "src/fast_math.h": {
+      "sha256": "2f3a763de5ab52d6db080601e987e2c1a62a6119e150e7c0b6671641a5036572",
+      "executable": false
+    },
+    "src/fast_math_vec.cpp": {
+      "sha256": "a6e3974331cc78697e9696756fdef3e7717b95192983c7cdf458891f011ce58d",
+      "executable": false
+    },
+    "src/fx_mixer_lr.h": {
+      "sha256": "43f0a284c3ccb0d158ed63302d8078bd4ae64e923006e663ac16fcc43d2749d2",
+      "executable": false
+    },
+    "src/glibc_compat.cpp": {
+      "sha256": "ad802db71cf550791f358e76c18b508b7e2a8839a10a68ade49c9b3581a940cf",
+      "executable": false
+    },
+    "src/helper_process.h": {
+      "sha256": "56e38df4f584213be903aa02e99b48c53dc25399c875d98d2346bfd0803c8228",
+      "executable": false
+    },
+    "src/huge_pages.h": {
+      "sha256": "34da12b0113263c26f6b0360a1705e81b55e2594eca4c07aa3d930413a53f833",
+      "executable": false
+    },
+    "src/id_exclude.h": {
+      "sha256": "faa8b21e19a690e4fd7638d237430c3c75f5fcc9055fdc39a8eea58fb718215a",
+      "executable": false
+    },
+    "src/invariants.h": {
+      "sha256": "84259696544a98a3d15a1c28b0612aa8569c40fdf67f8577453724e35debd9d8",
+      "executable": false
+    },
+    "src/ip_pack.h": {
+      "sha256": "4e22acd8b505919f6f6846894177f079b045860c77c8eceaaca804ee614cff2c",
+      "executable": false
+    },
+    "src/isa_floor.h": {
+      "sha256": "9c7fb9e554628ae08eb2fdf2d608be97b7d8b5236851c16e63240d30554f7c0d",
+      "executable": false
+    },
+    "src/logit_table.h": {
+      "sha256": "b776e5dd66d33f6ca2df1fa2b9bf13578442e950a722f8bda3dc0b97ed87e5c3",
+      "executable": false
+    },
+    "src/lstm_aux_contexts.h": {
+      "sha256": "a736a55bfc6bade14217f6b17ac7be2e880d51dd8ffbe9fa8e2c1f4351759bf4",
+      "executable": false
+    },
+    "src/lstm_blockdiag.h": {
+      "sha256": "e605ab347aa94cfc4c985605fbc40aa0aa50f070d74362329d0b85ee4efbd7e5",
+      "executable": false
+    },
+    "src/lstm_fx_link.h": {
+      "sha256": "0447346bad618f93c70dec189cea36b8511d5096d04fdb4dba5f8ab7547e93ea",
+      "executable": false
+    },
+    "src/lstm_match_channel.h": {
+      "sha256": "a057297e305a6f1b9a4ab54fc9d5d12dc36c4f27a13fd3ff3dd8390d0c8ec733",
+      "executable": false
+    },
+    "src/lstm_mixer_inputs.h": {
+      "sha256": "cc563b41f0115d5ceb699ecfcc886919da402632971e0b2ea8ba0381174c0841",
+      "executable": false
+    },
+    "src/lstm_row_geometry.h": {
+      "sha256": "4dd0fd9735a03c44cdfb02b84660a302358e6bc8d6b16b70d9ef55d459546ab3",
+      "executable": false
+    },
+    "src/lstm_sharpen.h": {
+      "sha256": "84e6f8eeb9b46387e479400ff28c76983aaf26798d9bef0b6161f3b4ec19cf7f",
+      "executable": false
+    },
+    "src/match_extra.h": {
+      "sha256": "b7a92f676b0e66d41dcb6df45b42a2a4575311733961c914b9f817f7e4302e61",
+      "executable": false
+    },
+    "src/match_recovery.h": {
+      "sha256": "fc1749ec0923b64eba6bcce689a6b23135e19269daeffe46c2c2734e541db1b8",
+      "executable": false
+    },
+    "src/metablock.h": {
+      "sha256": "fbf55374d95054ee7e015d8bffa7dc06a39dd3287c8a429aac8a08b87a1e9024",
+      "executable": false
+    },
+    "src/metablock_form.h": {
+      "sha256": "822329ddd14ce41fbbbcc93a3dd45aed367654825648e63ad683aabd1b7eac78",
+      "executable": false
+    },
+    "src/mixer/byte-mixer.cpp": {
+      "sha256": "60a43a79560e679822e2cde66ce8cd36067af85fb39772e9feb66510f55be154",
+      "executable": false
+    },
+    "src/mixer/byte-mixer.h": {
+      "sha256": "3bc44879cffe3f0a87317163680c7a60b391ca821f5df9091f692f2e8334da5f",
+      "executable": false
+    },
+    "src/mixer/lstm-layer.h": {
+      "sha256": "2c7b56abdb1d1982065bd6fae403343be981925f8e2128bea1e243760dba40be",
+      "executable": false
+    },
+    "src/mixer/lstm-layer.hpp": {
+      "sha256": "feea2ac512e0a62b0d998a992ba5883ba581efee0034f6bd4211e839ceb74141",
+      "executable": false
+    },
+    "src/mixer/lstm.h": {
+      "sha256": "9cbd577d29ed1a81247cd6a523e09eac114e403c6166510b9414c6ef52b18ce3",
+      "executable": false
+    },
+    "src/mixer/lstm.hpp": {
+      "sha256": "1544f7a4a7274be88fcd191c488cfdb8dd42929345955f3250c323674e41d734",
+      "executable": false
+    },
+    "src/mixer/mixer-input.cpp": {
+      "sha256": "0604efdc84149454ed7483cfa14b7cec89ae1cc521bc6d5368d3dfb4d2f64bd5",
+      "executable": false
+    },
+    "src/mixer/mixer-input.h": {
+      "sha256": "02a7f75d1b8584ba1c9471537006cef0146813eb50ff4cfdeec1f15480502cb8",
+      "executable": false
+    },
+    "src/mixer/mixer.cpp": {
+      "sha256": "f76144a99cd92e18a552054dc9f80c1a5f6ad82d56a04784686a7ebd83a1cbab",
+      "executable": false
+    },
+    "src/mixer/mixer.h": {
+      "sha256": "eaa304cac4f24cd8694cf02b610a29e77f2dd061c689b8542153390cdd23c7bf",
+      "executable": false
+    },
+    "src/mixer/sigmoid.cpp": {
+      "sha256": "7e0f3cc475ca19dc28ccb16feec73fdddc62b4e69482c0b09676f79b07e24cf5",
+      "executable": false
+    },
+    "src/mixer/sigmoid.h": {
+      "sha256": "e59e635669664090720edc3228c20b1b9b77da307a8d7f2c331cd42876565148",
+      "executable": false
+    },
+    "src/mixer/sse.cpp": {
+      "sha256": "0477777434a0da27b55d5a557a209c386f4488500261024d80336b21164f2c44",
+      "executable": false
+    },
+    "src/mixer/sse.h": {
+      "sha256": "034625fbebd5a44210776d44b61d1a63746839be9c33350338304f96ed679a45",
+      "executable": false
+    },
+    "src/mixer_bank.h": {
+      "sha256": "52144c75d077745ec2d82ce2334ee1765723f7c321608b515bc8bb69895f27b4",
+      "executable": false
+    },
+    "src/mixer_chain.h": {
+      "sha256": "b272b4138d0d1dc19710aa4af12978ec7e21b668ed1350c023ae4b34aed3dca3",
+      "executable": false
+    },
+    "src/mixer_decay.h": {
+      "sha256": "3da47a2f56f8b341b9e8f0e29a283776381ae4b09ac0ce0bb637a1c7f868e4ed",
+      "executable": false
+    },
+    "src/mixer_lr.h": {
+      "sha256": "2671bd618316fb98f4cb44ee0fe182f22b77cb2b77449e1de33763ccd58d0e7c",
+      "executable": false
+    },
+    "src/mixer_lr_restart.h": {
+      "sha256": "7d930b4977949ccd76e430aa4f9daff58529b5a24a0de4a8c453426bb927969c",
+      "executable": false
+    },
+    "src/mixer_selectors.h": {
+      "sha256": "165036ca709ced01fde8794f5f4648a1d037114c0527fffe86fee8f8aadfb9dd",
+      "executable": false
+    },
+    "src/mixer_weights.h": {
+      "sha256": "aa0dffc1adae70fbb10aa4d454e4e4e5bbcc710fda8f7982e1af71c4f6c3ad3d",
+      "executable": false
+    },
+    "src/models/bracket.cpp": {
+      "sha256": "8cfcb19134f6c46d801b29771558ad0de468c4923baec9815bc42f28562e84df",
+      "executable": false
+    },
+    "src/models/bracket.h": {
+      "sha256": "8b99918c3ba1978b2a9d9bdb40492f69d2bef64bbd7166b54339e1117872499f",
+      "executable": false
+    },
+    "src/models/byte-model.cpp": {
+      "sha256": "5e56bf3afa6fce16700cafe2922ac8016fd77dc51fa74e9a8030ac0c2f9984da",
+      "executable": false
+    },
+    "src/models/byte-model.h": {
+      "sha256": "0128654baff57576d3540dd4dd1d86c56f391d56ec8ad5482086ede07d2e3545",
+      "executable": false
+    },
+    "src/models/direct-hash.cpp": {
+      "sha256": "f8438540a3e2ddcb46fc68e18dc5b7f6ef102134e9c58152ccfd5850df0e19b2",
+      "executable": false
+    },
+    "src/models/direct-hash.h": {
+      "sha256": "d6c509322160901bfbdf29768610f8e53be95f8bf83c29df057498080bfd4f5b",
+      "executable": false
+    },
+    "src/models/direct.cpp": {
+      "sha256": "0f0143eae67e4e62e1b454e32220b8780e8fca58ee52a2c9672ffceca36fd667",
+      "executable": false
+    },
+    "src/models/direct.h": {
+      "sha256": "fa162b750d28a9953a27c044466cd1b2017dbc1f91bcfa8b247f02552cd25c1c",
+      "executable": false
+    },
+    "src/models/fxcmv1.cpp": {
+      "sha256": "8c5a49bd14aa0f9efa3f100434d35847279917487f5b287e6860e7fecb5982a4",
+      "executable": false
+    },
+    "src/models/fxcmv1.h": {
+      "sha256": "a532083287e83a3e21d83a182b1295f375c94178b96a55da3936cf003aabfed7",
+      "executable": false
+    },
+    "src/models/grammar-match.cpp": {
+      "sha256": "b729250a76f2b39ee1a0a5fd1449e94162badc2553ec3152f60f40b7cf270ba7",
+      "executable": false
+    },
+    "src/models/grammar-match.h": {
+      "sha256": "255240633c45fcdfff5f865f99bec06b9a817d8e0aba21b70956ebc5ab464611",
+      "executable": false
+    },
+    "src/models/indirect.cpp": {
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "executable": false
+    },
+    "src/models/indirect.h": {
+      "sha256": "b1033ec222a40462f87d5e1ec134ab386c20f50167b4327a27a86148c5dcf7cc",
+      "executable": false
+    },
+    "src/models/match.cpp": {
+      "sha256": "c527e123bee949110e5e213d74110685c10ee3135065c80a7b1f8dbd32d74d3b",
+      "executable": false
+    },
+    "src/models/match.h": {
+      "sha256": "37529cf2744007f0123cf4356bdd5dfea9eb7b152c10d3220cda05b3806f1ef0",
+      "executable": false
+    },
+    "src/models/model.h": {
+      "sha256": "031c62ac432d3e477398011e860fac3960f58c6b217a443e0d8d733920f02abc",
+      "executable": false
+    },
+    "src/models/ppmd.cpp": {
+      "sha256": "eac5ad33f5a484bbc2bcdf38bf6a343268fc59b1f352d8f52e56908340d1b65f",
+      "executable": false
+    },
+    "src/models/ppmd.h": {
+      "sha256": "d1e8c3ac749c5063b9a244c2adeeb4681577b58cbbf4394c9d0b991122049f66",
+      "executable": false
+    },
+    "src/models/ppmd_page.cpp": {
+      "sha256": "02df76ba8b97dbd19b77c2cfd85faa90da690eeea5af7ed669be504b349cf72b",
+      "executable": false
+    },
+    "src/models/ppmd_page.h": {
+      "sha256": "fd3e5a2acecd83de94e127b838a764cf5ab54222360828c0f5a8098835d7d4f3",
+      "executable": false
+    },
+    "src/models/ppmd_page_ptr.h": {
+      "sha256": "7994414f793b964a569163068306636c9cf6ad8e67ae82df9f8811db4d85a1ff",
+      "executable": false
+    },
+    "src/optimizer.h": {
+      "sha256": "c74e2ed46b191bed6cccd2c185500ba22c29d793e65475a7c8f1e34b3e42f873",
+      "executable": false
+    },
+    "src/optimizer_vec.cpp": {
+      "sha256": "5bb97c3b9870400aba0195d5d24926247ac9348675f5bd201154b41af933ae02",
+      "executable": false
+    },
+    "src/page_contexts.h": {
+      "sha256": "50ef7dee453bf44950f1f9c8c45237c576d0ee75ac79c51f0141ba395f519648",
+      "executable": false
+    },
+    "src/page_registry.h": {
+      "sha256": "5d37d2803dd0683403ee9408ba40ad150d97a1f1ec42420119428d0946c47a17",
+      "executable": false
+    },
+    "src/ppm_logit_prior.h": {
+      "sha256": "f931f1fb57f093ea4476ded5cf176fc9167c94700c5606c0c2d5b03dcca6ad93",
+      "executable": false
+    },
+    "src/ppmd_meta.h": {
+      "sha256": "8df89ab888076bf843c88d6cfe330fcff4b2f723facf62e06c799da5b03f7ee3",
+      "executable": false
+    },
+    "src/ppmd_order_table.h": {
+      "sha256": "140dc738a8dd8c5919a5f7d141df7d6db88c6aa525cf2d53a2fe9860296d01e6",
+      "executable": false
+    },
+    "src/ppmd_prewarm.h": {
+      "sha256": "2346dffd9784a889c6ca7b001530a8674f40bda7d6f3d2381ffdeec5ee200173",
+      "executable": false
+    },
+    "src/predictor.cpp": {
+      "sha256": "2729b4a0c20064d980a788823a3041b590838cf18713cef1c62cb28013719139",
+      "executable": false
+    },
+    "src/predictor.h": {
+      "sha256": "36730a5446b84c1a3ba336bf39d3352cc4f0bcb7b523a9e790d01f1ee981311d",
+      "executable": false
+    },
+    "src/preprocess/dict_derive.cpp": {
+      "sha256": "9d1ef87342afcf8b4b5f25c820a6a09ad9e301305e1682da0b696020415cc590",
+      "executable": false
+    },
+    "src/preprocess/dict_derive.h": {
+      "sha256": "cca0d38eea9f355a6ddb468495750a4ea50e30233371b44a7dc0da66adaf1252",
+      "executable": false
+    },
+    "src/preprocess/dictionary.cpp": {
+      "sha256": "cb117310e916264b39c2c9c37baa580310f95fe11f201919df21d0f5dd89ff64",
+      "executable": false
+    },
+    "src/preprocess/dictionary.h": {
+      "sha256": "992d8713d1ebd9b8c2976fe507bc3c9fbfb9a274a5f01533d485dfa38ae8cfc8",
+      "executable": false
+    },
+    "src/preprocess/preprocessor.cpp": {
+      "sha256": "5c58d94982b003b45337e777e22ff15ecd2454679d935bf80dfb26d1c91f9595",
+      "executable": false
+    },
+    "src/preprocess/preprocessor.h": {
+      "sha256": "723670d654c52b89e3f10d6d4a3532458edac5d6a9fca425169109aaf3d0a1d1",
+      "executable": false
+    },
+    "src/preprocess_roundtrip.cpp": {
+      "sha256": "9b0ce57af8eeb9fbe4f4d6a56d7b45a11b7575979f7b50e25a87565f8bb922fe",
+      "executable": false
+    },
+    "src/r1_reorder_impl.inc": {
+      "sha256": "3dcf68a7d53e3fd5cd2e73c78b75970b21b4f23a7ac2be8d6ccfc788807d302b",
+      "executable": false
+    },
+    "src/r1_reorder_transform.cpp": {
+      "sha256": "6fc2dae14e294ff655bdc51b90b443422efcad091d344a9740109e5a8f85896a",
+      "executable": false
+    },
+    "src/r1_reorder_transform.h": {
+      "sha256": "45efa6b03508f572dbafc1c8c318b8ab0df67070e19541c8302092d235d1d541",
+      "executable": false
+    },
+    "src/readalike_prepr/article_remap.cpp": {
+      "sha256": "7d1957ec837061a134f5427b35b86a3a9035f64e39b4ec273733bc6b622878ad",
+      "executable": false
+    },
+    "src/readalike_prepr/article_reorder.h": {
+      "sha256": "048d633409052fade1be4a5cd501b580b5a461b6ad82bd40c0bb6ea0a485a9b0",
+      "executable": false
+    },
+    "src/readalike_prepr/census_transform.h": {
+      "sha256": "9531990073f2b6b050c3a9a2ca2b13e6eaf577b98a02cc6e94bf1d56c63a10f3",
+      "executable": false
+    },
+    "src/readalike_prepr/cmtidx_transform.h": {
+      "sha256": "4c63da84a9d83c3a0496a04120087f5c41be64f1c9690d893950d6cb706dfb02",
+      "executable": false
+    },
+    "src/readalike_prepr/data/new_article_order": {
+      "sha256": "c9f8b1001bfbc041a087eab65e5caa609eb87bb8ecf297cfcdbcdaffa7a1dd19",
+      "executable": false
+    },
+    "src/readalike_prepr/header_sort.h": {
+      "sha256": "192d8d6eb0eb868d695029a5fba2e3ed7583e8ccbfbc07cf2b2a268fbb560f1a",
+      "executable": false
+    },
+    "src/readalike_prepr/misc.h": {
+      "sha256": "f3e014cf89f72c37ed3d4c365c3f778cd69337fd675d0251d6abf6aeb64b2444",
+      "executable": false
+    },
+    "src/readalike_prepr/order_codec.h": {
+      "sha256": "7a16289fb7ce6f48fea02a724a06305fb553befc11b648e5c9e3d68338e6f730",
+      "executable": false
+    },
+    "src/readalike_prepr/page_form.h": {
+      "sha256": "a664633a43b5fbeda6ae155508199a2801b165ec3467fe778c8175585ddc5ef8",
+      "executable": false
+    },
+    "src/readalike_prepr/phda9_preprocess.h": {
+      "sha256": "96316a88c919b006a601927b016bbd02d53026a6365088722f1faaab591332cc",
+      "executable": false
+    },
+    "src/readalike_prepr/self_extract.h": {
+      "sha256": "8faa37228d7e6e08e4165d2f3d01e5ef7908d9139f8391516c9c692ab3a64eb1",
+      "executable": false
+    },
+    "src/redirect_table.h": {
+      "sha256": "511f63fbe3a320dd30b6296fc93b3483ccf4dccffa14842d985a7407264745bf",
+      "executable": false
+    },
+    "src/run_mode.h": {
+      "sha256": "7ed7adc9d0369023eb9ae940c09278f8692125cc24143c05192ddd9e4bae4c38",
+      "executable": false
+    },
+    "src/runner.cpp": {
+      "sha256": "f87c647ba8f7019805589ced28717bf1860096493af956c059f4c924b300fb00",
+      "executable": false
+    },
+    "src/selfx_clean.h": {
+      "sha256": "952d631a178c7efa829d637f6317e0ec19593e333aebfeafcf83c9d4493bb363",
+      "executable": false
+    },
+    "src/sentence_intersect.h": {
+      "sha256": "bd8cca2e5a828a041e5256c5717f4978536d1b3534c27ed3f3a1e802baf3a5ed",
+      "executable": false
+    },
+    "src/simd_scan.h": {
+      "sha256": "8306bf5590eede304af3549a53afbb0ce25dd5a5d3b088fcd081970a942be6ba",
+      "executable": false
+    },
+    "src/states/nonstationary.cpp": {
+      "sha256": "f47be85b6a11f05f63473f3b01fc658cac1f6df54ea1b9636ed93ea5d7f47d14",
+      "executable": false
+    },
+    "src/states/nonstationary.h": {
+      "sha256": "bb88ac7e53a12f8f8390429ec4913c179c3f013d4cee89f2267fe5cbca7a0311",
+      "executable": false
+    },
+    "src/states/run-map.cpp": {
+      "sha256": "3ceb6534be95997cd1b6e844b7aeddd3eb25b7aa710b26fe5b3786198158f62f",
+      "executable": false
+    },
+    "src/states/run-map.h": {
+      "sha256": "0ff8abf2ef885ce60ec42f1077e4f1cf24c3c7143fbd73ca0fcdb176c3b025fc",
+      "executable": false
+    },
+    "src/states/state.h": {
+      "sha256": "99b094ce1d628a3d8990e55a33daf5604266d07ef0908e3dfabffcfb35e23e04",
+      "executable": false
+    },
+    "src/string_pool.h": {
+      "sha256": "af8ad8b776f1dd8c76d3af33e0e8b8902fdca894cf27fb77dbfd221b7bfb3acf",
+      "executable": false
+    },
+    "src/tf1/kernels.cpp": {
+      "sha256": "bd83825a91e855d52d5c002be7433b2b909ca4031db88ad642230110a4e8cf1c",
+      "executable": false
+    },
+    "src/tf1/kernels.h": {
+      "sha256": "2ab9204435d7c264a238e14149c51a1bba934a571e613194ea352e03f12eb71d",
+      "executable": false
+    },
+    "src/tf1/model.cpp": {
+      "sha256": "0e2b63d14f89bc8d0c1756755330e3c4ddda099f248483017e75d28c5303c21a",
+      "executable": false
+    },
+    "src/tf1/model.h": {
+      "sha256": "3e66be9d074770e73b956aed7e87bd6dd69fb9a2ef45f5280dee4e3df73645e5",
+      "executable": false
+    },
+    "src/tf1/opt/arena_build.cpp": {
+      "sha256": "b06ec5c58b388fd26be788efd86c41d4437923eecdc904c67f50a80366d5ca7d",
+      "executable": false
+    },
+    "src/tf1/opt/arena_build.h": {
+      "sha256": "c5e9179e45c01b1a180aec23394e26b92eda5b61efa75efb6cea845ea864429a",
+      "executable": false
+    },
+    "src/tf1/opt/attn.cpp": {
+      "sha256": "7fba8c492711f02715ee09b16383331ce799b87356466dd457c4ce4a9044f088",
+      "executable": false
+    },
+    "src/tf1/opt/attn.h": {
+      "sha256": "cbd388558af52bdff4ed4c5296270d499c6db7911b8682a4bc0457b06c4d9796",
+      "executable": false
+    },
+    "src/tf1/opt/glue.cpp": {
+      "sha256": "fa01dc31ce4b2da3815c1b7ca8bd521fa8cff8bb025dbcacea559d4cec47b22c",
+      "executable": false
+    },
+    "src/tf1/opt/glue.h": {
+      "sha256": "26b111b42f22bfc60fca5d8f77284886ff074efe0abd11fac02be4966d762e1a",
+      "executable": false
+    },
+    "src/tf1/opt/kda.cpp": {
+      "sha256": "0a8aa4a8c3dc0200fb5c75bb9b4bff6b30e84e83fa7cdb9d417df03f883b8bf6",
+      "executable": false
+    },
+    "src/tf1/opt/kda.h": {
+      "sha256": "1e2818864d45c761852b81d849ee3a12e92117cf96ac92d06146fcf65fa003e7",
+      "executable": false
+    },
+    "src/tf1/opt/kda_math.h": {
+      "sha256": "82738c540b5ea96933888e41794404b27adb65d26ed89d2daa917ae1c8a6d06d",
+      "executable": false
+    },
+    "src/tf1/opt/model_opt.cpp": {
+      "sha256": "ec82e227ba37485700beece52fec6fb1253123653141ba7fd9dcfcdcefc4b0e7",
+      "executable": false
+    },
+    "src/tf1/opt/model_opt.h": {
+      "sha256": "60502c3f66137d6596f857c58ca2ab73882fbd5b398420b5d52a59df7096e202",
+      "executable": false
+    },
+    "src/tf1/opt/qmat.h": {
+      "sha256": "05342cff3d01db857a97744aab5243b9acecf1ce310b7657b595c096edd6c8e2",
+      "executable": false
+    },
+    "src/tf1/opt/qmat_dense.cpp": {
+      "sha256": "4eea931d33dc14cebe3da1d856f48c8f911c22c3daf65de47fc874c18c861758",
+      "executable": false
+    },
+    "src/tf1/opt/qmat_dense.h": {
+      "sha256": "bbe253f6bb61e7315b67c37699d5222e44b7df7f00a150d69b4275455d31bda8",
+      "executable": false
+    },
+    "src/tf1/opt/qmat_sparse.cpp": {
+      "sha256": "19af377d6e1852201cffdb6eda7e97659d8bce0529d2cd707490ad95788c7519",
+      "executable": false
+    },
+    "src/tf1/opt/qmat_sparse.h": {
+      "sha256": "f6c9c696c6fb4a906621cc68022400d9dad4765a1707c5d3828e684e5ecbf141",
+      "executable": false
+    },
+    "src/tf1/opt/sparse_acts.h": {
+      "sha256": "9dcf91740307f9b6273873b7ebefc88b93ee2d259abfd53f570228fe700b3b18",
+      "executable": false
+    },
+    "src/tf1/opt/vec_math.h": {
+      "sha256": "7d6277420dba6e87eb9c1ff8fa721a34f1592029b4280bd473258357be451031",
+      "executable": false
+    },
+    "src/tf1/tf1_engine.cpp": {
+      "sha256": "1e7ed4a1daac191210a5504d4f21d3e2b9180c65b4e4eb61face51b7a4753591",
+      "executable": false
+    },
+    "src/tf1/tf1_engine.h": {
+      "sha256": "90fd899f7090ba7a2e7fc2289257145e09b2710fe3c8d47ea194dbbc78ef6fe1",
+      "executable": false
+    },
+    "src/tf1/tf1_gate.cpp": {
+      "sha256": "ef0c592510e76392fabc23477dea160f6929f511a39a5b2aa41f6ea1be3d22b1",
+      "executable": false
+    },
+    "src/tf1/tf1_gate.h": {
+      "sha256": "5676568fcd6cfc316b08aa444fa3e0d5f0453e6816e30e724ae4bfe20fb9f45c",
+      "executable": false
+    },
+    "src/tf1/tf1_load_oz.h": {
+      "sha256": "609829095c85c2d0274aa5cfa86509854f3dae67228b57003afa5654fdef62e8",
+      "executable": false
+    },
+    "src/tf1/tf1_paket.h": {
+      "sha256": "fce9b8902462b57824a504a1051ed0fcb532cdf00c41e0ec360abe79a0c012b5",
+      "executable": false
+    },
+    "src/tf1/tf1_prior0.h": {
+      "sha256": "a5c04138c8c780dca0924494e1fc0857e1ba3f6e64fc1a8147e92f3e9ece88f9",
+      "executable": false
+    },
+    "src/tf1/tf1_prior0_set_v9.h": {
+      "sha256": "19141d5cdebe94a16c6da440d9f0bff81f1cbf721b9ccbbb6df4c709dc9369b6",
+      "executable": false
+    },
+    "src/tf1/tf1_prompt.cpp": {
+      "sha256": "e2ec11b0cc5b64ed11bdd757626ad8a1017940b7305ca6992a289fc57bec93c8",
+      "executable": false
+    },
+    "src/tf1/tf1_prompt.h": {
+      "sha256": "6a4c630795c9fc19169c0108b33ff63e5d3dadd229e9f8cef6c7b693165b6e89",
+      "executable": false
+    },
+    "src/tf1/tf1_z3.cpp": {
+      "sha256": "3f2b415a2e4f38a726652c4dd9c8da39b6cc1812a40c79164a37d4823cb6312a",
+      "executable": false
+    },
+    "src/tf1/tf1_z3.h": {
+      "sha256": "f2b66bddb2e1419a303cead4333cc3fc6c0dd84dde33be8eecb2d2e696e8ef5d",
+      "executable": false
+    },
+    "src/tf1/weights_io.cpp": {
+      "sha256": "bd0473eb642c79e9bb9ac4444aa9caf3d4ae781214c280fe614eceace82b5662",
+      "executable": false
+    },
+    "src/tf1/weights_io.h": {
+      "sha256": "752e93e8796ea1fc4632a2a270d2f4c00dc09a28531be244acefc46fb71568bc",
+      "executable": false
+    },
+    "src/tf1/weights_io_compressed.cpp": {
+      "sha256": "de2f01062e66653edeb5344269d1bf2e24aea7c5533f2bf51193567c4f170d6b",
+      "executable": false
+    },
+    "src/timestamp_algebra.h": {
+      "sha256": "d25df046dbb09c5ccd5d400b89151181e02b49ccf96c8f3d1ac11ce64c62534b",
+      "executable": false
+    },
+    "src/transformer.h": {
+      "sha256": "ccc6046785eb76ff59c27fad5a9cb92f28285e6496d71b3ba72d4d09e4872371",
+      "executable": false
+    },
+    "src/transformer_gate_ctx.h": {
+      "sha256": "f34566fcbf39f60cda9e8b4bb2eb34aa291d5e0bb184504823c5e80276c9b989",
+      "executable": false
+    },
+    "src/ts_progress.h": {
+      "sha256": "eedc6a3acbf3d5327e46a848865157cfe4b91a54325bc78181a110a542e5e571",
+      "executable": false
+    },
+    "src/vocab_bittests.h": {
+      "sha256": "047bea87aaebd8654c22eff46781bcdabe4bbe32a11b796ea13b9a48c73f2a99",
+      "executable": false
+    },
+    "src/vocab_frozen.h": {
+      "sha256": "c13a183eb2a22ed7aeab44c1e76f9563d340cdce1a24ac2a08eb4f25150ba9cb",
+      "executable": false
+    },
+    "src/word_label.cpp": {
+      "sha256": "da6b6bb1e1facd0482199e342f59d9c5634f79b68eddbe6936322cc8c4f21319",
+      "executable": false
+    },
+    "src/word_label.h": {
+      "sha256": "0912b2d1fd6bf0307c0be6e172ff8dfd6e284ded8017702f6c0574063d4e5066",
+      "executable": false
+    },
+    "src/word_recency.h": {
+      "sha256": "d3717f7406e996bdf619bd297668f570dcd8353ce96eaae6e954c7942a423675",
+      "executable": false
+    },
+    "third_party/LLVM-LICENSE.txt": {
+      "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee",
+      "executable": false
+    },
+    "third_party/PyTorch-LICENSE.txt": {
+      "sha256": "d63aaf3622186b2a761832a5704edeef1f25d08f5b9c50ac4e435befc8e348a8",
+      "executable": false
+    },
+    "third_party/README.md": {
+      "sha256": "8fc00e7c37bd1147201bd0bfdf9fab1e00b736977b01e0f90aa4ad36e11ada8e",
+      "executable": false
+    },
+    "third_party/emhash-LICENSE.txt": {
+      "sha256": "f1fbab7346b4cfc669f7cd6bd47ec15e3eb6b9ea3871b1bd0715c9389b240eae",
+      "executable": false
+    },
+    "third_party/mathfun-LICENSE.txt": {
+      "sha256": "582896037b757c58672d627a10f87e0bff21c7f3a680c9e22c36d7e28c250cfb",
+      "executable": false
+    },
+    "third_party/xxHash-LICENSE.txt": {
+      "sha256": "6ffedbc0f7878612d2b23589f1ff2ab15633e1df7963a5d9fc750ec5500c7e7a",
+      "executable": false
+    },
+    "tools_src/packer/boot_cm.h": {
+      "sha256": "b21883fa2abf7ffb7cc8699dfb33f43cd2a577600c97515c8130396615aa08f3",
+      "executable": false
+    },
+    "tools_src/packer/build_packer.sh": {
+      "sha256": "c3ac474e2bf9b291462ff1efc0f0da4418db20601c99a167f77c2cd67660bc19",
+      "executable": true
+    },
+    "tools_src/packer/cm_core.h": {
+      "sha256": "1dd1a223a0f4080f4648eb300fe45011147c267fac304fdaa941ab620d4bfcb1",
+      "executable": false
+    },
+    "tools_src/packer/cm_params.h": {
+      "sha256": "c3b800f1c9c79afcd99359310b1df3f8cf9680db427113845c586dc69a3d41bc",
+      "executable": false
+    },
+    "tools_src/packer/cut_dpath.py": {
+      "sha256": "0c60f88da1315f25738291ea11872d3b4383b2bc9f8e12c08e028994d3af7fce",
+      "executable": true
+    },
+    "tools_src/packer/pack_tool.c": {
+      "sha256": "b1065085f4a59acc7d2786e907240c90ce3c6202459ada41f3b5d13ba40f89c8",
+      "executable": false
+    },
+    "tools_src/packer/s2.lds": {
+      "sha256": "24064953f7927bed576ebd0c1ffba241e202bc18c2c437800132db23f5b0587f",
+      "executable": false
+    },
+    "tools_src/packer/stub.c": {
+      "sha256": "68306a4d4578c0b3ee19a2587440d511932eca923640c7f17066320fd45d214f",
+      "executable": false
+    },
+    "tools_src/packer/stub_boot.c": {
+      "sha256": "28a132a9dc6b5d3c29e77edc073093c3a6ebf764fe96ca85f7406b0bc26e382e",
+      "executable": false
+    },
+    "tools_src/packer/x86p.h": {
+      "sha256": "712e7345076e712868ae7d9933487058e481b1fabddb64ac95954bc8da301454",
+      "executable": false
+    },
+    "tools_src/packer/x86t.h": {
+      "sha256": "d9abfb64b95006b23bd2cc058daa451a20e6210c52c58a467475b7a568d71d2a",
+      "executable": false
+    },
+    "tools_src/sstrip.c": {
+      "sha256": "0b1fb40192b6b9bcbe6be527378780d5ba2316981c227cc42904e7b8e7175e01",
+      "executable": false
+    },
+    "training/ATTRIBUTION.md": {
+      "sha256": "cace844a2fb39b75855f3b5fff5a3a6ae14abb5be87d3d6fe9cedddebe46c1bb",
+      "executable": false
+    },
+    "training/MANIFEST.tsv": {
+      "sha256": "c9194f1837b1eb8d8132bf2f475eecc0a5ae90b271bbc88ee67b00152e846d3f",
+      "executable": false
+    },
+    "training/README.md": {
+      "sha256": "eed58a9080b72322970114bd4e7f1e728eae81fefbb8794fc32b70c01460593b",
+      "executable": false
+    },
+    "training/bitl/FORMAT.md": {
+      "sha256": "03b84e1213e438398646714c3bc76cc2e5723a4fc414b8967036d9bcbfdd3a55",
+      "executable": false
+    },
+    "training/bitl/README.md": {
+      "sha256": "20ede83a6c9337b73f779e3ef6354a7c33dcce4c272ce06cdf69d26122d4882f",
+      "executable": false
+    },
+    "training/bitl/record/F2L_BITS": {
+      "sha256": "93b543419d5ee5f1c3be8e3ea157c822909d59095ca863c2ec6e8145db2c871a",
+      "executable": false
+    },
+    "training/bitl/record/F2L_fp32.nblb": {
+      "sha256": "5447ed151f0503d7019ee23467d954842d128cf7e1cd4a3464c883155a022eb6",
+      "executable": false
+    },
+    "training/bitl/record/README.md": {
+      "sha256": "572f81685543959fff52b2375242c56c90c7822ed11c0128910680ba3d3bdea5",
+      "executable": false
+    },
+    "training/bitl/record/SHA256SUMS": {
+      "sha256": "a2c76be1601551a1e07805612db672de2ab27eebf802bdbcf554067db1f276d8",
+      "executable": false
+    },
+    "training/bitl/record/mark.txt": {
+      "sha256": "dde432adecaa9ec258b5725df8334d302115427c7f87678d7b2e59804fb712af",
+      "executable": false
+    },
+    "training/bitl/record/training.txt": {
+      "sha256": "35c7b21aac457d8af2e0f6c63165c5c4146c368820d3ff2e794bfdae7815b382",
+      "executable": false
+    },
+    "training/bitl/tools/blobstat.py": {
+      "sha256": "1ac5e15b9dcc564782d87c137688d144ae8f19586ff6e8812aea8ed3e5860016",
+      "executable": true
+    },
+    "training/bitl/tools/cut_trace.sh": {
+      "sha256": "2ab9a4461b6f2ae7eac422d0e9c0b7d507e0a2bd15d587b2c4382649654370f6",
+      "executable": true
+    },
+    "training/bitl/tools/nblb.py": {
+      "sha256": "b3030300e2558ef8a5acef531ed97afa13f7fadb7ba6283902eb7637a17de72a",
+      "executable": true
+    },
+    "training/bitl/tools/trace_geom.py": {
+      "sha256": "cc0733c380cce32dc3cd0bc39cce1645c74183ccd6b0c3428327b612e03fc0c1",
+      "executable": true
+    },
+    "training/bitl/tools/train_blob.sh": {
+      "sha256": "e49456962799d278b036a302203b3a1dc5d97b446269a27d0c44753a0a403e36",
+      "executable": true
+    },
+    "training/bitl/trace/FEATURES_trace.txt": {
+      "sha256": "777ed78372016794d57e392570160b3dd652fecd316f620928294fc0c78d4050",
+      "executable": false
+    },
+    "training/bitl/trace/run_trace.sh": {
+      "sha256": "3627062bdafa13d43e78b95458649c426aa67224f1b980c7cfd0262c38f05b9b",
+      "executable": true
+    },
+    "training/bitl/trainer/bit_head.cpp": {
+      "sha256": "536dd3eb8744fa39f05f65a8a6c33006e3e0f9e91778a30d8685229ff19b962f",
+      "executable": false
+    },
+    "training/bitl/trainer/bit_head.h": {
+      "sha256": "905dd4d0148ae1ba627633075bcc457f977ebe4bffc20c474321154cbc414b30",
+      "executable": false
+    },
+    "training/bitl/trainer/build.sh": {
+      "sha256": "409a9071f784b436dad9c572f9e15a43d485d9989895ecec21f3854b5a0981f6",
+      "executable": true
+    },
+    "training/bitl/trainer/isa_floor.h": {
+      "sha256": "0063ae6aec169f850069e0b520312cee3c3386c0723e3019df3b3696ec55d226",
+      "executable": false
+    },
+    "training/bitl/trainer/replay_trainer.cpp": {
+      "sha256": "06ded2dc28e52c578295040460b9ed564c01af92f9ad7115562608e610519b24",
+      "executable": false
+    },
+    "training/data/README.md": {
+      "sha256": "da65c7314922d038517bc00642a79c3633ad6fc06c4f8931a6be16371ce4de0d",
+      "executable": false
+    },
+    "training/data/tools/build_hints4.py": {
+      "sha256": "2f152b8091e814ffbe790a034879c1a44399079272a6c7fb27b8ac0117b65869",
+      "executable": true
+    },
+    "training/data/tools/build_variant.sh": {
+      "sha256": "71c7fb0e865588817c8d34b38a3e9b66c282953781b475a46900f1925e3e04d2",
+      "executable": true
+    },
+    "training/data/tools/check_order_run.sh": {
+      "sha256": "1052fde010c2f06124235e37fa88dc04cdc5fd754020776141bbdd5cb0e78b00",
+      "executable": true
+    },
+    "training/data/tools/combine.py": {
+      "sha256": "b43a866892dc70e19084aaee1f14653890f00595eca11d8148f9ab1de6a5a8a1",
+      "executable": true
+    },
+    "training/data/tools/count_words.py": {
+      "sha256": "00c37f1a4af70fb9a85a05ed83e7a8204f9a833a37b462527d857fe02f1ea18f",
+      "executable": true
+    },
+    "training/tf/1_dump/README.md": {
+      "sha256": "91aeea6d461fb302046def338150d052558395ccc8abf9e33705cc4f4db49239",
+      "executable": false
+    },
+    "training/tf/1_dump/build_dump_tools.sh": {
+      "sha256": "6bc559345d754b971af1fc2c00f8fbc0f25ed1e5801a54f94666e5468c4645e3",
+      "executable": true
+    },
+    "training/tf/1_dump/dumpleser.py": {
+      "sha256": "d6393122efc788b103f0b9394958d027e8fa55159bef46306c3372f5f48dcf90",
+      "executable": true
+    },
+    "training/tf/1_dump/features_dump.txt": {
+      "sha256": "18ede96e515f806b65dc089e3f22811077822c106136fa0162318453121b00e2",
+      "executable": false
+    },
+    "training/tf/1_dump/features_priors.txt": {
+      "sha256": "eeb5bc43a209a1ba0b1bb8998042cbcac3362ba319e962f24a0fb5b436af4e21",
+      "executable": false
+    },
+    "training/tf/1_dump/features_stream.txt": {
+      "sha256": "96c811ba22c7648593965c2bdfe799850b51aaef4c3ffd77c7ce247df0762d44",
+      "executable": false
+    },
+    "training/tf/1_dump/trainmodes.patch": {
+      "sha256": "5dc9dbeed312fc521ea44621575b3ab87c878764e7c0d2c2eb9c8ba234e9be2c",
+      "executable": false
+    },
+    "training/tf/2_package/build_package.sh": {
+      "sha256": "9f15744f3d2f6fbde33e87ba42bbe63b11dde7325fc4ee6c64300873c22367bf",
+      "executable": true
+    },
+    "training/tf/2_package/dump_check.py": {
+      "sha256": "bb98d700dc54dcf271f4f426b7a824538e17d00b4247205d4f7a0501f69b47bc",
+      "executable": true
+    },
+    "training/tf/2_package/dumpv2.py": {
+      "sha256": "8592016e3914272c1f0b783f960446a3ce557b7220ea1202764097ed0d825c93",
+      "executable": true
+    },
+    "training/tf/2_package/loader_probe.py": {
+      "sha256": "cfc105503fafa4b45067698eebe3dc8a1a2e8f7e0c5d0f00380b6ad6a4cc5aaa",
+      "executable": true
+    },
+    "training/tf/2_package/loader_vs_dump.py": {
+      "sha256": "488fd25f82ce2a3a1baab5fa62b3196f949405c551921e8e8d492679c0f99cf9",
+      "executable": true
+    },
+    "training/tf/2_package/mk_pkgdump.py": {
+      "sha256": "3d169e220287bfb906428741168fbd91f9d7e70291d18b2ef0531f89b172aa95",
+      "executable": true
+    },
+    "training/tf/2_package/package_checks.py": {
+      "sha256": "36c543ff33720e2545ee9c0e41b998b6ab25482606ba2ae0d64efe68636deaee",
+      "executable": true
+    },
+    "training/tf/2_package/page_anchors.py": {
+      "sha256": "c02afb6cda2be408652ccf67783f0987c33cd7e289ea206b4a02870d85c3e351",
+      "executable": true
+    },
+    "training/tf/2_package/pages.py": {
+      "sha256": "bc2d75a3f0836ab66a6006a7b85abd1e6dd677fa1bbe823d1f8f6f784a1eba24",
+      "executable": true
+    },
+    "training/tf/2_package/patch_paket11.py": {
+      "sha256": "00cf4880286863ffe09fee5ec0806a04c46ef07b868505b460db41eaf980a431",
+      "executable": true
+    },
+    "training/tf/2_package/ppmd_bytes.py": {
+      "sha256": "dd24928005607d43cf39d212af1ef8255c2631a922579b7c7375c5bf59b4700d",
+      "executable": true
+    },
+    "training/tf/2_package/prior0_diff.py": {
+      "sha256": "9358d4817b48f74bb653899b540b07da0cd59a377bf7ff12560abfbf76a91fae",
+      "executable": true
+    },
+    "training/tf/2_package/prior_mask.py": {
+      "sha256": "d876d04af0d08c9aff88f2f682667c003aa6010995ea1c637aa0aadb1abb1b7c",
+      "executable": true
+    },
+    "training/tf/2_package/title_lengths.py": {
+      "sha256": "5e08bb77a90b47844126a10988305581806edf8f3bd3644052e6a69147c486b1",
+      "executable": true
+    },
+    "training/tf/2_package/trim.py": {
+      "sha256": "cb19d2c550f198ba5b0ccc1c9279a2726b6ca9e44ca3ec23337931cdf71dde04",
+      "executable": true
+    },
+    "training/tf/2_package/trim_inplace.py": {
+      "sha256": "6ffcb7f86e0476c6ffb5104879d32840b6ae2b671570fb1135831e12e95bd6c9",
+      "executable": true
+    },
+    "training/tf/2_package/vocab-bitmap.u8": {
+      "sha256": "d257fd4a869ca4f61d67bb487f4276517a4d81540098f76828403b298b29a70c",
+      "executable": false
+    },
+    "training/tf/2_package/warmstart.py": {
+      "sha256": "8f477cd798654e6ab559b02e48af2f2b1df3a6b360908a199f1cd8294fd836b4",
+      "executable": true
+    },
+    "training/tf/2_package/zpdump.py": {
+      "sha256": "df42676f98ab15a60e26ab8bcb2a72d17ac93b465e300e3b2a6e8dea0f516e5d",
+      "executable": true
+    },
+    "training/tf/3_train/README.md": {
+      "sha256": "78e5979e758ef9d3068804c3a617ee675baf29eba7dfb4a8a1aa30d0b86ae669",
+      "executable": false
+    },
+    "training/tf/3_train/chain/01_anchor_w2048.env": {
+      "sha256": "344546f2e2b91229cec52b5fd5a3c1362cb9ccb1c55096371fc9bd7ef3b6ba6a",
+      "executable": false
+    },
+    "training/tf/3_train/chain/02_w1024.env": {
+      "sha256": "5a3cd45fd759277cd5b8a15fcc28a3e0ae22ea688799e5225f0dd164c3a432d0",
+      "executable": false
+    },
+    "training/tf/3_train/chain/03_w1536.env": {
+      "sha256": "2114259c8136c99fe128d34e1aa71c0545f08b208fe24ac9c08ecc03efbbddcf",
+      "executable": false
+    },
+    "training/tf/3_train/chain/04_w1536_second.env": {
+      "sha256": "bafc638b785cda2bd15a22e36c2b3010bb7a0cd9ab18b9214a1cff2f459a201c",
+      "executable": false
+    },
+    "training/tf/3_train/chain/05_w2048.env": {
+      "sha256": "071da264a42c420d2f1b1dfa5acba4c4aab4606382578035fd0737cf46104d18",
+      "executable": false
+    },
+    "training/tf/3_train/chain/06_w2560.env": {
+      "sha256": "56f63cb9e08aaf29602c9a5715a63d1ab10a7da8d0799492b454915c2b173f72",
+      "executable": false
+    },
+    "training/tf/3_train/chain/07_w2048.env": {
+      "sha256": "2db60d0c89d7a450f7bc261d112c9a645c32d8b2219dfd385ea330ea9071e75c",
+      "executable": false
+    },
+    "training/tf/3_train/chain/08_w2048.env": {
+      "sha256": "7952dcde95311d267765107c9b0d6eaadad764ce7397139670c4aa2424d49e51",
+      "executable": false
+    },
+    "training/tf/3_train/chain/08b_w2048_resume.env": {
+      "sha256": "a6ccba3800a04759b428ab83a06e58724a802145cb6e364c6d8f303c507d8a00",
+      "executable": false
+    },
+    "training/tf/3_train/chain/09_qat.env": {
+      "sha256": "1d99434d3fee6ebbb50285462d94f58fc4145870b50fd19257292331425776d2",
+      "executable": false
+    },
+    "training/tf/3_train/chain/10_fp32.env": {
+      "sha256": "16b51db39845a054960e96618f481c59bc0963e716f0601b07991512f3d53dd9",
+      "executable": false
+    },
+    "training/tf/3_train/chain/CHAIN.tsv": {
+      "sha256": "e890a4135fe017fad35c00961d945f770b60c86ad4f93f2967046dd5169ebbc4",
+      "executable": false
+    },
+    "training/tf/3_train/epoche_opt.sh": {
+      "sha256": "d91a122b85116e22d03ae6cdb2a08744194be51d7db89f8b4a23a62dda48d232",
+      "executable": true
+    },
+    "training/tf/3_train/fix_subnormal_rows.py": {
+      "sha256": "1dab5e8e5ab842b3f6b7257a4e2a2aa6ef1a132a245378b90959dbfad91c206c",
+      "executable": false
+    },
+    "training/tf/3_train/fp32_arm.sh": {
+      "sha256": "c12c74ada6889434626980d4509b7e51d2b7d3d034db324cfc14a0573d8e9ee7",
+      "executable": true
+    },
+    "training/tf/3_train/geo_zusatz.py": {
+      "sha256": "d5261c2efacbc31ae675c981bd7898518645105503c54157d2c16557b9d76d0b",
+      "executable": true
+    },
+    "training/tf/3_train/kette_arm.sh": {
+      "sha256": "1c11c1746d0c5c193d7a16ec84af9dae3089119cb3e86fdca8e431acf2346e21",
+      "executable": true
+    },
+    "training/tf/3_train/prioren_server.py": {
+      "sha256": "be1ba9b6fa32b07294445d7c25a598afcc8a364cea655054429127ea4ae7b556",
+      "executable": true
+    },
+    "training/tf/3_train/probe_row_max.py": {
+      "sha256": "1784927bb91928dcf78e1ea7226726f3ea8d2d98ff872964c7d6de274b2452bb",
+      "executable": false
+    },
+    "training/tf/3_train/qat_arm.sh": {
+      "sha256": "11dcf703bff96f755ecdd820018c2e8b26890717c279d2bfecc9d049b1ef96a5",
+      "executable": true
+    },
+    "training/tf/3_train/setup_host.sh": {
+      "sha256": "4ae08a00ab4ee21172bfcdbddbb15999273dec5360e23d7ce88a4a248c5ac9b6",
+      "executable": true
+    },
+    "training/tf/3_train/wiederanlauf.sh": {
+      "sha256": "80a4e6e37229c76a1a41268e6f43a3d69bb434f52ecdaf0ec03b6d422a71d856",
+      "executable": true
+    },
+    "training/tf/4_export/convert_container_v4.py": {
+      "sha256": "b5263160a18e126dd7ba672eb193650659e554b23e5e5ae846b0bc00469d3553",
+      "executable": true
+    },
+    "training/tf/4_export/export.sh": {
+      "sha256": "5a16a1e9a030f67bc5614d50fccd895569eb65c2b3658b682a7a87530df03e29",
+      "executable": true
+    },
+    "training/tf/4_export/prune_dead_neurons.py": {
+      "sha256": "a0f5bc01704610f4e492f9b3688ecdcf88d3177257a54e5859d9886b1b88fb88",
+      "executable": true
+    },
+    "training/tf/4_export/weights-poc8m_w2048.bin.json": {
+      "sha256": "93fa6f75b582a2ccd629d2bb6be0f22c399004ae9c532f5e19ad220a25674692",
+      "executable": false
+    },
+    "training/tf/4_export/weights_compress_v3.py": {
+      "sha256": "9cfb3b1f1c39cc700ef569865e409d53b4849547f3d1b0f42f91476a79afa468",
+      "executable": false
+    },
+    "training/tf/4_export/wpack2_bf16.py": {
+      "sha256": "978ddad673d1ea4b7edcce7542f898d46a5bd73687b60d692d55b889f6ef4f64",
+      "executable": true
+    },
+    "training/tf/tree_overlay/paket11_warmstart.py": {
+      "sha256": "8f477cd798654e6ab559b02e48af2f2b1df3a6b360908a199f1cd8294fd836b4",
+      "executable": true
+    },
+    "training/tf/tree_overlay/run/export_chain.sh": {
+      "sha256": "b33fc54f29c3e3644f3e1bdadf1deb9f7552e7d75a502bfdd3c3465019eb250b",
+      "executable": true
+    },
+    "training/tf/tree_overlay/run/night.sh": {
+      "sha256": "80c0a470ccb387924e3ff3fa3ccef679078fc7859e5dde7b122f58b71e5ef9d2",
+      "executable": true
+    },
+    "training/tf/tree_overlay/run/setup_pod.sh": {
+      "sha256": "bf5fafd4928c9b21c9fc99fe3a2b933b9726b9f5321b110751b97a0067be8d4e",
+      "executable": true
+    },
+    "training/tf/tree_overlay/run/smoke.sh": {
+      "sha256": "e8d8dcd47b7ea72957cf7cb57fe781a657606f09ef26812c4dcc7bb2ce13d42e",
+      "executable": true
+    },
+    "training/tf/tree_overlay/tft/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executable": false
+    },
+    "training/tf/tree_overlay/tft/calibrate.py": {
+      "sha256": "38bf2f48418798ca422ca3cb4e4221ecd7bbe2846777bc6026b88687382e58bf",
+      "executable": false
+    },
+    "training/tf/tree_overlay/tft/config.py": {
+      "sha256": "76f3b1271ffb6fa705784e352c5fa7e190d9fa5d2daefbe0f46e797ca1db0e01",
+      "executable": false
+    },
+    "training/tf/tree_overlay/tft/cooldown_poc.py": {
+      "sha256": "c97853eddf9ea7e4a40bc66c8caa29f39ddaa0941b998f9e490edfa87d599960",
+      "executable": false
+    },
+    "training/tf/tree_overlay/tft/dataset.py": {
+      "sha256": "9e51b6bb41393493260b59d5f4b4afd9a3a1f4e5bb5578eeb196c7f8243d5e6d",
+      "executable": true
+    },
+    "training/tf/tree_overlay/tft/export_weights_poc.py": {
+      "sha256": "ff5331fc22970885e23a772d88a274f6f749f026e15e704d2827f21eda2f6b19",
+      "executable": false
+    },
+    "training/tf/tree_overlay/tft/param_count.py": {
+      "sha256": "6a682fa2170e0c915631015c88af2c470d3e5306c0a37ef3c09630c87b7dc090",
+      "executable": true
+    },
+    "training/tf/tree_overlay/tft/quantize_poc.py": {
+      "sha256": "a1abf1abe51a3a2d4b1df0d5aff593d20a2c04804bad74404e29b2e606fd9183",
+      "executable": false
+    },
+    "training/tf/tree_overlay/tft/runner.py": {
+      "sha256": "0974c86e38d3f1558e43172078aa4f235b003866f1547f9b916c015436a12a06",
+      "executable": false
+    },
+    "training/tf/tree_overlay/tft/stub_imports.py": {
+      "sha256": "0242753d93cf3040415d1deb6c8d9747b1e692a49882202e645c7f6417d39072",
+      "executable": false
+    },
+    "training/tf/tree_overlay/tft/train_poc.py": {
+      "sha256": "781f674ba02cabe7ab2390058013cf69cdcaf386bc8a93ea144dd4be1d79f941",
+      "executable": false
+    },
+    "training/tf/tree_overlay/zctx/README.md": {
+      "sha256": "b062d9d43de2f33ed41ec431c6648166d5569e83275ea4a69cb498c35cbcb41b",
+      "executable": false
+    },
+    "training/tf/tree_overlay/zctx/SPEC_Z3.md": {
+      "sha256": "3a62cdd2e1beb50bf611381d2ae0a0bff7cbb351fb83b0cf79da818121542612",
+      "executable": false
+    },
+    "training/tf/tree_overlay/zctx/__init__.py": {
+      "sha256": "fd15ec2bd5dfe41af3164e1d6dd2b08a64c9fdaa63b574aad0d7d57ebd9435a8",
+      "executable": false
+    },
+    "training/tf/tree_overlay/zctx/dryrun_zctx.py": {
+      "sha256": "2ec511a18820c67ed8deccd0f6d4468024711f0308e0a3754d6b5bde726343b4",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/dumpv2.py": {
+      "sha256": "8592016e3914272c1f0b783f960446a3ce557b7220ea1202764097ed0d825c93",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/eval_zctx.py": {
+      "sha256": "2cb786040c85026d19b980b4861cc892dd6aaeb57ccf74fb1bc8f912d63f3a0c",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/gate_dry.py": {
+      "sha256": "5178532994356cb4ad6a0de305d6344f9f9a5a556eb7945cae2e6684fc83942e",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/gate_eval.py": {
+      "sha256": "a41127c4e6247f195d45de7842b0877d949010e349b5ca6ec44642f05e431ba2",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/run_zctx.sh": {
+      "sha256": "3217ebd1cdbba6cf1e9a1f22dec2dc4cb9bf67076ff12f4ca80918df745187e9",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/slice_lite.py": {
+      "sha256": "f72c53f03a36871347501de04676882be5f326ad3e114fde0c1b5397666d99af",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/z3_extract.py": {
+      "sha256": "574b387a726c796052addd8c3694572d2dbb470b7411046564b63d675de16613",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zabc.py": {
+      "sha256": "5bb0edc9825f50b6640d0efe3dd7bbd22ce20b352266d644af9c86df9e39ee77",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zfeat.py": {
+      "sha256": "ccd69f21ea8bc99563b64ed609558424d436790cd09a323ff0b5edccd49fd966",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zgate.py": {
+      "sha256": "d0f36dc1bf05f7f93684f515f819d6afddbb2c9d288e2bf7adf993da0cf10126",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zgrammar.py": {
+      "sha256": "39e4b17c27d0e98889d2bdc834c5eb2c6a8a8d48eacbbf25a6eec7c686339ebb",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zlast.py": {
+      "sha256": "97fd44623cd26db8b45d46c7c0be3759e57f8b968ed802b0408fac6462ce66e9",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zloader.py": {
+      "sha256": "2870e97044b4aeaef5f54ba183eb26480722fc440812b084db61a662d6c48579",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zmatch.py": {
+      "sha256": "578ac05f65888aa124233db06aeec7fcb63c3241fcb9102ce3bfd2db12282d17",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zmodel.py": {
+      "sha256": "fa7a7e1ef490c45d34bfa417de90f602a12362ff8cc99b2691d1c79a98f2ce20",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zone_eval.py": {
+      "sha256": "3ed2f042a63cf1fd5b5daf5f37d6d8bd8cf655806e26d1b88c08835f2a4045de",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zonemap.py": {
+      "sha256": "5594311aa133cc6b385aaf6b43d1b6075aa2fb80f42d538a78293938ba17fa8f",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zonemap2.py": {
+      "sha256": "09632c14dabd66fbb40e4a63d600422841f6b8340c28e60e9863eea067fe158e",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zpaket.py": {
+      "sha256": "38d8b362bb43588aa5386f2a203382e244f359c0e2b3f846d6abd2adae7a6a0d",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zpdump.py": {
+      "sha256": "df42676f98ab15a60e26ab8bcb2a72d17ac93b465e300e3b2a6e8dea0f516e5d",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zploader.py": {
+      "sha256": "375620e231d85f50b0a8ed043e7363c4811697e8d25458e9a153a43a5b459883",
+      "executable": true
+    },
+    "training/tf/tree_overlay/zctx/zpmodel.py": {
+      "sha256": "98a77b09db2cb600fd148c5aa30bdd7c64638be6f6e44fc2d3562183f418decb",
+      "executable": true
+    },
+    "training/tf/tree_upstream/.gitignore": {
+      "sha256": "97f0a2ca365326daf651ce623fec93300b341351fdf118bab2af91aecb607b23",
+      "executable": false
+    },
+    "training/tf/tree_upstream/LICENSE": {
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "executable": false
+    },
+    "training/tf/tree_upstream/README.md": {
+      "sha256": "805a5b9f0d061b38271ab930f5094643c88b29ca4c79681b536aaa2044cf40f0",
+      "executable": false
+    },
+    "training/tf/tree_upstream/build_and_construct_comp.sh": {
+      "sha256": "92566f3a8a6fe08c91635a35ac021d18c78487991e63f29bcd66b024123cb796",
+      "executable": true
+    },
+    "training/tf/tree_upstream/cpp_infer/.gitignore": {
+      "sha256": "4563c0d2cede7bcb689f27e90beb847b6c2964e1e0490a3c20e4c373d403884e",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/COMPRESSION.md": {
+      "sha256": "c570a2beaa79f4d952b6e44c412dfa16de4e54a45652392f082e2e9b3e85daee",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/KIMI_SEMANTICS.md": {
+      "sha256": "c77114db2fbe189ad9c0fa690126b5f5ea9b0a4165bbf9603f8e73be1bce4037",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/MACHINE.md": {
+      "sha256": "760b91f7ba038c8a2ca476db8c44e5a72859fdaf3105c01cbe7d6ea3b12f6a6c",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/Makefile": {
+      "sha256": "4c99670a8a76ad919101acae5f5308c8162ea5770432280c6d80e19f57af4526",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/OPTLOG.md": {
+      "sha256": "5b37b115cdcb7ab0e77f705dfbaff69d9ca0ed1e84123e9060d97ee9ac667f4f",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/REPORT.md": {
+      "sha256": "8deca171e0834c54026f625e6c81679ef0e220a58f8460c8884aa7646bc39a83",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/SPEC.md": {
+      "sha256": "23e57c3fd18e35ed5f3600624c3c236e91d0b451ef001f02b641f0e4665d52e9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/THEORY_DRAFT.md": {
+      "sha256": "3a16688c55f4bad2c891a7d7696ea78080533732107130b87d16dae7e109c7b7",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/Makefile": {
+      "sha256": "c2cab99f0adf64fa1400365a214e265f1acd1d27390730ab3dd4aab1d1365042",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/alu_peaks": {
+      "sha256": "9368dca6b4fe616daa52137ce2fe22e0a701281d1a04dd4279889978b0cabae9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/alu_peaks.cpp": {
+      "sha256": "768c24e7222d7e6be0b618a0402d476041efbcf76811fc16225f09c611a36052",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/bench_common.h": {
+      "sha256": "6bb3f2fa6375d50d5080137323e1f98f4ddddf50df706a15b0b7b635612039c7",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/gemv": {
+      "sha256": "0cec7cfb6e05f5f27bd13758bd9ac76139579dde4c2ff09c4d42d2e0c738c5e7",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/gemv.cpp": {
+      "sha256": "4755e30a78197ac810b958369093ab3882d1c249508b148284dd17829050cc5e",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/gemv_clang": {
+      "sha256": "f0c999a5a54addf34e82d7a5f799d7dbb9e86aaf49c05cbfc3a61d979b417bfd",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/l3_thrasher": {
+      "sha256": "a047d1c0978bbed85793e391b32e723e32e08bd79a06c29dec7402bcbb7a5c66",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/l3_thrasher.cpp": {
+      "sha256": "ca1a49dff1041d6e566a7150039491057f10dbb0e7835984e20e9c4420060105",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/membw": {
+      "sha256": "5404905c60c68ad2825104d5d605e8c6952a8bd854a875f3c973c1b03b106975",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/membw.cpp": {
+      "sha256": "6065565a16466f81c52edc6a2d3b0d2c7919f1856ed1daf70837b500ffc87cd9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/misc": {
+      "sha256": "c7a44b6be3dac1e8b8b52e0e63086b6eaf83a2e49d67c5a81c1a09508db75bef",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/misc.cpp": {
+      "sha256": "08f3855abc24951b479d735110dcb368bce610cb013f31f1563a77099b3e5286",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/results/alu.txt": {
+      "sha256": "9d34d6e1612cf2f3246ddda13147a17a05e21aa4ed3babcc20e446b2d398583d",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/results/gemv_clang.txt": {
+      "sha256": "39ff3478f0e7e2c2be4e9e8a1d60eb3d4036c07035547129152678f4eafe0c2c",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/results/gemv_gcc.txt": {
+      "sha256": "b932e7551abcbf4da811142bd665e6840645224aa6d6b91a40d72f3f4a4869bc",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/results/membw.txt": {
+      "sha256": "a47ac3454cf5714ccd8b8cc1e75984dc44f423ec14aad49a460c9791e1b8f5ad",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/bench/results/misc.txt": {
+      "sha256": "4957e4fdea5ea51100b87601455e6347e7054283aa5f96597694f8837931f8d5",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/bench.cpp": {
+      "sha256": "717fe1f6eb46572a7747e4a6f0bf4ce6ec69b3f57702404a6679d4fdc337390a",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/kernels.cpp": {
+      "sha256": "d0bb895c5623a542162bf67cab5e3a736062908a7d32b05702755c645b9f27fd",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/kernels.h": {
+      "sha256": "b6af238f9fec0ad62efb660ec73c28a5bacc39bf41679bc8ae369eadbc091709",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/model.cpp": {
+      "sha256": "c4f613a7ed3f7ca4f4fa8936a63351b4c2c01bd13645e5c2b092ec49975d48b8",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/model.h": {
+      "sha256": "419cabf66913116f4d85fa19227e6a49cf8570b9230d89e82efd6b0d47c0f479",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/npy.h": {
+      "sha256": "e3396effe32e78ed893be4e68853f702b8d3ad058688ae6836f27073dca949ba",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/Makefile": {
+      "sha256": "3dab839df1560c503ed6135a4126af39741167819277d0263c913136e9ab36fe",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/Makefile.attn": {
+      "sha256": "59ca4790eb980fc6d12ff47cc83ae4e0f5427aaae074e87a09a5a1a19fb5b4af",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/Makefile.glue": {
+      "sha256": "a9e2217ed35ddb977c9bb0a263b3aaf7a56b03a2dfd0f9a866a03bdb6fb2ce4b",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/Makefile.kda": {
+      "sha256": "429bf5ed20866d36cc4776da18530a93d6179c2d6b933f92c4af195951f6b0b9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/OPTLOG.md": {
+      "sha256": "d36e40f116a54936677a8fb206309f7d92beebfc32bc419a7bd6c53f9aaa528e",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/arena_build.cpp": {
+      "sha256": "d5a439ee00ae3d09f4db0e69a163e144a2aa82fc62a74075f95147b2c0b179a9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/arena_build.h": {
+      "sha256": "098090a1fc9cefb01881325f9d648e5df3228435fec3b89f2a57dcbb933b4aa6",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/attn.cpp": {
+      "sha256": "9991e1d1b2814ef0f41b0e1f37b6f273002f98777bee5d7fa5206f90cc03db11",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/attn.h": {
+      "sha256": "b8c728e30fb0ef5781e46970ee59e157bdfb53cb557383dc0677fe8c20e40048",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/bench_attn.cpp": {
+      "sha256": "756ef790e44c92f1b6967135013efa53d07450b1e1637f94d751d2df7cbb5bd9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/bench_glue.cpp": {
+      "sha256": "b9249a1a3cea3537d16446a92b9b51e88185a486fef8270867d8ed8e702b9a7c",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/bench_kda.cpp": {
+      "sha256": "fad504c7c845e60c6aa3f7b3349782014b7804023eff0a28bba3375e2ac0a9dd",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/bench_opt.cpp": {
+      "sha256": "e3a36497982e298113ed3040ecf4956edf39397554bcbf65c1be4602c7fba8cc",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/bench_qmat.cpp": {
+      "sha256": "a338f0b1611272a2d78a6fa3395f28baea5d0a06d245a92a8861b31d300d5a51",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/capture_qkv.cpp": {
+      "sha256": "74ff97e50f80ae3d2555fd49e7d4f8797a439aa23725b54a923d6fd4d98fe727",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/glue.cpp": {
+      "sha256": "36f3b2f7ba64369373609a8ad454b90d58b899fb56bc7d4ba1a80cd15aafde72",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/glue.h": {
+      "sha256": "b7b6531c413573618b5942f426b170724903755c83cae87e768335a0c7bc4345",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/kda.cpp": {
+      "sha256": "06c66e4518720872a6b8597da36fcbe04fb4a5df6966655c39bea44272d14dcd",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/kda.h": {
+      "sha256": "f878aac685e32e249323def8e28838f8c11069a5e557fa0725aad97f59615820",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/kda_math.h": {
+      "sha256": "b5bd271535a91a4b372a68e71eb9b84d60b958ca5bfbecd8a2fc7ca3a2610807",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/model_opt.cpp": {
+      "sha256": "b49493ece5a3a135baa24eeef00d6aaf56335324d0c6355b7283e46736c9df8e",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/model_opt.h": {
+      "sha256": "cff755873e9539fe215335649aceefda9bc2ceef08d47bed8813469e2ea82035",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/pipe_probe.cpp": {
+      "sha256": "eaa00154b8f494d7a102e1491b15296dcba0cc9b0cff11ec00bbed11f490e63c",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/qkv_capture.h": {
+      "sha256": "5bc7e594391e96d4869d23c575d2083029f399a0bc517ec9a447249899bec000",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/qmat.h": {
+      "sha256": "c73cf5e26db7a6bea86d6ddca43f9639ff628a809ba47b950a1f8ca15fb4ebcf",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/qmat_dense.cpp": {
+      "sha256": "a96a3bce2d09e6441767eb79604308941e33848a5a78a75633c35f33475d9d28",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/qmat_dense.h": {
+      "sha256": "8eed632cd8dbf25ef1b964791e1a8c7cec11bd6defdc82ebde199c8a75f32ed9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/qmat_sparse.cpp": {
+      "sha256": "1ec094aaeea74732b71535d5adcb7e493a3fc0dea02327dd3b00703d1010d207",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/qmat_sparse.h": {
+      "sha256": "34b7607dbcd23cf443b879d9dcc9f2ccdfdf94e163cfa58dd8c7c7f2a921bcf8",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/sparse_acts.h": {
+      "sha256": "b78f4eae098888fd5ca57c0af6745780e80c22249e048aec7b96071cb6ff8eb4",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/test_attn.cpp": {
+      "sha256": "12af2b337cde19a8da0098e2d1b4fdf7b2dca0522143b710784b0cd3aa89b176",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/test_e2e_opt.cpp": {
+      "sha256": "7fcc7b524627249cd0aff0672b5ddcfdfbc1ff9add555be68ae90579f661778b",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/test_glue.cpp": {
+      "sha256": "778c1e76fe2fc672bdcbf8b44ee1bece1f73bcc9cd9fe92367a3c30287d8faa6",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/test_kda.cpp": {
+      "sha256": "ca2ff1dbe905343be13d07ecd55b595d0aaecf400dd4c5d585a3eb1e7e7f3f10",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/test_qmat.cpp": {
+      "sha256": "d8317f9a4c473883a66c3a2a45690bb30de7abfdd7625c9e7708c8028d201e29",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/test_xcheck.cpp": {
+      "sha256": "95494f87accc4e5f5ee8c01d983ae4e09454198f4a7cce0960807e9ba93677fe",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/opt/vec_math.h": {
+      "sha256": "062a9ecd7549cee76105cef1efc46187b6e3f1548c3deb3ad6fcb05e0243c848",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/test_components.cpp": {
+      "sha256": "95d2f8f2c9957d8569074a30ad99f8021be12733acaec5e17feef27d300ed469",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/test_e2e.cpp": {
+      "sha256": "803c17e8aa29bf9b788edc82ae98ef8a7e855c9d227d2239a15476c7d9816a64",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/test_weights_compressed.cpp": {
+      "sha256": "0eb136cfe217e185c0bdae2a71431cb2eafb7017ba79d55f5e0456822e492d32",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/testdata.h": {
+      "sha256": "8e80f1183203cfb4eb7081d194f4a1fbc4d4f2ef1b61c34089416f5d670117df",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/weights_io.cpp": {
+      "sha256": "5b505339a8a3410661b74d2062d3843359709873dec0e759199a0f2a24f2b323",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/weights_io.h": {
+      "sha256": "c6abb82b462baa1a10c5244fa8ba52852397fc2b09950d483f9fc3873fd972ec",
+      "executable": false
+    },
+    "training/tf/tree_upstream/cpp_infer/src/weights_io_compressed.cpp": {
+      "sha256": "d13fb385f7938ff84b2a5b2a34e09e17c14af3b6c321f020262e96e97c5c41a6",
+      "executable": false
+    },
+    "training/tf/tree_upstream/dictionary/english.dic": {
+      "sha256": "4c8568cca9343b9a6212477880f56f8efd162f8784224a25edd043097d36215a",
+      "executable": false
+    },
+    "training/tf/tree_upstream/make_training_data.sh": {
+      "sha256": "8cdeb420ea2987cd82bde3c2f6d5237a1f5e7dbd8c23e387e1893d7729936a02",
+      "executable": false
+    },
+    "training/tf/tree_upstream/makefile": {
+      "sha256": "3c688f265addff7887f1f0214a2d8dd6bfc9ef3abf8b34774541027677de2986",
+      "executable": false
+    },
+    "training/tf/tree_upstream/prof_input/input": {
+      "sha256": "890b3e1210a24a249768d86bd5a79a1775ce19b2d56984ce3069ee26359ef2e6",
+      "executable": false
+    },
+    "training/tf/tree_upstream/prof_input/input2": {
+      "sha256": "7dc711344aaa6e9b8fab85cd4b5b5e97c3be4d98c29b2c9f479ab774a3c7cbc2",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pyproject.toml": {
+      "sha256": "647e8feda399cb6f46d856fc9914a9922ac8a40a8473df952c68d09e153f0bb4",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pysrc/attention_function.py": {
+      "sha256": "1ac9c5f59d0f881565df23c4d809646f5adbe2eeb42059d3713a4cf82fb6973f",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pysrc/data.py": {
+      "sha256": "efbe9715ea468b71da7534b70cfb0c076d85a63547cfca3e5a8b1a19150b9675",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pysrc/export_testdata.py": {
+      "sha256": "00119424c5a1ef137d6eba265d87e89e07f40e9ca80ea86fec8241fa5acf59ae",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pysrc/export_weights.py": {
+      "sha256": "bac19094137e6cea761bf336f178ba55dfee2a12a6cd0dd1d4a88fd95c6df817",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pysrc/kda_reference.py": {
+      "sha256": "c34a3a43a0c894400db62bba2c2aebe47544ef9e2bce1a72b8872c275faca5fb",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pysrc/logger.py": {
+      "sha256": "377b428957f8f3f4cd34fae55bcee42093d047fb16ecb849612c0a0c6562a529",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pysrc/model.py": {
+      "sha256": "5f8a5dfe8c4db881fdd02bdc7ef6704a506f62d020f803ba348084ccbf3b2052",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pysrc/optimizer.py": {
+      "sha256": "ea967d5d531d986c6e65998018e64305fa8877996aa04e1b05e1f9c65911fd0d",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pysrc/quantization.py": {
+      "sha256": "076dba090af4d9bb97c97b411f902fa11d46cc35d00d75f35146a74cf1c708b6",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pysrc/save_outputs.py": {
+      "sha256": "a0363b5a1b5df5a0394b6ca1ac077a2d11103e7221539a318072491e841eb010",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pysrc/train.py": {
+      "sha256": "3cc33ea206fca4085ed2b0ce52e4addc92ee508335cb13c213e2f7d7e0c283f9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/pysrc/weights_compress.py": {
+      "sha256": "eb3a5404886f4cc8b67a0197385ef1f0f220721707f269fa54870f28ba53e6c8",
+      "executable": false
+    },
+    "training/tf/tree_upstream/setup.sh": {
+      "sha256": "ae2b9c7d748e037c839929c14ca39f095e715469cd757fbb66571842d438672d",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/article_order/embeddings.ipynb": {
+      "sha256": "a86234dafff5befa01f0df521d67ec48da0bf4ecc3dd3191777f53349a92cbfe",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/article_order/kmeans.ipynb": {
+      "sha256": "96b2faeea49657643ded0fab8840ef2332c81cc04e5870d117fe3b4de49a4337",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/article_order/manual-sort.ipynb": {
+      "sha256": "e0c4094c5c803bb5cb2e56739344df3b7f32d234acc440205b810447afecf5ac",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/article_order/tsne.ipynb": {
+      "sha256": "f794eadc7289e55acd84072ca4903722015e3735603c38adfb09f7a1f750d6c0",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/coder/decoder.cpp": {
+      "sha256": "1bae2c108906625fb124f3fc602d1d59d814e5a415d963ab74246bf474e8bae9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/coder/decoder.h": {
+      "sha256": "5c2e452d5264b83782360711e88c68917159fdf9e0863f4d75cc36d4fe0d9237",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/coder/encoder.cpp": {
+      "sha256": "ecd9a2f4f39553e3864c8e9c96c7b512edca46a6fbb3197beaccaf47b0a8fdce",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/coder/encoder.h": {
+      "sha256": "0697c4231e3d87771adfc96e5689e15337f224e62795085cd0f848c84badf813",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/context-manager.cpp": {
+      "sha256": "44f43a0140d44de900ccb0d247147b34b1baa9616361cbe76b4c33eac432b94b",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/context-manager.h": {
+      "sha256": "15400f9fd5972be00dde69db5892457a29b3259c2c0c7ece98403176d48d447c",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/bit-context.cpp": {
+      "sha256": "0f2605156c1cd9e90b0b70169ba184ff72537f90020f18a74876a11577925506",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/bit-context.h": {
+      "sha256": "fa3a932d1b4ef0dc5f660a293ebe86afb318268da7c83485bbdd36880299a7eb",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/bracket-context.cpp": {
+      "sha256": "ffb996be7888caa227058dedd4832050277f03464b0d1013e6e8a0603a12abf9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/bracket-context.h": {
+      "sha256": "e9f510af2777a8b342110a8e184a6812958bc4299dab68e536c8ec4febabff0c",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/combined-context.cpp": {
+      "sha256": "4bdd607bf45fccdcf460cb74f8e73e19a689b8df3049871e84591c1a14c6e284",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/combined-context.h": {
+      "sha256": "241e799a89af6fdcd105f596661159e094cc387786d52de67dec88c678c3de29",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/context-hash.cpp": {
+      "sha256": "f2c3d36bc84f016bb585676c8696ef8a17a0a4a27bb6643fce833c1248db55a7",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/context-hash.h": {
+      "sha256": "f628396881311b76e796b6305f0f26e5ca469da17271c0f3c872f6e64de6c85b",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/context.h": {
+      "sha256": "b6bb88d7c422ab3d7108fe5aabcde2c648e778b43c5ee853979d3cf6ec1df59d",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/indirect-hash.cpp": {
+      "sha256": "1441db11d1492910551d69125d8f55b89f4793938131627ac83987739f372cfd",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/indirect-hash.h": {
+      "sha256": "259210715b180de97350f32b4506553cb0685e625a0a982dcccd03a126ba3731",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/interval-hash.cpp": {
+      "sha256": "03e09f9c5e422682c7366bd17afe77a0e1155a16fa780d53ab4434609ee99c7e",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/interval-hash.h": {
+      "sha256": "6ab2fa3114b0e68b38a777989a3236c17a0bd7c0d19c95c3c1af067b614410f9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/interval.cpp": {
+      "sha256": "075af777c69ffea7efd26452b8ef17062d2f674de903191fbdbdfbfc29ee5afa",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/interval.h": {
+      "sha256": "50a1fa8a292160014bf75f9110f879679fb889e9a120090d47a3aa6680f3c7fb",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/sparse.cpp": {
+      "sha256": "9eda6f332a64caf48569ff00ee88a1eef80dde398ff1184a20653b31fb706305",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/contexts/sparse.h": {
+      "sha256": "202f5ee5393e70853ea294f91444d90e9b973726bd86747c42a39ade013ac4a1",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/ds/AlignOf.h": {
+      "sha256": "7668044291e14bbb7b56b435819f2f5050cc16d8459b6c720fea4da56a796900",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/ds/SmallVector.h": {
+      "sha256": "743c725e65f3b336073f6222ece7a49eccdda4498edcb604664c0a47b1b2cd45",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/ds/SmallVector.hpp": {
+      "sha256": "3ec8c6bd7fcf2ac998afb362dda72a494f70c866a2cd3f392e61064958992bf2",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/ds/emhash_map.hpp": {
+      "sha256": "2d84c685c62acd28f4c66e9498f244c472ae898aaa0902cbc0feeb5a0c6af83a",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/ds/emhash_set.hpp": {
+      "sha256": "d9405c502181dc76378f33cf919f76294dcb5f0c9b219b485c76d222f89bed7b",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/byte-mixer.cpp": {
+      "sha256": "0a371b43cd41ac4e8710131a60da0beff2c6f9239925bed7c6087f1e2856e506",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/byte-mixer.h": {
+      "sha256": "3ffbec9d3efc847136d9339a9df388153411419f0449c9ec0d549a7a9ee09f0a",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/lstm-layer.h": {
+      "sha256": "3366ccfcbae9fddf77b8390082377214c720ebd614523c72b2832f82977cff56",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/lstm-layer.hpp": {
+      "sha256": "1f7fad6dfc5512eeaf6da98c75a9e95a04e7c451522ff34af38719be408fa22e",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/lstm.h": {
+      "sha256": "4bac5574920c7c4e0f2b2aa7ee2e79d29a1ddcd7be5e04d546757b3fa5be8db0",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/lstm.hpp": {
+      "sha256": "aa89107f66944f4d39bdbfd7c534ede4a72db21fa79eba4dc320b218a19e3a1b",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/mixer-input.cpp": {
+      "sha256": "841f8c6c5ea1ac554f99af94cf43185b025248aa5f2532b0ed0843979333e033",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/mixer-input.h": {
+      "sha256": "fa30d2b24b83201da450f68820c6e646e5788dfced505c686cb65916501e843f",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/mixer.cpp": {
+      "sha256": "6fb3e2df88429382452b4df6095b0604a7fe84953678b839e2ec0b01b8193a76",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/mixer.h": {
+      "sha256": "6a32194ad23ace57d66d0cb64b028698d405f0a3b56c53e20cd43f1fb284914e",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/sigmoid.cpp": {
+      "sha256": "1c7acda49b5c9933f71cad26ebff10dc604b27db7cccdcc387fc5bb87f61a4e4",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/sigmoid.h": {
+      "sha256": "1a4be048627e62c17ebddfe08fffa7deb2773c699ed520970c400d9a7cbf6ffd",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/sse.cpp": {
+      "sha256": "843b10a1fa5037238f50289abe7375b8b1a2ebc9432317a3cc875bd8f356046d",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/mixer/sse.h": {
+      "sha256": "4391c25e8e674f455ddccdfe8bea3beaf575537ea0c58cad459e97e041075151",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/bracket.cpp": {
+      "sha256": "1e2de39d146b910ca50354b3efdf7f2beb5f68c81139a20ce235fbb4364f4ac2",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/bracket.h": {
+      "sha256": "5a81e94a6143ee79a28060adcbbd20e7c0c1030ecb6b7f7244a43aebf9e095be",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/byte-model.cpp": {
+      "sha256": "86340c1a0a2fc9d14c0ffd5fb93c011bb705678fdcc1c84839b4ec5a1e77197e",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/byte-model.h": {
+      "sha256": "815a9d270c0feca69f39e72087063e6a74e6fcce75bf98b0818ec6a7da8ba383",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/direct-hash.cpp": {
+      "sha256": "f8438540a3e2ddcb46fc68e18dc5b7f6ef102134e9c58152ccfd5850df0e19b2",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/direct-hash.h": {
+      "sha256": "d6c509322160901bfbdf29768610f8e53be95f8bf83c29df057498080bfd4f5b",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/direct.cpp": {
+      "sha256": "5ccb5871493a5567de906d139ef43d0e6df8fb5553076ef840f56a9256d555e9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/direct.h": {
+      "sha256": "9053bce81cdc83a171c87a775cb2bf314d6b10b95a844cf1150d475a948966d1",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/fxcmv1.cpp": {
+      "sha256": "b3de8853b1577ed9b6276abdb61e9b446fdf0b4bf42a3106c4aa98d3fea70b6c",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/fxcmv1.h": {
+      "sha256": "0ad7b51972b685ac38cf8f8d959bdd9da3cbdd7ea73decc56c09042d41d51205",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/indirect.cpp": {
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/indirect.h": {
+      "sha256": "8a83c265c5a0dfdb5a7f7d5e201f72e62518575e8c68b98cb37343db2f3ea256",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/match.cpp": {
+      "sha256": "e809d7f2665dacaca673eab675fa591b43f105b6dfef91c4625cdb51ada18b81",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/match.h": {
+      "sha256": "5a66520946a0f9770696a72f80391d2e30ab500982d64b512e53f1087bf2e456",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/model.h": {
+      "sha256": "031c62ac432d3e477398011e860fac3960f58c6b217a443e0d8d733920f02abc",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/ppmd.cpp": {
+      "sha256": "f666f525675c3fdc1bdacc8e1542c38eaa93b6f9c1c53666b5ba0de9989a5990",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/models/ppmd.h": {
+      "sha256": "d6261894d07f41101b95e83518028402ebbafe55cbb7da415233e7099c32d50d",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/predictor.cpp": {
+      "sha256": "0b79f43644daee942c9cb6da18fa464f0eb0185b6fc7ffc43cde703808fe537e",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/predictor.h": {
+      "sha256": "348d3924fc4e1f4890d0332b0f33ba9591afa6ee06971b9a9bdeaa376b41f458",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/preprocess/dictionary.cpp": {
+      "sha256": "c0c3dcbf4b4e89bca9af7fb896d6dcc6c524f6ae592a2bcf71691ed09161501f",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/preprocess/dictionary.h": {
+      "sha256": "612d88e769fa222dc846df5d817d89218500490e5a02b4b46ddbf65ad98fdae5",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/preprocess/preprocessor.cpp": {
+      "sha256": "52e5ae9d03bf9dbffb3e7e99451f51e304809298de7e20ba25b52c6158c97af9",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/preprocess/preprocessor.h": {
+      "sha256": "723670d654c52b89e3f10d6d4a3532458edac5d6a9fca425169109aaf3d0a1d1",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/readalike_prepr/article_remap.cpp": {
+      "sha256": "7d1957ec837061a134f5427b35b86a3a9035f64e39b4ec273733bc6b622878ad",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/readalike_prepr/article_reorder.h": {
+      "sha256": "a8a98f135013cedb2f2a772b87e51cdb58cf877aeca56c3930b9f7f6e4925e93",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/readalike_prepr/data/new_article_order": {
+      "sha256": "4d0fa5313c753c1ecf71e91a83e285894cdde20049711456e6514c07eb85c581",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/readalike_prepr/misc.h": {
+      "sha256": "37f45b006308224763f9fa61ca5190e4ba977458ac25d537ae754a83e807306b",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/readalike_prepr/phda9_preprocess.h": {
+      "sha256": "ceef7417a7b6906f0c41f8b0e0277e441ca638ceade3cdd37269d79d2743ba76",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/readalike_prepr/self_extract.h": {
+      "sha256": "ad03e7d7a2e230d25ca25a2d6759a2a7fd068a037f72eaac51ecb0a771a16786",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/runner.cpp": {
+      "sha256": "7d0f28c6298bc112a5a6d6f6be0ad825dff38b2e070d16a406efcde69cbd6bf6",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/states/nonstationary.cpp": {
+      "sha256": "f47be85b6a11f05f63473f3b01fc658cac1f6df54ea1b9636ed93ea5d7f47d14",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/states/nonstationary.h": {
+      "sha256": "bb88ac7e53a12f8f8390429ec4913c179c3f013d4cee89f2267fe5cbca7a0311",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/states/run-map.cpp": {
+      "sha256": "6d4b977b0d2e4d1c0af7a6a58733592ccd305469cb1fb289c181932599783fb8",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/states/run-map.h": {
+      "sha256": "0ff8abf2ef885ce60ec42f1077e4f1cf24c3c7143fbd73ca0fcdb176c3b025fc",
+      "executable": false
+    },
+    "training/tf/tree_upstream/src/states/state.h": {
+      "sha256": "f455bfe3a2a2072831022122a82dfa2ae8bd0dbff27e0b8281c3c4566060711f",
+      "executable": false
+    },
+    "training/tf/tree_upstream/training_recipes/cooldown.py": {
+      "sha256": "55d893427ce44af9472c987e16fad02a8f20f6c0477cd7a0bd748ae65240587a",
+      "executable": false
+    },
+    "training/tf/tree_upstream/training_recipes/quantize.py": {
+      "sha256": "e43cad80d1090a530c1f4ea1d53d6bc4693fc7fb5301041527387f6b4693b3d4",
+      "executable": false
+    },
+    "training/tf/tree_upstream/training_recipes/quantize_sweep.py": {
+      "sha256": "65d1082a026ae55c2659d6b6db8e3c349e15f179ce287925ef41ba8493ad5e95",
+      "executable": false
+    },
+    "training/tf/tree_upstream/training_recipes/save_outputs.py": {
+      "sha256": "0b7f54e4fba9f23e87b87b4e0c70062b85b538cef14e99f26a623ac514631a92",
+      "executable": false
+    },
+    "training/tf/tree_upstream/training_recipes/train_6m.py": {
+      "sha256": "742847856595829ad4b85997ec2bc61e7d7a9b91c92bec7893ba40ee1d2c42a1",
+      "executable": false
+    },
+    "training/tf/tree_upstream/training_recipes/train_6m_v2.py": {
+      "sha256": "86b148758f89734ddcbf766087027e3adf7ee526e379545f992a6af249e465b5",
+      "executable": false
+    },
+    "training/tf/tree_upstream/uv.lock": {
+      "sha256": "b20f3eedccc07efd74bf11cc88607c5612e604575ac906c5d5f1d330804cbb0a",
+      "executable": false
+    },
+    "training/tf/tree_upstream/writeup.md": {
+      "sha256": "84444b62bf27d1db709c0d35b512ee9b85823e9e668568f2cbcdc724acfab6a0",
+      "executable": false
+    },
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719",
+      "executable": false
+    }
+  },
+  "source_changes": {
+    "changed": [],
+    "missing": [],
+    "added": []
+  },
+  "weight_binding": null,
+  "bit_weight_binding": null,
+  "bit_blend_binding": null,
+  "metadata_binding": null,
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "cpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  4\nOn-line CPU(s) list:                     0-3\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC 7763 64-Core Processor\nCPU family:                              25\nModel:                                   1\nThread(s) per core:                      2\nCore(s) per socket:                      2\nSocket(s):                               1\nStepping:                                1\nBogoMIPS:                                4890.86\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid aperfmperf tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves user_shstk clzero xsaveerptr rdpru arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload umip vaes vpclmulqdq rdpid fsrm\nVirtualization:                          AMD-V\nHypervisor vendor:                       Microsoft\nVirtualization type:                     full\nL1d cache:                               64 KiB (2 instances)\nL1i cache:                               64 KiB (2 instances)\nL2 cache:                                1 MiB (2 instances)\nL3 cache:                                32 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-3\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Vulnerable: Safe RET, no microcode\nVulnerability Spec store bypass:         Vulnerable\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Retpolines; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Vulnerable: No microcode\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected",
+  "compiler": "Ubuntu clang version 18.1.3 (1ubuntu1)\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin",
+  "linker": "Ubuntu LLD 18.1.3 (compatible with GNU linkers)",
+  "compiler_driver": "Ubuntu clang version 18.1.3 (1ubuntu1)\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin\nFound candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/12\nFound candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/13\nSelected GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/13\nCandidate multilib: .;@m64\nSelected multilib: .;@m64\n (in-process)\n \"/usr/lib/llvm-18/bin/clang\" -cc1 -triple x86_64-pc-linux-gnu -E -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name null -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -fdebug-compilation-dir=/home/runner/work/hutter/hutter -v -fcoverage-compilation-dir=/home/runner/work/hutter/hutter -resource-dir /usr/lib/llvm-18/lib/clang/18 -internal-isystem /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13 -internal-isystem /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/x86_64-linux-gnu/c++/13 -internal-isystem /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/backward -internal-isystem /usr/lib/llvm-18/lib/clang/18/include -internal-isystem /usr/local/include -internal-isystem /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../x86_64-linux-gnu/include -internal-externc-isystem /usr/include/x86_64-linux-gnu -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdeprecated-macro -ferror-limit 19 -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -faddrsig -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o - -x c++ /dev/null\nclang -cc1 version 18.1.3 based upon LLVM 18.1.3 default target x86_64-pc-linux-gnu\nignoring nonexistent directory \"/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../x86_64-linux-gnu/include\"\nignoring nonexistent directory \"/include\"\n#include \"...\" search starts here:\n#include <...> search starts here:\n /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13\n /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/x86_64-linux-gnu/c++/13\n /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/backward\n /usr/lib/llvm-18/lib/clang/18/include\n /usr/local/include\n /usr/include/x86_64-linux-gnu\n /usr/include\nEnd of search list.\n",
+  "packages": "7zip=23.01+dfsg-11\n7zip-rar=23.01-4\naardvark-dns=1.4.0-5\nacl=2.3.2-1build1.1\nadduser=3.137ubuntu1\nadoptium-ca-certificates=1.0.6-1\nadwaita-icon-theme=46.0-1\nant=1.10.14-1\nant-optional=1.10.14-1\napache2=2.4.58-1ubuntu8.16\napache2-bin=2.4.58-1ubuntu8.16\napache2-data=2.4.58-1ubuntu8.16\napache2-utils=2.4.58-1ubuntu8.16\napparmor=4.0.1really4.0.1-0ubuntu0.24.04.8\napport=2.28.3-0ubuntu0.1\napport-core-dump-handler=2.28.3-0ubuntu0.1\napport-symptoms=0.25\nappstream=1.0.2-1build6\napt=2.8.3\napt-transport-https=2.8.3\napt-utils=2.8.3\naria2=1.37.0+debian-1build3\nat-spi2-common=2.52.0-1build1\nautoconf=2.71-3\nautomake=1:1.16.5-1.3ubuntu1\nautotools-dev=20220109.1\nazure-cli=2.91.0-1~noble\nazure-vm-utils=0.6.0-4~ubuntu0.24.04.1\nbase-files=13ubuntu10.5\nbase-passwd=3.6.3build1\nbash=5.2.21-2ubuntu4\nbash-completion=1:2.11-8\nbc=1.07.1-3ubuntu4\nbcache-tools=1.0.8-5build1\nbind9-dnsutils=1:9.18.39-0ubuntu0.24.04.7\nbind9-host=1:9.18.39-0ubuntu0.24.04.7\nbind9-libs=1:9.18.39-0ubuntu0.24.04.7\nbinutils=2.42-4ubuntu2.10\nbinutils-common=2.42-4ubuntu2.10\nbinutils-x86-64-linux-gnu=2.42-4ubuntu2.10\nbison=2:3.8.2+dfsg-1ubuntu0.24.04.1\nbolt=0.9.7-1\nbpfcc-tools=0.29.1+ds-1ubuntu7\nbpftrace=0.20.2-1ubuntu4.3\nbrotli=1.1.0-2build2\nbsdextrautils=2.39.3-9ubuntu6.6\nbsdutils=1:2.39.3-9ubuntu6.6\nbtrfs-progs=6.6.3-1.1build2\nbuildah=1.33.7+ds1-1ubuntu0.24.04.3\nbusybox-initramfs=1:1.36.1-6ubuntu3.1\nbusybox-static=1:1.36.1-6ubuntu3.1\nbyobu=6.11-0ubuntu1.1\nbzip2=1.0.8-5.1ubuntu0.1\nca-certificates=20260601~24.04.1\ncatatonit=0.1.7-1\nchrony=4.5-1ubuntu4.2\ncifs-utils=2:7.0-2ubuntu0.5\nclang-16=1:16.0.6-23ubuntu4\nclang-17=1:17.0.6-9ubuntu1\nclang-18=1:18.1.3-1ubuntu1\nclang-format-16=1:16.0.6-23ubuntu4\nclang-format-17=1:17.0.6-9ubuntu1\nclang-format-18=1:18.1.3-1ubuntu1\nclang-tidy-16=1:16.0.6-23ubuntu4\nclang-tidy-17=1:17.0.6-9ubuntu1\nclang-tidy-18=1:18.1.3-1ubuntu1\nclang-tools-16=1:16.0.6-23ubuntu4\nclang-tools-17=1:17.0.6-9ubuntu1\nclang-tools-18=1:18.1.3-1ubuntu1\ncloud-guest-utils=0.33-1\ncloud-init=26.1-0ubuntu1~24.04.1\ncloud-initramfs-copymods=0.49~24.04.1\ncloud-initramfs-dyn-netconf=0.49~24.04.1\ncommand-not-found=23.04.0\nconmon=2.1.10+ds1-1build2\nconsole-setup=1.226ubuntu1.1\nconsole-setup-linux=1.226ubuntu1.1\ncontainerd.io=2.4.1-2~ubuntu.24.04~noble\ncoreutils=9.4-3ubuntu6.3\ncpio=2.15+dfsg-1ubuntu2.1\ncpp=4:13.2.0-7ubuntu1\ncpp-12=12.4.0-2ubuntu1~24.04.1\ncpp-13=13.3.0-6ubuntu2~24.04.1\ncpp-13-x86-64-linux-gnu=13.3.0-6ubuntu2~24.04.1\ncpp-14=14.2.0-4ubuntu2~24.04.1\ncpp-14-x86-64-linux-gnu=14.2.0-4ubuntu2~24.04.1\ncpp-x86-64-linux-gnu=4:13.2.0-7ubuntu1\ncron=3.0pl1-184ubuntu2\ncron-daemon-common=3.0pl1-184ubuntu2\ncrun=1.14.1-1\ncryptsetup=2:2.7.0-1ubuntu4.2\ncryptsetup-bin=2:2.7.0-1ubuntu4.2\ncryptsetup-initramfs=2:2.7.0-1ubuntu4.2\ncurl=8.5.0-2ubuntu10.15\ndash=0.5.12-6ubuntu5\ndbus=1.14.10-4ubuntu4.1\ndbus-bin=1.14.10-4ubuntu4.1\ndbus-daemon=1.14.10-4ubuntu4.1\ndbus-session-bus-common=1.14.10-4ubuntu4.1\ndbus-system-bus-common=1.14.10-4ubuntu4.1\ndbus-user-session=1.14.10-4ubuntu4.1\ndconf-gsettings-backend=0.40.0-4ubuntu0.1\ndconf-service=0.40.0-4ubuntu0.1\ndebconf=1.5.86ubuntu1\ndebconf-i18n=1.5.86ubuntu1\ndebianutils=5.17build1\ndebugedit=1:5.0-5build2\ndhcpcd-base=1:10.0.6-1ubuntu3.2\ndictionaries-common=1.29.7\ndiffutils=1:3.10-1ubuntu0.1\ndirmngr=2.4.4-2ubuntu17.6\ndistro-info=1.7build1\ndistro-info-data=0.72-0ubuntu0.24.04.1\ndmeventd=2:1.02.185-3ubuntu3.2\ndmidecode=3.5-3ubuntu0.2\ndmsetup=2:1.02.185-3ubuntu3.2\ndnsutils=1:9.18.39-0ubuntu0.24.04.7\ndocker-ce=5:28.0.4-1~ubuntu.24.04~noble\ndocker-ce-cli=5:28.0.4-1~ubuntu.24.04~noble\ndosfstools=4.2-1.1build1\ndpkg=1.22.6ubuntu6.6\ndpkg-dev=1.22.6ubuntu6.6\ndracut-install=060+5-1ubuntu3.4\ne2fsprogs=1.47.0-2.4~exp1ubuntu4.1\ne2fsprogs-l10n=1.47.0-2.4~exp1ubuntu4.1\neatmydata=131-1ubuntu1\ned=1.20.1-1\nefibootmgr=18-1build2\neject=2.39.3-9ubuntu6.6\nemacsen-common=3.0.5\nethtool=1:6.7-1build1\nfakeroot=1.33-1\nfdisk=2.39.3-9ubuntu6.6\nfile=1:5.45-3build1\nfinalrd=9build1\nfindutils=4.9.0-5build1\nfirebird3.0-common=3.0.11.33703.ds4-2ubuntu2\nfirebird3.0-common-doc=3.0.11.33703.ds4-2ubuntu2\nfirefox=157.0+build1-0ubuntu0.24.04.1~mt1\nflex=2.6.4-8.2build1\nfontconfig=2.15.0-1.1ubuntu2\nfontconfig-config=2.15.0-1.1ubuntu2\nfonts-dejavu=2.37-8\nfonts-dejavu-core=2.37-8\nfonts-dejavu-extra=2.37-8\nfonts-dejavu-mono=2.37-8\nfonts-lato=2.015-1\nfonts-liberation=1:2.1.5-3\nfonts-noto-color-emoji=2.047-0ubuntu0.24.04.1\nfonts-ubuntu-console=0.869+git20240321-0ubuntu1\nfreetds-common=1.3.17+ds-2build3\nfriendly-recovery=0.2.42\nftp=20230507-2build3\nfuse-overlayfs=1.13-1\nfuse3=3.14.0-5build1\nfwupd=2.0.20-1ubuntu2~24.04.2\nfwupd-signed=1.52+1.4-1\ng++=4:13.2.0-7ubuntu1\ng++-12=12.4.0-2ubuntu1~24.04.1\ng++-13=13.3.0-6ubuntu2~24.04.1\ng++-13-x86-64-linux-gnu=13.3.0-6ubuntu2~24.04.1\ng++-x86-64-linux-gnu=4:13.2.0-7ubuntu1\ngawk=1:5.2.1-2ubuntu0.1\ngcc=4:13.2.0-7ubuntu1\ngcc-12=12.4.0-2ubuntu1~24.04.1\ngcc-12-base=12.4.0-2ubuntu1~24.04.1\ngcc-13=13.3.0-6ubuntu2~24.04.1\ngcc-13-base=13.3.0-6ubuntu2~24.04.1\ngcc-13-x86-64-linux-gnu=13.3.0-6ubuntu2~24.04.1\ngcc-14-base=14.2.0-4ubuntu2~24.04.1\ngcc-x86-64-linux-gnu=4:13.2.0-7ubuntu1\ngdisk=1.0.10-1build1\ngettext-base=0.21-14ubuntu2\ngfortran=4:13.2.0-7ubuntu1\ngfortran-12=12.4.0-2ubuntu1~24.04.1\ngfortran-13=13.3.0-6ubuntu2~24.04.1\ngfortran-13-x86-64-linux-gnu=13.3.0-6ubuntu2~24.04.1\ngfortran-x86-64-linux-gnu=4:13.2.0-7ubuntu1\ngh=2.102.0\ngir1.2-girepository-2.0=1.80.1-1\ngir1.2-glib-2.0=2.80.0-6ubuntu3.9\ngir1.2-packagekitglib-1.0=1.2.8-2ubuntu1.5\ngit=1:2.55.0-0ppa1~ubuntu24.04.2\ngit-ftp=1.6.0+dfsg-1\ngit-lfs=3.8.0\ngit-man=1:2.55.0-0ppa1~ubuntu24.04.2\ngnupg=2.4.4-2ubuntu17.6\ngnupg-l10n=2.4.4-2ubuntu17.6\ngnupg-utils=2.4.4-2ubuntu17.6\ngnupg2=2.4.4-2ubuntu17.6\ngolang-github-containers-common=0.57.4+ds1-2ubuntu0.2\ngolang-github-containers-image=5.29.2-2\ngoogle-chrome-stable=155.0.8059.39-1\ngoogle-cloud-cli=588.0.0-0\ngpg=2.4.4-2ubuntu17.6\ngpg-agent=2.4.4-2ubuntu17.6\ngpg-wks-client=2.4.4-2ubuntu17.6\ngpgconf=2.4.4-2ubuntu17.6\ngpgsm=2.4.4-2ubuntu17.6\ngpgv=2.4.4-2ubuntu17.6\ngrep=3.11-4build1\ngroff-base=1.23.0-3build2\ngrub-common=2.12-1ubuntu7.3\ngrub-efi-amd64-bin=2.12-1ubuntu7.3\ngrub-efi-amd64-signed=1.202.5+2.12-1ubuntu7.3\ngrub-gfxpayload-lists=0.7build2\ngrub-pc=2.12-1ubuntu7.3\ngrub-pc-bin=2.12-1ubuntu7.3\ngrub2-common=2.12-1ubuntu7.3\ngtk-update-icon-cache=3.24.41-4ubuntu1.3\ngzip=1.12-1ubuntu3.2\nhaveged=1.9.14-1ubuntu2\nhdparm=9.65+ds-1build1\nhicolor-icon-theme=0.17-2\nhostname=3.23+nmu2ubuntu2\nhtop=3.3.0-4build1\nhumanity-icon-theme=0.6.16\nhunspell-en-us=1:2020.12.07-2\nhwdata=0.379-1\nibverbs-providers=50.0-2ubuntu0.2\nicu-devtools=74.2-1ubuntu3.1\nieee-data=20220827.1\nimagemagick-6-common=8:6.9.12.98+dfsg1-5.2build2\ninetutils-telnet=2:2.5-3ubuntu4.2\ninfo=7.1-3build2\ninit=1.66ubuntu1\ninit-system-helpers=1.66ubuntu1\ninitramfs-tools=0.142ubuntu25.8\ninitramfs-tools-bin=0.142ubuntu25.8\ninitramfs-tools-core=0.142ubuntu25.8\ninstall-info=7.1-3build2\niproute2=6.1.0-1ubuntu6.4\niptables=1.8.10-3ubuntu2\niputils-ping=3:20240117-1ubuntu0.1\niputils-tracepath=3:20240117-1ubuntu0.1\niso-codes=4.16.0-1\njava-common=0.75+exp1\njavascript-common=11+nmu1\njq=1.7.1-3ubuntu0.24.04.2\nkbd=2.6.4-2ubuntu2\nkeyboard-configuration=1.226ubuntu1.1\nkeyboxd=2.4.4-2ubuntu17.6\nkeyutils=1.6.3-3build1\nklibc-utils=2.0.13-4ubuntu0.2\nkmod=31+20240202-2ubuntu7.2\nkpartx=0.9.4-5ubuntu8.2\nkrb5-locales=1.20.1-6ubuntu2.10\nkubectl=1.37.1-ubuntu24.04u2\nlandscape-common=24.02-0ubuntu5.7\nless=590-2ubuntu2.1\nlib32gcc-s1=14.2.0-4ubuntu2~24.04.1\nlib32stdc++6=14.2.0-4ubuntu2~24.04.1\nlibacl1=2.3.2-1build1.1\nlibaio1t64=0.3.113-6build1.1\nlibaom3=3.8.2-2ubuntu0.2\nlibapparmor1=4.0.1really4.0.1-0ubuntu0.24.04.8\nlibappstream5=1.0.2-1build6\nlibapr1t64=1.7.2-3.1ubuntu0.1\nlibaprutil1-dbd-sqlite3=1.6.3-1.1ubuntu7.1\nlibaprutil1-ldap=1.6.3-1.1ubuntu7.1\nlibaprutil1t64=1.6.3-1.1ubuntu7.1\nlibapt-pkg6.0t64=2.8.3\nlibarchive13t64=3.7.2-2ubuntu0.9\nlibargon2-1=0~20190702+dfsg-4build1\nlibaria2-0=1.37.0+debian-1build3\nlibasan8=14.2.0-4ubuntu2~24.04.1\nlibasound2-data=1.2.11-1ubuntu0.3\nlibasound2t64=1.2.11-1ubuntu0.3\nlibaspell15=0.60.8.1-1build1\nlibassuan0=2.5.6-1build1\nlibatasmart4=0.19-5build3\nlibatk-bridge2.0-0t64=2.52.0-1build1\nlibatk1.0-0t64=2.52.0-1build1\nlibatm1t64=1:2.5.1-5.1build1\nlibatomic1=14.2.0-4ubuntu2~24.04.1\nlibatspi2.0-0t64=2.52.0-1build1\nlibattr1=1:2.5.2-1ubuntu0.1\nlibaudit-common=1:3.1.2-2.1ubuntu0.1\nlibaudit1=1:3.1.2-2.1ubuntu0.1\nlibavahi-client3=0.8-13ubuntu6.2\nlibavahi-common-data=0.8-13ubuntu6.2\nlibavahi-common3=0.8-13ubuntu6.2\nlibbinutils=2.42-4ubuntu2.10\nlibblkid1=2.39.3-9ubuntu6.6\nlibblockdev-crypto3=3.1.1-1ubuntu0.1\nlibblockdev-fs3=3.1.1-1ubuntu0.1\nlibblockdev-loop3=3.1.1-1ubuntu0.1\nlibblockdev-mdraid3=3.1.1-1ubuntu0.1\nlibblockdev-nvme3=3.1.1-1ubuntu0.1\nlibblockdev-part3=3.1.1-1ubuntu0.1\nlibblockdev-swap3=3.1.1-1ubuntu0.1\nlibblockdev-utils3=3.1.1-1ubuntu0.1\nlibblockdev3=3.1.1-1ubuntu0.1\nlibbpf1=1:1.3.0-2build2\nlibbpfcc=0.29.1+ds-1ubuntu7\nlibbrotli1=1.1.0-2build2\nlibbsd0=0.12.1-1build1.1\nlibbytesize-common=2.10-1ubuntu2\nlibbytesize1=2.10-1ubuntu2\nlibbz2-1.0=1.0.8-5.1ubuntu0.1\nlibc-bin=2.39-0ubuntu8.9\nlibc-client2007e=8:2007f~dfsg-7build3\nlibc-dev-bin=2.39-0ubuntu8.9\nlibc6=2.39-0ubuntu8.9\nlibc6-dev=2.39-0ubuntu8.9\nlibc6-i386=2.39-0ubuntu8.9\nlibcairo-gobject2=1.18.0-3build1\nlibcairo2=1.18.0-3build1\nlibcanberra0t64=0.30-10ubuntu10\nlibcap-ng0=0.8.4-2build2\nlibcap2=1:2.66-5ubuntu2.4\nlibcap2-bin=1:2.66-5ubuntu2.4\nlibcares2=1.27.0-1.0ubuntu1\nlibcbor0.10=0.10.2-1.2ubuntu2\nlibcc1-0=14.2.0-4ubuntu2~24.04.1\nlibcgi-fast-perl=1:2.17-1\nlibcgi-pm-perl=4.63-1\nlibclang-common-16-dev=1:16.0.6-23ubuntu4\nlibclang-common-17-dev=1:17.0.6-9ubuntu1\nlibclang-common-18-dev=1:18.1.3-1ubuntu1\nlibclang-cpp16t64=1:16.0.6-23ubuntu4\nlibclang-cpp17t64=1:17.0.6-9ubuntu1\nlibclang-cpp18=1:18.1.3-1ubuntu1\nlibclang-rt-16-dev=1:16.0.6-23ubuntu4\nlibclang-rt-17-dev=1:17.0.6-9ubuntu1\nlibclang-rt-18-dev=1:18.1.3-1ubuntu1\nlibclang1-16t64=1:16.0.6-23ubuntu4\nlibclang1-17t64=1:17.0.6-9ubuntu1\nlibclang1-18=1:18.1.3-1ubuntu1\nlibclone-perl=0.46-1build3\nlibcolord2=1.4.7-1build2\nlibcom-err2=1.47.0-2.4~exp1ubuntu4.1\nlibcommon-sense-perl=3.75-3build3\nlibcrypt-dev=1:4.4.36-4build1\nlibcrypt1=1:4.4.36-4build1\nlibcryptsetup12=2:2.7.0-1ubuntu4.2\nlibctf-nobfd0=2.42-4ubuntu2.10\nlibctf0=2.42-4ubuntu2.10\nlibcups2t64=2.4.7-1.2ubuntu7.14\nlibcurl3t64-gnutls=8.5.0-2ubuntu10.15\nlibcurl4t64=8.5.0-2ubuntu10.15\nlibdatrie1=0.2.13-3build1\nlibdb5.3t64=5.3.28+dfsg2-7\nlibdbus-1-3=1.14.10-4ubuntu4.1\nlibdbusmenu-glib4=18.10.20180917~bzr492+repack1-3.1ubuntu5\nlibdbusmenu-gtk3-4=18.10.20180917~bzr492+repack1-3.1ubuntu5\nlibdconf1=0.40.0-4ubuntu0.1\nlibdebconfclient0=0.271ubuntu3\nlibdeflate0=1.19-1build1.1\nlibdevmapper-event1.02.1=2:1.02.185-3ubuntu3.2\nlibdevmapper1.02.1=2:1.02.185-3ubuntu3.2\nlibdpkg-perl=1.22.6ubuntu6.6\nlibdrm-amdgpu1=2.4.125-1ubuntu0.1~24.04.2\nlibdrm-common=2.4.125-1ubuntu0.1~24.04.2\nlibdrm-intel1=2.4.125-1ubuntu0.1~24.04.2\nlibdrm2=2.4.125-1ubuntu0.1~24.04.2\nlibduktape207=2.7.0+tests-0ubuntu3\nlibdw1t64=0.190-1.1ubuntu0.1\nlibeatmydata1=131-1ubuntu1\nlibedit2=3.1-20230828-1build1\nlibefiboot1t64=38-3.1build1\nlibefivar1t64=38-3.1build1\nlibelf1t64=0.190-1.1ubuntu0.1\nlibenchant-2-2=2.3.3-2build2\nlibencode-locale-perl=1.05-3\nlibepoxy0=1.5.10-1build1\nliberror-perl=0.17029-2\nlibestr0=0.1.11-1build1\nlibevdev2=1.13.1+dfsg-1build1\nlibevent-core-2.1-7t64=2.1.12-stable-9ubuntu2.2\nlibevent-pthreads-2.1-7t64=2.1.12-stable-9ubuntu2.2\nlibexpat1=2.6.1-2ubuntu0.6\nlibexpat1-dev=2.6.1-2ubuntu0.6\nlibext2fs2t64=1.47.0-2.4~exp1ubuntu4.1\nlibfakeroot=1.33-1\nlibfastjson4=1.2304.0-1build1\nlibfbclient2=3.0.11.33703.ds4-2ubuntu2\nlibfcgi-bin=2.4.2-2.1ubuntu0.24.04.1\nlibfcgi-perl=0.82+ds-3build2\nlibfcgi0t64=2.4.2-2.1ubuntu0.24.04.1\nlibfdisk1=2.39.3-9ubuntu6.6\nlibffi-dev=3.4.6-1build1\nlibffi8=3.4.6-1build1\nlibfftw3-double3=3.3.10-1ubuntu3\nlibfido2-1=1.14.0-1build3\nlibflashrom1=1.3.0-2.1ubuntu2\nlibfontconfig1=2.15.0-1.1ubuntu2\nlibfontenc1=1:1.1.8-1build1\nlibfreetype6=2.13.2+dfsg-1ubuntu0.2\nlibfribidi0=1.0.13-3build1\nlibfsverity0=1.5-1.1build3\nlibftdi1-2=1.5-6build5\nlibfuse3-3=3.14.0-5build1\nlibfwupd3=2.0.20-1ubuntu2~24.04.2\nlibgbm1=25.2.8-0ubuntu0.24.04.4\nlibgc1=1:8.2.6-1build1\nlibgcc-12-dev=12.4.0-2ubuntu1~24.04.1\nlibgcc-13-dev=13.3.0-6ubuntu2~24.04.1\nlibgcc-s1=14.2.0-4ubuntu2~24.04.1\nlibgcrypt20=1.10.3-2ubuntu0.2\nlibgd3=2.3.3-9ubuntu5\nlibgdbm-compat4t64=1.23-5.1build1\nlibgdbm6t64=1.23-5.1build1\nlibgdk-pixbuf-2.0-0=2.42.10+dfsg-3ubuntu3.3\nlibgdk-pixbuf2.0-common=2.42.10+dfsg-3ubuntu3.3\nlibgfortran-12-dev=12.4.0-2ubuntu1~24.04.1\nlibgfortran-13-dev=13.3.0-6ubuntu2~24.04.1\nlibgfortran5=14.2.0-4ubuntu2~24.04.1\nlibgirepository-1.0-1=1.80.1-1\nlibgl1=1.7.0-1build1\nlibgl1-mesa-dri=25.2.8-0ubuntu0.24.04.4\nlibglib2.0-0t64=2.80.0-6ubuntu3.9\nlibglib2.0-bin=2.80.0-6ubuntu3.9\nlibglib2.0-data=2.80.0-6ubuntu3.9\nlibglvnd0=1.7.0-1build1\nlibglx-mesa0=25.2.8-0ubuntu0.24.04.4\nlibglx0=1.7.0-1build1\nlibgmp-dev=2:6.3.0+dfsg-2ubuntu6.1\nlibgmp10=2:6.3.0+dfsg-2ubuntu6.1\nlibgmpxx4ldbl=2:6.3.0+dfsg-2ubuntu6.1\nlibgnutls30t64=3.8.3-1.1ubuntu3.6\nlibgomp1=14.2.0-4ubuntu2~24.04.1\nlibgpg-error-l10n=1.47-3build2.1\nlibgpg-error0=1.47-3build2.1\nlibgpgme11t64=1.18.0-4.1ubuntu4\nlibgpm2=1.20.7-11\nlibgprofng0=2.42-4ubuntu2.10\nlibgraphite2-3=1.3.14-2ubuntu0.24.04.1\nlibgssapi-krb5-2=1.20.1-6ubuntu2.10\nlibgstreamer1.0-0=1.24.2-1ubuntu0.1\nlibgtk-3-0t64=3.24.41-4ubuntu1.3\nlibgtk-3-common=3.24.41-4ubuntu1.3\nlibgudev-1.0-0=1:238-5ubuntu1\nlibharfbuzz0b=8.3.0-2build2\nlibhashkit2t64=1.1.4-1.1build3\nlibhavege2=1.9.14-1ubuntu2\nlibheif-plugin-aomdec=1.17.6-1ubuntu4.9\nlibheif1=1.17.6-1ubuntu4.9\nlibhogweed6t64=3.9.1-2.2build1.1\nlibhtml-parser-perl=3.81-1ubuntu0.1\nlibhtml-tagset-perl=3.20-6\nlibhtml-template-perl=2.97-2\nlibhttp-date-perl=6.06-1ubuntu0.24.04.1\nlibhttp-message-perl=6.45-1ubuntu1\nlibhunspell-1.7-0=1.7.2+really1.7.2-10build3\nlibhwasan0=14.2.0-4ubuntu2~24.04.1\nlibibverbs1=50.0-2ubuntu0.2\nlibice6=2:1.0.10-1build3\nlibicu-dev=74.2-1ubuntu3.1\nlibicu70=70.1-2\nlibicu74=74.2-1ubuntu3.1\nlibidn2-0=2.3.7-2build1.1\nlibinih1=55-1ubuntu2\nlibintl-perl=1.33-1build3\nlibintl-xs-perl=1.33-1build3\nlibio-html-perl=1.004-3\nlibip4tc2=1.8.10-3ubuntu2\nlibip6tc2=1.8.10-3ubuntu2\nlibisl23=0.26-3build1.1\nlibisns0t64=0.101-0.3ubuntu0.1\nlibitm1=14.2.0-4ubuntu2~24.04.1\nlibjansson4=2.14-2build2\nlibjbig0=2.1-6.1ubuntu2\nlibjcat1=0.2.3-1~ubuntu0.24.04.1\nlibjpeg-turbo8=2.1.5-2ubuntu2\nlibjpeg8=8c-2ubuntu11\nlibjq1=1.7.1-3ubuntu0.24.04.2\nlibjs-jquery=3.6.1+dfsg+~3.5.14-1\nlibjs-sphinxdoc=7.2.6-6\nlibjs-underscore=1.13.4~dfsg+~1.11.4-3\nlibjson-c5=0.17-1build1\nlibjson-glib-1.0-0=1.8.0-2build2\nlibjson-glib-1.0-common=1.8.0-2build2\nlibjson-perl=4.10000-1\nlibjson-xs-perl=4.040-0ubuntu0.24.04.1\nlibk5crypto3=1.20.1-6ubuntu2.10\nlibkeyutils1=1.6.3-3build1\nlibklibc=2.0.13-4ubuntu0.2\nlibkmod2=31+20240202-2ubuntu7.2\nlibkrb5-3=1.20.1-6ubuntu2.10\nlibkrb5support0=1.20.1-6ubuntu2.10\nlibksba8=1.6.6-1build1\nliblcms2-2=2.14-2ubuntu0.1\nlibldap-common=2.6.10+dfsg-0ubuntu0.24.04.1\nlibldap2=2.6.10+dfsg-0ubuntu0.24.04.1\nliblerc4=4.0.0+ds-4ubuntu2\nliblldb-16t64=1:16.0.6-23ubuntu4\nliblldb-17t64=1:17.0.6-9ubuntu1\nliblldb-18=1:18.1.3-1ubuntu1\nlibllvm16t64=1:16.0.6-23ubuntu4\nlibllvm17t64=1:17.0.6-9ubuntu1\nlibllvm18=1:18.1.3-1ubuntu1\nlibllvm19=1:19.1.1-1ubuntu1~24.04.2\nlibllvm20=1:20.1.2-0ubuntu1~24.04.3\nliblmdb0=0.9.31-1build1\nliblocale-gettext-perl=1.07-6ubuntu5\nliblqr-1-0=0.4.2-2.1build2\nliblsan0=14.2.0-4ubuntu2~24.04.1\nlibltdl7=2.4.7-7build1\nliblttng-ust-common1t64=2.13.7-1.1ubuntu2\nliblttng-ust-ctl5t64=2.13.7-1.1ubuntu2\nliblttng-ust1t64=2.13.7-1.1ubuntu2\nliblua5.3-0=5.3.6-2build2\nliblua5.4-0=5.4.6-3build2\nliblvm2cmd2.03=2.03.16-3ubuntu3.2\nliblwp-mediatypes-perl=6.04-2\nliblz4-1=1.9.4-1build1.1\nliblz4-dev=1.9.4-1build1.1\nliblzma5=5.6.1+really5.4.5-1ubuntu0.3\nliblzo2-2=2.10-2build4\nlibmagic-mgc=1:5.45-3build1\nlibmagic1t64=1:5.45-3build1\nlibmagickcore-6.q16-7t64=8:6.9.12.98+dfsg1-5.2build2\nlibmagickwand-6.q16-7t64=8:6.9.12.98+dfsg1-5.2build2\nlibmaxminddb0=1.9.1-1build1\nlibmbim-glib4=1.31.2-0ubuntu3.1\nlibmbim-proxy=1.31.2-0ubuntu3.1\nlibmbim-utils=1.31.2-0ubuntu3.1\nlibmd0=1.1.0-2build1.1\nlibmecab2=0.996-14ubuntu4\nlibmediainfo0v5=24.01+dfsg-1build2\nlibmemcached11t64=1.1.4-1.1build3\nlibmm-glib0=1.23.4-0ubuntu2\nlibmms0=0.6.4-3build1\nlibmnl0=1.0.5-2build1\nlibmodule-find-perl=0.16-2\nlibmodule-scandeps-perl=1.35-1ubuntu0.24.04.1\nlibmount1=2.39.3-9ubuntu6.6\nlibmpc3=1.3.1-1build1.1\nlibmpfr6=4.2.1-1build1.1\nlibmspack0t64=0.11-1.1build1\nlibmysqlclient-dev=8.0.46-0ubuntu0.24.04.4\nlibmysqlclient21=8.0.46-0ubuntu0.24.04.4\nlibncurses-dev=6.4+20240113-1ubuntu2.2\nlibncurses6=6.4+20240113-1ubuntu2.2\nlibncursesw6=6.4+20240113-1ubuntu2.2\nlibnetfilter-conntrack3=1.0.9-6build1\nlibnetplan1=1.1.2-8ubuntu1~24.04.3\nlibnettle8t64=3.9.1-2.2build1.1\nlibnewt0.52=0.52.24-2ubuntu2\nlibnfnetlink0=1.0.2-2build1\nlibnftables1=1.0.9-1ubuntu0.1\nlibnftnl11=1.2.6-2build1\nlibnghttp2-14=1.59.0-1ubuntu0.4\nlibnl-3-200=3.7.0-0.3build1.1\nlibnl-genl-3-200=3.7.0-0.3build1.1\nlibnl-route-3-200=3.7.0-0.3build1.1\nlibnorm1t64=1.5.9+dfsg-3.1build1\nlibnpth0t64=1.6-3.1build1\nlibnspr4=2:4.35-1.1build1\nlibnss-systemd=255.4-1ubuntu8.17\nlibnss3=2:3.98-1ubuntu0.2\nlibnss3-tools=2:3.98-1ubuntu0.2\nlibntfs-3g89t64=1:2022.10.3-1.2ubuntu3.2\nlibnuma1=2.0.18-1ubuntu0.24.04.1\nlibnvme1t64=1.8-3ubuntu1\nlibobjc-13-dev=13.3.0-6ubuntu2~24.04.1\nlibobjc4=14.2.0-4ubuntu2~24.04.1\nlibodbc2=2.3.12-1ubuntu0.24.04.1\nlibogg0=1.3.5-3build1\nlibonig5=6.9.9-1build1\nlibopeniscsiusr=2.1.9-3ubuntu5.5\nlibopenjp2-7=2.5.0-2ubuntu0.5\nlibp11-kit0=0.25.3-4ubuntu2.2\nlibpackagekit-glib2-18=1.2.8-2ubuntu1.5\nlibpam-cap=1:2.66-5ubuntu2.4\nlibpam-modules=1.5.3-5ubuntu5.7\nlibpam-modules-bin=1.5.3-5ubuntu5.7\nlibpam-runtime=1.5.3-5ubuntu5.7\nlibpam-systemd=255.4-1ubuntu8.17\nlibpam0g=1.5.3-5ubuntu5.7\nlibpango-1.0-0=1.52.1+ds-1build1\nlibpangocairo-1.0-0=1.52.1+ds-1build1\nlibpangoft2-1.0-0=1.52.1+ds-1build1\nlibparted2t64=3.6-4build1\nlibpcap0.8t64=1.10.4-4.1ubuntu3.1\nlibpci3=1:3.10.0-2build1\nlibpciaccess0=0.17-3ubuntu0.24.04.3\nlibpcre2-16-0=10.42-4ubuntu2.1\nlibpcre2-32-0=10.42-4ubuntu2.1\nlibpcre2-8-0=10.42-4ubuntu2.1\nlibpcre2-dev=10.42-4ubuntu2.1\nlibpcre2-posix3=10.42-4ubuntu2.1\nlibperl5.38t64=5.38.2-3.2ubuntu0.6\nlibpfm4=4.13.0+git32-g0d4ed0e-1ubuntu0.1\nlibpgm-5.3-0t64=5.3.128~dfsg-2.1build1\nlibpipeline1=1.5.7-2\nlibpixman-1-0=0.42.2-1build1\nlibpkgconf3=1.8.1-2build1\nlibplymouth5=24.004.60-1ubuntu7.2\nlibpng16-16t64=1.6.43-5ubuntu0.7\nlibpolkit-agent-1-0=124-2ubuntu1.24.04.4\nlibpolkit-gobject-1-0=124-2ubuntu1.24.04.4\nlibpopt0=1.19+dfsg-1build1\nlibpq-dev=18.6-1.pgdg24.04+2\nlibpq5=18.6-1.pgdg24.04+2\nlibproc-processtable-perl=0.636-1build3\nlibproc2-0=2:4.0.4-4ubuntu3.3\nlibprotobuf-c1=1.4.1-1ubuntu4\nlibprotobuf-lite32t64=3.21.12-8.2ubuntu0.3\nlibpsl5t64=0.21.2-1.1build1\nlibpython3-dev=3.12.3-0ubuntu2.1\nlibpython3-stdlib=3.12.3-0ubuntu2.1\nlibpython3.12-dev=3.12.3-1ubuntu0.17\nlibpython3.12-minimal=3.12.3-1ubuntu0.17\nlibpython3.12-stdlib=3.12.3-1ubuntu0.17\nlibpython3.12t64=3.12.3-1ubuntu0.17\nlibqdbm14t64=1.8.78-12.1build2\nlibqmi-glib5=1.35.2-0ubuntu2\nlibqmi-proxy=1.35.2-0ubuntu2\nlibqmi-utils=1.35.2-0ubuntu2\nlibqrtr-glib0=1.2.2-1ubuntu4\nlibquadmath0=14.2.0-4ubuntu2~24.04.1\nlibrabbitmq4=0.11.0-1ubuntu0.2\nlibraw23t64=0.21.2-2.1ubuntu0.24.04.2\nlibre2-10=20230301-3build1\nlibreadline8t64=8.2-4build1\nlibreiserfscore0t64=1:3.6.27-7.1build1\nlibrpm9t64=4.18.2+dfsg-2.1build2\nlibrpmbuild9t64=4.18.2+dfsg-2.1build2\nlibrpmio9t64=4.18.2+dfsg-2.1build2\nlibrpmsign9t64=4.18.2+dfsg-2.1build2\nlibrtmp1=2.4+20151223.gitfa8646d.1-2build7\nlibruby=1:3.2~ubuntu1\nlibruby3.2=3.2.3-1ubuntu0.24.04.8\nlibsasl2-2=2.1.28+dfsg1-5ubuntu3.1\nlibsasl2-modules=2.1.28+dfsg1-5ubuntu3.1\nlibsasl2-modules-db=2.1.28+dfsg1-5ubuntu3.1\nlibseccomp2=2.5.5-1ubuntu3.1\nlibselinux1=3.5-2ubuntu2.1\nlibsemanage-common=3.5-1build5\nlibsemanage2=3.5-1build5\nlibsensors-config=1:3.6.0-9build1\nlibsensors5=1:3.6.0-9build1\nlibsepol2=3.5-2build1\nlibsframe1=2.42-4ubuntu2.10\nlibsgutils2-1.46-2=1.46-3ubuntu4.1\nlibsharpyuv0=1.3.2-0.4build3\nlibsigsegv2=2.14-1ubuntu2\nlibslang2=2.3.3-3build2\nlibslirp0=4.7.0-1ubuntu3.1\nlibsm6=2:1.2.3-1build3\nlibsmartcols1=2.39.3-9ubuntu6.6\nlibsnappy1v5=1.1.10-1build1\nlibsnmp-base=5.9.4+dfsg-1.1ubuntu3.2\nlibsnmp40t64=5.9.4+dfsg-1.1ubuntu3.2\nlibsodium23=1.0.18-1ubuntu0.24.04.1\nlibsort-naturally-perl=1.03-4\nlibsqlite3-0=3.45.1-1ubuntu2.8\nlibsqlite3-dev=3.45.1-1ubuntu2.8\nlibss2=1.47.0-2.4~exp1ubuntu4.1\nlibssh-4=0.10.6-2ubuntu0.5\nlibssh2-1t64=1.11.0-4.1ubuntu0.24.04.4\nlibssl-dev=3.0.13-0ubuntu3.16\nlibssl3t64=3.0.13-0ubuntu3.16\nlibstdc++-12-dev=12.4.0-2ubuntu1~24.04.1\nlibstdc++-13-dev=13.3.0-6ubuntu2~24.04.1\nlibstdc++6=14.2.0-4ubuntu2~24.04.1\nlibstemmer0d=2.2.0-4build1\nlibsubid4=1:4.13+dfsg1-4ubuntu3.2\nlibsybdb5=1.3.17+ds-2build3\nlibsystemd-shared=255.4-1ubuntu8.17\nlibsystemd0=255.4-1ubuntu8.17\nlibtalloc2=2.4.2-1build2\nlibtasn1-6=4.19.0-3ubuntu0.24.04.2\nlibtcl8.6=8.6.14+dfsg-1build1\nlibtdb1=1.4.10-1build1\nlibterm-readkey-perl=2.38-2build4\nlibtext-charwidth-perl=0.04-11build3\nlibtext-iconv-perl=1.7-8build3\nlibtext-unidecode-perl=1.30-3\nlibtext-wrapi18n-perl=0.06-10\nlibthai-data=0.1.29-2build1\nlibthai0=0.1.29-2build1\nlibtidy5deb1=2:5.6.0-11ubuntu2\nlibtiff6=4.5.1+git230720-4ubuntu2.5\nlibtimedate-perl=2.3300-2\nlibtinfo6=6.4+20240113-1ubuntu2.2\nlibtinyxml2-10=10.0.0+dfsg-2\nlibtirpc-common=1.3.4+ds-1.1build1\nlibtirpc3t64=1.3.4+ds-1.1build1\nlibtk8.6=8.6.14-1build1\nlibtommath1=1.2.1-2build1\nlibtool=2.4.7-7build1\nlibtraceevent1=1:1.8.2-1ubuntu2.1\nlibtraceevent1-plugin=1:1.8.2-1ubuntu2.1\nlibtracefs1=1.8.0-1ubuntu1\nlibtsan2=14.2.0-4ubuntu2~24.04.1\nlibtss2-esys-3.0.2-0t64=4.0.1-7.1ubuntu5.1\nlibtss2-mu-4.0.1-0t64=4.0.1-7.1ubuntu5.1\nlibtss2-rc0t64=4.0.1-7.1ubuntu5.1\nlibtss2-sys1t64=4.0.1-7.1ubuntu5.1\nlibtss2-tcti-cmd0t64=4.0.1-7.1ubuntu5.1\nlibtss2-tcti-device0t64=4.0.1-7.1ubuntu5.1\nlibtss2-tcti-mssim0t64=4.0.1-7.1ubuntu5.1\nlibtss2-tcti-swtpm0t64=4.0.1-7.1ubuntu5.1\nlibtypes-serialiser-perl=1.01-1\nlibubsan1=14.2.0-4ubuntu2~24.04.1\nlibuchardet0=0.0.8-1build1\nlibudev1=255.4-1ubuntu8.17\nlibudisks2-0=2.10.1-6ubuntu1.5\nlibunistring5=1.1-2build1.1\nlibunwind8=1.6.2-3build1.1\nliburcu8t64=0.14.0-3.1build1\nliburi-perl=5.27-1\nlibusb-1.0-0=2:1.0.27-1\nlibutempter0=1.2.1-3build1\nlibuuid1=2.39.3-9ubuntu6.6\nlibuv1t64=1.48.0-1.1build1\nlibvolume-key1=0.3.12-7build2\nlibvorbis0a=1.3.7-1build3\nlibvorbisfile3=1.3.7-1build3\nlibvulkan1=1.3.275.0-1build1\nlibwayland-client0=1.22.0-2.1build1\nlibwayland-cursor0=1.22.0-2.1build1\nlibwayland-egl1=1.22.0-2.1build1\nlibwbclient0=2:4.19.5+dfsg-4ubuntu9.8\nlibwebp7=1.3.2-0.4build3\nlibwebpdemux2=1.3.2-0.4build3\nlibwebpmux3=1.3.2-0.4build3\nlibwrap0=7.6.q-33\nlibx11-6=2:1.8.7-1ubuntu0.1\nlibx11-data=2:1.8.7-1ubuntu0.1\nlibx11-xcb1=2:1.8.7-1ubuntu0.1\nlibxau6=1:1.0.9-1build6\nlibxaw7=2:1.0.14-1build2\nlibxcb-dri3-0=1.15-1ubuntu2\nlibxcb-glx0=1.15-1ubuntu2\nlibxcb-present0=1.15-1ubuntu2\nlibxcb-randr0=1.15-1ubuntu2\nlibxcb-render0=1.15-1ubuntu2\nlibxcb-shm0=1.15-1ubuntu2\nlibxcb-sync1=1.15-1ubuntu2\nlibxcb-xfixes0=1.15-1ubuntu2\nlibxcb1=1.15-1ubuntu2\nlibxcomposite1=1:0.4.5-1build3\nlibxcursor1=1:1.2.1-1build1\nlibxdamage1=1:1.1.6-1build1\nlibxdmcp6=1:1.1.3-0ubuntu6\nlibxext6=2:1.3.4-1build2\nlibxfixes3=1:6.0.0-2build1\nlibxfont2=1:2.0.6-1+deb13u1build0.24.04.2\nlibxft2=2.3.6-1build1\nlibxi6=2:1.8.1-1build1\nlibxinerama1=2:1.1.4-3build1\nlibxkbcommon0=1.6.0-1build1\nlibxkbfile1=1:1.1.0-1build4\nlibxml-libxml-perl=2.0207+dfsg+really+2.0134-1build4\nlibxml-namespacesupport-perl=1.12-2\nlibxml-sax-base-perl=1.09-3\nlibxml-sax-perl=1.02+dfsg-3\nlibxml2=2.9.14+dfsg-1.3ubuntu3.10\nlibxml2-dev=2.9.14+dfsg-1.3ubuntu3.10\nlibxmlb2=0.3.24-1~ubuntu0.24.04.1\nlibxmlsec1t64=1.2.39-5build2\nlibxmlsec1t64-openssl=1.2.39-5build2\nlibxmu6=2:1.1.3-3build2\nlibxmuu1=2:1.1.3-3build2\nlibxpm4=1:3.5.17-1ubuntu0.24.04.2\nlibxrandr2=2:1.5.2-2build1\nlibxrender1=1:0.9.10-1.1build1\nlibxshmfence1=1.3-1build5\nlibxslt1.1=1.1.39-0exp1ubuntu0.24.04.3\nlibxss1=1:1.2.3-1build3\nlibxt6t64=1:1.2.1-1.2build1\nlibxtables12=1.8.10-3ubuntu2\nlibxtst6=2:1.2.3-1.1build1\nlibxxf86vm1=1:1.1.4-1build4\nlibxxhash0=0.8.2-2build1\nlibyajl2=2.1.0-5build1\nlibyaml-0-2=0.2.5-1build1\nlibyaml-dev=0.2.5-1build1\nlibz3-4=4.8.12-3.1build1\nlibz3-dev=4.8.12-3.1build1\nlibzen0t64=0.4.41-2.1build1\nlibzip4t64=1.7.3-1.1ubuntu2\nlibzmq5=4.3.5-1build2\nlibzstd-dev=1.5.5+dfsg2-2build1.1\nlibzstd1=1.5.5+dfsg2-2build1.1\nlinux-azure=6.17.0-1022.22\nlinux-azure-6.17-cloud-tools-6.17.0-1022=6.17.0-1022.22\nlinux-azure-6.17-headers-6.17.0-1022=6.17.0-1022.22\nlinux-azure-6.17-tools-6.17.0-1022=6.17.0-1022.22\nlinux-base=4.5ubuntu9+24.04.2\nlinux-base-sgx=4.5ubuntu9+24.04.2\nlinux-cloud-tools-6.17.0-1022-azure=6.17.0-1022.22\nlinux-cloud-tools-azure=6.17.0-1022.22\nlinux-cloud-tools-common=6.8.0-146.146\nlinux-headers-6.17.0-1022-azure=6.17.0-1022.22\nlinux-headers-azure=6.17.0-1022.22\nlinux-image-6.17.0-1022-azure=6.17.0-1022.22\nlinux-image-azure=6.17.0-1022.22\nlinux-libc-dev=6.8.0-146.146\nlinux-modules-6.17.0-1022-azure=6.17.0-1022.22\nlinux-tools-6.17.0-1022-azure=6.17.0-1022.22\nlinux-tools-azure=6.17.0-1022.22\nlinux-tools-common=6.8.0-146.146\nlld-16=1:16.0.6-23ubuntu4\nlld-17=1:17.0.6-9ubuntu1\nlld-18=1:18.1.3-1ubuntu1\nlldb-18=1:18.1.3-1ubuntu1\nllvm-16=1:16.0.6-23ubuntu4\nllvm-16-dev=1:16.0.6-23ubuntu4\nllvm-16-linker-tools=1:16.0.6-23ubuntu4\nllvm-16-runtime=1:16.0.6-23ubuntu4\nllvm-16-tools=1:16.0.6-23ubuntu4\nllvm-17=1:17.0.6-9ubuntu1\nllvm-17-dev=1:17.0.6-9ubuntu1\nllvm-17-linker-tools=1:17.0.6-9ubuntu1\nllvm-17-runtime=1:17.0.6-9ubuntu1\nllvm-17-tools=1:17.0.6-9ubuntu1\nllvm-18=1:18.1.3-1ubuntu1\nllvm-18-dev=1:18.1.3-1ubuntu1\nllvm-18-linker-tools=1:18.1.3-1ubuntu1\nllvm-18-runtime=1:18.1.3-1ubuntu1\nllvm-18-tools=1:18.1.3-1ubuntu1\nlocales=2.39-0ubuntu8.9\nlogin=1:4.13+dfsg1-4ubuntu3.2\nlogrotate=3.21.0-2build1\nlogsave=1.47.0-2.4~exp1ubuntu4.1\nlsb-release=12.0-2\nlshw=02.19.git.2021.06.19.996aaad9c7-2ubuntu0.24.04.1\nlsof=4.95.0-1build3\nlsscsi=0.32-1build1\nlto-disabled-list=47\nlvm2=2.03.16-3ubuntu3.2\nlxd-agent-loader=0.7ubuntu0.1\nlxd-installer=4ubuntu0.1\nlz4=1.9.4-1build1.1\nm4=1.4.19-4build1\nmake=4.3-4.1build2\nman-db=2.12.0-4build2\nmanpages=6.7-2\nmawk=1.3.4.20240123-1build1\nmdadm=4.3-1ubuntu2.1\nmecab-ipadic=2.7.0-20070801+main-3\nmecab-ipadic-utf8=2.7.0-20070801+main-3\nmecab-utils=0.996-14ubuntu4\nmedia-types=10.1.0\nmediainfo=24.01.1-1build2\nmercurial=6.7.2-1ubuntu2.2\nmercurial-common=6.7.2-1ubuntu2.2\nmesa-libgallium=25.2.8-0ubuntu0.24.04.4\nmicrosoft-edge-stable=155.0.4283.45-1\nmlock=8:2007f~dfsg-7build3\nmodemmanager=1.23.4-0ubuntu2\nmokutil=0.6.0-2build3\nmotd-news-config=13ubuntu10.5\nmount=2.39.3-9ubuntu6.6\nmtr-tiny=0.95-1.1ubuntu0.1\nmultipath-tools=0.9.4-5ubuntu8.2\nmysql-client=8.0.46-0ubuntu0.24.04.4\nmysql-client-8.0=8.0.46-0ubuntu0.24.04.4\nmysql-client-core-8.0=8.0.46-0ubuntu0.24.04.4\nmysql-common=5.8+1.1.0build1\nmysql-server=8.0.46-0ubuntu0.24.04.4\nmysql-server-8.0=8.0.46-0ubuntu0.24.04.4\nmysql-server-core-8.0=8.0.46-0ubuntu0.24.04.4\nnano=7.2-2ubuntu0.2\nncurses-base=6.4+20240113-1ubuntu2.2\nncurses-bin=6.4+20240113-1ubuntu2.2\nncurses-term=6.4+20240113-1ubuntu2.2\nneedrestart=3.6-7ubuntu4.5\nnet-tools=2.10-0.1ubuntu4.4\nnetavark=1.4.0-4\nnetbase=6.4\nnetcat-openbsd=1.226-1ubuntu2\nnetplan-generator=1.1.2-8ubuntu1~24.04.3\nnetplan.io=1.1.2-8ubuntu1~24.04.3\nnetworkd-dispatcher=2.2.4-1\nnftables=1.0.9-1ubuntu0.1\nnginx=1.24.0-2ubuntu7.18\nnginx-common=1.24.0-2ubuntu7.18\nntfs-3g=1:2022.10.3-1.2ubuntu3.2\nnumactl=2.0.18-1ubuntu0.24.04.1\nnvme-cli=2.8-1ubuntu0.1\nopen-iscsi=2.1.9-3ubuntu5.5\nopen-vm-tools=2:13.0.10-0ubuntu0.24.04.1\nopenssh-client=1:9.6p1-3ubuntu13.19\nopenssh-server=1:9.6p1-3ubuntu13.19\nopenssh-sftp-server=1:9.6p1-3ubuntu13.19\nopenssl=3.0.13-0ubuntu3.16\nos-prober=1.81ubuntu4\noverlayroot=0.49~24.04.1\np11-kit=0.25.3-4ubuntu2.2\np11-kit-modules=0.25.3-4ubuntu2.2\np7zip-full=16.02+transitional.1\np7zip-rar=16.02+transitional.1\npackagekit=1.2.8-2ubuntu1.5\npackagekit-tools=1.2.8-2ubuntu1.5\npackages-microsoft-prod=1.2-ubuntu24.04\nparallel=20231122+ds-1\nparted=3.6-4build1\npasst=0.0~git20240220.1e6f92b-1\npasswd=1:4.13+dfsg1-4ubuntu3.2\npastebinit=1.6.2-1\npatch=2.7.6-7build3\npatchelf=0.18.0-1.1build1\npci.ids=0.0~2024.03.31-1ubuntu0.1\npciutils=1:3.10.0-2build1\nperl=5.38.2-3.2ubuntu0.6\nperl-base=5.38.2-3.2ubuntu0.6\nperl-modules-5.38=5.38.2-3.2ubuntu0.6\nphp-common=2:93ubuntu2\nphp-pear=1:1.10.13+submodules+notgz+2022032202-2build1\nphp8.3=8.3.6-0ubuntu0.24.04.11\nphp8.3-amqp=1.11.0-5ubuntu1\nphp8.3-apcu=5.1.22+4.0.11-2ubuntu1\nphp8.3-bcmath=8.3.6-0ubuntu0.24.04.11\nphp8.3-bz2=8.3.6-0ubuntu0.24.04.11\nphp8.3-cgi=8.3.6-0ubuntu0.24.04.11\nphp8.3-cli=8.3.6-0ubuntu0.24.04.11\nphp8.3-common=8.3.6-0ubuntu0.24.04.11\nphp8.3-curl=8.3.6-0ubuntu0.24.04.11\nphp8.3-dba=8.3.6-0ubuntu0.24.04.11\nphp8.3-dev=8.3.6-0ubuntu0.24.04.11\nphp8.3-enchant=8.3.6-0ubuntu0.24.04.11\nphp8.3-fpm=8.3.6-0ubuntu0.24.04.11\nphp8.3-gd=8.3.6-0ubuntu0.24.04.11\nphp8.3-gmp=8.3.6-0ubuntu0.24.04.11\nphp8.3-igbinary=3.2.13-1ubuntu3\nphp8.3-imagick=3.7.0-4ubuntu3\nphp8.3-imap=8.3.6-0ubuntu0.24.04.11\nphp8.3-interbase=8.3.6-0ubuntu0.24.04.11\nphp8.3-intl=8.3.6-0ubuntu0.24.04.11\nphp8.3-ldap=8.3.6-0ubuntu0.24.04.11\nphp8.3-mbstring=8.3.6-0ubuntu0.24.04.11\nphp8.3-memcache=8.0+4.0.5.2+3.0.9~20170802.e702b5f9+-8ubuntu1\nphp8.3-memcached=3.2.0+2.2.0-4ubuntu3\nphp8.3-mongodb=1.15.0+1.11.1+1.9.2+1.7.5-1ubuntu3\nphp8.3-msgpack=1:2.2.0~rc2-3ubuntu1\nphp8.3-mysql=8.3.6-0ubuntu0.24.04.11\nphp8.3-odbc=8.3.6-0ubuntu0.24.04.11\nphp8.3-opcache=8.3.6-0ubuntu0.24.04.11\nphp8.3-pcov=1.0.11-5ubuntu1\nphp8.3-pgsql=8.3.6-0ubuntu0.24.04.11\nphp8.3-phpdbg=8.3.6-0ubuntu0.24.04.11\nphp8.3-pspell=8.3.6-0ubuntu0.24.04.11\nphp8.3-readline=8.3.6-0ubuntu0.24.04.11\nphp8.3-redis=5.3.7+4.3.0-3ubuntu1\nphp8.3-snmp=8.3.6-0ubuntu0.24.04.11\nphp8.3-soap=8.3.6-0ubuntu0.24.04.11\nphp8.3-sqlite3=8.3.6-0ubuntu0.24.04.11\nphp8.3-sybase=8.3.6-0ubuntu0.24.04.11\nphp8.3-tidy=8.3.6-0ubuntu0.24.04.11\nphp8.3-xdebug=3.2.0+3.1.6+2.9.8+2.8.1+2.5.5-3ubuntu1\nphp8.3-xml=8.3.6-0ubuntu0.24.04.11\nphp8.3-xsl=8.3.6-0ubuntu0.24.04.11\nphp8.3-yaml=2.2.2+2.1.0+2.0.4+1.3.2-6ubuntu1\nphp8.3-zip=8.3.6-0ubuntu0.24.04.11\nphp8.3-zmq=1.1.3-24ubuntu1\npigz=2.8-1\npinentry-curses=1.2.1-3ubuntu5\npkg-config=1.8.1-2build1\npkgconf=1.8.1-2build1\npkgconf-bin=1.8.1-2build1\nplymouth=24.004.60-1ubuntu7.2\nplymouth-theme-ubuntu-text=24.004.60-1ubuntu7.2\npodman=4.9.3+ds1-1ubuntu0.2\npolkitd=124-2ubuntu1.24.04.4\npollinate=4.33-3.1ubuntu1.3\npostgresql-16=16.15-1.pgdg24.04+2\npostgresql-client-16=16.15-1.pgdg24.04+2\npostgresql-client-common=293.pgdg24.04+1\npostgresql-common=293.pgdg24.04+1\npowermgmt-base=1.37ubuntu0.1\npowershell=7.6.6-1.deb\nprocps=2:4.0.4-4ubuntu3.3\npsmisc=23.7-1build1\npublicsuffix=20231001.0357-0.1\npython-apt-common=2.7.7ubuntu5.3\npython-babel-localedata=2.10.3-3build1\npython-is-python3=3.11.4-1\npython3=3.12.3-0ubuntu2.1\npython3-apport=2.28.3-0ubuntu0.1\npython3-apt=2.7.7ubuntu5.3\npython3-attr=23.2.0-2\npython3-automat=22.10.0-2\npython3-babel=2.10.3-3build1\npython3-bcrypt=3.2.2-1build1\npython3-blinker=1.7.0-1\npython3-boto3=1.34.46+dfsg-1ubuntu1\npython3-botocore=1.34.46+repack-1ubuntu1\npython3-bpfcc=0.29.1+ds-1ubuntu7\npython3-certifi=2023.11.17-1\npython3-cffi-backend=1.16.0-2build1\npython3-chardet=5.2.0+dfsg-1\npython3-click=8.1.6-2\npython3-colorama=0.4.6-4\npython3-commandnotfound=23.04.0\npython3-configobj=5.0.8-3\npython3-constantly=23.10.4-1\npython3-cryptography=41.0.7-4ubuntu0.4\npython3-dateutil=2.8.2-3ubuntu1\npython3-dbus=1.3.2-5build3\npython3-debconf=1.5.86ubuntu1\npython3-debian=0.1.49ubuntu2\npython3-dev=3.12.3-0ubuntu2.1\npython3-distro=1.9.0-1\npython3-distro-info=1.7build1\npython3-distupgrade=1:24.04.29\npython3-gdbm=3.12.3-0ubuntu1\npython3-gi=3.48.2-1\npython3-hamcrest=2.1.0-1\npython3-httplib2=0.20.4-3ubuntu0.1\npython3-hyperlink=21.0.0-5\npython3-idna=3.6-2ubuntu0.2\npython3-incremental=22.10.0-1\npython3-jinja2=3.1.2-1ubuntu1.3\npython3-jmespath=1.0.1-1\npython3-json-pointer=2.0-0ubuntu1\npython3-jsonpatch=1.32-3\npython3-jsonschema=4.10.3-2ubuntu1\npython3-jwt=2.7.0-1ubuntu0.2\npython3-launchpadlib=1.11.0-6\npython3-lazr.restfulclient=0.14.6-1\npython3-lazr.uri=1.0.6-3\npython3-lldb-18=1:18.1.3-1ubuntu1\npython3-magic=2:0.4.27-3\npython3-markdown-it=3.0.0-2\npython3-markupsafe=2.1.5-1build2\npython3-mdurl=0.1.2-1\npython3-minimal=3.12.3-0ubuntu2.1\npython3-netaddr=0.8.0-2ubuntu1\npython3-netifaces=0.11.0-2build3\npython3-netplan=1.1.2-8ubuntu1~24.04.3\npython3-newt=0.52.24-2ubuntu2\npython3-oauthlib=3.2.2-1\npython3-openssl=23.2.0-1ubuntu0.1\npython3-packaging=24.0-1\npython3-parted=3.12.0-6build3\npython3-passlib=1.7.4-4\npython3-pexpect=4.9-2\npython3-pip=24.0+dfsg-1ubuntu1.3\npython3-pip-whl=24.0+dfsg-1ubuntu1.3\npython3-pkg-resources=68.1.2-2ubuntu1.2\npython3-problem-report=2.28.3-0ubuntu0.1\npython3-ptyprocess=0.7.0-5\npython3-pyasn1=0.4.8-4ubuntu0.3\npython3-pyasn1-modules=0.2.8-1\npython3-pygments=2.17.2+dfsg-1\npython3-pyparsing=3.1.1-1\npython3-pyrsistent=0.20.0-1build2\npython3-requests=2.31.0+dfsg-1ubuntu1.2\npython3-rich=13.7.1-1\npython3-s3transfer=0.10.1-1ubuntu2\npython3-serial=3.5-2\npython3-service-identity=24.1.0-1\npython3-setuptools=68.1.2-2ubuntu1.2\npython3-setuptools-whl=68.1.2-2ubuntu1.2\npython3-six=1.16.0-4\npython3-software-properties=0.99.49.4\npython3-systemd=235-1build4\npython3-twisted=24.3.0-1ubuntu0.2\npython3-typing-extensions=4.10.0-1\npython3-tz=2024.1-2\npython3-update-manager=1:24.04.12\npython3-urllib3=2.0.7-1ubuntu0.7\npython3-venv=3.12.3-0ubuntu2.1\npython3-wadllib=1.3.6-5\npython3-wheel=0.42.0-2\npython3-yaml=6.0.1-2build2\npython3-zope.interface=6.1-1build1\npython3-zstandard=0.22.0-1build1\npython3.12=3.12.3-1ubuntu0.17\npython3.12-dev=3.12.3-1ubuntu0.17\npython3.12-minimal=3.12.3-1ubuntu0.17\npython3.12-venv=3.12.3-1ubuntu0.17\nrake=13.0.6-3\nreadline-common=8.2-4build1\nri=1:3.2~ubuntu1\nrpcsvc-proto=1.4.2-0ubuntu7\nrpm=4.18.2+dfsg-2.1build2\nrpm-common=4.18.2+dfsg-2.1build2\nrpm2cpio=4.18.2+dfsg-2.1build2\nrsync=3.2.7-1ubuntu1.5\nrsyslog=8.2312.0-3ubuntu9.4\nruby=1:3.2~ubuntu1\nruby-dev=1:3.2~ubuntu1\nruby-full=1:3.2~ubuntu1\nruby-net-telnet=0.2.0-1\nruby-rubygems=3.4.20-1\nruby-sdbm=1.0.0-5build4\nruby-webrick=1.8.1-1ubuntu0.2\nruby-xmlrpc=0.3.2-2\nruby3.2=3.2.3-1ubuntu0.24.04.8\nruby3.2-dev=3.2.3-1ubuntu0.24.04.8\nruby3.2-doc=3.2.3-1ubuntu0.24.04.8\nrubygems-integration=1.18\nrun-one=1.17-0ubuntu2\nsbsigntool=0.9.4-3.1ubuntu7\nscreen=4.9.1-1ubuntu1\nsecureboot-db=1.9build1\nsed=4.9-2ubuntu0.24.04.1\nsensible-utils=0.0.22\nsession-manager-plugin=1.2.896.0-1\nsg3-utils=1.46-3ubuntu4.1\nsg3-utils-udev=1.46-3ubuntu4.1\nsgml-base=1.31\nshared-mime-info=2.4-4\nshellcheck=0.9.0-1\nshim-signed=1.58+15.8-0ubuntu1\nshtool=2.0.8-10\nskopeo=1.13.3+ds1-2ubuntu0.24.04.3\nslirp4netns=1.2.1-1build2\nsnapd=2.76.3+ubuntu24.04\nsnmp=5.9.4+dfsg-1.1ubuntu3.2\nsoftware-properties-common=0.99.49.4\nsosreport=4.11.2-0ubuntu0~24.04.1\nsound-theme-freedesktop=0.8-2ubuntu1\nsphinxsearch=2.2.11-8build1\nsqlite3=3.45.1-1ubuntu2.8\nsquashfs-tools=1:4.6.1-1build1\nssh=1:9.6p1-3ubuntu13.19\nssh-import-id=5.11-0ubuntu2.24.04.1\nsshpass=1.09-1\nssl-cert=1.1.2ubuntu1\nstrace=6.8-0ubuntu2\nsudo=1.9.15p5-3ubuntu5.24.04.4\nswig=4.2.0-2ubuntu1\nsysstat=12.6.1-2\nsystemd=255.4-1ubuntu8.17\nsystemd-coredump=255.4-1ubuntu8.17\nsystemd-dev=255.4-1ubuntu8.17\nsystemd-hwe-hwdb=255.1.7\nsystemd-resolved=255.4-1ubuntu8.17\nsystemd-sysv=255.4-1ubuntu8.17\nsysvinit-utils=3.08-6ubuntu3\ntar=1.35+dfsg-3ubuntu0.4\ntcl=8.6.14build1\ntcl8.6=8.6.14+dfsg-1build1\ntcpdump=4.99.4-3ubuntu4.24.04.1\ntelnet=0.17+2.5-3ubuntu4.2\ntemurin-11-jdk=11.0.32.1.0+1-0\ntemurin-17-jdk=17.0.20.1.0+1-0\ntemurin-21-jdk=21.0.12.1.0+1-0\ntemurin-25-jdk=25.0.4.1.0+1-0\ntemurin-8-jdk=8.0.504.0.0+1-0\ntex-common=6.18\ntexinfo=7.1-3build2\ntexinfo-lib=7.1-3build2\nthin-provisioning-tools=0.9.0-2ubuntu5.1\ntime=1.9-0.2build1\ntk=8.6.14build1\ntk8.6=8.6.14-1build1\ntmux=3.4-1ubuntu0.1\ntnftp=20230507-2build3\ntpm-udev=0.6ubuntu1\ntrace-cmd=3.2-1ubuntu2\ntree=2.1.1-2ubuntu3.24.04.2\ntzdata=2026c-0ubuntu0.24.04.1\ntzdata-legacy=2026c-0ubuntu0.24.04.1\nubuntu-kernel-accessories=1.539.2\nubuntu-keyring=2023.11.28.1\nubuntu-minimal=1.539.2\nubuntu-mono=24.04-0ubuntu1\nubuntu-pro-client=37.2ubuntu~24.04.1\nubuntu-pro-client-l10n=37.2ubuntu~24.04.1\nubuntu-release-upgrader-core=1:24.04.29\nubuntu-server=1.539.2\nubuntu-standard=1.539.2\nucf=3.0043+nmu1\nudev=255.4-1ubuntu8.17\nudisks2=2.10.1-6ubuntu1.5\nufw=0.36.2-6\nuidmap=1:4.13+dfsg1-4ubuntu3.2\nunzip=6.0-28ubuntu4.1\nupdate-manager-core=1:24.04.12\nupdate-notifier-common=3.192.68.2\nupx-ucl=4.2.2-3\nusb-modeswitch=2.6.1-3ubuntu3\nusb-modeswitch-data=20191128-6\nusb.ids=2024.03.18-1\nusbutils=1:017-3build1\nutil-linux=2.39.3-9ubuntu6.6\nuuid-runtime=2.39.3-9ubuntu6.6\nvim=2:9.1.0016-1ubuntu7.20\nvim-common=2:9.1.0016-1ubuntu7.20\nvim-runtime=2:9.1.0016-1ubuntu7.20\nvim-tiny=2:9.1.0016-1ubuntu7.20\nwalinuxagent=2.15.0.1-0ubuntu1~24.04.1\nwget=1.21.4-1ubuntu4.5\nwhiptail=0.52.24-2ubuntu2\nx11-common=1:7.7+23ubuntu3\nx11-xkb-utils=7.7+8build2\nxauth=1:1.1.2-1build1\nxdg-user-dirs=0.18-1build1\nxdg-utils=1.1.3-4.1ubuntu3\nxfsprogs=6.6.0-1ubuntu2.1\nxkb-data=2.41-2ubuntu1.1\nxml-core=0.19\nxserver-common=2:21.1.12-1ubuntu1.8\nxul-ext-ubufox=3.4-0ubuntu1.17.10.4\nxvfb=2:21.1.12-1ubuntu1.8\nxxd=2:9.1.0016-1ubuntu7.20\nxz-utils=5.6.1+really5.4.5-1ubuntu0.3\nzerofree=1.1.1-1build5\nzip=3.0-13ubuntu0.2\nzlib1g=1:1.3.dfsg-3.1ubuntu2.2\nzlib1g-dev=1:1.3.dfsg-3.1ubuntu2.2\nzstd=1.5.5+dfsg2-2build1.1\nzsync=0.6.2-5build1",
+  "scope": "Unmodified upstream release build/packer and guards; optional explicit single-model change. Executable components only, no full enwik9 score or resource eligibility.",
+  "execution": {
+    "command": [
+      "bash",
+      "/home/runner/work/hutter/hutter/build/blend-release-baseline/source/build.sh"
+    ],
+    "status": "ok",
+    "exit_code": 0,
+    "wall_seconds": 205.106461724,
+    "peak_rss_bytes": 6579093504,
+    "log": "/home/runner/work/hutter/hutter/build/blend-release-baseline/stderr.log"
+  },
+  "packer_checks": {
+    "CUT-Gegenprobe voll: bitidentisch": true,
+    "CUT-Gegenprobe dec: Praefix bitidentisch": true,
+    "CUT-Stubprobe voll: bitidentisch": true,
+    "CUT-Stubprobe dec: Praefix bitidentisch": true
+  },
+  "package": {
+    "compressor_bytes": 4000689,
+    "compressor_sha256": "8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7",
+    "packed_program_bytes": 182722,
+    "decoder_prefix_bytes": 165545,
+    "decoder_prefix_sha256": "7a4020aeecff28623891e038e3c262c3a2beed3ce93afd06008db6fbf8789631",
+    "blocks": {
+      "hints": {
+        "bytes": 57504,
+        "sha256": "1aac80c7810acf6a808d11000b25438f187f724892587b458af4f237b735bda1"
+      },
+      "order": {
+        "bytes": 43780,
+        "sha256": "f4fd097c6d28cf2bce0c350fdbd30195e29b4e3d84ba663db44bc3cd9af7d7a2"
+      },
+      "weights": {
+        "bytes": 3716667,
+        "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+      }
+    },
+    "component_bytes_excluding_dictionary_payload_footer_args": 7882901
+  },
+  "matches_published_binary": true,
+  "log_sha256": {
+    "build.log": "93e3d7afbc377c7e6182978c2905d332489fb70000f6d4e92843df9157d3115e",
+    "stderr.log": "1c361507a09ddd9e6ff97c37b7181c47c994e6895d0f8e947ffeacd2e166fa3f"
+  },
+  "passed": true
+}

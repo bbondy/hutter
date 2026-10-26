@@ -126,7 +126,10 @@ Priorities:
    passes: versus prior it saves [9/32 bytes on Mac](../benchmarks/training/20261023-bit-blend-mac-screen-v1)
    and [11/30 bytes on Linux](../benchmarks/training/20261023-bit-blend-linux-screen-v1)
    across screen/disjoint, with exact restoration and matching contexts.
-   Complete package accounting and full enwik9 remain open.
+   The [native Linux packed release](../benchmarks/training/20261025-bit-blend-release-v1)
+   reproduces both pinned baseline and prior packages and saves another
+   37 measured component bytes versus prior (17 compressor + 20 decoder
+   prefix). It is a small confirmed component gain; full enwik9 remains open.
 
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)

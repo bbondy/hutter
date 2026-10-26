@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "run_id": 40187845193,
+  "head_sha": "c10edcf299e0bd60de203cf4e0af3c8322a2d22d",
+  "run_conclusion": "success",
+  "protocol_sha256": "58f88484ae4c5ed12d9c574ebb82c6049af7b1ddceb03a26ba65a260f72977be",
+  "checks": {
+    "all_packer_self_checks": true,
+    "pinned_baseline_and_prior_sha256": true,
+    "model_and_source_bindings": true,
+    "identical_external_blocks": true,
+    "independent_comparison_matches_ci": true
+  },
+  "local_package_files": {
+    "baseline/comp9": {
+      "bytes": 4000689,
+      "sha256": "8b07d85f0a374b55688fd08d1a464222f766efbb5bfefc2bc94d6abb201133d7"
+    },
+    "baseline/decoder-prefix": {
+      "bytes": 165545,
+      "sha256": "7a4020aeecff28623891e038e3c262c3a2beed3ce93afd06008db6fbf8789631"
+    },
+    "prior/comp9": {
+      "bytes": 4000673,
+      "sha256": "5851ec70fb399dfda9d33082ccc1d6e52a0260fea0743609b7122e1b17c45a89"
+    },
+    "prior/decoder-prefix": {
+      "bytes": 165529,
+      "sha256": "0ec9b2df1aa72e05b48f7f6d1445be16ed12803e853b59cf18352cf8bd893db5"
+    },
+    "candidate/comp9": {
+      "bytes": 4000656,
+      "sha256": "d448abd6ceb1c143aacc1793d119b01700e863fa86bcc081531790179eb96f39"
+    },
+    "candidate/decoder-prefix": {
+      "bytes": 165509,
+      "sha256": "e370ae8591c1f7b586c19e79c49c29b12dd310e8b955fe0a610cc28d3064f86f"
+    }
+  },
+  "retained_sha256": {
+    "baseline/report.json": "2234e714a1957d26d7c748d60047a25991ec8e4762140e7fc1118beedba33d23",
+    "baseline/build.log": "93e3d7afbc377c7e6182978c2905d332489fb70000f6d4e92843df9157d3115e",
+    "baseline/stderr.log": "1c361507a09ddd9e6ff97c37b7181c47c994e6895d0f8e947ffeacd2e166fa3f",
+    "prior/report.json": "8cb529fcb4b1bd41d823b6ba6745577a4fdab3d18bdb6b329c521c9f7abe561a",
+    "prior/build.log": "a3f33078aea8b0e8cb1ef50c6a68127b420a2eb41690512e2c4d50e76a5493bf",
+    "prior/stderr.log": "7e08e6ea09cf13bc9db1845e4a5f40024928f2a5340d259f7ee4e3d34fff4aa9",
+    "candidate/report.json": "722cc55a538ea916f23a3edbb3c71b53a2462edd083b5d2bdf3b22bb43186c44",
+    "candidate/build.log": "e815bce4baf3a53dca8249fc47b306520ed6b442c2abd56e608b290cfeee1ac6",
+    "candidate/stderr.log": "e99e4fa549eec9c0ffe385e87081c0631d9986c25769e791b651ead1ddc32553",
+    "blend-release-comparison.json": "eb14834c85b79caf016f63d29a1a55075a96f851566847a6742b500d266ce421",
+    "compiler-selection.log": "ebcca823475f8fef5094e548a5dc7662221dcf2612e2d652b090582ab2ce7b93"
+  }
+}
