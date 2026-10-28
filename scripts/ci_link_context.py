@@ -25,6 +25,7 @@ EXPERIMENTS = {
     "bitl-warm-start": "20261017-bitl-archive-protocol-v1",
     "bitl-broad": "20261018-bit-weight-broad-protocol-v1",
     "bitl-blend": "20261022-bitl-blend-archive-protocol-v1",
+    "bitl-blend-confirmation": "20261027-bitl-blend-confirmation-protocol-v1",
 }
 
 
@@ -34,7 +35,7 @@ def main():
     parser.add_argument("--enwik8", type=Path, required=True)
     parser.add_argument("--experiment", choices=EXPERIMENTS, default="link-context")
     args = parser.parse_args()
-    group = "training" if args.experiment in ("bitl-trace", "bitl-warm-start", "bitl-broad", "bitl-blend") else "model-variants"
+    group = "training" if args.experiment in ("bitl-trace", "bitl-warm-start", "bitl-broad", "bitl-blend", "bitl-blend-confirmation") else "model-variants"
     original_protocol = ROOT / "benchmarks" / group / EXPERIMENTS[args.experiment] / "protocol.json"
     frozen_protocol = json.loads(original_protocol.read_text())
     if args.role not in frozen_protocol["fixtures"]:

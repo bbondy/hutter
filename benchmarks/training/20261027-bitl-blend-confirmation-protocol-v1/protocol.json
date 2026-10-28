@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "hypothesis": "The already selected 25% blend will reduce actual archive bytes versus the prior one-pass checkpoint on a third geographically separate enwik8 article range without changing code, contexts or model size.",
+  "fixtures": {
+    "confirmation": {
+      "manifest_path": "benchmarks/model-variants/20261017-retrieval-confirmation-protocol-v1/confirmation.json",
+      "manifest_sha256": "7a2d790580709ac043ec19b4487d3cea325f3285b1d46682b2ee69ccbf917b0d",
+      "input_sha256": "60436c2ca5b650bd1e8e7894447ce14de1499c19d45d79a0764d6186830cc2c9"
+    }
+  },
+  "input_variant": "upstream",
+  "variants": ["baseline", "bit-weight-warm-start-lr3000-v1", "bit-blend-one-quarter-v1"],
+  "bit_weight_recipe_sha256": "91f2aa17e6ec986bb73edb9446d5487e964bd91161dad996b23dfe47ba25d470",
+  "bit_blend_recipe_sha256": "4a3cbd11c5e7c76025ed96a0aa32478d2b5bad28cfd6255ced254458b041fe64",
+  "prior_model_sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0",
+  "model_sha256": "4369bf1abd259a42b4463f519d7613bd9c78c138e72c8c7d03c1f6170af2c0f4",
+  "model_bytes": 7386,
+  "rule": "Build untouched, prior and frozen blend serially on one native Linux host; compare one archive each on identical prepared input and verify exact original XML restoration and all encoder/decoder context counters. Preserve a loss as well as a gain. Do not tune on this range.",
+  "promotion_gate": "Blend payload smaller than prior on this range with exact restoration and identical contexts. This is a supporting third-range check, not a final full-input validation.",
+  "scope": "The 150-page, 1,000,794-byte raw XML range was already used for an unrelated retrieval comparison and prior fixed-weight trial. The same range and full corpus are not untouched validation; fixture payloads and development binaries are not Hutter Prize scores."
+}
