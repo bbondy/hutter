@@ -1,0 +1,348 @@
+{
+  "version": 1,
+  "kind": "fixed-input-model-ablation",
+  "role": "confirmation",
+  "date_utc": "2026-10-28T12:38:45.195668+00:00",
+  "protocol_sha256": "856effd60a44a996c9f52a2f113e88a8c616c33cc97761ad0c1dc35480c933ee",
+  "manifest_sha256": "77b60295ea58d7a54280fe3f03ac8c18c44fce8fd40203d2dc9f9c85a9e70e00",
+  "input_sha256": "60436c2ca5b650bd1e8e7894447ce14de1499c19d45d79a0764d6186830cc2c9",
+  "input_bytes": 924454,
+  "raw_sha256": "045ffc2760edf5e56b1304ec82053f1876a4731addde8aa2ddf4568de5f8908c",
+  "raw_bytes": 1000794,
+  "side_data": {
+    "weights-poc8m_w2048_p15f_v3bf16_gestrichen_v4.c4": {
+      "bytes": 3716667,
+      "sha256": "ba982cd5da95c88c076d63b7767dad12e0c510ea3dd99adc0e213e707b45e719"
+    },
+    "dictionary/english.dic": {
+      "bytes": 520804,
+      "sha256": "0ab9f2d2733003577b53b206791f382fd31b91eff9975041b2173bb5585c5535"
+    }
+  },
+  "native_arguments": [
+    "--native-corpus",
+    "150",
+    "52"
+  ],
+  "verifier_sha256": "1e3f0016aba6f7ffc31711b0286fd67c49381f56bb2b2d7d926d01b6cc00f55a",
+  "scope": "Native Linux x86-64, all models serial on one CI host; not a full prize run",
+  "variants": {
+    "baseline": {
+      "payload_bytes": 126001,
+      "archive_sha256": "f12ad5938b457f6343a5609bbf95f23ece1693eb66f5824faeb5d7dd1b63ba45",
+      "binary_sha256": "146bf187158a9fb5fdc7c486356c692f9efc7de239f219dd082b8032fa4638b0",
+      "binary_bytes": 577272,
+      "model": {
+        "budget": 256,
+        "chunk": 64,
+        "max_mentions": 8,
+        "line_scan": 512,
+        "open_len": 1
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 150,
+            "titles": 149,
+            "blocks": 1,
+            "bytes": 7,
+            "links": 9354,
+            "links_piped": 1794,
+            "links_dropped": 0,
+            "redirects": 50,
+            "from_redirect": 10,
+            "from_linktext": 1
+          },
+          "z3": {
+            "articles": 100,
+            "usable_titles": 99,
+            "articles_with_mentions": 13,
+            "articles_with_prefix": 13,
+            "mentions_total": 16,
+            "prefix_tokens_total": 702,
+            "chunks_total": 16,
+            "anchors": 10292,
+            "fed_tokens": 702
+          },
+          "prompt": {
+            "articles": 150,
+            "redirect_prompt_pages": 51,
+            "redirect_prompt_tokens": 204,
+            "redirect_pages": 50,
+            "meta_pages": 150,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 15138
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 150,
+            "titles": 149,
+            "blocks": 1,
+            "bytes": 7,
+            "links": 9354,
+            "links_piped": 1794,
+            "links_dropped": 0,
+            "redirects": 50,
+            "from_redirect": 10,
+            "from_linktext": 1
+          },
+          "z3": {
+            "articles": 100,
+            "usable_titles": 99,
+            "articles_with_mentions": 13,
+            "articles_with_prefix": 13,
+            "mentions_total": 16,
+            "prefix_tokens_total": 702,
+            "chunks_total": 16,
+            "anchors": 10292,
+            "fed_tokens": 702
+          },
+          "prompt": {
+            "articles": 150,
+            "redirect_prompt_pages": 51,
+            "redirect_prompt_tokens": 204,
+            "redirect_pages": 50,
+            "meta_pages": 150,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 15138
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "045ffc2760edf5e56b1304ec82053f1876a4731addde8aa2ddf4568de5f8908c",
+      "compress_seconds": 174.389748945,
+      "decompress_seconds": 162.46974043199998,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-bitl-blend-confirmation-confirmation/run-baseline",
+      "metadata_sha256": "58708252ce4552d6692915d76a1ec99a5ccccda0d9b223b960debe8f9d7b104d",
+      "results_sha256": "9b8f8f10bd594144efbeb7cdfc1e6d211763c8649aee35df24da43171827ca39",
+      "log_sha256": {
+        "compress": "d88232429b71ff38bf22b71b8ac9533509773d0b3b177e3226fe376bc29ee529",
+        "decompress": "9636f3654ed03cef749f95946252783477601f0c8000329c5a0dbed27aad9ff6"
+      },
+      "delta_bytes_vs_baseline": 0
+    },
+    "bit-weight-warm-start-lr3000-v1": {
+      "payload_bytes": 125905,
+      "archive_sha256": "211a5f58d5489fa8a03e77798ab7725d9c769772819244dfd1cfa6da1f107965",
+      "binary_sha256": "8d2672d19a0874481597a6522f096f395e4dc5a1c390b179a01b30f9c3c52f89",
+      "binary_bytes": 577272,
+      "model": {
+        "name": "warm-start-lr3000-v1",
+        "source_file": "src/bit_head_weights.h",
+        "before_sha256": "c5977bd52281d05d02825c7a6a79dd9731e7ec239bc70755704e4baf8132010a",
+        "after_sha256": "75766a7201331d4382756157ebd4dad3741112b76b0ee17918c7b64babab1043",
+        "recipe_sha256": "91f2aa17e6ec986bb73edb9446d5487e964bd91161dad996b23dfe47ba25d470",
+        "model_sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0",
+        "model_bytes": 7386,
+        "model_path": "benchmarks/training/20261017-bitl-warm-start-v1/models/lr3000.nblb",
+        "scope": "Only the embedded BF16 array and its hash comment change. Model code, geometry, online-learning threshold, transformer weights and all other sources remain unchanged."
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 150,
+            "titles": 149,
+            "blocks": 1,
+            "bytes": 7,
+            "links": 9354,
+            "links_piped": 1794,
+            "links_dropped": 0,
+            "redirects": 50,
+            "from_redirect": 10,
+            "from_linktext": 1
+          },
+          "z3": {
+            "articles": 100,
+            "usable_titles": 99,
+            "articles_with_mentions": 13,
+            "articles_with_prefix": 13,
+            "mentions_total": 16,
+            "prefix_tokens_total": 702,
+            "chunks_total": 16,
+            "anchors": 10292,
+            "fed_tokens": 702
+          },
+          "prompt": {
+            "articles": 150,
+            "redirect_prompt_pages": 51,
+            "redirect_prompt_tokens": 204,
+            "redirect_pages": 50,
+            "meta_pages": 150,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 15138
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 150,
+            "titles": 149,
+            "blocks": 1,
+            "bytes": 7,
+            "links": 9354,
+            "links_piped": 1794,
+            "links_dropped": 0,
+            "redirects": 50,
+            "from_redirect": 10,
+            "from_linktext": 1
+          },
+          "z3": {
+            "articles": 100,
+            "usable_titles": 99,
+            "articles_with_mentions": 13,
+            "articles_with_prefix": 13,
+            "mentions_total": 16,
+            "prefix_tokens_total": 702,
+            "chunks_total": 16,
+            "anchors": 10292,
+            "fed_tokens": 702
+          },
+          "prompt": {
+            "articles": 150,
+            "redirect_prompt_pages": 51,
+            "redirect_prompt_tokens": 204,
+            "redirect_pages": 50,
+            "meta_pages": 150,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 15138
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "045ffc2760edf5e56b1304ec82053f1876a4731addde8aa2ddf4568de5f8908c",
+      "compress_seconds": 166.13889658399995,
+      "decompress_seconds": 157.96461276599996,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-bitl-blend-confirmation-confirmation/run-bit-weight-warm-start-lr3000-v1",
+      "metadata_sha256": "d2d639397fcc60ff493e3e9b908574504253e3fc867eb5c1af62d441394e87d2",
+      "results_sha256": "ad90601450b1e21d9d8dd80b3f9c5d5a934004e9c8265f0a6cf9e2dfb30698e2",
+      "log_sha256": {
+        "compress": "2e294cf7289e8c832f5a7c18e8ed4d67d332c780934119aae848da6be0c8922b",
+        "decompress": "3d3126443af58042ef303f4f378b9d314009387c085b64607265529d13a4a606"
+      },
+      "delta_bytes_vs_baseline": -96
+    },
+    "bit-blend-one-quarter-v1": {
+      "payload_bytes": 125879,
+      "archive_sha256": "77a1d52d9173590e791fc5332a590895cc14b8de4fa196e3bc6277e12b323812",
+      "binary_sha256": "d5375abfa4ff5165ca431aef6d105ea7742b0ba24fa42271c2737fcabce9310d",
+      "binary_bytes": 577272,
+      "model": {
+        "name": "one-quarter-v1",
+        "source_file": "src/bit_head_weights.h",
+        "before_sha256": "c5977bd52281d05d02825c7a6a79dd9731e7ec239bc70755704e4baf8132010a",
+        "after_sha256": "0604ba1ed2959b7e729e5cf61d45800ae102182b61e78f10b1fafa90748c61e4",
+        "recipe_sha256": "4a3cbd11c5e7c76025ed96a0aa32478d2b5bad28cfd6255ced254458b041fe64",
+        "model_sha256": "4369bf1abd259a42b4463f519d7613bd9c78c138e72c8c7d03c1f6170af2c0f4",
+        "model_bytes": 7386,
+        "model_path": "benchmarks/training/20261022-bitl-blend-v1/blend-1-of-4.nblb",
+        "scope": "Only the embedded BF16 array and its hash comment change. Source checkpoint selection is frozen before archive trials; all model code, geometry, online-learning threshold, transformer weights and other sources stay unchanged."
+      },
+      "context": {
+        "compress": {
+          "alias": {
+            "articles": 150,
+            "titles": 149,
+            "blocks": 1,
+            "bytes": 7,
+            "links": 9354,
+            "links_piped": 1794,
+            "links_dropped": 0,
+            "redirects": 50,
+            "from_redirect": 10,
+            "from_linktext": 1
+          },
+          "z3": {
+            "articles": 100,
+            "usable_titles": 99,
+            "articles_with_mentions": 13,
+            "articles_with_prefix": 13,
+            "mentions_total": 16,
+            "prefix_tokens_total": 702,
+            "chunks_total": 16,
+            "anchors": 10292,
+            "fed_tokens": 702
+          },
+          "prompt": {
+            "articles": 150,
+            "redirect_prompt_pages": 51,
+            "redirect_prompt_tokens": 204,
+            "redirect_pages": 50,
+            "meta_pages": 150,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 15138
+          }
+        },
+        "decompress": {
+          "alias": {
+            "articles": 150,
+            "titles": 149,
+            "blocks": 1,
+            "bytes": 7,
+            "links": 9354,
+            "links_piped": 1794,
+            "links_dropped": 0,
+            "redirects": 50,
+            "from_redirect": 10,
+            "from_linktext": 1
+          },
+          "z3": {
+            "articles": 100,
+            "usable_titles": 99,
+            "articles_with_mentions": 13,
+            "articles_with_prefix": 13,
+            "mentions_total": 16,
+            "prefix_tokens_total": 702,
+            "chunks_total": 16,
+            "anchors": 10292,
+            "fed_tokens": 702
+          },
+          "prompt": {
+            "articles": 150,
+            "redirect_prompt_pages": 51,
+            "redirect_prompt_tokens": 204,
+            "redirect_pages": 50,
+            "meta_pages": 150,
+            "alias_tokens": 0,
+            "alias_articles": 0,
+            "links": 0,
+            "links_piped": 0,
+            "redirects": 0,
+            "fed_tokens": 15138
+          }
+        }
+      },
+      "original_bytes_roundtrip": true,
+      "restored_raw_sha256": "045ffc2760edf5e56b1304ec82053f1876a4731addde8aa2ddf4568de5f8908c",
+      "compress_seconds": 178.24242169399997,
+      "decompress_seconds": 184.764489551,
+      "source_run": "/home/runner/work/hutter/hutter/build/linux-ci-bitl-blend-confirmation-confirmation/run-bit-blend-one-quarter-v1",
+      "metadata_sha256": "ab8c960468b4ec734d608c251cd25346c09932c9adc9f7b5d1e3d7d9778c5643",
+      "results_sha256": "e6fe8a3e17776524f262fc2d37fd4a1e56bcab28e69dfbb5f2e7aad427596158",
+      "log_sha256": {
+        "compress": "a625f804055c0287d181c344efd703e41e8ac3b359806acb8e55147b3c58fe61",
+        "decompress": "0594da7bb645a02e35d8c5c33e23aa5a0c033b1d0b7b4173a75fe85eddbf6745"
+      },
+      "delta_bytes_vs_baseline": -122
+    }
+  }
+}

@@ -9,7 +9,11 @@ import shutil
 from make_samples import digest
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE_PROTOCOL = ROOT / "benchmarks/training/20261022-bitl-blend-archive-protocol-v1/protocol.json"
+SOURCE_PROTOCOLS = {
+    "screen": ROOT / "benchmarks/training/20261022-bitl-blend-archive-protocol-v1/protocol.json",
+    "holdout": ROOT / "benchmarks/training/20261022-bitl-blend-archive-protocol-v1/protocol.json",
+    "confirmation": ROOT / "benchmarks/training/20261027-bitl-blend-confirmation-protocol-v1/protocol.json",
+}
 NAMES = ("baseline", "bit-weight-warm-start-lr3000-v1", "bit-blend-one-quarter-v1")
 BLEND_SHA = "4369bf1abd259a42b4463f519d7613bd9c78c138e72c8c7d03c1f6170af2c0f4"
 PRIOR_SHA = "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0"
@@ -25,12 +29,13 @@ def main():
     args = parser.parse_args()
     src = args.artifact_role
     role = src.name
-    if role not in ("screen", "holdout"):
-        raise ValueError("artifact role must be screen or holdout")
+    if role not in SOURCE_PROTOCOLS:
+        raise ValueError("artifact role must be screen, holdout or confirmation")
+    source_protocol_path = SOURCE_PROTOCOLS[role]
     comparison = json.loads((src / "comparison/report.json").read_text())
     protocol = json.loads((src / "protocol.json").read_text())
     manifest = json.loads((src / "manifest.json").read_text())
-    source_protocol = json.loads(SOURCE_PROTOCOL.read_text())
+    source_protocol = json.loads(source_protocol_path.read_text())
     host = json.loads((src / "host.json").read_text())
     checks = {}
 
@@ -40,7 +45,7 @@ def main():
             raise ValueError("artifact check failed: " + label)
 
     check("source revision", host["commit"] == args.head_sha)
-    check("source protocol", protocol["parent_protocol_sha256"] == digest(SOURCE_PROTOCOL)
+    check("source protocol", protocol["parent_protocol_sha256"] == digest(source_protocol_path)
           and source_protocol["model_sha256"] == BLEND_SHA
           and source_protocol["variants"] == list(NAMES))
     check("protocol", digest(src / "protocol.json") == comparison["protocol_sha256"])
@@ -90,7 +95,7 @@ def main():
             shutil.copy2(file, dest)
     inventory = {str(file.relative_to(out)): digest(file) for file in sorted(out.rglob("*")) if file.is_file()}
     (out / "verification.json").write_text(json.dumps({"version": 1, "run_id": args.run_id,
-        "head_sha": args.head_sha, "role": role, "source_protocol_sha256": digest(SOURCE_PROTOCOL),
+        "head_sha": args.head_sha, "role": role, "source_protocol_sha256": digest(source_protocol_path),
         "checks": checks, "retained_sha256": inventory}, indent=2) + "\n")
     print(json.dumps({"role": role, "checks": len(checks), "files": len(inventory),
                       "payload_delta_vs_prior_bytes": blend["payload_bytes"] - prior["payload_bytes"]}, indent=2))

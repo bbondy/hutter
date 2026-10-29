@@ -260,6 +260,12 @@ blocks are byte-identical. The source, model, package and log hashes are saved
 with the comparison. This is still a small fixture and release-component gain;
 full enwik9 payload, self-extracting decode and official scoring remain open.
 
+The fixed blend also passed a [third native Linux article range](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261029-bit-blend-linux-confirmation-v1):
+125,879 payload bytes, versus 125,905 for the prior checkpoint and 126,001
+untouched. All variants restored exact original XML and kept identical
+contexts. This range was already used for other research; it is a supporting
+check, not untouched final validation or a full prize score.
+
 Before training on that range, a [frozen native Linux comparison](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-weight-linux-broad-v1)
 tested the *existing* one-pass checkpoint there. It reduced the 4 MB range's
 payload from 476,220 to 475,970 bytes (**250 bytes saved**); both variants

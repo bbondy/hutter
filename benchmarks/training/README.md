@@ -114,3 +114,9 @@ keeps identical context counts. The [native Linux packed-release comparison](202
 reproduces the published baseline and prior packages exactly; the blend saves
 17 compressor and 20 decoder-prefix bytes versus prior, or 37 measured
 component bytes. Full enwik9 compression and submission scoring remain open.
+
+The fixed blend also passed a [third native Linux article range](20261029-bit-blend-linux-confirmation-v1):
+125,879 payload bytes versus 125,905 for the prior checkpoint and 126,001
+untouched. All three restore exact XML with identical contexts. The range had
+already been used for other research, so it is supporting evidence rather than
+untouched final validation.
