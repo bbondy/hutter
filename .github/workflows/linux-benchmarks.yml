@@ -17,6 +17,7 @@ on:
           - bitl-broad
           - bitl-blend
           - bitl-blend-confirmation
+          - bitl-blend-long
 
 permissions:
   contents: read
@@ -33,7 +34,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        role: ${{ fromJSON(inputs.experiment == 'exact-target-confirmation' && '["confirmation"]' || inputs.experiment == 'bitl-blend-confirmation' && '["confirmation"]' || inputs.experiment == 'bitl-broad' && '["screen"]' || '["screen", "holdout"]') }}
+        role: ${{ fromJSON(inputs.experiment == 'exact-target-confirmation' && '["confirmation"]' || inputs.experiment == 'bitl-blend-confirmation' && '["confirmation"]' || inputs.experiment == 'bitl-blend-long' && '["confirmation"]' || inputs.experiment == 'bitl-broad' && '["screen"]' || '["screen", "holdout"]') }}
     steps:
       - uses: actions/checkout@v4
       - name: Install native compiler and measurement tools

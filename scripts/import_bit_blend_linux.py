@@ -25,13 +25,14 @@ def main():
     parser.add_argument("--enwik8", type=Path, required=True)
     parser.add_argument("--run-id", type=int, required=True)
     parser.add_argument("--head-sha", required=True)
+    parser.add_argument("--source-protocol", type=Path, help="frozen protocol for a second range with the same role")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     src = args.artifact_role
     role = src.name
     if role not in SOURCE_PROTOCOLS:
         raise ValueError("artifact role must be screen, holdout or confirmation")
-    source_protocol_path = SOURCE_PROTOCOLS[role]
+    source_protocol_path = args.source_protocol or SOURCE_PROTOCOLS[role]
     comparison = json.loads((src / "comparison/report.json").read_text())
     protocol = json.loads((src / "protocol.json").read_text())
     manifest = json.loads((src / "manifest.json").read_text())

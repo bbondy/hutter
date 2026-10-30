@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "hypothesis": "The previously selected 25% BITLSTM blend will save actual archive bytes versus the prior one-pass checkpoint on a separate roughly 4 MB enwik8 article range, with the same runtime and model size.",
+  "source_selection": {
+    "corpus": "checksum-verified official enwik8",
+    "corpus_sha256": "2b49720ec4d78c3c9fabaee6e4179a5e997302b3a70029f30f2d582218c024a8",
+    "requested_offset": 60000000,
+    "target_raw_bytes": 4000000,
+    "source_offset": 60014618,
+    "source_end": 64032232,
+    "raw_bytes": 4017614,
+    "raw_sha256": "fb4a7a320f79b8e9f858129d71a1d3ee846f2c5f3f3be6507ea3d23ee4824f58",
+    "page_count": 495,
+    "rule": "Select the first complete page at or after requested offset through the first complete page end after target bytes, then project the verified full-corpus upstream order. This range does not overlap the saved 1 MB, 4 MB or third-range trials."
+  },
+  "fixtures": {
+    "confirmation": {
+      "manifest_path": "benchmarks/training/20261029-bit-blend-long-protocol-v1/projected-manifest.json",
+      "manifest_sha256": "8671c556dbebbcf3efc1e560be01a10c2869a320401a94cdce9004ed7d8c898d",
+      "input_sha256": "6b34569d68bf1fc45e8a6356b6c687288131ac0769e67f251f86689fa23a0270"
+    }
+  },
+  "source_manifest_sha256": "057a43592b0edaf325d397b1c4ad5e5ea972af49776ccf73c7c309ed2be12a51",
+  "sample_verification_sha256": "7ce79f338ab4863796ea56e2c0b2754163a76a5cd8a59fdee9f7469aac3d64f1",
+  "input_variant": "upstream",
+  "variants": [
+    "baseline",
+    "bit-weight-warm-start-lr3000-v1",
+    "bit-blend-one-quarter-v1"
+  ],
+  "bit_weight_recipe_sha256": "91f2aa17e6ec986bb73edb9446d5487e964bd91161dad996b23dfe47ba25d470",
+  "bit_blend_recipe_sha256": "4a3cbd11c5e7c76025ed96a0aa32478d2b5bad28cfd6255ced254458b041fe64",
+  "prior_model_sha256": "bfd6401b0142441e7b99a4fe930943d830e7dca2e47d08692e83b023a642f8e0",
+  "model_sha256": "4369bf1abd259a42b4463f519d7613bd9c78c138e72c8c7d03c1f6170af2c0f4",
+  "model_bytes": 7386,
+  "rule": "Build untouched, prior and frozen blend serially on one native Linux host. Compress one archive each on the identical prepared input. Verify exact prepared and original XML restoration and identical encoder/decoder context counts. Preserve losses as well as gains; do not retune on this range.",
+  "promotion_gate": "Blend payload smaller than prior with exact restoration and unchanged contexts. This longer fixture tests length scaling but does not establish a full enwik9 submission score.",
+  "scope": "The 4 MB enwik8 segment was chosen before model compression. enwik8 is part of the known benchmark corpus, so this is not an independent final holdout. Development binaries and fixture payloads exclude full submission components and resources."
+}

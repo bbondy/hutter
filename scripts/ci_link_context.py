@@ -26,6 +26,7 @@ EXPERIMENTS = {
     "bitl-broad": "20261018-bit-weight-broad-protocol-v1",
     "bitl-blend": "20261022-bitl-blend-archive-protocol-v1",
     "bitl-blend-confirmation": "20261027-bitl-blend-confirmation-protocol-v1",
+    "bitl-blend-long": "20261029-bit-blend-long-protocol-v1",
 }
 
 
@@ -35,7 +36,7 @@ def main():
     parser.add_argument("--enwik8", type=Path, required=True)
     parser.add_argument("--experiment", choices=EXPERIMENTS, default="link-context")
     args = parser.parse_args()
-    group = "training" if args.experiment in ("bitl-trace", "bitl-warm-start", "bitl-broad", "bitl-blend", "bitl-blend-confirmation") else "model-variants"
+    group = "training" if args.experiment in ("bitl-trace", "bitl-warm-start", "bitl-broad", "bitl-blend", "bitl-blend-confirmation", "bitl-blend-long") else "model-variants"
     original_protocol = ROOT / "benchmarks" / group / EXPERIMENTS[args.experiment] / "protocol.json"
     frozen_protocol = json.loads(original_protocol.read_text())
     if args.role not in frozen_protocol["fixtures"]:
@@ -86,7 +87,7 @@ def main():
             runs.append(run)
             subprocess.run([sys.executable, "scripts/linux_cmix.py", "bench", str(work / "fixture/upstream.ready"),
                             "--build", str(build), "--manifest", str(manifest), "--output", str(run),
-                            "--timeout", "7200" if args.experiment == "bitl-broad" else "1800"], cwd=ROOT, check=True)
+                            "--timeout", "7200" if args.experiment in ("bitl-broad", "bitl-blend-long") else "1800"], cwd=ROOT, check=True)
         summarize(SimpleNamespace(manifest=manifest, protocol=protocol_path, role=args.role,
                                   build=builds[0], runs=runs, output=evidence / "comparison"))
         if args.experiment == "bitl-trace":
