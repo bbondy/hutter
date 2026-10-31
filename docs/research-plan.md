@@ -132,7 +132,13 @@ Priorities:
    prefix). A fixed [third native Linux range](../benchmarks/training/20261029-bit-blend-linux-confirmation-v1)
    saves another 26 fixture payload bytes versus prior with exact restoration.
    This reused range supports generalization but is not untouched validation.
-   These are small confirmed component and fixture gains; full enwik9 remains open.
+   A separate [4 MB native Linux range](../benchmarks/training/20261031-bit-blend-linux-long-v1)
+   selected before compression saves 126 payload bytes versus prior and 326
+   versus untouched, with exact restoration. These are small confirmed
+   component and fixture gains; full enwik9 remains open. A simple 1 GB
+   proportional scaling of the incremental 126 bytes is only about 31 KB,
+   and cannot be treated as a measured full-stream result. The bit-head blend
+   alone is unlikely to provide the material gain required to win.
 
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)

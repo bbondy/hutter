@@ -120,3 +120,9 @@ The fixed blend also passed a [third native Linux article range](20261029-bit-bl
 untouched. All three restore exact XML with identical contexts. The range had
 already been used for other research, so it is supporting evidence rather than
 untouched final validation.
+
+A separate [4 MB native Linux range](20261031-bit-blend-linux-long-v1),
+selected and hashed before compression, yielded 489,618/489,418/489,292
+payload bytes for untouched/prior/blend. The blend saves 126 bytes versus
+prior with exact XML restoration and identical contexts. This longer fixture
+does not establish a full prize score; the incremental gain remains small.

@@ -266,6 +266,16 @@ untouched. All variants restored exact original XML and kept identical
 contexts. This range was already used for other research; it is a supporting
 check, not untouched final validation or a full prize score.
 
+To check length scaling, we froze a [separate 4 MB article range](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261029-bit-blend-long-protocol-v1)
+before compression. The [native Linux comparison](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261031-bit-blend-linux-long-v1)
+produced **489,618/489,418/489,292 payload bytes** for untouched, prior and
+blend. The blend saves **126 bytes versus prior** and **326 versus untouched**
+on 4,017,614 raw XML bytes; all three restore exact XML with identical context
+counts. A straight-line extrapolation of the 126-byte increment to 1 GB is
+about 31 KB, but full-stream behavior can differ. This model-only gain is
+promising as a controlled improvement and remains too small to carry a prize
+entry by itself. The full enwik9 archive, decoder and resource checks are open.
+
 Before training on that range, a [frozen native Linux comparison](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-weight-linux-broad-v1)
 tested the *existing* one-pass checkpoint there. It reduced the 4 MB range's
 payload from 476,220 to 475,970 bytes (**250 bytes saved**); both variants
