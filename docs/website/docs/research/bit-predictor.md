@@ -275,6 +275,10 @@ counts. A straight-line extrapolation of the 126-byte increment to 1 GB is
 about 31 KB, but full-stream behavior can differ. This model-only gain is
 promising as a controlled improvement and remains too small to carry a prize
 entry by itself. The full enwik9 archive, decoder and resource checks are open.
+The [full baseline/blend protocol](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261031-bit-blend-full-protocol-v1)
+now freezes the exact Linux packages and official input for that next gate.
+It still needs a persistent native Linux x86-64 host; no full archive or
+submission score has been measured.
 
 Before training on that range, a [frozen native Linux comparison](https://github.com/bbondy/hutter/tree/main/benchmarks/training/20261018-bit-weight-linux-broad-v1)
 tested the *existing* one-pass checkpoint there. It reduced the 4 MB range's

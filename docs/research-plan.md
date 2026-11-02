@@ -138,7 +138,11 @@ Priorities:
    component and fixture gains; full enwik9 remains open. A simple 1 GB
    proportional scaling of the incremental 126 bytes is only about 31 KB,
    and cannot be treated as a measured full-stream result. The bit-head blend
-   alone is unlikely to provide the material gain required to win.
+   alone is unlikely to provide the material gain required to win. The
+   [full enwik9 baseline/blend protocol](../benchmarks/training/20261031-bit-blend-full-protocol-v1)
+   is frozen against exact Linux package hashes. A persistent native Linux
+   x86-64 host is needed to execute its complete encode, isolated SFX decode
+   and resource measurement; no such runner is currently configured.
 
 Continue signing and pushing immutable reports, protocols, hashes and failures
 to `main`; keep the [educational research pages](https://bbondy.github.io/hutter/research/experiment-playbook)
